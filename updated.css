@@ -235,3 +235,52 @@ footer {
   height: 100%;
   border: none;
 }
+
+/* ============================================================
+   Refined "Mark as Completed" Action Button (Leader Theme)
+   ============================================================ */
+.complete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.complete-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+  stroke: var(--accent);
+}
+
+.complete-btn:hover {
+  background: var(--accent);
+  color: #070d1e;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(250, 204, 21, 0.25);
+  font-weight: 700;
+}
+
+.complete-btn:hover svg {
+  stroke: #070d1e;
+  transform: scale(1.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .complete-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

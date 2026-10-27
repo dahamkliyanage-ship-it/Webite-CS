@@ -1,34 +1,35 @@
 import { auth, db } from "./backend.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { doc, setDoc, getDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // --- NEW CODE: FORCE LOGOUT CHECK ---
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('logout') === 'true') {
   signOut(auth).then(() => {
-    // Clean the URL so it doesn't stay there if the user refreshes
     window.history.replaceState(null, '', window.location.pathname);
   });
 }
 // ------------------------------------
 
-let authStateTimer; // Added to prevent rapid misfires from Firebase cache
+// --- GLOBAL STATE TRACKING ---
+let currentUser = null;
+let authStateTimer; // Prevent rapid misfires from Firebase cache
 
 // --- LOGIN ROUTING AND PROGRESS TRACKING ---
 onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  
   const loginSection = document.getElementById("login-section");
   const userInfo = document.getElementById("user-info");
   const completeBtn = document.getElementById("mark-complete-btn");
 
-  // Clear any pending redirects if Firebase updates its state quickly
+  // Clear any pending redirects if Firebase updates state quickly
   clearTimeout(authStateTimer);
 
   if (user) {
-    // 1. Handle Login Page Routing (Debounced to fix redirect loop)
+    // 1. Handle Login Page Routing (Safely buffered to prevent loops)
     if (loginSection) {
-      loginSection.style.display = "none"; // Hide form to prevent flickering
-      
-      // Wait 800ms before redirecting to ensure Firebase doesn't correct to 'null'
+      loginSection.style.display = "none";
       authStateTimer = setTimeout(() => {
         if (auth.currentUser) {
           window.location.replace("Home module page.html"); 
@@ -36,13 +37,13 @@ onAuthStateChanged(auth, (user) => {
       }, 800);
     }
     
-    // 2. Fetch profile data AND fill the progress bar on page load
+    // 2. Fetch profile data AND fill all progress bars on page load
     displayUserProfile(user.uid);
     updateProgressBar(user.uid); 
     
-    // 3. Safely attach the "Mark as Complete" logic
+    // 3. Safely attach the "Mark as Complete" logic for single lesson pages
     if (completeBtn && !completeBtn.hasAttribute("data-active")) {
-      completeBtn.setAttribute("data-active", "true"); // Prevents duplicate listeners cleanly
+      completeBtn.setAttribute("data-active", "true"); 
       
       completeBtn.addEventListener("click", async () => {
         const moduleName = completeBtn.getAttribute("data-module");
@@ -65,26 +66,31 @@ onAuthStateChanged(auth, (user) => {
     }
     
   } else {
-    // User is genuinely logged out
-    if(loginSection) {
-        loginSection.style.display = "block";
-    }
-    if(userInfo) {
-        userInfo.style.display = "none";
-    }
+    // User is logged out: Reset UI state
+    if (loginSection) loginSection.style.display = "block";
+    if (userInfo) userInfo.style.display = "none";
     
+    // Lock the individual complete button
     if (completeBtn && !completeBtn.hasAttribute("data-active")) {
       completeBtn.setAttribute("data-active", "true");
       completeBtn.addEventListener("click", () => {
         alert("Please log in to save your progress.");
       });
     }
+    
+    // Display lock messages on multi-bar Hub/Roadmap Pages
+    const submoduleBars = document.querySelectorAll(".dynamic-sub-bar");
+    submoduleBars.forEach(barContainer => {
+      barContainer.innerHTML = `<div style="color: #94a3b8; font-size: 13px; margin-top: 5px;">🔒 Login to view progress</div>`;
+    });
   }
 });
 
 // --- PROGRESS BAR CALCULATION & BUTTON STATE RESTORATION ---
 async function updateProgressBar(userId) {
   const progressBar = document.getElementById("progress-bar");
+  const subProgressBar = document.getElementById("submodule-progress-bar"); 
+  const subProgressText = document.getElementById("submodule-progress-text");
   const completeBtn = document.getElementById("mark-complete-btn");
   
   const docRef = doc(db, "users", userId);
@@ -92,21 +98,49 @@ async function updateProgressBar(userId) {
   
   if (docSnap.exists()) {
     const userData = docSnap.data();
+    const completedArray = userData.completedModules || [];
     
-    // Calculate and fill the progress bar
-    const completedCount = userData.completedModules ? userData.completedModules.length : 0;
-    const totalModulesInCourse = 10; 
-    
+    // 1. Fill the Global Course Progress Bar
     if (progressBar) {
-      const percentage = Math.min((completedCount / totalModulesInCourse) * 100, 100);
+      const totalModulesInCourse = 50; 
+      const percentage = Math.min((completedArray.length / totalModulesInCourse) * 100, 100);
       progressBar.style.width = `${percentage}%`;
     }
     
-    // Restore the button state if they already completed this specific page
-    if (completeBtn && userData.completedModules) {
-      const currentModuleName = completeBtn.getAttribute("data-module");
+    // 2. Fill the Individual Page Submodule Bar
+    if (subProgressBar) {
+      const prefix = subProgressBar.getAttribute("data-prefix"); 
+      const total = parseInt(subProgressBar.getAttribute("data-total"), 10);
       
-      if (userData.completedModules.includes(currentModuleName)) {
+      const subCount = completedArray.filter(modName => modName.startsWith(prefix)).length;
+      let subPercentage = 0;
+      if (total > 0) subPercentage = Math.round((subCount / total) * 100);
+      
+      subProgressBar.style.width = `${subPercentage}%`;
+      if (subProgressText) subProgressText.innerText = `Submodule Progress: ${subPercentage}%`;
+    }
+
+    // 3. Fill Hub Page Multiple Bars (Statics, Dynamics, Math Roadmaps, etc.)
+    const submoduleBars = document.querySelectorAll(".dynamic-sub-bar");
+    submoduleBars.forEach(barContainer => {
+      const prefix = barContainer.getAttribute("data-prefix");
+      const total = parseInt(barContainer.getAttribute("data-total"), 10);
+      
+      const subCount = completedArray.filter(modName => modName.startsWith(prefix)).length;
+      let subPercentage = 0;
+      if (total > 0) subPercentage = Math.round((subCount / total) * 100);
+      
+      const innerBar = barContainer.querySelector(".inner-fill");
+      const textLabel = barContainer.querySelector(".progress-text");
+      
+      if (innerBar) innerBar.style.width = `${subPercentage}%`;
+      if (textLabel) textLabel.innerText = `Progress: ${subPercentage}%`;
+    });
+    
+    // 4. Restore the Button State if already completed
+    if (completeBtn) {
+      const currentModuleName = completeBtn.getAttribute("data-module");
+      if (completedArray.includes(currentModuleName)) {
         completeBtn.innerText = "Completed!";
         completeBtn.style.background = "var(--string, #9ece6a)";
         completeBtn.style.color = "#0f1117";
@@ -176,21 +210,7 @@ if (emailActionBtn) {
   });
 }
 
-// --- GOOGLE SIGN-IN LOGIC ---
-const googleLoginBtn = document.getElementById("google-login-btn");
-
-if (googleLoginBtn) {
-  googleLoginBtn.addEventListener("click", () => {
-    const provider = new GoogleAuthProvider();
-    
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // Successful Google login
-        window.location.replace("Home module page.html");
-      })
-      .catch((error) => {
-        console.error("Google Sign-In Error:", error);
-        alert("Google Sign-In Error: " + error.message);
-      });
-  });
+const logoutBtn = document.getElementById("logout-btn");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => signOut(auth));
 }

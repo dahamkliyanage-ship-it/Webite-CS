@@ -459,38 +459,52 @@
     <!-- Chatbot Script -->
     <script src="chatbot_fluid.js"></script>
 
-    <!-- Auto-Evaluating Script -->
-    <script>
+    <!-- Local Submodule Progress Bar (Matched to Electrical Theme) -->
+    <div style="background: var(--bg-panel, #1e293b); border: 1px solid var(--border, #334155); border-radius: 12px; padding: 25px; margin: 40px 0; box-sizing: border-box;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            
+            <span id="submodule-progress-text" style="color: var(--accent-blue, #38bdf8); font-size: 14px; font-weight: 700;">Submodule Progress: 0%</span>
+        </div>
+        <div style="width: 100%; background: rgba(15, 23, 42, 0.6); border-radius: 8px; overflow: hidden; height: 10px; border: 1px solid var(--border, #334155);">
+            <div id="submodule-progress-bar" data-prefix="fluid-topic1-" data-total="1" style="width: 0%; height: 100%; background: #38bdf8; border-radius: 8px; transition: width 0.5s ease;"></div>
+        </div>
+    </div>
+
+    <!-- Unified Quiz Evaluation & Database Saving Script -->
+    <script type="module">
+        import { auth, db } from "./backend.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { doc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        let currentUser = null;
+        onAuthStateChanged(auth, (user) => { currentUser = user ? user : null; });
+
         document.addEventListener('DOMContentLoaded', () => {
             const allQuestions = document.querySelectorAll('.mcq-card');
             const display = document.getElementById('final-score-display');
+            const dbStatusMsg = document.getElementById('db-status-msg');
             
-            // Attach a 'change' listener to every single radio button option
             allQuestions.forEach(card => {
                 const options = card.querySelectorAll('input[type="radio"]');
                 const feedback = card.querySelector('.feedback-msg');
                 
                 options.forEach(opt => {
                     opt.addEventListener('change', (e) => {
-                        // Instant feedback for this specific question as soon as clicked
                         if(e.target.value === 'correct') {
                             feedback.textContent = "✅ Correct! Excellent understanding.";
                             feedback.className = "feedback-msg success";
-                            card.style.borderLeft = "5px solid #14b8a6";
+                            card.style.borderLeft = "5px solid var(--success)";
                         } else {
-                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.textContent = "❌ Incorrect. Review the theory and try again.";
                             feedback.className = "feedback-msg error";
-                            card.style.borderLeft = "5px solid #ef4444";
+                            card.style.borderLeft = "5px solid var(--error)";
                         }
-                        
-                        // Immediately check if all questions are completed
                         checkAllAnswered();
                     });
                 });
             });
 
-            // Function to automatically calculate and show final score
-            function checkAllAnswered() {
+            async function checkAllAnswered() {
                 let correctCount = 0;
                 let answeredCount = 0;
 
@@ -500,28 +514,54 @@
                     options.forEach(opt => {
                         if (opt.checked) {
                             isAnswered = true;
-                            if (opt.value === 'correct') {
-                                correctCount++;
-                            }
+                            if (opt.value === 'correct') { correctCount++; }
                         }
                     });
                     if (isAnswered) answeredCount++;
                 });
                 
-                // If every question has an answer, reveal the final score box
                 if (answeredCount === allQuestions.length && allQuestions.length > 0) {
                     const percentage = Math.round((correctCount / allQuestions.length) * 100);
                     display.style.display = 'block';
                     display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
                     display.style.color = "var(--success)";
                     display.style.padding = "20px";
-                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.backgroundColor = "rgba(34, 197, 94, 0.1)";
                     display.style.borderRadius = "8px";
-                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.border = "1px solid rgba(34, 197, 94, 0.3)";
                     display.style.marginTop = "30px";
+
+                    // Save progress to Firebase under the correct Chapter 2 prefix
+                    if (currentUser && correctCount === allQuestions.length) {
+                        try {
+                            const userRef = doc(db, "users", currentUser.uid);
+                            await setDoc(userRef, {
+                                completedModules: arrayUnion("fluid-topic1-intro")
+                            }, { merge: true });
+
+                            if (dbStatusMsg) {
+                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                dbStatusMsg.style.color = "#4ade80";
+                            }
+                            
+                            setTimeout(() => { window.location.reload(); }, 2000);
+                        } catch (error) {
+                            if (dbStatusMsg) {
+                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                dbStatusMsg.style.color = "#f43f5e";
+                            }
+                        }
+                    }
                 }
             }
         });
     </script>
+
+    
+
+    <!-- Master App Connection for Progress Bars -->
+    <script type="module" src="app.js"></script>
+
+
 </body>
 </html>

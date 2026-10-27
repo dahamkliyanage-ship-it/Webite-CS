@@ -101,10 +101,94 @@
         <button id="send-btn">Send</button>
       </div>
     </div>
- <script type="module" src="interactiveQuiz.js" defer></script>
-<script src="materials_chatbot.js"></script>
+ <!-- Local Submodule Progress Bar -->
+    <div style="width: 100%; background: rgba(30, 41, 59, 0.7); border-radius: 8px; margin: 30px 0 10px; border: 1px solid #334155;">
+        <div id="submodule-progress-bar" data-prefix="materials-chapter8-" data-total="4" style="width: 0%; height: 10px; background: #38bdf8; border-radius: 8px; transition: width 0.5s ease;"></div>
+    </div>
+    <div id="submodule-progress-text" style="color: #38bdf8; font-size: 13px; text-align: center; font-weight: 600;">Submodule Progress: 0%</div>
 
+    <!-- Completion Message & Database Status -->
+    <div id="completed-msg" style="display: none; text-align: center; color: #4ade80; font-weight: bold; margin-top: 15px;">
+        🎉 Practice completed! Progress saved.
+    </div>
+    <div id="db-status-msg" style="text-align: center; margin-top: 10px; font-weight: 600; font-size: 15px;"></div>
 
-    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+    <!-- Materials Quiz Script (Participation Mode: Saves on attempt) -->
+    <script type="module">
+        import { auth, db } from "./backend.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { doc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        let currentUser = null;
+        onAuthStateChanged(auth, (user) => { currentUser = user ? user : null; });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            const totalQuestions = questionBlocks.length; 
+            const answeredQuestions = new Set(); 
+            const dbStatusMsg = document.getElementById('db-status-msg');
+
+            questionBlocks.forEach((block, index) => {
+                const options = block.querySelectorAll('.option-box');
+                const questionId = "q" + (index + 1);
+
+                options.forEach(option => {
+                    option.addEventListener('click', async function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            const correctOpt = block.querySelector('.option-box[data-correct="true"]');
+                            if (correctOpt) correctOpt.classList.add('correct');
+                        }
+                        
+                        // Register that the question was attempted
+                        answeredQuestions.add(questionId);
+
+                        // THE TRIGGER: Fires when all questions in this page are answered
+                        if (answeredQuestions.size === totalQuestions) {
+                            document.getElementById('completed-msg').style.display = 'block';
+
+                            if (currentUser) {
+                                try {
+                                    const userRef = doc(db, "users", currentUser.uid);
+                                    
+                                    // UNIQUE PAGE ID FOR FIREBASE
+                                    await setDoc(userRef, {
+                                        completedModules: arrayUnion("materials-chapter8-topic2")
+                                    }, { merge: true });
+
+                                    if (dbStatusMsg) {
+                                        dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                        dbStatusMsg.style.color = "#4ade80";
+                                    }
+                                    
+                                    setTimeout(() => { window.location.reload(); }, 2000);
+                                } catch (error) {
+                                    if (dbStatusMsg) {
+                                        dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                        dbStatusMsg.style.color = "#f43f5e";
+                                    }
+                                }
+                            } else {
+                                if (dbStatusMsg) {
+                                    dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                    dbStatusMsg.style.color = "#facc15";
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script type="module" src="app.js"></script>
+    <script src="materials_chatbot.js"></script>
 </body>
 </html>

@@ -212,7 +212,7 @@
             </a>
 
             <!-- Module 2: Programming -->
-            <a href="#" class="topic-card green-box">
+            <a href="cse_roadmap.html" class="topic-card green-box">
                 <h2>CS1033-Programming Fundamentals</h2>
                 <p>Programming logic, Python fundamentals, and algorithm development.</p>
                 <div class="progress-status" id="status-main-programming" style="margin-top: 15px; width: 100%;"></div>
@@ -226,7 +226,7 @@
             </a>
 
             <!-- Module 4: Electrical -->
-            <a href="MAIN PAGE ELEC.html" class="topic-card purple-box">
+            <a href="MAIN PAGE_2.html" class="topic-card purple-box">
                 <h2>EE1040-Electrical Fundamentals</h2>
                 <p>Circuit analysis, RLC circuits, nodal analysis, and electrical principles.</p>
                 <div class="progress-status" id="status-main-electrical" style="margin-top: 15px; width: 100%;"></div>
@@ -269,75 +269,79 @@
 
     <!-- Firebase Connection & Progress Verification Script -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        /* ADDED signOut to imports */
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        // 1. Import your centralized authentication instead of using a fake API key
+        import { auth, db } from "./backend.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSy...", 
-            authDomain: "sharkvision-4ac92.firebaseapp.com",
-            projectId: "sharkvision-4ac92",
-            storageBucket: "sharkvision-4ac92.firebasestorage.app",
-            messagingSenderId: "516357464658",
-            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // All subjects and their respective sub-module IDs with clear, descriptive names
+        // Keep all your original subject definitions here
         const allSubjects = [
             {
                 id: "mathematics",
                 elementId: "status-main-mathematics",
                 subModules: [
-                    "vectors-line", "vectors-planesangle", "vectors-angle", "vectors-crossproduct",
-                    "vectors-dotproduct", "vectors-3space", "vectors", "vectors-plane",
-                    "vectors-properties", "vectors-scalartriple", "vectors-planedistance", "vectors-skewlines",
-                    "vectors-vectortriple", "matrices-inverse", "matrices-determinant", "matrices-special",
-                    "matrices-eigenvalues", "matrices-elementary", "matrices-intro", "matrices-diagonalization",
-                    "matrices-norms", "matrices-operations", "matrices-orthogonal", "matrices-properties",
-                    "matrices-rank", "matrices-homogeneous", "matrices-nonhomogeneous", "matrices-linearequations",
-                    "ode-firstorder", "ode-basic", "ode-bernoulli", "ode-linear",
-                    "ode-reduction", "ode-secondorder", "ode-wronskian", "riemann-beta",
-                    "riemann-definition", "riemann-ftc", "riemann-gamma", "riemann-improper",
-                    "riemann-ivt", "riemann-intro", "riemann-properties", "riemann-relation",
-                    "riemann-cauchy", "real-analysis-sequences", "real-analysis-logic", "real-analysis-relations",
-                    "real-analysis-settheory", "real-analysis-axioms"
+                    "maths-vectors-intro", "maths-vectors-dotproduct", "maths-vectors-properties", "maths-vectors-plane", "maths-vectors-skewlines", "maths-vectors-shortestdistance", "maths-vectors-vectortripleproduct", "maths-vectors-3space", "maths-vectors-scalartripleproduct", "maths-vectors-equationsoflines", "maths-vectors-anglebetweentwoplanes", "maths-vectors-anglebetweentwolines", "maths-vectors-crossproduct",
+                    "maths-matrix-intro", "maths-matrix-operations", "maths-matrix-properties", "maths-matrix-determinant", 
+                    "maths-matrix-adjoint", "maths-matrix-transformations", "maths-matrix-linear", "maths-matrix-rank", 
+                    "maths-matrix-nonhomo", "maths-matrix-homo", "maths-matrix-eigenvalues", "maths-matrix-eigenval2", 
+                    "maths-matrix-ortho", "maths-matrix-diagonalization", "maths-matrix-norms", "maths-ode-solve", 
+                    "maths-ode-basic", "maths-ode-bernoulli", "maths-ode-linear", "maths-ode-reduction", "maths-ode-second", "maths-ode-wronskian", 
+                    "maths-ri-beta", "maths-ri-def", "maths-ri-fund", "maths-ri-gamma", "maths-ri-improper", 
+                    "maths-ri-ivt", "maths-ri-intro", "maths-ri-prop", "maths-ri-betagamma", "maths-ri-cauchy", 
+                    "maths-real-seq", "maths-real-logics", "maths-real-relations", 
+                    "maths-real-sets", "maths-real-axiom", "maths-real-mvt", "maths-real-diff", "maths-real-fun", "maths-real-lim", "maths-real-cauchys", "maths-real-inf"
                 ]
             },
             {
                 id: "programming",
                 elementId: "status-main-programming",
-                subModules: ["programming-module-1"]
+                // IMPORTANT: These strings must exactly match the data-module="" attributes on your learning pages
+                subModules: [
+                    "cs-phase1-intro", "cs-phase2-basics", "cs-phase2-controlflow", "cs-phase2-datastr","cs-phase2-file", "cs-phase2-functions", "cs-phase3-think", "cs-phase3-recursion", "cs-phase3-dq", "cs-phase3-coredata", "cs-phase3-search", "cs-phase4-datarep", "cs-phase5-topic1", "cs-phase5-topic2", "cs-phase5-topic3", "cs-phase5-topic4", "cs-phase5-topic5", "cs-phase5-topic6"
+                ] 
             },
             {
                 id: "materials",
                 elementId: "status-main-materials",
-                subModules: ["materials-module-1"]
+                subModules: [
+                    "materials-chapter1-topic1", "materials-chapter1-topic2", "materials-chapter1-topic3", "materials-chapter1-topic4", "materials-chapter2-topic1", "materials-chapter2-topic2", "materials-chapter2-topic3", "materials-chapter2-topic4",
+                    "materials-chapter3-topic1", "materials-chapter3-topic2", "materials-chapter3-topic3", "materials-chapter3-topic4", "materials-chapter3-topic5", "materials-chapter3-topic6", "materials-chapter4-topic1", "materials-chapter4-topic2", "materials-chapter4-topic3", "materials-chapter4-topic4", "materials-chapter5-topic1", "materials-chapter5-topic2", "materials-chapter5-topic3", "materials-chapter5-topic4", "materials-chapter5-topic5", "materials-chapter6-topic1", "materials-chapter6-topic2", "materials-chapter6-topic3", "materials-chapter6-topic4", "materials-chapter6-topic5", "materials-chapter7-topic1", "materials-chapter7-topic2", "materials-chapter7-topic3", "materials-chapter7-topic4", "materials-chapter8-topic1", "materials-chapter8-topic2", "materials-chapter8-topic3", "materials-chapter8-topic4", "materials-chapter9-topic1", "materials-chapter9-topic2"
+                ]
             },
             {
                 id: "electrical",
                 elementId: "status-main-electrical",
-                subModules: ["electrical-module-1"]
+                subModules: [
+                    "elec-topic1-overview", "elec-topic2-analysis", "elec-topic3-AC", "elec-topic4-threephase", "elec-topic5-protection", "elec-topic6-installations"
+                ] 
             },
             {
                 id: "fluids",
                 elementId: "status-main-fluids",
-                subModules: ["fluids-module-1"]
+                subModules: [
+                    "fluid-topic1-intro", "fluid-topic2-hydropressure", "fluid-topic3-hydrothrust",
+                    "fluid-topic4-buoyancy", "fluid-topic5-equilibrium", "fluid-topic6-fluidmotion", "fluid-topic7-analysisfluid", "fluid-topic8-machinery"
+                ] 
             },
             {
                 id: "mechanics",
                 elementId: "status-main-mechanics",
-                subModules: ["mechanics-module-1"]
+                subModules: ["mech-stat-1", "mech-stat-2", "mech-stat-3", "mech-dyn-1", "mech-dyn-2", "mech-dyn-3"] 
             }
         ];
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userId = user.uid;
+                let completedArray = [];
+                
+                // 2. Fetch the unified completedModules array we built in app.js
+                const docRef = doc(db, "users", userId);
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists() && docSnap.data().completedModules) {
+                    completedArray = docSnap.data().completedModules;
+                }
                 
                 for (let subject of allSubjects) {
                     const statusEl = document.getElementById(subject.elementId);
@@ -347,11 +351,9 @@
                         let completedCount = 0;
                         const totalModules = subject.subModules.length;
 
+                        // 3. Check if the required modules exist in the user's saved array
                         for (let subModId of subject.subModules) {
-                            const docRef = doc(db, "users", userId, "progress", subModId);
-                            const docSnap = await getDoc(docRef);
-
-                            if (docSnap.exists() && docSnap.data().completed) {
+                            if (completedArray.includes(subModId)) {
                                 completedCount++;
                             }
                         }

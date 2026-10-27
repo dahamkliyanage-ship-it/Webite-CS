@@ -223,195 +223,66 @@
             <a href="vectors-roadmap.html" class="topic-card blue-box">
                 <h2>Algebra-Vectors</h2>
                 <p>Vector algebra, dot products, cross products, and 3D geometry applications.</p>
-                <div class="progress-status" id="status-vectors">Loading progress...</div>
+                <div class="progress-status dynamic-sub-bar" data-prefix="maths-vectors-" data-total="13">
+                    <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
+                        <div class="inner-fill" style="width: 0%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <div class="progress-text" style="color: #4ade80; font-size: 13px; margin-top: 5px;">Progress: 0%</div>
+                </div>
             </a>
 
             <!-- Box 2 -->
             <a href="Matrix-roadmap.html" class="topic-card green-box">
                 <h2>Algebra-Matrices</h2>
                 <p>Matrix operations, determinants, inverse matrices, and systems of linear equations.</p>
-                <div class="progress-status" id="status-matrices">Loading progress...</div>
+                <div class="progress-status dynamic-sub-bar" data-prefix="maths-matrix-" data-total="15">
+                    <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
+                        <div class="inner-fill" style="width: 0%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <div class="progress-text" style="color: #4ade80; font-size: 13px; margin-top: 5px;">Progress: 0%</div>
+                </div>
             </a>
 
             <!-- Box 3 -->
             <a href="ODE-roadmap.html" class="topic-card yellow-box">
                 <h2>Ordinary Differential Equations</h2>
                 <p>First and second order ODEs, separable, homogeneous, and exact equations.</p>
-                <div class="progress-status" id="status-ode">Loading progress...</div>
+                <div class="progress-status dynamic-sub-bar" data-prefix="maths-ode-" data-total="7">
+                    <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
+                        <div class="inner-fill" style="width: 0%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <div class="progress-text" style="color: #4ade80; font-size: 13px; margin-top: 5px;">Progress: 0%</div>
+                </div>
             </a>
 
             <!-- Box 4 -->
             <a href="riemann-roadmap.html" class="topic-card purple-box">
                 <h2>Riemann Integration</h2>
                 <p>Improper integrals, Beta & Gamma functions, and convergence theorems.</p>
-                <div class="progress-status" id="status-riemann">Loading progress...</div>
+                <div class="progress-status dynamic-sub-bar" data-prefix="maths-ri-" data-total="10">
+                    <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
+                        <div class="inner-fill" style="width: 0%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <div class="progress-text" style="color: #4ade80; font-size: 13px; margin-top: 5px;">Progress: 0%</div>
+                </div>
             </a>
 
             <!-- Box 5 -->
             <a href="Real-roadmap.html" class="topic-card red-box">
                 <h2>Real Analysis</h2>
                 <p>Limits, continuity, sequences, series, and formal proofs in calculus.</p>
-                <div class="progress-status" id="status-real">Loading progress...</div>
+                <div class="progress-status dynamic-sub-bar" data-prefix="maths-real-" data-total="11">
+                    <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
+                        <div class="inner-fill" style="width: 0%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <div class="progress-text" style="color: #4ade80; font-size: 13px; margin-top: 5px;">Progress: 0%</div>
+                </div>
             </a>
 
         </div>
     </div>
 
-    <!-- Firebase Connection & Progress Verification Script -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-
-        // Oyage Firebase config eka methanata danna
-        const firebaseConfig = {
-            apiKey: "AIzaSy...", 
-            authDomain: "sharkvision-4ac92.firebaseapp.com",
-            projectId: "sharkvision-4ac92",
-            storageBucket: "sharkvision-4ac92.firebasestorage.app",
-            messagingSenderId: "516357464658",
-            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // Modules mapping with Firebase document IDs for each sub-topic
-        const modules = [
-            { 
-                id: "vectors", 
-                elementId: "status-vectors",
-                subModules: [
-                    "vectors-line",
-                    "vectors-planesangle",
-                    "vectors-angle",
-                    "vectors-crossproduct",
-                    "vectors-dotproduct",
-                    "vectors-3space",
-                    "vectors",
-                    "vectors-plane",
-                    "vectors-properties",
-                    "vectors-scalartriple",
-                    "vectors-planedistance",
-                    "vectors-skewlines",
-                    "vectors-vectortriple"
-                ] // Add real module IDs when built
-            },
-            { 
-                id: "matrices", 
-                elementId: "status-matrices",
-                subModules: [
-                    "matrices-inverse",
-                    "matrices-determinant",
-                    "matrices-special",
-                    "matrices-eigenvalues",
-                    "matrices-elementary",
-                    "matrices-intro",
-                    "matrices-diagonalization",
-                    "matrices-norms",
-                    "matrices-operations",
-                    "matrices-orthogonal",
-                    "matrices-properties",
-                    "matrices-rank",
-                    "matrices-homogeneous",
-                    "matrices-nonhomogeneous",
-                    "matrices-linearequations"
-                ] // Add real module IDs when built
-            },
-            { 
-                id: "ode", 
-                elementId: "status-ode",
-                subModules: [
-                    "ode-firstorder",
-                    "ode-basic",
-                    "ode-bernoulli",
-                    "ode-linear",
-                    "ode-reduction",
-                    "ode-secondorder",
-                    "ode-wronskian"
-                ] // Add real module IDs when built
-            },
-            { 
-                id: "riemann", 
-                elementId: "status-riemann",
-                subModules: [
-                    "riemann-beta",
-                    "riemann-definition",
-                    "riemann-ftc",
-                    "riemann-gamma",
-                    "riemann-improper",
-                    "riemann-ivt",
-                    "riemann-intro",
-                    "riemann-properties",
-                    "riemann-relation",
-                    "riemann-cauchy"
-                ] 
-            },
-            { 
-                id: "real", 
-                elementId: "status-real",
-                subModules: [
-                    "real-analysis-sequences",
-                    "real-analysis-logic",
-                    "real-analysis-relations",
-                    "real-analysis-settheory",
-                    "real-analysis-axioms"
-                ] 
-            }
-        ];
-
-        // Checking user state and fetching live progress from Firestore
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userId = user.uid;
-
-                for (let mod of modules) {
-                    const statusEl = document.getElementById(mod.elementId);
-                    
-                    try {
-                        let completedCount = 0;
-                        const totalSubModules = mod.subModules.length;
-
-                        // Check completion for every sub-module inside the main module
-                        for (let subModId of mod.subModules) {
-                            const docRef = doc(db, "users", userId, "progress", subModId);
-                            const docSnap = await getDoc(docRef);
-
-                            if (docSnap.exists() && docSnap.data().completed) {
-                                completedCount++;
-                            }
-                        }
-
-                        // Calculate percentage
-                        let percentage = 0;
-                        if (totalSubModules > 0) {
-                            percentage = Math.round((completedCount / totalSubModules) * 100);
-                        }
-
-                        // Render Progress Bar UI
-                        statusEl.innerHTML = `
-                            <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
-                                <div style="width: ${percentage}%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
-                            </div>
-                            <div style="color: #4ade80; font-size: 13px; margin-top: 5px;">Progress: ${percentage}%</div>
-                        `;
-
-                    } catch (error) {
-                        statusEl.textContent = "Status: Not Available";
-                        statusEl.style.color = "#f43f5e";
-                    }
-                }
-            } else {
-                // If user is not logged in
-                modules.forEach(mod => {
-                    const statusEl = document.getElementById(mod.elementId);
-                    statusEl.textContent = "🔒 Login to view progress";
-                    statusEl.style.color = "#94a3b8";
-                });
-            }
-        });
-    </script>
+    <script type="module" src="app.js"></script>
 
 </body>
 </html>
