@@ -301,23 +301,11 @@
     <script type="module" src="app.js"></script>
 
     <!-- Specific Firebase Script for submitting feedback -->
+    <!-- Specific Firebase Script for submitting feedback -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
-            authDomain: "sharkvision-4ac92.firebaseapp.com",
-            projectId: "sharkvision-4ac92",
-            storageBucket: "sharkvision-4ac92.appspot.com",
-            messagingSenderId: "516357464658",
-            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        import { auth, db } from "./backend.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
         // Custom Modal Logic
         const modal = document.getElementById('custom-modal');
@@ -368,12 +356,10 @@
                 return;
             }
 
-            // Disable button during upload to prevent double clicks
             submitBtn.disabled = true;
             submitBtn.textContent = "Submitting...";
 
             try {
-                // NEW: Save the feedback to a central GlobalFeedback folder instead of inside the user
                 const feedbackCollectionRef = collection(db, "GlobalFeedback");
                 
                 await addDoc(feedbackCollectionRef, {
