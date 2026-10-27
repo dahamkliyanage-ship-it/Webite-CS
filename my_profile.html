@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Faculty of Engineering</title>
+    
+    <style>
+        /* Base Theme Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background-color: #1e293b;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .top-nav li {
+            display: inline;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav a:hover, .top-nav a.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        #home-sign-out-btn { color: #f43f5e; }
+        #home-sign-out-btn:hover {
+            background-color: #f43f5e;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+        }
+
+        /* Profile Layout */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 1px solid #334155;
+        }
+
+        /* User Info Section */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #profile-img-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+            overflow: hidden;
+            border: 3px solid #38bdf8;
+            flex-shrink: 0;
+        }
+
+        #profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #0f172a;
+        }
+
+        .img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            font-size: 0.75em;
+            padding: 8px 0;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-weight: bold;
+        }
+
+        #profile-img-container:hover .img-overlay {
+            opacity: 1;
+        }
+
+        .user-info-text h2 {
+            margin: 0 0 5px 0;
+            color: #f8fafc;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .edit-name-btn {
+            background: none;
+            border: none;
+            color: #38bdf8;
+            cursor: pointer;
+            font-size: 0.6em;
+            transition: transform 0.2s;
+            padding: 5px;
+        }
+
+        .edit-name-btn:hover {
+            transform: scale(1.2);
+            color: #0ea5e9;
+        }
+
+        .user-info-text p {
+            margin: 0;
+            color: #94a3b8;
+            font-size: 1.1em;
+        }
+
+        /* Document Section */
+        .section-header {
+            font-size: 1.5em;
+            color: #38bdf8;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }
+
+        .upload-area {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .upload-area input[type="file"] {
+            flex: 1;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px dashed #475569;
+            border-radius: 8px;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+        
+        .upload-area input[type="file"]::file-selector-button {
+            background-color: #334155;
+            color: #cbd5e1;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .upload-area input[type="file"]::file-selector-button:hover {
+            background-color: #475569;
+        }
+
+        .upload-btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+
+        .upload-btn:hover {
+            background-color: #0ea5e9;
+            transform: translateY(-2px);
+        }
+
+        .upload-btn:disabled {
+            background-color: #475569;
+            color: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Document List */
+        .doc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .doc-item {
+            background: #0f172a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #334155;
+            transition: border-color 0.2s;
+        }
+
+        .doc-item:hover {
+            border-color: #38bdf8;
+        }
+        
+        .doc-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .doc-item a {
+            color: #f8fafc;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1em;
+        }
+        
+        .doc-item a:hover {
+            color: #38bdf8;
+            text-decoration: underline;
+        }
+
+        .doc-meta {
+            color: #64748b;
+            font-size: 0.85em;
+        }
+        
+        .doc-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .delete-btn {
+            background-color: transparent;
+            color: #f43f5e;
+            border: 1px solid #f43f5e;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background-color: #f43f5e;
+            color: #ffffff;
+        }
+
+        /* Custom Modal UI */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(15, 23, 42, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            color: #f8fafc;
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .modal-message {
+            color: #cbd5e1;
+            margin-bottom: 25px;
+        }
+
+        /* Input field for the prompt modal */
+        .modal-input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #f8fafc;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .modal-input:focus {
+            border-color: #38bdf8;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .modal-btn-primary {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+        .modal-btn-primary:hover { background-color: #0ea5e9; }
+
+        .modal-btn-danger {
+            background-color: #f43f5e;
+            color: #ffffff;
+        }
+        .modal-btn-danger:hover { background-color: #e11d48; }
+
+        .modal-btn-secondary {
+            background-color: #334155;
+            color: #f8fafc;
+        }
+        .modal-btn-secondary:hover { background-color: #475569; }
+
+        @media (max-width: 600px) {
+            .upload-area { flex-direction: column; align-items: stretch; }
+            .doc-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .doc-actions { width: 100%; justify-content: flex-end; }
+            .user-info { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Faculty of Engineering - First Semester</h1>
+    </header>
+
+    <nav class="top-nav">
+        <ul>
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="my_profile.html" class="active">My Profile</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+            <li><a href="#" id="home-sign-out-btn">Sign Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- User Info Card with Edit Capabilities -->
+        <div class="card user-info">
+            <div id="profile-img-container" title="Change Profile Picture">
+                <img id="profile-img" src="https://placehold.co/100x100/1e293b/38bdf8?text=USER" alt="Profile Picture">
+                <div class="img-overlay">✏️ Edit</div>
+                <input type="file" id="profile-pic-input" accept="image/*" style="display: none;">
+            </div>
+            
+            <div class="user-info-text">
+                <h2 id="profile-name-container">
+                    <span id="profile-name">Loading Profile...</span>
+                    <button id="edit-name-btn" class="edit-name-btn" title="Edit Name">✏️</button>
+                </h2>
+                <p id="profile-email">Please wait</p>
+            </div>
+        </div>
+
+        <!-- Document Storage Card -->
+        <div class="card">
+            <h3 class="section-header">My Private Documents</h3>
+            
+            <div class="upload-area">
+                <input type="file" id="file-input" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.txt,.xlsx">
+                <button class="upload-btn" id="upload-btn">Upload File</button>
+            </div>
+
+            <ul class="doc-list" id="doc-list">
+                <!-- Documents will be dynamically loaded here -->
+                <li class="doc-item" style="color: #94a3b8; justify-content: center;">Fetching your documents...</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Custom Modal UI -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="modal-title" class="modal-title">Notification</h3>
+            <p id="modal-message" class="modal-message">Message goes here.</p>
+            <input type="text" id="modal-input" class="modal-input" style="display: none;">
+            <div id="modal-buttons" class="modal-buttons">
+                <!-- Buttons injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Setup -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        // Added updateProfile for modifying user name and photo
+        import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, query, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
+
+        // Your specific Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app); 
+
+        let currentUser = null;
+
+        // --- CUSTOM MODAL CONTROLLER ---
+        const modal = document.getElementById('custom-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalInput = document.getElementById('modal-input');
+        const modalButtons = document.getElementById('modal-buttons');
+
+        function showMessage(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalInput.style.display = 'none'; // Hide input
+            modalButtons.innerHTML = `<button class="modal-btn modal-btn-primary" id="modal-ok-btn">OK</button>`;
+            modal.classList.add('active');
+            
+            document.getElementById('modal-ok-btn').onclick = () => {
+                modal.classList.remove('active');
+            };
+        }
+
+        function showConfirm(title, message, onConfirm) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalInput.style.display = 'none'; // Hide input
+            modalButtons.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button class="modal-btn modal-btn-danger" id="modal-confirm-btn">Delete</button>
+            `;
+            modal.classList.add('active');
+            
+            document.getElementById('modal-cancel-btn').onclick = () => {
+                modal.classList.remove('active');
+            };
+            
+            document.getElementById('modal-confirm-btn').onclick = () => {
+                modal.classList.remove('active');
+                onConfirm();
+            };
+        }
+
+        function showPrompt(title, message, defaultValue, onSave) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            
+            modalInput.style.display = 'block';
+            modalInput.value = defaultValue || '';
+            modalInput.placeholder = "Enter new name...";
+            
+            modalButtons.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button class="modal-btn modal-btn-primary" id="modal-save-btn">Save</button>
+            `;
+            modal.classList.add('active');
+            modalInput.focus();
+            
+            document.getElementById('modal-cancel-btn').onclick = () => {
+                modal.classList.remove('active');
+            };
+            
+            document.getElementById('modal-save-btn').onclick = () => {
+                const val = modalInput.value.trim();
+                if(val) {
+                    modal.classList.remove('active');
+                    onSave(val);
+                } else {
+                    alert("Name cannot be empty.");
+                }
+            };
+        }
+
+        // --- RENDER USER INFO ---
+        function renderUserInfo(user) {
+            const displayName = user.displayName || 'Engineering Student';
+            document.getElementById('profile-name').textContent = displayName;
+            document.getElementById('profile-email').textContent = user.email;
+            
+            if (user.photoURL) {
+                document.getElementById('profile-img').src = user.photoURL;
+            } else {
+                const initial = user.email ? user.email.charAt(0).toUpperCase() : 'U';
+                document.getElementById('profile-img').src = `https://placehold.co/100x100/1e293b/38bdf8?text=${initial}`;
+            }
+        }
+
+        // --- AUTHENTICATION LISTENER ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                
+                // 1. Populate user info in UI
+                renderUserInfo(user);
+                
+                // 2. Fetch their personal files
+                loadUserDocuments(user.uid);
+            } else {
+                // If logged out, kick them back to login page
+                try {
+                    window.location.replace("index.html");
+                } catch (err) {
+                    console.warn("Redirect prevented in preview mode.");
+                }
+            }
+        });
+
+        // --- EDIT PROFILE NAME LOGIC ---
+        const editNameBtn = document.getElementById('edit-name-btn');
+        editNameBtn.addEventListener('click', () => {
+            if (!currentUser) return;
+            const currentName = currentUser.displayName || '';
+            
+            showPrompt("Edit Profile Name", "Please enter your new display name:", currentName, async (newName) => {
+                try {
+                    await updateProfile(currentUser, { displayName: newName });
+                    renderUserInfo(currentUser); // Update UI instantly
+                    showMessage("Success", "Your profile name has been updated successfully.");
+                } catch (error) {
+                    console.error("Error updating name:", error);
+                    showMessage("Error", "Failed to update your name. Please try again.");
+                }
+            });
+        });
+
+        // --- EDIT PROFILE PICTURE LOGIC ---
+        const profileImgContainer = document.getElementById('profile-img-container');
+        const profilePicInput = document.getElementById('profile-pic-input');
+
+        // Clicking the image container triggers the hidden file input
+        profileImgContainer.addEventListener('click', () => {
+            profilePicInput.click();
+        });
+
+        profilePicInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file || !currentUser) return;
+
+            // Optional: Basic validation to ensure it's an image
+            if (!file.type.startsWith('image/')) {
+                showMessage("Invalid File", "Please select an image file (JPG, PNG, etc.)");
+                return;
+            }
+
+            showMessage("Uploading...", "Please wait while your new profile picture is being uploaded and saved.");
+
+            try {
+                // Upload to Storage: users/{uid}/profile_pic/{timestamp_filename}
+                const safeFilename = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+                const storagePathString = `users/${currentUser.uid}/profile_pic/${safeFilename}`;
+                const storageRef = ref(storage, storagePathString);
+                
+                await uploadBytes(storageRef, file);
+                const downloadURL = await getDownloadURL(storageRef);
+
+                // Update Auth Profile
+                await updateProfile(currentUser, { photoURL: downloadURL });
+                
+                // Update UI instantly
+                renderUserInfo(currentUser);
+                showMessage("Success", "Your profile picture has been updated successfully.");
+
+            } catch (error) {
+                console.error("Error updating profile picture:", error);
+                showMessage("Upload Failed", "An error occurred while uploading your profile picture. Please try again.");
+            } finally {
+                profilePicInput.value = ""; // Clear input
+            }
+        });
+
+
+        // --- FILE UPLOAD LOGIC (DOCUMENTS) ---
+        const fileInput = document.getElementById('file-input');
+        const uploadBtn = document.getElementById('upload-btn');
+
+        uploadBtn.addEventListener('click', async () => {
+            const file = fileInput.files[0];
+            if (!file) {
+                showMessage("No File Selected", "Please choose a file to upload first.");
+                return;
+            }
+            if (!currentUser) return;
+
+            // UI Feedback
+            uploadBtn.textContent = "Uploading...";
+            uploadBtn.disabled = true;
+
+            try {
+                // Create a unique path in Firebase Storage: users/{uid}/documents/{timestamp_filename}
+                const safeFilename = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+                const storagePathString = `users/${currentUser.uid}/documents/${safeFilename}`;
+                const storageRef = ref(storage, storagePathString);
+                
+                // Upload file to Firebase Storage
+                await uploadBytes(storageRef, file);
+                
+                // Get the public download link
+                const downloadURL = await getDownloadURL(storageRef);
+
+                // Save metadata (including the storage path for future deletion) to Firestore database
+                await addDoc(collection(db, "users", currentUser.uid, "documents"), {
+                    name: file.name,
+                    url: downloadURL,
+                    storagePath: storagePathString, 
+                    size: (file.size / 1024 / 1024).toFixed(2) + " MB",
+                    date: new Date().toLocaleDateString()
+                });
+
+                showMessage("Success", "Your file was uploaded successfully.");
+                fileInput.value = ""; // clear input
+                loadUserDocuments(currentUser.uid); // Refresh the list
+            } catch (error) {
+                console.error("Upload Error:", error);
+                showMessage("Upload Failed", "An error occurred during upload. Please ensure your files are not too large and try again.");
+            } finally {
+                uploadBtn.textContent = "Upload File";
+                uploadBtn.disabled = false;
+            }
+        });
+
+        // --- FETCH AND DISPLAY FILES LOGIC ---
+        async function loadUserDocuments(uid) {
+            const listEl = document.getElementById('doc-list');
+            listEl.innerHTML = '<li class="doc-item" style="justify-content: center;">Loading your files...</li>';
+            
+            try {
+                // Query Firestore for documents owned by this user
+                const q = query(collection(db, "users", uid, "documents"));
+                const querySnapshot = await getDocs(q);
+                
+                listEl.innerHTML = ""; // Clear loading message
+
+                if (querySnapshot.empty) {
+                    listEl.innerHTML = '<li class="doc-item" style="color: #64748b; justify-content: center;">No documents uploaded yet. Start by uploading a file above.</li>';
+                    return;
+                }
+
+                // Render each file as a clickable download link with a delete button
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const docId = docSnap.id;
+                    
+                    const li = document.createElement('li');
+                    li.className = "doc-item";
+                    
+                    li.innerHTML = `
+                        <div class="doc-info">
+                            <a href="${data.url}" target="_blank">
+                                📄 ${data.name}
+                            </a>
+                            <span class="doc-meta">Uploaded: ${data.date || 'Unknown date'} • Size: ${data.size || 'Unknown size'}</span>
+                        </div>
+                        <div class="doc-actions">
+                            <button class="delete-btn" data-id="${docId}" data-path="${data.storagePath || ''}">Delete</button>
+                        </div>
+                    `;
+                    listEl.appendChild(li);
+                });
+
+                // Attach event listeners to all newly created delete buttons
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const docId = e.target.getAttribute('data-id');
+                        const storagePath = e.target.getAttribute('data-path');
+                        
+                        showConfirm("Delete Document", "Are you sure you want to permanently delete this file? This action cannot be undone.", () => {
+                            executeFileDeletion(docId, storagePath, uid);
+                        });
+                    });
+                });
+
+            } catch (error) {
+                console.error("Error fetching docs:", error);
+                listEl.innerHTML = '<li class="doc-item" style="color: #f43f5e; justify-content: center;">Failed to load documents. Ensure your connection is stable.</li>';
+            }
+        }
+
+        // --- FILE DELETION LOGIC ---
+        async function executeFileDeletion(docId, storagePath, uid) {
+            try {
+                // 1. Delete from Firebase Storage (if the path exists)
+                if (storagePath) {
+                    const storageRef = ref(storage, storagePath);
+                    await deleteObject(storageRef);
+                }
+
+                // 2. Delete metadata from Firestore
+                await deleteDoc(doc(db, "users", uid, "documents", docId));
+                
+                // 3. Provide feedback and refresh
+                showMessage("File Deleted", "The file was successfully removed from your profile.");
+                loadUserDocuments(uid);
+            } catch (error) {
+                console.error("Delete error:", error);
+                showMessage("Deletion Failed", "There was an error deleting the file. Please try again.");
+            }
+        }
+
+        // --- SIGN OUT LOGIC ---
+        const signOutBtn = document.getElementById('home-sign-out-btn');
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showConfirm("Sign Out", "Are you sure you want to sign out?", () => {
+                    signOut(auth).then(() => {
+                        try {
+                            localStorage.clear();
+                            sessionStorage.clear();
+                            window.location.replace("index.html?logout=true");
+                        } catch (err) {
+                            console.warn("Redirect prevented in preview mode.");
+                        }
+                    }).catch((error) => showMessage("Error", "Failed to sign out."));
+                });
+            });
+        }
+    </script>
+</body>
+</html>
