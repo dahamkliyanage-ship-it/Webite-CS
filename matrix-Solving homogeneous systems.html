@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solving Homogeneous Systems</title>
+    <!-- Link to the external CSS file containing the provided styles -->
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Solving Homogeneous Systems. Focus on homogeneous systems of linear equations in matrix form Ax = 0, where the constant vector is the zero vector. Cover the trivial solution, where all variables are zero, and explain why every homogeneous system is always consistent because the trivial solution always exists. Explain the relationship rank(A) = rank([A|0]) and the rank conditions for solutions: rank(A) equal to the number of variables gives a unique solution consisting only of the trivial solution, while rank(A) less than the number of variables gives infinitely many solutions, including non-trivial solutions. Cover free variables, non-trivial solutions, and determining the number of solutions from the rank of the coefficient matrix.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Solving Homogeneous Systems</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec8-3" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Homogeneous Systems</a></li>
+                <li><a href="#trivial-sol">The Trivial Solution</a></li>
+                <li><a href="#rank-rules">Rank Rules for Homogeneous Systems</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec8-3" style="margin-bottom: 20px;">Solving homogeneous systems</h2>
+
+            <div class="blue-box">
+                <strong>Consider the homogeneous system</strong>
+                <div class="math-center">
+                    $$ A_{m \times n}X_{n \times 1} = O_{m \times 1}. $$
+                </div>
+                In a homogeneous system, the matrix equation equals a zero vector $O_{m \times 1}$ instead of a constants vector $B$.
+            </div>
+
+            <div class="green-box" id="trivial-sol">
+                <strong>The Trivial Solution</strong><br><br>
+                It is easy to see that $X = O$ (where all variables equal zero) is always a solution for this system. Therefore, <strong>any homogeneous system is always consistent</strong>. This guaranteed solution $X = O$ is known as the <em>trivial solution</em>.
+            </div>
+
+            <div class="yellow-box" id="rank-rules">
+                <strong>Rank Conditions for Solutions</strong><br><br>
+                Because the constant column is all zeros, augmenting the matrix with it does not change its rank. Thus, for a homogeneous system, $\text{Rank } A = \text{Rank}(A|O)$ is always true. The number of solutions depends on how the rank compares to $n$ (the number of variables):
+                
+                <ul style="padding-left: 20px; line-height: 1.8; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">If $\text{Rank } A = \text{Rank}(A|O) = n$ then the system has a <strong>unique solution</strong>, which is exclusively the trivial one ($X=O$).</li>
+                    <li>If $\text{Rank } A = \text{Rank}(A|O) < n$ then the system has <strong>infinitely many solutions</strong> other than the trivial solution (these are called non-trivial solutions).</li>
+                </ul>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial explaining how to solve homogeneous systems using matrices, identifying trivial vs. non-trivial solutions, and finding free variables:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/cB2byS_I6Js" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Homogeneous Systems and their solutions based on matrix rank.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> In matrix notation, how is a homogeneous system of linear equations defined?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $AX = B$, where $B$ is a non-zero vector.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $AX = O$, where $O$ is the zero vector.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $A = O$, where $A$ is the coefficient matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> What does the "trivial solution" refer to in the context of homogeneous systems?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The solution where all variables are exactly zero ($X = O$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A solution where all variables equal one.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) A solution involving infinitely many free variables.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Why is a homogeneous system of equations mathematically guaranteed to ALWAYS be "consistent"?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Because the coefficient matrix $A$ is always an invertible matrix.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Because the number of rows always matches the number of columns.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Because the zero vector ($X = O$) is always a guaranteed valid solution.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> For any homogeneous system, what is the fixed relationship between the rank of the coefficient matrix $A$ and the rank of the augmented matrix $(A|O)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\text{Rank } A < \text{Rank}(A|O)$ is always true.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\text{Rank } A = \text{Rank}(A|O)$ is always true.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\text{Rank } A > \text{Rank}(A|O)$ is always true.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If the rank of the coefficient matrix $A$ is exactly equal to $n$ (the total number of variables), what can be concluded about the solutions?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The system has infinitely many solutions.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The system has absolutely no solutions.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The system has a unique solution, which is exclusively the trivial one.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Under what specific mathematical condition does a homogeneous system possess infinitely many (non-trivial) solutions?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) When $\text{Rank } A < n$ (number of variables).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) When $\text{Rank } A = n$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) When $\text{Rank } A > n$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> What does it practically mean for a homogeneous system to possess "non-trivial solutions"?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) It has valid solutions where at least one variable is strictly not zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It only has the basic solution $X = O$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It means the system is inconsistent and cannot be solved.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> Consider a homogeneous system with 4 distinct variables ($n=4$). If its coefficient matrix $A$ is reduced and found to have a rank of 3, how many solutions does the system have?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Exactly one solution (the trivial solution).</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Infinitely many solutions.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) No solutions at all.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-homogeneous"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-homogeneous");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

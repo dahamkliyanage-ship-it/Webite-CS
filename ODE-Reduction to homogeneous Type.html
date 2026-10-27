@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reduction to Homogeneous Type</title>
+    <!-- Link to the external CSS file containing the provided styles -->
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Reduction to Homogeneous Type in Ordinary Differential Equations. Focus on the method of reducing first-order ODEs of the form dy/dx = (ax + by + c)/(Ax + By + C) to a homogeneous equation using linear translation of variables. Cover the substitution x = X + h, y = Y + k, the conditions for choosing constants h and k to eliminate constant terms, and the resulting homogeneous equation. Include worked examples, step-by-step explanations, and exercises for practice.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Reduction to Homogeneous Type</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec3-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Reduction to Homogeneous Type</a></li>
+                <li><a href="#method-sub">The Substitution Method</a></li>
+                <li><a href="#example-reduce">Worked Example</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec3-1" style="margin-bottom: 20px;">Reduction to Homogeneous Type</h2>
+
+            <div class="blue-box">
+                <strong>The General Form</strong><br><br>
+                The equation of the form
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = \frac{ax + by + c}{Ax + By + C} $$
+                </div>
+                can be reduced to a homogeneous form by changing the variables $x, y$ to $X, Y$ related by the equations:
+                <div class="math-center">
+                    $$ x = X + h, \quad y = Y + k $$
+                </div>
+                where $h, k$ are constants to be chosen so as to make the given equation homogeneous.
+            </div>
+
+            <div class="green-box" id="method-sub">
+                <strong>Applying the Substitution</strong><br><br>
+                Substituting $x = X + h$ and $y = Y + k$, the differentials become $dx = dX$ and $dy = dY$. The given equation becomes:
+                <div class="math-center">
+                    $$ \frac{dY}{dX} = \frac{a(X+h) + b(Y+k) + c}{A(X+h) + B(Y+k) + C} $$
+                    $$ \frac{dY}{dX} = \frac{aX + bY + (ah + bk + c)}{AX + BY + (Ah + Bk + C)} $$
+                </div>
+                Now, let's select $h$ and $k$ such that the constant terms vanish:
+                <div class="math-center">
+                    $$ ah + bk + c = 0 $$
+                    $$ Ah + Bk + C = 0 $$
+                </div>
+                Solving this system of linear equations gives us the values for $h$ and $k$. Once applied, the differential equation simplifies to:
+                <div class="math-center">
+                    $$ \frac{dY}{dX} = \frac{aX + bY}{AX + BY} $$
+                </div>
+                This is now a standard homogeneous equation in variables $X$ and $Y$. Now apply the previous method (substituting $Y = vX$) to find the solution.
+            </div>
+
+            <div class="yellow-box" id="example-reduce">
+                <strong>Worked Example: Reduction Process</strong><br><br>
+                Reduce the equation $\frac{dy}{dx} = \frac{y - x + 1}{y + x + 5}$ to a homogeneous form.
+                <br><br>
+                <strong>Step 1: Set up the translation.</strong><br>
+                Let $x = X + h$ and $y = Y + k$. Then $dx = dX$ and $dy = dY$.
+                <div class="math-center">
+                    $$ \frac{dY}{dX} = \frac{(Y+k) - (X+h) + 1}{(Y+k) + (X+h) + 5} = \frac{Y - X + (k - h + 1)}{Y + X + (k + h + 5)} $$
+                </div>
+                <br>
+                <strong>Step 2: Solve for $h$ and $k$.</strong><br>
+                Set the constant parts to zero to force homogeneity:
+                <div class="math-center">
+                    $-h + k + 1 = 0 \quad$ (1)<br>
+                    $h + k + 5 = 0 \quad$ (2)
+                </div>
+                Adding the two equations: $2k + 6 = 0 \implies k = -3$.<br>
+                Substituting $k=-3$ into (2): $h - 3 + 5 = 0 \implies h = -2$.
+                <br><br>
+                <strong>Step 3: Write the reduced homogeneous equation.</strong><br>
+                With $h=-2$ and $k=-3$, the constants disappear, leaving:
+                <div class="math-center">
+                    $$ \frac{dY}{dX} = \frac{Y - X}{Y + X} $$
+                </div>
+                This equation can now be solved using the substitution $Y = vX$. Once solved for $X$ and $Y$, you must substitute back $X = x - h = x + 2$ and $Y = y - k = y + 3$ to get the final answer in terms of $x$ and $y$.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video for a direct, step-by-step breakdown of how to solve first-order differential equations by substituting variables to eliminate constants and reduce them to a homogeneous form:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/gUxovPcKyNA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on reducing equations with constants to a homogeneous form.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What is the primary mathematical purpose of the substitution $x = X + h, y = Y + k$ in equations of the form $\frac{dy}{dx} = \frac{ax+by+c}{Ax+By+C}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) To entirely eliminate the variables $x$ and $y$ from the equation.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) To eliminate the constant terms $c$ and $C$ to make the equation properly homogeneous.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) To directly separate the variables for immediate integration.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Under the linear translation $x = X + h$ and $y = Y + k$ (where $h$ and $k$ are constants), how do the differentials $\frac{dy}{dx}$ and $\frac{dY}{dX}$ relate to each other?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{dy}{dx} = h\frac{dY}{dX} + k$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{dy}{dx} = \frac{1}{h+k}\frac{dY}{dX}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\frac{dy}{dx} = \frac{dY}{dX}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> In order to successfully force the constant terms in the numerator and denominator to vanish, what condition must the constants $h$ and $k$ satisfy?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) They must satisfy the linear system $ah + bk + c = 0$ and $Ah + Bk + C = 0$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They must strictly be equal to zero ($h = 0, k = 0$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) They must satisfy the system $aX + bY = 0$ and $AX + BY = 0$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Once the correctly evaluated constants $h$ and $k$ are applied, what is the resulting simplified homogeneous equation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{dY}{dX} = aX + bY + C$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{dY}{dX} = \frac{ah + bk}{Ah + Bk}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\frac{dY}{dX} = \frac{aX + bY}{AX + BY}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> In the provided worked example $\frac{dy}{dx} = \frac{y - x + 1}{y + x + 5}$, what specific system of linear equations is used to find $h$ and $k$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $h + k + 1 = 0$ and $h - k + 5 = 0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $-h + k + 1 = 0$ and $h + k + 5 = 0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $-h - k + 1 = 0$ and $-h + k + 5 = 0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Solving the linear system $-h + k + 1 = 0$ and $h + k + 5 = 0$ from the worked example yields which values for $h$ and $k$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $h = 2$, $k = 3$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $h = -2$, $k = 3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $h = -2$, $k = -3$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> After reducing the equation to the standard homogeneous form $\frac{dY}{dX} = \frac{Y - X}{Y + X}$, what is the immediate next mathematical step to solve it?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Apply the substitution $Y = vX$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Integrate both sides with respect to $X$ directly.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Multiply both sides by an integrating factor.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> At the very end of the solving process for the worked example, using $h = -2$ and $k = -3$, what expressions must be substituted back in place of $X$ and $Y$ to state the final solution in terms of $x$ and $y$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $X = x - 2$, $Y = y - 3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $X = x + 2$, $Y = y + 3$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $X = -2x$, $Y = -3y$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "ode-reduction"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "ode-reduction");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Overview of Electrical Engineering</title>
+    <link rel="stylesheet" href="style_2.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="An introduction to fundamental energy concepts, power generation methods, atomic principles, and the basic architecture of electrical power systems.">
+
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="page-header">
+            <div class="header-content">
+                <span class="module-tag">EE1040 - Electrical Fundamentals</span>
+                <h1>1.0 Overview of Electrical Engineering</h1>
+                <p>An introduction to fundamental energy concepts, power generation methods, atomic principles, and the basic architecture of electrical power systems.</p>
+            </div>
+        </header>
+
+        <section class="content-block">
+            <h2>1.1 The Fundamentals: How Electricity Works</h2>
+            <p>At the most foundational level, electricity is driven by atomic structure. Everything is made of atoms, which contain positive protons, neutral neutrons, and negative electrons orbiting in shells. In materials known as <strong>conductors</strong> (like copper, aluminum, or gold), the outermost "valence" electrons are loosely bound and can easily flow to neighboring atoms. <strong>Insulators</strong> (like rubber, glass, or dry air) hold tightly to their electrons, preventing flow.</p>
+            
+            <p>When a closed electrical circuit is established, a power source creates a pushing force called <strong>Voltage</strong> or Potential Difference (measured in Volts, defined as Joules per Coulomb, $V = W/Q$). This pressure forces a group of electrons to flow sequentially. This continuous flow is called <strong>Current</strong> (measured in Amperes, where $1\text{ Amp} = 1\text{ Coulomb/second}$).</p>
+            
+            <p>As electrons move through a conductor, they collide with atomic structures, creating a restriction to flow known as <strong>Resistance</strong> ($R$, measured in Ohms, $\Omega$). This friction generates heat (and sometimes light), which is the basis for incandescent bulbs and electrical heaters.</p>
+            
+            <p><strong>AC vs. DC Current:</strong></p>
+            <ul>
+                <li><strong>Direct Current (DC):</strong> Flows uniformly in one single direction (e.g., from batteries, solar panels).</li>
+                <li><strong>Alternating Current (AC):</strong> Constantly reverses direction sinusoidally (e.g., 50 or 60 times a second). AC is the global standard for grid power because its voltage can be easily stepped up or down using transformers, minimizing energy losses over long distances.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>1.2 Energy Sources and Power Generation</h2>
+            <p>Energy is a basic necessity for human and economic development. The process of converting available natural primary energy into usable electrical energy is called <em>generation</em>. This universally involves a natural source providing energy to a <strong>Prime Mover</strong> (like a turbine), which physically rotates an <strong>Alternator</strong>.</p>
+            
+            <div class="diagram-box">
+                <h4>General Architecture of Electrical Generation</h4>
+                <svg viewBox="0 0 800 200" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-blue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L6,3 z" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Block 1: Energy Source -->
+                    <rect x="20" y="60" width="160" height="80" rx="8" fill="rgba(56, 189, 248, 0.1)" stroke="#38bdf8" stroke-width="2" />
+                    <text x="100" y="95" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Energy Source</text>
+                    <text x="100" y="120" fill="#94a3b8" font-size="12" text-anchor="middle">(Water / Coal / Gas)</text>
+                    
+                    <line x1="180" y1="100" x2="260" y2="100" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)" />
+
+                    <!-- Block 2: Prime Mover -->
+                    <rect x="270" y="60" width="160" height="80" rx="8" fill="rgba(250, 204, 21, 0.1)" stroke="#facc15" stroke-width="2" />
+                    <text x="350" y="95" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Prime Mover</text>
+                    <text x="350" y="120" fill="#94a3b8" font-size="12" text-anchor="middle">(Steam/Hydro Turbine)</text>
+
+                    <line x1="430" y1="100" x2="510" y2="100" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)" />
+                    <text x="470" y="90" fill="#3b82f6" font-size="12" text-anchor="middle">Mechanical Energy</text>
+
+                    <!-- Block 3: Alternator -->
+                    <rect x="520" y="60" width="160" height="80" rx="8" fill="rgba(34, 197, 94, 0.1)" stroke="#22c55e" stroke-width="2" />
+                    <text x="600" y="95" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Alternator</text>
+                    <text x="600" y="120" fill="#94a3b8" font-size="12" text-anchor="middle">(AC Generator)</text>
+
+                    <line x1="680" y1="100" x2="760" y2="100" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)" />
+                    <text x="720" y="90" fill="#3b82f6" font-size="12" text-anchor="middle">Electrical Energy</text>
+                </svg>
+            </div>
+
+            <ul>
+                <li><strong>Hydroelectric:</strong> Stored water at a high elevation possesses potential energy. As it falls through a penstock, it strikes and turns a hydraulic turbine (like a Francis or Pelton wheel).</li>
+                <li><strong>Thermal (Fossil Fuels):</strong> Includes solid coal, liquid oil, and natural gas. Heat energy boils water to create high-pressure steam that spins a steam turbine. Liquefied Natural Gas (LNG) is a notable thermal fuel offering higher efficiency and faster ramp-up times with significantly fewer pollutants than coal.</li>
+                <li><strong>Nuclear:</strong> Nuclear fission (splitting atoms) generates immense heat to create steam.</li>
+                <li><strong>Renewables:</strong> Wind turbines harness kinetic wind energy directly. Solar Photovoltaic (PV) uniquely generates DC electricity directly from photons without a mechanical prime mover.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>1.3 Balanced Three-Phase Systems</h2>
+            <p>Virtually all modern power stations utilize alternators designed to produce balanced three-phase voltages. A balanced system generates three distinct sinusoidal voltages of exactly equal magnitude and frequency, but phase-shifted from one another by exactly <strong>120&deg;</strong> ($\frac{2\pi}{3}$ radians) in time.</p>
+            
+            <div class="math-callout">
+                <p><strong>Instantaneous Time-Domain Equations:</strong></p>
+                <p>$$v_a(t) = V_m \sin(\omega t)$$</p>
+                <p>$$v_b(t) = V_m \sin\left(\omega t - 120^\circ\right)$$</p>
+                <p>$$v_c(t) = V_m \sin\left(\omega t + 120^\circ\right)$$</p>
+            </div>
+            
+            <p>Three-phase power is superior to single-phase because it provides a constant, non-pulsating power transfer to heavy industrial loads (like large motors) and requires less conductor material to transmit the same amount of power.</p>
+
+            <div class="diagram-box">
+                <h4>Balanced Three-Phase Voltage Waveforms</h4>
+                <svg viewBox="-40 -100 800 220" style="width: 100%; height: auto; background-color: #0f172a; border-radius: 6px; padding: 10px;">
+                    <defs>
+                        <!-- Perfect Sine Wave Path (360 degrees = 360 pixels length) -->
+                        <path id="sine-wave" d="M 0 0 C 35 -100, 55 -100, 90 0 C 125 100, 145 100, 180 0 C 215 -100, 235 -100, 270 0 C 305 100, 325 100, 360 0 C 395 -100, 415 -100, 450 0 C 485 100, 505 100, 540 0 C 575 -100, 595 -100, 630 0 C 665 100, 685 100, 720 0" fill="none" stroke-width="3" />
+                    </defs>
+                    
+                    <!-- X and Y Axes -->
+                    <line x1="0" y1="0" x2="740" y2="0" stroke="#94a3b8" stroke-width="2" />
+                    <line x1="0" y1="-80" x2="0" y2="80" stroke="#94a3b8" stroke-width="2" />
+                    <polygon points="0,-85 -5,-75 5,-75" fill="#94a3b8" />
+                    <polygon points="745,0 735,-5 735,5" fill="#94a3b8" />
+
+                    <!-- Axis Labels -->
+                    <text x="-25" y="-70" fill="#94a3b8" font-size="14">V(t)</text>
+                    <text x="730" y="20" fill="#94a3b8" font-size="14">ωt</text>
+
+                    <!-- Degree Marks -->
+                    <line x1="90" y1="-5" x2="90" y2="5" stroke="#94a3b8" stroke-width="1" />
+                    <text x="80" y="20" fill="#94a3b8" font-size="12">180°</text>
+                    
+                    <line x1="180" y1="-5" x2="180" y2="5" stroke="#94a3b8" stroke-width="1" />
+                    <text x="170" y="20" fill="#94a3b8" font-size="12">360°</text>
+                    
+                    <!-- Phase A (Red) -->
+                    <use href="#sine-wave" stroke="#ef4444" />
+                    
+                    <!-- Phase B (Yellow) - Lags Phase A by 120 degrees (60px right shift) -->
+                    <use href="#sine-wave" stroke="#facc15" transform="translate(60, 0)" />
+                    
+                    <!-- Phase C (Blue) - Lags Phase B by 120 degrees (120px right shift) -->
+                    <use href="#sine-wave" stroke="#38bdf8" transform="translate(120, 0)" />
+                </svg>
+                
+                <div class="legend">
+                    <span style="color: #ef4444;">&mdash; Phase A (0&deg;)</span>
+                    <span style="color: #facc15;">&mdash; Phase B (-120&deg;)</span>
+                    <span style="color: #38bdf8;">&mdash; Phase C (+120&deg;)</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>1.4 Electric Power System Architecture</h2>
+            <p>A power system connects generating stations to consumers via complex transmission and distribution networks. Because drawing three distinct wires for every circuit is visually confusing, engineers map these systems using a <strong>Single-Line Diagram</strong>, which simplifies the three-phase circuits into a single structural line.</p>
+            
+            <div class="diagram-box">
+                <h4>Typical Single-Line Power Architecture</h4>
+                <svg viewBox="0 0 800 250" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Transformer Symbol (Overlapping Circles) -->
+                        <g id="transformer">
+                            <circle cx="0" cy="-10" r="15" fill="none" stroke="#f1f5f9" stroke-width="3" />
+                            <circle cx="0" cy="10" r="15" fill="none" stroke="#f1f5f9" stroke-width="3" />
+                        </g>
+                    </defs>
+
+                    <!-- Base Line -->
+                    <line x1="80" y1="125" x2="720" y2="125" stroke="#94a3b8" stroke-width="3" />
+
+                    <!-- Generation -->
+                    <circle cx="80" cy="125" r="25" fill="none" stroke="#ef4444" stroke-width="3" />
+                    <text x="80" y="132" fill="#ef4444" font-size="20" font-weight="bold" text-anchor="middle">G</text>
+                    <text x="80" y="175" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">Generator</text>
+                    <text x="80" y="195" fill="#94a3b8" font-size="12" text-anchor="middle">13.8 kV</text>
+
+                    <!-- Step-Up Transformer -->
+                    <use href="#transformer" x="220" y="125" />
+                    <text x="220" y="175" fill="#facc15" font-size="14" font-weight="bold" text-anchor="middle">Step-Up TX</text>
+                    <text x="220" y="195" fill="#94a3b8" font-size="12" text-anchor="middle">13.8kV / 220kV</text>
+
+                    <!-- Transmission Tower -->
+                    <path d="M 360 125 L 370 70 L 390 70 L 400 125 M 360 85 L 400 85 M 365 105 L 395 105" fill="none" stroke="#38bdf8" stroke-width="2" />
+                    <text x="380" y="175" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Transmission Line</text>
+                    <text x="380" y="195" fill="#94a3b8" font-size="12" text-anchor="middle">220 kV</text>
+
+                    <!-- Step-Down Transformer -->
+                    <use href="#transformer" x="540" y="125" />
+                    <text x="540" y="175" fill="#22c55e" font-size="14" font-weight="bold" text-anchor="middle">Step-Down TX</text>
+                    <text x="540" y="195" fill="#94a3b8" font-size="12" text-anchor="middle">220kV / 33kV</text>
+
+                    <!-- Load -->
+                    <polygon points="700,110 740,110 720,140" fill="#a855f7" />
+                    <text x="720" y="175" fill="#a855f7" font-size="14" font-weight="bold" text-anchor="middle">Industrial Load</text>
+                    <text x="720" y="195" fill="#94a3b8" font-size="12" text-anchor="middle">33 kV</text>
+                </svg>
+            </div>
+
+            <ul>
+                <li><strong>Generation:</strong> Power is typically generated at medium voltages (e.g., 11 kV to 15 kV).</li>
+                <li><strong>Transmission:</strong> Transformers step <em>up</em> the voltage (e.g., 132 kV, 220 kV, or 400 kV) before sending it across the country. Because Power ($P = VI$), increasing the voltage ($V$) drastically lowers the current ($I$) required to send the same power, which minimizes $I^2R$ heat losses in the cables over long distances.</li>
+                <li><strong>Distribution:</strong> At regional substations, voltage is stepped <em>down</em> (e.g., to 33 kV or 11 kV) for safe travel through populated areas.</li>
+                <li><strong>Utilization:</strong> Pole-mounted transformers step the voltage down to highly safe levels for consumer loads (e.g., 400V 3-phase for commercial, 230V single-phase for residential).</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Strict Operational Conditions</strong>
+                <p>Because electrical energy cannot be easily stored on a massive scale, the grid must strictly maintain parameters in real-time:</p>
+                <ul>
+                    <li><strong>Power Balance:</strong> $\Sigma \text{Generation} = \Sigma \text{Load} + \Sigma \text{Losses}$ (If load exceeds generation, frequency drops; if generation exceeds load, frequency rises).</li>
+                    <li><strong>Frequency:</strong> Must remain within $50\text{Hz} \pm 1\%$ (in most of the world) or $60\text{Hz}$ (in the Americas).</li>
+                    <li><strong>Voltage:</strong> Must generally remain within $\pm 6\%$ of nominal limits to prevent equipment damage.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>1.5 System Demand & Load Curves</h2>
+            <p>Electrical demand is never constant; it fluctuates significantly based on weather, industrial shifts, and consumer habits. This creates a <strong>variable load</strong> over a 24-hour period. Grid operators visualize this using a Daily Load Curve (plotting Load in kW/MW against Time in hours).</p>
+
+            <div class="diagram-box">
+                <h4>Daily Load Curve Step Graph</h4>
+                <svg viewBox="0 0 700 350" style="width: 100%; height: auto;">
+                    <!-- Y Axis Labels (kW) -->
+                    <text x="40" y="55" fill="#94a3b8" font-size="12" text-anchor="end">80</text>
+                    <text x="40" y="105" fill="#94a3b8" font-size="12" text-anchor="end">60</text>
+                    <text x="40" y="155" fill="#94a3b8" font-size="12" text-anchor="end">40</text>
+                    <text x="40" y="205" fill="#94a3b8" font-size="12" text-anchor="end">20</text>
+                    <text x="40" y="255" fill="#94a3b8" font-size="12" text-anchor="end">0</text>
+                    <text x="15" y="150" fill="#f1f5f9" font-size="14" font-weight="bold" transform="rotate(-90 15,150)">Load (kW)</text>
+
+                    <!-- X Axis Labels (Hours) -->
+                    <text x="50" y="275" fill="#94a3b8" font-size="12" text-anchor="middle">0</text>
+                    <text x="200" y="275" fill="#94a3b8" font-size="12" text-anchor="middle">6</text>
+                    <text x="300" y="275" fill="#94a3b8" font-size="12" text-anchor="middle">10</text>
+                    <text x="350" y="275" fill="#94a3b8" font-size="12" text-anchor="middle">12</text>
+                    <text x="450" y="275" fill="#94a3b8" font-size="12" text-anchor="middle">16</text>
+                    <text x="550" y="275" fill="#94a3b8" font-size="12" text-anchor="middle">20</text>
+                    <text x="650" y="275" fill="#94a3b8" font-size="12" text-anchor="middle">24</text>
+                    <text x="350" y="305" fill="#f1f5f9" font-size="14" font-weight="bold" text-anchor="middle">Time (Hours)</text>
+
+                    <!-- Grid Lines -->
+                    <line x1="50" y1="50" x2="650" y2="50" stroke="#334155" stroke-width="1" stroke-dasharray="4,4" />
+                    <line x1="50" y1="100" x2="650" y2="100" stroke="#334155" stroke-width="1" stroke-dasharray="4,4" />
+                    <line x1="50" y1="150" x2="650" y2="150" stroke="#334155" stroke-width="1" stroke-dasharray="4,4" />
+                    <line x1="50" y1="200" x2="650" y2="200" stroke="#334155" stroke-width="1" stroke-dasharray="4,4" />
+                    <line x1="50" y1="250" x2="650" y2="250" stroke="#94a3b8" stroke-width="2" />
+                    <line x1="50" y1="250" x2="50" y2="30" stroke="#94a3b8" stroke-width="2" />
+
+                    <!-- Step Graph Data -->
+                    <!-- 0-6h: 40kW -->
+                    <rect x="50" y="150" width="150" height="100" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2" />
+                    <!-- 6-10h: 50kW -->
+                    <rect x="200" y="125" width="100" height="125" fill="rgba(56, 189, 248, 0.4)" stroke="#38bdf8" stroke-width="2" />
+                    <!-- 10-12h: 60kW -->
+                    <rect x="300" y="100" width="50" height="150" fill="rgba(56, 189, 248, 0.6)" stroke="#38bdf8" stroke-width="2" />
+                    <!-- 12-16h: 50kW -->
+                    <rect x="350" y="125" width="100" height="125" fill="rgba(56, 189, 248, 0.4)" stroke="#38bdf8" stroke-width="2" />
+                    <!-- 16-20h: 70kW - Peak -->
+                    <rect x="450" y="75" width="100" height="175" fill="rgba(239, 68, 68, 0.6)" stroke="#ef4444" stroke-width="2" />
+                    <!-- 20-24h: 40kW -->
+                    <rect x="550" y="150" width="100" height="100" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2" />
+
+                    <!-- Annotations -->
+                    <text x="500" y="60" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">Maximum Demand</text>
+                    <text x="125" y="200" fill="#f8fafc" font-size="14" text-anchor="middle">Base Load</text>
+                </svg>
+            </div>
+
+            <div class="example-box">
+                <div class="example-header">Calculations Based on the Load Curve</div>
+                <p>Using the data from the graph above, we can determine the core operating metrics for the facility:</p>
+                <table class="styled-table">
+                    <tr>
+                        <th>Time Period</th><td>00:00-06:00</td><td>06:00-10:00</td><td>10:00-12:00</td><td>12:00-16:00</td><td>16:00-20:00</td><td>20:00-24:00</td>
+                    </tr>
+                    <tr>
+                        <th>Duration (h)</th><td>6</td><td>4</td><td>2</td><td>4</td><td>4</td><td>4</td>
+                    </tr>
+                    <tr>
+                        <th>Load (kW)</th><td>40</td><td>50</td><td>60</td><td>50</td><td>70</td><td>40</td>
+                    </tr>
+                </table>
+                <br>
+                <p><strong>1. Maximum Demand:</strong> $70\text{ kW}$ (The highest peak recorded during the evening hours).</p>
+                
+                <p><strong>2. Total Daily Energy Consumed:</strong> The total energy is the area under the load curve (Power in kW &times; Time in hours):</p>
+                <p>$$ E = (40 \times 6) + (50 \times 4) + (60 \times 2) + (50 \times 4) + (70 \times 4) + (40 \times 4) $$</p>
+                <p>$$ E = 240 + 200 + 120 + 200 + 280 + 160 = \mathbf{1200\text{ kWh}} $$</p>
+                
+                <p><strong>3. Average Demand:</strong> This is a hypothetical constant load that would consume the same total energy over the 24 hours.</p>
+                <p>$$ P_{avg} = \frac{\text{Total Energy}}{\text{24 hours}} = \frac{1200\text{ kWh}}{24\text{ h}} = \mathbf{50\text{ kW}} $$</p>
+                
+                <p style="margin-top:15px; color: var(--text-muted); font-size: 0.95rem;"><em>Note on Metering: Older analog energy meters have a "Meter Constant" (e.g., $400\text{ rev/kWh}$). This means the magnetic aluminum disk inside the meter must complete exactly 400 revolutions to register one full unit ($1\text{ kWh}$) of energy consumption on the dial.</em></p>
+            </div>
+        </section>
+
+        <!-- Video strictly positioned before the quiz -->
+        <section class="video-section">
+            <h2>Video Resource: How Electricity Works</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/mc979OhitAg?si=_tYJtS2pUbFdsACY" title="How Electricity Works" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Assessment -->
+        <section class="quiz-section">
+            <h2>End of Chapter Assessment</h2>
+            <p class="quiz-intro">Test your understanding of the electrical fundamentals covered above.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. Why is electrical voltage frequently compared to water pressure in a pipe?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) Because it determines the physical diameter of the electrical cable required.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) Because it creates friction that directly generates heat inside the wire.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) Because it serves as the electromotive "pushing force" that drives a flow of electrons through a closed circuit.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) Because it represents the total volume of electrons stored in a battery.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the defining characteristic of a balanced Three-Phase power system?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) It outputs three distinct direct currents (DC) at exactly 120 Volts each.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>B) It generates three sinusoidal voltages of equal magnitude and frequency, but they are phase-shifted by exactly 120&deg; ($\frac{2\pi}{3}$ rad) from one another.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) It uses three prime movers to spin one massive alternator.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) The frequencies of the three phases are $50\text{Hz}$, $100\text{Hz}$, and $150\text{Hz}$ respectively to balance the load.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. Why is voltage stepped up significantly (e.g., to 220 kV or 400 kV) for long-distance power transmission?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) To force the electrons to travel faster than the speed of light.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>B) Because industrial loads require 220 kV to operate directly.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) To increase the frequency of the alternating current.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>D) Stepping up the voltage proportionately reduces the current required to transmit the same power, thereby minimizing $I^2R$ heat losses in the long transmission lines.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. According to fundamental grid operating conditions, what is the required system power balance equation at any given instant?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) $\Sigma \text{Generation} = \Sigma \text{Load} - \Sigma \text{Losses}$</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) $\Sigma \text{Losses} = \Sigma \text{Generation} + \Sigma \text{Load}$</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>C) $\Sigma \text{Generation} = \Sigma \text{Load} + \Sigma \text{Losses}$</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) $\Sigma \text{Load} = \Sigma \text{Generation} + \Sigma \text{Losses}$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. A small processing facility operates with a constant load of $30\text{ kW}$ from midnight (00:00) to 08:00, and steps up to a load of $60\text{ kW}$ from 08:00 to 12:00. What is the total electrical energy consumed during this 12-hour period?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) $90\text{ kWh}$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>B) $240\text{ kWh}$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>C) $600\text{ kWh}$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>D) $480\text{ kWh}$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_electrical.js"></script>
+
+    <!-- Auto-Evaluating Quiz Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid var(--success)";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the theory and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid var(--error)";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(34, 197, 94, 0.1)";
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(34, 197, 94, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orthogonal and Orthonormal Vectors</title>
+    <!-- External stylesheet reference (no inline CSS) -->
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Orthogonal Vectors and Matrices. Focus on the inner product (dot product) of real column vectors, orthogonal vectors, orthogonal sets, and orthonormal sets. Cover the conditions for orthogonality, where the dot product of two non-zero vectors is zero, and orthonormality, where vectors are pairwise orthogonal and each vector has norm 1. Explain orthogonal matrices, defined by A^T A = I or equivalently A^T = A^{-1}, and how to verify whether a square real matrix is orthogonal. Cover key properties of orthogonal matrices, including that the product of two orthogonal matrices of the same order is also orthogonal and that the rows and columns of an orthogonal matrix form orthogonal sets of vectors.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Orthogonal Vectors and Matrices</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec10-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Orthogonal Vectors</a></li>
+                <li><a href="#def10-1-1">Definition(Product)</a></li>
+                <li><a href="#def10-1-2">Definition(Orthogonal)</a></li>
+                <li><a href="#sec10-2">Orthogonal Matrices</a></li>
+                <li><a href="#props10-2-1">Matrix Properties</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec10-1" style="margin-bottom: 20px;">Orthogonal and Orthonormal Vectors</h2>
+            
+            <p style="margin-bottom: 20px;">Recall the vector norm defined in the previous lesson. The product of two column matrices (vectors) can be defined as follows.</p>
+
+            <div class="blue-box" id="def10-1-1">
+                <strong>Definition:</strong> Consider two column matrices $V_1 = \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix}$ and $V_2 = \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix}$ with real entries. The <strong>product of</strong> $V_1$ <strong>and</strong> $V_2$ is defined by $V_1 \cdot V_2 = a_1b_1 + \cdots + a_nb_n$.
+                <br><br>
+                <strong>Remark.</strong> It is easy to see that $V_1 \cdot V_2 = V_2 \cdot V_1$ and $(V_1 \cdot V_2) = V_1^T V_2$.
+            </div>
+
+            <div class="green-box" id="def10-1-2">
+                <strong>Definition:</strong><br>
+                <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                    <li>Two non-zero column matrices $V_1$ and $V_2$ are said to be <strong>orthogonal</strong> if $V_1 \cdot V_2 = 0$.</li>
+                    <li>Let $V_1, \cdots, V_n$ be a set of $n$ non-zero column vectors. The set is said to be <strong>orthogonal</strong> if they are pairwise orthogonal. (That is for each distinct $i, j \in \{1, \cdots, n\}$, $V_i \cdot V_j = 0$.)</li>
+                    <li>Let $V_1, \cdots, V_n$ be a set of $n$ column vectors. The set is said to be <strong>orthonormal</strong> if they are pairwise orthogonal and for each $i \in \{1, \cdots, n\}$, $||V_i|| = 1$.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Example: Verifying Orthonormality</strong><br><br>
+                Let $V_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $V_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$. 
+                <br><br>
+                <strong>Step 1: Check if they are orthogonal.</strong>
+                <div class="math-center">
+                    $$ V_1 \cdot V_2 = (1)(0) + (0)(1) = 0 $$
+                </div>
+                Since their dot product is zero, the vectors are orthogonal.
+                <br><br>
+                <strong>Step 2: Check if they are normal (norm equals 1).</strong>
+                <div class="math-center">
+                    $$ ||V_1|| = \sqrt{1^2 + 0^2} = 1, \quad ||V_2|| = \sqrt{0^2 + 1^2} = 1 $$
+                </div>
+                Since both conditions are met, the set $\{V_1, V_2\}$ is an <strong>orthonormal</strong> set.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec10-2" style="margin-bottom: 20px;">Orthogonal Matrices</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> A square matrix $A$ of real entries is said to be <strong>orthogonal</strong> if $A^T = A^{-1}$.
+                <br><br>
+                <strong>Remark.</strong> If $A$ is an orthogonal matrix then $A^T A = A A^T = I$, which can also be used as the definition of an orthogonal matrix.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Example: Orthogonal Matrix Verification</strong><br><br>
+                Consider the matrix $A = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$. Determine if $A$ is an orthogonal matrix.
+                <br><br>
+                <strong>Step 1: Find the transpose $A^T$.</strong>
+                <div class="math-center">
+                    $$ A^T = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} $$
+                </div>
+                <strong>Step 2: Compute $A^T A$ to check if it yields the identity matrix $I$.</strong>
+                <div class="math-center">
+                    $$ A^T A = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = \begin{pmatrix} (0)(0)+(-1)(-1) & (0)(1)+(-1)(0) \\ (1)(0)+(0)(-1) & (1)(1)+(0)(0) \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I $$
+                </div>
+                Because $A^T A = I$, the matrix $A$ is orthogonal.
+            </div>
+
+            <h3 id="props10-2-1" style="margin-top: 30px; margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Properties of orthogonal matrices</h3>
+
+            <div class="green-box">
+                <strong>Theorem:</strong><br>
+                <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                    <li>(i). The product of two orthogonal matrices of the same order is also an orthogonal matrix.</li>
+                    <li>(ii). The columns (rows) of an orthogonal matrix form an orthogonal set of vectors.</li>
+                </ul>
+                <br>
+                <em>Detail on (i):</em> If matrices $A$ and $B$ are orthogonal, then $(AB)^T (AB) = B^T A^T A B = B^T (I) B = B^T B = I$. This proves that their product $AB$ is indeed orthogonal.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial for a detailed explanation of orthogonality and orthonormality of vectors and subspaces:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/6nqMegdbxik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this short lecture on the properties of orthogonal matrices and how they preserve vector lengths:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/IGBm-gZryVI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Orthogonal & Orthonormal Vectors and Orthogonal Matrices.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What condition must two non-zero column vectors $V_1$ and $V_2$ satisfy to be defined as orthogonal?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $V_1 \cdot V_2 = 1$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $V_1 \cdot V_2 = 0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $V_1 = V_2^T$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> What additional condition transforms an orthogonal set of vectors into an <em>orthonormal</em> set?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Every vector in the set must have a norm equal to 1 ($||V_i|| = 1$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The vectors must be identical to each other.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The sum of all vectors must equal the identity vector.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> For two column vectors $V_1$ and $V_2$, how can their inner product $V_1 \cdot V_2$ be equivalently written using matrix multiplication?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $V_1 V_2^T$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $(V_1 V_2)^{-1}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $V_1^T V_2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> A real square matrix $A$ is defined as an <em>orthogonal matrix</em> if and only if:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $A = A^T$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $A^T = A^{-1}$ (or equivalently $A^T A = I$)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $A = A^{-1}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If $A$ and $B$ are two orthogonal matrices of the same order, what can we conclude about their product $AB$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $AB$ is a diagonal matrix.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $AB$ is a singular matrix.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The product $AB$ is also an orthogonal matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> According to the properties of orthogonal matrices, what special relationship do the columns (or rows) of an orthogonal matrix hold?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) They form an orthogonal set of vectors.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They must all sum to zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) They are linearly dependent on one another.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> Consider the vectors $V_1 = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix}$ and $V_2 = \begin{pmatrix} 1/\sqrt{2} \\ -1/\sqrt{2} \end{pmatrix}$. How is this set classified?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Orthogonal only, because their lengths are greater than 1.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Orthonormal, because $V_1 \cdot V_2 = 0$ and $||V_1|| = ||V_2|| = 1$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Neither orthogonal nor orthonormal.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> If $A$ is an orthogonal matrix, what is the exact matrix product of $A A^T$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The zero matrix $O$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $2A$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The identity matrix $I$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-orthogonal"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-orthogonal");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

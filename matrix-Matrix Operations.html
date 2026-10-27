@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix Operations</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Matrix Operations. Focus on addition of matrices of the same order, scalar multiplication by multiplying every matrix element by the scalar, and matrix multiplication including the compatibility condition that the number of columns of the first matrix equals the number of rows of the second. Cover determining the order of a product matrix, calculating individual product elements using row-column multiplication, and the non-commutative nature of matrix multiplication. Include properties involving zero matrices and zero divisors, worked examples, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Matrix Operations</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec5-3" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Matrix Operations</a></li>
+                <li><a href="#sec5-3-1">Addition of Matrices</a></li>
+                <li><a href="#sec5-3-2">Scalar Multiplication</a></li>
+                <li><a href="#sec5-3-3">Product of Two Matrices</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec5-3" style="margin-bottom: 20px;">Matrix Operations</h2>
+
+            <h3 id="sec5-3-1" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Addition of matrices</h3>
+
+            <div class="blue-box">
+                <strong>Definition:</strong><br><br>
+                The sum of two matrices of the same order is defined as the matrix whose elements are the sums of the corresponding elements. If $A = (a_{ij})_{m \times n}$ and $B = (b_{ij})_{m \times n}$ then <br>
+                <div class="math-center">
+                    $$ A + B = (a_{ij} + b_{ij})_{m \times n} $$
+                </div>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 8.</strong>
+                <div class="math-center">
+                    $$ \begin{pmatrix} 1 & 3 \\ 2 & 5 \end{pmatrix} + \begin{pmatrix} 0 & 2 \\ 1 & -3 \end{pmatrix} = \begin{pmatrix} 1 & 5 \\ 3 & 2 \end{pmatrix} $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 id="sec5-3-2" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Scalar multiplication</h3>
+
+            <div class="blue-box">
+                <strong>Definition:</strong><br><br>
+                A matrix is multiplied by a number (scalar) when all its elements are multiplied by that number (scalar). If $A = (a_{ij})_{m \times n}$ then <br>
+                <div class="math-center">
+                    $$ kA = (ka_{ij})_{m \times n} $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 id="sec5-3-3" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Product of two matrices</h3>
+
+            <div class="blue-box">
+                <strong>Definition & Compatibility</strong><br><br>
+                The product matrix $A \times B$ or $AB$ of two matrices $A$ and $B$ is defined <strong>only if</strong> the number of columns of the first matrix is equal to the number of rows of the second matrix.<br><br>
+                If $A = (a_{ij})_{m \times p}$ and $B = (b_{ij})_{p \times n}$ then $A \times B = C = (c_{ij})_{m \times n}$ where
+                <div class="math-center">
+                    $$ c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{ip}b_{pj} $$
+                </div>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #e5e7eb;">In particular,</p>
+
+            <div class="math-center">
+                $$ \begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{pmatrix} \times \begin{pmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \\ b_{31} & b_{32} \end{pmatrix} $$
+                $$ = \begin{pmatrix} 
+                a_{11}b_{11} + a_{12}b_{21} + a_{13}b_{31} & a_{11}b_{12} + a_{12}b_{22} + a_{13}b_{32} \\ 
+                a_{21}b_{11} + a_{22}b_{21} + a_{23}b_{31} & a_{21}b_{12} + a_{22}b_{22} + a_{23}b_{32} 
+                \end{pmatrix} = \begin{pmatrix} c_{11} & c_{12} \\ c_{21} & c_{22} \end{pmatrix} $$
+            </div>
+
+            <div class="green-box">
+                <strong>Remarks on Matrix Multiplication</strong>
+                <ul style="padding-left: 20px; margin-top: 10px; margin-bottom: 0;">
+                    <li style="margin-bottom: 8px;">$B \times A = (b_{ij})_{p \times n} \times (a_{ij})_{m \times p}$ is also defined if $n = m$. In general, <strong>$A \times B \neq B \times A$</strong> (matrix multiplication is non-commutative).</li>
+                    <li style="margin-bottom: 8px;">$A \neq 0$ and $B \neq 0$ does not imply that $A \times B \neq 0$ (zero divisors exist in matrix rings).</li>
+                    <li>$A \times B = 0$ does not necessarily follow that either $A = 0$ or $B = 0$.</li>
+                </ul>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial for a clear overview of matrix operations and addition:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/QXUbFzEd3Ww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this comprehensive tutorial to master multiplying matrices step-by-step:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/vzt9c7iWPxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your understanding of matrix addition, scalar multiplication, and matrix products.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Under what condition can two matrices be successfully added together?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) When they have the same number of rows, regardless of columns.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) When they are exactly of the same order (same number of rows and columns).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) When the columns of the first matrix equal the rows of the second matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> If matrix $A$ is multiplied by a scalar $k=3$, what happens to the elements of matrix $A$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Every single element in the matrix is multiplied by 3.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Only the main diagonal elements are multiplied by 3.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Only the elements in the first row are multiplied by 3.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> What is the result of the addition: $\begin{pmatrix} 2 & 4 \\ -1 & 0 \end{pmatrix} + \begin{pmatrix} -2 & 1 \\ 3 & 5 \end{pmatrix}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\begin{pmatrix} -4 & 4 \\ -3 & 0 \end{pmatrix}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\begin{pmatrix} 0 & 5 \\ 2 & 5 \end{pmatrix}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\begin{pmatrix} 4 & 3 \\ -4 & -5 \end{pmatrix}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Under what condition is the product matrix $A \times B$ mathematically defined?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) When the number of columns in $A$ equals the number of rows in $B$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Only when $A$ and $B$ are square matrices of the exact same order.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) When the number of rows in $A$ equals the number of columns in $B$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If matrix $A$ has an order of $3 \times 4$ and matrix $B$ has an order of $4 \times 2$, what is the dimension (order) of the resulting product matrix $AB$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $4 \times 4$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $2 \times 3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $3 \times 2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Which of the following statements is generally true regarding matrix multiplication?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Matrix multiplication is strictly commutative ($A \times B = B \times A$).</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Matrix multiplication is non-commutative in general ($A \times B \neq B \times A$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The product $B \times A$ is always undefined if $A \times B$ is defined.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If the product of two matrices $A \times B = 0$ (the zero matrix), what can we definitively conclude?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Both matrices $A$ and $B$ must be zero matrices.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Either matrix $A = 0$ or matrix $B = 0$.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) It does not necessarily mean that either $A = 0$ or $B = 0$ (zero divisors can exist).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> In the product matrix $C = AB$, how is the specific element $c_{12}$ computed?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) By multiplying the elements of the 1st row of $A$ with the 2nd column of $B$, and summing them.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) By directly multiplying $a_{12}$ and $b_{12}$ together.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) By multiplying the elements of the 2nd row of $A$ with the 1st column of $B$, and summing them.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-operations"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-operations");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bernoulli Equation</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Bernoulli Equation in Ordinary Differential Equations. Focus on the definition and form of Bernoulli's equation, the substitution method for reducing it to a linear ODE, and step-by-step procedures for solving it. Cover worked examples, including the identification of P(x), f(x), and n, the application of the substitution v = y^(1-n), and the use of integrating factors to solve the resulting linear equation. Include exercises for practice and a video tutorial for visual learning."> 
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Bernoulli Equation</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec5-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Bernoulli Equation</a></li>
+                <li><a href="#def5-1">Definition & Form</a></li>
+                <li><a href="#method-solving">Substitution Method</a></li>
+                <li><a href="#worked-example">Worked Example</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec5-1" style="margin-bottom: 20px;">Bernoulli Equation</h2>
+
+            <div class="blue-box" id="def5-1">
+                <strong>Definition(Bernoulli's Equation)</strong><br><br>
+                The differential equation 
+                <div class="math-center">
+                    $$ \frac{dy}{dx} + P(x)y = f(x)y^n, $$
+                </div>
+                where $n$ is any real number, is called Bernoulli's equation.
+                <br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>When $n = 0$ and $n = 1$, this equation is linear. In these cases, it can be solved directly using the integrating factor method discussed in Section 4.</li>
+                </ul>
+            </div>
+
+            <div class="green-box" id="method-solving">
+                <strong>Method of Solving (Reduction to Linear Form)</strong><br><br>
+                For $n \neq 0, 1$, we use the substitution $v = y^{1-n}$ to reduces any equation of this form to a linear equation.
+                <br><br>
+                <strong>Step-by-step procedure:</strong>
+                <ol style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                    <li>Divide the entire Bernoulli equation by $y^n$ to get: 
+                        <div class="math-center">
+                            $$ y^{-n}\frac{dy}{dx} + P(x)y^{1-n} = f(x) $$
+                        </div>
+                    </li>
+                    <li>Apply the substitution $v = y^{1-n}$. Differentiating both sides with respect to $x$ gives:
+                        <div class="math-center">
+                            $$ \frac{dv}{dx} = (1-n)y^{-n}\frac{dy}{dx} \implies y^{-n}\frac{dy}{dx} = \frac{1}{1-n}\frac{dv}{dx} $$
+                        </div>
+                    </li>
+                    <li>Substitute $v$ and $y^{-n}\frac{dy}{dx}$ back into the equation from Step 1:
+                        <div class="math-center">
+                            $$ \frac{1}{1-n}\frac{dv}{dx} + P(x)v = f(x) $$
+                        </div>
+                    </li>
+                    <li>Multiply by $(1-n)$ to achieve standard linear form:
+                        <div class="math-center">
+                            $$ \frac{dv}{dx} + (1-n)P(x)v = (1-n)f(x) $$
+                        </div>
+                        This is now a first-order linear ODE that can be solved for $v$ using an integrating factor.
+                    </li>
+                    <li>Once $v$ is found, substitute $y^{1-n}$ back in for $v$ to find the solution for $y$.</li>
+                </ol>
+            </div>
+
+            <div class="yellow-box" id="worked-example">
+                <strong>Worked Example: Solving a Bernoulli Equation</strong><br><br>
+                Solve the differential equation: $\frac{dy}{dx} + \frac{1}{x}y = xy^2$.
+                <br><br>
+                <strong>Step 1: Identify terms and divide by $y^n$.</strong><br>
+                Here, $P(x) = \frac{1}{x}$, $f(x) = x$, and $n = 2$.<br>
+                Divide the equation by $y^2$:
+                <div class="math-center">
+                    $$ y^{-2}\frac{dy}{dx} + \frac{1}{x}y^{-1} = x $$
+                </div>
+                <br>
+                <strong>Step 2: Apply the substitution.</strong><br>
+                Let $v = y^{1-2} = y^{-1}$.<br>
+                Then $\frac{dv}{dx} = -y^{-2}\frac{dy}{dx}$, which means $y^{-2}\frac{dy}{dx} = -\frac{dv}{dx}$.
+                <br><br>
+                <strong>Step 3: Substitute into the equation.</strong><br>
+                <div class="math-center">
+                    $$ -\frac{dv}{dx} + \frac{1}{x}v = x $$
+                    $$ \frac{dv}{dx} - \frac{1}{x}v = -x $$
+                </div>
+                This is a linear equation where the new $P(x) = -\frac{1}{x}$ and new $Q(x) = -x$.
+                <br><br>
+                <strong>Step 4: Solve the linear equation using an Integrating Factor (IF).</strong><br>
+                <div class="math-center">
+                    $$ \text{IF} = e^{\int -\frac{1}{x} dx} = e^{-\ln|x|} = x^{-1} = \frac{1}{x} $$
+                </div>
+                Multiply the linear equation by $\frac{1}{x}$:
+                <div class="math-center">
+                    $$ \frac{1}{x}\frac{dv}{dx} - \frac{1}{x^2}v = -1 $$
+                    $$ \frac{d}{dx}\left( \frac{v}{x} \right) = -1 $$
+                </div>
+                Integrate both sides:
+                <div class="math-center">
+                    $$ \frac{v}{x} = -x + C \implies v = Cx - x^2 $$
+                </div>
+                <br>
+                <strong>Step 5: Back-substitute to solve for $y$.</strong><br>
+                Replace $v$ with $y^{-1}$:
+                <div class="math-center">
+                    $$ \frac{1}{y} = Cx - x^2 \implies y = \frac{1}{Cx - x^2} $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this detailed step-by-step tutorial covering Bernoulli's Differential Equation. Mastering these reduction substitutions will be extremely useful for processing dynamic systems in upcoming first-semester engineering examinations at the University of Moratuwa:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/BoI_ej-T0V4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on recognizing and solving Bernoulli differential equations.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What is the standard mathematical form of a Bernoulli differential equation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\frac{dy}{dx} + P(x)y = f(x)y^n$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{dy}{dx} + P(x)y = f(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{dy}{dx} + P(y)x = f(y)x^n$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> For which specific values of $n$ is the Bernoulli equation already considered a standard linear differential equation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $n = 1$ and $n = 2$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $n = 0$ and $n = 1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $n = 0$ and $n = -1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> What is the correct substitution formula used to reduce a Bernoulli equation (where $n \neq 0, 1$) into a linear differential equation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $v = y^n$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $v = y^{n-1}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $v = y^{1-n}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> If you are given the Bernoulli equation $\frac{dy}{dx} + P(x)y = f(x)y^3$, what specific substitution should you use?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $v = y^{-2}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $v = y^{-3}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $v = y^2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> When solving a Bernoulli equation, what is the crucial first algebraic step before applying the substitution $v = y^{1-n}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Multiply the entire equation by $y^n$.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Divide the entire equation by $y^n$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Differentiate the entire equation with respect to $x$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Based on the substitution $v = y^{1-n}$, what is the correct expression for the derivative $\frac{dv}{dx}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $(1-n)y^{-n}\frac{dy}{dx}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $n y^{n-1}\frac{dy}{dx}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $(1-n)y^n\frac{dy}{dx}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> After successfully substituting $v = y^{1-n}$ into the Bernoulli equation, what does the new, simplified linear ODE look like?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{dv}{dx} + P(x)v = f(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{dv}{dx} + (n-1)P(x)v = f(x)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\frac{dv}{dx} + (1-n)P(x)v = (1-n)f(x)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> In the provided worked example $\frac{dy}{dx} + \frac{1}{x}y = xy^2$, what is the Integrating Factor (IF) calculated to solve the reduced linear equation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $x$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\frac{1}{x}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $e^x$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "ode-bernoulli"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "ode-bernoulli");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

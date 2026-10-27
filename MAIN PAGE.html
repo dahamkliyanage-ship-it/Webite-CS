@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE1023: Fluid Mechanics</title>
+    <link rel="stylesheet" href="style-fluid.css">
+
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Main navigation roadmap for CE1023: Fluid Mechanics. Links to 8 chapters covering Fluid Statics, Kinematics, Dynamics, and Machinery.">
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="main">
+        <h1 class="title">CE1023: Fluid Mechanics</h1>
+        
+        <div class="timeline">
+            
+            <!-- Chapter 1 -->
+            <div class="step left">
+                <a href="Introduction and Fluid Properties_2.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-green">Chapter 01</span>
+                        <h2>Introduction & Fluid Properties</h2>
+                        <p>Introduction to fluid mechanics, covering fundamental dimensions, units, continuum concept, and properties like density and viscosity.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 2 -->
+            <div class="step right">
+                <a href="Hydrostatic Pressure_2.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-blue">Chapter 02</span>
+                        <h2>Hydrostatic Pressure</h2>
+                        <p>Introduction to fluid statics, pressure at a point, Pascal's law, and pressure measurement using manometers and mechanical gauges.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 3 -->
+            <div class="step left">
+                <a href="Hydrostatic Thrust_2.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-orange">Chapter 03</span>
+                        <h2>Hydrostatic Thrust</h2>
+                        <p>Calculation of hydrostatic forces, magnitude, direction, and lines of action (centers of pressure) on submerged flat and curved surfaces.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 4 -->
+            <div class="step right">
+                <a href="Bouyancy_2.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-yellow">Chapter 04</span>
+                        <h2>Buoyancy & Stability</h2>
+                        <p>Archimedes' principle, buoyant forces, metacentric height, and stability conditions for fully submerged and floating bodies.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 5 -->
+            <div class="step left">
+                <a href="Relative Equilibrium of Fluids.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-purple">Chapter 05</span>
+                        <h2>Relative Equilibrium</h2>
+                        <p>Behavior and pressure distribution of fluids subjected to uniform linear acceleration and constant angular rotation (Forced Vortex Motion).</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 6 -->
+            <div class="step right">
+                <a href="Fluids in Motion.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-red">Chapter 06</span>
+                        <h2>Fluids in Motion</h2>
+                        <p>Kinematic principles of fluid in motion, classification of flows, spatial/temporal variations, and flow visualization patterns.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 7 -->
+            <div class="step left">
+                <a href="Analysis of Fluid Flow_2.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-dark">Chapter 07</span>
+                        <h2>Analysis of Fluid Flow</h2>
+                        <p>Applying the fundamental laws of mechanics—Conservation of Mass, Energy, and Momentum—using Control Volume analysis.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 8 -->
+            <div class="step right">
+                <a href="Fluid Machinery_2.html" class="card-link">
+                    <div class="card">
+                        <span class="tag tag-teal">Chapter 08</span>
+                        <h2>Fluid Machinery</h2>
+                        <p>Comprehensive overview of devices that convert fluid energy to mechanical energy or vice versa, focusing on pumps and turbines.</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+</body>
+</html>

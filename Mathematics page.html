@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MA1014 - Mathematics</title>
+    
+    <!-- Embedded CSS directly inside HTML -->
+    <style>
+        /* Base Theme Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* Dark theme background */
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Top Bar & Heading */
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* Horizontal Navigation Menu */
+        .top-nav {
+            background-color: #1e293b;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .top-nav li {
+            display: inline;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav a:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Main Content Flexbox Layout (This centers the bottom row) */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .module-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers items on the last row */
+            gap: 30px;
+        }
+
+        /* Topic Cards */
+        .topic-card {
+            flex: 1 1 300px; /* Allows cards to grow and shrink, base width 300px */
+            max-width: 350px; /* Prevents them from getting too wide */
+            box-sizing: border-box;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+            z-index: 1;
+        }
+
+        .topic-card p {
+            margin: 0;
+            font-size: 1em;
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        /* Progress Status Indicator Styles inside Card */
+        .progress-status {
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+
+        /* Color Variations for Cards */
+        .blue-box {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid #38bdf8;
+            color: #e2e8f0;
+        }
+        .blue-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+            border-color: #7dd3fc;
+        }
+        .blue-box h2 { color: #38bdf8; }
+
+        .green-box {
+            background-color: rgba(74, 222, 128, 0.1);
+            border-left: 4px solid #4ade80;
+            color: #e2e8f0;
+        }
+        .green-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2);
+            border-color: #86efac;
+        }
+        .green-box h2 { color: #4ade80; }
+
+        .yellow-box {
+            background-color: rgba(250, 204, 21, 0.1);
+            border-left: 4px solid #facc15;
+            color: #e2e8f0;
+        }
+        .yellow-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(250, 204, 21, 0.2);
+            border-color: #fde047;
+        }
+        .yellow-box h2 { color: #facc15; }
+
+        .purple-box {
+            background-color: rgba(192, 132, 252, 0.1);
+            border-left: 4px solid #c084fc;
+            color: #e2e8f0;
+        }
+        .purple-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(192, 132, 252, 0.2);
+            border-color: #d8b4fe;
+        }
+        .purple-box h2 { color: #c084fc; }
+
+        /* New Red/Rose Box for Real Analysis */
+        .red-box {
+            background-color: rgba(244, 63, 94, 0.1);
+            border-left: 4px solid #f43f5e;
+            color: #e2e8f0;
+        }
+        .red-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(244, 63, 94, 0.2);
+            border-color: #fb7185;
+        }
+        .red-box h2 { color: #f43f5e; }
+
+        /* Responsive Nav adjustment */
+        @media (max-width: 600px) {
+            .top-nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .top-bar h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="top-bar">
+        <h1>MA1014-mathematics</h1>
+    </header>
+
+    <!-- Landscape Navigation Menu -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container (Boxes) -->
+    <div class="container">
+        <div class="module-grid">
+            
+            <!-- Box 1 -->
+            <a href="vectors-roadmap.html" class="topic-card blue-box">
+                <h2>Algebra-Vectors</h2>
+                <p>Vector algebra, dot products, cross products, and 3D geometry applications.</p>
+                <div class="progress-status" id="status-vectors">Loading progress...</div>
+            </a>
+
+            <!-- Box 2 -->
+            <a href="Matrix-roadmap.html" class="topic-card green-box">
+                <h2>Algebra-Matrices</h2>
+                <p>Matrix operations, determinants, inverse matrices, and systems of linear equations.</p>
+                <div class="progress-status" id="status-matrices">Loading progress...</div>
+            </a>
+
+            <!-- Box 3 -->
+            <a href="ODE-roadmap.html" class="topic-card yellow-box">
+                <h2>Ordinary Differential Equations</h2>
+                <p>First and second order ODEs, separable, homogeneous, and exact equations.</p>
+                <div class="progress-status" id="status-ode">Loading progress...</div>
+            </a>
+
+            <!-- Box 4 -->
+            <a href="riemann-roadmap.html" class="topic-card purple-box">
+                <h2>Riemann Integration</h2>
+                <p>Improper integrals, Beta & Gamma functions, and convergence theorems.</p>
+                <div class="progress-status" id="status-riemann">Loading progress...</div>
+            </a>
+
+            <!-- Box 5 -->
+            <a href="Real-roadmap.html" class="topic-card red-box">
+                <h2>Real Analysis</h2>
+                <p>Limits, continuity, sequences, series, and formal proofs in calculus.</p>
+                <div class="progress-status" id="status-real">Loading progress...</div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Firebase Connection & Progress Verification Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        // Oyage Firebase config eka methanata danna
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Modules mapping with Firebase document IDs for each sub-topic
+        const modules = [
+            { 
+                id: "vectors", 
+                elementId: "status-vectors",
+                subModules: [
+                    "vectors-line",
+                    "vectors-planesangle",
+                    "vectors-angle",
+                    "vectors-crossproduct",
+                    "vectors-dotproduct",
+                    "vectors-3space",
+                    "vectors",
+                    "vectors-plane",
+                    "vectors-properties",
+                    "vectors-scalartriple",
+                    "vectors-planedistance",
+                    "vectors-skewlines",
+                    "vectors-vectortriple"
+                ] // Add real module IDs when built
+            },
+            { 
+                id: "matrices", 
+                elementId: "status-matrices",
+                subModules: [
+                    "matrices-inverse",
+                    "matrices-determinant",
+                    "matrices-special",
+                    "matrices-eigenvalues",
+                    "matrices-elementary",
+                    "matrices-intro",
+                    "matrices-diagonalization",
+                    "matrices-norms",
+                    "matrices-operations",
+                    "matrices-orthogonal",
+                    "matrices-properties",
+                    "matrices-rank",
+                    "matrices-homogeneous",
+                    "matrices-nonhomogeneous",
+                    "matrices-linearequations"
+                ] // Add real module IDs when built
+            },
+            { 
+                id: "ode", 
+                elementId: "status-ode",
+                subModules: [
+                    "ode-firstorder",
+                    "ode-basic",
+                    "ode-bernoulli",
+                    "ode-linear",
+                    "ode-reduction",
+                    "ode-secondorder",
+                    "ode-wronskian"
+                ] // Add real module IDs when built
+            },
+            { 
+                id: "riemann", 
+                elementId: "status-riemann",
+                subModules: [
+                    "riemann-beta",
+                    "riemann-definition",
+                    "riemann-ftc",
+                    "riemann-gamma",
+                    "riemann-improper",
+                    "riemann-ivt",
+                    "riemann-intro",
+                    "riemann-properties",
+                    "riemann-relation",
+                    "riemann-cauchy"
+                ] 
+            },
+            { 
+                id: "real", 
+                elementId: "status-real",
+                subModules: [
+                    "real-analysis-sequences",
+                    "real-analysis-logic",
+                    "real-analysis-relations",
+                    "real-analysis-settheory",
+                    "real-analysis-axioms"
+                ] 
+            }
+        ];
+
+        // Checking user state and fetching live progress from Firestore
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userId = user.uid;
+
+                for (let mod of modules) {
+                    const statusEl = document.getElementById(mod.elementId);
+                    
+                    try {
+                        let completedCount = 0;
+                        const totalSubModules = mod.subModules.length;
+
+                        // Check completion for every sub-module inside the main module
+                        for (let subModId of mod.subModules) {
+                            const docRef = doc(db, "users", userId, "progress", subModId);
+                            const docSnap = await getDoc(docRef);
+
+                            if (docSnap.exists() && docSnap.data().completed) {
+                                completedCount++;
+                            }
+                        }
+
+                        // Calculate percentage
+                        let percentage = 0;
+                        if (totalSubModules > 0) {
+                            percentage = Math.round((completedCount / totalSubModules) * 100);
+                        }
+
+                        // Render Progress Bar UI
+                        statusEl.innerHTML = `
+                            <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
+                                <div style="width: ${percentage}%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
+                            </div>
+                            <div style="color: #4ade80; font-size: 13px; margin-top: 5px;">Progress: ${percentage}%</div>
+                        `;
+
+                    } catch (error) {
+                        statusEl.textContent = "Status: Not Available";
+                        statusEl.style.color = "#f43f5e";
+                    }
+                }
+            } else {
+                // If user is not logged in
+                modules.forEach(mod => {
+                    const statusEl = document.getElementById(mod.elementId);
+                    statusEl.textContent = "🔒 Login to view progress";
+                    statusEl.style.color = "#94a3b8";
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

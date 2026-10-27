@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ODE - Basic Concepts</title>
+    <!-- Link to the external CSS file containing the provided styles -->
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Ordinary Differential Equations - Basic Concepts. Focus on the fundamental definitions and classifications of ordinary differential equations (ODEs), including linear and nonlinear ODEs, order and degree, standard form, solutions, and initial value problems (IVPs). Cover the distinctions between ODEs and partial differential equations (PDEs), the conditions for linearity, the concepts of order and degree, the standard form of first-order ODEs, general solutions with arbitrary constants, and the existence and uniqueness of solutions for IVPs.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Basic Concepts</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec1-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Basic Concepts</a></li>
+                <li><a href="#sec-linear">Linear & Nonlinear ODEs</a></li>
+                <li><a href="#sec-order">Order and Degree</a></li>
+                <li><a href="#sec-solution">Standard Form & Solutions</a></li>
+                <li><a href="#sec-ivp">Initial Value Problems</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec1-1" style="margin-bottom: 20px;">Basic Concepts</h2>
+
+            <div class="blue-box">
+                <strong>Definition(Differential Equation)</strong><br><br>
+                Equations which are composed of an unknown function and its derivatives are called <strong>differential equations</strong>.
+            </div>
+
+            <p style="margin-bottom: 15px;">Differential equations are categorized into two main classes:</p>
+
+            <div class="blue-box">
+                <strong>Definition(ODE and PDE)</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>When a differential equation involves one independent variable, and one or more dependent variables, the equation is called an <strong>ordinary differential equation</strong> (ODE). In other words, it contains only ordinary derivatives.</li>
+                    <li><strong>Partial differential equation</strong> (PDE) involves two or more independent variables, and one or more dependent variables. In other words, it contains partial derivatives.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 1.1: ODEs vs PDEs</strong><br><br>
+                The following are examples of <strong>ordinary differential equations</strong>, which frequently appear in first-semester engineering tasks like RLC circuit analysis:<br>
+                <div class="math-center">
+                    $$ L\frac{d^2i}{dt^2} + R\frac{di}{dt} + \frac{1}{C}i = 0 \quad \text{(RLC Circuit)} $$
+                    $$ \frac{dy}{dx} = \cos(x) $$
+                    $$ \frac{d^2y}{dx^2} + 8y = e^{-2x} $$
+                    $$ \frac{dy}{dx} \frac{d^3y}{dx^3} - 4 \left( \frac{dy}{dx} \right)^2 = 2 $$
+                </div>
+                The following are examples of <strong>partial differential equations</strong>:<br>
+                <div class="math-center">
+                    $$ \frac{\partial u}{\partial x} + \frac{\partial u}{\partial y} = 0 $$
+                    $$ \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2} $$
+                </div>
+                <em>Note: PDEs have important engineering applications, such as calculating the deflection of elastic beams under complex continuous loads, and are mathematically more complicated than ODEs.</em>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec-linear" style="margin-bottom: 20px;">Linear vs. Nonlinear Differential Equations</h2>
+
+            <div class="blue-box">
+                <strong>Definition(Linear and Nonlinear)</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>A <strong>linear differential equation</strong> is a differential equation that is defined by a linear polynomial in the unknown function (dependent variable) and its derivatives. It takes the form:
+                        <div class="math-center">
+                            $$ P_0(x)y + P_1(x)y' + P_2(x)y'' + \dots + P_n(x)y^{(n)} + Q(x) = 0 $$
+                        </div>
+                        Where $P_0(x), \dots, P_n(x)$, and $Q(x)$ are either zero, constant, or depend only on $x$, not on $y$. They are differentiable functions that do not need to be linear. $y', \dots, y^{(n)}$ are successive derivatives of the unknown function $y$ of the independent variable $x$.
+                    </li>
+                    <li style="margin-top: 15px;"><strong>Nonlinear differential equations</strong> are any equations that cannot be written in the above form. In particular, these include all equations containing $y, y', y''$, etc., raised to any power such as $y^2, y'^3$, nonlinear functions of $y$ or any derivative to any order (such as $\sin(y)$ or $e^{ty}$), or any product or function of these.</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec-order" style="margin-bottom: 20px;">Order and Degree</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong><br><br>
+                The <strong>order</strong> of a differential equation is determined by the highest order derivative which occurs in it after the equation has been rationalized, i.e., made free from radicals and fractions so far as derivatives are concerned (polynomial form). <br><br>
+                The <strong>degree</strong> of a differential equation is determined by the exponent of the highest derivative in it.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Further Example: Finding Order and Degree</strong><br><br>
+                Consider the differential equation:
+                <div class="math-center">
+                    $$ \left( \frac{d^2y}{dx^2} \right)^3 + 4\frac{dy}{dx} - y = 0 $$
+                </div>
+                <ul>
+                    <li>The <strong>Order</strong> is $2$, because the highest derivative present is the second derivative $\frac{d^2y}{dx^2}$.</li>
+                    <li>The <strong>Degree</strong> is $3$, because the exponent attached to that highest derivative is $3$.</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec-solution" style="margin-bottom: 20px;">Standard Form and Solutions</h2>
+            <p style="margin-bottom: 15px;">In this module we mainly discuss first and second order differential equations and their solutions.</p>
+
+            <div class="blue-box">
+                <strong>Definition(Standard Form)</strong><br><br>
+                A differential equation is said to be in standard form if we can solve for $\frac{dy}{dx}$, i.e.,
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = f(x, y) $$
+                </div>
+                We will often write a given equation in standard form so that we can identify the form of the function $f(x, y)$.
+            </div>
+
+            <div class="blue-box">
+                <strong>Definition(Solution, ODE)</strong><br><br>
+                A function $y(x) = \phi(x)$ is called a solution of $y' = f(x, y)$, if it satisfies:
+                <div class="math-center">
+                    $$ \phi'(x) = f(x, \phi(x)) $$
+                </div>
+                To verify that a function $y = f(x)$ is a solution of the ODE, we substitute the function into both sides of the differential equation.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 1.3</strong><br><br>
+                A solution of 
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = x^2 $$
+                </div>
+                is 
+                <div class="math-center">
+                    $$ y = \frac{x^3}{3} $$
+                </div>
+                We use the expression "a solution" rather than "the solution" because solutions are not unique. For example:
+                <div class="math-center">
+                    $$ y = \frac{x^3}{3} + 1 $$
+                </div>
+                is also a solution of $y' = x^2$. We say the solution is <strong>not unique</strong>.
+                <br><br>
+                If we integrate both sides of $y' = x^2$:
+                <div class="math-center">
+                    $$ \int dy = \int x^2 \, dx $$
+                    $$ y = \frac{x^3}{3} + C $$
+                </div>
+                where $C$ is any arbitrary constant. <br><br>
+                The solution $y = \frac{x^3}{3} + C$ with the arbitrary constant is called the <strong>general solution</strong> of the differential equation. A constant like $C$ that is allowed to take on multiple values in an equation is sometimes called a <strong>parameter</strong>. Sometimes we will say $y = \frac{x^3}{3} + C$ represents the <strong>one-parameter family of solutions</strong>, <strong>integral curves</strong> or <strong>solution curves</strong> of the differential equation, with parameter $C$.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec-ivp" style="margin-bottom: 20px;">Initial Value Problems (IVP)</h2>
+
+            <div class="blue-box">
+                <strong>Definition(Initial Value Problem (IVP))</strong><br><br>
+                An initial value problem is given by:
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = f(x, y) $$
+                    $$ y(x_0) = y_0 $$
+                </div>
+                where $(x_0, y_0)$ be a point in the domain of $f(x, y)$. The equation $y(x_0) = y_0$ is called an initial condition for the initial value problem.
+            </div>
+
+            <div class="blue-box">
+                <strong>Definition(Solution, IVP)</strong><br><br>
+                The function $y(x)$ is called a solution of the initial value problem:
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = f(x, y) $$
+                    $$ y(x_0) = y_0 $$
+                </div>
+                if $y(x)$ satisfies both the ODE and the Initial Condition (IC).
+            </div>
+
+            <div class="green-box">
+                <strong>Theorem(Picard's Existence and Uniqueness Theorem)</strong><br><br>
+                Consider the Initial Value Problem:
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = f(x, y) $$
+                    $$ y(x_0) = y_0 $$
+                </div>
+                Suppose $f(x, y)$ and $\frac{\partial f}{\partial y}$ are continuous functions in some open neighbourhood $D \in \mathbf{R}^2$ which contains the point $(x_0, y_0)$. Then the IVP has a unique solution in some closed interval which contains $x_0$.
+                <br><br>
+                <em>Detail:</em> Picard's Theorem is a foundational mathematical guarantee. It assures us that as long as our differential equation's function and its partial derivative with respect to $y$ are reasonably smooth (continuous) around our starting point, a solution will not only exist but will be the <em>only</em> solution through that specific point.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this comprehensive tutorial covering the fundamentals of differential equations, including identifying ODEs vs PDEs, determining order and degree, and classifying linearity:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/WDd2MhI-H3I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the fundamental concepts of Differential Equations.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What completely distinguishes an Ordinary Differential Equation (ODE) from a Partial Differential Equation (PDE)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) ODEs are always linear, while PDEs are inherently non-linear.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) ODEs involve ordinary derivatives with one independent variable, while PDEs contain partial derivatives with two or more.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) ODEs contain multiple independent variables, while PDEs involve exactly one.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Which of the following elements makes a differential equation mathematically <strong>nonlinear</strong>?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Having polynomial coefficients like $x^2$ attached to the derivatives.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The equation being of the second order or higher.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The presence of the dependent variable raised to a power (e.g., $y^2$), or a nonlinear function like $\sin(y)$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> What is the order and degree of the differential equation $\left( \frac{d^2y}{dx^2} \right)^3 + 4\frac{dy}{dx} - y = 0$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Order 2, Degree 3</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Order 3, Degree 2</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Order 1, Degree 3</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> A first-order differential equation is considered to be written in "standard form" when:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It is set strictly equal to zero.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) It is explicitly solved for the first derivative, $\frac{dy}{dx} = f(x,y)$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) All $x$ terms and $y$ terms are separated on opposite sides of the equals sign.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> In the general solution $y = \frac{x^3}{3} + C$, what does the arbitrary constant $C$ represent geometrically?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) It defines a one-parameter family of integral curves or solution curves.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It represents the specific exact initial condition of the equation.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It is the highest degree of the original differential equation.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Within the context of an Initial Value Problem (IVP), what vital role does the equation $y(x_0) = y_0$ play?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It determines the order and linearity of the differential equation.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It acts as the characteristic polynomial of the equation.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) It serves as the initial condition that a specific unique solution must satisfy.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> A function $y(x)$ is officially verified as a valid solution to an Initial Value Problem ONLY if it:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Satisfies the differential equation perfectly, regardless of the initial condition.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Satisfies both the differential equation AND the given initial condition.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Has an algebraic multiplicity of 1.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> According to Picard's Existence and Uniqueness Theorem, what strict condition ensures that an IVP has a unique solution near a point $(x_0, y_0)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Both the function $f(x, y)$ and its partial derivative $\frac{\partial f}{\partial y}$ must be continuous in an open neighborhood around $(x_0, y_0)$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The differential equation must be entirely linear and homogeneous.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The constant $C$ must evaluate to zero.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                document.addEventListener('DOMContentLoaded', () => { // Note: keeping inner listener clean
+                                });
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "ode-basic"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "ode-basic");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

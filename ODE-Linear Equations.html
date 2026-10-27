@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linear Equations</title>
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Linear Equations in Ordinary Differential Equations. Focus on the definition and properties of linear first-order ODEs, the standard form, and methods for solving them. Cover the integrating factor method, the general solution, and examples illustrating the process. Include exercises for practice and a video tutorial for visual learning.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Linear Equations</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec4-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Linear Equation Form</a></li>
+                <li><a href="#def4-1">Definition</a></li>
+                <li><a href="#method-solving">Method of Solving</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec4-1" style="margin-bottom: 20px;">Linear Equations</h2>
+
+            <div class="blue-box" id="def4-1">
+                <strong>Definition(Linear Equation)</strong><br><br>
+                A first order differential equation of the standard form,
+                <div class="math-center">
+                    $$ \frac{dy}{dx} + P(x)y = Q(x), $$
+                </div>
+                is said to be a linear equation in the dependent variable $y$.
+                <br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>If $Q(x) = 0$, then the equation is called a <strong>homogeneous linear differential equation</strong>.</li>
+                    <li>If $Q(x) \neq 0$, then the equation is called a <strong>nonhomogeneous linear differential equation</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="green-box" id="method-solving">
+                <strong>Method of Solving using an Integrating Factor</strong><br><br>
+                <ol style="padding-left: 20px; line-height: 1.8;">
+                    <li>Put the linear equation into the standard form: $\frac{dy}{dx} + P(x)y = Q(x)$.</li>
+                    <li>Identify $P(x)$ and then find the <strong>integrating factor</strong>: $e^{\int P(x)dx}$.</li>
+                    <li>Multiply both sides of the standard form of the equation by the integrating factor. The left hand side of the resulting equation is automatically the derivative of the product of the integrating factor and $y$, i.e.,
+                        <div class="math-center">
+                            $$ \frac{d}{dx}\left[ y e^{\int P(x)dx} \right] = e^{\int P(x)dx}Q(x). $$
+                        </div>
+                    </li>
+                    <li>Integrate both sides of the resulting equation with respect to $x$ to solve for $y$.</li>
+                </ol>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Example: Integrating Factor</strong><br><br>
+                Solve the linear equation $\frac{dy}{dx} + \frac{2}{x}y = 3$.
+                <br><br>
+                <strong>Step 1: Standard form.</strong><br>
+                The equation is already in standard form with $P(x) = \frac{2}{x}$ and $Q(x) = 3$.
+                <br><br>
+                <strong>Step 2: Integrating factor (IF).</strong><br>
+                <div class="math-center">
+                    $$ \text{IF} = e^{\int \frac{2}{x} dx} = e^{2\ln|x|} = e^{\ln(x^2)} = x^2 $$
+                </div>
+                <br>
+                <strong>Step 3: Multiply by IF.</strong><br>
+                <div class="math-center">
+                    $$ x^2\left(\frac{dy}{dx} + \frac{2}{x}y\right) = 3x^2 $$
+                    $$ x^2\frac{dy}{dx} + 2xy = 3x^2 $$
+                </div>
+                The left side is exactly the derivative of $(y \cdot x^2)$:
+                <div class="math-center">
+                    $$ \frac{d}{dx}(y \cdot x^2) = 3x^2 $$
+                </div>
+                <br>
+                <strong>Step 4: Integrate both sides.</strong><br>
+                <div class="math-center">
+                    $$ \int \frac{d}{dx}(y \cdot x^2) dx = \int 3x^2 dx $$
+                    $$ y \cdot x^2 = x^3 + C $$
+                    $$ y = x + \frac{C}{x^2} $$
+                </div>
+            </div>
+            
+            <div class="video-section">
+                <p>Watch this detailed step-by-step tutorial covering how to solve first order linear differential equations using an integrating factor—the essential final step for solving any reduced Bernoulli equation:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/gd1FYn86P0c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on recognizing and solving first-order linear differential equations.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What is the standard mathematical form of a first-order linear differential equation in the dependent variable $y$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{dy}{dx} + P(x) = Q(y)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\frac{dy}{dx} + P(x)y = Q(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $P(x)\frac{dy}{dx} + y = Q(x)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> In the standard form $\frac{dy}{dx} + P(x)y = Q(x)$, what specific condition makes the linear differential equation "homogeneous"?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $P(x) = 0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $Q(x) = 0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $P(x) = Q(x)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> What is the correct mathematical formula to calculate the integrating factor (IF) for a linear equation in standard form?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $e^{\int Q(x) dx}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\int e^{P(x)} dx$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $e^{\int P(x) dx}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> After multiplying the standard linear equation by the integrating factor, the left side of the equation automatically collapses into the derivative of what expression?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The product of the integrating factor and $y$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The product of $P(x)$ and $Q(x)$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The quotient of $y$ and the integrating factor.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> In the worked example $\frac{dy}{dx} + \frac{2}{x}y = 3$, what is the function $P(x)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\frac{2}{x}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $2x$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> In the same worked example, evaluating the integrating factor $e^{\int \frac{2}{x} dx}$ simplifies to which of the following?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\ln(x^2)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $e^{2x}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $x^2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> Once the integrating factor ($x^2$) is multiplied through, what does the left side $x^2\frac{dy}{dx} + 2xy$ simplify to using the product rule?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{d}{dx}(2xy)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\frac{d}{dx}(y \cdot x^2)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{d}{dx}(x^2)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> After integrating $\frac{d}{dx}(y \cdot x^2) = 3x^2$ to get $y \cdot x^2 = x^3 + C$, what is the final explicit general solution for $y$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $y = x + Cx^2$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $y = x^3 + C - x^2$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $y = x + \frac{C}{x^2}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "ode-linear"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "ode-linear");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

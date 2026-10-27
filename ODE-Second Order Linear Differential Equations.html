@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Second Order Linear Differential Equations</title>
+    <!-- External stylesheet reference to match the provided CSS exactly -->
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Second Order Linear Differential Equations. Focus on the general form of second-order linear ODEs, the characteristic equation, and the nature of roots (distinct real, repeated real, complex conjugates). Cover the method of undetermined coefficients for finding particular solutions, the complementary function, and the general solution. Include worked examples for each case, step-by-step explanations, and exercises for practice.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Second Order Linear Differential Equations</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec6-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Linear ODEs</a></li>
+                <li><a href="#sec6-2">Differential Operators</a></li>
+                <li><a href="#sec6-3">Homogeneous Equations</a></li>
+                <li><a href="#sec6-4">Nonhomogeneous Equations</a></li>
+                <li><a href="#undetermined-coeff">Undetermined Coefficients</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec6-1" style="margin-bottom: 20px;">Linear Differential Equations</h2>
+
+            <div class="blue-box">
+                <strong>General Linear ODE of Order $n$</strong><br><br>
+                The general linear ODE of order $n$ is defined by:
+                <div class="math-center">
+                    $$ \frac{d^ny}{dx^n} + p_1(x)\frac{d^{n-1}y}{dx^{n-1}} + \dots + p_n(x)y = q(x) $$
+                </div>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>If $q(x) = 0$, this equation is called a <strong>homogeneous equation</strong> or reduced equation.</li>
+                    <li>If $q(x) \neq 0$, this equation is called <strong>nonhomogeneous</strong>.</li>
+                </ul>
+                <br>
+                <strong>Complementary & Particular Solutions</strong><br>
+                The general solution to the associated homogeneous equation is called the <strong>complementary function</strong> $y_c = c_1y_1 + \dots + c_ny_n$, where $y_i$'s are linearly independent solutions. <br><br>
+                Once finding $n$ independent solutions from the associated homogeneous equation, the general solution to the original nonhomogeneous ODE can be expressed as:
+                <div class="math-center">
+                    $$ y = y_p + y_c $$
+                </div>
+                where $y_p$ is called a <strong>particular solution</strong>.
+            </div>
+
+            <h2 id="sec6-2" style="margin-top: 30px; margin-bottom: 20px;">Linear Differential Operators with Constant Coefficients</h2>
+            
+            <div class="blue-box">
+                From now on, we consider cases with <strong>constant coefficients</strong>:
+                <div class="math-center">
+                    $$ \frac{d^ny}{dx^n} + a_1\frac{d^{n-1}y}{dx^{n-1}} + \dots + a_ny = q(x) $$
+                </div>
+                Using the differentiation operator $D^i := \frac{d^i}{dx^i}$, we can write the equation as a polynomial operator acting on $y$:
+                <div class="math-center">
+                    $$ (D^n + a_1D^{n-1} + \dots + a_n)y = q(x) \implies P(D)y = q(x) $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec6-3" style="margin-bottom: 20px;">Homogeneous Linear Differential Equations of Second Order</h2>
+
+            <div class="green-box">
+                <strong>The Characteristic Equation</strong><br><br>
+                Standard form: $\frac{d^2y}{dx^2} + a\frac{dy}{dx} + by = 0$.<br>
+                Consider the trial solution $y = e^{mx}$. Substituting $y'=me^{mx}$ and $y''=m^2e^{mx}$ gives:
+                <div class="math-center">
+                    $$ e^{mx}(m^2 + am + b) = 0 $$
+                </div>
+                Since $e^{mx} \neq 0$, we get the <strong>Auxiliary (or Characteristic) Equation</strong>:
+                <div class="math-center">
+                    $$ m^2 + am + b = 0 $$
+                </div>
+                The general solution depends entirely on the nature of the roots $m_1, m_2$ of this quadratic equation.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Nature of Roots and Solutions</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>Case I: Two distinct real roots ($m_1 \neq m_2$)</strong><br>
+                        $y = Ae^{m_1x} + Be^{m_2x}$
+                    </li>
+                    <li><strong>Case II: Two equal real roots ($m_1 = m_2 = m$)</strong><br>
+                        To maintain linear independence, we multiply the second term by $x$:<br>
+                        $y = (Ax + B)e^{mx}$
+                    </li>
+                    <li><strong>Case III: Complex conjugate roots ($m = p \pm iq$)</strong><br>
+                        Using Euler's formula, the solution reduces to trigonometric terms:<br>
+                        $y = e^{px}(A\cos qx + B\sin qx)$
+                    </li>
+                </ul>
+                <br>
+                <strong>Worked Example (Case II):</strong> Solve $y'' - 6y' + 9y = 0$.<br>
+                1. Characteristic Eq: $m^2 - 6m + 9 = 0$<br>
+                2. Factor: $(m - 3)^2 = 0 \implies m = 3$ (repeated root).<br>
+                3. General Solution: $y = (Ax + B)e^{3x}$.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec6-4" style="margin-bottom: 20px;">Nonhomogeneous Equations & Undetermined Coefficients</h2>
+
+            <div class="blue-box">
+                The general solution of the second order nonhomogeneous linear equation $y'' + p_1(x)y' + p_2(x)y = f(x)$ is $y = y_c + y_p$.
+                The term $y_c$ solves the corresponding homogeneous equation $=0$, and $y_p$ is any specific function satisfying the nonhomogeneous equation.
+            </div>
+
+            <div class="green-box" id="undetermined-coeff">
+                <strong>Method of Undetermined Coefficients</strong><br><br>
+                We find $y_p(x)$ by substituting a "guessed" form based on the nature of $f(x)$:
+                <table style="width: 100%; text-align: left; margin-top: 15px; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <th style="padding: 10px;">Form of $f(x)$</th>
+                        <th style="padding: 10px;">Initial Guess for $y_p$</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <td style="padding: 10px;">Constant $k$</td>
+                        <td style="padding: 10px;">$c$</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <td style="padding: 10px;">Linear $kx$</td>
+                        <td style="padding: 10px;">$ax + b$</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <td style="padding: 10px;">Quadratic $kx^2$</td>
+                        <td style="padding: 10px;">$ax^2 + bx + c$</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <td style="padding: 10px;">Trigonometric $k\sin x$ or $k\cos x$</td>
+                        <td style="padding: 10px;">$a\sin x + b\cos x$</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">Exponential $e^{kx}$</td>
+                        <td style="padding: 10px;">$ce^{kx}$ (if $k$ is not a root of aux eq)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Problem Solving Steps</strong><br><br>
+                <ol style="padding-left: 20px; line-height: 1.8;">
+                    <li>Solve the complementary equation for $y_c$.</li>
+                    <li>Make an initial guess for $y_p(x)$ based on $f(x)$.</li>
+                    <li><strong>Crucial Step:</strong> Check if any term in $y_p$ overlaps with $y_c$. If so, multiply the guess by $x$ (or $x^2$) until there is no overlap.</li>
+                    <li>Substitute $y_p(x)$ into the ODE and equate coefficients to find unknown constants.</li>
+                    <li>Add $y = y_c + y_p$.</li>
+                </ol>
+                <br>
+                
+            </div>
+
+            <div class="video-section">
+                <p>Watch this comprehensive tutorial detailing how to solve the characteristic equation for homogeneous second-order linear differential equations—an essential mathematical foundation for analyzing RLC circuits and beam deflection in engineering mechanics:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/uI2xt8nTOlQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your understanding of Second Order Linear ODEs, characteristic roots, and the method of undetermined coefficients.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> For a general linear ODE of order $n$, what specific condition classifies the equation as a <em>homogeneous</em> equation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The function $q(x)$ is equal to $x$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The function $q(x)$ is not equal to zero ($q(x) \neq 0$).</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The function $q(x)$ on the right-hand side is exactly zero ($q(x) = 0$).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> How is the complete general solution of a nonhomogeneous linear differential equation correctly expressed?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $y = y_c + y_p$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $y = y_c - y_p$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $y = y_c \times y_p$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> In the context of linear differential operators, what mathematical operation does the notation $D^n$ represent?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Raising a variable to the $n^{\text{th}}$ power.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The $n^{\text{th}}$ derivative with respect to $x$, i.e., $\frac{d^n}{dx^n}$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Multiplying the function by a constant $n$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> If the characteristic (auxiliary) equation $m^2 + am + b = 0$ yields two equal real roots ($m_1 = m_2 = m$), what is the correct form of the complementary solution $y_c$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $y = Ae^{mx} + Be^{-mx}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $y = (Ax + B)e^{mx}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $y = x^2e^{mx}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> When the roots of the characteristic equation are complex conjugates ($m = p \pm iq$), what format does the solution take after applying Euler's formula?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $y = e^{qx}(A\cos px + B\sin px)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $y = (Ax+B)e^{px}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $y = e^{px}(A\cos qx + B\sin qx)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> A given homogeneous equation has a characteristic equation with roots $m_1 = 2$ and $m_2 = -3$. What is the complementary function $y_c$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $y_c = Ae^{2x} + Be^{-3x}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $y_c = (Ax+B)e^{2x}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $y_c = e^{2x}(A\cos 3x + B\sin 3x)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> Using the Method of Undetermined Coefficients, if the nonhomogeneous term is $f(x) = 5\sin x$, what should your standard initial guess for $y_p(x)$ be?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $y_p = a\sin x$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $y_p = a\sin x + b\cos x$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $y_p = c e^{\sin x}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> What is the crucial adjustment step required if a term in your initial guess for $y_p(x)$ mathematically overlaps (is identical in form) to a term already present in $y_c$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Immediately set those overlapping terms in the guess to zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Divide the entire guess by $x$ to separate them.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Multiply the overlapping guess terms by $x$ (or $x^2$) until the overlap is entirely eliminated.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "ode-secondorder"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "ode-secondorder");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rank of a Matrix</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Rank of a Matrix. Focus on the definition of matrix rank as the number of non-zero rows in the row echelon form, and its relationship to linearly independent row vectors. Cover row echelon form and column echelon form, including the definition of column echelon form through the transpose of a matrix. Explain row rank and column rank, emphasizing that they are always equal, and how transposing a column echelon matrix produces a row echelon matrix. Include determining rank from echelon form, interpreting zero rows, and understanding the rank of zero matrices and matrices with dependent or independent rows or columns.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Rank of a Matrix</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec8-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Rank of a Matrix</a></li>
+                <li><a href="#def8-1-1">Definition(Row Echelon):</a></li>
+                <li><a href="#def8-1-2">Definition(Column Echelon):</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec8-1" style="margin-bottom: 20px;">Rank of a matrix</h2>
+
+            <div class="blue-box" id="def8-1-1">
+                <strong>Definition:</strong><br><br>
+                The number of non-zero rows of the row echelon form of a matrix $A$ is defined as the <strong>rank</strong> of $A$, which is denoted by $\text{Rank } A$.
+                <br><br>
+                <em>Detail:</em> The rank essentially tells us the number of linearly independent row vectors in the matrix. If a $3 \times 3$ matrix reduces to having exactly one row of all zeros, its rank is $2$.
+            </div>
+
+            <div class="green-box" id="def8-1-2">
+                <strong>Definition:</strong><br><br>
+                A matrix $A$ is in <strong>column echelon form</strong> if its transpose $A^T$ is in row echelon form.
+            </div>
+
+            <div class="yellow-box" id="examples">
+                <strong>Example 2.</strong><br><br>
+                The following matrix is in column echelon form:
+                <div class="math-center">
+                    $$ \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 2 & -4 & 1 \end{pmatrix} $$
+                </div>
+                If we were to transpose this matrix, it would result in a standard upper-triangular row echelon form.
+            </div>
+
+            <p style="margin-bottom: 20px; color: #e5e7eb;"><strong>Remark.</strong> The rank of a matrix can be analogously defined considering the column echelon form. The row rank and column rank of any given matrix are always equal.</p>
+
+            <div class="video-section">
+                <p>Watch this tutorial to learn how to find the rank of a matrix using echelon form step-by-step:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/cSj82GG6MX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Rank of a Matrix and Echelon Forms.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What is the formal definition of the rank of a matrix according to the text?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The total number of rows in the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The number of non-zero rows in its row echelon form.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The number of completely zero rows in its row echelon form.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Mathematically, the rank of a matrix reveals the exact number of:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Linearly independent row vectors.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Zero elements contained within the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Columns that have a leading value of 1.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If a $3 \times 3$ matrix is reduced to its row echelon form and has exactly one row consisting entirely of zeros, what is the rank of this matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> How is a matrix $A$ formally defined to be in <em>column echelon form</em>?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) If its transpose $A^T$ is also in column echelon form.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) If its transpose $A^T$ is in row echelon form.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) If all of its columns are linearly independent.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> What is the absolute relationship between the row rank and the column rank of any given matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) They are always equal.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The row rank is always greater than the column rank.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) They are equal only if the matrix is a square matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> If you take a matrix that is in column echelon form and transpose it, what will be the resulting structure?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) An identity matrix.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) A matrix in standard row echelon form.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) A purely diagonal matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> Based on the definition of rank, what would be the rank of a zero matrix $O_{m \times n}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $m$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> If an $n \times n$ matrix is calculated to have a rank exactly equal to $n$, what does this imply about its rows?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) All $n$ rows are linearly independent.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) There are no linearly independent rows in the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It must have exactly one row of all zeros.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-rank"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-rank");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

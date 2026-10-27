@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Systems of Linear Equations</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <meta name="bot-context" content="Topic: Mathematics : Systems of Linear Equations. Focus on representing systems of linear equations using matrix notation, including the coefficient matrix, variable vector, constant vector, homogeneous and non-homogeneous systems. Cover methods for solving non-homogeneous systems, including the inverse matrix method for square invertible coefficient matrices, Cramer's Rule using determinants and replacement matrices, and Gaussian elimination using augmented matrices and row operations. Explain row echelon form, leading coefficients, zero rows, back-substitution, unique solutions, free variables, and infinitely many solutions.">
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Systems of Linear Equations</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec7" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Matrix Notation</a></li>
+                <li><a href="#sec7-1-1">Method 1: Direct Approach</a></li>
+                <li><a href="#sec7-1-2">Method 2: Cramer's Rule</a></li>
+                <li><a href="#sec7-1-3">Method 3: Gaussian Elimination</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec7" style="margin-bottom: 20px;">Systems of Linear Equations</h2>
+
+            <div class="blue-box">
+                <strong>Matrix Representation</strong><br><br>
+                Any system of linear equations can be represented in matrix notation as shown below:
+                <div class="math-center" style="font-size: 1.1rem;">
+                    $a_{11}x + a_{12}y + a_{13}z = b_1$<br>
+                    $a_{21}x + a_{22}y + a_{23}z = b_2$<br>
+                    $a_{31}x + a_{32}y + a_{33}z = b_3$
+                </div>
+                By factoring out the variables into a column vector, we rewrite this as:
+                <div class="math-center">
+                    $$ \begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix} \implies AX = B $$
+                </div>
+                Matrix $A$ is called the <strong>coefficient matrix</strong>. If the constant matrix $B \neq 0$ then the system is called <strong>non-homogeneous</strong>; otherwise, if all constants equal zero, it is <strong>homogeneous</strong>.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Solution of non-homogeneous systems</h3>
+            <p style="margin-bottom: 20px; color: #e5e7eb;">Three fundamental methods are commonly utilized to solve these systems, which we explore below.</p>
+
+            <h4 id="sec7-1-1" style="margin-bottom: 15px; font-size: 1.2rem; color: #facc15;">Method 1 (Direct Approach)</h4>
+
+            <div class="green-box">
+                <strong>Inverse Matrix Method</strong><br><br>
+                This method is used for a system where the number of linear equations is equal to the number of unknowns (resulting in a square coefficient matrix) and the determinant of $A$ is non-zero ($|A| \neq 0$). In other words, the inverse of the coefficient matrix exists.<br><br>
+                In that case, we can isolate the variable matrix $X$ by pre-multiplying both sides by $A^{-1}$:
+                <div class="math-center">
+                    $$ AX = B \implies X = A^{-1}B $$
+                </div>
+                and the system has a unique solution.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 1.</strong> Find the inverse of $A = \begin{pmatrix} 2 & 3 & 4 \\ 1 & 2 & 1 \\ 4 & 6 & 5 \end{pmatrix}$. Hence solve the system:<br>
+                <div class="math-center" style="font-size: 1.1rem;">
+                    $2x + 3y + 4z = 4$<br>
+                    $x + 2y + z = -12$<br>
+                    $4x + 6y + 5z = 11$
+                </div>
+                <em>Solution:</em><br>
+                It can be shown (using the adjoint method) that $A^{-1} = \begin{pmatrix} -4/3 & -3 & 5/3 \\ 1/3 & 2 & -2/3 \\ 2/3 & 0 & -1/3 \end{pmatrix}$.<br><br>
+                Applying $X = A^{-1}B$:
+                <div class="math-center">
+                    $$ X = \begin{pmatrix} -4/3 & -3 & 5/3 \\ 1/3 & 2 & -2/3 \\ 2/3 & 0 & -1/3 \end{pmatrix} \begin{pmatrix} 4 \\ -12 \\ 11 \end{pmatrix} = \begin{pmatrix} 1 \\ 2 \\ -1 \end{pmatrix} $$
+                </div>
+                Therefore the unique solution is $x = 1$, $y = 2$, and $z = -1$.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h4 id="sec7-1-2" style="margin-bottom: 15px; font-size: 1.2rem; color: #facc15;">7.1.2 Method 2 (Cramer's Rule)</h4>
+
+            <div class="green-box">
+                <strong>Determinant Method</strong><br><br>
+                This method is also applied when the coefficient matrix is a square matrix and is invertible ($|A| \neq 0$). For the system $AX = B$, where $X = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}$, we define the solution components as:
+                <div class="math-center">
+                    $$ x_i = \frac{|A_i|}{|A|} \quad \text{for each } i \in \{1, 2, \cdots, n\} $$
+                </div>
+                where $|A_i|$ is the determinant obtained from the coefficient matrix $A$ by entirely replacing its $i^{\text{th}}$ column with the constant vector $B$.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 2.</strong> Using Cramer's rule, solve the following system:<br>
+                <div class="math-center" style="font-size: 1.1rem;">
+                    $x + 3y + z = 8$<br>
+                    $2x + y + 3z = 7$<br>
+                    $x + y - z = 2$
+                </div>
+                <em>Solution:</em><br>
+                First, we find the coefficient matrix $A = \begin{pmatrix} 1 & 3 & 1 \\ 2 & 1 & 3 \\ 1 & 1 & -1 \end{pmatrix}$ and compute its determinant $|A| = 12$.<br><br>
+                Then we substitute the constants vector $B = (8, 7, 2)^T$ into the columns of $A$:
+                <div class="math-center">
+                    $$ x = \frac{|A_1|}{|A|} = \frac{\begin{vmatrix} 8 & 3 & 1 \\ 7 & 1 & 3 \\ 2 & 1 & -1 \end{vmatrix}}{12} = \frac{12}{12} = 1 $$
+                    <br>
+                    $$ y = \frac{|A_2|}{|A|} = \frac{\begin{vmatrix} 1 & 8 & 1 \\ 2 & 7 & 3 \\ 1 & 2 & -1 \end{vmatrix}}{12} = \frac{24}{12} = 2 $$
+                    <br>
+                    $$ z = \frac{|A_3|}{|A|} = \frac{\begin{vmatrix} 1 & 3 & 8 \\ 2 & 1 & 7 \\ 1 & 1 & 2 \end{vmatrix}}{12} = \frac{12}{12} = 1 $$
+                </div>
+                Thus, the solution is $x=1, y=2, z=1$.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h4 id="sec7-1-3" style="margin-bottom: 15px; font-size: 1.2rem; color: #facc15;">Method 3 (Reducing to Echelon Form)</h4>
+
+            <div class="blue-box">
+                <strong>Gaussian Elimination</strong><br><br>
+                In the system $AX = B$, the coefficient matrix $A$ combined with the constant matrix $B$ forms the <strong>augmented matrix</strong> $(A|B)$. <br><br>
+                By applying elementary row operations, we transform this augmented matrix into its <strong>Echelon form</strong>. A matrix is in Echelon form if it satisfies:
+                <ul style="padding-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                    <li>Any row consisting entirely of zeros occurs at the bottom of the matrix.</li>
+                    <li>For each row that does not contain entirely zeros, the first non-zero entry (the leading coefficient) is $1$.</li>
+                    <li>For two successive non-zero rows, the leading $1$ in the higher row is further to the left than the leading one in the lower row.</li>
+                </ul>
+                The process of reducing the augmented matrix to row Echelon form is known as <strong>Gaussian elimination</strong>.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 3.</strong> Solve the following system using Gaussian elimination:<br>
+                <div class="math-center" style="font-size: 1.1rem;">
+                    $2x + 3y + 4z = 10$<br>
+                    $x + 2y - z = -1$<br>
+                    $3x + 4y = 3$
+                </div>
+                <em>Solution:</em><br>
+                Construct the augmented matrix and apply row operations to reach Echelon form:
+                <div class="math-center">
+                    $$ \begin{pmatrix} 2 & 3 & 4 & \mid & 10 \\ 1 & 2 & -1 & \mid & -1 \\ 3 & 4 & 0 & \mid & 3 \end{pmatrix} \xrightarrow{R_1 \leftrightarrow R_2} \begin{pmatrix} 1 & 2 & -1 & \mid & -1 \\ 2 & 3 & 4 & \mid & 10 \\ 3 & 4 & 0 & \mid & 3 \end{pmatrix} $$
+                    $$ \xrightarrow[\begin{smallmatrix} R_2 \rightarrow R_2 - 2R_1 \\ R_3 \rightarrow R_3 - 3R_1 \end{smallmatrix}]{} \begin{pmatrix} 1 & 2 & -1 & \mid & -1 \\ 0 & -1 & 6 & \mid & 12 \\ 0 & -2 & 3 & \mid & 6 \end{pmatrix} $$
+                    $$ \xrightarrow[\begin{smallmatrix} R_3 \rightarrow R_3 - 2R_2 \\ R_2 \rightarrow -R_2 \\ R_3 \rightarrow -\frac{1}{9}R_3 \end{smallmatrix}]{} \begin{pmatrix} 1 & 2 & -1 & \mid & -1 \\ 0 & 1 & -6 & \mid & -12 \\ 0 & 0 & 1 & \mid & 2 \end{pmatrix} $$
+                </div>
+                Extracting the reduced system of equations yields:
+                <div class="math-center" style="font-size: 1.1rem;">
+                    $x + 2y - z = -1$<br>
+                    $y - 6z = -12$<br>
+                    $z = 2$
+                </div>
+                By back-substitution, if $z=2$, then $y - 6(2) = -12 \implies y = 0$. <br>
+                Substituting $y=0$ and $z=2$ into the first equation: $x + 2(0) - 2 = -1 \implies x = 1$.<br>
+                Hence the solution is $x = 1$, $y = 0$, and $z = 2$.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <p style="margin-bottom: 20px; color: #e5e7eb;">When we delve into Echelon form, we occasionally encounter systems that do not have a single unique solution. When a row reduces entirely to zeros (while equating to zero on the constant side), the system holds infinitely many solutions and must be parameterized.</p>
+
+            <div class="yellow-box">
+                <strong>Example 1 (Infinite Solutions).</strong>Solve the system:<br>
+                <div class="math-center" style="font-size: 1.1rem;">
+                    $x - 2y + z = -1$<br>
+                    $x + y - 2z = 3$<br>
+                    $4x + y - 5z = 8$<br>
+                    $5x - 7y + 2z = -1$
+                </div>
+                <em>Solution:</em><br>
+                The augmented matrix of the system reduces to Echelon form as shown:
+                <div class="math-center">
+                    $$ \begin{pmatrix} 
+                    1 & -2 & 1 & \mid & -1 \\ 
+                    1 & 1 & -2 & \mid & 3 \\ 
+                    4 & 1 & -5 & \mid & 8 \\ 
+                    5 & -7 & 2 & \mid & -1 
+                    \end{pmatrix} \longrightarrow \cdots \longrightarrow \begin{pmatrix} 
+                    1 & -2 & 1 & \mid & -1 \\ 
+                    0 & 1 & -1 & \mid & 4/3 \\ 
+                    0 & 0 & 0 & \mid & 0 \\ 
+                    0 & 0 & 0 & \mid & 0 
+                    \end{pmatrix} $$
+                </div>
+                The reduced system yields only two linearly independent equations:<br>
+                $x - 2y + z = -1$ and $y - z = \frac{4}{3}$.<br><br>
+                Because we have more variables (3) than independent equations (2), we introduce a free parameter. Let $z = t$ be arbitrary. <br>
+                Then we solve for $y$: $y = t + \frac{4}{3} = \frac{1}{3}(3t + 4)$.<br>
+                Substitute $y$ and $z$ into the first equation to solve for $x$: 
+                $$x = 2y - z - 1 = 2\left(\frac{3t+4}{3}\right) - t - 1 = \frac{6t+8 - 3t - 3}{3} = \frac{3t+5}{3} = \frac{1}{3}(3t+5)$$ <br>
+                Since $t$ is a continuous parameter, the system has <strong>infinitely many solutions</strong> along a line in 3D space.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial to learn how to solve systems of linear equations using matrices:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/eDb6iugi6Uk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this video for an in-depth look at Cramer's Rule for solving systems of equations:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/bq5gDsEdN3Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the methods used to solve systems of linear equations.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What completely distinguishes a homogeneous system from a non-homogeneous system in the matrix notation $AX = B$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) A homogeneous system has a coefficient matrix $A = 0$.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) A homogeneous system has the constants vector $B = 0$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) A homogeneous system must have an equal number of rows and columns.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> When using the inverse matrix method ($X = A^{-1}B$) to solve a system, what mathematical condition MUST the coefficient matrix $A$ strictly satisfy?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It must be an identity matrix ($A = I$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Its determinant must be exactly zero ($|A| = 0$).</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Its determinant must not be zero ($|A| \neq 0$).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> In Cramer's Rule, what does the specific determinant $|A_i|$ represent when solving for the variable $x_i$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The determinant of $A$ after completely replacing its $i^{\text{th}}$ column with the constants vector $B$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The determinant of $A$ after multiplying the $i^{\text{th}}$ column by the constants vector $B$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The determinant of $A$ after removing the $i^{\text{th}}$ row entirely.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> During Gaussian elimination, which of the following is a strict requirement for a matrix to be considered in Echelon form?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Every column must contain at least one zero.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Any row consisting entirely of zeros must occur at the very bottom of the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The matrix must be transformed completely into an identity matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> In a valid row echelon form matrix, what must the first non-zero entry (the leading coefficient) of any non-zero row be?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It can be any positive integer.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> In Example 1 (Infinite Solutions), why was a free parameter ($z=t$) necessarily introduced to solve the system?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Because the reduced system yielded fewer linearly independent equations (2) than the number of variables (3).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Because the system yielded more independent equations than the number of variables.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Because Cramer's Rule failed to produce a valid determinant.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If the determinant of a coefficient matrix is exactly zero ($|A| = 0$), which of the following methods will immediately fail and cannot be used directly to find a unique solution?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Gaussian Elimination</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The Inverse Matrix Method ($X = A^{-1}B$)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Echelon form reduction</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> In the Gaussian Elimination example (Example 3), what standard algebraic technique is used to find the values of $x$ and $y$ after first determining that $z=2$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Matrix inversion</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Column echelon transformation</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Back-substitution</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-linearequations"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-linearequations");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: True }); // Note: updated script fix
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

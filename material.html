@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MT1023 - Properties of Materials</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --nav-bg: #111827;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --nav-border: #334155;
+            
+            /* Card Accent Colors */
+            --c-blue: #38bdf8;
+            --c-green: #34d399;
+            --c-yellow: #fbbf24;
+            --c-purple: #c084fc;
+            --c-red: #f87171;
+            --c-cyan: #22d3ee;
+            --c-pink: #f472b6;
+            --c-orange: #fb923c;
+            --c-teal: #2dd4bf;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+        }
+
+        /* --- Header & Nav --- */
+        .top-header {
+            background-color: var(--nav-bg);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .top-header h1 {
+            margin: 0 0 20px 0;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            border-top: 1px solid var(--nav-border);
+            border-bottom: 1px solid var(--nav-border);
+            padding: 15px 0;
+            background-color: var(--bg-dark);
+        }
+
+        .nav-bar a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-bar a:hover {
+            color: var(--c-blue);
+        }
+
+        /* --- Grid Layout --- */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        /* --- Card Styling --- */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 40px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Color Modifiers */
+        .card.blue { border-left: 5px solid var(--c-blue); }
+        .card.blue h2 { color: var(--c-blue); }
+
+        .card.green { border-left: 5px solid var(--c-green); }
+        .card.green h2 { color: var(--c-green); }
+
+        .card.yellow { border-left: 5px solid var(--c-yellow); }
+        .card.yellow h2 { color: var(--c-yellow); }
+
+        .card.purple { border-left: 5px solid var(--c-purple); }
+        .card.purple h2 { color: var(--c-purple); }
+
+        .card.red { border-left: 5px solid var(--c-red); }
+        .card.red h2 { color: var(--c-red); }
+
+        .card.cyan { border-left: 5px solid var(--c-cyan); }
+        .card.cyan h2 { color: var(--c-cyan); }
+
+        .card.pink { border-left: 5px solid var(--c-pink); }
+        .card.pink h2 { color: var(--c-pink); }
+
+        .card.orange { border-left: 5px solid var(--c-orange); }
+        .card.orange h2 { color: var(--c-orange); }
+
+        .card.teal { border-left: 5px solid var(--c-teal); }
+        .card.teal h2 { color: var(--c-teal); }
+
+        .card h2 {
+            margin: 0 0 15px 0;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-main);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0 0 25px 0;
+            flex-grow: 1;
+        }
+
+        /* Lock Icon & Progress Text */
+        .progress-indicator {
+            color: var(--text-muted);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .progress-indicator svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--c-yellow);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <h1>MT1023-Properties of Materials</h1>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="#">Home</a>
+        <a href="#">My Profile</a>
+        <a href="#">About Us</a>
+        <a href="#">About University</a>
+    </nav>
+
+    <main class="container">
+        <div class="grid-wrapper">
+
+            <!-- Chapter 1 -->
+            <a href="chapter1-timeline.html" class="card blue">
+                <h2>Chapter 01 - Introduction</h2>
+                <p>Importance of materials in engineering, classification of materials, and characteristics of main material classes.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 2.2 -->
+            <a href="chapter2-timeline.html" class="card green">
+                <h2>Chapter 02 - Atomic Structure</h2>
+                <p>Fundamental atomic structure, Bohr Theory, quantum numbers, periodic table, and primary/secondary bonding.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 3 -->
+            <a href="chapter3-timeline.html" class="card yellow">
+                <h2>Chapter 03 - Crystal Structure</h2>
+                <p>Space lattices, 14 Bravais lattices, Miller Indices for planes/directions, allotropy, and crystal defects.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 4 -->
+            <a href="chapter4-timeline.html" class="card purple">
+                <h2>Chapter 04 - Mechanical Properties</h2>
+                <p>Stress-strain behavior, elastic & plastic deformation, yield strength, toughness, and hardness testing.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 5 -->
+            <a href="chapter5-timeline.html" class="card red">
+                <h2>Chapter 05 - Electrical Properties</h2>
+                <p>Conduction fundamentals, energy band structure, intrinsic/extrinsic semiconductors, and dielectrics.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 6 -->
+            <a href="chapter6-timeline.html" class="card cyan">
+                <h2>Chapter 06 - Nanotechnology</h2>
+                <p>Nanoscale materials, top-down vs bottom-up synthesis, Graphene structure, and Carbon Nanotubes (CNTs).</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 7 -->
+            <a href="chapter7-timeline.html" class="card pink">
+                <h2>Chapter 07 - Functional Properties</h2>
+                <p>Functional material classifications, gas sensing, piezoelectricity, and phase-changing data storage materials.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 8 -->
+            <a href="chapter8-timeline.html" class="card orange">
+                <h2>Chapter 08 - Degradation of Materials</h2>
+                <p>Electrochemical metallic corrosion, galvanic effects, cathodic protection, and polymer chain scission.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+            <!-- Chapter 9 -->
+            <a href="chapter9-timeline.html" class="card teal">
+                <h2>Chapter 09 - Selection of Materials</h2>
+                <p>The engineering material selection process: translating, screening, ranking, and utilizing bubble charts.</p>
+                <div class="progress-indicator">
+                    <svg viewBox="0 0 24 24"><path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8v-4zm4 13.25c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z"/></svg>
+                    View Chapters
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrices - Introduction and Special Matrices</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Matrices - Introduction and Special Matrices. Focus on the definition of matrices, their order, and representation. Cover special types of matrices including square matrices, zero matrices, diagonal matrices, identity matrices, column and row matrices, triangular matrices, and the transpose of a matrix. Include worked examples and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Matrices: Introduction & Special Types</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec5-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Introduction</a></li>
+                <li><a href="#sec5-2-1">Square Matrices</a></li>
+                <li><a href="#sec5-2-2">Zero Matrix</a></li>
+                <li><a href="#sec5-2-3">Diagonal Matrix</a></li>
+                <li><a href="#sec5-2-4">Identity Matrix</a></li>
+                <li><a href="#sec5-2-5">Column & Row Matrix</a></li>
+                <li><a href="#sec5-2-6">Triangular Matrix</a></li>
+                <li><a href="#sec5-2-7">Transpose of a Matrix</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec5-1" style="margin-bottom: 20px;">Matrices</h2>
+
+            <h3 style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Introduction</h3>
+
+            <div class="blue-box">
+                <strong>Definition:</strong><br><br>
+                A matrix is a rectangular array of numbers arranged in rows and columns and enclosed by a pair of brackets.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 1.</strong>
+                <div class="math-center">
+                    $$ \begin{pmatrix} 2 & 2 \\ -1 & 5 \end{pmatrix}, \quad \begin{pmatrix} 1 & -2 & 6 \\ 7 & 9 & 3 \\ 2 & 0 & 3 \end{pmatrix}, \quad \begin{pmatrix} 2 \\ -3 \\ 4 \end{pmatrix} $$
+                </div>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #e5e7eb;">If the matrix has $m$ rows and $n$ columns it is called an $m \times n$ <strong>matrix</strong> or a <strong>matrix of order</strong> $m \times n$. A matrix is denoted by a single capital letter. If matrix $A$ has $m$ rows and $n$ columns it is denoted by $A_{m \times n}$. Consider the following matrix:</p>
+
+            <div class="math-center">
+                $$ A = \begin{pmatrix} 
+                a_{11} & a_{12} & \cdot & \cdot & a_{1n} \\
+                \cdot & \cdot & \cdot & \cdot & \cdot \\
+                a_{i1} & a_{i2} & \cdot & a_{ij} & a_{in} \\
+                \cdot & \cdot & \cdot & \cdot & \cdot \\
+                a_{m1} & a_{m2} & \cdot & a_{mj} & a_{mn} 
+                \end{pmatrix} $$
+            </div>
+
+            <p style="margin-bottom: 20px; color: #e5e7eb;">It can be represented as $A = (a_{ij})_{m \times n}$.</p>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 id="sec5-2" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">5.2 Some Special Matrices</h3>
+
+            <h4 id="sec5-2-1" style="margin-bottom: 10px; margin-top: 20px; font-size: 1.1rem; color: #facc15;">5.2.1 Square Matrices</h4>
+            <div class="blue-box">
+                A matrix is called a square matrix when the number of rows equals the number of columns ($m = n$).
+            </div>
+
+            <div class="math-center">
+                $$ \begin{pmatrix} 
+                a_{11} & a_{12} & \cdot & \cdot & a_{1n} \\
+                a_{21} & \cdot & \cdot & \cdot & a_{2n} \\
+                \cdot & \cdot & \cdot & \cdot & \cdot \\
+                \cdot & \cdot & \cdot & \cdot & \cdot \\
+                a_{n1} & a_{n2} & \cdot & \cdot & a_{nn} 
+                \end{pmatrix} $$
+            </div>
+
+            <p style="margin-bottom: 20px; color: #e5e7eb;">In a square matrix, the elements having equal subscripts, $a_{11}, a_{22}, \cdots, a_{nn}$, form the <strong>main diagonal</strong> of the matrix.</p>
+
+            <h4 id="sec5-2-2" style="margin-bottom: 10px; margin-top: 20px; font-size: 1.1rem; color: #facc15;">Zero Matrix</h4>
+            <div class="blue-box">
+                A matrix whose elements are all zero is called a <strong>zero matrix</strong> or <strong>null matrix</strong> and it is denoted by $O_{m \times n}$ where $m$ is the number of rows and $n$ is the number of columns. That is $a_{ij} = 0$ for all $i$ and $j$.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 2.</strong>
+                <div class="math-center">
+                    $$ O_{3 \times 3} = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} $$
+                </div>
+            </div>
+
+            <h4 id="sec5-2-3" style="margin-bottom: 10px; margin-top: 20px; font-size: 1.1rem; color: #facc15;">Diagonal matrix</h4>
+            <div class="blue-box">
+                A square matrix whose only non-zero elements are diagonal elements is called a <strong>diagonal matrix</strong>.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 3.</strong>
+                <div class="math-center">
+                    $$ \begin{pmatrix} 1 & 0 & 0 \\ 0 & -3 & 0 \\ 0 & 0 & 2 \end{pmatrix} $$
+                </div>
+            </div>
+
+            <h4 id="sec5-2-4" style="margin-bottom: 10px; margin-top: 20px; font-size: 1.1rem; color: #facc15;">5.2.4 Identity matrix (Unit matrix)</h4>
+            <div class="blue-box">
+                A diagonal matrix whose diagonal elements are all equal to 1 is called an <strong>identity matrix</strong> or a <strong>unit matrix</strong> and is denoted by $I$.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 4.</strong>
+                <div class="math-center">
+                    $$ I_{3 \times 3} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} $$
+                </div>
+            </div>
+
+            <h4 id="sec5-2-5" style="margin-bottom: 10px; margin-top: 20px; font-size: 1.1rem; color: #facc15;">Column matrix (Column vector) and Row matrix (Row vector)</h4>
+            <div class="blue-box">
+                A <strong>column matrix</strong> is a matrix having only one column while a <strong>row matrix</strong> is a matrix having only one row.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 5.</strong> $A = \begin{pmatrix} 1 & 0 & -3 \end{pmatrix}$ is a row matrix and $B = \begin{pmatrix} -2 \\ 1 \end{pmatrix}$ is a column matrix.
+            </div>
+
+            <h4 id="sec5-2-6" style="margin-bottom: 10px; margin-top: 20px; font-size: 1.1rem; color: #facc15;">5.2.6 Triangular matrix</h4>
+            <div class="blue-box">
+                <ul style="padding-left: 20px; margin-bottom: 10px;">
+                    <li>A square matrix $A = (a_{ij})_{n \times n}$ is called an <strong>upper triangular matrix</strong> if all its elements below the diagonal are zero.</li>
+                    <li>A square matrix $A = (a_{ij})_{n \times n}$ is called a <strong>lower triangular matrix</strong> if all its elements above the diagonal are zero.</li>
+                    <li>A matrix is called a <strong>triangular matrix</strong> if it is upper or lower triangular.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 6.</strong> $A = \begin{pmatrix} 1 & 1 & -3 \\ 0 & -2 & 6 \\ 0 & 0 & -2 \end{pmatrix}$ is an upper triangular matrix and $B = \begin{pmatrix} -2 & 0 \\ 1 & 1 \end{pmatrix}$ is a lower triangular matrix.
+            </div>
+
+            <h4 id="sec5-2-7" style="margin-bottom: 10px; margin-top: 20px; font-size: 1.1rem; color: #facc15;">5.2.7 Transpose of a matrix</h4>
+            <div class="blue-box">
+                The matrix obtained from a given matrix by interchanging its rows and columns is called the <strong>transpose</strong> of the matrix. For a given matrix $A$, the transpose of $A$ is denoted by $A^T$.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 7.</strong> If $A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}$ then $A^T = \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix}$.
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the fundamental properties and special types of matrices.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> If a matrix $A$ consists of exactly 4 rows and 3 columns, what is the mathematical order of this matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $3 \times 4$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $4 \times 3$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $12$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> In a square matrix $A = (a_{ij})_{n \times n}$, the specific elements $a_{11}, a_{22}, \dots, a_{nn}$ collectively form what part of the matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The main diagonal</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The lower triangle</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The identity row</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Which of the following conditions must be met for a matrix to be classified as a zero (null) matrix $O_{m \times n}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Only the main diagonal elements are zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The first row and the first column are entirely zeros.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Every single element $a_{ij}$ in the matrix must be $0$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> How is an identity matrix (or unit matrix) $I$ defined?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It is a square matrix where every element is equal to 1.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) It is a diagonal matrix where all the main diagonal elements are exactly 1.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It is a row matrix containing only the number 1.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> A matrix given by $B = \begin{pmatrix} 5 \\ -1 \\ 0 \end{pmatrix}$ is best classified as which of the following?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) A diagonal matrix</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A row matrix</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) A column matrix</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> If a square matrix $A$ is classified as an <em>upper triangular matrix</em>, which of the following statements must be true?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) All elements strictly below the main diagonal are zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) All elements strictly above the main diagonal are zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The main diagonal consists only of zeros.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If matrix $A$ is a $3 \times 2$ matrix, what will be the order (dimensions) of its transpose $A^T$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $3 \times 2$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $2 \times 3$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $3 \times 3$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> Consider the square matrix $\begin{pmatrix} -4 & 0 \\ 0 & 7 \end{pmatrix}$. How is this matrix best classified based on the text?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Identity matrix</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Lower triangular matrix only</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Diagonal matrix</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-intro"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-intro");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="stylesheet" href="style-vectors-intro.css">
+        <link rel="stylesheet" href="chatbot_style.css">
+        <meta name="bot-context" content="Topic: Mathematics : Eigenvalues and Eigenvectors. Focus on the definition and calculation of eigenvalues and eigenvectors for square matrices using the eigenvalue equation Av = λv and the characteristic equation det(A − λI) = 0. Cover the characteristic polynomial, roots as eigenvalues, corresponding non-zero eigenvectors, algebraic multiplicity of repeated eigenvalues, the spectrum as the set of eigenvalues, and the spectral radius as the maximum absolute value of the eigenvalues. Explain linear independence of eigenvectors corresponding to distinct eigenvalues and how linearly independent eigenvectors can form a basis. Also cover scaling eigenvectors, normalization using the reciprocal of the vector magnitude, the Euclidean norm of a vector, and the fact that every normalized eigenvector has norm 1.">
+
+    <meta charset="UTF-8">
+    <title>Eigenvalues and Eigenvectors</title>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Eigenvalues and Eigenvectors</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec9-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Eigenvalues & Eigenvectors</a></li>
+                <li><a href="#sec9-2">Linear Independence</a></li>
+                <li><a href="#sec9-3">Normalization</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec9-1" style="margin-bottom: 20px;">Eigenvalues and Eigenvectors</h2>
+
+            <div class="blue-box">
+                <strong>Foundational Concepts</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>In some cases having $n$ linear equations in $n$ independent variables, it is required to find a solution vector $X$ proportional to $AX$, where $A$ is the coefficient matrix of the system.</li>
+                    <li>This means $X$ should be a solution of the matrix equation $AX = \lambda X$ where $\lambda$ is a constant.</li>
+                    <li>Rearranging this equation yields the homogeneous system $(A - \lambda I)X = O$.</li>
+                    <li>Non-zero solutions exist for the system if the determinant $|A - \lambda I| = 0$, which gives different values of $\lambda$.</li>
+                    <li>The numbers $\lambda_i$ for which non-zero solutions $X_i$ exist are called the eigenvalues of $A$, and the corresponding vectors $X_i$ are called the eigenvectors of $A$.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Definitions</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>Definition:</strong> If $A$ is an $n \times n$ matrix, then the polynomial of degree $n$ defined by $p(\lambda) = |A - \lambda I|$ is called the characteristic polynomial of $A$. The roots of the equation $p(\lambda) = 0$ are the eigenvalues, and the column vectors $X_1, X_2, \cdots, X_n$ satisfying $(A - \lambda_i I)X_i = O$ are the eigenvectors.</li>
+                    <li><strong>Definition:</strong> If the characteristic polynomial consists of a factor of the form $(\lambda - \lambda_i)^r$, which means eigenvalue $\lambda_i$ is repeated $r$ times, and $(\lambda - \lambda_i)^{r+1}$ is not a factor, then $r$ is called the algebraic multiplicity of the eigenvalue $\lambda_i$.</li>
+                    <li><strong>Definition:</strong> The set of all eigenvalues $\lambda_1, \lambda_2, \cdots, \lambda_n$ of $A$ is called the spectrum of $A$, and $R = \max\{|\lambda_1|, |\lambda_2|, \cdots, |\lambda_n|\}$ is called the spectral radius of $A$.</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec9-2" style="margin-bottom: 20px;">Linear Independence of Eigenvectors</h2>
+
+            <div class="green-box">
+                <strong>Linear Independence</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>Definition:</strong> Suppose $X_1, X_2, \cdots, X_n$ is a set of $n$ vectors and $k_1, k_2, \cdots, k_n$ is a set of $n$ scalars. If $k_1X_1 + k_2X_2 + \cdots + k_nX_n = O \implies k_1 = k_2 = \cdots = k_n = 0$, then the vectors are linearly independent.</li>
+                    <li><strong>Theorem:</strong> Suppose the eigenvectors $X_1, X_2, \cdots, X_m$ correspond to $m$ distinct eigenvalues $\lambda_1, \lambda_2, \cdots, \lambda_m$ of an $n \times n$ matrix $A$. If they are linearly independent and $m = n$, then $X_1, X_2, \cdots, X_n$ forms a basis for the $n$-dimensional vector space associated with $A$.</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec9-3" style="margin-bottom: 20px;">Normalization of Eigenvectors</h2>
+
+            <div class="blue-box">
+                <strong>Scaling Vectors</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>Observe that a non-zero scalar multiple of an eigenvector remains an eigenvector of the equation $AX = \lambda X$.</li>
+                    <li>This property is used to scale eigenvectors of $A$ to produce what we call normalized eigenvectors.</li>
+                    <li>To normalize the eigenvector, we multiply it by the reciprocal of the square root of the sum of the squares of its components.</li>
+                    <li>That operation makes the magnitude of the eigenvector equal to $1$.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Detailed Example & Norm Definition</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>For example, consider the eigenvector $X = \begin{pmatrix} a \\ b \\ c \end{pmatrix}$.</li>
+                    <li>The normalizing factor is $k = \frac{1}{\sqrt{a^2 + b^2 + c^2}}$.</li>
+                    <li>The normalized vector is evaluated as $\begin{pmatrix} \frac{a}{\sqrt{a^2 + b^2 + c^2}} \\ \frac{b}{\sqrt{a^2 + b^2 + c^2}} \\ \frac{c}{\sqrt{a^2 + b^2 + c^2}} \end{pmatrix}$.</li>
+                    <li>It is easy to see that the magnitude of the normalized vector is $1$.</li>
+                    <li><strong>Definition:</strong> The norm of a row or column vector $W$ with real components $w_1, w_2, \cdots, w_n$ is denoted by $||W||$ and defined by $||W|| = \sqrt{w_1^2 + w_2^2 + \cdots + w_n^2}$.</li>
+                    <li><strong>Note:</strong> The norm of any normalized vector is 1. Specifically, the norm of any normalized eigenvector is also 1.</li>
+                </ul>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial for a comprehensive introduction to calculating eigenvalues and eigenvectors:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/BWvx4wUSGdA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this detailed walk-through demonstrating how to find the eigenvalues and corresponding eigenvectors for a $3 \times 3$ matrix:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/qa9fI6qvUQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Eigenvalues, Eigenvectors, Linear Independence, and Normalization.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> To find the eigenvalues $\lambda$ of a square matrix $A$, which fundamental equation must be solved?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $AX = O$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $|A - \lambda I| = 0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $A = \lambda I$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> What is the characteristic polynomial $p(\lambda)$ of an $n \times n$ matrix $A$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $p(\lambda) = A - \lambda I$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $p(\lambda) = \lambda X$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $p(\lambda) = |A - \lambda I|$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If a characteristic polynomial factors into $(\lambda - 4)^3 (\lambda - 2) = 0$, what is the algebraic multiplicity of the eigenvalue $\lambda = 4$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $3$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $4$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $12$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> The <em>spectral radius</em> of a matrix is mathematically defined as:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The maximum absolute value among all its eigenvalues.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The sum of all its eigenvalues.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The minimum absolute value among all its eigenvalues.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If a set of eigenvectors corresponds to perfectly <em>distinct</em> (different) eigenvalues of a matrix, what algebraic property do they possess?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) They are mutually orthogonal in all cases.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) They are linearly independent.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) They are linearly dependent.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Which of the following statements about scaling an eigenvector is true?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) A non-zero scalar multiple of an eigenvector is still a valid eigenvector.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A non-zero scalar multiple of an eigenvector is NO LONGER an eigenvector.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) An eigenvector can be scaled down to become the zero vector $O$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If an eigenvector is given as $X = \begin{pmatrix} 3 \\ -4 \end{pmatrix}$, what is its properly normalized form?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\begin{pmatrix} 1 \\ 1 \end{pmatrix}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\begin{pmatrix} 3/7 \\ -4/7 \end{pmatrix}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\begin{pmatrix} 3/5 \\ -4/5 \end{pmatrix}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> What is the exact value of the norm $||W||$ for any correctly normalized eigenvector?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The value of its corresponding eigenvalue $\lambda$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-eigenvalues"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-eigenvalues");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

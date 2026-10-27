@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix Diagonalization and Cayley-Hamilton Theorem</title>
+    <!-- External stylesheet reference to match the provided CSS exactly -->
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Matrix Diagonalization and Cayley-Hamilton Theorem. Focus on the definition of similar matrices, diagonalizable matrices, and the process of diagonalization. Cover the construction of the diagonalizing matrix using linearly independent eigenvectors, and explain how to compute powers of a matrix using its diagonalization. Include orthogonal diagonalization for symmetric matrices, emphasizing the use of normalized eigenvectors and orthogonal matrices. For the Cayley-Hamilton theorem, explain how a matrix satisfies its own characteristic polynomial, and demonstrate how to use this theorem to compute the inverse of a matrix efficiently.">
+
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Matrix Diagonalization & Cayley-Hamilton Theorem</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec10-4" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Matrix Diagonalization</a></li>
+                <li><a href="#def10-4-1">Similar Matrices</a></li>
+                <li><a href="#diagonalizing-process">The Diagonalizing Process</a></li>
+                <li><a href="#matrix-powers">Powers of a Matrix</a></li>
+                <li><a href="#ortho-diag">Orthogonal Diagonalization</a></li>
+                <li><a href="#sec11-1">Cayley-Hamilton Theorem</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec10-4" style="margin-bottom: 20px;">Matrix Diagonalization</h2>
+            <p style="margin-bottom: 20px; color: #e5e7eb;">The reason for diagonalizing an $n \times n$ matrix $A$ is to simplify the structure of $A$ so that, in some ways, it reflects the simple computational characteristics of a diagonal matrix.</p>
+
+            <div class="blue-box" id="def10-4-1">
+                <strong>Definition(Similar Matrices):</strong> Suppose $A$ and $B$ are two square matrices of the same order. Then $A$ is <strong>similar</strong> to $B$ if there exists an invertible matrix $P$ such that 
+                <div class="math-center">
+                    $$ B = P^{-1}AP $$
+                </div>
+                <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                    <li><strong>Theorem:</strong> If the matrix $A$ is similar to the matrix $B$ then $B$ is similar to $A$.</li>
+                    <li><strong>Theorem:</strong> If the matrix $A$ is similar to the matrix $B$ then $A$ and $B$ have the <em>same eigenvalues</em>.</li>
+                </ul>
+            </div>
+
+            <div class="green-box" id="diagonalizing-process">
+                <strong>Definition(Diagonalizable Matrix):</strong> A matrix is <strong>diagonalizable</strong> if it is similar to a diagonal matrix. That is, if $A$ is diagonalizable, then there exists a diagonal matrix $D$ and an invertible matrix $P$ such that $D = P^{-1}AP$.
+                <br><br>
+                <strong>How to Diagonalize:</strong><br>
+                Suppose an $n \times n$ matrix $A$ has $n$ eigenvalues $\lambda_1, \lambda_2, \cdots, \lambda_n$ (which need not be distinct). Also suppose $X_1, X_2, \cdots, X_n$ are $n$ <strong>linearly independent eigenvectors</strong> corresponding to these eigenvalues.
+                <br><br>
+                Then construct the $n \times n$ matrix $P$ where the $i^{\text{th}}$ column of $P$ is the eigenvector $X_i$. We have $D = P^{-1}AP$, which results in the diagonal matrix:
+                <div class="math-center">
+                    $$ D = \begin{pmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{pmatrix} $$
+                </div>
+                where the eigenvalue $\lambda_i$ is in the $i^{\text{th}}$ position on the diagonal. Here $P$ is called the <strong>diagonalizing matrix</strong>.
+                <br><br>
+                <strong>Remark:</strong> A diagonalizing matrix is not unique because it depends on the order in which the eigenvectors of $A$ are arranged to form its columns.
+            </div>
+
+            <div class="yellow-box" id="matrix-powers">
+                <strong>Application: Computing Positive Integer Powers</strong><br><br>
+                For a given matrix $A$, its diagonalization greatly simplifies calculating powers of $A$. Suppose $A$ can be diagonalized as $D = P^{-1}AP$. Rearranging this gives $A = PDP^{-1}$.
+                <br><br>
+                Squaring the matrix yields:
+                <div class="math-center">
+                    $$ A^2 = (PDP^{-1})(PDP^{-1}) = PD(P^{-1}P)DP^{-1} = PD^2P^{-1} $$
+                </div>
+                In general, for any positive integer $n \in \mathbb{N}$:
+                <div class="math-center">
+                    $$ A^n = PD^nP^{-1} $$
+                </div>
+                <em>Since $D$ is a diagonal matrix, $D^n$ is simply computed by raising each diagonal entry to the $n^{\text{th}}$ power.</em>
+            </div>
+
+            <div class="blue-box" id="ortho-diag">
+                <strong>Orthogonal Diagonalization for Symmetric Matrices</strong><br><br>
+                <strong>Remark.</strong> If $A$ is an $n \times n$ real symmetric matrix with <strong>distinct</strong> eigenvalues, then it has $n$ <strong>mutually orthogonal linearly independent</strong> eigenvectors.<br><br> 
+                Hence, the diagonalizing matrix $P$ formed by using the <strong>normalized eigenvectors</strong> is an <strong>orthogonal matrix</strong> (meaning $P^{-1} = P^T$). In this special case, the diagonalization can be written as:
+                <div class="math-center">
+                    $$ D = P^T A P $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec11-1" style="margin-bottom: 20px;">The Cayley-Hamilton Theorem</h2>
+            <p style="margin-bottom: 20px; color: #e5e7eb;">The Cayley-Hamilton theorem is an important result in linear algebra that simplifies matrix computations. It allows us to express higher powers of a matrix $A$ in terms of its lower powers, and it can also be utilized to elegantly compute the inverse of a matrix.</p>
+
+            <div class="green-box">
+                <strong>Theorem(Cayley-Hamilton theorem):</strong><br><br>
+                If $P(\lambda)$ is the characteristic polynomial of an $n \times n$ matrix $A$, then $A$ satisfies its own characteristic equation. That is:
+                <div class="math-center">
+                    $$ P(A) = O $$
+                </div>
+                where $O$ is the $n \times n$ zero matrix.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Example: Using Cayley-Hamilton to find an Inverse</strong><br><br>
+                Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$. 
+                <br><br>
+                <strong>Step 1: Find the characteristic polynomial.</strong><br>
+                <div class="math-center">
+                    $$ P(\lambda) = \det(A - \lambda I) = \begin{vmatrix} 1-\lambda & 2 \\ 3 & 4-\lambda \end{vmatrix} = (1-\lambda)(4-\lambda) - 6 = \lambda^2 - 5\lambda - 2 $$
+                </div>
+                <strong>Step 2: Apply the Cayley-Hamilton Theorem.</strong><br>
+                Substitute $A$ for $\lambda$. The theorem states that:
+                <div class="math-center">
+                    $$ A^2 - 5A - 2I = O $$
+                </div>
+                <strong>Step 3: Solve for $A^{-1}$.</strong><br>
+                Multiply the entire equation by $A^{-1}$:
+                <div class="math-center">
+                    $$ A^{-1}(A^2 - 5A - 2I) = A^{-1}O $$
+                    $$ A - 5I - 2A^{-1} = O $$
+                    $$ 2A^{-1} = A - 5I \implies A^{-1} = \frac{1}{2}(A - 5I) $$
+                </div>
+                This provides a direct formula to compute the inverse using only matrix addition and scalar multiplication!
+            </div>
+
+            <div class="video-section">
+                <p>Watch this detailed step-by-step example to thoroughly understand the full process of diagonalizing a matrix. Mastering this sequence is highly valuable for scoring well on first-semester engineering examinations:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ieWyx2mlZyk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this comprehensive tutorial demonstrating how to apply the Cayley-Hamilton Theorem to efficiently compute the inverse of a matrix, a great shortcut to save valuable calculation time:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/r-b4m2-yCt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Matrix Diagonalization and the Cayley-Hamilton Theorem.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> If two matrices $A$ and $B$ are similar (i.e., $B = P^{-1}AP$), which of the following is guaranteed to be true?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) They have the same eigenvectors.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They must both be diagonal matrices.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) They have the exact same eigenvalues.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> When constructing the diagonalizing matrix $P$ for a matrix $A$, what do the columns of $P$ represent?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The linearly independent eigenvectors of $A$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The transpose of matrix $A$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The eigenvalues of $A$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> In the diagonalized form $D = P^{-1}AP$, what are the values located on the main diagonal of $D$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The co-factors of matrix $P$.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The eigenvalues of matrix $A$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The elements of the identity matrix $I$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> If a matrix $A$ can be diagonalized such that $A = PDP^{-1}$, what is the correct efficient formula for calculating $A^n$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $A^n = P^n D P^{-n}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $A^n = P^{-1} D^n P$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $A^n = P D^n P^{-1}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> When performing orthogonal diagonalization using normalized eigenvectors, the resulting diagonalizing matrix $P$ is an orthogonal matrix. What does this mean for $P^{-1}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $P^{-1} = I$ (the identity matrix)</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $P^{-1} = P^T$ (the transpose of $P$)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $P^{-1} = D$ (the diagonal matrix)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Because $P^{-1} = P^T$ for an orthogonally diagonalizable matrix, the standard diagonalization equation $D = P^{-1}AP$ simplifies to:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $D = P^T A P$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $D = P A P^T$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $D = P^{-1} A P^T$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> What is the core principle of the Cayley-Hamilton Theorem for a square matrix $A$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The trace of $A$ is equal to the determinant of its characteristic polynomial.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The matrix $A$ can always be inverted if $P(0) \neq 0$.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The matrix $A$ satisfies its own characteristic equation, meaning $P(A) = O$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> If the characteristic equation of a $2 \times 2$ matrix $A$ is $\lambda^2 - 3\lambda + 4 = 0$, what expression correctly represents the inverse $A^{-1}$ using the Cayley-Hamilton theorem?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $A^{-1} = \frac{1}{3}(A - 4I)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $A^{-1} = \frac{1}{4}(3I - A)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $A^{-1} = \frac{1}{4}(A - 3I)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-diagonalization"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-diagonalization");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adjoint and Inverse of a Matrix</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <meta name="bot-context" content="Topic: Mathematics : Adjoint and Inverse of a Matrix. Focus on the definition of the adjoint as the transpose of the co-factor matrix, calculating individual co-factors, the definition and properties of the inverse of a square matrix, the inverse formula using the adjoint and determinant, and the classification of matrices as singular, non-singular, or invertible based on their determinant.">
+    <link rel="stylesheet" href="chatbot_">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Adjoint and Inverse of a Matrix</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec6-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Adjoint of a Matrix</a></li>
+                <li><a href="#sec6-2">Inverse of a Matrix</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec6-1" style="margin-bottom: 20px;">Adjoint and Inverse</h2>
+
+            <h3 style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Adjoint of a matrix</h3>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Suppose $A = (a_{ij})_{n \times n}$ is a square matrix. Then the transpose of the matrix $(A_{ij})_{n \times n}$ where $A_{ij} = (-1)^{i+j}|M_{ij}|$ is called the <strong>adjoint of the matrix</strong> $A$ and is denoted by $\text{adj } A$.<br><br>
+                <strong>Note.</strong> <em>The adjoint is the transpose of the co-factor matrix.</em>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 1. Find $\text{adj } A$ if $A = \begin{pmatrix} 1 & 2 & 0 \\ -1 & 3 & 4 \\ -2 & 5 & 6 \end{pmatrix}$.</strong><br><br>
+                <em>Solution:</em> First, we compute all individual co-factors $A_{ij} = (-1)^{i+j}|M_{ij}|$:
+                <div class="math-center">
+                    $$ A_{11} = \begin{vmatrix} 3 & 4 \\ 5 & 6 \end{vmatrix} = 18 - 20 = -2 $$
+                    $$ A_{12} = -\begin{vmatrix} -1 & 4 \\ -2 & 6 \end{vmatrix} = -(-6 - (-8)) = -2 $$
+                    $$ A_{13} = \begin{vmatrix} -1 & 3 \\ -2 & 5 \end{vmatrix} = -5 - (-6) = 1 $$
+                    $$ A_{21} = -\begin{vmatrix} 2 & 0 \\ 5 & 6 \end{vmatrix} = -(12 - 0) = -12 $$
+                    $$ A_{22} = \begin{vmatrix} 1 & 0 \\ -2 & 6 \end{vmatrix} = 6 - 0 = 6 $$
+                    $$ A_{23} = -\begin{vmatrix} 1 & 2 \\ -2 & 5 \end{vmatrix} = -(5 - (-4)) = -9 $$
+                    $$ A_{31} = \begin{vmatrix} 2 & 0 \\ 3 & 4 \end{vmatrix} = 8 - 0 = 8 $$
+                    $$ A_{32} = -\begin{vmatrix} 1 & 0 \\ -1 & 4 \end{vmatrix} = -(4 - 0) = -4 $$
+                    $$ A_{33} = \begin{vmatrix} 1 & 2 \\ -1 & 3 \end{vmatrix} = 3 - (-2) = 5 $$
+                </div>
+                Observe that:
+                <div class="math-center">
+                    $$ \text{adj } A = \begin{pmatrix} 
+                    A_{11} & A_{12} & A_{13} \\ 
+                    A_{21} & A_{22} & A_{23} \\ 
+                    A_{31} & A_{32} & A_{33} 
+                    \end{pmatrix}^T = \begin{pmatrix} -2 & -2 & 1 \\ -12 & 6 & -9 \\ 8 & -4 & 5 \end{pmatrix}^T = \begin{pmatrix} -2 & -12 & 8 \\ -2 & 6 & -4 \\ 1 & -9 & 5 \end{pmatrix} $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 id="sec6-2" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">6.2 Inverse of a matrix</h3>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Suppose $A$ and $B$ are square matrices of the same order. If $AB = BA = I$ then $B$ is called the <strong>inverse</strong> of $A$ and is denoted by $A^{-1}$. That is $B = A^{-1}$.<br><br>
+                <strong>Note.</strong> <em>If $B$ is the inverse of $A$ then $A$ is the inverse of $B$.</em>
+            </div>
+
+            <div class="green-box">
+                <strong>Theorem:</strong> Suppose $A$ is a square matrix. If $|A| \neq 0$ then
+                <div class="math-center">
+                    $$ A^{-1} = \frac{\text{adj } A}{|A|} $$
+                </div>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Important Classification Notes:</strong>
+                <ul style="padding-left: 20px; margin-top: 10px; margin-bottom: 0; line-height: 1.8;">
+                    <li>A matrix $A$ is said to be <strong>singular</strong> if $|A| = 0$. In this case, the inverse $A^{-1}$ does not exist.</li>
+                    <li>Otherwise, if $|A| \neq 0$, it is called <strong>non-singular</strong>. Non-singular matrices are also called <strong>invertible matrices</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this tutorial video to understand how to compute the inverse of a matrix using the adjoint method:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/R8PdCKkvjag" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this comprehensive video to reinforce matrix inversion and properties of singular versus non-singular matrices:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/s9URv38YNFI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Adjoint and Inverse of a matrix.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> How is the adjoint of a square matrix $\text{adj } A$ formally defined in relation to its co-factor matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It is simply the co-factor matrix itself without any changes.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) It is the transpose of the co-factor matrix $(A_{ij})_{n \times n}$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It is the inverse of the co-factor matrix multiplied by its determinant.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> What formula is used to compute the individual co-factor elements $A_{ij}$ of a matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $A_{ij} = (-1)^{i-j}|M_{ij}|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $A_{ij} = (i + j)|M_{ij}|$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $A_{ij} = (-1)^{i+j}|M_{ij}|$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If $A$ is a square matrix and its determinant $|A| = 0$, what is the matrix $A$ classified as?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) A singular matrix</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) An invertible matrix</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) A non-singular matrix</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Under what condition does the inverse of a square matrix $A^{-1}$ fail to exist?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) When $|A| \neq 0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) When the matrix is singular ($|A| = 0$)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) When $\text{adj } A$ is a zero matrix</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> What is the standard formula for finding the inverse of a non-singular square matrix $A$ using its adjoint?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $A^{-1} = |A| \cdot \text{adj } A$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $A^{-1} = \frac{|A|}{\text{adj } A}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $A^{-1} = \frac{\text{adj } A}{|A|}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> If $B$ is the inverse of $A$ (meaning $AB = BA = I$), what can be said about matrix $A$ with respect to matrix $B$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $A$ is also the inverse of $B$ ($A = B^{-1}$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $A$ must be equal to $B$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $A$ has no inverse.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> What alternative name is given to a non-singular square matrix whose determinant is not equal to zero?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Symmetric matrix</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Invertible matrix</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Diagonal matrix</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> If $A$ is a $2 \times 2$ matrix given by $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$, what is its determinant $|A|$ and is it invertible?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $|A| = 0$, so it is singular and not invertible.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $|A| = -2$, so it is non-singular and invertible.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $|A| = 10$, so it is singular.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-inverse"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-inverse");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

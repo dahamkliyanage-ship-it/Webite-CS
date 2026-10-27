@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wronskian & Variation of Parameters</title>
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Wronskian & Variation of Parameters in Ordinary Differential Equations. Focus on the definition and properties of the Wronskian determinant, its role in determining linear independence of solutions, and the method of variation of parameters for finding particular solutions to nonhomogeneous second-order linear ODEs. Cover step-by-step procedures, worked examples, and exercises for practice.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>The Wronskian and Variation of Parameters</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec7" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Wronskian</a></li>
+                <li><a href="#def7-1">Linear Independence</a></li>
+                <li><a href="#thm7-1">Wronskian Theorems</a></li>
+                <li><a href="#sec7-1">Variation of Parameters</a></li>
+                <li><a href="#var-params-method">Derivation & Formulas</a></li>
+                <li><a href="#worked-example">Worked Example</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec7" style="margin-bottom: 20px;">Wronskian</h2>
+            <p style="margin-bottom: 15px;">Consider the differential equation $y'' + Py' + Qy = 0$ where $P$ and $Q$ are functions of $x$ alone.</p>
+
+            <div class="blue-box" id="def7-1">
+                <strong>Definition(Linear Independence)</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>Two solutions $u(x), v(x)$ of a differential equation are said to be linearly dependent, if there exist constants $c_1$ and $c_2$, not both zero, such that $c_1u(x) + c_2v(x) = 0$.</li>
+                    <li>Otherwise, i.e., $c_1 = c_2 = 0$, the solution is independent.</li>
+                </ul>
+                <br>
+                <strong>Definition(The Wronskian)</strong><br><br>
+                The Wronskian of two solutions $u(x), v(x)$ of a differential equation, is defined to be the determinant:
+                <div class="math-center">
+                    $$ w(x) = \begin{vmatrix} u(x) & v(x) \\ u'(x) & v'(x) \end{vmatrix} = u(x)v'(x) - v(x)u'(x) $$
+                </div>
+            </div>
+
+            <div class="green-box" id="thm7-1">
+                <strong>Theorem:</strong><br><br>
+                The Wronskian of two solutions of the differential equation (28) is identically zero or never zero. 
+                <br><br>
+                Again let $u$ and $v$ be solutions of the second order linear differential equation $y'' + P(x)y' + Q(x)y = 0$. Then:
+                <div class="math-center">
+                    $$ W(u, v) = c e^{-\int P(x)dx} = W(u, v)(x_0)e^{-\int P(x)dx} $$
+                </div>
+                <br>
+                <strong>Theorem:</strong><br><br>
+                The solutions of differential equation (28) are linearly dependent if and only if their Wronskian vanish identically.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec7-1" style="margin-bottom: 20px;">Variation of Parameters</h2>
+            
+            <p style="margin-bottom: 15px;">By our work above, to find the general solution of the nonhomogeneous equation we needed to find a linearly independent pair of solutions $y_1, y_2$ of the homogeneous equation, and a particular solution $y_p$. The method of variation of parameters uses a pair of linearly independent solutions of the homogeneous equation to construct a particular solution.</p>
+
+            <div class="blue-box" id="var-params-method">
+                <strong>Deriving the System</strong><br><br>
+                <ol style="padding-left: 20px; line-height: 1.8;">
+                    <li>We replace the arbitrary constants $C_1$ and $C_2$ by functions $u = u(x)$ and $v = v(x)$, which are to be determined so that $y_p(x) = u(x)y_1(x) + v(x)y_2(x)$ is a particular solution of the nonhomogeneous equation.</li>
+                    <li>Since there are two unknowns $u$ and $v$ to be determined we shall impose two conditions on these unknowns.</li>
+                    <li>For our second condition on $u$ and $v$, we set $y_1u' + y_2v' = 0$. This condition is chosen because it simplifies the first derivative $y_p'$ and because it will lead to a simple pair of equations in the unknowns $u$ and $v$.</li>
+                    <li>Now substitute $y_p, y_p'$ and $y_p''$ into the left side of equation (27). The condition that $y_p$ should satisfy is $y_1'u' + y_2'v' = f(x)$.</li>
+                </ol>
+                <br>
+                These constitute a system of two equations in the two unknowns $u'$ and $v'$:
+                <div class="math-center">
+                    $$ y_1u' + y_2v' = 0 $$
+                    $$ y_1'u' + y_2'v' = f(x) $$
+                </div>
+            </div>
+
+            <div class="green-box">
+                <strong>Integrating for the Final Solution</strong><br><br>
+                Solving for $u'$ and $v'$, we find that:
+                <div class="math-center">
+                    $$ u' = \frac{-y_2 f}{y_1y_2' - y_2y_1'} \quad \text{and} \quad v' = \frac{y_1 f}{y_1y_2' - y_2y_1'} $$
+                </div>
+                We know that the denominators here are non-zero because the expression $y_1(x)y_2'(x) - y_2(x)y_1'(x) = W(x)$ is the Wronskian of $y_1$ and $y_2$, and $y_1, y_2$ are linearly independent solutions of the homogeneous equation.
+                <br><br>
+                We can now get $u$ and $v$ by integrating:
+                <div class="math-center">
+                    $$ u = -\int \frac{y_2(x)f(x)}{W(x)}dx \quad \text{and} \quad v = \int \frac{y_1(x)f(x)}{W(x)}dx $$
+                </div>
+                Finally, a particular solution of the nonhomogeneous equation is:
+                <div class="math-center">
+                    $$ y_p(x) = -y_1(x)\int \frac{y_2(x)f(x)}{W(x)}dx + y_2(x)\int \frac{y_1(x)f(x)}{W(x)}dx $$
+                </div>
+            </div>
+
+            <div class="yellow-box" id="worked-example">
+                <strong>Worked Example: Variation of Parameters</strong><br><br>
+                Find the general solution to the differential equation $y'' + y = \sec(x)$.
+                <br><br>
+                <strong>Step 1: Solve the homogeneous equation to find $y_1$ and $y_2$.</strong><br>
+                The auxiliary equation for $y'' + y = 0$ is $m^2 + 1 = 0 \implies m = \pm i$.<br>
+                The complementary solution is $y_c = C_1\cos(x) + C_2\sin(x)$.<br>
+                Therefore, $y_1 = \cos(x)$ and $y_2 = \sin(x)$.
+                <br><br>
+                <strong>Step 2: Calculate the Wronskian $W(x)$.</strong><br>
+                <div class="math-center">
+                    $$ W(x) = \begin{vmatrix} \cos(x) & \sin(x) \\ -\sin(x) & \cos(x) \end{vmatrix} = (\cos(x))(\cos(x)) - (\sin(x))(-\sin(x)) = \cos^2(x) + \sin^2(x) = 1 $$
+                </div>
+                <br>
+                <strong>Step 3: Apply the integration formulas for $u$ and $v$.</strong><br>
+                Here, $f(x) = \sec(x)$.
+                <div class="math-center">
+                    $$ u = -\int \frac{\sin(x)\sec(x)}{1}dx = -\int \tan(x)dx = \ln|\cos(x)| $$
+                    $$ v = \int \frac{\cos(x)\sec(x)}{1}dx = \int 1 dx = x $$
+                </div>
+                <br>
+                <strong>Step 4: Construct the particular and general solutions.</strong><br>
+                The particular solution is $y_p = u y_1 + v y_2 = (\ln|\cos(x)|)\cos(x) + x\sin(x)$.<br>
+                The general solution is $y = y_c + y_p$:
+                <div class="math-center">
+                    $$ y = C_1\cos(x) + C_2\sin(x) + \cos(x)\ln|\cos(x)| + x\sin(x) $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this comprehensive tutorial covering the Wronskian determinant and the method of variation of parameters for nonhomogeneous second-order differential equations:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/IogxjIYk65c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Wronskian determinant and the Variation of Parameters method.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> For two solutions $u(x)$ and $v(x)$, how is the Wronskian $W(x)$ mathematically defined?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $u(x)v(x) - u'(x)v'(x)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $u(x)v'(x) - v(x)u'(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $u'(x)v'(x) + u(x)v(x)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> According to the Wronskian theorems, two solutions of a differential equation are <strong>linearly dependent</strong> if and only if their Wronskian is:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Equal to exactly $1$ everywhere.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A non-zero constant.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Identically zero ($W(x) = 0$).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> In the Variation of Parameters method, what do we replace the arbitrary constants $C_1$ and $C_2$ with to construct the particular solution $y_p(x)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Functions $u(x)$ and $v(x)$ to be determined.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Higher-order derivatives $y'$ and $y''$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Constant parameters like $\alpha$ and $\beta$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> When deriving the system for Variation of Parameters, what is the chosen condition imposed to simplify the first derivative $y_p'$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $y_1u' + y_2v' = 0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $y_1'u' + y_2'v' = f(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $y_1u + y_2v = 1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Based on the derived formulas for $u'$ and $v'$, what is the correct expression for $u'$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $u' = \frac{y_1 f(x)}{W(x)}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $u' = \frac{-y_2(x) f(x)}{W(x)}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $u' = \frac{-y_1(x) f(x)}{W(x)}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Why are we mathematically guaranteed that the denominators in the formulas for $u'$ and $v'$ will not be zero?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Because $f(x)$ is defined as a strictly positive function.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Because the denominator is the Wronskian of linearly independent solutions, which is never zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Because the variables $u$ and $v$ are inherently non-zero constants.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> In the provided worked example $y'' + y = \sec(x)$, what was the calculated Wronskian $W(x)$ for the fundamental solutions $y_1 = \cos(x)$ and $y_2 = \sin(x)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\sec^2(x)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> Once $u(x)$ and $v(x)$ are found via integration, what is the final standard form of the particular solution $y_p(x)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $y_p(x) = u(x)y_1(x) + v(x)y_2(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $y_p(x) = u'(x)y_1'(x) + v'(x)y_2'(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $y_p(x) = y_1(x)y_2(x) - u(x)v(x)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "ode-wronskian"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "ode-wronskian");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Determinant of a Square Matrix and Its Properties</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Determinant of a Square Matrix & Properties. Focus on the definition of the determinant of a square matrix, minors and cofactors, and calculating determinants using cofactor expansion. Cover fundamental determinant properties, including zero rows or columns, identical rows or columns, the determinant of a product, equality with the determinant of the transpose, row or column operations, interchange of rows or columns, triangular and diagonal matrices, scalar multiplication of rows or columns, and the additive property of determinants. Include related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Determinant of a Square Matrix & Properties</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec5-5" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Determinant Definition</a></li>
+                <li><a href="#sec5-5-1">Properties of Determinants</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec5-5" style="margin-bottom: 20px;">Determinant of a Square Matrix</h2>
+
+            <div class="blue-box">
+                <strong>Definition 5.5.1.</strong> If $A = (a_{ij})_{n \times n}$ then the <strong>determinant</strong> of $A$ is denoted by $|A|$ or $\det(A)$ and is defined by:
+                <div class="math-center">
+                    $$ |A| = \sum_{j=1}^{n} a_{ij} A_{ij} $$
+                </div>
+                where $1 \le j \le n$, $A_{ij}$ is called the <strong>co-factor</strong> of $a_{ij}$ and $A_{ij} = (-1)^{i+j} |M_{ij}|$ where $M_{ij}$ is the matrix obtained by deleting $i^{\text{th}}$ row and $j^{\text{th}}$ column of $A$, which is called the <strong>minor</strong> of $a_{ij}$.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 9. Expansion of a $3 \times 3$ Determinant</strong>
+                <div class="math-center">
+                    $$ \begin{vmatrix} 
+                    a_{11} & a_{12} & a_{13} \\ 
+                    a_{21} & a_{22} & a_{23} \\ 
+                    a_{31} & a_{32} & a_{33} 
+                    \end{vmatrix} = \sum_{j=1}^{3} a_{ij}A_{ij} = \sum_{j=1}^{3} a_{ij}(-1)^{i+j}|M_{ij}| $$
+                    $$ = a_{11}\begin{vmatrix} a_{22} & a_{23} \\ a_{32} & a_{33} \end{vmatrix} - a_{12}\begin{vmatrix} a_{21} & a_{23} \\ a_{31} & a_{33} \end{vmatrix} + a_{13}\begin{vmatrix} a_{21} & a_{22} \\ a_{31} & a_{32} \end{vmatrix} $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 id="sec5-5-1" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Properties of Determinants</h3>
+
+            <div class="green-box">
+                <strong>Key Determinant Rules</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>(i)</strong> If every element of a row or column of a matrix is zero, then the value of its determinant is zero.</li>
+                    <li><strong>(ii)</strong> If two columns or two rows of a matrix are identical, then its determinant is zero.</li>
+                    <li><strong>(iii)</strong> If $A$ and $B$ are two square matrices, then $|AB| = |A||B|$.</li>
+                    <li><strong>(iv)</strong> The determinant of a square matrix and its transpose are equal, i.e., $|A| = |A^T|$.</li>
+                    <li><strong>(v)</strong> The value of the determinant of a matrix remains unchanged if a scalar multiple of a row or column is added to any other row or column.</li>
+                </ul>
+                <div class="math-center" style="margin-top: 15px; margin-bottom: 5px;">
+                    $$ \begin{vmatrix} a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \\ c_1 & c_2 & c_3 \end{vmatrix} = \begin{vmatrix} a_1 + kc_1 & a_2 + kc_2 & a_3 + kc_3 \\ b_1 & b_2 & b_3 \\ c_1 & c_2 & c_3 \end{vmatrix} $$
+                </div>
+            </div>
+
+            <div class="blue-box">
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>(vi)</strong> If a square matrix $B$ is obtained from another square matrix $A$ by an interchange of two columns or rows, then $|B| = -|A|$.</li>
+                    <li><strong>(vii)</strong> If $A$ is an upper or lower triangular matrix (or diagonal matrix), then the determinant is the product of its diagonal entries, i.e., $|A| = a_{11} \cdot a_{22} \cdots a_{nn}$.</li>
+                    <li><strong>(viii)</strong> If every entry in any row or column is multiplied by a scalar, then the whole determinant is multiplied by that scalar.</li>
+                </ul>
+                <div class="math-center" style="margin-top: 15px; margin-bottom: 5px;">
+                    $$ \begin{vmatrix} ka_1 & ka_2 & ka_3 \\ b_1 & b_2 & b_3 \\ c_1 & c_2 & c_3 \end{vmatrix} = k \begin{vmatrix} a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \\ c_1 & c_2 & c_3 \end{vmatrix} $$
+                </div>
+            </div>
+
+            <div class="yellow-box">
+                <strong>(ix) Additive Property of Determinants</strong><br><br>
+                The determinant of any square matrix can be expressed as the sum of two determinants by expanding it along any row or column as follows:
+                <div class="math-center">
+                    $$ \begin{vmatrix} a & b & c + d \\ e & f & g + h \\ i & j & k + l \end{vmatrix} = \begin{vmatrix} a & b & c \\ e & f & g \\ i & j & k \end{vmatrix} + \begin{vmatrix} a & b & d \\ e & f & h \\ i & j & l \end{vmatrix} $$
+                    $$ \begin{vmatrix} a & b & c \\ d & e & f \\ g + h & i + j & k + l \end{vmatrix} = \begin{vmatrix} a & b & c \\ d & e & f \\ g & i & k \end{vmatrix} + \begin{vmatrix} a & b & c \\ d & e & f \\ h & j & l \end{vmatrix} $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial for a clear, step-by-step walkthrough of determinants and their fundamental properties:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/3ROzG6n4yMc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on determinants and their mathematical properties.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> How is a co-factor $A_{ij}$ mathematically related to its minor $M_{ij}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $A_{ij} = (-1)^{i+j} |M_{ij}|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $A_{ij} = (i + j) |M_{ij}|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $A_{ij} = (-1)^{i-j} |M_{ij}|$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> What is the value of the determinant of a square matrix if two of its rows or two of its columns are identical?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It depends on the size of the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If $A$ and $B$ are two square matrices of the same order, how does the determinant of their product $|AB|$ relate to their individual determinants?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $|AB| = |A| + |B|$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $|AB| = |A||B|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $|AB| = \frac{|A|}{|B|}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> What is the relationship between the determinant of a square matrix $A$ and the determinant of its transpose $A^T$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $|A| = |A^T|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $|A| = -|A^T|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $|A| = \frac{1}{|A^T|}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If matrix $B$ is obtained by interchanging two rows or two columns of matrix $A$, how does $|B|$ relate to $|A|$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $|B| = |A|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $|B| = \frac{1}{|A|}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $|B| = -|A|$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> How can you easily calculate the determinant of an upper triangular, lower triangular, or diagonal matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) By taking the sum of all elements in the matrix</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) By finding the product of its main diagonal entries</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) By squaring each diagonal entry</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If every element in a single row of a $3 \times 3$ matrix is multiplied by a scalar $k$, how is the determinant affected?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The determinant is multiplied by $k$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The determinant remains unchanged.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The determinant is multiplied by $k^3$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> What is the determinant of the $3 \times 3$ identity matrix $I$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-determinant"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-determinant");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

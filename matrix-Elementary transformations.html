@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Elementary Transformations and Inverse of a Matrix</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Elementary Transformations & Matrix Inversion. Focus on elementary row and column operations, including row or column interchange, adding a multiple of one row or column to another, and multiplying a row or column by a non-zero constant. Cover matrix equivalence under elementary transformations, using elementary row operations to reduce a square matrix to the identity matrix, and finding its inverse through the augmented matrix method.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Elementary Transformations & Matrix Inversion</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec6-3" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Elementary Transformations</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec6-3" style="margin-bottom: 20px;">Elementary transformations (row and column operations) on matrices</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong><br><br>
+                The following three types of matrix transformations are known as <strong>elementary row and column operations</strong> or <strong>elementary transformations</strong>:<br><br>
+                <ol style="padding-left: 20px; line-height: 1.8;">
+                    <li>Interchange of any columns or rows.</li>
+                    <li>Addition to any column or row a multiple of any other column or row.</li>
+                    <li>Multiplication of each element of a column or a row by a non-zero constant.</li>
+                </ol>
+                <br>
+                If the matrix $B$ is obtained by applying elementary row or column operations to $A$ then the matrix $A$ is <strong>equivalent</strong> to $B$, which is denoted by $A \approx B$.
+            </div>
+
+            <div class="green-box">
+                <strong>Theorem:</strong> Suppose $A$ is a square matrix. The elementary row operations that reduce the matrix $A$ to the identity matrix transform the identity matrix to the inverse of $A$.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 2. Use the elementary row operations to find the inverse of $A = \begin{pmatrix} 2 & 3 & 4 \\ 4 & 3 & 1 \\ 1 & 2 & 4 \end{pmatrix}$.</strong><br><br>
+                <em>Solution (Augmented Matrix Method):</em> We form the augmented matrix $[A \mid I]$ and apply row operations until we get $[I \mid A^{-1}]$:
+                <div class="math-center">
+                    $$ \begin{pmatrix} 
+                    2 & 3 & 4 & \mid & 1 & 0 & 0 \\ 
+                    4 & 3 & 1 & \mid & 0 & 1 & 0 \\ 
+                    1 & 2 & 4 & \mid & 0 & 0 & 1 
+                    \end{pmatrix} \longrightarrow \begin{pmatrix} 
+                    1 & 2 & 4 & \mid & 0 & 0 & 1 \\ 
+                    4 & 3 & 1 & \mid & 0 & 1 & 0 \\ 
+                    2 & 3 & 4 & \mid & 1 & 0 & 0 
+                    \end{pmatrix} $$
+                    $$ \longrightarrow \begin{pmatrix} 
+                    1 & 2 & 4 & \mid & 0 & 0 & 1 \\ 
+                    0 & -5 & -15 & \mid & 0 & 1 & -4 \\ 
+                    0 & -1 & -4 & \mid & 1 & 0 & -2 
+                    \end{pmatrix} \longrightarrow \begin{pmatrix} 
+                    1 & 2 & 4 & \mid & 0 & 0 & 1 \\ 
+                    0 & 1 & 3 & \mid & 0 & -1/5 & 4/5 \\ 
+                    0 & -1 & -4 & \mid & 1 & 0 & -2 
+                    \end{pmatrix} $$
+                    $$ \longrightarrow \begin{pmatrix} 
+                    1 & 2 & 4 & \mid & 0 & 0 & 1 \\ 
+                    0 & 1 & 3 & \mid & 0 & -1/5 & 4/5 \\ 
+                    0 & 0 & -1 & \mid & 1 & -1/5 & -6/5 
+                    \end{pmatrix} \longrightarrow \begin{pmatrix} 
+                    1 & 0 & -2 & \mid & 0 & 2/5 & -3/5 \\ 
+                    0 & 1 & 3 & \mid & 0 & -1/5 & 4/5 \\ 
+                    0 & 0 & 1 & \mid & -1 & 1/5 & 6/5 
+                    \end{pmatrix} $$
+                    $$ \longrightarrow \begin{pmatrix} 
+                    1 & 0 & 0 & \mid & -2 & 4/5 & 9/5 \\ 
+                    0 & 1 & 0 & \mid & 3 & -4/5 & -14/5 \\ 
+                    0 & 0 & 1 & \mid & -1 & 1/5 & 6/5 
+                    \end{pmatrix} $$
+                </div>
+                Therefore, the inverse matrix is:
+                <div class="math-center">
+                    $$ \therefore A^{-1} = \begin{pmatrix} 
+                    -2 & 4/5 & 9/5 \\ 
+                    3 & -4/5 & -14/5 \\ 
+                    -1 & 1/5 & 6/5 
+                    \end{pmatrix} $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial for a clear, step-by-step walkthrough of using elementary row operations and matrix transformations:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Fg7_mv3izR0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Elementary Transformations and Matrix Inversion.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Which of the following is NOT considered a valid elementary row or column operation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Interchanging two rows.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Multiplying all elements of a row by zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Adding a multiple of one row to another row.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> If a matrix $B$ is obtained from matrix $A$ through a sequence of elementary transformations, what term is used to describe their relationship?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) They are identical ($A = B$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They are inverses of each other ($A = B^{-1}$).</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) They are equivalent ($A \approx B$).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> When using the augmented matrix method to find the inverse of a square matrix $A$, what is the correct initial setup?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $[I \mid A]$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $[A \mid O]$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $[A \mid I]$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> In the augmented matrix method, what must the left side of the augmented matrix $[A \mid I]$ be transformed into to successfully find the inverse?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The Identity Matrix $I$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A Zero Matrix $O$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The original matrix $A$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> In the provided Example 2, looking at the very first transformation step $[A \mid I] \longrightarrow \dots$, what specific elementary row operation was performed?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Interchanging Row 1 and Row 3.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Adding Row 2 to Row 1.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Multiplying Row 1 by $1/2$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> According to the main theorem, applying the same sequence of row operations that reduces $A$ to $I$ onto the identity matrix $I$ will yield:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The determinant of $A$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The transpose of $A$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The inverse of $A$ ($A^{-1}$)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If an elementary row operation involves multiplying a row by a constant $k$, what mathematical restriction applies to $k$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $k$ must be a positive integer.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $k$ must be a non-zero constant.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $k$ can be any real number including zero.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> If a square matrix $A$ cannot be reduced to the identity matrix $I$ using elementary row operations, what does this mathematically imply?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The matrix $A$ is its own inverse.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The matrix $A$ does not have an inverse (it is singular).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The inverse can only be found using column operations.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-elementary"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-elementary");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

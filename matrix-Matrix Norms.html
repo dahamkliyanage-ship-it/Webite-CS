@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix Norms</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Matrix Norms. Focus on the definition and calculation of matrix norms, including the 1-norm, 2-norm (Euclidean/Frobenius norm), and infinity norm. Cover the properties of matrix norms, such as non-negativity, scalability, triangle inequality, and sub-multiplicativity. Include worked examples for calculating each type of norm and explain their significance in measuring the size or magnitude of matrices.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Matrix Norms</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec11-2" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Matrix Norms</a></li>
+                <li><a href="#def11-2-1">Definition(1-norm)</a></li>
+                <li><a href="#def11-2-2">Definition(2-norm)</a></li>
+                <li><a href="#def11-2-3">Definition(Infinity norm)</a></li>
+                <li><a href="#worked-example">Worked Example</a></li>
+                <li><a href="#sec11-2-1">Properties of Norms</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec11-2" style="margin-bottom: 20px;">Matrix Norms</h2>
+            <p style="margin-bottom: 20px; color: #e5e7eb;">Let $A$ be an arbitrary $m \times n$ matrix with real entries. A norm of $A$ is a non-negative real number denoted by $||A||$. It acts as a measure of the "magnitude" or "size" of the matrix. There are several different ways of defining a norm, some of which are provided below.</p>
+
+            <div class="blue-box" id="def11-2-1">
+                <strong>Definition:</strong> For a matrix $A = (a_{ij})_{m \times n}$, the <strong>1-norm</strong> is denoted by $||A||_1$ and defined by
+                <div class="math-center">
+                    $$ ||A||_1 = \max_{1 \le j \le n} \left( \sum_{i=1}^{m} |a_{ij}| \right). $$
+                </div>
+                <em>That is, the 1-norm is the maximum of the absolute column sums.</em>
+            </div>
+
+            <div class="green-box" id="def11-2-2">
+                <strong>Definition:</strong> For a matrix $A = (a_{ij})_{m \times n}$, the <strong>Euclidean norm</strong> or <strong>2-norm</strong> is denoted by $||A||_E$ or $||A||_2$ and defined by
+                <div class="math-center">
+                    $$ ||A||_2 = \sqrt{\sum_{i=1}^{m} \sum_{j=1}^{n} (a_{ij})^2}. $$
+                </div>
+                <em>That is, the 2-norm (also known as the Frobenius norm) is the square root of the sum of all the squared elements of the matrix.</em>
+            </div>
+
+            <div class="yellow-box" id="def11-2-3">
+                <strong>Definition:</strong> For a matrix $A = (a_{ij})_{m \times n}$, the <strong>infinity norm</strong> is denoted by $||A||_\infty$ and defined by
+                <div class="math-center">
+                    $$ ||A||_\infty = \max_{1 \le i \le m} \left( \sum_{j=1}^{n} |a_{ij}| \right). $$
+                </div>
+                <em>That is, the infinity norm is the maximum of the absolute row sums.</em>
+            </div>
+
+            <div class="blue-box" id="worked-example">
+                <strong>Worked Example: Calculating Matrix Norms</strong><br><br>
+                Let $A = \begin{pmatrix} 1 & -2 \\ 3 & 4 \end{pmatrix}$. Find the 1-norm, infinity norm, and Euclidean norm.<br><br>
+                
+                <strong>1. Finding $||A||_1$ (Max Column Sum):</strong><br>
+                Sum of absolute values for Column 1: $|1| + |3| = 4$<br>
+                Sum of absolute values for Column 2: $|-2| + |4| = 6$<br>
+                $$ ||A||_1 = \max(4, 6) = 6 $$
+                <br>
+                
+                <strong>2. Finding $||A||_\infty$ (Max Row Sum):</strong><br>
+                Sum of absolute values for Row 1: $|1| + |-2| = 3$<br>
+                Sum of absolute values for Row 2: $|3| + |4| = 7$<br>
+                $$ ||A||_\infty = \max(3, 7) = 7 $$
+                <br>
+                
+                <strong>3. Finding $||A||_2$ (Euclidean/Frobenius Norm):</strong><br>
+                Square every element, sum them, and take the square root:<br>
+                $$ ||A||_2 = \sqrt{1^2 + (-2)^2 + 3^2 + 4^2} = \sqrt{1 + 4 + 9 + 16} = \sqrt{30} \approx 5.477 $$
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <div class="green-box">
+                <strong>Definition:</strong> A norm defined for column vectors is called a <strong>vector norm</strong>.
+            </div>
+
+            <h3 id="sec11-2-1" style="margin-top: 30px; margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">Properties of Norms</h3>
+            <p style="margin-bottom: 20px; color: #e5e7eb;">Any matrix norm (or a vector norm) satisfies the properties described in above theorem</p>
+
+            <div class="yellow-box">
+                <strong>Theorem:</strong> For given $m \times n$ matrices $A$ and $B$ and a norm $|| \cdot ||$:
+                <ol style="padding-left: 20px; margin-top: 10px; line-height: 2;">
+                    <li>$||A|| \ge 0$. (Norms are non-negative)</li>
+                    <li>$||A|| = 0$ if and only if $A = 0$. (Only the zero matrix has a zero norm)</li>
+                    <li>$||kA|| = |k| ||A||$ where $k$ is a scalar. (Absolute scalability)</li>
+                    <li>$||A + B|| \le ||A|| + ||B||$. (The Triangle Inequality)</li>
+                    <li>$||AB|| \le ||A|| ||B||$. (Sub-multiplicativity, provided the matrix product $AB$ is defined)</li>
+                </ol>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial for a comprehensive breakdown of Vector and Matrix Norms, visually demonstrating how the 1-norm, 2-norm, and infinity-norms are calculated:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/y0AjJeeWoNM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this short and precise lesson explaining the mathematical properties associated with matrix norms (Theorem 11.2.1):</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/IBGZILhwjco" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on calculating Matrix Norms and understanding their properties.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What does a matrix norm $||A||$ physically or mathematically represent?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The determinant of the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) A non-negative real number measuring the "size" or "magnitude" of the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The trace of the matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> How is the 1-norm ($||A||_1$) of a given matrix formally defined?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It is the maximum of the absolute row sums.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It is the square root of the sum of squared elements.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) It is the maximum of the absolute column sums.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Let $B = \begin{pmatrix} -5 & 2 \\ 1 & 3 \end{pmatrix}$. What is its infinity norm ($||B||_\infty$)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $7$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $6$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $8$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Which of the following accurately describes the 2-norm (Euclidean/Frobenius norm) $||A||_2$ of a matrix?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The square root of the sum of all squared elements of the matrix.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The sum of the main diagonal elements.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The absolute value of the matrix determinant.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Calculate the 2-norm (Euclidean norm) of the matrix $C = \begin{pmatrix} 0 & -3 \\ 4 & 0 \end{pmatrix}$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $7$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $5$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $25$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Which mathematical property correctly represents the Triangle Inequality for matrix norms?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $||AB|| \le ||A|| ||B||$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $||A + B|| = ||A|| + ||B||$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $||A + B|| \le ||A|| + ||B||$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If $A$ is a matrix and $k$ is a scalar constant (for example, $k = -3$), what is the relationship describing $||kA||$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $||kA|| = k ||A||$ (so $-3 ||A||$)</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $||kA|| = |k| ||A||$ (so $3 ||A||$)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $||kA|| = k^2 ||A||$ (so $9 ||A||$)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> The Sub-multiplicativity property $||AB|| \le ||A|| ||B||$ is valid under what condition?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Provided that the matrix product $AB$ is mathematically defined.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Only if both $A$ and $B$ are diagonal matrices.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Only when $A$ and $B$ are square matrices of the exact same size.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-norms"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-norms");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

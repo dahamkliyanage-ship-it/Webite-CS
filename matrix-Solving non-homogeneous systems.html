@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solving Non-Homogeneous Systems</title>
+    <!-- Link to the external CSS file containing the provided styles -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Solving Non-Homogeneous Systems. Focus on classifying non-homogeneous systems of linear equations using the rank of the coefficient matrix A and the augmented matrix [A|b], including unique solutions, infinitely many solutions, and no solutions. Cover the definition of consistency, where a system is consistent if it has at least one solution and inconsistent if it has no solutions. Explain the rank conditions for general systems: rank(A) = rank([A|b]) = number of variables gives a unique solution, rank(A) = rank([A|b]) < number of variables gives infinitely many solutions, and rank(A) < rank([A|b]) gives no solution. Also cover the use of determinants for square systems, parameter-dependent systems, and identifying contradictions or zero rows when classifying solutions."> 
+
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Solving Non-Homogeneous Systems</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec8-2" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Non-Homogeneous Systems</a></li>
+                <li><a href="#def8-2-1">Definition(Consistency)</a></li>
+                <li><a href="#thm8-2-1">Theorem(General Systems)</a></li>
+                <li><a href="#examples">Worked Example</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec8-2" style="margin-bottom: 20px;">Solving non-homogeneous systems</h2>
+
+            <div class="blue-box">
+                <strong>Consider the non-homogeneous systems</strong>
+                <div class="math-center">
+                    $$ A_{n \times n}X_{n \times 1} = B_{n \times 1}. $$
+                </div>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li style="margin-bottom: 8px;">If $|A| \neq 0$ then the system has a unique solution. (i.e. $\text{Rank } A = \text{Rank}(A|B) = n$)</li>
+                    <li style="margin-bottom: 8px;">If $|A| = 0$ then the system has no solutions or infinitely many solutions.
+                        <ul style="padding-left: 20px; list-style-type: square; margin-top: 5px;">
+                            <li>If $\text{Rank } A < \text{Rank}(A|B)$ then the system has no solutions.</li>
+                            <li>If $\text{Rank } A = \text{Rank}(A|B) < n$ then the system has infinitely many solutions.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="yellow-box" id="def8-2-1">
+                <strong>Definition:</strong><br><br>
+                If the system $AX = B$ has at least one solution then we say it is <strong>consistent</strong>. Otherwise, it is <strong>inconsistent</strong>.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <div class="green-box" id="thm8-2-1">
+                <strong>Theorem:</strong> Consider the non-homogeneous systems
+                <div class="math-center">
+                    $$ A_{m \times n}X_{n \times 1} = B_{m \times 1}. $$
+                </div>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>If $\text{Rank } A = \text{Rank}(A|B) = n$ then the system has a unique solution.</li>
+                    <li>If $\text{Rank } A = \text{Rank}(A|B) < n$ then the system has infinitely many solutions.</li>
+                    <li>If $\text{Rank } A \neq \text{Rank}(A|B)$ then the system has no solutions.</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <div class="blue-box" id="examples">
+                <strong>Example 3.</strong> Show that the following system has a unique solution unless $a = 2$.
+                <div class="math-center" style="font-size: 1.1rem;">
+                    $x - y + 2z = -3$<br>
+                    $2x + 3y - 4z = 5$<br>
+                    $5x + az = b$.
+                </div>
+                
+                <em>Solution:</em><br>
+                Observe that
+                <div class="math-center">
+                    $$ \begin{pmatrix} 1 & -1 & 2 & \mid & -3 \\ 2 & 3 & -4 & \mid & 5 \\ 5 & 0 & a & \mid & b \end{pmatrix} \approx \begin{pmatrix} 1 & -1 & 2 & \mid & -3 \\ 0 & 1 & -8/5 & \mid & 11/5 \\ 0 & 0 & a-2 & \mid & b+4 \end{pmatrix}. $$
+                </div>
+                
+                If $a \neq 2$ then
+                <div class="math-center">
+                    $$ \begin{pmatrix} 1 & -1 & 2 & \mid & -3 \\ 0 & 1 & -8/5 & \mid & 11/5 \\ 0 & 0 & a-2 & \mid & b+4 \end{pmatrix} \approx \begin{pmatrix} 1 & -1 & 2 & \mid & -3 \\ 0 & 1 & -8/5 & \mid & 11/5 \\ 0 & 0 & 1 & \mid & \frac{b+4}{a-2} \end{pmatrix} $$
+                </div>
+                and $\text{Rank } A = \text{Rank}(A|B) = 3$.<br><br>
+                Therefore the system has a unique solution if $a \neq 2$.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video tutorial explaining how to classify systems with one, no, or infinitely many solutions:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/bq5gDsEdN3Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on solving non-homogeneous systems using ranks and determinants.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What does it mean for a non-homogeneous linear system $AX = B$ to be "consistent"?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It has exactly one unique solution only.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) It has at least one solution (either unique or infinitely many).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It has absolutely no solutions.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> For an $n \times n$ non-homogeneous system, what is mathematically guaranteed if the determinant $|A| \neq 0$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The system has a unique solution.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The system has infinitely many solutions.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The system is inconsistent.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If the rank of the coefficient matrix $A$ is strictly less than the rank of the augmented matrix $(A|B)$ ($\text{Rank } A < \text{Rank}(A|B)$), what is the nature of the solutions?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Unique solution</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Infinitely many solutions</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) No solutions (the system is inconsistent)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Under what specific condition does a system of $n$ variables possess infinitely many solutions?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) When $\text{Rank } A = \text{Rank}(A|B) = n$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) When $\text{Rank } A = \text{Rank}(A|B) < n$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) When $\text{Rank } A \neq \text{Rank}(A|B)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Which of the following defines an "inconsistent" system?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) A system with zero solutions.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A system with infinitely many solutions.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) A system where $\text{Rank } A = \text{Rank}(A|B) = n$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> In Example 3, consider the final reduced matrix. What happens if the parameters are $a = 2$ and $b = -4$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The system has a unique solution.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The system has no solutions.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The system has infinitely many solutions because the last row becomes all zeros ($0=0$).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> Still referring to Example 3, what happens if the parameters are $a = 2$ but $b = 0$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The system has a unique solution.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The system has no solutions because the last row implies $0 = 4$, which is impossible.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The system has infinitely many solutions.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> For an $n \times n$ system, if it is known that $|A| = 0$, what can be conclusively said about the system?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It definitely has infinitely many solutions.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It definitely has no solutions.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) It has either no solutions or infinitely many solutions, but never a unique solution.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-nonhomogeneous"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-nonhomogeneous");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

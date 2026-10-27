@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eigenvalues and Eigenvectors of Special Matrices</title>
+    <!-- Referencing external CSS to keep this strictly HTML -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <meta name="bot-context" content="Topic: Mathematics : Eigenvalues and Eigenvectors of Special Matrices. Focus on the properties of eigenvalues and eigenvectors for special matrices, particularly real symmetric and upper triangular matrices. Cover the theorem that real symmetric matrices have only real eigenvalues and that eigenvectors corresponding to distinct eigenvalues are mutually orthogonal. Explain that the eigenvalues of an upper triangular matrix are exactly its main diagonal entries. Cover the definition of the trace of a square matrix as the sum of its main diagonal entries and the theorem that the trace equals the sum of all eigenvalues, including cases where eigenvalues may be real or complex. Include using trace as a shortcut for checking calculated eigenvalues and solving for an unknown eigenvalue when the trace and other eigenvalues are known.">
+    <link rel="stylesheet" href="chatbot_style.css"> 
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Eigenvalues & Eigenvectors of Special Matrices</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec10-3" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Special Matrices</a></li>
+                <li><a href="#thm10-3-1">Theorem(Symmetric)</a></li>
+                <li><a href="#thm10-3-2">Theorem(Triangular)</a></li>
+                <li><a href="#def10-3-1">Definition(Trace)</a></li>
+                <li><a href="#thm10-3-3">Theorem(Trace & Eigenvalues)</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec10-3" style="margin-bottom: 20px;">Eigenvalues and Eigenvectors of Special Matrices</h2>
+
+            <div class="green-box" id="thm10-3-1">
+                <strong>Theorem:</strong> Suppose $A$ is an $n \times n$ real symmetric matrix. Then the following hold:<br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>(i). The eigenvalues of $A$ are all real numbers.</li>
+                    <li>(ii). The eigenvectors of $A$ corresponding to distinct eigenvalues are mutually orthogonal.</li>
+                </ul>
+                <br>
+                <em>Proof.</em> Omit.
+                <br><br>
+                <strong>Detail & Example:</strong> Real symmetric matrices ($A = A^T$) guarantee that we won't end up with complex eigenvalues. Furthermore, if you calculate the eigenvectors for different eigenvalues, their dot product will always be exactly zero.
+            </div>
+
+            <div class="blue-box" id="thm10-3-2">
+                <strong>Theorem:</strong> Suppose $A$ is an upper triangular matrix. Then the eigenvalues of $A$ are the diagonal entries of $A$.
+                <br><br>
+                <em>Proof.</em> Omit.
+                <br><br>
+                <strong>Worked Example:</strong> Consider the upper triangular matrix $A$:
+                <div class="math-center">
+                    $$ A = \begin{pmatrix} 4 & 7 & -2 \\ 0 & 1 & 5 \\ 0 & 0 & -3 \end{pmatrix} $$
+                </div>
+                Because all entries below the main diagonal are zero, you do not need to solve the characteristic polynomial $(4-\lambda)(1-\lambda)(-3-\lambda) = 0$. You can immediately state the eigenvalues by looking at the main diagonal:
+                <div class="math-center">
+                    $$ \lambda_1 = 4, \quad \lambda_2 = 1, \quad \lambda_3 = -3 $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <div class="green-box" id="def10-3-1">
+                <strong>Definition:</strong> Suppose $A$ is a square matrix. The <strong>trace</strong> of $A$ is the sum of its diagonal entries, which is denoted by $\text{trace}(A)$ or $\text{Tr}(A)$. That is 
+                <div class="math-center">
+                    $$ \text{trace}(A) = \sum_{i=1}^{n} a_{ii} \quad \text{where } A = (a_{ij}). $$
+                </div>
+            </div>
+
+            <div class="yellow-box" id="thm10-3-3">
+                <strong>Theorem:</strong> If $\lambda_1, \cdots, \lambda_n$ are the eigenvalues of $A = (a_{ij})$ then 
+                <div class="math-center">
+                    $$ \text{trace}(A) = \lambda_1 + \cdots + \lambda_n. $$
+                </div>
+                <em>Proof.</em> Omit.<br><br>
+                <strong>Remark.</strong> In above theorem, the eigenvalues can be either real or complex.<br><br>
+
+                <strong>Worked Example: Verifying the Trace Theorem</strong><br>
+                Let $A = \begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$.<br><br>
+                <strong>Step 1: Compute the trace of $A$.</strong><br>
+                Summing the main diagonal entries: $\text{trace}(A) = 2 + 2 = 4$.
+                <br><br>
+                <strong>Step 2: Find the eigenvalues.</strong><br>
+                The characteristic equation is $\det(A - \lambda I) = (2-\lambda)(2-\lambda) - (-1)(-1) = \lambda^2 - 4\lambda + 3 = 0$.<br>
+                Factoring this gives $(\lambda - 3)(\lambda - 1) = 0$. The eigenvalues are $\lambda_1 = 3$ and $\lambda_2 = 1$.
+                <br><br>
+                <strong>Step 3: Sum the eigenvalues.</strong><br>
+                Sum of eigenvalues $= 3 + 1 = 4$. <br>
+                This perfectly matches the trace of the matrix, confirming Theorem 10.3.3. This is an extremely useful shortcut to verify if your calculated eigenvalues are correct!
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this focused breakdown on how the trace and determinant relate to eigenvalues, providing essential problem-solving techniques for linear algebra applications:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/tIRRIlYbo8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the properties of Special Matrices, Trace, and Eigenvalues.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> If $A$ is a real symmetric matrix, what mathematical guarantee do we have regarding its eigenvalues?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) They are all real numbers.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They are all complex numbers.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) They are all equal to zero.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> For a real symmetric matrix, what is the geometric relationship between eigenvectors that correspond to distinct (different) eigenvalues?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) They are perfectly parallel to each other.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They are linearly dependent.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) They are mutually orthogonal (perpendicular).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> How can you quickly determine the eigenvalues of an upper triangular matrix without solving the characteristic polynomial?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) By summing the elements of the first row.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) They are simply the entries on the main diagonal.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) By multiplying all the entries of the matrix together.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> What are the eigenvalues of the upper triangular matrix $A = \begin{pmatrix} 2 & 8 & -1 \\ 0 & 5 & 3 \\ 0 & 0 & -4 \end{pmatrix}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $8, -1, 3$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $0, 0, 0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $2, 5, -4$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> How is the "trace" of a square matrix mathematically defined?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The product of its diagonal entries.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The sum of its main diagonal entries.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The determinant of the matrix.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Find the trace of the matrix $A = \begin{pmatrix} 3 & -2 & 1 \\ 4 & 0 & 5 \\ 1 & -1 & -6 \end{pmatrix}$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $-3$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $7$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> According to Theorem 10.3.3, what is the crucial relationship between the trace of a matrix and its eigenvalues?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The trace equals the product of all the eigenvalues.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The trace is exactly equal to the sum of all the eigenvalues.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The trace equals the largest eigenvalue.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> A $3 \times 3$ matrix has a trace equal to $6$. If two of its eigenvalues are $\lambda_1 = 4$ and $\lambda_2 = -1$, what must the third eigenvalue ($\lambda_3$) be?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $6$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $-3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $3$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "matrices-special"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "matrices-special");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

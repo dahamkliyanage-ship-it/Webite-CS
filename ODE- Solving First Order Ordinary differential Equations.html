@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solving First Order Ordinary Differential Equations</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Solving First Order Ordinary Differential Equations. Focus on the methods for solving first-order ODEs, including separable equations, exponential integrals, homogeneous equations, and the method of solving. Cover the definition of separable ODEs, the process of separating variables and integrating both sides, the definition and evaluation of the exponential integral function Ei(x), the conditions for homogeneous equations, the substitution method using y = vx, and worked examples illustrating these techniques. Include exercises for practice and a video tutorial for visual learning."> 
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Solving First Order Ordinary Differential Equations</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec2-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Separable Equations</a></li>
+                <li><a href="#def2-1">Exponential Integral</a></li>
+                <li><a href="#example2-1">Example</a></li>
+                <li><a href="#sec2-2">Homogeneous Equations</a></li>
+                <li><a href="#method-solving">Method of Solving</a></li>
+                <li><a href="#example-homo">Homogeneous Example</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec2-1" style="margin-bottom: 20px;">Separable Equations</h2>
+
+            <div class="blue-box">
+                <strong>Separable ODEs</strong><br><br>
+                An ODE is said to be separable if the parts that depend on $x$ and $y$ can be separated into different sides of the equation. This makes it possible to integrate both sides separately.
+                <br><br>
+                An equation is separable if it can be written as:
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = f(x)g(y), $$
+                </div>
+                for some function $f(x)$ that only depends on $x$ but not on $y$, and some function $g(y)$ that only depends on $y$ and not on $x$. If we multiply through by $dx$ and divide by $g(y)$, the equation becomes:
+                <div class="math-center">
+                    $$ \frac{dy}{g(y)} = f(x)dx. $$
+                </div>
+                So we may integrate:
+                <div class="math-center">
+                    $$ \int \frac{dy}{g(y)} = \int f(x)dx. $$
+                </div>
+            </div>
+
+            <div class="green-box" id="def2-1">
+                <strong>Definition:</strong><br><br>
+                For real non-zero values of $x$, the <em>exponential integral</em> $Ei(x)$ is defined as:
+                <div class="math-center">
+                    $$ Ei(x) = -\int_{-x}^{\infty} \frac{e^{-t}}{t} dt $$
+                </div>
+                <em>Detail:</em> The exponential integral is a special function that frequently arises in physics and engineering applications when solving certain separable differential equations that cannot be evaluated using elementary functions.
+            </div>
+
+            <div class="yellow-box" id="example2-1">
+                <strong>Example 2.1</strong><br><br>
+                Find and illustrate the one-parameter family of solutions for the ODE:
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = -\frac{x}{y} $$
+                </div>
+                <strong>Detailed Solution:</strong><br>
+                1. <em>Separate variables:</em> Multiply both sides by $y$ and $dx$ to get $x$ and $y$ on opposite sides.
+                <div class="math-center">
+                    $$ y \, dy = -x \, dx $$
+                </div>
+                2. <em>Integrate both sides:</em>
+                <div class="math-center">
+                    $$ \int y \, dy = -\int x \, dx $$
+                    $$ \frac{y^2}{2} = -\frac{x^2}{2} + C $$
+                </div>
+                3. <em>Simplify:</em> Multiply by 2 and rearrange.
+                <div class="math-center">
+                    $$ x^2 + y^2 = 2C $$
+                </div>
+                If we let $2C = R^2$, the solution is $x^2 + y^2 = R^2$, which represents a one-parameter family of concentric circles centered at the origin.
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h2 id="sec2-2" style="margin-bottom: 20px;">Homogeneous Equation</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong><br><br>
+                Suppose 
+                <div class="math-center">
+                    $$ \frac{dy}{dx} = f(x, y). $$
+                </div>
+                $f(x, y)$ is said to be <strong>homogeneous</strong> if 
+                <div class="math-center">
+                    $$ f(\lambda x, \lambda y) = f(x, y) $$
+                </div>
+                for every non-zero real value $\lambda$.
+            </div>
+
+            <div class="green-box" id="method-solving">
+                <strong>Method of Solving</strong><br><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>Determine whether the equation is homogeneous or not by applying the test $f(\lambda x, \lambda y) = f(x, y)$.</li>
+                    <li>Use the substitution $y = vx$ and therefore its derivative $\frac{dy}{dx} = v + x\frac{dv}{dx}$ in the original differential equation.</li>
+                    <li>Separate the variables $x$ and $v$. (The substitution guarantees the equation will become separable).</li>
+                    <li>Integrate both sides.</li>
+                    <li>Substitute $v = \frac{y}{x}$ back into the equation to get the general solution.</li>
+                    <li>Use initial conditions (if given) to find the specific constant values.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box" id="example-homo">
+                <strong>Worked Example: Solving a Homogeneous ODE</strong><br><br>
+                Solve the differential equation: $\frac{dy}{dx} = \frac{x^2 + y^2}{xy}$
+                <br><br>
+                <strong>Step 1: Check if homogeneous.</strong><br>
+                $f(\lambda x, \lambda y) = \frac{(\lambda x)^2 + (\lambda y)^2}{(\lambda x)(\lambda y)} = \frac{\lambda^2(x^2 + y^2)}{\lambda^2(xy)} = \frac{x^2 + y^2}{xy} = f(x,y)$. It is homogeneous.
+                <br><br>
+                <strong>Step 2: Substitute $y = vx$ and $y' = v + xv'$.</strong><br>
+                <div class="math-center">
+                    $$ v + x\frac{dv}{dx} = \frac{x^2 + (vx)^2}{x(vx)} = \frac{x^2(1 + v^2)}{x^2v} = \frac{1 + v^2}{v} = \frac{1}{v} + v $$
+                </div>
+                <strong>Step 3: Separate variables $x$ and $v$.</strong><br>
+                Subtract $v$ from both sides:
+                <div class="math-center">
+                    $$ x\frac{dv}{dx} = \frac{1}{v} $$
+                    $$ v \, dv = \frac{1}{x} dx $$
+                </div>
+                <strong>Step 4: Integrate both sides.</strong><br>
+                <div class="math-center">
+                    $$ \int v \, dv = \int \frac{1}{x} dx $$
+                    $$ \frac{v^2}{2} = \ln|x| + C $$
+                </div>
+                <strong>Step 5: Substitute back $v = y/x$.</strong><br>
+                <div class="math-center">
+                    $$ \frac{(y/x)^2}{2} = \ln|x| + C \implies y^2 = 2x^2(\ln|x| + C) $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this tutorial for a basic introduction to solving separable first-order differential equations, including finding general and particular solutions:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/C7nuJcJriWM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on classifying and solving Separable and Homogeneous ODEs.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> How is a separable differential equation mathematically identified according to the text?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It can be written as $\frac{dy}{dx} = f(x) + g(y)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) It can be written as $\frac{dy}{dx} = f(x)g(y)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It only contains powers of $x$ and $y$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Once variables are separated in the equation $\frac{dy}{dx} = f(x)g(y)$, what does the correctly arranged integral equation look like?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\int g(y) \, dy = \int f(x) \, dx$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\int f(x)g(y) \, dx = \int 1 \, dy$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\int \frac{dy}{g(y)} = \int f(x) \, dx$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Based on the definition, how is the Exponential Integral $Ei(x)$ evaluated?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $-\int_{-x}^{\infty} \frac{e^{-t}}{t} dt$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\int_{0}^{x} e^{-t^2} dt$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\int_{-x}^{\infty} e^{-t} \ln(t) dt$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> What specific test confirms that a function $f(x, y)$ is homogeneous?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $f(\lambda x, \lambda y) = \lambda f(x, y)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $f(\lambda x, \lambda y) = f(x, y)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $f(x, y) = f(y, x)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> When solving a homogeneous equation, what is the standard substitution used to make the equation separable?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $x = vy^2$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $y = \frac{v}{x}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $y = vx$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Following the substitution $y = vx$, what does the derivative $\frac{dy}{dx}$ correctly expand to using the product rule?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{dv}{dx} + x$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $v + x\frac{dv}{dx}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $x + v\frac{dx}{dv}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> In Example 2.1 ($\frac{dy}{dx} = -\frac{x}{y}$), what geometric shape does the resulting one-parameter family of solutions $x^2 + y^2 = R^2$ represent?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) A family of concentric circles centered at the origin.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A family of parallel parabolas.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) A family of straight lines passing through the origin.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> In the final step of solving a homogeneous equation, what must be substituted back in place of $v$ to obtain the general solution in terms of $x$ and $y$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $v = \frac{x}{y}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $v = \frac{y}{x}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $v = xy$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "ode-firstorder"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "ode-firstorder");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>
