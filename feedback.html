@@ -373,15 +373,16 @@
             submitBtn.textContent = "Submitting...";
 
             try {
-                // Save the feedback inside the user's private folder so security rules allow it
-                const feedbackCollectionRef = collection(db, "users", currentUser.uid, "feedbacks");
+                // NEW: Save the feedback to a central GlobalFeedback folder instead of inside the user
+                const feedbackCollectionRef = collection(db, "GlobalFeedback");
                 
                 await addDoc(feedbackCollectionRef, {
                     type: type,
                     message: message,
                     timestamp: serverTimestamp(),
                     userEmail: currentUser.email,
-                    userName: currentUser.displayName || "Unknown"
+                    userName: currentUser.displayName || "Unknown",
+                    userId: currentUser.uid
                 });
 
                 feedbackForm.reset();
