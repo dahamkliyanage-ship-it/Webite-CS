@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vectors-Introduction</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta name="bot-context" content="Topic: Mathematics : Vectors. Focus on the definition and geometric representation of vectors, magnitude and direction, the distinction between scalars and vectors, equality of vectors, scalar multiplication, unit vectors, vector addition using the triangle law, vectors in a plane, Cartesian components, position vectors, and calculating vector magnitudes using Pythagoras' theorem.">
+    
+
+    <link rel="stylesheet" href="chatbot_style.css">
+
+    <!-- Aluthen add karapu Progress Button eka saha Success message eka sadaha CSS Styles -->
+    <style>
+        .progress-action-container {
+            margin: 50px 0 30px 0;
+            padding: 25px;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .complete-btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .complete-btn:hover {
+            background-color: #0ea5e9;
+            transform: translateY(-2px);
+        }
+
+        #progress-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Introduction</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec1">Vectors</a></li>
+                <li><a href="#sec1-1">Graphical Representation</a></li>
+                <li><a href="#sec1-2">Scalar Multiplication</a></li>
+                <li><a href="#sec1-3">Vectors in a Plane</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h1 id="sec1">Vectors</h1>
+
+            <h2 id="sec1-1">Graphical Representation</h2>
+            
+            <p>In applied mathematics and engineering mechanics, distinguishing between scalars and vectors is essential. A scalar (like mass, temperature, or time) only has a size. A vector must have both a size and a specific direction.</p>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> A <em>vector</em> is a quantity having both magnitude and direction. It is represented by an arrow, the direction of which indicates the direction of the vector and the length of which is the magnitude.
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 250 80" style="max-width: 100%; height: auto; max-width: 300px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker  id="arrow1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
+                        </marker>
+                    </defs>
+                    <text x="20" y="45" font-family="serif" font-style="italic" font-weight="bold" font-size="18">A</text>
+                    <line x1="45" y1="40" x2="110" y2="33" stroke="#333" stroke-width="1.5" marker-end="url(#arrow1)" />
+                    <line x1="110" y1="33" x2="180" y2="25" stroke="#333" stroke-width="1.5" />
+                    <text x="190" y="30" font-family="serif" font-style="italic" font-weight="bold" font-size="18">B</text>
+                </svg>
+                <br>
+                <span>Figure 1:</span>
+            </div>
+
+            <p>The vector \(AB\) has,</p>
+            <ul>
+                <li>a <em>magnitude</em> – length of \(AB\) and</li>
+                <li>a <em>direction</em> – given by the arrow</li>
+            </ul>
+
+            <p>Geometrically a vector is represented by a directed line segment such as \(\vec{AB}\) where the magnitude of the vector is the length of the line segment and the direction of the vector is shown by an arrow sign.</p>
+
+            <p><strong>Practical Example:</strong> Think of a car moving at 50 km/h towards the East. The speed (50 km/h) is the <em>magnitude</em>, and "East" is the <em>direction</em>. If you only say "50 km/h", that is just a scalar (speed). Saying "50 km/h East" makes it a vector (velocity).</p>
+
+            <div class="yellow-box">
+                <strong>Note.</strong> Notations such as \(\vec{PQ}\) or \(\underline{a}\) are used for a vector and the magnitude of the vector is denoted by \(|\vec{PQ}|\) or \(|\underline{a}|\).
+            </div>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Two vectors are <strong>equal</strong> if they have the same length and are parallel having the same direction.
+            </div>
+
+            <p><em>Tip:</em> Two vectors can be equal even if they start at different points. For instance, two parallel train tracks pointing North with trains moving at the exact same speed represent equal vectors.</p>
+
+            <br>
+
+            <h2 id="sec1-2">Scalar Multiplication and Addition of vectors</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Let \(\underline{a}\) be a vector and \(\lambda\) be a positive real number. Then the vector whose magnitude is \(\lambda|\underline{a}|\) and the direction is the same as that of \(\underline{a}\) is called a <strong>scalar multiple</strong> of \(\underline{a}\) and is denoted by \(\lambda\underline{a}\).
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 200 150" style="max-width: 100%; height: auto; max-width: 250px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
+                        </marker>
+                    </defs>
+                    <line x1="40" y1="120" x2="70" y2="80" stroke="#333" stroke-width="1.5" marker-end="url(#arrow2)"/>
+                    <line x1="70" y1="80" x2="100" y2="40" stroke="#333" stroke-width="1.5" />
+                    <text x="50" y="70" font-family="serif" font-style="italic" font-weight="bold" font-size="16" text-decoration="underline">a</text>
+                    <line x1="90" y1="140" x2="135" y2="80" stroke="#333" stroke-width="1.5" marker-end="url(#arrow2)"/>
+                    <line x1="135" y1="80" x2="180" y2="20" stroke="#333" stroke-width="1.5" />
+                    <text x="135" y="90" font-family="serif" font-style="italic" font-weight="bold" font-size="16">λ<tspan text-decoration="underline">a</tspan></text>
+                </svg>
+                <br>
+                <span>Figure 2:</span>
+            </div>
+            
+            <p><strong>Example of Scalar Multiplication:</strong> If \(\underline{a}\) represents a structural force of 10 Newtons acting downwards on an elastic beam, then \(3\underline{a}\) represents a force of 30 Newtons acting in that exact same downward direction. The magnitude is tripled, but the line of action stays the same.</p>
+
+            <div class="blue-box">
+                <strong>Definition(Unit Vector):</strong> A <strong>unit vector</strong> is a vector with a magnitude is 1 unit.<br><br>
+                The unit vector along the vector \(\underline{a}\) is given by \(\frac{\underline{a}}{|\underline{a}|}\).<br><br>
+                Similarly, \(\frac{\vec{PQ}}{|\vec{PQ}|}\) represents a unit vector along the vector \(\vec{PQ}\).
+            </div>
+
+            <p>Unit vectors are incredibly useful because they isolate the <em>direction</em> of a vector without interfering with the magnitude when used in calculations.</p>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Suppose \(\underline{a}\) and \(\underline{b}\) are two vectors represented by \(\vec{OA}\) and \(\vec{AB}\) respectively. Then the vector \(\vec{OB}\) is called the sum of \(\vec{OA}\) and \(\vec{AB}\).
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 250 150" style="max-width: 100%; height: auto; max-width: 300px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow3" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
+                        </marker>
+                    </defs>
+                    <line x1="40" y1="110" x2="120" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow3)"/>
+                    <line x1="120" y1="95" x2="200" y2="80" stroke="#333" stroke-width="1.5" />
+                    <line x1="200" y1="80" x2="160" y2="55" stroke="#333" stroke-width="1.5" marker-end="url(#arrow3)"/>
+                    <line x1="160" y1="55" x2="120" y2="30" stroke="#333" stroke-width="1.5" />
+                    <line x1="40" y1="110" x2="80" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#arrow3)"/>
+                    <line x1="80" y1="70" x2="120" y2="30" stroke="#333" stroke-width="1.5" />
+                    <text x="20" y="125" font-family="serif" font-style="italic" font-weight="bold" font-size="16">O</text>
+                    <text x="210" y="90" font-family="serif" font-style="italic" font-weight="bold" font-size="16">A</text>
+                    <text x="115" y="20" font-family="serif" font-style="italic" font-weight="bold" font-size="16">B</text>
+                </svg>
+                <br>
+                <span>Figure 3:</span>
+            </div>
+
+            <p>This is called the <strong>triangle law</strong>.</p>
+            
+            <div class="math-center">
+                \(\vec{OB} = \vec{OA} + \vec{AB} = \underline{a} + \underline{b}\)
+            </div>
+
+            <p><strong>Example of Addition:</strong> Imagine a particle's displacement. If you walk from point O to point A, and then from point A to point B, your net displacement (your final distance and direction from where you started) is exactly the same as if you had walked straight from O to B.</p>
+
+            <br>
+
+            <h2 id="sec1-3">Vectors in a Plane</h2>
+            
+            <p>Consider the \(XY\) plane. \(\underline{i}\) and \(\underline{j}\) are the unit vectors along the directions \(OX\) (horizontal) and \(OY\) (vertical) respectively. These form the fundamental building blocks of coordinate geometry.</p>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> If \(P = (a_1, a_2)\) then \(\vec{OP} = a_1\underline{i} + a_2\underline{j}\) and \(\vec{OP}\) is called the <strong>position vector</strong> of \(P\) with respect to the origin \(O\). \(a_1\) and \(a_2\) are the <strong>components</strong> of \(\vec{OP}\). (See figure 4.)
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 320 220" style="max-width: 100%; height: auto; max-width: 400px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#555" />
+                        </marker>
+                        <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                        <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                    </defs>
+                    <line x1="40" y1="180" x2="280" y2="180" stroke="#555" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    <line x1="80" y1="200" x2="80" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    <text x="60" y="195" font-family="serif" font-size="16">0</text>
+                    <text x="280" y="195" font-family="serif" font-style="italic" font-size="16">x</text>
+                    <text x="60" y="45" font-family="serif" font-style="italic" font-size="16">y</text>
+                    <line x1="80" y1="180" x2="200" y2="180" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-cyan)" />
+                    <line x1="200" y1="180" x2="200" y2="70" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-cyan)" />
+                    <line x1="80" y1="180" x2="200" y2="70" stroke="#e81c8f" stroke-width="2.5" marker-end="url(#arrow-pink)" />
+                    <circle cx="200" cy="70" r="4" fill="black" />
+                    <text x="195" y="55" font-family="sans-serif" font-weight="bold" font-size="15">P</text>
+                    <text x="210" y="75" font-family="serif" font-size="15">(a₁, a₂)</text>
+                    <text x="125" y="115" font-family="serif" font-weight="bold" fill="black" font-size="18">a</text>
+                    <text x="135" y="200" font-family="serif" font-weight="bold" fill="black" font-size="16">a₁i</text>
+                    <text x="210" y="130" font-family="serif" font-weight="bold" fill="black" font-size="16">a₂j</text>
+                </svg>
+                <br>
+                <span>Figure 4:</span>
+            </div>
+
+            <p><strong>Applying the Concept:</strong> If a point \(P\) has coordinates \((3, 4)\), its position vector is \(\vec{OP} = 3\underline{i} + 4\underline{j}\). This simply means you move 3 units horizontally along the x-axis and 4 units vertically along the y-axis to reach point \(P\).</p>
+            <p>We can easily calculate the exact length (magnitude) of this vector using Pythagoras' theorem:</p>
+            <div class="math-center">
+                \(|\vec{OP}| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\) units.
+            </div>
+
+            <div class="video-section">
+                <p>Watch the video below to get a better understanding of this:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/fNk_zzaMoSs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Aluthen add karapu Mark as Completed Section -->
+            <div class="progress-action-container">
+                <button id="complete-btn" class="complete-btn">Mark as Completed</button>
+                <div id="progress-msg"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Firebase Database Progress Saving Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        // Oyage Firebase config eka methanata danna
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const completeBtn = document.getElementById("complete-btn");
+        const progressMsg = document.getElementById("progress-msg");
+
+        let currentUser = null;
+
+        // Track user login state
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+            } else {
+                currentUser = null;
+            }
+        });
+
+        // When user clicks "Mark as Completed"
+        completeBtn.addEventListener("click", async () => {
+            if (!currentUser) {
+                alert("Please log in first to save your progress!");
+                return;
+            }
+
+            try {
+                // "vectors" module eka complete kala kiyala database eke save kirima
+                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors");
+                await setDoc(userRef, {
+                    completed: true,
+                    completedAt: new Date()
+                }, { merge: true });
+
+                progressMsg.textContent = "🎉 Progress Saved Successfully!";
+                progressMsg.style.color = "#4ade80"; // Green success message
+            } catch (error) {
+                console.error("Error saving progress: ", error);
+                progressMsg.textContent = "❌ Failed to save progress. Try again.";
+                progressMsg.style.color = "#f43f5e"; // Red error message
+            }
+        });
+    </script>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+
+</body>
+</html>

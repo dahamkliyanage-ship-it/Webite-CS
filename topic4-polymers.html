@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers the physiochemical degradation mechanisms of polymers, including chain scission, swelling, and dissolution, alongside the exceptional corrosion and thermal resistance of stable ceramics.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 04 - Degradation | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter8-timeline.html" class="back-link">&larr; Back to Chapter 08 Timeline</a>
+        <div class="topic-label">Topic 04</div>
+        <h1>Degradation of Polymers & Ceramics</h1>
+        <div class="content-section">
+            <h3>Polymer Degradation</h3>
+            <p>Unlike metal corrosion (which is strictly electrochemical), polymer degradation is <strong>physiochemical</strong> in nature. It is a change in the physical or chemical structure of the polymer chain under the influence of environmental factors (heat, UV light, chemicals, mechanical stress).</p>
+            <p>The susceptibility of a polymer depends heavily on its structure. For example, chains containing aromatic rings are highly susceptible to UV degradation, while hydrocarbon-based polymers are highly susceptible to thermal degradation.</p>
+
+            <h3>Mechanisms of Polymer Failure</h3>
+            <ul>
+                <li><strong>Chain Scission:</strong> Environmental factors cause the primary molecular bonds to rupture. This severs the chains, leading directly to a massive decrease in the molecular weight and strength of the polymer.</li>
+                <li><strong>Swelling:</strong> When exposed to liquids, the liquid diffuses and absorbs into the polymer. The macromolecules are forced apart (the specimen expands). This increase in separation drastically reduces the secondary intermolecular bonding forces, causing the material to become weak and soft.</li>
+                <li><strong>Dissolution:</strong> This is simply the continuation of severe swelling until the polymer becomes completely soluble and breaks apart.</li>
+            </ul>
+            <p><em>Note: While degradation is undesirable during use, it becomes highly desirable after use in the form of Biodegradation.</em></p>
+
+            <h3>Corrosion of Ceramics</h3>
+            <p>In contrast to metals and polymers, ceramic materials are exceptionally resistant to corrosion. Because their primary atomic bonds are already fully stable, they do not easily react with external environments. This extreme resilience is why glass is ubiquitously used to contain harsh liquids, and refractory ceramics are used to withstand incredibly high temperatures and provide thermal insulation.</p>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on the degradation of non-metals.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Unlike metal corrosion, polymer degradation is primarily what type of process?</div>
+                <div class="option-box" data-correct="false">A) Strictly electrochemical</div>
+                <div class="option-box" data-correct="true">B) Physiochemical</div>
+                <div class="option-box" data-correct="false">C) Strictly radioactive</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What happens to a polymer during "Chain Scission"?</div>
+                <div class="option-box" data-correct="false">A) It hardens into a rigid ceramic</div>
+                <div class="option-box" data-correct="false">B) The molecular weight increases infinitely</div>
+                <div class="option-box" data-correct="true">C) Primary bonds rupture, causing a sharp decrease in molecular weight and strength</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. How does "Swelling" physically weaken a polymer?</div>
+                <div class="option-box" data-correct="true">A) Absorbed liquid forces macromolecules apart, reducing secondary intermolecular bonds</div>
+                <div class="option-box" data-correct="false">B) The liquid creates a galvanic cell inside the plastic</div>
+                <div class="option-box" data-correct="false">C) It causes the polymer to undergo a martensitic phase transformation</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Which type of polymer structure is notably susceptible to ultraviolet (UV) photo-degradation?</div>
+                <div class="option-box" data-correct="false">A) High-density polyethylene</div>
+                <div class="option-box" data-correct="true">B) Chains containing aromatic rings</div>
+                <div class="option-box" data-correct="false">C) Pure hydrocarbon chains</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. Why are ceramics (like glass) frequently utilized in environments with harsh chemicals?</div>
+                <div class="option-box" data-correct="false">A) They naturally act as sacrificial anodes</div>
+                <div class="option-box" data-correct="false">B) They easily swell to absorb the chemicals harmlessly</div>
+                <div class="option-box" data-correct="true">C) They are exceptionally resistant to corrosion and thermal degradation</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains fundamental atomic structure, the properties of subatomic particles (protons, neutrons, electrons), and Bohr's theory of electron energy levels.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 01 - Subatomic Particles | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="chapter2-timeline.html" class="back-link">&larr; Back to Chapter 02 Timeline</a>
+
+        <div class="topic-label">Topic 01</div>
+        <h1>Subatomic Particles & Bohr Theory</h1>
+
+        <div class="content-section">
+            <p>An atom is the smallest portion of matter, consisting of a dense central nucleus surrounded by revolving electrons in an orbital. The nucleus contains protons and neutrons.</p>
+            
+            <img src="atom.jpg" alt="Model of an atom showing the nucleus and revolving electrons" class="content-image small">
+
+            <table class="data-table">
+                <tr>
+                    <th>Particle</th>
+                    <th>Mass (kg)</th>
+                    <th>Charge (C)</th>
+                </tr>
+                <tr>
+                    <td>Proton</td>
+                    <td>1.67 &times; 10<sup>-27</sup></td>
+                    <td>+1.6 &times; 10<sup>-19</sup></td>
+                </tr>
+                <tr>
+                    <td>Neutron</td>
+                    <td>1.67 &times; 10<sup>-27</sup></td>
+                    <td>Neutral</td>
+                </tr>
+                <tr>
+                    <td>Electron</td>
+                    <td>9.11 &times; 10<sup>-31</sup></td>
+                    <td>-1.6 &times; 10<sup>-19</sup></td>
+                </tr>
+            </table>
+
+            <p>The <strong>atomic number</strong> of an element is defined strictly by its number of protons. Atomic mass is measured in unified atomic mass units (u).</p>
+
+            <h3>The Bohr Theory</h3>
+            <p>Niels Bohr proposed a foundational model for atomic structure based on specific postulations:</p>
+            <ul>
+                <li>Electrons are restricted to specific "energy levels" or "stationary states," meaning they can only possess distinct energy values.</li>
+                <li>Electrons rotate around the nucleus in these fixed orbits without radiating or absorbing any energy.</li>
+                <li>When an electron receives energy, it jumps from a lower energy level to a higher one.</li>
+                <li>The emission of radiant energy (electromagnetic radiation) occurs only when an electron drops from a higher energy level back to a lower energy level.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/fm2C0ovz-3M" 
+        title="Subatomic Particles and Bohr Theory Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Subatomic Particles & Bohr Theory.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What is the mass of a neutron?</div>
+                <div class="option-box" data-correct="false">A) 9.11 &times; 10<sup>-31</sup> kg</div>
+                <div class="option-box" data-correct="true">B) 1.67 &times; 10<sup>-27</sup> kg</div>
+                <div class="option-box" data-correct="false">C) 1.6 &times; 10<sup>-19</sup> kg</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which subatomic particle determines the atomic number of an element?</div>
+                <div class="option-box" data-correct="false">A) Electron</div>
+                <div class="option-box" data-correct="false">B) Neutron</div>
+                <div class="option-box" data-correct="true">C) Proton</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. According to the Bohr Theory, what causes an atom to emit electromagnetic radiation?</div>
+                <div class="option-box" data-correct="false">A) An electron absorbing energy while in a fixed orbit</div>
+                <div class="option-box" data-correct="true">B) An electron moving from a higher energy level to a lower energy level</div>
+                <div class="option-box" data-correct="false">C) A proton being ejected from the nucleus</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What is the electrical charge of an electron?</div>
+                <div class="option-box" data-correct="true">A) -1.6 &times; 10<sup>-19</sup> C</div>
+                <div class="option-box" data-correct="false">B) Neutral</div>
+                <div class="option-box" data-correct="false">C) +1.6 &times; 10<sup>-19</sup> C</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            questionBlocks.forEach(block => {
+                const options = block.querySelectorAll('.option-box');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="materials_chatbot.js"></script>
+
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

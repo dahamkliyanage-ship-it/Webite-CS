@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers the periodic table's organization into periods and groups, detailing the characteristics of light metals, transition metals, non-metals, and noble gases.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 03 - The Periodic Table | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="chapter2-timeline.html" class="back-link">&larr; Back to Chapter 02 Timeline</a>
+
+        <div class="topic-label">Topic 03</div>
+        <h1>The Periodic Table</h1>
+
+        <div class="content-section">
+            <p>The periodic table organizes elements sequentially by atomic number. Horizontal rows are called periods, and vertical columns are called groups. Elements in the same row possess the same number of main energy levels.</p>
+            
+            <img src="periodic-table.webp" alt="The Periodic Table of Elements categorized by metals, nonmetals, and intermediate elements" class="content-image">
+
+            <p>All elements fall into three structural categories: Metals, Non-metals, and Metalloids (elements exhibiting properties of both, such as B, Si, Ge, As, Sb, Te, Po).</p>
+
+            <ul>
+                <li><strong>Metals (~80% of elements):</strong> Because their outermost shells are not fully occupied, electrons can move freely between atoms, granting high electrical/thermal conductivity and chemical reactivity. Except for Mercury (Hg), all metals are solid at room temperature.</li>
+                <li><strong>Light Metals (s-block, IA & IIA):</strong> Very soft and chemically reactive because they readily give away the 1 or 2 electrons in their outer shell (low ionization energy).</li>
+                <li><strong>Transition Metals (d-block, IIIB to VIIIB):</strong> Elements filling the d-orbit. They are much stronger and harder than other metals.</li>
+                <li><strong>Non-metals (p-block, IIIA to VIIA):</strong> These elements need only a few electrons to complete their outer shells, making their ionization energy high. Most are gaseous, though Bromine (Br) is liquid.</li>
+                <li><strong>Noble Gases (Group VIIIA):</strong> Have fully filled final orbitals, making them chemically inert.</li>
+            </ul>
+        </div>
+        
+<!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/62eS9KB2Qsw" 
+        title="Periodic Table Metals, Nonmetals, and Metalloids Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on the Periodic Table.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Roughly what percentage of the periodic table is made up of metals?</div>
+                <div class="option-box" data-correct="false">A) 50%</div>
+                <div class="option-box" data-correct="true">B) 80%</div>
+                <div class="option-box" data-correct="false">C) 95%</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which is the only metal that is NOT solid at room temperature?</div>
+                <div class="option-box" data-correct="false">A) Bromine (Br)</div>
+                <div class="option-box" data-correct="false">B) Gallium (Ga)</div>
+                <div class="option-box" data-correct="true">C) Mercury (Hg)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. Which group of elements contains the highly inert Noble Gases?</div>
+                <div class="option-box" data-correct="false">A) Group IA</div>
+                <div class="option-box" data-correct="false">B) Group VIIA</div>
+                <div class="option-box" data-correct="true">C) Group VIIIA</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Transition metals, known for being stronger and harder, belong to which block of the periodic table?</div>
+                <div class="option-box" data-correct="false">A) s-block</div>
+                <div class="option-box" data-correct="false">B) p-block</div>
+                <div class="option-box" data-correct="true">C) d-block</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            questionBlocks.forEach(block => {
+                const options = block.querySelectorAll('.option-box');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

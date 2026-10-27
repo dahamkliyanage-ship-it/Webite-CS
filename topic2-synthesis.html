@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers top-down and bottom-up approaches to nanomaterial synthesis, detailing photolithography, exfoliation methods, and Chemical Vapor Deposition (CVD).">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Synthesis | MT1023</title>
+   <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter6-timeline.html" class="back-link">&larr; Back to Chapter 06 Timeline</a>
+        <div class="topic-label">Topic 02</div>
+        <h1>Synthesis of Nanomaterials</h1>
+        <div class="content-section">
+            <p>Creating materials at the nanoscale involves two primary methodologies: <strong>Top-Down</strong> and <strong>Bottom-Up</strong> approaches<!--[cite: 12] -->.</p>
+
+            <h3>Top-Down Approach</h3>
+            <p>Nanoscale dimensions are created by whittling down larger bulk components, usually controlled by external devices<!--[cite: 12] -->.</p>
+            <ul>
+                <li><strong>Photolithography:</strong> Extensively used to produce patterns in silicon chips for microprocessors. A silicon wafer is coated with a photosensitive material, exposed to radiation through a patterned mask, developed, and then etched<!--[cite: 12] -->.</li>
+                <li><strong>Mechanical Exfoliation:</strong> Includes Micromechanical Cleavage (the famous "scotch tape" method used to first isolate graphene, though impossible to scale up) and Ultrasonication (using liquid cavitation from high-frequency sound waves to gently peel layers apart)<!--[cite: 12] -->.</li>
+                <li><strong>Chemical Exfoliation:</strong> Processes like the Hummers method to prepare Graphene Oxide (GO). While highly scalable, it can emit toxic gases and damage the graphene basal plane, reducing conductivity<!--[cite: 12] -->.</li>
+            </ul>
+
+            <img src="photo.png" alt="Diagram showing the steps of the photolithography process" class="content-image">
+
+            <h3>Bottom-Up Approach</h3>
+            <p>Molecular components arrange themselves into complex nanomaterials atom-by-atom or molecule-by-molecule<!--[cite: 12] -->.</p>
+            <ul>
+                <li><strong>Chemical Vapor Deposition (CVD):</strong> In this process, gaseous precursors react in a heated reaction chamber to form a solid coating on a substrate. For example, growing graphene from Methane gas: <code>CH<sub>4</sub> &rarr; C (Graphene) + 2H<sub>2</sub></code><!--[cite: 12] -->.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/YhuUFLzJSsg" 
+        title="Synthesis of Nanomaterials Top-Down vs Bottom-Up Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on the Synthesis of Nanomaterials.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Which of the following is considered a "Bottom-Up" approach to synthesizing nanomaterials?</div>
+                <div class="option-box" data-correct="true">A) Chemical Vapor Deposition (CVD)</div>
+                <div class="option-box" data-correct="false">B) Photolithography</div>
+                <div class="option-box" data-correct="false">C) Micromechanical Cleavage</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What technique was historically used to first isolate a single sheet of graphene?</div>
+                <div class="option-box" data-correct="false">A) Laser etching</div>
+                <div class="option-box" data-correct="false">B) Chemical Vapor Deposition</div>
+                <div class="option-box" data-correct="true">C) Micromechanical Cleavage (Scotch tape method)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. In photolithography, what causes the coating on the silicon wafer to change its properties?</div>
+                <div class="option-box" data-correct="true">A) Exposure to electromagnetic radiation through a mask</div>
+                <div class="option-box" data-correct="false">B) High-frequency sound waves</div>
+                <div class="option-box" data-correct="false">C) Acidic etching solutions</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What is a known drawback of the chemical exfoliation (Hummers) method?</div>
+                <div class="option-box" data-correct="false">A) It is impossible to scale up for industrial use</div>
+                <div class="option-box" data-correct="true">B) It can emit toxic gases and damage the material's conductive basal plane</div>
+                <div class="option-box" data-correct="false">C) It requires absolute zero temperatures to work</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. What physical mechanism drives the exfoliation of graphite during Ultrasonication?</div>
+                <div class="option-box" data-correct="false">A) Thermal melting</div>
+                <div class="option-box" data-correct="false">B) Chemical oxidation</div>
+                <div class="option-box" data-correct="true">C) Liquid cavitation from high-frequency waves</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

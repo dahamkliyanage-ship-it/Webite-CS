@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Highlights the universal importance of materials knowledge across all engineering disciplines, detailing how civil, mechanical, electrical, biomedical, and textile engineers utilize materials.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 01 - Introduction | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="chapter1-timeline.html" class="back-link">&larr; Back to Chapter 01 Timeline</a>
+
+        <div class="topic-label">Topic 04</div>
+        <h1>Materials Across Engineering</h1>
+
+        <div class="content-section">
+            <p>No matter the specific discipline, all engineers will eventually face a design problem involving materials. A basic and applied knowledge of materials is universally required across the field .</p>
+            
+            <ul>
+                <li><strong>Materials Engineers:</strong> Specialists who develop, process, and test materials used to create products ranging from computer chips to aircraft wings. They study the atomic structures of metals, ceramics, plastics, composites, and nanomaterials to create new substances that meet precise mechanical, electrical, and chemical requirements.</li>
+                <li><strong>Civil Engineers:</strong> Design, build, and maintain public and private infrastructure, requiring an intimate knowledge of bulk structural materials like concrete and steel.</li>
+                <li><strong>Mechanical Engineers:</strong> Design, build, and test mechanical and thermal sensors, engines, and machines.</li>
+                <li><strong>Electrical & Computer Engineers:</strong> Design electronic equipment, power generation systems, processors, and circuit boards, relying heavily on conductive and semiconductive materials.</li>
+                <li><strong>Biomedical Engineers:</strong> Combine engineering principles with medical sciences to design healthcare equipment and biocompatible devices.</li>
+                <li><strong>Textile Engineers:</strong> Design the processes and equipment to create fibers, yarns, and fabrics—textiles so advanced they are even used as the lining of space shuttle cargo holds.</li>
+            </ul>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Materials Across Engineering.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Which type of engineer designs and develops fibers, yarns, and fabrics, including those used in space shuttle cargo holds?</div>
+                <div class="option-box" data-correct="false">A) Chemical engineers</div>
+                <div class="option-box" data-correct="false">B) Materials engineers</div>
+                <div class="option-box" data-correct="true">C) Textile engineers</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What is the primary role of a Materials Engineer?</div>
+                <div class="option-box" data-correct="false">A) To build and maintain public infrastructure like bridges and dams</div>
+                <div class="option-box" data-correct="true">B) To study material properties and structures to create new materials meeting precise requirements</div>
+                <div class="option-box" data-correct="false">C) To design global positioning systems (GPS) and broadcast networks</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            questionBlocks.forEach(block => {
+                const options = block.querySelectorAll('.option-box');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta name="bot-context" content="Covers the fundamentals of electrical conduction, explaining Ohm's law, resistivity, conductivity, electron drift velocity, and carrier mobility equations.">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Topic 01 - Conduction | MT1023</title>
+
+   
+
+    <link rel="stylesheet" href="style-materials.css">
+
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="chapter5-timeline.html" class="back-link">&larr; Back to Chapter 05 Timeline</a>
+
+        <div class="topic-label">Topic 01</div>
+
+        <h1>Fundamentals of Conduction</h1>
+
+        <div class="content-section">
+
+            <p>An electric current results from the motion of electrically charged particles (typically electrons) responding to forces from an external electric field<span style="display:none">[cite: 11]</span>. <strong>Electric Current (I)</strong> is the total charge (Q) passing through a given point per unit time (t), measured in Amperes (A)<span style="display:none">[cite: 11]</span>.</p>
+
+           
+
+            <img src="electrons.png" alt="Diagram showing flow of electrons in a circuit" class="content-image small">
+
+
+
+            <h3>Ohm's Law & Conductivity</h3>
+
+            <p><strong>Ohm's Law</strong> dictates that Voltage (V) equals Current (I) multiplied by Resistance (R): <code>V = I &middot; R</code><span style="display:none">[cite: 11]</span>.</p>
+
+            <ul>
+
+                <li><strong>Electrical Resistivity (&rho;):</strong> A fundamental measure of how strongly a material opposes the flow of electric current<span style="display:none">[cite: 11]</span>. Calculated as <code>R = &rho;(l/A)</code>, where 'l' is length and 'A' is cross-sectional area. Measured in &Omega;&middot;m<span style="display:none">[cite: 11]</span>.</li>
+
+                <li><strong>Electrical Conductivity (&sigma;):</strong> The reciprocal of resistivity (<code>&sigma; = 1/&rho;</code>). Measured in S/m or (&Omega;&middot;m)<sup>-1</sup><span style="display:none">[cite: 11]</span>.</li>
+
+            </ul>
+
+
+
+            <h3>Electron Mobility</h3>
+
+            <p>In a solid, moving electrons scatter off atomic cores and imperfections, creating a net <em>drift</em> in the direction opposite to the electric field<span style="display:none">[cite: 11]</span>. <strong>Drift Velocity (v&#772;)</strong> is the average velocity attained by these charge carriers<span style="display:none">[cite: 11]</span>. The <strong>Carrier Mobility (&mu;)</strong> evaluates this drift relative to the electric field (<code>&mu; = v&#772; / E</code>)<span style="display:none">[cite: 11]</span>.</p>
+
+            <p>The master formula for conductivity is: <code>&sigma; = n &middot; q &middot; &mu;</code>, meaning conductivity can be improved by increasing the number of charge carriers (n) or their mobility (&mu;)<span style="display:none">[cite: 11]</span>.</p>
+
+        </div>
+
+
+
+        <div class="quiz-container">
+
+            <div class="quiz-title">Practice Exercises</div>
+
+            <div class="quiz-desc">Test your knowledge on the Fundamentals of Conduction.</div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">1. Which formula correctly represents Ohm's Law?</div>
+
+                <div class="option-box" data-correct="false">A) V = I / R</div>
+
+                <div class="option-box" data-correct="true">B) V = I &middot; R</div>
+
+                <div class="option-box" data-correct="false">C) I = V &middot; R</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">2. What are the standard units for Electrical Conductivity (&sigma;)?</div>
+
+                <div class="option-box" data-correct="true">A) S/m or (&Omega;&middot;m)⁻¹</div>
+
+                <div class="option-box" data-correct="false">B) &Omega;&middot;m</div>
+
+                <div class="option-box" data-correct="false">C) Amperes (A)</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">3. According to the conductivity equation (&sigma; = n&middot;q&middot;&mu;), what two factors can directly increase a material's conductivity?</div>
+
+                <div class="option-box" data-correct="false">A) Increasing resistivity and decreasing drift velocity</div>
+
+                <div class="option-box" data-correct="true">B) Increasing the number of charge carriers and increasing carrier mobility</div>
+
+                <div class="option-box" data-correct="false">C) Increasing the cross-sectional area and length of the wire</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">4. What occurs when free electrons in a solid scatter off atomic cores while under an electric field?</div>
+
+                <div class="option-box" data-correct="false">A) They stop moving entirely</div>
+
+                <div class="option-box" data-correct="false">B) They break the atomic bonds of the solid</div>
+
+                <div class="option-box" data-correct="true">C) They experience a net drift velocity in the direction opposite to the electric field</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">5. What is the fundamental relationship between Electrical Resistivity (&rho;) and Electrical Conductivity (&sigma;)?</div>
+
+                <div class="option-box" data-correct="true">A) They are reciprocals of each other (&sigma; = 1/&rho;)</div>
+
+                <div class="option-box" data-correct="false">B) They are identical properties</div>
+
+                <div class="option-box" data-correct="false">C) Conductivity is the square of resistivity</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+
+</body>
+
+</html> 
+

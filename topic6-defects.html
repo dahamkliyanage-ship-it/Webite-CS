@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers crystal imperfections including point defects, line defects (dislocations), and planar defects (grain boundaries), alongside the stages of metal solidification and grain structure formation.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 06 - Defects & Grains | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script><link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter3-timeline.html" class="back-link">&larr; Back to Chapter 03 Timeline</a>
+        <div class="topic-label">Topic 06</div>
+        <h1>Crystal Defects & Grains</h1>
+        <div class="content-section">
+            <p>Real crystals are never perfect. They contain defects that significantly influence their mechanical properties<span style="display:none">[cite: 12, 13]</span>.</p>
+            <ul>
+                <li><strong>Point Defects:</strong> Occur at a single lattice site. Types include vacancies (missing atoms), interstitial impurity atoms, substitutional impurity atoms, and self-interstitial atoms<span style="display:none">[cite: 12]</span>.</li>
+                <li><strong>Line Defects (Dislocations):</strong> There are two main types: Screw dislocations and Edge dislocations. An Edge dislocation forms by the insertion of an extra half-plane of atoms<span style="display:none">[cite: 12]</span>.</li>
+                <li><strong>Planar Defects:</strong> Surface imperfections in crystalline materials, most notably <em>Grain boundaries</em><span style="display:none">[cite: 12]</span>.</li>
+            </ul>
+            <img src="defect1.png" alt="Diagram showing vacancies, interstitials, and substitutional point defects" class="content-image small">
+            
+            <h3>Solidification & Grains</h3>
+            <p>When liquid metals freeze, solidification occurs in three stages: <strong>Nucleation, Growth of crystals, and Formation of the grain structure</strong><span style="display:none">[cite: 12]</span>.</p>
+            <p>A grain is simply a group of atoms packed in a particular orientation that differs from its neighbor's orientation<span style="display:none">[cite: 12]</span>. The surface that separates two adjacent grains is the grain boundary<span style="display:none">[cite: 12]</span>.</p>
+            <img src="defect3.jpg" alt="Microscopic view of grain boundaries in a solidified metal" class="content-image small">
+        </div>
+        
+<!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/EoCtPYHaRAE" 
+        title="Crystallographic Defects and Lattice Defects Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Crystal Defects and Solidification.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Which of the following is an example of a point defect?</div>
+                <div class="option-box" data-correct="false">A) Edge dislocation</div>
+                <div class="option-box" data-correct="false">B) Grain boundary</div>
+                <div class="option-box" data-correct="true">C) Vacancy</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What type of line defect is formed by the insertion of an extra half-plane of atoms into the lattice?</div>
+                <div class="option-box" data-correct="false">A) Screw dislocation</div>
+                <div class="option-box" data-correct="true">B) Edge dislocation</div>
+                <div class="option-box" data-correct="false">C) Substitutional impurity</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. Grain boundaries are classified as what type of defect?</div>
+                <div class="option-box" data-correct="false">A) Point defect</div>
+                <div class="option-box" data-correct="false">B) Line defect</div>
+                <div class="option-box" data-correct="true">C) Planar defect</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What is the very first stage in the solidification of metals?</div>
+                <div class="option-box" data-correct="true">A) Nucleation</div>
+                <div class="option-box" data-correct="false">B) Growth of crystals</div>
+                <div class="option-box" data-correct="false">C) Formation of grain structure</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. What defines a "grain" in a crystalline material?</div>
+                <div class="option-box" data-correct="false">A) A microscopic void space in the lattice</div>
+                <div class="option-box" data-correct="false">B) An impurity atom substituting a parent atom</div>
+                <div class="option-box" data-correct="true">C) A group of atoms packed in a specific orientation different from neighbors</div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains composite materials, which combine substances for superior properties, alongside advanced high-tech semiconductors, nanomaterials, and biomaterials.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 01 - Introduction | MT1023</title>
+   <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="chapter1-timeline.html" class="back-link">&larr; Back to Chapter 01 Timeline</a>
+
+        <div class="topic-label">Topic 03</div>
+        <h1>Composites & Advanced Materials</h1>
+
+        <div class="content-section">
+            <p><strong>Composites</strong> are formed by combining two or more distinct types of materials to create a new material whose properties are superior to those of the individual components. This allows engineers to perfectly tailor properties to suit specific applications.</p>
+            <ul>
+                <li><strong>Concrete:</strong> A composite mixture of cement, sand, aggregates, and admixtures.</li>
+                <li><strong>Fiberglass:</strong> A composite of glass fiber and plastic.</li>
+                <li><strong>Polymer/Ceramic Composites:</strong> These combinations yield a material with a greater Young's modulus than the base polymer, while remaining less brittle than the pure ceramic.</li>
+            </ul>
+
+            <p>Beyond the primary classes, modern engineering categorizes advanced materials based on their high-tech applications:</p>
+            <ul>
+                <li><strong>Semiconductors:</strong> Materials that can be switched from an insulator (off) to a conductor (on) via the application of voltage.</li>
+                <li><strong>Nanomaterials:</strong> Materials sized between 1 to 100 nm, where their geometry and size play a significant role in dictating their properties.</li>
+                <li><strong>Biomaterials:</strong> Materials implanted into the human body (like a titanium hip joint). They must be <em>biocompatible</em>, meaning they have the ability to survive in the body without causing harm.</li>
+                <li><strong>Smart Materials:</strong> Materials that, much like biological systems, inherently respond to external stimuli.</li>
+            </ul>
+        </div>
+       <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/5w73zCQY1bQ" 
+        title="Composite Materials Explained Simply" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Composites and Advanced Materials.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What is the primary advantage of a composite material like fiberglass?</div>
+                <div class="option-box" data-correct="true">A) Its combined properties are superior to the individual components</div>
+                <div class="option-box" data-correct="false">B) It is perfectly crystalline and transparent</div>
+                <div class="option-box" data-correct="false">C) It transitions between a conductor and an insulator</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which classification refers to materials implanted into the human body that must be highly biocompatible?</div>
+                <div class="option-box" data-correct="false">A) Smart materials</div>
+                <div class="option-box" data-correct="true">B) Biomaterials</div>
+                <div class="option-box" data-correct="false">C) Nanomaterials</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            questionBlocks.forEach(block => {
+                const options = block.querySelectorAll('.option-box');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+   <script src="materials_chatbot.js"></script>
+ 
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

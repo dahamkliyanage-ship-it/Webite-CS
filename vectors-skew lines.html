@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skew Lines and Distance Between Them</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Skew Lines & Distance Between Them. Focus on the definition and geometric properties of skew lines in three-dimensional space, distinguishing them from parallel and intersecting lines. Cover the concept of the shortest distance between skew lines as the length of their common perpendicular, identifying points and direction vectors from symmetric equations, and deriving the distance formula using the scalar projection of the vector connecting points on the two lines onto a unit normal vector. Include calculating the unit normal vector using the cross product of the direction vectors, worked examples, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Skew Lines & Distance Between Them</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec4-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Skew Lines Definition</a></li>
+                <li><a href="#sec4-1-1">Distance Between Skew Lines</a></li>
+                <li><a href="#examples">Detailed Examples</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec4-1" style="margin-bottom: 20px;">Skew Lines</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong><br><br>
+                <em>Two non-parallel lines in a 3-space that do not intersect are called skew lines.</em><br><br>
+                Unlike parallel lines (which lie in the exact same plane and never meet) or intersecting lines (which share a common point), skew lines exist in different planes and are unique to three-dimensional coordinate geometry.
+            </div>
+
+            <h3 id="sec4-1-1" style="margin-bottom: 15px; margin-top: 30px; font-size: 1.3rem; color: #f9fafb;">Distance between two skew lines</h3>
+
+            <p style="margin-bottom: 20px; color: #e5e7eb;">The distance between two skew lines is the shortest distance between them, which is uniquely defined as the length of the common perpendicular line segment that connects both lines.</p>
+
+            <div class="green-box">
+                <strong>Symmetric Equations of the Lines</strong><br><br>
+                It is given that the straight lines are expressed symmetrically as:
+                <div class="math-center">
+                    $$ \frac{x - x_0}{a_0} = \frac{y - y_0}{b_0} = \frac{z - z_0}{c_0} \quad \text{and} \quad \frac{x - x_1}{a_1} = \frac{y - y_1}{b_1} = \frac{z - z_1}{c_1} $$
+                </div>
+                These lines are skew lines, where point $A = (x_0, y_0, z_0)$ lies on the first line, and point $B = (x_1, y_1, z_1)$ lies on the second line.
+            </div>
+
+            <div class="image-box">
+                <!-- SVG Recreation of Figure 1 (Skew Lines) -->
+                <svg viewBox="0 0 500 350" style="max-width: 100%; height: auto; max-width: 550px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-skew-n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Line 1 -->
+                    <line x1="100" y1="280" x2="350" y2="180" stroke="#00bbf0" stroke-width="2" />
+                    <text x="360" y="190" font-family="serif" font-style="italic" font-size="14" fill="#00bbf0">y</text>
+                    <circle cx="200" cy="240" r="3" fill="#00bbf0" />
+                    <text x="180" y="265" font-family="sans-serif" font-weight="bold" font-size="13" fill="#e5e7eb">A (x₀, y₀, z₀)</text>
+
+                    <!-- Line 2 -->
+                    <line x1="120" y1="120" x2="400" y2="80" stroke="#e81c8f" stroke-width="2" />
+                    <text x="410" y="85" font-family="serif" font-style="italic" font-size="14" fill="#e81c8f">line 2</text>
+                    <circle cx="280" cy="100" r="3" fill="#e81c8f" />
+                    <text x="290" y="85" font-family="sans-serif" font-weight="bold" font-size="13" fill="#e5e7eb">B (x₁, y₁, z₁)</text>
+
+                    <!-- Vector AB connecting points -->
+                    <line x1="200" y1="240" x2="280" y2="100" stroke="#facc15" stroke-width="1.5" />
+                    
+                    <!-- Common Perpendicular / Normal Vector n indicators -->
+                    <line x1="200" y1="240" x2="200" y2="170" stroke="#4ade80" stroke-width="2" marker-end="url(#arrow-skew-n)" />
+                    <text x="180" y="210" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#4ade80">n</text>
+
+                    <line x1="280" y1="100" x2="280" y2="170" stroke="#4ade80" stroke-width="2" marker-end="url(#arrow-skew-n)" />
+                    <text x="295" y="140" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#4ade80">n</text>
+
+                    <!-- Dashed projection line -->
+                    <line x1="200" y1="170" x2="350" y2="130" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4" />
+
+                    <!-- Right angle symbols -->
+                    <path d="M 195 230 L 195 240 L 205 240" fill="transparent" stroke="#e5e7eb" stroke-width="1" />
+                    <path d="M 275 110 L 280 100 L 285 110" fill="transparent" stroke="#e5e7eb" stroke-width="1" />
+
+                </svg>
+                <br>
+                <span>Figure 1: Geometric representation of skew lines, points $A$ and $B$, and their common unit normal vector $\underline{n}$.</span>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Distance Formula Derivation</strong><br><br>
+                The shortest distance between the two skew lines is given by the magnitude of the scalar projection of the vector $\overrightarrow{AB}$ onto the unit normal vector $\underline{n}$ shared perpendicularly by both lines:
+                <div class="math-center">
+                    $$ \text{the distance} = |\overrightarrow{AB} \cdot \underline{n}| $$
+                </div>
+                where $\underline{n}$ is a <strong>unit normal vector</strong> perpendicular to both direction vectors. That is computed by taking the cross product of the two direction vectors and normalizing it:
+                <div class="math-center">
+                    $$ \underline{n} = \frac{\langle a_0, b_0, c_0 \rangle \times \langle a_1, b_1, c_1 \rangle}{|\langle a_0, b_0, c_0 \rangle \times \langle a_1, b_1, c_1 \rangle|} $$
+                </div>
+            </div>
+
+            <h2 id="examples" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Detailed Mathematical Example</h2>
+
+            <div class="blue-box">
+                <strong>Example: Finding Distance Between Skew Lines</strong><br><br>
+                Find the shortest distance between the skew lines defined by:<br>
+                Line 1: $\frac{x}{1} = \frac{y-1}{1} = \frac{z}{1}$<br>
+                Line 2: $\frac{x-1}{2} = \frac{y}{1} = \frac{z}{0}$<br><br>
+                
+                <strong>Step 1: Identify points $A$ and $B$ and direction vectors.</strong>
+                <ul style="margin-top: 10px; margin-bottom: 10px; padding-left: 20px;">
+                    <li>Point on Line 1: $A(0, 1, 0) \implies \underline{r_A} = \langle 0, 1, 0 \rangle$</li>
+                    <li>Point on Line 2: $B(1, 0, 0) \implies \underline{r_B} = \langle 1, 0, 0 \rangle$</li>
+                    <li>Vector connecting them: $\overrightarrow{AB} = \langle 1-0, 0-1, 0-0 \rangle = \langle 1, -1, 0 \rangle$</li>
+                    <li>Direction vector 1: $\underline{v_0} = \langle 1, 1, 1 \rangle$</li>
+                    <li>Direction vector 2: $\underline{v_1} = \langle 2, 1, 0 \rangle$</li>
+                </ul>
+                
+                <strong>Step 2: Compute the cross product of the direction vectors.</strong>
+                <div class="math-center">
+                    $$ \underline{v_0} \times \underline{v_1} = \begin{vmatrix} \underline{i} & \underline{j} & \underline{k} \\ 1 & 1 & 1 \\ 2 & 1 & 0 \end{vmatrix} $$
+                    $$ = \underline{i}(0 - 1) - \underline{j}(0 - 2) + \underline{k}(1 - 2) = \langle -1, 2, -1 \rangle $$
+                </div>
+                
+                <strong>Step 3: Find the magnitude of the cross product vector.</strong>
+                <div class="math-center">
+                    $$ |\langle -1, 2, -1 \rangle| = \sqrt{(-1)^2 + 2^2 + (-1)^2} = \sqrt{1 + 4 + 1} = \sqrt{6} $$
+                </div>
+
+                <strong>Step 4: Form the unit normal vector $\underline{n}$ and compute the distance.</strong>
+                <div class="math-center">
+                    $$ \underline{n} = \frac{\langle -1, 2, -1 \rangle}{\sqrt{6}} $$
+                    $$ \text{Distance} = |\overrightarrow{AB} \cdot \underline{n}| = \left| \langle 1, -1, 0 \rangle \cdot \frac{\langle -1, 2, -1 \rangle}{\sqrt{6}} \right| $$
+                    $$ = \frac{|(1)(-1) + (-1)(2) + (0)(-1)|}{\sqrt{6}} = \frac{|-1 - 2|}{\sqrt{6}} = \frac{3}{\sqrt{6}} = \frac{\sqrt{6}}{2} \text{ units} $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video to understand the conceptual differences between parallel, intersecting, and skew lines in 3D space:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/cemF45vNOhg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-section" style="margin-top: 30px;">
+                <p>Watch this comprehensive tutorial to master calculating the shortest perpendicular distance between two skew lines using vector cross-products:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/m5yIWCGOVTU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Skew Lines and finding the shortest distance between them.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What are skew lines in a three-dimensional space?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Two lines that lie in the exact same plane and intersect at a single point.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Two parallel lines that never intersect.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Two non-parallel lines that do not intersect and exist in different planes.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Can two parallel lines in 3D space be classified as skew lines?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Yes, as long as they do not touch each other.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) No, because skew lines must be strictly non-parallel.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Only if they share the same plane.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> How is the unit normal vector $\underline{n}$ that is mutually perpendicular to two skew lines' direction vectors ($\underline{v_0}$ and $\underline{v_1}$) calculated?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) By taking the cross product of $\underline{v_0}$ and $\underline{v_1}$ and dividing by its magnitude.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) By taking the dot product of $\underline{v_0}$ and $\underline{v_1}$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) By adding the two direction vectors together.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> What geometric quantity does the formula $\text{Distance} = |\overrightarrow{AB} \cdot \underline{n}|$ compute?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The angle between the two skew lines.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The volume of the parallelepiped formed by the lines.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The shortest perpendicular distance between the two skew lines.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If two lines intersect each other at a single point, what will their shortest distance evaluation yield using the skew lines formula?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) An infinite distance</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Exactly $0$ units</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $1$ unit</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Given Line 1 with a point $A(0, 1, 0)$ and Line 2 with a point $B(1, 0, 0)$, what is the vector $\overrightarrow{AB}$ connecting these two points?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\langle 1, -1, 0 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\langle -1, 1, 0 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\langle 1, 1, 0 \rangle$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> If the cross product of two direction vectors $\underline{v_0} \times \underline{v_1}$ results in $\langle 0, 0, 0 \rangle$ (the zero vector), what does this indicate about the lines?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) They are strictly skew lines.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They are perpendicular to each other.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) They are parallel (or collinear), so they are not skew lines.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> Why is the magnitude operator used around the dot product in the distance formula ($|\overrightarrow{AB} \cdot \underline{n}|$)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) To eliminate vector components along the z-axis.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) To ensure the resulting shortest distance is always a positive real value.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) To convert the scalar value into a new vector.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-skewlines"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-skewlines");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

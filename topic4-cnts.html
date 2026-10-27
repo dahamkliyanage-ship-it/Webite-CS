@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explores Carbon Nanotubes (CNTs), covering Single- and Multi-Walled structures, chirality (n,m notation) for Armchair and Zigzag tubes, and their unique mechanical, electrical, and thermal properties.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 04 - CNTs | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter6-timeline.html" class="back-link">&larr; Back to Chapter 06 Timeline</a>
+        <div class="topic-label">Topic 04</div>
+        <h1>Carbon Nanotubes (CNTs)</h1>
+        <div class="content-section">
+            <p>Discovered in 1991 by Japanese scientist Sumio Ijima, a <strong>Carbon Nanotube</strong> is essentially a single sheet of graphene rolled into a tube, with both ends capped by fullerene hemispheres<!--[cite: 12] -->.</p>
+            <p>They are classified into Single-Walled (SWNT) and Multi-Walled (MWNT) tubes. In MWNTs, the inter-tube distance is ~3.4 &Aring; (similar to the interlayer separation of graphite)<!--[cite: 12] -->.</p>
+
+            <h3>Chirality & (n,m) Notation</h3>
+            <p>The properties of a CNT depend on how the sheet is rolled, defined by its <strong>Chiral Vector</strong>: <code>C = n(a<sub>1</sub>) + m(a<sub>2</sub>)</code><!--[cite: 12] -->. This determines the twisting angle (&theta;) of the tube:</p>
+            <ul>
+                <li><strong>Armchair Tubes:</strong> Occur when <code>n = m</code>. The chiral angle is exactly &theta; = 30&deg;<!--[cite: 12] -->.</li>
+                <li><strong>Zigzag Tubes:</strong> Occur when <code>n = 0</code> (or m = 0). The chiral angle is exactly &theta; = 0&deg;<!--[cite: 12] -->.</li>
+                <li><strong>Chiral Tubes:</strong> Occur when n &ne; m. The chiral angle is between 0&deg; and 30&deg;<!--[cite: 12] -->.</li>
+            </ul>
+
+            <div class="image-row">
+                <img src="armchair.png" alt="Armchair CNT Structure" class="content-image small">
+                <img src="zigzag.png" alt="Zigzag CNT Structure" class="content-image small">
+            </div>
+            
+            <p><em>Diameter Formula:</em> <code>D = (a / &pi;) &radic;(n<sup>2</sup> + m<sup>2</sup> + nm)</code>, where 'a' is the lattice constant of graphene<!--[cite: 12] -->.</p>
+
+            <h3>Properties of CNTs</h3>
+            <ul>
+                <li><strong>Electrical:</strong> Depends entirely on chirality! If <code>n = m</code>, the tube is <strong>Metallic</strong>. If <code>n - m = 3q</code>, it is a small band gap semiconductor. Otherwise, it is a large band gap semiconductor<!--[cite: 12] -->.</li>
+                <li><strong>Mechanical:</strong> Young's Modulus is 0.9 &ndash; 1.1 TPa with a max strain of 10% (much higher than structural metals)<!--[cite: 12] -->.</li>
+                <li><strong>Thermal:</strong> Extreme thermal conductivity axially (~3000 W/m&middot;K) due to strong C-C covalent bonds, but they act as thermal insulators in the radial direction<!--[cite: 12] -->.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to see how 2D Graphene rolls into 3D Carbon Nanotubes:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/rYUzFhqUMls" 
+        title="Graphene to Carbon Nanotubes Animation" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Carbon Nanotubes.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What is the approximate inter-tube distance in a Multi-Walled Carbon Nanotube (MWNT)?</div>
+                <div class="option-box" data-correct="false">A) ~1.0 &Aring;</div>
+                <div class="option-box" data-correct="true">B) ~3.4 &Aring;</div>
+                <div class="option-box" data-correct="false">C) ~10.2 &Aring;</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What defines the (n,m) notation of an "Armchair" carbon nanotube?</div>
+                <div class="option-box" data-correct="false">A) n = 0</div>
+                <div class="option-box" data-correct="true">B) n = m</div>
+                <div class="option-box" data-correct="false">C) n &ne; m</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What is the specific chiral angle (&theta;) of a Zigzag nanotube?</div>
+                <div class="option-box" data-correct="true">A) 0&deg;</div>
+                <div class="option-box" data-correct="false">B) 15&deg;</div>
+                <div class="option-box" data-correct="false">C) 30&deg;</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What happens to the electrical properties of a CNT if it has an Armchair structure (n = m)?</div>
+                <div class="option-box" data-correct="true">A) It behaves as a metal</div>
+                <div class="option-box" data-correct="false">B) It behaves as a large band gap semiconductor</div>
+                <div class="option-box" data-correct="false">C) It becomes a perfect electrical insulator</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. How does a Carbon Nanotube conduct heat?</div>
+                <div class="option-box" data-correct="false">A) It acts as a thermal insulator in all directions</div>
+                <div class="option-box" data-correct="false">B) It acts as a thermal conductor in all directions</div>
+                <div class="option-box" data-correct="true">C) It is a thermal conductor axially, but a thermal insulator radially</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

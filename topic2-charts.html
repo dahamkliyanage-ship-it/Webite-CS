@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains how engineers use logarithmic material selection charts (Ashby charts) and material bubbles to sequentially screen constraints and rank design objectives.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Selection Charts | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter9-timeline.html" class="back-link">&larr; Back to Chapter 09 Timeline</a>
+        <div class="topic-label">Topic 02</div>
+        <h1>Material Selection Charts</h1>
+        <div class="content-section">
+            <p>During the screening and ranking phases, engineers heavily utilize <strong>Material Selection Charts</strong>. These charts plot one material property on the Y-axis and another property on the X-axis (usually using logarithmic scales due to the massive range of values). Whole families of materials (Metals, Ceramics, Polymers, Foams) are drawn as "bubbles" enclosing their specific members<span style="display:none">[cite: 14]</span>.</p>
+
+            <img src="chart.png" alt="Material selection chart showing Thermal Conductivity vs Electrical Resistivity" class="content-image">
+
+            <h3>Using Multiple Charts</h3>
+            <p>Often, a single chart cannot capture all the constraints and objectives required for a specific design. In these cases, engineers will use two or more charts sequentially<span style="display:none">[cite: 14]</span>.</p>
+            
+            <p><strong>Example: An Overhead Transmission Cable</strong></p>
+            <ul>
+                <li><strong>Constraint:</strong> The cable must not break under tension. Therefore, strength must be greater than 80 MPa<span style="display:none">[cite: 14]</span>.</li>
+                <li><strong>Action:</strong> The engineer uses a <em>Strength vs. Density</em> chart to screen out (eliminate) any material bubble that falls below the 80 MPa line<span style="display:none">[cite: 14]</span>.</li>
+                <li><strong>Objective:</strong> The cable needs to transmit electricity as efficiently as possible<span style="display:none">[cite: 14]</span>.</li>
+                <li><strong>Action:</strong> The engineer takes the surviving materials and looks at a <em>Thermal Conductivity vs. Electrical Resistivity</em> chart to rank them based on which one has the absolute lowest resistivity<span style="display:none">[cite: 14]</span>.</li>
+            </ul>
+
+            <img src="chart2.png" alt="Material selection chart showing Strength vs Density" class="content-image">
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to see how the selection process is applied using material bubble charts:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/KMrzYGUgqgw" 
+        title="Ashby Charts and Material Selection Process Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Selection Charts.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Why do material selection charts often use logarithmic scales on their axes?</div>
+                <div class="option-box" data-correct="false">A) To make the charts look more mathematically complex</div>
+                <div class="option-box" data-correct="true">B) Because the range of property values across different material kingdoms is extremely massive</div>
+                <div class="option-box" data-correct="false">C) Logarithmic scales are only used for polymer materials</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What do the "bubbles" on a material selection chart represent?</div>
+                <div class="option-box" data-correct="true">A) A whole family or class of materials (like Metals or Foams) enclosing its specific members</div>
+                <div class="option-box" data-correct="false">A) The physical atomic size of the materials</div>
+                <div class="option-box" data-correct="false">C) Areas of the chart where no materials currently exist</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. In the Overhead Transmission Cable example, what type of chart is used to screen out materials that are too weak?</div>
+                <div class="option-box" data-correct="false">A) Thermal Conductivity vs. Electrical Resistivity</div>
+                <div class="option-box" data-correct="false">B) Young's Modulus vs. Cost</div>
+                <div class="option-box" data-correct="true">C) Strength vs. Density</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. In that same example, what type of chart is then used to rank the surviving materials based on the objective?</div>
+                <div class="option-box" data-correct="true">A) Thermal Conductivity vs. Electrical Resistivity</div>
+                <div class="option-box" data-correct="false">B) Strength vs. Density</div>
+                <div class="option-box" data-correct="false">C) Hardness vs. Temperature</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

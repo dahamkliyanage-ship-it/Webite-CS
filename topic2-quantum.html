@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains the four quantum numbers (principal, secondary, magnetic, spin) and the rules for electron configuration (Pauli Exclusion, Aufbau Principle, Hund's Rule).">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Quantum Numbers | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="chapter2-timeline.html" class="back-link">&larr; Back to Chapter 02 Timeline</a>
+
+        <div class="topic-label">Topic 02</div>
+        <h1>Quantum Numbers & Electron Configurations</h1>
+
+        <div class="content-section">
+            <p>Because the Bohr Theory failed to describe atoms with many electrons, Modern Atomic Theory introduced four quantum numbers to properly define electron energy levels.</p>
+
+            <ul>
+                <li><strong>Principal Quantum Number (n):</strong> Relates to the distance between the nucleus and the principal energy levels (Shells K, L, M, N corresponding to n = 1, 2, 3, 4). The maximum number of electrons in an orbital is 2n<sup>2</sup>.</li>
+                <li><strong>Secondary Quantum Number (l):</strong> Represents sub-levels and dictates the shape of the electron cloud. If l = 0, the shape is spherical (s orbital); if l = 1, the shape is a dumbbell (p orbital). The number of sub-shells equals n.</li>
+                <li><strong>Magnetic Quantum Number (m):</strong> Represents the direction of maximum extension in space for dumbbell-shaped clouds (p, d, and f). It has (2l + 1) different values.</li>
+                <li><strong>Spin Quantum Number (s):</strong> Represents electron spin, possessing values of +1/2 (clockwise) or -1/2 (counterclockwise).</li>
+            </ul>
+
+            <img src="orbitals.jpg" alt="Diagram showing spherical 's' orbitals and dumbbell 'p' orbital shapes" class="content-image small">
+
+            <h3>Electron Configuration Rules</h3>
+            <p>Three strict rules govern how electrons fill these energy levels:</p>
+            <ul>
+                <li><strong>Pauli Exclusion Principle:</strong> No two electrons in a single atom can have all four quantum numbers be identical.</li>
+                <li><strong>Aufbau Principle:</strong> Sub-levels with the lowest energy are completely filled before higher energy levels. The filling sequence is: 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s.</li>
+                <li><strong>Hund's Rule:</strong> The p, d, and f sublevels are first occupied by single electrons before any pairing of electrons with opposed spins takes place.</li>
+            </ul>
+            <p><em>Exceptions:</em> Chromium (Cr-24) and Copper (Cu-29) organize into 4s<sup>1</sup> 3d<sup>5</sup> and 4s<sup>1</sup> 3d<sup>10</sup> respectively, as this arrangement represents a lower-energy, more stable state than strictly following the sequence.</p>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/rcKilE9CdaA" 
+        title="Quantum Numbers and Electron Configurations Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Quantum Numbers.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Which quantum number dictates the physical shape of the electron cloud (e.g., spherical or dumbbell)?</div>
+                <div class="option-box" data-correct="false">A) Principal Quantum Number (n)</div>
+                <div class="option-box" data-correct="true">B) Secondary Quantum Number (l)</div>
+                <div class="option-box" data-correct="false">C) Magnetic Quantum Number (m)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. According to the formula 2n<sup>2</sup>, what is the maximum number of electrons that can fit in the M shell (n = 3)?</div>
+                <div class="option-box" data-correct="false">A) 8</div>
+                <div class="option-box" data-correct="true">B) 18</div>
+                <div class="option-box" data-correct="false">C) 32</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. Which principle states that no two electrons in an atom can have the exact same set of four quantum numbers?</div>
+                <div class="option-box" data-correct="true">A) Pauli Exclusion Principle</div>
+                <div class="option-box" data-correct="false">B) Aufbau Principle</div>
+                <div class="option-box" data-correct="false">C) Hund's Rule</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What is the stable, exceptional electron configuration for Copper (Cu-29)?</div>
+                <div class="option-box" data-correct="false">A) 4s<sup>2</sup> 3d<sup>9</sup></div>
+                <div class="option-box" data-correct="false">B) 4s<sup>2</sup> 3d<sup>4</sup></div>
+                <div class="option-box" data-correct="true">C) 4s<sup>1</sup> 3d<sup>10</sup></div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            questionBlocks.forEach(block => {
+                const options = block.querySelectorAll('.option-box');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

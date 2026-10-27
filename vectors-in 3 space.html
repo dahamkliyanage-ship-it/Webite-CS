@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vectors in 3-Space</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Vectors in 3-Space. Focus on three-dimensional vectors, Cartesian unit vectors along the x, y, and z axes, position vectors in 3D, vector components, direction angles, direction cosines, and direction ratios. Cover the relationships between vector components and direction cosines, the identity involving the squares of the direction cosines, and finding vector magnitudes and unit vectors. Include applications in engineering mechanics, particularly resolving 3D force vectors, calculating magnitudes, determining direction cosines, and verifying vector identities, along with related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Vectors in 3-Space</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec1">Vectors in 3-Space</a></li>
+                
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec1-5" style="margin-bottom: 20px;">Vectors in 3-Space</h2>
+
+            <p>$\underline{i}$, $\underline{j}$ and $\underline{k}$ are the unit vectors from the origin along the axes $X, Y$, and $Z$ respectively.</p>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Let $\langle a_1, a_2, a_3 \rangle$ be the position vector of $P$ with respect to the origin $O$. (See figure 5.)
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 350 250" style="max-width: 100%; height: auto; max-width: 400px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-vector" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                    </defs>
+                    
+                    <line x1="150" y1="150" x2="50" y2="220" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    <line x1="150" y1="150" x2="320" y2="180" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    <line x1="150" y1="150" x2="150" y2="20" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    
+                    <text x="35" y="230" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="325" y="195" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="135" y="20" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="130" y="155" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <line x1="150" y1="150" x2="80" y2="110" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="80" y1="110" x2="80" y2="200" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="150" y1="150" x2="250" y2="100" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="250" y1="100" x2="250" y2="190" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="80" y1="110" x2="250" y2="100" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="80" y1="200" x2="250" y2="190" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="50" y1="220" x2="80" y2="200" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="150" y1="20" x2="250" y2="100" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    <line x1="150" y1="20" x2="80" y2="110" stroke="#9ca3af" stroke-dasharray="4" stroke-width="1" />
+                    
+                    <line x1="150" y1="150" x2="250" y2="100" stroke="#e81c8f" stroke-width="2.5" marker-end="url(#arrow-vector)" />
+                    
+                    <text x="260" y="105" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">P</text>
+                    <text x="195" y="120" font-family="sans-serif" font-weight="bold" font-size="16" fill="#e5e7eb">a</text>
+                    <text x="85" y="175" font-family="serif" font-style="italic" font-size="14" fill="#e5e7eb">a₁</text>
+
+                    <path d="M 115 175 Q 140 185 175 155" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="145" y="185" font-family="serif" font-style="italic" font-size="16" fill="#facc15">α</text>
+                    
+                    <path d="M 180 155 Q 190 145 200 125" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="195" y="155" font-family="serif" font-style="italic" font-size="16" fill="#facc15">β</text>
+                    
+                    <path d="M 150 110 Q 165 110 180 115" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="165" y="105" font-family="serif" font-style="italic" font-size="16" fill="#facc15">γ</text>
+                </svg>
+                <br>
+                <span>Figure 5</span>
+            </div>
+
+            <p>Then $\overrightarrow{OP} = a_1\underline{i} + a_2\underline{j} + a_3\underline{k}$ and $|\overrightarrow{OP}| = \sqrt{a_1^2 + a_2^2 + a_3^2}$.</p>
+            
+            <p>According to the figure,</p>
+            <div class="math-center">
+                $$ \overrightarrow{OP} = |\overrightarrow{OP}|(\cos\alpha\underline{i} + \cos\beta\underline{j} + \cos\gamma\underline{k}) \text{ and } \frac{\overrightarrow{OP}}{|\overrightarrow{OP}|} = \cos\alpha\underline{i} + \cos\beta\underline{j} + \cos\gamma\underline{k} $$
+            </div>
+            
+            <p style="text-align: center; margin-bottom: 30px;">
+                where $\alpha, \beta, \gamma$ are the angles between $OP$ and coordinate axes $X, Y$, and $Z$ respectively.
+            </p>
+
+            <div class="green-box">
+                <strong>Properties of Direction Angles</strong><br><br>
+                It can be shown that
+                <div class="math-center">
+                    $$ \cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1 $$
+                </div>
+                <br>
+                Moreover, $\frac{\overrightarrow{OP}}{|\overrightarrow{OP}|}$ is the unit vector along the direction of $\overrightarrow{OP}$.<br><br>
+                <ul>
+                    <li>$\cos\alpha, \cos\beta, \cos\gamma$ are called the <strong>direction cosines</strong> of the vector $\overrightarrow{OP}$.</li>
+                    <li>$\cos\alpha : \cos\beta : \cos\gamma$ is called the <strong>direction ratio</strong> of the vector $\overrightarrow{OP}$.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Engineering Mechanics Example: Analyzing a 3D Force Vector</strong><br><br>
+                When determining the resultant forces acting on a spatial joint in structural mechanics, vectors are broken down into their 3D components. 
+                <br><br>
+                Suppose a force vector acting on a structural node is given by $\overrightarrow{F} = 20\underline{i} + 30\underline{j} - 60\underline{k}$ Newtons.
+                <br><br>
+                <strong>1. Calculate the Magnitude:</strong>
+                <div class="math-center">
+                    $$ |\overrightarrow{F}| = \sqrt{20^2 + 30^2 + (-60)^2} = \sqrt{400 + 900 + 3600} = \sqrt{4900} = 70 \text{ N} $$
+                </div>
+                
+                <strong>2. Determine the Direction Cosines:</strong><br>
+                By dividing each component by the overall magnitude, we find the cosines of the angles the force makes with the $X, Y$, and $Z$ axes respectively:
+                <ul style="margin-top: 10px; margin-bottom: 10px;">
+                    <li>$\cos\alpha = \frac{20}{70} = \frac{2}{7}$</li>
+                    <li>$\cos\beta = \frac{30}{70} = \frac{3}{7}$</li>
+                    <li>$\cos\gamma = \frac{-60}{70} = -\frac{6}{7}$</li>
+                </ul>
+                
+                <strong>3. Verification of Identity:</strong><br>
+                We can rigorously verify the fundamental mathematical property of the direction cosines:
+                <div class="math-center">
+                    $$ \left(\frac{2}{7}\right)^2 + \left(\frac{3}{7}\right)^2 + \left(-\frac{6}{7}\right)^2 = \frac{4}{49} + \frac{9}{49} + \frac{36}{49} = \frac{49}{49} = 1 $$
+                </div>
+                This confirms the unit vector identity holds perfectly along the line of action of the structural force.
+            </div>
+            
+            <div class="video-section">
+                <p>Watch the video below to get a better understanding of this:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/EzJP9uwV3ms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on 3-Space Vectors and Direction Cosines.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Find the magnitude of the vector $\overrightarrow{v} = 2\underline{i} - 3\underline{j} + 6\underline{k}$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $5$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $7$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $49$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Which of the following equations is always true for the direction angles $\alpha, \beta, \gamma$ of any 3D vector?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\cos\alpha + \cos\beta + \cos\gamma = 1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\sin^2\alpha + \sin^2\beta + \sin^2\gamma = 1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If $\overrightarrow{F} = 4\underline{i} + 0\underline{j} - 3\underline{k}$, what is the unit vector in the direction of $\overrightarrow{F}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $4\underline{i} - 3\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{4}{25}\underline{i} - \frac{3}{25}\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\frac{4}{5}\underline{i} - \frac{3}{5}\underline{k}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> A position vector has components $\langle 1, 2, 2 \rangle$. What is its direction cosine $\cos\beta$ (with respect to the Y-axis)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\frac{2}{3}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{1}{3}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{2}{9}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> The coordinates of a point $P$ are $(3, -1, 4)$. What is its position vector $\overrightarrow{OP}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $3\underline{i} + \underline{j} + 4\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $4\underline{i} - \underline{j} + 3\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $3\underline{i} - \underline{j} + 4\underline{k}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> If the direction cosines of a vector are $\frac{2}{7}, \frac{3}{7}, -\frac{6}{7}$, what is a valid direction ratio for this vector?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $4 : 9 : 36$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $2 : 3 : -6$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $1 : 1 : -2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 6;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-3space"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-3space");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains the piezoelectric effect utilized in transducers to convert mechanical deformation into electrical signals, alongside intrinsically conducting polymers (ICPs) which conduct electricity via conjugated backbones.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 05 - Piezo & Polymers | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter5-timeline.html" class="back-link">&larr; Back to Chapter 05 Timeline</a>
+        <div class="topic-label">Topic 05</div>
+        <h1>Piezoelectricity & Conductive Polymers</h1>
+        <div class="content-section">
+            <h3>Piezoelectricity</h3>
+            <p>The <strong>Piezoelectric effect</strong> is a unique property where mechanically deforming a material (like compressing it) causes a current to flow and charge its faces<span style="display:none">[cite: 11]</span>. The process works in reverse as well: applying an electrical field to the material will cause it to physically deform<span style="display:none">[cite: 11]</span>.</p>
+            
+            <p>This makes these materials perfect for <strong>Transducers</strong>, which measure changes in pressure, force, or acceleration by converting those physical actions directly into an electrical signal<span style="display:none">[cite: 11]</span>.</p>
+            <ul>
+                <li><strong>Common Examples:</strong> Quartz (SiO<sub>2</sub>), Lead Zirconate Titanate (PZT), and Barium Titanate (BaTiO<sub>3</sub>)<span style="display:none">[cite: 11]</span>.</li>
+            </ul>
+
+            <img src="piezoe.webp" alt="Diagram showing mechanical force converting into piezo-voltage" class="content-image">
+
+            <h3>Conductive Polymers</h3>
+            <p>While traditional polymers (like plastics and rubber) are excellent insulators, <strong>Intrinsically Conducting Polymers (ICPs)</strong> are a special class of polymers that actually conduct electricity<span style="display:none">[cite: 11]</span>.</p>
+            
+            <p>Their conductivity arises from their <strong>conjugated backbone</strong>—a structural chain of alternating double and single bonds<span style="display:none">[cite: 11]</span>. The overlapping p-orbitals in this structure create a system of delocalized &pi;-electrons, allowing electrical charge to flow freely through the polymer<span style="display:none">[cite: 11]</span>.</p>
+            <ul>
+                <li><strong>Common Examples:</strong> Polyaniline (PANI), Polypyrrole (PPy), and PEDOT<span style="display:none">[cite: 11]</span>.</li>
+            </ul>
+
+            <img src="conductive-polymers.png" alt="Chemical structures showing the conjugated backbones of conductive polymers" class="content-image ">
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/wcJXA8IqYl8" 
+        title="Piezoelectric Effect and Conductive Polymers Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Piezoelectricity and Conductive Polymers.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What defines the Piezoelectric effect?</div>
+                <div class="option-box" data-correct="false">A) Generating heat when an electric current is passed through a wire</div>
+                <div class="option-box" data-correct="true">B) Generating an electrical current when a material is mechanically deformed</div>
+                <div class="option-box" data-correct="false">C) Emitting light when exposed to high temperatures</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which of the following components relies heavily on piezoelectric materials to convert physical pressure into electrical signals?</div>
+                <div class="option-box" data-correct="true">A) Transducers</div>
+                <div class="option-box" data-correct="false">B) Capacitors</div>
+                <div class="option-box" data-correct="false">C) Load cells</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. Which of the following is a classic example of a piezoelectric material?</div>
+                <div class="option-box" data-correct="false">A) Polyethylene</div>
+                <div class="option-box" data-correct="false">B) Pure Silicon</div>
+                <div class="option-box" data-correct="true">C) Quartz (SiO2)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What specific structural feature allows Intrinsically Conducting Polymers (ICPs) to conduct electricity?</div>
+                <div class="option-box" data-correct="false">A) A sea of free metallic electrons</div>
+                <div class="option-box" data-correct="true">B) A conjugated backbone with alternating double and single bonds</div>
+                <div class="option-box" data-correct="false">C) A highly ordered Face-Centered Cubic (FCC) lattice</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. Which of the following is an example of an Intrinsically Conducting Polymer?</div>
+                <div class="option-box" data-correct="true">A) Polyaniline (PANI)</div>
+                <div class="option-box" data-correct="false">B) Teflon (PTFE)</div>
+                <div class="option-box" data-correct="false">C) Polyvinyl chloride (PVC)</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

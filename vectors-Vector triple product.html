@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vector Triple Product</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Vector Triple Product. Focus on the definition and geometric interpretation of the vector triple product, its distinction from the scalar triple product, and the fact that its result lies in the plane formed by the original vectors. Cover the BAC-CAB rule and both vector triple product expansion formulas using dot products and cross products. Include evaluating vector triple products using dot products, the non-associative nature of the cross product, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Vector Triple Product</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec2-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Vector Triple Product</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec2-4" style="margin-bottom: 20px;">Vector Triple Product</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Suppose $\underline{a}$, $\underline{b}$, and $\underline{c}$ are three vectors. Then the <strong>vector triple product</strong> of $\underline{a}$, $\underline{b}$, and $\underline{c}$ is defined by:
+                <div class="math-center">
+                    $$ \underline{a} \times (\underline{b} \times \underline{c}) $$
+                </div>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #9ca3af;"><em>Insight:</em> Unlike the scalar triple product $[\underline{a}, \underline{b}, \underline{c}]$ which outputs a single real number, the vector triple product outputs a <strong>new vector</strong>. This is because crossing $\underline{b}$ and $\underline{c}$ gives a vector, and crossing $\underline{a}$ with that result gives yet another vector. Furthermore, this resulting vector will always lie entirely within the plane formed by vectors $\underline{b}$ and $\underline{c}$.</p>
+
+            <div class="green-box">
+                <strong>Theorem(The Expansion Formulas):</strong><br><br>
+                Calculating two cross products manually using large $3 \times 3$ determinants is tedious and prone to algebraic errors. Fortunately, the vector triple product can be expanded into much simpler dot products.<br><br>
+                Suppose $\underline{a}$, $\underline{b}$, and $\underline{c}$ are three vectors. Then:
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li><strong style="color: yellow;">Formula 1:</strong> $\underline{a} \times (\underline{b} \times \underline{c}) = (\underline{a} \cdot \underline{c})\underline{b} - (\underline{a} \cdot \underline{b})\underline{c}$</li>
+                    <li style="margin-top: 15px;"><strong style="color: yellow;">Formula 2:</strong> $(\underline{a} \times \underline{b}) \times \underline{c} = (\underline{a} \cdot \underline{c})\underline{b} - (\underline{b} \cdot \underline{c})\underline{a}$</li>
+                </ul>
+                <hr style="border-top: 1px dashed yellow; border-bottom: none; margin: 15px 0;">
+                <em>Memory Trick (The BAC-CAB Rule):</em> For Formula 1, notice the pattern of the letters on the right side. It spells out "BAC minus CAB". This is the most common way engineers and physicists memorize this expansion identity!
+            </div>
+
+            <div class="yellow-box">
+                <strong>Detailed Example: Using the BAC-CAB Rule</strong><br><br>
+                Let $\underline{a} = \underline{i} + \underline{j}$, $\underline{b} = \underline{i} - \underline{k}$, and $\underline{c} = \underline{j} + \underline{k}$. <br>
+                Evaluate the vector triple product $\underline{a} \times (\underline{b} \times \underline{c})$.<br><br>
+                
+                Instead of doing two separate cross-product determinants, we will use Theorem 2.4.1: <br>
+                $\underline{a} \times (\underline{b} \times \underline{c}) = (\underline{a} \cdot \underline{c})\underline{b} - (\underline{a} \cdot \underline{b})\underline{c}$
+                <br><br>
+                <strong>Step 1: Calculate the dot products (Scalars)</strong>
+                <ul>
+                    <li>$\underline{a} \cdot \underline{c} = (1)(0) + (1)(1) + (0)(1) = 1$</li>
+                    <li>$\underline{a} \cdot \underline{b} = (1)(1) + (1)(0) + (0)(-1) = 1$</li>
+                </ul>
+                <br>
+                <strong>Step 2: Substitute the scalars back into the BAC-CAB formula</strong>
+                <div class="math-center">
+                    $$ \underline{a} \times (\underline{b} \times \underline{c}) = (1)\underline{b} - (1)\underline{c} $$
+                    $$ = 1(\underline{i} - \underline{k}) - 1(\underline{j} + \underline{k}) $$
+                </div>
+                <br>
+                <strong>Step 3: Simplify the resulting vector</strong>
+                <div class="math-center">
+                    $$ = \underline{i} - \underline{k} - \underline{j} - \underline{k} $$
+                    $$ = \underline{i} - \underline{j} - 2\underline{k} $$
+                </div>
+                <em>Notice how much faster this is than computing multiple $3 \times 3$ matrices!</em>
+            </div>
+
+            <p style="margin-bottom: 15px; margin-top: 20px;"><strong>Warning on Associativity:</strong> The cross product is <em>not</em> associative. As shown by comparing the two formulas in Theorem 2.4.1, shifting the parentheses completely changes the result: $\underline{a} \times (\underline{b} \times \underline{c}) \neq (\underline{a} \times \underline{b}) \times \underline{c}$.</p>
+
+            <div class="video-section">
+                <p>Watch this video for a clear, step-by-step breakdown of the Vector Triple Product and the BAC-CAB rule:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/b7JTVLc_aMk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Vector Triple Product and the BAC-CAB expansion rules.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What type of mathematical object is the final result of the vector triple product $\underline{a} \times (\underline{b} \times \underline{c})$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) A scalar (a real number)</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) A new vector</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) A $3 \times 3$ matrix</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> The resulting vector of the triple product $\underline{a} \times (\underline{b} \times \underline{c})$ will always lie entirely within the plane formed by which vectors?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\underline{b}$ and $\underline{c}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\underline{a}$ and $\underline{b}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\underline{a}$ and $\underline{c}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> According to the BAC-CAB rule (Formula 1), what is the correct expansion of $\underline{u} \times (\underline{v} \times \underline{w})$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $(\underline{u} \cdot \underline{v})\underline{w} - (\underline{u} \cdot \underline{w})\underline{v}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $(\underline{v} \cdot \underline{w})\underline{u} - (\underline{u} \cdot \underline{w})\underline{v}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $(\underline{u} \cdot \underline{w})\underline{v} - (\underline{u} \cdot \underline{v})\underline{w}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Using Formula 2, what is the correct expansion for $(\underline{p} \times \underline{q}) \times \underline{r}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $(\underline{p} \cdot \underline{r})\underline{q} - (\underline{p} \cdot \underline{q})\underline{r}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $(\underline{p} \cdot \underline{r})\underline{q} - (\underline{q} \cdot \underline{r})\underline{p}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $(\underline{q} \cdot \underline{r})\underline{p} - (\underline{p} \cdot \underline{q})\underline{r}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Which of the following statements is true regarding the associativity of the cross product?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It is associative only if the vectors are orthogonal.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It is always associative, meaning $\underline{a} \times (\underline{b} \times \underline{c}) = (\underline{a} \times \underline{b}) \times \underline{c}$.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) It is strictly non-associative, so shifting parentheses changes the result.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> If $\underline{a} \cdot \underline{c} = 2$, $\underline{a} \cdot \underline{b} = 3$, $\underline{b} = \underline{i} + \underline{j}$, and $\underline{c} = \underline{j} + \underline{k}$, what is $\underline{a} \times (\underline{b} \times \underline{c})$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $2\underline{i} - \underline{j} - 3\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $3\underline{i} + 2\underline{j} - \underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\underline{i} - 2\underline{j} + 3\underline{k}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 6;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-vectortriple");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers mechanical deformation, engineering vs. true stress and strain calculations, tensile testing procedures, and flexural testing for brittle ceramics.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 01 - Stress & Strain | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter4-timeline.html" class="back-link">&larr; Back to Chapter 04 Timeline</a>
+        <div class="topic-label">Topic 01</div>
+        <h1>Stress, Strain & Testing</h1>
+        <div class="content-section">
+            <p>When in service, materials are subjected to different types of loads and forces (such as tension, compression, bending, shear, and torsion). The application of a force causes a material to change its size and shape—a process known as <strong>deformation</strong>.</p>
+            
+            <h3>Stress (&sigma;)</h3>
+            <p>Stress normalizes the force applied over the cross-sectional area. The unit is Pascals (N/m<sup>2</sup>). Because a specimen stretches and thins out under tension, it can be calculated in two ways:</p>
+            <ul>
+                <li><strong>Engineering Stress:</strong> <code>&sigma; = F / A<sub>0</sub></code> (Force divided by the <em>initial</em> cross-sectional area).</li>
+                <li><strong>True Stress:</strong> <code>&sigma;<sub>T</sub> = F / A<sub>i</sub></code> (Force divided by the <em>instantaneous</em> area).</li>
+            </ul>
+
+            <h3>Strain (&epsilon;)</h3>
+            <p>Strain represents the dimensional change with respect to the original dimensions.</p>
+            <ul>
+                <li><strong>Engineering Strain:</strong> <code>&epsilon; = (l - l<sub>0</sub>) / l<sub>0</sub></code></li>
+                <li><strong>True Strain:</strong> <code>&epsilon;<sub>T</sub> = ln(l<sub>i</sub> / l<sub>0</sub>)</code></li>
+            </ul>
+
+            <img src="specimen.png" alt="Tensile testing machine with specimen and extensometer" class="content-image small">
+
+            <h3>The Tensile Test</h3>
+            <p>The mechanical properties of a material are primarily studied by performing a Tensile Test. A standard "dog-bone" specimen is clamped into a testing machine that elongates it at a constant rate. A <em>load cell</em> measures the instantaneous force, while an <em>extensometer</em> measures the elongation. This generates a Force-Elongation curve, which is then converted into a Stress-Strain diagram.</p>
+            
+            <p><em>Note:</em> For highly brittle materials (like ceramics and glass) that cannot be easily gripped without breaking, a <strong>Flexural Test</strong> (bending) is used instead to find the Modulus of Rupture (MOR).</p>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Stress, Strain, and Tensile Testing.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What is the formula for Engineering Stress?</div>
+                <div class="option-box" data-correct="false">A) Force / Instantaneous Area</div>
+                <div class="option-box" data-correct="true">B) Force / Initial Area</div>
+                <div class="option-box" data-correct="false">C) Change in Length / Initial Length</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which instrument on a tensile testing machine is responsible for directly measuring the elongation of the specimen?</div>
+                <div class="option-box" data-correct="false">A) Load cell</div>
+                <div class="option-box" data-correct="true">B) Extensometer</div>
+                <div class="option-box" data-correct="false">C) Crosshead</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. How does True Stress differ from Engineering Stress?</div>
+                <div class="option-box" data-correct="true">A) True stress uses the instantaneous cross-sectional area as the specimen stretches.</div>
+                <div class="option-box" data-correct="false">B) True stress only measures compressive forces.</div>
+                <div class="option-box" data-correct="false">C) True stress does not factor in the force applied.</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What are the standard units for Stress?</div>
+                <div class="option-box" data-correct="false">A) Newtons (N)</div>
+                <div class="option-box" data-correct="false">B) Joules (J)</div>
+                <div class="option-box" data-correct="true">C) Pascals (N/m&sup2;)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. Why is a Flexural (bending) test often used instead of a Tensile test for ceramics?</div>
+                <div class="option-box" data-correct="false">A) Ceramics are too soft to grip.</div>
+                <div class="option-box" data-correct="true">B) It is difficult to grip brittle materials without fracturing them in tension.</div>
+                <div class="option-box" data-correct="false">C) Ceramics do not experience strain.</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

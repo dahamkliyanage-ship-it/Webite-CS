@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers key forms of metal corrosion: uniform corrosion, galvanic corrosion (Area Effect), oxygen concentration cells, and autocatalytic crevice corrosion.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Forms of Corrosion | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter8-timeline.html" class="back-link">&larr; Back to Chapter 08 Timeline</a>
+        <div class="topic-label">Topic 02</div>
+        <h1>Forms of Metal Corrosion</h1>
+        <div class="content-section">
+            <p>Engineers categorize corrosion into eight main forms. The most critical ones include:</p>
+
+            <h3>1. Uniform / General Corrosion</h3>
+            <p>This occurs uniformly over the entire exposed area of the metal, such as a piece of iron rusting in the atmosphere. Approximately 30% of all corrosion failures are due to uniform corrosion.</p>
+
+            <h3>2. Galvanic Corrosion</h3>
+            <p>Occurs when two different metals are in contact in a corrosive environment. The metal situated lower on the Galvanic Series (more active/negative) becomes the anode and corrodes, while the other is protected. <strong>The Area Effect:</strong> The smaller the anode is relative to the cathode, the more severe the localized corrosion will be.</p>
+            <img src="zn.png" alt="Diagram showing Zinc corroding while protecting Iron at the junction" class="content-image">
+
+            <h3>3. Oxygen Concentration Cells</h3>
+            <p>Galvanic corrosion can occur within a <em>single piece of metal</em> if there is an oxygen imbalance. For example, a steel pipe partly immersed in water will eventually deplete the oxygen below the water level. Because the submerged area has lower oxygen, it becomes the anode and begins to corrode severely just below the waterline.</p>
+
+            <h3>4. Crevice Corrosion (CC)</h3>
+            <p>If a crevice (a narrow crack or opening like a riveted joint) is in contact with liquid, it experiences restricted convection. The crevice becomes depleted of oxygen, acts as the anode, and corrodes heavily.</p>
+            <p>This process is highly destructive because it is <strong>autocatalytic</strong>. If the water contains salts (like NaCl), metal chlorides hydrolize to form acids inside the crevice (<code>M<sup>+</sup>Cl<sup>-</sup> + H<sub>2</sub>O &rarr; H<sup>+</sup>Cl<sup>-</sup> + MOH</code>). The formation of this acid drastically increases the rate of corrosion.</p>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to understand the fundamental electrochemistry driving different forms of corrosion:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/E7yWy52g3Go" 
+        title="Types of Corrosion Explained Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on the forms of corrosion.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Approximately what percentage of all corrosion failures are due to Uniform/General corrosion?</div>
+                <div class="option-box" data-correct="false">A) 10%</div>
+                <div class="option-box" data-correct="true">B) 30%</div>
+                <div class="option-box" data-correct="false">C) 75%</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. In Galvanic corrosion, what dictates the severity of the corrosion via the "Area Effect"?</div>
+                <div class="option-box" data-correct="false">A) The larger the anode, the faster it corrodes</div>
+                <div class="option-box" data-correct="true">B) The smaller the anode relative to the cathode, the more severe the corrosion</div>
+                <div class="option-box" data-correct="false">C) The physical distance between the two metals</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. In an Oxygen Concentration Cell (like a steel rod half-submerged in water), which part of the metal becomes the corroding anode?</div>
+                <div class="option-box" data-correct="false">A) The area exposed to the open air (high oxygen)</div>
+                <div class="option-box" data-correct="false">B) The exact waterline boundary</div>
+                <div class="option-box" data-correct="true">C) The submerged area depleted of oxygen (low oxygen)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Why does Crevice Corrosion accelerate so rapidly?</div>
+                <div class="option-box" data-correct="true">A) It is an autocatalytic process where trapped salts form acids inside the crevice</div>
+                <div class="option-box" data-correct="false">B) Crevices naturally attract high concentrations of pure oxygen</div>
+                <div class="option-box" data-correct="false">C) The metal inside a crevice structurally shifts to a more brittle phase</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. When looking at a Galvanic Series table, which material is more likely to corrode when coupled?</div>
+                <div class="option-box" data-correct="true">A) The metal placed lower on the list (most active / anodic)</div>
+                <div class="option-box" data-correct="false">B) The metal placed higher on the list (most noble / cathodic)</div>
+                <div class="option-box" data-correct="false">C) Whichever metal is physically thicker</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

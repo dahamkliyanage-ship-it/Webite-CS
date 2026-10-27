@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scalar Triple Product</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Scalar Triple Product of Vectors. Focus on the definition and calculation of the scalar triple product using the dot product, cross product, and determinant method, and its scalar-valued result. Cover the dot-cross interchange property, cyclic and anti-cyclic permutations, and the use of the scalar triple product to test the coplanarity of three vectors. Include geometrical applications involving the volume of a parallelepiped and a tetrahedron, calculating volumes from vectors and 3D coordinates, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Scalar Triple Product of Vectors</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec2-3" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Scalar Triple Product</a></li>
+                <li><a href="#sec2-3-1">Properties & Coplanarity</a></li>
+                <li><a href="#applications">Geometrical Applications</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec2-3" style="margin-bottom: 20px;">Scalar Triple Product of Vectors</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>Suppose $\underline{a}$, $\underline{b}$, and $\underline{c}$ are three vectors. Then the <strong>scalar triple product</strong> of $\underline{a}$, $\underline{b}$, and $\underline{c}$ is defined by taking the dot product of the first vector with the cross product of the other two: $\underline{a} \cdot (\underline{b} \times \underline{c})$. It is commonly denoted by $[\underline{a}, \underline{b}, \underline{c}]$.</li>
+                    <li style="margin-top: 10px;">If $\underline{a} = a_1\underline{i} + a_2\underline{j} + a_3\underline{k}$, $\underline{b} = b_1\underline{i} + b_2\underline{j} + b_3\underline{k}$, and $\underline{c} = c_1\underline{i} + c_2\underline{j} + c_3\underline{k}$, then the product can be computed rapidly using a $3 \times 3$ determinant:</li>
+                </ul>
+                <div class="math-center">
+                    $$ \underline{a} \cdot (\underline{b} \times \underline{c}) = \begin{vmatrix} a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \\ c_1 & c_2 & c_3 \end{vmatrix} $$
+                </div>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #9ca3af;"><em>Insight:</em> The result of a scalar triple product is always a single real number (a scalar), not a vector. This happens because evaluating the cross product $(\underline{b} \times \underline{c})$ yields a vector, and taking the dot product of $\underline{a}$ with this new vector yields a scalar.</p>
+
+            <div class="yellow-box">
+                <strong>Detailed Example 1: Evaluating a Scalar Triple Product</strong><br><br>
+                Let $\underline{a} = 2\underline{i} + 1\underline{j} + 0\underline{k}$, $\underline{b} = 1\underline{i} - 1\underline{j} + 3\underline{k}$, and $\underline{c} = 0\underline{i} + 1\underline{j} + 2\underline{k}$. Find the scalar triple product $[\underline{a}, \underline{b}, \underline{c}]$.<br><br>
+                Set up the determinant using the components of the three vectors in the exact order they are listed:
+                <div class="math-center">
+                    $$ \begin{vmatrix} 2 & 1 & 0 \\ 1 & -1 & 3 \\ 0 & 1 & 2 \end{vmatrix} $$
+                </div>
+                Expand along the first row (the components of $\underline{a}$):
+                <div class="math-center">
+                    $$ = 2 \begin{vmatrix} -1 & 3 \\ 1 & 2 \end{vmatrix} - 1 \begin{vmatrix} 1 & 3 \\ 0 & 2 \end{vmatrix} + 0 \begin{vmatrix} 1 & -1 \\ 0 & 1 \end{vmatrix} $$
+                    $$ = 2((-1)(2) - (3)(1)) - 1((1)(2) - (3)(0)) + 0 $$
+                    $$ = 2(-2 - 3) - 1(2 - 0) $$
+                    $$ = 2(-5) - 2 = -10 - 2 = -12 $$
+                </div>
+                The scalar triple product evaluates to $-12$.
+            </div>
+
+            <h2 id="sec2-3-1" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Properties & Coplanarity</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Vectors that lie perfectly flat on the same plane (or can be shifted to lie on the same plane) in a three-dimensional space are called <strong>coplanar vectors</strong>.
+            </div>
+
+            <div class="green-box">
+                <strong>Theorem:</strong> For any given three vectors $\underline{a}$, $\underline{b}$, and $\underline{c}$:
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li><strong>Dot/Cross Interchange:</strong> $\underline{a} \cdot (\underline{b} \times \underline{c}) = (\underline{a} \times \underline{b}) \cdot \underline{c}$. The operations can be swapped without changing the result.</li>
+                    <li style="margin-top: 10px;"><strong>Cyclic Permutation:</strong> $\underline{a} \cdot (\underline{b} \times \underline{c}) = \underline{b} \cdot (\underline{c} \times \underline{a}) = \underline{c} \cdot (\underline{a} \times \underline{b})$. Shifting the vectors in a cycle preserves the value because shifting rows twice in a determinant keeps the sign identical.</li>
+                    <li style="margin-top: 10px;"><strong>Anti-Cyclic Permutation:</strong> Swapping any two adjacent vectors introduces a negative sign, e.g., $[\underline{a}, \underline{b}, \underline{c}] = -[\underline{a}, \underline{c}, \underline{b}]$.</li>
+                    <li style="margin-top: 10px;"><strong>Coplanarity Test:</strong> If $\underline{a} \cdot (\underline{b} \times \underline{c}) = 0$, then the vectors $\underline{a}$, $\underline{b}$, and $\underline{c}$ are absolutely <strong>coplanar</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Detailed Example 2: Checking for Coplanarity</strong><br><br>
+                Determine mathematically if the vectors $\underline{u} = \underline{i} + 2\underline{j} - \underline{k}$, $\underline{v} = 3\underline{i} + \underline{j} + 4\underline{k}$, and $\underline{w} = \underline{i} - 3\underline{j} + 6\underline{k}$ lie on the same plane.<br><br>
+                We compute the scalar triple product. If the result is exactly $0$, they are coplanar.
+                <div class="math-center">
+                    $$ [\underline{u}, \underline{v}, \underline{w}] = \begin{vmatrix} 1 & 2 & -1 \\ 3 & 1 & 4 \\ 1 & -3 & 6 \end{vmatrix} $$
+                </div>
+                <div class="math-center">
+                    $$ = 1 \begin{vmatrix} 1 & 4 \\ -3 & 6 \end{vmatrix} - 2 \begin{vmatrix} 3 & 4 \\ 1 & 6 \end{vmatrix} + (-1) \begin{vmatrix} 3 & 1 \\ 1 & -3 \end{vmatrix} $$
+                    $$ = 1(6 - (-12)) - 2(18 - 4) - 1(-9 - 1) $$
+                    $$ = 1(18) - 2(14) - 1(-10) = 18 - 28 + 10 = 0 $$
+                </div>
+                Because the scalar triple product equals $0$, we have proven that vectors $\underline{u}$, $\underline{v}$, and $\underline{w}$ are strictly <strong>coplanar</strong>.
+            </div>
+
+            <h2 id="applications" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Geometrical Applications</h2>
+            
+            <p style="margin-bottom: 15px;">The scalar triple product is not just an abstract number; it represents physical 3D space. Specifically, it calculates the volume of the geometric shapes formed when you place three vectors tail-to-tail.</p>
+
+            <div class="image-box">
+                <svg viewBox="0 0 400 300" style="max-width: 100%; height: auto; max-width: 450px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-solid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e5e7eb" />
+                        </marker>
+                        <marker id="arrow-normal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Back lines (Dashed) -->
+                    <line x1="210" y1="200" x2="280" y2="200" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4" />
+                    <line x1="210" y1="200" x2="160" y2="225" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4" />
+                    <line x1="210" y1="200" x2="250" y2="135" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4" />
+
+                    <!-- Vector c (Dashed base) -->
+                    <line x1="100" y1="225" x2="205" y2="202" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-solid)" />
+                    <text x="145" y="210" font-family="serif" font-style="italic" font-weight="bold" font-size="16" fill="#e5e7eb">c</text>
+
+                    <!-- Vector b (Solid base) -->
+                    <line x1="100" y1="225" x2="275" y2="225" stroke="#e5e7eb" stroke-width="2" marker-end="url(#arrow-solid)" />
+                    <text x="185" y="240" font-family="serif" font-style="italic" font-weight="bold" font-size="16" fill="#e5e7eb">b</text>
+
+                    <!-- Vector a (Solid upward) -->
+                    <line x1="100" y1="225" x2="140" y2="160" stroke="#e5e7eb" stroke-width="2" marker-end="url(#arrow-solid)" />
+                    <text x="110" y="185" font-family="serif" font-style="italic" font-weight="bold" font-size="16" fill="#e5e7eb">a</text>
+
+                    <!-- Vector b x c (Normal) -->
+                    <line x1="100" y1="225" x2="100" y2="105" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-normal)" />
+                    <text x="115" y="115" font-family="serif" font-style="italic" font-weight="bold" font-size="16" fill="#38bdf8">b x c</text>
+                    
+                    <!-- Angle Phi -->
+                    <path d="M 100 195 Q 105 190 115 200" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="105" y="195" font-family="serif" font-style="italic" font-size="16" fill="#facc15">ϕ</text>
+
+                    <!-- Rest of Parallelepiped solid lines -->
+                    <line x1="280" y1="225" x2="350" y2="200" stroke="#e5e7eb" stroke-width="1.5" />
+                    <line x1="350" y1="200" x2="280" y2="200" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4" /> 
+                    <line x1="140" y1="160" x2="315" y2="160" stroke="#e5e7eb" stroke-width="1.5" />
+                    <line x1="140" y1="160" x2="250" y2="135" stroke="#e5e7eb" stroke-width="1.5" />
+                    <line x1="315" y1="160" x2="385" y2="135" stroke="#e5e7eb" stroke-width="1.5" />
+                    <line x1="250" y1="135" x2="385" y2="135" stroke="#e5e7eb" stroke-width="1.5" />
+                    <line x1="315" y1="160" x2="280" y2="225" stroke="#e5e7eb" stroke-width="1.5" />
+                    <line x1="385" y1="135" x2="350" y2="200" stroke="#e5e7eb" stroke-width="1.5" />
+                </svg>
+                <br>
+                <span>Figure 2: Parallelepiped Volume formed by three adjacent vectors</span>
+            </div>
+
+            <div class="blue-box">
+                <strong>Volume Formulas</strong>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>The volume of the <strong>parallelepiped</strong> with $\underline{a}$, $\underline{b}$, and $\underline{c}$ as adjacent edges is calculated as:
+                        <div class="math-center"> $V_{\text{parallelepiped}} = |\underline{a} \cdot (\underline{b} \times \underline{c})|$ </div>
+                        <em>(Absolute value is used because volume must always be a positive physical quantity).</em>
+                    </li>
+                    <li style="margin-top: 15px;">The volume of the <strong>tetrahedron</strong> (a triangular pyramid) with $\underline{a}$, $\underline{b}$, and $\underline{c}$ as adjacent edges is exactly one-sixth of the parallelepiped:
+                        <div class="math-center"> $V_{\text{tetrahedron}} = \frac{1}{6} |\underline{a} \cdot (\underline{b} \times \underline{c})|$ </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Detailed Example 3: Finding the Volume of a Tetrahedron from Coordinates</strong><br><br>
+                Suppose you are given four points in 3D space: $A(1,0,1)$, $B(2,3,0)$, $C(-1,1,4)$, and $D(0,3,2)$. Find the volume of the tetrahedron formed by these vertices.<br><br>
+                <strong>Step 1:</strong> Form three vectors originating from the same point (let's use $A$):
+                <ul>
+                    <li>$\underline{AB} = (2-1)\underline{i} + (3-0)\underline{j} + (0-1)\underline{k} = \langle 1, 3, -1 \rangle$</li>
+                    <li>$\underline{AC} = (-1-1)\underline{i} + (1-0)\underline{j} + (4-1)\underline{k} = \langle -2, 1, 3 \rangle$</li>
+                    <li>$\underline{AD} = (0-1)\underline{i} + (3-0)\underline{j} + (2-1)\underline{k} = \langle -1, 3, 1 \rangle$</li>
+                </ul>
+                <br>
+                <strong>Step 2:</strong> Compute the scalar triple product $[\underline{AB}, \underline{AC}, \underline{AD}]$:
+                <div class="math-center">
+                    $$ \begin{vmatrix} 1 & 3 & -1 \\ -2 & 1 & 3 \\ -1 & 3 & 1 \end{vmatrix} = 1(1 - 9) - 3(-2 - (-3)) + (-1)(-6 - (-1)) $$
+                    $$ = 1(-8) - 3(1) - 1(-5) = -8 - 3 + 5 = -6 $$
+                </div>
+                <br>
+                <strong>Step 3:</strong> Apply the tetrahedron volume formula:
+                <div class="math-center">
+                    $$ V = \frac{1}{6} |-6| = \frac{1}{6}(6) = 1 \text{ cubic unit} $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this visual explanation of the Scalar Triple Product and Volume computation:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/6NeAK0rJwlk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Scalar Triple Product, Coplanarity, and Volume calculations.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What type of mathematical object is the final result of a scalar triple product $\underline{a} \cdot (\underline{b} \times \underline{c})$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) A $3 \times 3$ matrix</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A vector quantity</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) A scalar (a real number)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Based on the property of cyclic permutation, which of the following is exactly equal to $\underline{a} \cdot (\underline{b} \times \underline{c})$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\underline{a} \cdot (\underline{c} \times \underline{b})$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\underline{b} \cdot (\underline{c} \times \underline{a})$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $-(\underline{b} \cdot (\underline{c} \times \underline{a}))$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If the scalar triple product of three non-zero vectors $\underline{u}$, $\underline{v}$, and $\underline{w}$ equals exactly $0$, what can we conclude about these vectors?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) They are coplanar (lie on the same plane).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) They are all orthogonal to each other.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) They are collinear (lie on the same line).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Three adjacent edges of a parallelepiped are given by vectors $\underline{p}, \underline{q}$, and $\underline{r}$. If the determinant calculation $[\underline{p}, \underline{q}, \underline{r}]$ evaluates to $-15$, what is the geometric volume of the parallelepiped?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $-15$ cubic units</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $2.5$ cubic units</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $15$ cubic units</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If the volume of a parallelepiped formed by three vectors is exactly $24$ cubic units, what is the volume of the <em>tetrahedron</em> formed by those exact same three vectors?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $12$ cubic units</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $4$ cubic units</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $8$ cubic units</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Calculate the scalar triple product of the standard basis vectors $\underline{i}, \underline{j}, \underline{k}$ in that exact order. (Hint: evaluate $\underline{i} \cdot (\underline{j} \times \underline{k})$).</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $-1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 6;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-scalartriple"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-scalartriple");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

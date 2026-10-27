@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains atomic bonding in materials, detailing strong primary bonds (ionic, covalent, metallic) and weak secondary bonds (Van der Waal's, hydrogen).">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 04 - Atomic Bonding | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="chapter2-timeline.html" class="back-link">&larr; Back to Chapter 02 Timeline</a>
+
+        <div class="topic-label">Topic 04</div>
+        <h1>Atomic Bonding</h1>
+
+        <div class="content-section">
+            <p>Atomic bonds dictate the physical and mechanical limits of an engineering material. Bonds are classified into strong Primary bonds (where valence electrons are present) and weak Secondary bonds (where the outer shell is completely filled).</p>
+
+            <h3>Primary Bonds (Strong)</h3>
+            <ul>
+                <li><strong>Ionic Bonds:</strong> Formed via electron transfer between highly electropositive metals and highly electronegative non-metals (e.g., NaCl). The bond is created by the resulting strong electrostatic attraction between cations and anions. These materials are generally non-directional, hard, brittle, and act as electrical insulators.</li>
+                <li><strong>Covalent Bonds:</strong> Formed by the mutual sharing of valence electrons between electronegative elements located close to each other on the periodic table (e.g., F<sub>2</sub>, CH<sub>4</sub>, GaAs). While the intra-molecular covalent bonds are very strong, the material may have a low melting point (like Methane at -183&deg;C) if only weak secondary bonds exist between the molecules themselves.</li>
+                <li><strong>Metallic Bonds:</strong> Exists in all metallic elements as an arrangement of positive ion cores floating in a "sea" of free electrons. These free-moving electrons are what grant metals their high electrical and thermal conductivity, as well as their easily deformable (ductile) mechanical nature.</li>
+            </ul>
+
+            <div class="image-row">
+                <img src="nacl.jpg" alt="Diagram showing electron transfer in ionic bonding" class="content-image small">
+                <img src="Metallic-Bonding.png" alt="Diagram showing a sea of free electrons in metallic bonding" class="content-image small">
+            </div>
+
+            <h3>Secondary Bonds (Weak)</h3>
+            <ul>
+                <li><strong>Van der Waal's Bonds:</strong> Present between inert gases or symmetric molecules. Occurs when an electron cloud deforms, causing the center of positive and negative charges to shift and create a temporary dipole. Weak electrostatic attraction between these dipoles creates the bond (e.g., holding together the layers of Graphite).</li>
+                <li><strong>Hydrogen Bonds:</strong> Formed between polar covalently bonded molecules containing Hydrogen (e.g., HF, H<sub>2</sub>O, NH<sub>3</sub>). The hydrogen proton acts as a bridge between strongly electronegative atoms.</li>
+            </ul>
+
+            <img src="HF.png" alt="Diagram showing hydrogen bonding between HF molecules" class="content-image small">
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/QXT4OVM4vXI" 
+        title="Atomic Bonding: Ionic, Covalent, and Metallic Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Atomic Bonding.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Which primary bond is formed by the mutual sharing of valence electrons?</div>
+                <div class="option-box" data-correct="false">A) Ionic</div>
+                <div class="option-box" data-correct="true">B) Covalent</div>
+                <div class="option-box" data-correct="false">C) Metallic</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Why are metals exceptionally good conductors of electricity and heat?</div>
+                <div class="option-box" data-correct="false">A) They form rigid, highly directional bonds</div>
+                <div class="option-box" data-correct="true">B) Their structure contains a "sea" of free electrons</div>
+                <div class="option-box" data-correct="false">C) They rely on weak Van der Waal's forces</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What type of bond holds together the different layers of Graphite?</div>
+                <div class="option-box" data-correct="false">A) Covalent bonds</div>
+                <div class="option-box" data-correct="false">B) Hydrogen bonds</div>
+                <div class="option-box" data-correct="true">C) Van der Waal's bonds</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Ionic bonds are most likely to form between which two types of elements?</div>
+                <div class="option-box" data-correct="true">A) Highly electropositive metals and highly electronegative non-metals</div>
+                <div class="option-box" data-correct="false">B) Two noble gases</div>
+                <div class="option-box" data-correct="false">C) Two transition metals</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. Which of the following compounds exhibits Hydrogen bonding?</div>
+                <div class="option-box" data-correct="false">A) NaCl</div>
+                <div class="option-box" data-correct="true">B) H2O</div>
+                <div class="option-box" data-correct="false">C) CH4</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            questionBlocks.forEach(block => {
+                const options = block.querySelectorAll('.option-box');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+<script src="materials_chatbot.js"></script>
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

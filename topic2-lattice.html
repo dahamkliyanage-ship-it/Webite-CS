@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers crystal space lattices, unit cell parameters, coordination numbers for cubic structures (SC, BCC, FCC), and calculating the Atomic Packing Factor (APF).">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Space Lattice | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter3-timeline.html" class="back-link">&larr; Back to Chapter 03 Timeline</a>
+        <div class="topic-label">Topic 02</div>
+        <h1>Space Lattice & Unit Cells</h1>
+        <div class="content-section">
+            <p>The atomic arrangement within a crystalline material is usually described using a <strong>Space Lattice</strong>. A space lattice is an infinite set of equally spaced points in a space<span style="display:none">[cite: 12, 13]</span>. A set of lines is often drawn to connect these points simply to provide a useful visual guide to the eye—the lattice itself is the points, not the lines<span style="display:none">[cite: 12]</span>.</p>
+            
+            <p>A <strong>Unit Cell</strong> is defined as a parallelepiped with its origin at a specific lattice point<span style="display:none">[cite: 12]</span>. It is the basic structural building block of the crystal structure, defined by its lattice parameters (edge lengths a, b, c) and interaxial angles (&alpha;, &beta;, &gamma;)<span style="display:none">[cite: 12]</span>.</p>
+            <img src="unitcell.png" alt="Diagram of a unit cell showing parameters a, b, c and angles alpha, beta, gamma" class="content-image small">
+
+            <p><strong>Key Metrics in Crystal Lattices:</strong></p>
+            <ul>
+                <li><strong>Coordination Number:</strong> The number of nearest neighbors an atom possesses<span style="display:none">[cite: 12]</span>.
+                    <ul>
+                        <li>Simple Cubic (SC) = 6</li>
+                        <li>Body-Centered Cubic (BCC) = 8</li>
+                        <li>Face-Centered Cubic (FCC) = 12</li>
+                    </ul>
+                </li>
+                <li><strong>Atomic Packing Factor (APF):</strong> Calculated as the (Volume of atoms in a unit cell) divided by the (Volume of the unit cell)<span style="display:none">[cite: 12]</span>.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/HCWwRh5CXYU" 
+        title="Unit Cells and Crystal Systems Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Space Lattices and Unit Cells.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. How is a "Space Lattice" formally defined?</div>
+                <div class="option-box" data-correct="false">A) A finite grid of intersecting lines</div>
+                <div class="option-box" data-correct="true">B) An infinite set of equally spaced points in a space</div>
+                <div class="option-box" data-correct="false">C) The physical bonds between adjacent atoms</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What is the coordination number of a Face-Centered Cubic (FCC) structure?</div>
+                <div class="option-box" data-correct="false">A) 6</div>
+                <div class="option-box" data-correct="false">B) 8</div>
+                <div class="option-box" data-correct="true">C) 12</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. How is the Atomic Packing Factor (APF) calculated?</div>
+                <div class="option-box" data-correct="false">A) Volume of the unit cell / Volume of atoms</div>
+                <div class="option-box" data-correct="true">B) Volume of atoms in a unit cell / Volume of the unit cell</div>
+                <div class="option-box" data-correct="false">C) Mass of atoms in a unit cell / Volume of the unit cell</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What is the coordination number of a Body-Centered Cubic (BCC) structure?</div>
+                <div class="option-box" data-correct="false">A) 6</div>
+                <div class="option-box" data-correct="true">B) 8</div>
+                <div class="option-box" data-correct="false">C) 12</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

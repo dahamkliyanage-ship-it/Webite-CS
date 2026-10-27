@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explores advanced functional materials, focusing on piezoelectric applications like microphones and actuators, and the photocatalytic, super-hydrophilic mechanisms of TiO2 self-cleaning surfaces.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 03 - Piezo & Surfaces | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter7-timeline.html" class="back-link">&larr; Back to Chapter 07 Timeline</a>
+        <div class="topic-label">Topic 03</div>
+        <h1>Piezoelectricity & Self-Cleaning Surfaces</h1>
+        <div class="content-section">
+            <h3>Piezoelectric Applications</h3>
+            <p>The piezoelectric effect allows materials to translate mechanical vibrations into electrical signals, and vice-versa. This functional property is used extensively across multiple industries:</p>
+            <ul>
+                <li><strong>Microphones:</strong> Sound vibrations physically deform a piezoelectric crystal inside the diaphragm, converting the sound into a storable electrical signal.</li>
+                <li><strong>Kinetic Energy Harvesting:</strong> "Smart Pavements" utilize footsteps to compress piezoelectric ceramics, harvesting ambient kinetic energy to power local lighting.</li>
+                <li><strong>Actuators:</strong> In an Atomic Force Microscope (AFM), a piezoelectric scanner expands or contracts when a specific voltage is applied, allowing for incredibly precise nano-scale movements.</li>
+            </ul>
+
+            <img src="scanner.webp" alt="Diagram of an Atomic Force Microscope utilizing a piezoelectric scanner" class="content-image small">
+
+            <h3>TiO<sub>2</sub> in Self-Cleaning Surfaces</h3>
+            <p>Self-cleaning windows are coated with a nanoscale layer of Titanium Dioxide (TiO<sub>2</sub>), which functions via two distinct mechanisms:</p>
+            <ol>
+                <li><strong>Photocatalytic:</strong> The coating is activated by ultraviolet (UV) rays from the sun, causing a series of chemical reactions that break down and loosen dust and organic particles.</li>
+                <li><strong>Super Hydrophilic:</strong> The TiO<sub>2</sub> alters the surface tension of the glass. When it rains, rather than beading up, the water forms a perfectly flat, even sheet that seamlessly washes away the decomposed dust particles.</li>
+            </ol>
+        </div>
+
+<!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to explore how these advanced functional materials are utilized in sensors, batteries, and smart surfaces:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/dPgx9EH0e7g" 
+        title="Nanotechnology Applications in Sensors and Batteries Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Piezo applications and TiO2 surfaces.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. How do piezoelectric microphones function?</div>
+                <div class="option-box" data-correct="false">A) They use a laser to read sound waves</div>
+                <div class="option-box" data-correct="true">B) Sound vibrations deform a crystal, which converts the mechanical energy into an electrical signal</div>
+                <div class="option-box" data-correct="false">C) They use thermal heat to generate magnetic fields</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. In an Atomic Force Microscope, what is the role of the piezoelectric scanner?</div>
+                <div class="option-box" data-correct="true">A) It acts as an actuator, using applied voltage to create nano-precision movements</div>
+                <div class="option-box" data-correct="false">B) It acts as a camera lens to bend light</div>
+                <div class="option-box" data-correct="false">C) It measures the temperature of the sample</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What specific type of energy triggers the photocatalytic reaction in TiO2 self-cleaning windows?</div>
+                <div class="option-box" data-correct="false">A) Infrared radiation</div>
+                <div class="option-box" data-correct="true">B) Ultraviolet (UV) rays</div>
+                <div class="option-box" data-correct="false">C) Kinetic friction</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Aside from breaking down dirt, what other property does TiO2 impart to a self-cleaning window?</div>
+                <div class="option-box" data-correct="true">A) It makes the surface super hydrophilic, causing water to form an even sheet</div>
+                <div class="option-box" data-correct="false">B) It makes the surface superhydrophobic, causing water to aggressively bead up</div>
+                <div class="option-box" data-correct="false">C) It turns the window completely opaque</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. "Smart Pavements" utilize piezoelectric materials for what specific purpose?</div>
+                <div class="option-box" data-correct="false">A) To act as a gas sensor</div>
+                <div class="option-box" data-correct="false">B) To melt snow using thermal conductivity</div>
+                <div class="option-box" data-correct="true">C) To harvest kinetic energy from footsteps to generate electricity</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

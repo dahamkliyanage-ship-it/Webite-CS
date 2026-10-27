@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta name="bot-context" content="Covers the four-step material selection process: translating requirements, screening by constraints, ranking via the Material Index, and finding supporting info.">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Topic 01 - Selection Process | MT1023</title>
+
+    <link rel="stylesheet" href="style-materials.css">
+
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="chapter9-timeline.html" class="back-link">&larr; Back to Chapter 09 Timeline</a>
+
+        <div class="topic-label">Topic 01</div>
+
+        <h1>The Selection Process</h1>
+
+        <div class="content-section">
+
+            <p>Selecting the most suitable material for a specific engineering application is a primary responsibility of an engineer. Because the "kingdom" of materials is so vast, engineers follow a systematic, four-step process to find the best match between the property-profiles of available materials and the requirements of the design<span style="display:none">[cite: 14]</span>.</p>
+
+
+
+            <img src="selection.png" alt="Flowchart showing the four steps of the material selection process" class="content-image small">
+
+
+
+            <h3>Step 1: Translation</h3>
+
+            <p>The first step is translating the design requirements into a clear statement composed of four specific elements<span style="display:none">[cite: 14]</span>:</p>
+
+            <ul>
+
+                <li><strong>Function:</strong> What exactly does the component do?</li>
+
+                <li><strong>Constraints:</strong> What non-negotiable conditions must be met? (e.g., Must meet a specific target value of stiffness, strength, electrical resistivity, or cost limit).</li>
+
+                <li><strong>Objective:</strong> What metric is to be maximized or minimized? (e.g., Minimize mass, minimize volume, or maximize energy storage).</li>
+
+                <li><strong>Free Variables:</strong> What parameters of the problem is the designer free to change? (e.g., Thickness, shape, or exact material choice).</li>
+
+            </ul>
+
+
+
+            <h3>Step 2: Screening</h3>
+
+            <p>Screening involves completely eliminating materials that simply cannot do the job. This elimination is based strictly on the <strong>Constraints</strong> defined in the Translation phase. For example, if a constraint dictates that electrical resistivity must be greater than a certain value, all materials below that value are immediately screened out<span style="display:none">[cite: 14]</span>.</p>
+
+
+
+            <h3>Step 3: Ranking</h3>
+
+            <p>Ranking involves taking the surviving (screened) materials and sorting them to find the ones that do the job <em>best</em>. This is based entirely on the <strong>Objective</strong>. The specific property (or group of properties) that maximizes performance for the given design is called the <strong>Material Index (M)</strong>. If the objective is to maximize thermal conductivity (&lambda;), then M = &lambda;<span style="display:none">[cite: 14]</span>.</p>
+
+
+
+            <h3>Step 4: Seeking Supporting Information</h3>
+
+            <p>The final step involves researching the "family history" of the top-ranked candidates. This means checking data-sheets for practical realities like ease of fabrication, exact cost, local availability, and environmental impact before making the final choice<span style="display:none">[cite: 14]</span>.</p>
+
+        </div>
+
+
+
+        <div class="quiz-container">
+
+            <div class="quiz-title">Practice Exercises</div>
+
+            <div class="quiz-desc">Test your knowledge on the Selection Process.</div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">1. Which step of the selection process involves completely eliminating materials that cannot meet non-negotiable conditions?</div>
+
+                <div class="option-box" data-correct="false">A) Translation</div>
+
+                <div class="option-box" data-correct="true">B) Screening</div>
+
+                <div class="option-box" data-correct="false">C) Ranking</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">2. During the "Translation" step, what are "Free Variables"?</div>
+
+                <div class="option-box" data-correct="true">A) Parameters of the problem that the designer is free to change (like shape or thickness)</div>
+
+                <div class="option-box" data-correct="false">B) The conditions that must not be broken under any circumstance</div>
+
+                <div class="option-box" data-correct="false">C) The metrics that must be explicitly maximized or minimized</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">3. The "Ranking" step sorts the surviving materials based on what specific design requirement?</div>
+
+                <div class="option-box" data-correct="false">A) Constraints</div>
+
+                <div class="option-box" data-correct="false">B) Free Variables</div>
+
+                <div class="option-box" data-correct="true">C) Objective</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">4. What is the "Material Index" (M)?</div>
+
+                <div class="option-box" data-correct="false">A) The atomic weight of the final material chosen</div>
+
+                <div class="option-box" data-correct="true">B) The specific property or group of properties that maximizes performance for the design</div>
+
+                <div class="option-box" data-correct="false">C) A catalog number used to order materials from a supplier</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">5. What does an engineer do during the "Seeking Supporting Information" phase?</div>
+
+                <div class="option-box" data-correct="true">A) Researches the top-ranked candidates for practical issues like cost, availability, and ease of fabrication</div>
+
+                <div class="option-box" data-correct="false">B) Defines the core mechanical function of the component</div>
+
+                <div class="option-box" data-correct="false">C) Randomly selects a material from the un-screened list</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+
+</body>
+
+</html> 
+

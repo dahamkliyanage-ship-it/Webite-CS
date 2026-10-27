@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers the three main classes of engineering materials: Metals (conductive, strong), Polymers (lightweight insulators), and Ceramics (hard but highly brittle).">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 01 - Introduction | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="chapter1-timeline.html" class="back-link">&larr; Back to Chapter 01 Timeline</a>
+
+        <div class="topic-label">Topic 02</div>
+        <h1>The Main Classes of Materials</h1>
+
+        <div class="content-section">
+            <p>At present, there are over 60,000 materials available for engineers to use, which are generally divided into three main classes: <strong>Metals</strong>, <strong>Polymers</strong>, and <strong>Ceramics</strong>.</p>
+            
+            <p><strong>1. Metals & Alloys:</strong></p>
+            <ul>
+                <li><strong>Examples:</strong> Pure metals like Iron, Copper (electrical wires), and Aluminum (beverage cans); and alloys like Steel (Fe+C), Brass (Cu+Zn), and Duralumin (Al+Cu).</li>
+                <li><strong>Properties:</strong> Metals generally feature good electrical and thermal conductivity, high strength, high stiffness, and good ductility. Some are magnetic, and some can even become superconductors at extremely low temperatures.</li>
+            </ul>
+
+            <p><strong>2. Polymers (Plastics & Rubber):</strong></p>
+            <ul>
+                <li><strong>Examples:</strong> Plastics like PVC, Polyethylene (PE), and Teflon (PTFE); and rubbers like Natural Rubber and Styrene Butadiene Rubber (SBR).</li>
+                <li><strong>Properties:</strong> Polymers are macromolecules usually based on a carbon backbone. They are lightweight, corrosion-resistant, inexpensive, and easy to process at low temperatures. While they have low strength, they exhibit high toughness and act as excellent electrical and thermal insulators.</li>
+            </ul>
+
+            <p><strong>3. Ceramics & Glasses:</strong></p>
+            <ul>
+                <li><strong>Examples:</strong> Traditional ceramics like pottery, bricks, and porcelain; and advanced ceramics like Silicon carbide, Alumina, and Zirconia.</li>
+                <li><strong>Properties:</strong> Ceramics are inorganic, non-metallic materials manufactured by shaping and then firing. They boast high melting temperatures, low density, high strength, high stiffness, high hardness, and excellent corrosion resistance.</li>
+                <li><strong>Drawback:</strong> The one major drawback of ceramics (which are crystalline) and glasses (which are amorphous) is that they are extremely brittle.</li>
+            </ul>
+        </div>
+       <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/IPbwBOsKZ7E" 
+        title="Material Classifications Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on the Main Classes of Materials.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. Which class of materials is characterized by being lightweight, corrosion-resistant, and an excellent electrical insulator?</div>
+                <div class="option-box" data-correct="false">A) Metals</div>
+                <div class="option-box" data-correct="false">B) Ceramics</div>
+                <div class="option-box" data-correct="true">C) Polymers</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What is the primary mechanical drawback of ceramics and glasses?</div>
+                <div class="option-box" data-correct="false">A) They have low hardness</div>
+                <div class="option-box" data-correct="true">B) They are highly brittle</div>
+                <div class="option-box" data-correct="false">C) They melt at low temperatures</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionBlocks = document.querySelectorAll('.question-block');
+            questionBlocks.forEach(block => {
+                const options = block.querySelectorAll('.option-box');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (block.getAttribute('data-answered') === 'true') return;
+                        block.setAttribute('data-answered', 'true');
+                        options.forEach(opt => opt.classList.add('answered'));
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                        } else {
+                            this.classList.add('wrong');
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

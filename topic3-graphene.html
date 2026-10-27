@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers the structure and properties of graphene, a 2D carbon allotrope featuring a rhombus unit cell, a zero band gap, and extraordinary mechanical strength.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 03 - Graphene | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter6-timeline.html" class="back-link">&larr; Back to Chapter 06 Timeline</a>
+        <div class="topic-label">Topic 03</div>
+        <h1>Graphene</h1>
+        <div class="content-section">
+            <p>Carbon has several distinct allotropes, including Graphite, Diamond, Buckminsterfullerene (1985), Carbon Nanotubes (1991), and finally <strong>Graphene (2004)</strong><!--[cite: 12] -->. Graphene isolation earned the Nobel Prize in 2010<!--[cite: 12] -->.</p>
+            
+            <h3>Crystal Structure</h3>
+            <p>Graphene is a 2D crystal where carbon atoms are arranged in a flat, hexagonal network<!--[cite: 12] -->.</p>
+            <ul>
+                <li><strong>Unit Cell Shape:</strong> Rhombus<!--[cite: 12] -->.</li>
+                <li><strong>Atoms per unit cell:</strong> 2 atoms<!--[cite: 12] -->.</li>
+                <li><strong>Lattice Parameter:</strong> If the C-C bond length is <em>d</em>, the lattice parameter is calculated as <code>2d cos(30&deg;)</code><!--[cite: 12] -->.</li>
+            </ul>
+
+            <img src="graphene.png" alt="Diagram showing the hexagonal lattice and rhombus unit cell of graphene" class="content-image small">
+
+            <h3>Extraordinary Properties</h3>
+            <p>Graphene boasts some of the most extreme properties ever recorded in materials science<!--[cite: 12] -->:</p>
+            <table class="data-table">
+                <tr>
+                    <th>Property</th>
+                    <th>Approximate Value</th>
+                </tr>
+                <tr>
+                    <td>Charge carrier mobility</td>
+                    <td>~ 200,000 cm&sup2; / V&middot;s</td>
+                </tr>
+                <tr>
+                    <td>Thermal Conductivity</td>
+                    <td>~ 5000 W / m&middot;K</td>
+                </tr>
+                <tr>
+                    <td>Transparency</td>
+                    <td>~ 97.4%</td>
+                </tr>
+                <tr>
+                    <td>Young's modulus</td>
+                    <td>~ 1 TPa (1000 GPa)</td>
+                </tr>
+                <tr>
+                    <td>Tensile strength</td>
+                    <td>~ 1100 GPa</td>
+                </tr>
+                <tr>
+                    <td>Band gap</td>
+                    <td>Zero</td>
+                </tr>
+            </table>
+        </div>
+        
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on the structure and properties of Graphene.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What is the shape of a single unit cell of Graphene?</div>
+                <div class="option-box" data-correct="false">A) Hexagon</div>
+                <div class="option-box" data-correct="true">B) Rhombus</div>
+                <div class="option-box" data-correct="false">C) Square</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. How many carbon atoms are located within a single unit cell of Graphene?</div>
+                <div class="option-box" data-correct="false">A) 1</div>
+                <div class="option-box" data-correct="true">B) 2</div>
+                <div class="option-box" data-correct="false">C) 6</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What is the electronic band gap of pure Graphene?</div>
+                <div class="option-box" data-correct="true">A) Zero</div>
+                <div class="option-box" data-correct="false">B) 1.1 eV</div>
+                <div class="option-box" data-correct="false">C) Extremely large (Insulator)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What is the approximate Young's Modulus of Graphene?</div>
+                <div class="option-box" data-correct="false">A) ~15 GPa</div>
+                <div class="option-box" data-correct="false">B) ~200 GPa</div>
+                <div class="option-box" data-correct="true">C) ~1 TPa (1000 GPa)</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. If the C-C bond length is <em>d</em>, what is the formula for the lattice parameter of Graphene?</div>
+                <div class="option-box" data-correct="true">A) 2d cos(30&deg;)</div>
+                <div class="option-box" data-correct="false">B) d sin(60&deg;)</div>
+                <div class="option-box" data-correct="false">C) 2d</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

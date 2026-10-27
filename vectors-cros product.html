@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Cross Product</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Cross Product of Vectors (Vector Product). Focus on the definition and geometric interpretation of the cross product, its magnitude and direction, the right-hand rule, and the unit normal vector perpendicular to two vectors. Cover the anti-commutative and distributive properties, the relationship between parallel vectors and the zero vector, cross products of Cartesian basis vectors, and calculating cross products using the determinant method. Include applications in engineering mechanics, particularly calculating the moment of a force using position and force vectors to determine rotational effects around supports or joints, along with related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Cross Product of Vectors (Vector Product)</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec2-2" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Cross Product</a></li>
+                <li><a href="#sec2-2-1">Properties</a></li>
+                <li><a href="#sec2-2-2">Applications</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec2-2" style="margin-bottom: 20px;">Cross Product of Vectors (Vector Product)</h2>
+
+            <div class="blue-box">
+                <strong>Definition:</strong> Let $\underline{a}$ and $\underline{b}$ be two vectors. Then the <strong>cross product</strong> of two vectors $\underline{a}$ and $\underline{b}$ is denoted by $\underline{a} \times \underline{b}$ and is defined by:
+                
+                <div class="math-center">
+                    $$ \underline{a} \times \underline{b} = |\underline{a}||\underline{b}|\sin\theta \underline{n} $$
+                </div>
+                
+                where $\theta$ ($0 \le \theta \le \pi$) is the angle between $\underline{a}$ and $\underline{b}$ and $\underline{n}$ is the <strong>unit normal vector</strong> to $\underline{a}$ and $\underline{b}$.
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 350 250" style="max-width: 100%; height: auto; max-width: 350px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-vector" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e5e7eb" />
+                        </marker>
+                        <marker id="arrow-normal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Vector a -->
+                    <line x1="120" y1="160" x2="260" y2="175" stroke="#e5e7eb" stroke-width="2" marker-end="url(#arrow-vector)" />
+                    <text x="210" y="195" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#e5e7eb">a</text>
+                    
+                    <!-- Vector b -->
+                    <line x1="120" y1="160" x2="230" y2="80" stroke="#e5e7eb" stroke-width="2" marker-end="url(#arrow-vector)" />
+                    <text x="185" y="90" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#e5e7eb">b</text>
+                    
+                    <!-- Normal Vector n -->
+                    <line x1="215" y1="125" x2="215" y2="50" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-normal)" />
+                    <text x="225" y="105" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#38bdf8">n</text>
+                    
+                    <!-- Right Angle Symbol -->
+                    <path d="M 215 115 L 225 115 L 225 125" fill="transparent" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="2" />
+                    
+                    <!-- Angle Theta -->
+                    <path d="M 145 162 Q 165 145 155 135" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="140" y="152" font-family="serif" font-style="italic" font-size="14" fill="#facc15">θ</text>
+                    
+                    <!-- Dashed projection lines mimicking the original diagram -->
+                    <line x1="120" y1="160" x2="215" y2="125" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4" />
+                </svg>
+                <br>
+                <span>Figure 1: Cross Product Representation</span>
+            </div>
+
+            <p style="margin-bottom: 20px;"><strong>Note.</strong> The direction of $\underline{n}$ is given by the <strong>right-hand rule</strong>. Unlike the dot product which yields a scalar, the cross product generates a completely new vector that is perpendicular to the plane formed by the initial two vectors.</p>
+
+            <h2 id="sec2-2-1" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Properties of the cross product</h2>
+
+            <div class="blue-box">
+                <strong>Theorem:</strong> Let $\underline{a}$, $\underline{b}$, and $\underline{c}$ be vectors. They adhere to the following properties:
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>For any given two vectors $\underline{a}$ and $\underline{b}$, $\underline{a} \times \underline{b} = -(\underline{b} \times \underline{a})$. (This means the cross product is strictly anti-commutative).</li>
+                    <li style="margin-top: 10px;">For any given three vectors $\underline{a}$, $\underline{b}$, and $\underline{c}$, $\underline{a} \times (\underline{b} + \underline{c}) = \underline{a} \times \underline{b} + \underline{a} \times \underline{c}$ (distributive law).</li>
+                    <li style="margin-top: 10px;">If $\underline{a} \times \underline{b} = \underline{0}$ and $\underline{a}$ and $\underline{b}$ are non-zero vectors then $\underline{a}$ and $\underline{b}$ are parallel.</li>
+                </ul>
+            </div>
+
+            <div class="green-box">
+                <strong>Basis Vector Interactions</strong><br>
+                Because parallel vectors yield a zero cross product (since $\sin(0^\circ) = 0$), the cross product of any basis vector with itself is zero:
+                <div class="math-center" style="margin: 10px 0;">
+                    $\underline{i} \times \underline{i} = \underline{j} \times \underline{j} = \underline{k} \times \underline{k} = 0$.
+                </div>
+                Using the right-hand rule, crossing orthogonal basis vectors yields the third basis vector:
+                <div class="math-center" style="margin: 10px 0;">
+                    $\underline{i} \times \underline{j} = \underline{k}, \quad \underline{j} \times \underline{k} = \underline{i}, \quad \text{and} \quad \underline{k} \times \underline{i} = \underline{j}$.
+                </div>
+            </div>
+
+            <p style="margin-bottom: 15px;">Suppose $\underline{a} = a_1\underline{i} + a_2\underline{j} + a_3\underline{k}$ and $\underline{b} = b_1\underline{i} + b_2\underline{j} + b_3\underline{k}$. Then $\underline{a} \times \underline{b}$ can be efficiently obtained using a determinant format:</p>
+
+            <div class="math-center" style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 8px;">
+                $$ \underline{a} \times \underline{b} = \begin{vmatrix} \underline{i} & \underline{j} & \underline{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix} = \begin{vmatrix} a_2 & a_3 \\ b_2 & b_3 \end{vmatrix}\underline{i} - \begin{vmatrix} a_1 & a_3 \\ b_1 & b_3 \end{vmatrix}\underline{j} + \begin{vmatrix} a_1 & a_2 \\ b_1 & b_2 \end{vmatrix}\underline{k} $$
+                <br>
+                $$ = (a_2b_3 - a_3b_2)\underline{i} - (a_1b_3 - a_3b_1)\underline{j} + (a_1b_2 - a_2b_1)\underline{k} $$
+            </div>
+
+            <h2 id="sec2-2-2" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Applications</h2>
+
+            <div class="yellow-box">
+                <strong>Application: Moment of a Force</strong><br><br>
+                The <strong>moment of a force</strong> is a real word application of cross-product. This is particularly critical in structural mechanics when analyzing the rotational tendency of forces around a specific joint or support.<br><br>
+                If the force $\tilde{F}$ passes through the point $P$ and $\overrightarrow{OP} = \underline{r}$ then the moment of the force about $O$ denoted by $\tilde{M}$ is defined by:
+                <div class="math-center" style="margin: 15px 0;">
+                    $$ \tilde{M} = \underline{r} \times \tilde{F} $$
+                </div>
+                <em></em>
+            </div>
+
+            <div class="blue-box">
+                <strong>Engineering Mechanics Example: Calculating Joint Moments</strong><br><br>
+                Imagine a cantilever beam fixed at the origin $O$. A vertical force of $\tilde{F} = -50\underline{k}$ Newtons is applied at a distance along the beam defined by the position vector $\underline{r} = 3\underline{i} + 2\underline{j}$ meters. Find the resulting moment vector $\tilde{M}$ at the support $O$.<br><br>
+                Using the determinant method:
+                <div class="math-center">
+                    $$ \tilde{M} = \underline{r} \times \tilde{F} = \begin{vmatrix} \underline{i} & \underline{j} & \underline{k} \\ 3 & 2 & 0 \\ 0 & 0 & -50 \end{vmatrix} $$
+                </div>
+                Expanding across the top row:
+                <div class="math-center">
+                    $$ \tilde{M} = ((2)(-50) - (0)(0))\underline{i} - ((3)(-50) - (0)(0))\underline{j} + ((3)(0) - (2)(0))\underline{k} $$
+                    $$ \tilde{M} = -100\underline{i} - (-150)\underline{j} + 0\underline{k} $$
+                    $$ \tilde{M} = -100\underline{i} + 150\underline{j} \text{ Nm} $$
+                </div>
+                This resulting vector describes the exact axis and magnitude of rotational torque applied to the structural support.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video to master calculating the Cross Product step-by-step:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/pWbOisq1MJU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Cross Product and its applications.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Unlike the dot product, what type of mathematical object is the final result of a cross product ($\underline{a} \times \underline{b}$)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) A scalar quantity</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) An angle</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) A vector quantity</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> According to the anti-commutative property of the cross product, which of the following is equivalent to $\underline{a} \times \underline{b}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $-(\underline{b} \times \underline{a})$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\underline{b} \times \underline{a}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Based on the right-hand rule and basis vector interactions, what is the result of $\underline{j} \times \underline{k}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\underline{i}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $-\underline{i}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> If $\underline{u}$ and $\underline{v}$ are two non-zero vectors and they are parallel to each other, what is the value of $\underline{u} \times \underline{v}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $1$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\underline{0}$ (The zero vector)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $|\underline{u}||\underline{v}|$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Calculate the cross product of $\underline{a} = 2\underline{i}$ and $\underline{b} = 3\underline{j}$ using the determinant format or basis rules.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $6\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $6\underline{i}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> In structural mechanics, the moment of a force ($\tilde{M}$) about an origin is calculated using the position vector ($\underline{r}$) and the force vector ($\tilde{F}$). Which formula is correct?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\tilde{M} = \underline{r} \cdot \tilde{F}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\tilde{M} = \tilde{F} \times \underline{r}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\tilde{M} = \underline{r} \times \tilde{F}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 6;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-crossproduct"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-crossproduct");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

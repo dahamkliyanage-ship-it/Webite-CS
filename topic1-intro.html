@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta name="bot-context" content="An introduction to materials engineering, exploring the historical impact of materials and defining mechanical, electrical, magnetic, and optical properties.">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Topic 01 - Introduction | MT1023</title>
+
+    <link rel="stylesheet" href="style-materials.css">
+
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+
+<body>
+
+
+
+    <div class="container">
+
+        <a href="chapter1-timeline.html" class="back-link">&larr; Back to Chapter 01 Timeline</a>
+
+
+
+        <div class="topic-label">Topic 01</div>
+
+        <h1>Introduction & Material Properties</h1>
+
+
+
+        <div class="content-section">
+
+            <p>Everything you use every day—products, devices, components—is made of materials. Throughout history, the advancement of materials has gone hand-in-hand with the advancement of society. Entire eras of human development, such as the Stone Age, Bronze Age, and Iron Age, are named after the dominant materials of the time.</p>
+
+           
+
+            <p>Today, there are over 60,000 materials available for engineers to select from. Because engineers are tasked with selecting the most appropriate materials to manufacture products, they must understand how different materials behave under different conditions.</p>
+
+
+
+            <p>This behavior is defined by a material's <strong>properties</strong>. A property is simply the response given by a material to a specific stimulus. Key property categories include:</p>
+
+            <ul>
+
+                <li><strong>Mechanical properties:</strong> The material's response to applied stress or force.</li>
+
+                <li><strong>Electrical properties:</strong> The material's response to an electric field.</li>
+
+                <li><strong>Magnetic properties:</strong> The material's response to a magnetic field.</li>
+
+                <li><strong>Optical properties:</strong> The material's response to electromagnetic or light radiation.</li>
+
+            </ul>
+
+        </div>
+
+       
+
+
+
+        <div class="quiz-container">
+
+            <div class="quiz-title">Practice Exercises</div>
+
+            <div class="quiz-desc">Test your knowledge on Introduction & Material Properties.</div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">1. How is a material "property" defined in engineering?</div>
+
+                <div class="option-box" data-correct="false">A) The atomic weight of the material</div>
+
+                <div class="option-box" data-correct="true">B) The response given by a material to a specific stimulus</div>
+
+                <div class="option-box" data-correct="false">C) The visual color of the material under natural light</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">2. Which type of property describes how a material responds to applied stress?</div>
+
+                <div class="option-box" data-correct="false">A) Optical properties</div>
+
+                <div class="option-box" data-correct="false">B) Magnetic properties</div>
+
+                <div class="option-box" data-correct="true">C) Mechanical properties</div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+   
+
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const questionBlocks = document.querySelectorAll('.question-block');
+
+            questionBlocks.forEach(block => {
+
+                const options = block.querySelectorAll('.option-box');
+
+                options.forEach(option => {
+
+                    option.addEventListener('click', function() {
+
+                        if (block.getAttribute('data-answered') === 'true') return;
+
+                        block.setAttribute('data-answered', 'true');
+
+                        options.forEach(opt => opt.classList.add('answered'));
+
+
+
+                        const isCorrect = this.getAttribute('data-correct') === 'true';
+
+                        if (isCorrect) {
+
+                            this.classList.add('correct');
+
+                        } else {
+
+                            this.classList.add('wrong');
+
+                            block.querySelector('.option-box[data-correct="true"]').classList.add('correct');
+
+                        }
+
+                    });
+
+                });
+
+            });
+
+        });
+
+    </script>
+  <script src="materials_chatbot.js"></script>  
+
+
+
+
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+
+</body>
+
+</html> 
+

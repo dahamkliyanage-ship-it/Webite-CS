@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Calculator - Faculty of Engineering</title>
+    
+    <!-- Embedded CSS matching your dark theme -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* Dark theme background */
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Top Bar & Heading */
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* Horizontal Navigation Menu */
+        .top-nav {
+            background-color: #1e293b;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .top-nav li {
+            display: inline;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav a:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Calculator Card Style */
+        .calc-card {
+            background-color: rgba(45, 212, 191, 0.05);
+            border-left: 5px solid #2dd4bf;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .calc-card h2 {
+            color: #2dd4bf;
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Note Style */
+        .calc-note {
+            text-align: center;
+            font-size: 0.9em;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            font-style: italic;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 12px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #cbd5e1;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background-color: #1e293b;
+            color: #ffffff;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #2dd4bf;
+            box-shadow: 0 0 5px rgba(45, 212, 191, 0.3);
+        }
+
+        /* Button Style */
+        .calc-btn {
+            display: block;
+            width: 100%;
+            background-color: #2dd4bf;
+            color: #0f172a;
+            border: none;
+            font-size: 1.1em;
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(45, 212, 191, 0.3);
+        }
+
+        .calc-btn:hover {
+            background-color: #5eead4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(45, 212, 191, 0.5);
+        }
+
+        /* Result Text */
+        #result-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.2em;
+            color: #38bdf8;
+        }
+
+        /* Responsive Nav adjustment */
+        @media (max-width: 600px) {
+            .top-nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .calc-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="top-bar">
+        <h1>Faculty of Engineering</h1>
+    </header>
+
+    <!-- Landscape Navigation Menu -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+        </ul>
+    </nav>
+
+    <!-- Target Calculator Container -->
+    <div class="container">
+        <div class="calc-card">
+            <h2>Target Marks Calculator</h2>
+            <p class="calc-note">Note: This calculator is valid for all modules (20% CA and 80% Final Exam structure).</p>
+            
+            <div class="form-group">
+                <label for="ca-mark">Your Current CA Mark (out of 20):</label>
+                <input type="number" id="ca-mark" placeholder="e.g., 15" min="0" max="20" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="target-grade">Your Target Grade:</label>
+                <select id="target-grade">
+                    <option value="85">A+ (85+)</option>
+                    <option value="75">A (75+)</option>
+                    <option value="70">A- (70+)</option>
+                    <option value="65">B+ (65+)</option>
+                    <option value="60">B (60+)</option>
+                    <option value="55">B- (55+)</option>
+                    <option value="50">C+ (50+)</option>
+                    <option value="45">C (45+)</option>
+                </select>
+            </div>
+
+            <button class="calc-btn" onclick="calculateTarget()">Calculate Target</button>
+
+            <h3 id="result-text"></h3>
+        </div>
+    </div>
+
+    <!-- JavaScript for Calculation (20% CA / 80% Final Exam) -->
+    <script>
+        function calculateTarget() {
+            const caInput = document.getElementById('ca-mark').value;
+            const targetGrade = parseFloat(document.getElementById('target-grade').value);
+            const resultText = document.getElementById('result-text');
+
+            if (caInput === "") {
+                resultText.style.color = "#f43f5e";
+                resultText.innerText = "Please enter your current CA mark!";
+                return;
+            }
+
+            const caMarkOutOf20 = parseFloat(caInput);
+
+            // CA is out of 20, and contributes 20% to the final mark
+            const earnedFromCA = (caMarkOutOf20 / 20) * 20;
+            
+            // Final exam weight is 80%
+            const requiredFromExamPercentage = targetGrade - earnedFromCA;
+
+            // Convert back to a percentage out of 100 for the final exam
+            const requiredExamMark = (requiredFromExamPercentage / 80) * 100;
+
+            resultText.style.color = "#38bdf8";
+            if (requiredExamMark > 100) {
+                resultText.style.color = "#f43f5e";
+                resultText.innerText = `Target is difficult! You need ${requiredExamMark.toFixed(1)}% in the final exam.`;
+            } else if (requiredExamMark <= 0) {
+                resultText.style.color = "#4ade80";
+                resultText.innerText = `You have already achieved your target! 🎉`;
+            } else {
+                resultText.innerText = `You need at least ${requiredExamMark.toFixed(1)}% in the final exam to get your target grade.`;
+            }
+        }
+    </script>
+</body>
+</html>

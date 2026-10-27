@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers Miller Indices for identifying crystallographic directions and planes, explaining notation rules alongside concepts like Close Packed Planes and Planar Density.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 04 - Miller Indices | MT1023</title>
+<link rel="stylesheet" href="style-materials.css">    
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter3-timeline.html" class="back-link">&larr; Back to Chapter 03 Timeline</a>
+        <div class="topic-label">Topic 04</div>
+        <h1>Miller Indices</h1>
+        <div class="content-section">
+            <p>Engineers use a coordinate system called <strong>Miller Indices</strong> to identify specific directions and planes within a crystal lattice<span style="display:none">[cite: 12, 13]</span>.</p>
+            <ul>
+                <li><strong>Directions:</strong> Indicated strictly by square brackets. The [100], [110], and [111] directions are common ones. A "family" of equivalent directions is indicated by angle brackets, e.g., &lt;110&gt;<span style="display:none">[cite: 12]</span>.</li>
+                <li><strong>Planes:</strong> Indicated by parentheses, e.g., (100) or (111). To find the Miller Indices of a plane, you locate the intercepts of the plane on the x, y, and z axes, take their reciprocals, and clear any fractions to leave whole numbers<span style="display:none">[cite: 12]</span>.</li>
+            </ul>
+            <img src="mindices.webp" alt="Diagram showing various Miller Indices for planes in a cubic lattice" class="content-image small">
+            
+            <p>When analyzing these planes, two important concepts arise<span style="display:none">[cite: 12]</span>:</p>
+            <ul>
+                <li><strong>Close Packed Plane:</strong> A specific crystal plane where all neighboring atoms are touching each other (e.g., the (111) plane in an FCC structure)<span style="display:none">[cite: 12]</span>.</li>
+                <li><strong>Planar Density (Aerial Density):</strong> The number of atoms packed into a specific unit area (usually 1 m<sup>2</sup>) of a crystal plane<span style="display:none">[cite: 12]</span>.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/tihpxMy0A8s" 
+        title="What Are Miller Indices? Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Miller Indices and crystal planes.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. In Miller Indices notation, what type of brackets are used to denote a specific direction?</div>
+                <div class="option-box" data-correct="false">A) Parentheses ( )</div>
+                <div class="option-box" data-correct="true">B) Square brackets [ ]</div>
+                <div class="option-box" data-correct="false">C) Angle brackets &lt; &gt;</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What type of brackets are used to denote a specific crystal plane?</div>
+                <div class="option-box" data-correct="true">A) Parentheses ( )</div>
+                <div class="option-box" data-correct="false">B) Square brackets [ ]</div>
+                <div class="option-box" data-correct="false">C) Curly braces { }</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What defines a "Close Packed Plane"?</div>
+                <div class="option-box" data-correct="false">A) A plane with an atomic packing factor of exactly 1.0</div>
+                <div class="option-box" data-correct="true">B) A plane where all neighbor atoms touch each other</div>
+                <div class="option-box" data-correct="false">C) A plane that intersects all three coordinate axes equally</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What does "Planar Density" measure?</div>
+                <div class="option-box" data-correct="false">A) The mass of atoms spanning across three unit cells</div>
+                <div class="option-box" data-correct="true">B) The number of atoms in a specific unit area of a crystal plane</div>
+                <div class="option-box" data-correct="false">C) The volume of empty void space inside a crystal plane</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

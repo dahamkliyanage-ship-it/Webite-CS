@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vector Equation of a Plane</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Vector Equation of a Plane. Focus on defining planes in three-dimensional space using a point and two non-parallel direction vectors, a point and a normal vector, or three non-collinear points. Cover the parametric vector equation and scalar triple product form of a plane, deriving the normal vector equation using the dot product, and converting it into the Cartesian equation. Include finding a plane's normal vector from its Cartesian equation, constructing a plane equation from three points using the cross product and scalar triple product, worked examples, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Vector Equation of a Plane</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec3-3-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Plane via Point & Two Vectors</a></li>
+                <li><a href="#sec3-3-2">Plane via Normal Vector</a></li>
+                <li><a href="#sec3-3-3">Plane via Three Points</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec3-3" style="margin-bottom: 20px;">Vector Equation of a Plane</h2>
+
+            <p style="margin-bottom: 20px; color: #cbd5e1;">A plane in three-dimensional space can be uniquely determined in several ways. We will explore the three most common mathematical formulations: using a point and two parallel vectors, using a point and a perpendicular (normal) vector, and using three non-collinear points.</p>
+
+            <h3 id="sec3-3-1" style="margin-bottom: 15px; margin-top: 30px; font-size: 1.3rem; color: #f9fafb;">The plane that contains a point with the position vector $\underline{r_0}$ and is parallel to two vectors $\underline{a}$ and $\underline{b}$</h3>
+
+            <div class="blue-box">
+                <strong>Parametric Vector Equation</strong><br><br>
+                Suppose $\underline{a}$ and $\underline{b}$ are two vectors in 3-space so that $\underline{a} \times \underline{b} \neq \underline{0}$ (meaning they are not parallel to each other) and $(x_0, y_0, z_0)$ is a point on the plane with position vector $\underline{r_0}$. <br><br>
+                Let $(x, y, z)$ be an arbitrary point on the plane with the position vector $\underline{r}$. <br>
+                Then the vector connecting these two points, $\underline{r} - \underline{r_0}$, must lie entirely on the plane.<br><br>
+                Because $\underline{a}$ and $\underline{b}$ determine the "grid" or direction of the plane, any vector on the plane can be expressed as a linear combination of $\underline{a}$ and $\underline{b}$. Then $\underline{r} - \underline{r_0} = s\underline{a} + t\underline{b}$ for some scalars $s$ and $t$. Therefore,
+                <div class="math-center">
+                    $$ \underline{r} = \underline{r_0} + s\underline{a} + t\underline{b} \quad \text{where } s, t \in \mathbb{R} $$
+                </div>
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 500 350" style="max-width: 100%; height: auto; max-width: 500px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis4" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-vec-cyan4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                        <marker id="arrow-vec-pink4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                        <marker id="arrow-vec-yellow4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#facc15" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="160" y1="260" x2="90" y2="320" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis4)" />
+                    <line x1="160" y1="260" x2="420" y2="260" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis4)" />
+                    <line x1="160" y1="260" x2="160" y2="100" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis4)" />
+                    
+                    <text x="80" y="330" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="425" y="275" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="145" y="105" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="140" y="255" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- Plane outline (Blob) -->
+                    <path d="M 140 220 C 120 160 180 80 260 70 C 340 60 410 120 420 180 C 430 260 380 320 280 300 C 180 280 150 250 140 220 Z" fill="rgba(56, 189, 248, 0.05)" stroke="#e5e7eb" stroke-width="1" />
+
+                    <!-- Vector r0 -->
+                    <line x1="160" y1="260" x2="280" y2="210" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vec-cyan4)" />
+                    <text x="230" y="245" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r₀</text>
+                    <text x="290" y="215" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x₀, y₀, z₀)</text>
+
+                    <!-- Vector r -->
+                    <line x1="160" y1="260" x2="210" y2="150" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vec-cyan4)" />
+                    <text x="180" y="200" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r</text>
+                    <text x="185" y="140" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x, y, z)</text>
+
+                    <!-- Vector r - r0 -->
+                    <line x1="280" y1="210" x2="210" y2="150" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-vec-pink4)" />
+                    <text x="250" y="180" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e81c8f">r - r₀</text>
+
+                    <!-- Parallel Vectors a and b on plane -->
+                    <line x1="310" y1="240" x2="360" y2="200" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-vec-yellow4)" />
+                    <text x="340" y="235" font-family="sans-serif" font-weight="bold" font-size="14" fill="#facc15">a</text>
+
+                    <line x1="260" y1="90" x2="320" y2="120" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-vec-yellow4)" />
+                    <text x="290" y="125" font-family="sans-serif" font-weight="bold" font-size="14" fill="#facc15">b</text>
+                </svg>
+                <br>
+                <span>Figure 4: A plane defined by position vector $\underline{r_0}$ and direction vectors $\underline{a}$ and $\underline{b}$.</span>
+            </div>
+
+            <div class="green-box">
+                <strong>Scalar Triple Product Form</strong><br><br>
+                Alternatively, since the vector $(\underline{r} - \underline{r_0})$ lies on the plane formed by vectors $\underline{a}$ and $\underline{b}$, the three vectors are <strong>coplanar</strong>. As established in the Scalar Triple Product chapter, the volume of a parallelepiped formed by three coplanar vectors is zero.<br><br>
+                The equation can be efficiently written as:
+                <div class="math-center">
+                    $$ (\underline{a} \times \underline{b}) \cdot (\underline{r} - \underline{r_0}) = 0 \quad \text{i.e. } [\underline{r} - \underline{r_0}, \underline{a}, \underline{b}] = 0 $$
+                </div>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 1: Parameterizing a Plane</strong><br><br>
+                Find the vector equation of the plane passing through the point $P(1, 2, 3)$ and parallel to the vectors $\underline{a} = \underline{i} - \underline{k}$ and $\underline{b} = \underline{j} + \underline{k}$.<br><br>
+                We identify the position vector of the point as $\underline{r_0} = \underline{i} + 2\underline{j} + 3\underline{k}$.<br>
+                Plugging directly into the formula $\underline{r} = \underline{r_0} + s\underline{a} + t\underline{b}$:
+                <div class="math-center">
+                    $$ \underline{r} = (\underline{i} + 2\underline{j} + 3\underline{k}) + s(\underline{i} - \underline{k}) + t(\underline{j} + \underline{k}) $$
+                </div>
+                If required, we can expand this into parametric coordinates:
+                <div class="math-center">
+                    $x = 1 + s$ <br>
+                    $y = 2 + t$ <br>
+                    $z = 3 - s + t$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 id="sec3-3-2" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">The equation of the plane when $(x_0, y_0, z_0)$ on the plane and $\underline{n}$ is a normal vector</h3>
+
+            <div class="blue-box">
+                <strong>Normal Vector Equation</strong><br><br>
+                Let $(x, y, z)$ be an arbitrary point with the position vector $\underline{r}$. Then the vector $\underline{r} - \underline{r_0}$ lies on the plane.<br><br>
+                A normal vector $\underline{n}$ is defined as a vector that is perfectly perpendicular (orthogonal) to the entire plane. Therefore, it must be perpendicular to *every* vector lying on that plane.<br><br>
+                Observe that $\underline{r} - \underline{r_0}$ is perpendicular to the vector $\underline{n}$. Therefore, their dot product must be exactly zero:
+                <div class="math-center">
+                    $$ (\underline{r} - \underline{r_0}) \cdot \underline{n} = 0 $$
+                </div>
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 500 350" style="max-width: 100%; height: auto; max-width: 500px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Definitions -->
+                    <defs>
+                        <marker id="arrow-axis5" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-vec-cyan5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                        <marker id="arrow-vec-pink5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                        <marker id="arrow-vec-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="160" y1="260" x2="90" y2="320" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis5)" />
+                    <line x1="160" y1="260" x2="420" y2="260" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis5)" />
+                    <line x1="160" y1="260" x2="160" y2="100" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis5)" />
+                    
+                    <text x="80" y="330" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="425" y="275" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="145" y="105" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="140" y="255" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- Plane outline -->
+                    <path d="M 140 220 C 120 160 180 80 260 70 C 340 60 410 120 420 180 C 430 260 380 320 280 300 C 180 280 150 250 140 220 Z" fill="rgba(74, 222, 128, 0.05)" stroke="#e5e7eb" stroke-width="1" />
+
+                    <!-- Vector r0 -->
+                    <line x1="160" y1="260" x2="280" y2="210" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vec-cyan5)" />
+                    <text x="230" y="245" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r₀</text>
+                    <text x="290" y="215" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x₀, y₀, z₀)</text>
+
+                    <!-- Vector r -->
+                    <line x1="160" y1="260" x2="210" y2="150" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vec-cyan5)" />
+                    <text x="180" y="200" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r</text>
+                    <text x="185" y="140" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x, y, z)</text>
+
+                    <!-- Vector r - r0 -->
+                    <line x1="280" y1="210" x2="210" y2="150" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-vec-pink5)" />
+                    <text x="250" y="180" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e81c8f">r - r₀</text>
+
+                    <!-- Normal Vector n -->
+                    <line x1="330" y1="160" x2="380" y2="120" stroke="#4ade80" stroke-width="2" marker-end="url(#arrow-vec-green)" />
+                    <text x="365" y="155" font-family="sans-serif" font-weight="bold" font-size="14" fill="#4ade80">n</text>
+
+                    <!-- Right angle indicating normal -->
+                    <line x1="330" y1="160" x2="300" y2="120" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="3" />
+                    <path d="M 320 146 L 333 135 L 343 148" fill="transparent" stroke="#e5e7eb" stroke-width="1.5" />
+
+                </svg>
+                <br>
+                <span>Figure 5: Equation of a plane derived using a point and a perpendicular normal vector $\underline{n}$.</span>
+            </div>
+
+            <div class="green-box">
+                <strong>Cartesian (Scalar) Equation of the Plane</strong><br><br>
+                If we express the normal vector in its components $\underline{n} = a\underline{i} + b\underline{j} + c\underline{k}$, and substitute our position vectors $\underline{r} = \langle x,y,z \rangle$ and $\underline{r_0} = \langle x_0, y_0, z_0 \rangle$, the dot product becomes:
+                <div class="math-center">
+                    $$ a(x - x_0) + b(y - y_0) + c(z - z_0) = 0 $$
+                </div>
+                By expanding this and moving the constants to the right side, we obtain the standard Cartesian form of a plane:
+                <div class="math-center">
+                    $$ ax + by + cz = d \quad \text{where } d = ax_0 + by_0 + cz_0 $$
+                </div>
+                <em>Note: The coefficients of $x, y, z$ in the Cartesian equation $(a, b, c)$ instantly give you the components of the normal vector!</em>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 2: Finding the Cartesian Equation</strong><br><br>
+                Find the Cartesian equation of the plane passing through the point $P(2, -1, 4)$ with a normal vector $\underline{n} = 3\underline{i} + 5\underline{j} - 2\underline{k}$.<br><br>
+                Using the formula $a(x - x_0) + b(y - y_0) + c(z - z_0) = 0$, we plug in our point coordinates for $(x_0, y_0, z_0)$ and normal components for $(a, b, c)$:
+                <div class="math-center">
+                    $$ 3(x - 2) + 5(y - (-1)) - 2(z - 4) = 0 $$
+                    $$ 3x - 6 + 5y + 5 - 2z + 8 = 0 $$
+                    $$ 3x + 5y - 2z + 7 = 0 $$
+                </div>
+                Thus, the simplified Cartesian equation is:
+                <div class="math-center">
+                    $$ 3x + 5y - 2z = -7 $$
+                </div>
+            </div>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+
+            <h3 id="sec3-3-3" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">The equation of the plane passing through $\underline{r_0}$, $\underline{r_1}$, and $\underline{r_2}$</h3>
+
+            <div class="blue-box">
+                <strong>Three-Point Equation</strong><br><br>
+                Let $\underline{r_0}$, $\underline{r_1}$, and $\underline{r_2}$ be given, and $\underline{r}$ be the position vector of an arbitrary point on the plane. <br><br>
+                We can form three distinct vectors that lie completely flat on the plane by subtracting the position vectors of the known points:
+                <ul>
+                    <li>$\underline{r} - \underline{r_1}$ (from known point 1 to arbitrary point)</li>
+                    <li>$\underline{r_0} - \underline{r_1}$ (from known point 1 to known point 0)</li>
+                    <li>$\underline{r_2} - \underline{r_1}$ (from known point 1 to known point 2)</li>
+                </ul>
+                Because all three of these vectors are confined to the exact same 2D plane in 3D space, they are coplanar. Therefore, by the rules of the scalar triple product, their volume computation must be zero:
+                <div class="math-center">
+                    $$ (\underline{r} - \underline{r_1}) \cdot ((\underline{r_0} - \underline{r_1}) \times (\underline{r_2} - \underline{r_1})) = 0 $$
+                </div>
+            </div>
+
+            <div class="image-box">
+                <svg viewBox="0 0 500 350" style="max-width: 100%; height: auto; max-width: 500px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Definitions -->
+                    <defs>
+                        <marker id="arrow-axis6" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-vec-cyan6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                        <marker id="arrow-vec-pink6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="160" y1="260" x2="90" y2="320" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis6)" />
+                    <line x1="160" y1="260" x2="420" y2="260" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis6)" />
+                    <line x1="160" y1="260" x2="160" y2="100" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis6)" />
+                    
+                    <text x="80" y="330" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="425" y="275" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="145" y="105" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="140" y="255" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- Plane outline -->
+                    <path d="M 140 220 C 120 160 180 80 260 70 C 340 60 410 120 420 180 C 430 260 380 320 280 300 C 180 280 150 250 140 220 Z" fill="rgba(250, 204, 21, 0.05)" stroke="#e5e7eb" stroke-width="1" />
+
+                    <!-- Vector r1 (Base point) -->
+                    <line x1="160" y1="260" x2="260" y2="210" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vec-cyan6)" />
+                    <text x="220" y="240" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r₁</text>
+
+                    <!-- Vector r0 -->
+                    <line x1="160" y1="260" x2="350" y2="220" stroke="#00bbf0" stroke-width="1.5" />
+                    <text x="290" y="255" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r₀</text>
+
+                    <!-- Vector r2 -->
+                    <line x1="160" y1="260" x2="210" y2="130" stroke="#00bbf0" stroke-width="1.5" />
+                    <text x="170" y="180" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r₂</text>
+
+                    <!-- Vector r (arbitrary) -->
+                    <line x1="160" y1="260" x2="310" y2="130" stroke="#00bbf0" stroke-width="1.5" />
+                    <text x="220" y="195" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r</text>
+
+                    <!-- Differences on plane -->
+                    <line x1="260" y1="210" x2="350" y2="220" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-vec-pink6)" />
+                    <text x="360" y="200" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e81c8f">r₀ - r₁</text>
+
+                    <line x1="260" y1="210" x2="210" y2="130" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-vec-pink6)" />
+                    <text x="230" y="120" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e81c8f">r₂ - r₁</text>
+
+                    <line x1="260" y1="210" x2="310" y2="130" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-vec-pink6)" />
+                    <text x="315" y="160" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e81c8f">r - r₁</text>
+
+                    <!-- Parallelogram outline -->
+                    <line x1="210" y1="130" x2="360" y2="135" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4" />
+                    <line x1="350" y1="220" x2="360" y2="135" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4" />
+
+                </svg>
+                <br>
+                <span>Figure 6: Finding the equation of a plane using three distinct points.</span>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example 3: Creating an Equation from Three Points</strong><br><br>
+                Find the Cartesian equation of the plane passing through the points $A(1, 0, 0)$, $B(0, 1, 0)$, and $C(0, 0, 1)$.<br><br>
+                <strong>Step 1: Construct two direction vectors lying on the plane.</strong><br>
+                Let's use point $A$ as our anchor ($\underline{r_1}$).
+                <ul>
+                    <li>$\overrightarrow{AB} = \underline{r_0} - \underline{r_1} = \langle 0-1, 1-0, 0-0 \rangle = \langle -1, 1, 0 \rangle$</li>
+                    <li>$\overrightarrow{AC} = \underline{r_2} - \underline{r_1} = \langle 0-1, 0-0, 1-0 \rangle = \langle -1, 0, 1 \rangle$</li>
+                </ul>
+                <br>
+                <strong>Step 2: Find the normal vector $\underline{n}$ by crossing the two direction vectors.</strong>
+                <div class="math-center">
+                    $$ \underline{n} = \overrightarrow{AB} \times \overrightarrow{AC} = \begin{vmatrix} \underline{i} & \underline{j} & \underline{k} \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{vmatrix} $$
+                    $$ \underline{n} = \underline{i}(1 - 0) - \underline{j}(-1 - 0) + \underline{k}(0 - (-1)) = \langle 1, 1, 1 \rangle $$
+                </div>
+                <br>
+                <strong>Step 3: Use the Normal Vector Equation (from 3.3.2)</strong><br>
+                Using $\underline{n} = \langle 1, 1, 1 \rangle$ and our anchor point $A(1, 0, 0)$:
+                <div class="math-center">
+                    $$ 1(x - 1) + 1(y - 0) + 1(z - 0) = 0 $$
+                    $$ x + y + z = 1 $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video to fully grasp how to find the equation of a plane using a point and a perpendicular normal vector:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/2sZKZHyaQJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on finding Vector and Cartesian Equations of Planes.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Which equation represents a plane passing through a point with position vector $\underline{r_0}$ and parallel to two non-parallel vectors $\underline{a}$ and $\underline{b}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\underline{r} = \underline{r_0} \cdot (\underline{a} \times \underline{b})$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\underline{r} = \underline{r_0} + t(\underline{a} \times \underline{b})$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\underline{r} = \underline{r_0} + s\underline{a} + t\underline{b}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> If a plane has the normal vector $\underline{n} = \langle 4, -2, 5 \rangle$ and passes through the origin $(0,0,0)$, what is its Cartesian equation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $4x - 2y + 5z = 0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $4x - 2y + 5z = 1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $x + y + z = 0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> You are given the Cartesian equation of a plane: $3x - 7y + z = 12$. What is the normal vector $\underline{n}$ to this plane?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\langle 12, 12, 12 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\langle -3, 7, -1 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\langle 3, -7, 1 \rangle$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> What is the meaning of the equation $(\underline{r} - \underline{r_0}) \cdot \underline{n} = 0$ in the context of a plane?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It means the vector $\underline{n}$ lies flat on the plane.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) It states that any vector on the plane is perpendicular to the normal vector $\underline{n}$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) It means the plane passes through the origin.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> When finding the equation of a plane through three points $\underline{r_0}, \underline{r_1}, \underline{r_2}$, why is the scalar triple product $[\underline{r} - \underline{r_1}, \underline{r_0} - \underline{r_1}, \underline{r_2} - \underline{r_1}]$ set to equal zero?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Because those three vectors are coplanar, forming a parallelepiped with zero volume.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Because the three vectors are mutually orthogonal (perpendicular) to each other.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Because they are all unit vectors.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Find the Cartesian equation of a plane passing through $(1, 1, 1)$ with normal vector $\underline{n} = \langle 2, -1, 1 \rangle$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $2x - y + z = 0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $2x - y + z = 2$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $x + y + z = 2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 6;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-plane"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-plane");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+</body>
+</html>

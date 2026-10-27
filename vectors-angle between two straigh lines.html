@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Angle Between Two Straight Lines</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : The Angle Between Two Straight Lines. Focus on determining the angle between two straight lines in three-dimensional space using their direction vectors. Cover identifying direction vectors from vector and symmetric equations, deriving and applying the angle formula using the dot product and vector magnitudes, and finding the acute angle between two lines. Include the relationship between perpendicular lines and the zero dot product, worked examples involving 3D lines, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>The Angle Between Two Straight Lines</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec3-2" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Angle Between Two Lines</a></li>
+                <li><a href="#formula">The Angle Formula</a></li>
+                <li><a href="#examples">Detailed Examples</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec3-2" style="margin-bottom: 20px;">The Angle Between Two Straight Lines</h2>
+
+            <div class="blue-box">
+                <strong>Defining the Intersecting Lines</strong><br><br>
+                Consider the two intersecting lines $\alpha : \frac{x - x_1}{a_1} = \frac{y - y_1}{b_1} = \frac{z - z_1}{c_1}$ and $\beta : \frac{x - x_2}{a_2} = \frac{y - y_2}{b_2} = \frac{z - z_2}{c_2}$ in the 3-space.<br><br>
+                Clearly, $\alpha$ and $\beta$ pass through the points $(x_1, y_1, z_1)$ and $(x_2, y_2, z_2)$ and are parallel to the vectors $\langle a_1, b_1, c_1 \rangle$ and $\langle a_2, b_2, c_2 \rangle$ respectively.
+            </div>
+
+            <p style="margin-bottom: 20px; color: #9ca3af;"><em>Geometric Insight:</em> Because the orientation of any straight line is completely determined by its direction vector, the angle between any two lines in 3D space is identical to the angle between their respective direction vectors, provided we measure them from the same starting point (the origin).</p>
+
+            <div class="image-box">
+                <!-- SVG Recreation of Figure 3 -->
+                <svg viewBox="0 0 500 350" style="max-width: 100%; height: auto; max-width: 550px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis3" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-vec" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e5e7eb" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="160" y1="240" x2="80" y2="300" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis3)" />
+                    <line x1="160" y1="240" x2="420" y2="240" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis3)" />
+                    <line x1="160" y1="240" x2="160" y2="90" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis3)" />
+                    
+                    <!-- Axis Labels -->
+                    <text x="70" y="310" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="425" y="255" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="145" y="85" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="140" y="235" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- Vectors at Origin -->
+                    <line x1="160" y1="240" x2="250" y2="195" stroke="#e5e7eb" stroke-width="1.5" marker-end="url(#arrow-vec)" />
+                    <text x="170" y="200" font-family="serif" font-style="italic" font-weight="bold" font-size="13" fill="#e5e7eb">a₁i + b₁j + c₁k</text>
+
+                    <line x1="160" y1="240" x2="190" y2="135" stroke="#e5e7eb" stroke-width="1.5" marker-end="url(#arrow-vec)" />
+                    <text x="125" y="105" font-family="serif" font-style="italic" font-weight="bold" font-size="13" fill="#e5e7eb">a₂i + b₂j + c₂k</text>
+
+                    <!-- Angle Phi at Origin -->
+                    <path d="M 195 190 Q 210 160 180 155" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="190" y="170" font-family="serif" font-style="italic" font-size="14" fill="#facc15">ϕ</text>
+
+                    <!-- Intersecting Lines Alpha and Beta -->
+                    <line x1="260" y1="120" x2="380" y2="170" stroke="#00bbf0" stroke-width="1.5" />
+                    <text x="390" y="160" font-family="serif" font-style="italic" font-size="13" fill="#00bbf0">line: α</text>
+                    <circle cx="340" cy="153" r="3" fill="#00bbf0" />
+                    <text x="320" y="175" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x₁, y₁, z₁)</text>
+
+                    <line x1="280" y1="180" x2="350" y2="80" stroke="#e81c8f" stroke-width="1.5" />
+                    <text x="360" y="95" font-family="serif" font-style="italic" font-size="13" fill="#e81c8f">line: β</text>
+                    <circle cx="330" cy="110" r="3" fill="#e81c8f" />
+                    <text x="250" y="95" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x₂, y₂, z₂)</text>
+
+                    <!-- Angle Phi between lines -->
+                    <path d="M 330 150 Q 345 130 315 125" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="320" y="140" font-family="serif" font-style="italic" font-size="14" fill="#facc15">ϕ</text>
+
+                </svg>
+                <br>
+                <span>Figure 3: Geometric relationship between the angle of intersecting lines and their direction vectors.</span>
+            </div>
+
+            <h2 id="formula" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Deriving the Angle Formula</h2>
+
+            <div class="green-box">
+                <strong>Theorem</strong><br><br>
+                Therefore, the angle between two lines is same as the angle between two vectors and
+                
+                <div class="math-center">
+                    $$ \cos \phi = \frac{(a_1\underline{i} + b_1\underline{j} + c_1\underline{k}) \cdot (a_2\underline{i} + b_2\underline{j} + c_2\underline{k})}{|a_1\underline{i} + b_1\underline{j} + c_1\underline{k}||a_2\underline{i} + b_2\underline{j} + c_2\underline{k}|} = \frac{a_1 a_2 + b_1 b_2 + c_1 c_2}{\sqrt{(a_1^2 + b_1^2 + c_1^2)(a_2^2 + b_2^2 + c_2^2)}} $$
+                </div>
+                <span style="font-size: 0.9em; color: #9ca3af;"></span>
+                <br><br>
+                <hr style="border-top: 1px dashed yellow; border-bottom: none; margin: 15px 0;">
+                <em>Important Consequence:</em> If the two lines are <strong>perpendicular</strong> (orthogonal), their angle is $90^\circ$. Since $\cos(90^\circ) = 0$, the numerator of our formula must equal zero. Thus, lines are perpendicular if and only if $a_1 a_2 + b_1 b_2 + c_1 c_2 = 0$.
+            </div>
+
+            <h2 id="examples" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Detailed Mathematical Example</h2>
+
+            <div class="yellow-box">
+                <strong>Example: Finding the Angle Between Two 3D Lines</strong><br><br>
+                Find the acute angle $\phi$ between the two lines defined by the symmetric equations:<br>
+                Line 1 ($\alpha$): $\frac{x-1}{1} = \frac{y+2}{2} = \frac{z-3}{2}$<br>
+                Line 2 ($\beta$): $\frac{x}{0} = \frac{y-1}{3} = \frac{z+2}{4}$<br><br>
+                
+                <strong>Step 1: Extract the direction vectors.</strong><br>
+                The denominators of the symmetric equations give us the direction vectors.
+                <ul style="margin-top: 10px; margin-bottom: 10px; padding-left: 20px;">
+                    <li>$\underline{v_1} = \langle a_1, b_1, c_1 \rangle = \langle 1, 2, 2 \rangle$</li>
+                    <li>$\underline{v_2} = \langle a_2, b_2, c_2 \rangle = \langle 0, 3, 4 \rangle$</li>
+                </ul>
+                
+                <strong>Step 2: Calculate the dot product (the numerator).</strong>
+                <div class="math-center">
+                    $$ \underline{v_1} \cdot \underline{v_2} = (1)(0) + (2)(3) + (2)(4) = 0 + 6 + 8 = 14 $$
+                </div>
+                
+                <strong>Step 3: Calculate the magnitudes (the denominator components).</strong>
+                <div class="math-center">
+                    $$ |\underline{v_1}| = \sqrt{1^2 + 2^2 + 2^2} = \sqrt{1 + 4 + 4} = \sqrt{9} = 3 $$
+                    $$ |\underline{v_2}| = \sqrt{0^2 + 3^2 + 4^2} = \sqrt{0 + 9 + 16} = \sqrt{25} = 5 $$
+                </div>
+
+                <strong>Step 4: Apply the angle formula.</strong>
+                <div class="math-center">
+                    $$ \cos \phi = \frac{14}{(3)(5)} = \frac{14}{15} $$
+                    $$ \phi = \cos^{-1}\left(\frac{14}{15}\right) \approx 21.04^\circ $$
+                </div>
+                The acute angle between the two lines is approximately $21.04^\circ$.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video to learn how to easily find the angle between two 3D lines given in symmetric or vector form:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ijz6ikR77OI" title="YouTube video player" frameborder="0" sandbox="allow-scripts allow-same-origin allow-presentation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on finding the angle between two straight lines in 3D space.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What is the direction vector $\underline{v}$ of the line given by the symmetric equation $\frac{x-2}{3} = \frac{y-4}{-1} = \frac{z+1}{5}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\langle 2, 4, -1 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\langle 3, -1, 5 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\langle -3, 1, -5 \rangle$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> If two lines with direction vectors $\underline{u}$ and $\underline{v}$ are exactly perpendicular (orthogonal), which of the following conditions MUST be true?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\underline{u} \times \underline{v} = \underline{0}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\underline{u} \cdot \underline{v} = 1$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\underline{u} \cdot \underline{v} = 0$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> What is the angle $\phi$ between a line parallel to the x-axis (direction vector $\langle 1, 0, 0 \rangle$) and a line parallel to the y-axis (direction vector $\langle 0, 1, 0 \rangle$)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $90^\circ$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $0^\circ$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $45^\circ$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> In the formula $\cos \phi = \frac{a_1 a_2 + b_1 b_2 + c_1 c_2}{\sqrt{a_1^2 + b_1^2 + c_1^2}\sqrt{a_2^2 + b_2^2 + c_2^2}}$, what does the numerator ($a_1 a_2 + b_1 b_2 + c_1 c_2$) represent?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The cross product of the direction vectors</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The sum of the magnitudes of the direction vectors</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The dot product of the two direction vectors</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Find the value of $\cos \phi$ for two lines with direction vectors $\underline{v_1} = \langle 2, 0, 0 \rangle$ and $\underline{v_2} = \langle 2, 2, 0 \rangle$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{1}{2}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\frac{1}{\sqrt{2}}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{\sqrt{3}}{2}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Are the two lines with direction vectors $\underline{u} = \langle 2, -1, 3 \rangle$ and $\underline{v} = \langle 1, 5, 1 \rangle$ perpendicular?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Yes, because their dot product is exactly 0.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) No, because their dot product is not 0.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Yes, because their magnitudes are equal.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 6;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-angle"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-angle");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+</body>
+</html>

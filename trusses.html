@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pin-Jointed Trusses - Summary</title>
+  <link rel="stylesheet" href="updated.css">
+  <link rel="stylesheet" href="chatbot_style.css">
+  <meta name="bot-context" content="Topic: Engineering Mechanics : ME 1033 Determination of Forces in Assemblies of Rigid Bodies (Trusses). Focus on structural elements, trusses, stability of trusses, and analysis of trusses. Cover the classification of structural elements, including bars, axially loaded bars (ties and struts), flexural vs torsional members, plates and shells, and blocks. Explain the necessary conditions for stability and determinacy of trusses, including the relationships between the number of members (m), joints (j), and degrees of freedom. Discuss special joint loading cases and zero-force members, providing inspection rules to identify forces without calculations. Cover methods for truss analysis, including the method of joints and method of sections, with step-by-step procedures and examples. Explain the beam analogy method for approximate analysis of parallel-chorded trusses and open web girders. Discuss statically indeterminate trusses, compatibility requirements, and the influence of stiffness on member forces. Include practical examples, diagrams, and video explanations to illustrate these concepts.">
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <nav>
+    <a href="mechanics_home.html">← Back to Mechanics Hub</a>
+    <a href="#classification">Elements</a>
+    <a href="#stability">Stability</a>
+    <a href="#special-cases">Special Joints</a>
+    <a href="#analysis-methods">Analysis</a>
+    <a href="#beam-analogy">Beam Analogy</a>
+    <a href="#indeterminate">Indeterminate</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Pin-Jointed Trusses</h1>
+      <p>ME 1033 - Statics & Trusses Summary</p>
+    </header>
+
+    <!-- 1. Structural Elements -->
+    <section id="classification">
+      <h2>1. Structural Elements & Internal Forces</h2>
+      <ul>
+        <li><strong>Bars (1-D):</strong> Carry axial force (N), shear forces (S<sub>y</sub>, S<sub>z</sub>), torque (T), and bending moments (M<sub>y</sub>, M<sub>z</sub>).</li>
+        <div class="img-container">
+            <img src="https://lh3.googleusercontent.com/d/10QVYQsGfibJ2K7LMXTsMsmdZXMIZJqkn" alt="Internal Forces in a Bar (N, Sy, Sz, T, My, Mz)" onerror="this.style.display='none'">
+        </div>
+        <li><strong>Axially Loaded Bars (Trusses):</strong>
+          <ul>
+            <li><strong>Ties:</strong> Predominant tension.</li>
+            <li><strong>Struts:</strong> Predominant compression.</li>
+          </ul>
+        </li>
+        <li><strong>Flexural vs Torsional:</strong> Beams carry bending; Shafts carry torque.</li>
+        <li><strong>Plates & Shells (2-D):</strong> Slabs (plane) and tanks/domes (curved).</li>
+        <li><strong>Blocks (3-D):</strong> Massive structures (pyramids, stupas).</li>
+        <li><strong>Ideal Truss Assumptions:</strong> Members connected by frictionless pin joints at ends; loads applied only at joints; members develop purely axial forces.</li>
+      </ul>
+    </section>
+
+    <!-- 2. Stability Criteria -->
+    <section id="stability">
+      <h2>2. Stability & Determinacy Conditions</h2>
+      <p>The necessary (but not always sufficient) conditions for a simply stiff structure:</p>
+      
+      <div class="formula-box">
+        Closed 2-D Truss: m = 2j - 3<br>
+        Open 2-D Truss:   m = 2j<br>
+        Closed 3-D Space Truss: m = 3j - 6<br>
+        Open 3-D Space Truss:   m = 3j
+      </div>
+
+      <ul>
+        <li><strong>m &lt; m<sub>reqd</sub>:</strong> Unstable (Mechanism).</li>
+        <li><strong>m = m<sub>reqd</sub>:</strong> Statically Determinate (if geometry is properly triangulated).</li>
+        <li><strong>m &gt; m<sub>reqd</sub>:</strong> Statically Indeterminate (Redundant members exist).</li>
+        <li><strong>Arrangement Precaution:</strong> Even if <code>m = 2j - 3</code>, bad member geometry can still make a truss unstable.</li>
+      </ul>
+    </section>
+
+    <!-- 3. Special Joint Loading -->
+    <section id="special-cases">
+      <h2>3. Special Joints & Zero-Force Members</h2>
+      <p>Quick inspection rules to spot forces without calculating reactions:</p>
+      
+      <!-- Diagram 1: Special Joints Inspection -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1qpKLc9V4SOTNp01BmWnDovN1dzvGR6np" alt="Joints Under Special Loading Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <ul>
+        <li><strong>Collinear Pair + Non-collinear Third Member:</strong>
+          <ul>
+            <li>Two collinear members carry equal forces (T<sub>C</sub> = T<sub>D</sub>).</li>
+            <li>If no external load acts at the joint, the third member is a <strong>Zero-Force Member</strong> (T<sub>B</sub> = 0).</li>
+            <li>If an external load P acts along the third member, its internal force equals P (T<sub>B</sub> = -P).</li>
+          </ul>
+        </li>
+        <li><strong>Two Non-collinear Members (No External Load):</strong> Both members carry zero force (T<sub>C</sub> = 0, T<sub>D</sub> = 0).</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/kq88GGkoepQ" 
+             title="Static video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Analysis Methods -->
+    <section id="analysis-methods">
+      <h2>4. Truss Analysis: Joints vs Sections</h2>
+      <ul>
+        <li><strong>Method of Joints:</strong>
+          <ul>
+            <li>Based on equilibrium of individual joints (&Sigma;F<sub>x</sub> = 0, &Sigma;F<sub>y</sub> = 0).</li>
+            <li>Start at a joint with at most <strong>2 unknown</strong> member forces.</li>
+            <li>Assume tension (pulling away from joint); negative result indicates compression.</li>
+          </ul>
+        </li>
+        <li><strong>Method of Sections:</strong>
+          <ul>
+            <li>Based on overall equilibrium of an isolated part of the truss.</li>
+            <li>Pass an imaginary cut through <strong>not more than 3 members</strong> whose internal forces are needed.</li>
+            <li>Solve using 3 planar equilibrium equations: &Sigma;F<sub>x</sub> = 0, &Sigma;F<sub>y</sub> = 0, &Sigma;M = 0.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Diagram 2: Method of Sections -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1MRACUe11ubmqO4Gt-ZFt9pMqzbJh4Kfg" alt="Method of Sections Cutting Line" onerror="this.style.display='none'">
+      </div>
+    </section>
+
+    <!-- 5. Beam Analogy Method -->
+    <section id="beam-analogy">
+      <h2>5. Beam Analogy Method (Approximate)</h2>
+      <p>Used for fast estimates on parallel-chorded trusses / open web girders of depth <code>d</code>:</p>
+      
+      <!-- Diagram 3: Beam Analogy -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1nlF-vSKGrlod0uR9ySX6uhesUAfOGCNK" alt="Beam Analogy Chord and Web Forces" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        M<sub>max</sub> = wL² / 8 = F<sub>chord</sub> &middot; d &rarr; F<sub>chord(max)</sub> = M<sub>max</sub> / d<br>
+        V<sub>max</sub> = wL / 2 = F<sub>web</sub> &middot; sin &theta; &rarr; F<sub>web(max)</sub> = V<sub>max</sub> / sin &theta;
+      </div>
+      <ul>
+        <li><strong>Chord Members:</strong> Carry overall bending moments (tension in bottom chord, compression in top chord for sagging).</li>
+        <li><strong>Web Members:</strong> Vertical component resists total shear force.</li>
+      </ul>
+    </section>
+
+    <!-- 6. Indeterminate Trusses -->
+    <section id="indeterminate">
+      <h2>6. Statically Indeterminate Trusses</h2>
+      <ul>
+        <li><strong>Limitation:</strong> Equilibrium equations alone cannot solve member forces (more unknowns than available equations).</li>
+        <li><strong>Compatibility Requirement:</strong> Must use deformation compatibility equations combined with Hooke's Law:</li>
+      </ul>
+      <div class="formula-box">
+        Elongation: e = (F &middot; L) / (A &middot; E)<br>
+        Compatibility: Geometric relation between joint displacement &Delta; and member elongations e<sub>i</sub>
+      </div>
+      <ul>
+        <li><strong>Stiffness Influence:</strong> Member forces depend directly on cross-sectional areas (A) and Young's Modulus (E).</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/ml26FjTl-C8" 
+             title="Static video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+    <div class="quiz-box">
+        <strong>Quick Test: Truss Stability &amp; Zero-Force</strong>
+        <p>A planar closed truss has 6 joints and 8 members. Is this truss stable? At an unloaded joint with 3 members, two are collinear. What is the force in the non-collinear member?</p>
+        <details>
+            <summary>Show Answer &amp; Working</summary>
+            <p>1. Required members for stability: m = 2j - 3 = 2(6) - 3 = 9. Since provided m = 8 &lt; 9, the truss is <strong>Unstable (Mechanism)</strong>.</p>
+            <p>2. By special joint inspection, the non-collinear third member carries <strong>Zero Force</strong>.</p>
+        </details>
+    </div>
+
+    
+  </div>
+
+  <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbot-mech.js"></script>
+
+</body>
+</html>

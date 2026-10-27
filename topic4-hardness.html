@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains material hardness as resistance to localized plastic deformation and details indentation testing methods, including the Brinell, Vickers, and Rockwell scales.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 04 - Hardness | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter4-timeline.html" class="back-link">&larr; Back to Chapter 04 Timeline</a>
+        <div class="topic-label">Topic 04</div>
+        <h1>Hardness & Indentation Testing</h1>
+        <div class="content-section">
+            <p><strong>Hardness</strong> is defined as a material's resistance to localized plastic deformation, usually measured as its resistance to indentation. In an indentation test, a hard indenter is forced into the specimen under a specific load. The depth or physical size of the resulting indentation becomes the measure of hardness.</p>
+            
+            <p>Hardness units and scales differ depending on the type of indenter used and the load applied:</p>
+            
+            <h3>1. Brinell Hardness (HB)</h3>
+            <p>Uses a 10mm diameter steel or Tungsten Carbide (WC) ball indenter. Any load 'F' can be applied. The physical diameter of the circular indentation is measured and used in the calculation.</p>
+            
+            <h3>2. Vickers Hardness (HV)</h3>
+            <p>Uses a pyramid-shaped indenter made of diamond with an angle of 136&deg; between faces. The diagonal lengths of the resulting diamond-shaped indentation are measured and averaged for the calculation.</p>
+            <img src="indenters.jpg" alt="Diagram showing the Vickers diamond pyramid indentation" class="content-image small">
+
+            <h3>3. Rockwell Hardness</h3>
+            <p>Rockwell relies on multiple distinct scales depending on the material:</p>
+            <ul>
+                <li><strong>Rockwell A, C & D:</strong> These scales use a cone-shaped indenter made of diamond. Used for very hard materials. (HRC uses a 150 kg load).</li>
+                <li><strong>Rockwell B, F & G:</strong> These scales use a 1/16" diameter (approx. 1.5mm) ball made of steel or Tungsten Carbide. Used for softer metals.</li>
+                <li><strong>Rockwell E:</strong> Uses a larger 1/8" diameter (approx. 3mm) ball.</li>
+            </ul>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Hardness Testing.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. How is "Hardness" defined in materials science?</div>
+                <div class="option-box" data-correct="false">A) Resistance to stretching and necking</div>
+                <div class="option-box" data-correct="true">B) Resistance to localized plastic deformation (indentation)</div>
+                <div class="option-box" data-correct="false">C) Total energy absorbed before fracture</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which hardness test uses a 10mm steel or Tungsten Carbide ball indenter?</div>
+                <div class="option-box" data-correct="false">A) Vickers</div>
+                <div class="option-box" data-correct="false">B) Rockwell C</div>
+                <div class="option-box" data-correct="true">C) Brinell</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What shape is the indenter used in the Vickers Hardness test?</div>
+                <div class="option-box" data-correct="false">A) A small 1/16" steel ball</div>
+                <div class="option-box" data-correct="true">B) A diamond pyramid</div>
+                <div class="option-box" data-correct="false">C) A diamond cone</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Which Rockwell scales utilize a diamond cone indenter?</div>
+                <div class="option-box" data-correct="true">A) Rockwell A, C, and D</div>
+                <div class="option-box" data-correct="false">B) Rockwell B, F, and G</div>
+                <div class="option-box" data-correct="false">C) Rockwell E</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. In the Brinell and Vickers tests, what metric from the specimen is physically measured to calculate hardness?</div>
+                <div class="option-box" data-correct="false">A) The exact depth of the puncture</div>
+                <div class="option-box" data-correct="true">B) The diameter or diagonal lengths of the resulting indentation</div>
+                <div class="option-box" data-correct="false">C) The speed at which the indenter penetrates the surface</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

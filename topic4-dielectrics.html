@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains dielectric materials and electric polarization, detailing how their electric dipole structure is utilized in capacitors to dramatically increase electric energy storage.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 04 - Dielectrics | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter5-timeline.html" class="back-link">&larr; Back to Chapter 05 Timeline</a>
+        <div class="topic-label">Topic 04</div>
+        <h1>Dielectric Behavior</h1>
+        <div class="content-section">
+            <p>A <strong>dielectric material</strong> is an electrically insulating (nonmetallic) material that exhibits an electric dipole structure<span style="display:none">[cite: 11]</span>. An electric dipole is simply the separation of positive and negative charges at the molecular or atomic level<span style="display:none">[cite: 11]</span>.</p>
+            
+            <p>When placed in an electric field, these random dipoles are forced to align in one specific direction. This alignment process is called <strong>Electric Polarization</strong><span style="display:none">[cite: 11]</span>.</p>
+
+            <img src="dielec.gif" alt="Diagram showing the alignment of dipoles under an electric field" class="content-image small">
+
+            <h3>Capacitors</h3>
+            <p>Dielectric materials are primarily used inside <strong>Capacitors</strong>, which are components used to store electric energy<span style="display:none">[cite: 11]</span>. When voltage is applied across a capacitor, one plate becomes positively charged and the other negatively charged<span style="display:none">[cite: 11]</span>.</p>
+            <p>By placing a dielectric material in the vacuum between the two plates, an additional opposing surface charge is induced within the dielectric. This balances out and allows the plates to dramatically increase their stored charge<span style="display:none">[cite: 11]</span>. Capacitance is calculated as: <code>C = &epsilon;(A / l)</code>, where '&epsilon;' is the permittivity of the dielectric medium<span style="display:none">[cite: 11]</span>.</p>
+
+            <ul>
+                <li><strong>Ceramic Examples:</strong> Barium titanate (BaTiO<sub>3</sub>), Aluminum oxide<span style="display:none">[cite: 11]</span>.</li>
+                <li><strong>Polymer Examples:</strong> Polyethylene (PE), Teflon (PTFE)<span style="display:none">[cite: 11]</span>.</li>
+                <li><strong>Mineral Examples:</strong> Mica, heavily used due to its high dielectric strength<span style="display:none">[cite: 11]</span>.</li>
+            </ul>
+        </div>
+
+
+
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Dielectrics and Capacitors.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What defines a Dielectric material?</div>
+                <div class="option-box" data-correct="false">A) A highly conductive metal with free electrons</div>
+                <div class="option-box" data-correct="true">B) An electrically insulating material that exhibits an electric dipole structure</div>
+                <div class="option-box" data-correct="false">C) A pure intrinsic semiconductor like Silicon</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What is "Electric Polarization"?</div>
+                <div class="option-box" data-correct="false">A) The flow of free electrons across a band gap</div>
+                <div class="option-box" data-correct="false">B) The breaking of covalent bonds inside an insulator</div>
+                <div class="option-box" data-correct="true">C) The alignment of electric dipoles in one direction due to an applied electric field</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What is the primary engineering use for a Capacitor?</div>
+                <div class="option-box" data-correct="true">A) To store electric energy</div>
+                <div class="option-box" data-correct="false">B) To perfectly insulate a wire</div>
+                <div class="option-box" data-correct="false">C) To act as a thermal conductor</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What happens when a dielectric material is placed between the plates of a capacitor?</div>
+                <div class="option-box" data-correct="false">A) The capacitance drops to zero</div>
+                <div class="option-box" data-correct="false">B) The plates short-circuit and spark</div>
+                <div class="option-box" data-correct="true">C) An opposing surface charge is induced, allowing the plates to store more charge</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. Which naturally occurring mineral is famously used in capacitors for its excellent dielectric properties?</div>
+                <div class="option-box" data-correct="false">A) Graphite</div>
+                <div class="option-box" data-correct="true">B) Mica</div>
+                <div class="option-box" data-correct="false">C) Quartz</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

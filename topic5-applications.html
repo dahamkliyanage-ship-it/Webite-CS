@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers industrial applications of nanotechnology across electronics (nanoscale transistors), energy systems (supercapacitors and solar cells), and surface engineering (biomimetic superhydrophobic surfaces).">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 05 - Applications | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter6-timeline.html" class="back-link">&larr; Back to Chapter 06 Timeline</a>
+        <div class="topic-label">Topic 05</div>
+        <h1>Industrial Applications</h1>
+        <div class="content-section">
+            <p>Nanotechnology is rapidly transforming modern engineering by enabling the creation of smaller, faster, and more highly-tailored devices.<!--[cite: 12] --></p>
+
+            <h3>Electronics & Data Storage</h3>
+            <ul>
+                <li><strong>Nanoscale Transistors:</strong> The miniaturization of electronic components using CNT transistors allows for higher-performance electronics with vastly improved energy efficiency.<!--[cite: 12] --></li>
+                <li><strong>Magnetic Data Storage:</strong> Nanotechnology has revolutionized data drives by enabling high-density, ultra-compact storage devices with increased data capacity.<!--[cite: 12] --></li>
+            </ul>
+
+            <h3>Energy Systems</h3>
+            <ul>
+                <li><strong>Energy Storage:</strong> Nanostructured materials (like nanoparticles, nanowires, and nanorods) significantly enhance the charge storage capacity of battery electrodes. Furthermore, porous CNT and graphene-based electrodes are used to build next-generation <strong>Supercapacitors</strong>.<!--[cite: 12] --></li>
+                <li><strong>Energy Harvesting:</strong> Nanomaterials are heavily utilized in Photovoltaic (solar) cells. For instance, SWCNT/n-Si heterojunction solar cells utilize strong photoabsorption (from IR to UV), high carrier mobility, and shorter carrier transport lengths to increase efficiency.<!--[cite: 12] --></li>
+            </ul>
+
+            <img src="piechart.png" alt="Pie chart showing breakdown of industrial applications of graphene" class="content-image">
+
+            <h3>Surface Engineering</h3>
+            <p>Engineers mimic natural properties like the Lotus effect to engineer advanced surfaces. By creating a PTFE coated CNT forest, engineers can create synthetic <strong>superhydrophobic surfaces</strong> that aggressively repel water.<!--[cite: 12] --></p>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Industrial Applications.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. How has nanotechnology improved electronic transistors?</div>
+                <div class="option-box" data-correct="false">A) It made them physically larger to handle more current</div>
+                <div class="option-box" data-correct="true">B) It enabled miniaturization for higher performance and better energy efficiency</div>
+                <div class="option-box" data-correct="false">C) It eliminated the need for semiconductors</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What specific nanomaterial structure is commonly used to build the electrodes in high-performance Supercapacitors?</div>
+                <div class="option-box" data-correct="false">A) Solid blocks of bulk silicon</div>
+                <div class="option-box" data-correct="false">B) Smooth ceramic plates</div>
+                <div class="option-box" data-correct="true">C) Porous CNT or graphene-based materials</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. How do nanostructured materials (like nanowires) improve battery electrodes?</div>
+                <div class="option-box" data-correct="true">A) They significantly enhance charge storage capacity</div>
+                <div class="option-box" data-correct="false">B) They increase the weight of the battery for stability</div>
+                <div class="option-box" data-correct="false">C) They act as an electrical insulator to prevent short circuits</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. In solar energy harvesting, what advantage do SWCNT/n-Si heterojunction cells provide?</div>
+                <div class="option-box" data-correct="false">A) They reflect UV light to keep the panel cool</div>
+                <div class="option-box" data-correct="true">B) Strong photoabsorption, high carrier mobility, and shorter carrier transport lengths</div>
+                <div class="option-box" data-correct="false">C) They require zero sunlight to generate power</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. What engineering application directly mimics the natural Lotus leaf effect?</div>
+                <div class="option-box" data-correct="false">A) Gecko adhesive pads</div>
+                <div class="option-box" data-correct="true">B) Superhydrophobic surfaces (e.g., PTFE coated CNT forests)</div>
+                <div class="option-box" data-correct="false">C) Magnetic data storage drives</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers the 7 fundamental crystal systems defined by unit cell geometry (edge lengths and interaxial angles) and their expansion into the 14 unique Bravais Lattices.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 03 - Crystal Systems | MT1023</title>
+<link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter3-timeline.html" class="back-link">&larr; Back to Chapter 03 Timeline</a>
+        <div class="topic-label">Topic 03</div>
+        <h1>Crystal Systems & Lattices</h1>
+        <div class="content-section">
+            <p>Every crystalline material in existence falls into one of <strong>7 possible crystal systems</strong>, which are defined by the geometry of their unit cell<span style="display:none">[cite: 12, 13]</span>.</p>
+            <ul>
+                <li><strong>Cubic:</strong> a = b = c, and &alpha; = &beta; = &gamma; = 90&deg;</li>
+                <li><strong>Hexagonal:</strong> a = b &ne; c, and &alpha; = &beta; = 90&deg;, &gamma; = 120&deg;</li>
+                <li><strong>Tetragonal:</strong> a = b &ne; c, and &alpha; = &beta; = &gamma; = 90&deg;</li>
+                <li><strong>Rhombohedral (Trigonal):</strong> a = b = c, and &alpha; = &beta; = &gamma; &ne; 90&deg;</li>
+                <li><strong>Orthorhombic:</strong> a &ne; b &ne; c, and &alpha; = &beta; = &gamma; = 90&deg;</li>
+                <li><strong>Monoclinic:</strong> a &ne; b &ne; c, and &alpha; = &gamma; = 90&deg; &ne; &beta;</li>
+                <li><strong>Triclinic:</strong> a &ne; b &ne; c, and &alpha; &ne; &beta; &ne; &gamma; &ne; 90&deg;</li>
+            </ul>
+            <p>While there are only 7 base systems, unit cells can have additional lattice points beyond just the corners (such as Body-Centered, Face-Centered, or Base-Centered)<span style="display:none">[cite: 12]</span>. Mathematician Auguste Bravais proved that combining the 7 crystal systems with these variations results in exactly <strong>14 possible Bravais Lattices</strong><span style="display:none">[cite: 12]</span>.</p>
+            <img src="bravis.png" alt="Diagram showing the 14 unique Bravais lattices" class="content-image small">
+        </div>
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Crystal Systems and Lattices.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. How many possible base crystal systems exist?</div>
+                <div class="option-box" data-correct="true">A) 7</div>
+                <div class="option-box" data-correct="false">B) 14</div>
+                <div class="option-box" data-correct="false">C) 21</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. How many unique Bravais Lattices are there in total?</div>
+                <div class="option-box" data-correct="false">A) 7</div>
+                <div class="option-box" data-correct="true">B) 14</div>
+                <div class="option-box" data-correct="false">C) 16</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. In a pure Cubic crystal system, what are the axial relationships?</div>
+                <div class="option-box" data-correct="false">A) a = b &ne; c</div>
+                <div class="option-box" data-correct="true">B) a = b = c</div>
+                <div class="option-box" data-correct="false">C) a &ne; b &ne; c</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Which crystal system features interaxial angles of &alpha; = &beta; = 90&deg; and &gamma; = 120&deg;?</div>
+                <div class="option-box" data-correct="false">A) Tetragonal</div>
+                <div class="option-box" data-correct="false">B) Rhombohedral</div>
+                <div class="option-box" data-correct="true">C) Hexagonal</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

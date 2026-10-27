@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains semiconductor physics, covering intrinsic materials, electron-hole pairs, and how doping creates n-type and p-type extrinsic semiconductors to increase conductivity.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 03 - Semiconductors | MT1023</title>
+   <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter5-timeline.html" class="back-link">&larr; Back to Chapter 05 Timeline</a>
+        <div class="topic-label">Topic 03</div>
+        <h1>Semiconductors</h1>
+        <div class="content-section">
+            <h3>Intrinsic Semiconductors</h3>
+            <p>These are pure materials, such as Silicon (Si) or Germanium (Ge)<span style="display:none">[cite: 11]</span>. In these materials, the Fermi level lies perfectly between the conduction and valence bands<span style="display:none">[cite: 11]</span>. </p>
+            <p>When thermal energy causes an electron to jump into the conduction band, it leaves behind an empty space in the valence band known as a <strong>hole</strong><span style="display:none">[cite: 11]</span>. This hole acts as a positive charge (+1.6 &times; 10<sup>19</sup> C)<span style="display:none">[cite: 11]</span>. In intrinsic semiconductors, current flows due to the motion of <em>both</em> the free electrons and these positive holes (n = p)<span style="display:none">[cite: 11]</span>.</p>
+
+            <img src="silicon.png" alt="Diagram showing electrons and holes moving in a silicon lattice" class="content-image small">
+
+            <h3>Extrinsic (Doped) Semiconductors</h3>
+            <p>Intrinsic semiconductors have relatively low conductivity because they lack sufficient charge carriers. To fix this, engineers introduce specific impurities into the material, a process known as <strong>doping</strong><span style="display:none">[cite: 11]</span>.</p>
+            <ul>
+                <li><strong>n-type Semiconductors:</strong> Created by adding Group VA elements (like Phosphorus) which have a higher valence<span style="display:none">[cite: 11]</span>. This introduces <em>extra free electrons</em> into the lattice. Because electrons are the vast majority (n &gt;&gt;&gt;&gt; p), conductivity is almost entirely dictated by electrons<span style="display:none">[cite: 11]</span>.</li>
+                <li><strong>p-type Semiconductors:</strong> Created by adding Group IIIA elements (like Boron) which have a lower valence<span style="display:none">[cite: 11]</span>. This creates a deficiency of electrons, resulting in <em>extra holes</em>. Here, holes are the vast majority (p &gt;&gt;&gt;&gt; n), so conductivity is dictated by hole movement<span style="display:none">[cite: 11]</span>.</li>
+            </ul>
+        </div>
+        <!-- The video itself -->
+<!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/ethnHSgVbHs" 
+        title="Semiconductors and Energy Bands Basic Introduction" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Intrinsic and Extrinsic Semiconductors.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. In an intrinsic (pure) semiconductor like Silicon, how does the number of free electrons (n) compare to the number of holes (p)?</div>
+                <div class="option-box" data-correct="false">A) n is vastly greater than p</div>
+                <div class="option-box" data-correct="true">B) n is perfectly equal to p</div>
+                <div class="option-box" data-correct="false">C) p is vastly greater than n</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What defines a "hole" in semiconductor physics?</div>
+                <div class="option-box" data-correct="false">A) A physical gap between two atoms in the lattice</div>
+                <div class="option-box" data-correct="false">B) An extra neutron in the nucleus</div>
+                <div class="option-box" data-correct="true">C) An empty space left in the valence band when an electron jumps to the conduction band</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. How is an n-type semiconductor created?</div>
+                <div class="option-box" data-correct="true">A) By doping with Group VA elements (like Phosphorus) to create extra free electrons</div>
+                <div class="option-box" data-correct="false">B) By doping with Group IIIA elements (like Boron) to create extra holes</div>
+                <div class="option-box" data-correct="false">C) By freezing the semiconductor to 0 Kelvin</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What is the majority charge carrier in a p-type semiconductor?</div>
+                <div class="option-box" data-correct="false">A) Free electrons</div>
+                <div class="option-box" data-correct="true">B) Holes</div>
+                <div class="option-box" data-correct="false">C) Protons</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. What is the primary purpose of "doping" a semiconductor?</div>
+                <div class="option-box" data-correct="false">A) To make it physically harder</div>
+                <div class="option-box" data-correct="true">B) To generate excess charge carriers, greatly increasing its electrical conductivity</div>
+                <div class="option-box" data-correct="false">C) To increase its band gap to turn it into a perfect insulator</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

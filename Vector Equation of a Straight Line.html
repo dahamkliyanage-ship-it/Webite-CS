@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vector Equation of a Straight Line</title>
+    <!-- Links to your specific CSS file -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Vector Equation of a Straight Line. Focus on representing straight lines in three-dimensional space using vector, parametric, and symmetric equations. Cover the equation of a line passing through a known point and parallel to a non-zero direction vector, deriving its vector equation, converting it into parametric and symmetric forms, and interpreting direction ratios. Also cover finding the direction vector from two distinct points and using it to construct the vector and symmetric equations of the line passing through them. Include worked examples and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Vector Equation of a Straight Line</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec3-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Vector Equation of a Straight Line</a></li>
+                <li><a href="#sec3-1-1">Line through a point parallel to a vector</a></li>
+                <li><a href="#sec3-1-2">Line through two points</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec3-1" style="margin-bottom: 20px;">Vector Equation of a Straight Line</h2>
+
+            <p style="margin-bottom: 20px; color: #cbd5e1;">In three-dimensional space, a line is completely determined if we know either: <br>
+            1. One point on the line and the direction of the line.<br>
+            2. Two distinct points on the line.<br>
+            We will define vector equations for both of these scenarios.</p>
+
+            <h3 id="sec3-1-1" style="margin-bottom: 15px; margin-top: 30px; font-size: 1.3rem; color: #f9fafb;">The straight line that passes through the point $\underline{r_0} = (x_0, y_0, z_0)$ and parallel to the non zero vector $\underline{v} = a\underline{i} + b\underline{j} + c\underline{k}$</h3>
+
+            <div class="image-box">
+                <!-- SVG Recreation of Figure 1 -->
+                <svg viewBox="0 0 400 300" style="max-width: 100%; height: auto; max-width: 450px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-vector-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                        <marker id="arrow-vector-pink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                        <marker id="arrow-vector-yellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#facc15" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="150" y1="200" x2="80" y2="260" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    <line x1="150" y1="200" x2="350" y2="200" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    <line x1="150" y1="200" x2="150" y2="50" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis)" />
+                    
+                    <!-- Axis Labels -->
+                    <text x="70" y="270" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="355" y="215" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="135" y="55" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="135" y="205" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- The Line (Dashed extensions, solid between points) -->
+                    <line x1="130" y1="70" x2="175" y2="105" stroke="#e5e7eb" stroke-dasharray="4" stroke-width="1.5" />
+                    <line x1="175" y1="105" x2="280" y2="185" stroke="#e5e7eb" stroke-width="1.5" />
+                    <line x1="280" y1="185" x2="330" y2="223" stroke="#e5e7eb" stroke-dasharray="4" stroke-width="1.5" />
+
+                    <!-- Position Vector r0 -->
+                    <line x1="150" y1="200" x2="280" y2="185" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vector-cyan)" />
+                    <text x="225" y="210" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r₀</text>
+                    <text x="285" y="180" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x₀, y₀, z₀)</text>
+
+                    <!-- Arbitrary Position Vector r -->
+                    <line x1="150" y1="200" x2="175" y2="105" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vector-cyan)" />
+                    <text x="168" y="160" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r</text>
+                    <text x="180" y="100" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x, y, z)</text>
+
+                    <!-- Difference Vector r - r0 -->
+                    <line x1="280" y1="185" x2="175" y2="105" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-vector-pink)" />
+                    <text x="235" y="140" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e81c8f">r - r₀</text>
+
+                    <!-- Parallel Vector v -->
+                    <line x1="310" y1="140" x2="240" y2="85" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-vector-yellow)" />
+                    <text x="285" y="110" font-family="sans-serif" font-weight="bold" font-size="14" fill="#facc15">v = a i + b j + c k</text>
+                </svg>
+                <br>
+                <span>Figure 1: Vector equation of a line parallel to vector $\underline{v}$</span>
+            </div>
+
+            <div class="blue-box">
+                <strong>Derivation of the Equation</strong><br><br>
+                Let $(x, y, z)$ be an arbitrary point on the straight line with the position vector $\underline{r}$. <br>
+                Looking at Figure 1, the vector connecting our known point $\underline{r_0}$ to our arbitrary point $\underline{r}$ is $\underline{r} - \underline{r_0}$.<br><br>
+                Because the line is parallel to the given direction vector $\underline{v}$, the vector $\underline{r} - \underline{r_0}$ must be a <em>scalar multiple</em> of $\underline{v}$. Thus, $\underline{r} - \underline{r_0} = t\underline{v}$ for some scalar parameter $t \in \mathbb{R}$.
+                <br><br>
+                Therefore, rearranging for $\underline{r}$ gives the <strong>parametric vector equation</strong>:
+                <div class="math-center">
+                    $$ \underline{r} = \underline{r_0} + t\underline{v} \quad \text{where } t \in \mathbb{R} $$
+                </div>
+            </div>
+
+            <p style="margin-top: 20px;"><strong>Symmetric Form</strong></p>
+            <p>We can break this vector equation down into its individual $x$, $y$, and $z$ coordinates. If we substitute $\underline{r} = x\underline{i} + y\underline{j} + z\underline{k}$, $\underline{r_0} = x_0\underline{i} + y_0\underline{j} + z_0\underline{k}$, and $\underline{v} = a\underline{i} + b\underline{j} + c\underline{k}$ into the equation, we get the parametric equations:</p>
+            <div class="math-center" style="font-size: 1.1rem; color: #cbd5e1;">
+                $x = x_0 + at$<br>
+                $y = y_0 + bt$<br>
+                $z = z_0 + ct$
+            </div>
+            <p>If we solve each of these three equations for the parameter $t$, and set them equal to each other, we obtain the <strong>symmetric form</strong> of the straight line:</p>
+            
+            <div class="green-box" style="text-align: center; font-size: 1.25rem;">
+                $$ \frac{x - x_0}{a} = \frac{y - y_0}{b} = \frac{z - z_0}{c} $$
+            </div>
+
+            <div class="yellow-box">
+                <strong>Detailed Example 1: Finding the Equation of a Line</strong><br><br>
+                Find the vector and symmetric equations of the line that passes through the point $P(2, -1, 4)$ and is parallel to the vector $\underline{v} = 3\underline{i} + 5\underline{j} - 2\underline{k}$.<br><br>
+                <strong>Step 1: Identify $\underline{r_0}$ and $\underline{v}$.</strong>
+                <ul>
+                    <li>The position vector of point P is $\underline{r_0} = 2\underline{i} - 1\underline{j} + 4\underline{k}$.</li>
+                    <li>The direction vector is $\underline{v} = 3\underline{i} + 5\underline{j} - 2\underline{k}$.</li>
+                </ul>
+                <br>
+                <strong>Step 2: Write the Vector Parametric Equation ($\underline{r} = \underline{r_0} + t\underline{v}$).</strong>
+                <div class="math-center">
+                    $$ \underline{r} = (2\underline{i} - \underline{j} + 4\underline{k}) + t(3\underline{i} + 5\underline{j} - 2\underline{k}) $$
+                </div>
+                <br>
+                <strong>Step 3: Write the Symmetric Equations.</strong><br>
+                Using $(x_0, y_0, z_0) = (2, -1, 4)$ and direction ratios $(a, b, c) = (3, 5, -2)$:
+                <div class="math-center">
+                    $$ \frac{x - 2}{3} = \frac{y - (-1)}{5} = \frac{z - 4}{-2} \implies \frac{x - 2}{3} = \frac{y + 1}{5} = \frac{z - 4}{-2} $$
+                </div>
+            </div>
+
+            <br><hr style="border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;"><br>
+
+            <h3 id="sec3-1-2" style="margin-bottom: 15px; font-size: 1.3rem; color: #f9fafb;">The straight line that passes through the points $A$ and $B$</h3>
+
+            <div class="image-box">
+                <!-- SVG Recreation of Figure 2 -->
+                <svg viewBox="0 0 400 300" style="max-width: 100%; height: auto; max-width: 450px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-vec-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                        <marker id="arrow-vec-pink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                        <marker id="arrow-vec-yellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#facc15" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="150" y1="220" x2="80" y2="280" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis2)" />
+                    <line x1="150" y1="220" x2="350" y2="220" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis2)" />
+                    <line x1="150" y1="220" x2="150" y2="60" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis2)" />
+                    
+                    <!-- Axis Labels -->
+                    <text x="70" y="290" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="355" y="235" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="135" y="65" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="135" y="225" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- The Line through A, B, C -->
+                    <line x1="130" y1="70" x2="340" y2="245" stroke="#e5e7eb" stroke-width="1.5" />
+
+                    <!-- Point A (x1, y1, z1) -->
+                    <circle cx="280" cy="195" r="4" fill="#e5e7eb" />
+                    <text x="290" y="190" font-family="sans-serif" font-size="12" fill="#e5e7eb">A = (x₁, y₁, z₁)</text>
+                    <line x1="150" y1="220" x2="280" y2="195" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-vec-cyan)" />
+                    <text x="220" y="225" font-family="sans-serif" font-weight="bold" font-size="14" fill="#00bbf0">r₁</text>
+
+                    <!-- Point B (x2, y2, z2) -->
+                    <circle cx="220" cy="145" r="4" fill="#e5e7eb" />
+                    <text x="230" y="140" font-family="sans-serif" font-size="12" fill="#e5e7eb">B = (x₂, y₂, z₂)</text>
+                    <line x1="150" y1="220" x2="220" y2="145" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-vec-pink)" />
+                    <text x="195" y="195" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e81c8f">r₂</text>
+
+                    <!-- Arbitrary Point C (x, y, z) -->
+                    <text x="175" y="100" font-family="sans-serif" font-size="12" fill="#e5e7eb">C = (x, y, z)</text>
+                    <line x1="150" y1="220" x2="170" y2="105" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-vec-yellow)" />
+                    <text x="170" y="165" font-family="sans-serif" font-weight="bold" font-size="14" fill="#facc15">r</text>
+                </svg>
+                <br>
+                <span>Figure 2: Vector equation of a line passing through points A and B</span>
+            </div>
+
+            <div class="blue-box">
+                <strong>Derivation of the Equation</strong><br><br>
+                Let $C$ be an arbitrary point on the line joining $A$ and $B$ with the position vector $\underline{r}$. <br>
+                From Figure 2, the vector connecting points A and B is $\overrightarrow{AB} = \underline{r_2} - \underline{r_1}$. This acts as our direction vector $\underline{v}$ from the previous section.<br><br>
+                Since $A, B$, and $C$ lie on the same straight line, the vector $\overrightarrow{AC}$ is a scalar multiple of $\overrightarrow{AB}$.<br>
+                Then $\overrightarrow{AC} = t\overrightarrow{AB}$ for some scalar $t \in \mathbb{R}$.<br><br>
+                Substituting the position vectors for these segments:
+                <div class="math-center">
+                    $$ \underline{r} - \underline{r_1} = t(\underline{r_2} - \underline{r_1}) $$
+                    $$ \underline{r} = \underline{r_1} + t\underline{r_2} - t\underline{r_1} $$
+                </div>
+                Hence, factoring out $\underline{r_1}$ gives the vector equation:
+                <div class="math-center">
+                    $$ \underline{r} = (1 - t)\underline{r_1} + t\underline{r_2} \quad \text{where } t \in \mathbb{R} $$
+                </div>
+            </div>
+
+            <p style="margin-top: 20px;"><strong>Symmetric Form</strong></p>
+            <p>Similar to section, if we plug in the coordinates for $A(x_1, y_1, z_1)$, $B(x_2, y_2, z_2)$, and arbitrary point $C(x, y, z)$, the direction ratios are $(x_2 - x_1), (y_2 - y_1), (z_2 - z_1)$. This gives the symmetric form:</p>
+
+            <div class="green-box" style="text-align: center; font-size: 1.25rem;">
+                $$ \frac{x - x_1}{x_2 - x_1} = \frac{y - y_1}{y_2 - y_1} = \frac{z - z_1}{z_2 - z_1} $$
+            </div>
+
+            <div class="yellow-box">
+                <strong>Detailed Example 2: Line Through Two Points</strong><br><br>
+                Find the symmetric equation of the line passing through point $A(1, 0, -2)$ and point $B(3, 4, 1)$.<br><br>
+                <strong>Step 1: Calculate the direction vector ($\overrightarrow{AB}$).</strong>
+                <div class="math-center">
+                    $$ \overrightarrow{AB} = (3 - 1)\underline{i} + (4 - 0)\underline{j} + (1 - (-2))\underline{k} = 2\underline{i} + 4\underline{j} + 3\underline{k} $$
+                </div>
+                The direction ratios are $(a, b, c) = (2, 4, 3)$.<br><br>
+                
+                <strong>Step 2: Use point $A$ and the direction vector to write the symmetric equation.</strong><br>
+                Using $(x_1, y_1, z_1) = (1, 0, -2)$:
+                <div class="math-center">
+                    $$ \frac{x - 1}{2} = \frac{y - 0}{4} = \frac{z - (-2)}{3} $$
+                    $$ \frac{x - 1}{2} = \frac{y}{4} = \frac{z + 2}{3} $$
+                </div>
+                <em>Note: You could also use the coordinates of point B as the numerators, and the equation would still represent the exact same line in 3D space.</em>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this highly-rated tutorial for a clear breakdown of finding vector, parametric, and symmetric equations of lines in 3D space:</p>
+                <div class="video-container">
+                    <!-- Updated with a verified working video link -->
+                    <iframe src="https://www.youtube.com/embed/e9i4cS8S2HA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Vector Equations and Symmetric Forms of Straight Lines.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What is the parametric vector equation of a line passing through a point with position vector $\underline{r_0}$ and parallel to vector $\underline{v}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\underline{r} = \underline{r_0} \times t\underline{v}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\underline{r} = t(\underline{r_0} + \underline{v})$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\underline{r} = \underline{r_0} + t\underline{v}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Find the symmetric equations of a line passing through $(3, -2, 5)$ and parallel to the vector $4\underline{i} - \underline{j} + 2\underline{k}$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\frac{x - 3}{4} = \frac{y + 2}{-1} = \frac{z - 5}{2}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{x - 4}{3} = \frac{y + 1}{-2} = \frac{z - 2}{5}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{x + 3}{4} = \frac{y - 2}{-1} = \frac{z + 5}{2}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Which of the following is the vector equation of a line passing through two points with position vectors $\underline{r_1}$ and $\underline{r_2}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\underline{r} = t\underline{r_1} + (1+t)\underline{r_2}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\underline{r} = (1-t)\underline{r_1} + t\underline{r_2}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\underline{r} = \underline{r_1} + \underline{r_2} + t$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> What is the direction vector $\overrightarrow{AB}$ for a line passing through point $A(1, 2, -1)$ and point $B(4, 0, 3)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $5\underline{i} + 2\underline{j} + 2\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $-3\underline{i} + 2\underline{j} - 4\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $3\underline{i} - 2\underline{j} + 4\underline{k}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> In the symmetric equation $\frac{x-1}{2} = \frac{y}{4} = \frac{z+2}{3}$, what is the direction vector of the line?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\underline{i} - 2\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $2\underline{i} + 4\underline{j} + 3\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $-\underline{i} + 2\underline{k}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> A line is given by $\underline{r} = (2\underline{i} - \underline{j}) + t(\underline{i} + 3\underline{j} - \underline{k})$. What is the position vector of the point on the line when $t = 2$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $4\underline{i} + 5\underline{j} - 2\underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $3\underline{i} + 2\underline{j} - \underline{k}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $4\underline{i} - 5\underline{j} + 2\underline{k}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 6;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-line"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-line");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

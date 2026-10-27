@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Shortest Distance Between an Arbitrary Point and a Plane</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : The Shortest Distance Between an Arbitrary Point and a Plane. Focus on determining the minimum perpendicular distance from an arbitrary point in three-dimensional space to a plane using the plane's normal vector. Cover the geometric interpretation of perpendicular distance, deriving the distance formula using the scalar projection of the vector connecting a point on the plane to the external point onto the normal vector, and applying the Cartesian distance formula using the plane coefficients and point coordinates. Include worked examples, calculating the magnitude of the normal vector, interpreting zero distance, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>The Shortest Distance Between an Arbitrary Point and a Plane</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec3-5" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Shortest Distance: Point & Plane</a></li>
+                <li><a href="#derivation">Derivation & Formula</a></li>
+                <li><a href="#examples">Detailed Examples</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec3-5" style="margin-bottom: 20px;">The Shortest Distance Between an Arbitrary Point and a Plane</h2>
+
+            <div class="blue-box">
+                <strong>Problem Setup</strong><br><br>
+                Suppose $(x, y, z)$ is a point on the plane $ax + by + cz = d$. Let $(x_1, y_1, z_1)$ be an arbitrary point in the 3-space located outside the plane. <br><br>
+                Our objective is to find the minimum (perpendicular) distance from this external point down to the plane.
+            </div>
+
+            <p style="margin-bottom: 20px; color: #9ca3af;"><em>Geometric Insight:</em> The shortest distance from any point to a plane is measured along a line segment that is orthogonal (perpendicular) to the plane. By utilizing the plane's normal vector, we can project the vector connecting a point on the plane to our external point directly onto that normal vector.</p>
+
+            <div class="image-box">
+                <!-- SVG Recreation of Figure 8 -->
+                <svg viewBox="0 0 500 360" style="max-width: 100%; height: auto; max-width: 550px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis8" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-cyan8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                        <marker id="arrow-pink8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                        <marker id="arrow-green8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="160" y1="260" x2="80" y2="320" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis8)" />
+                    <line x1="160" y1="260" x2="420" y2="260" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis8)" />
+                    <line x1="160" y1="260" x2="160" y2="90" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis8)" />
+                    
+                    <text x="70" y="330" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="425" y="275" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="145" y="85" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="140" y="255" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- Plane Surface Blob -->
+                    <path d="M 140 220 C 120 150 190 70 280 90 C 370 110 430 170 420 230 C 410 290 330 330 240 310 C 150 290 160 250 140 220 Z" fill="rgba(56, 189, 248, 0.05)" stroke="#e5e7eb" stroke-width="1" />
+                    <text x="320" y="280" font-family="sans-serif" font-style="italic" font-size="13" fill="#e5e7eb">ax + by + cz = d</text>
+
+                    <!-- Position Vector r0 (to point on plane) -->
+                    <line x1="160" y1="260" x2="220" y2="180" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-cyan8)" />
+                    <text x="195" y="225" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#00bbf0">r₀</text>
+                    <text x="175" y="170" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x, y, z)</text>
+
+                    <!-- Position Vector r1 (to external point) -->
+                    <line x1="160" y1="260" x2="380" y2="210" stroke="#00bbf0" stroke-width="1.5" />
+                    <text x="260" y="240" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#00bbf0">r₁</text>
+                    <text x="375" y="230" font-family="sans-serif" font-size="12" fill="#e5e7eb">(x₁, y₁, z₁)</text>
+
+                    <!-- Vector r1 - r0 -->
+                    <line x1="220" y1="180" x2="380" y2="210" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-pink8)" />
+                    <text x="285" y="180" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#e81c8f">r₁ - r₀</text>
+
+                    <!-- Normal Vector n -->
+                    <line x1="330" y1="120" x2="370" y2="80" stroke="#4ade80" stroke-width="2" marker-end="url(#arrow-green8)" />
+                    <text x="380" y="95" font-family="serif" font-style="italic" font-weight="bold" font-size="14" fill="#4ade80">n</text>
+
+                    <!-- Orthogonal indicator -->
+                    <line x1="330" y1="120" x2="305" y2="95" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3" />
+                    <path d="M 315 106 L 324 99 L 331 108" fill="transparent" stroke="#e5e7eb" stroke-width="1" />
+
+                </svg>
+                <br>
+                <span>Figure 8: Shortest distance from an arbitrary point $(x_1, y_1, z_1)$ to the plane $ax + by + cz = d$.</span>
+            </div>
+
+            <h2 id="derivation" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Derivation & Distance Formula</h2>
+
+            <div class="green-box">
+                <strong>Theorem:</strong><br><br>
+                Clearly, $\underline{n} = a\underline{i} + b\underline{j} + c\underline{k}$ is perpendicular to the plane. Therefore, the shortest distance is obtained by taking the absolute scalar projection of the vector $(\underline{r_1} - \underline{r_0})$ onto the normal vector $\underline{n}$.<br><br>
+                Thus,
+                <div class="math-center">
+                    $$ \text{the distance} = \left| (\underline{r_1} - \underline{r_0}) \cdot \frac{\underline{n}}{|\underline{n}|} \right| = \frac{|(\underline{r_1} - \underline{r_0}) \cdot \underline{n}|}{|\underline{n}|} $$
+                </div>
+                <br>
+                <hr style="border-top: 1px dashed yellow; border-bottom: none; margin: 15px 0;">
+                <em>Alternative Cartesian Formula:</em> If you expand this dot product using point coordinates $(x_1, y_1, z_1)$ and plane equation $ax + by + cz = d$, it simplifies directly to the classic coordinate geometry formula:
+                <div class="math-center">
+                    $$ D = \frac{|ax_1 + by_1 + cz_1 - d|}{\sqrt{a^2 + b^2 + c^2}} $$
+                </div>
+            </div>
+
+            <h2 id="examples" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Detailed Mathematical Example</h2>
+
+            <div class="yellow-box">
+                <strong>Example: Calculating Point-to-Plane Distance</strong><br><br>
+                Find the shortest distance from the point $P(1, -2, 3)$ to the plane given by $2x + 3y - 6z = 5$.<br><br>
+                
+                <strong>Step 1: Identify the plane coefficients and point coordinates.</strong>
+                <ul style="margin-top: 10px; margin-bottom: 10px; padding-left: 20px;">
+                    <li>Plane parameters: $a = 2$, $b = 3$, $c = -6$, $d = 5$</li>
+                    <li>External point: $x_1 = 1$, $y_1 = -2$, $z_1 = 3$</li>
+                </ul>
+                
+                <strong>Step 2: Substitute the point into the left side of the plane equation (numerator).</strong>
+                <div class="math-center">
+                    $$ ax_1 + by_1 + cz_1 - d = 2(1) + 3(-2) + (-6)(3) - 5 $$
+                    $$ = 2 - 6 - 18 - 5 = -27 $$
+                </div>
+                
+                <strong>Step 3: Calculate the magnitude of the normal vector (denominator).</strong>
+                <div class="math-center">
+                    $$ |\underline{n}| = \sqrt{a^2 + b^2 + c^2} = \sqrt{2^2 + 3^2 + (-6)^2} = \sqrt{4 + 9 + 36} = \sqrt{49} = 7 $$
+                </div>
+
+                <strong>Step 4: Compute the final distance.</strong>
+                <div class="math-center">
+                    $$ D = \frac{|-27|}{7} = \frac{27}{7} \approx 3.86 \text{ units} $$
+                </div>
+                The shortest distance from the point $(1, -2, 3)$ to the plane is exactly $\frac{27}{7}$ units.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video for a complete, step-by-step walkthrough of how to find the shortest distance between a point and a plane in 3D space:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/zWMTTRJ0l4w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on calculating the shortest distance from an arbitrary point to a plane.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Geometrically, the shortest distance from an external point to a plane is measured along a line segment that is:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Parallel to the x-axis</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Orthogonal (perpendicular) to the plane</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Any line connecting the origin to the plane</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> In the vector distance formula, what does the expression $\frac{\underline{n}}{|\underline{n}|}$ represent?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The unit normal vector of the plane</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The distance from the plane to the origin</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The area of the plane</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Calculate the magnitude of the normal vector (the denominator in the distance formula) for the plane $3x - 4y + 12z = 10$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $10$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $169$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $13$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Find the shortest distance from the origin $(0, 0, 0)$ to the plane $2x - 2y + z = 6$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $-2$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $2$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $6$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Calculate the shortest distance from the point $(1, 1, 1)$ to the plane $x + y + z = 0$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $3$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\sqrt{3}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> If you calculate the shortest distance from an arbitrary point to a plane and the result is exactly $D = 0$, what does this mathematically imply?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The point lies exactly on the plane.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The plane passes through the origin.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The normal vector of the plane is zero.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> Evaluate the numerator $|ax_1 + by_1 + cz_1 - d|$ for the point $(2, 1, -1)$ and the plane $x + 2y - z = 4$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $5$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $-1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> Why must the absolute value operator be used in the numerator of the distance formula?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Because physical distance must always be a positive scalar quantity.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Because normal vectors cannot have negative components.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) To cancel out the effect of the square root in the denominator.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-planedistance"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-planedistance");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

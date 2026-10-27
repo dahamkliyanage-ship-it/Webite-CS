@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains energy band structure, valence and conduction bands, the Fermi level, and how band gaps differentiate metals, insulators, and semiconductors.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Energy Bands | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter5-timeline.html" class="back-link">&larr; Back to Chapter 05 Timeline</a>
+        <div class="topic-label">Topic 02</div>
+        <h1>Energy Band Structure</h1>
+        <div class="content-section">
+            <p>In isolated atoms, electrons occupy well-defined, discrete energy states. However, when atoms are brought closely together to form a solid, their atomic orbitals overlap. This causes the discrete energy levels to split into closely spaced levels, forming continuous <strong>Energy Bands</strong><span style="display:none">[cite: 11]</span>.</p>
+            
+            <ul>
+                <li><strong>Valence Band:</strong> The highest energy band that is occupied by electrons at absolute zero (0 K)<span style="display:none">[cite: 11]</span>.</li>
+                <li><strong>Conduction Band:</strong> The empty band just above the valence band. Electrons must jump to this band to move freely and conduct electricity<span style="display:none">[cite: 11]</span>.</li>
+            </ul>
+
+            <img src="energy-bands.avif" alt="Comparison of energy bands and band gaps for metals, semiconductors, and insulators" class="content-image small">
+
+            <h3>The Fermi Level</h3>
+            <p>At 0 Kelvin, electrons settle into the lowest available energy states, building a "Fermi Sea"<span style="display:none">[cite: 11]</span>. The <strong>Fermi Energy</strong> is the exact surface of this sea<span style="display:none">[cite: 11]</span>. The <strong>Fermi Level</strong> is formally defined as the energy level that has a 50% probability of electron occupancy (based on the Fermi-Dirac distribution)<span style="display:none">[cite: 11]</span>.</p>
+            
+            <h3>Metals vs. Insulators</h3>
+            <ul>
+                <li><strong>Metals:</strong> The valence band and conduction band overlap (or the Fermi level sits inside a partially filled band). Minimal energy is needed to promote an electron into the conduction band<span style="display:none">[cite: 11]</span>.</li>
+                <li><strong>Insulators & Semiconductors:</strong> A massive "band gap" exists between the valence and conduction bands. In insulators, the gap is too large to cross. In semiconductors, the gap is small enough that higher temperatures can provide enough thermal energy for electrons to jump across<span style="display:none">[cite: 11]</span>.</li>
+            </ul>
+        </div>
+        
+
+
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Energy Bands and the Fermi Level.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What is formed when the atomic orbitals of many closely packed atoms overlap in a solid?</div>
+                <div class="option-box" data-correct="false">A) A single discrete energy state</div>
+                <div class="option-box" data-correct="true">B) Continuous energy bands</div>
+                <div class="option-box" data-correct="false">C) A large macroscopic nucleus</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which band must electrons enter in order to move freely and conduct electricity?</div>
+                <div class="option-box" data-correct="false">A) The Valence Band</div>
+                <div class="option-box" data-correct="false">B) The Forbidden Band</div>
+                <div class="option-box" data-correct="true">C) The Conduction Band</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. How is the Fermi Level formally defined?</div>
+                <div class="option-box" data-correct="true">A) The energy level that has a 50% probability of electron occupancy</div>
+                <div class="option-box" data-correct="false">B) The exact bottom of the conduction band</div>
+                <div class="option-box" data-correct="false">C) The energy required to break a covalent bond</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. Why are metals such excellent conductors of electricity?</div>
+                <div class="option-box" data-correct="false">A) They possess a massive energy band gap</div>
+                <div class="option-box" data-correct="false">B) Their electrons are tightly bound to the nucleus at all times</div>
+                <div class="option-box" data-correct="true">C) Their valence and conduction bands overlap, requiring very little energy for conduction</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. In a semiconductor, what happens as temperature increases above 0 K?</div>
+                <div class="option-box" data-correct="false">A) The band gap increases</div>
+                <div class="option-box" data-correct="true">B) Thermal energy excites more electrons to jump across the band gap into the conduction band</div>
+                <div class="option-box" data-correct="false">C) Electrons drop from the conduction band back down to the nucleus</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

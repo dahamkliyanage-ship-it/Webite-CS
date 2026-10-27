@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Angle Between Two Planes</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : The Angle Between Two Planes. Focus on determining the angle between two intersecting planes in three-dimensional space using their normal vectors. Cover identifying normal vectors from Cartesian plane equations, deriving and applying the angle formula using the dot product and vector magnitudes, and finding the acute or supplementary angle between planes. Include the conditions for perpendicular planes (zero dot product of normal vectors) and parallel planes (normal vectors that are scalar multiples of each other), worked examples, and related practice exercises.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>The Angle Between Two Planes</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec3-4" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Angle Between Two Planes</a></li>
+                <li><a href="#derivation">Derivation & Formula</a></li>
+                <li><a href="#examples">Detailed Examples</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec3-4" style="margin-bottom: 20px;">The Angle Between Two Planes</h2>
+
+            <div class="blue-box">
+                <strong>Defining the Planes</strong><br><br>
+                Consider two non-parallel planes $A$ and $B$ given by $a_1x + a_2y + a_3z = d$ and $b_1x + b_2y + b_3z = d'$ respectively. <br><br>
+                It is easy to see that $\underline{a} = \langle a_1, a_2, a_3 \rangle$ is perpendicular to $A$ and $\underline{b} = \langle b_1, b_2, b_3 \rangle$ is perpendicular to $B$.
+            </div>
+
+            <p style="margin-bottom: 20px; color: #9ca3af;"><em>Geometric Insight:</em> Just as the angle between two straight lines can be found using their direction vectors, the angle between two intersecting planes is precisely equal to the angle between their respective normal vectors (or its supplement $\pi - \phi$). This reduces a complex 3D surface problem into a straightforward vector dot product.</p>
+
+            <div class="image-box">
+                <!-- SVG Recreation of Figure 7 -->
+                <svg viewBox="0 0 500 350" style="max-width: 100%; height: auto; max-width: 550px; filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-axis7" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+                        </marker>
+                        <marker id="arrow-normal-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00bbf0" />
+                        </marker>
+                        <marker id="arrow-normal-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e81c8f" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Axes -->
+                    <line x1="160" y1="240" x2="80" y2="300" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis7)" />
+                    <line x1="160" y1="240" x2="420" y2="240" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis7)" />
+                    <line x1="160" y1="240" x2="160" y2="90" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-axis7)" />
+                    
+                    <text x="70" y="310" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">x</text>
+                    <text x="425" y="255" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">y</text>
+                    <text x="145" y="85" font-family="serif" font-style="italic" font-size="16" fill="#9ca3af">z</text>
+                    <text x="140" y="235" font-family="sans-serif" font-weight="bold" font-size="14" fill="#e5e7eb">O</text>
+
+                    <!-- Plane A (Left Blob) -->
+                    <path d="M 180 180 C 160 120 220 80 280 110 C 310 125 330 180 300 240 C 270 300 200 300 180 260 C 160 220 200 240 180 180 Z" fill="rgba(56, 189, 248, 0.05)" stroke="#e5e7eb" stroke-width="1" />
+                    <text x="210" y="190" font-family="serif" font-style="italic" font-size="14" fill="#00bbf0">Plane A</text>
+
+                    <!-- Plane B (Right Blob) -->
+                    <path d="M 350 160 C 330 100 390 80 440 110 C 480 135 480 200 450 250 C 420 300 360 290 340 250 C 320 210 370 220 350 160 Z" fill="rgba(232, 28, 143, 0.05)" stroke="#e5e7eb" stroke-width="1" />
+                    <text x="390" y="180" font-family="serif" font-style="italic" font-size="14" fill="#e81c8f">Plane B</text>
+
+                    <!-- Normal Vector a -->
+                    <line x1="250" y1="160" x2="330" y2="120" stroke="#00bbf0" stroke-width="2" marker-end="url(#arrow-normal-a)" />
+                    <text x="285" y="130" font-family="serif" font-style="italic" font-weight="bold" font-size="15" fill="#00bbf0">a</text>
+
+                    <!-- Normal Vector b -->
+                    <line x1="410" y1="150" x2="350" y2="120" stroke="#e81c8f" stroke-width="2" marker-end="url(#arrow-normal-b)" />
+                    <text x="385" y="125" font-family="serif" font-style="italic" font-weight="bold" font-size="15" fill="#e81c8f">b</text>
+
+                    <!-- Intersecting Normal Vectors forming Angle Phi -->
+                    <line x1="330" y1="120" x2="380" y2="90" stroke="#00bbf0" stroke-width="1.5" stroke-dasharray="3" />
+                    <line x1="350" y1="120" x2="310" y2="85" stroke="#e81c8f" stroke-width="1.5" stroke-dasharray="3" />
+
+                    <!-- Angle Phi -->
+                    <path d="M 330 90 Q 345 70 365 92" fill="transparent" stroke="#facc15" stroke-width="1.5" />
+                    <text x="340" y="80" font-family="serif" font-style="italic" font-size="16" fill="#facc15">ϕ</text>
+
+                </svg>
+                <br>
+                <span>Figure 7: The angle between two planes is determined by the angle between their normal vectors $\underline{a}$ and $\underline{b}$.</span>
+            </div>
+
+            <h2 id="derivation" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Derivation & Formula</h2>
+
+            <div class="green-box">
+                <strong>Theorem</strong><br><br>
+                Therefore, the angle between $A$ and $B$ is the same as the angle between $\underline{a}$ and $\underline{b}$ or $\pi - (\text{the angle between } \underline{a} \text{ and } \underline{b})$.<br><br>
+                Thus, it is $\phi$ or $\pi - \phi$ where
+                
+                <div class="math-center">
+                    $$ \cos \phi = \frac{\underline{a} \cdot \underline{b}}{|\underline{a}||\underline{b}|} = \frac{a_1 b_1 + a_2 b_2 + a_3 b_3}{\sqrt{(a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2)}} $$
+                </div>
+                <br>
+                <hr style="border-top: 1px dashed yellow; border-bottom: none; margin: 15px 0;">
+                <em>Important Consequence (Orthogonality):</em> Two planes are perpendicular if and only if the dot product of their normal vectors is zero: $a_1 b_1 + a_2 b_2 + a_3 b_3 = 0$. Two planes are parallel if their normal vectors are scalar multiples of each other ($\underline{a} = k\underline{b}$).
+            </div>
+
+            <h2 id="examples" style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">Detailed Mathematical Example</h2>
+
+            <div class="yellow-box">
+                <strong>Example: Finding the Angle Between Two Planes</strong><br><br>
+                Find the acute angle $\phi$ between the two planes given by the Cartesian equations:<br>
+                Plane 1 ($A$): $2x - y + 2z = 5$<br>
+                Plane 2 ($B$): $3x + 4y - z = 1$<br><br>
+                
+                <strong>Step 1: Extract the normal vectors from the coefficients.</strong>
+                <ul style="margin-top: 10px; margin-bottom: 10px; padding-left: 20px;">
+                    <li>$\underline{a} = \langle 2, -1, 2 \rangle$</li>
+                    <li>$\underline{b} = \langle 3, 4, -1 \rangle$</li>
+                </ul>
+                
+                <strong>Step 2: Calculate the dot product ($\underline{a} \cdot \underline{b}$).</strong>
+                <div class="math-center">
+                    $$ \underline{a} \cdot \underline{b} = (2)(3) + (-1)(4) + (2)(-1) = 6 - 4 - 2 = 0 $$
+                </div>
+                
+                <strong>Step 3: Analyze the result.</strong>
+                <div class="math-center">
+                    $$ \cos \phi = \frac{0}{|\underline{a}||\underline{b}|} = 0 \implies \phi = \cos^{-1}(0) = 90^\circ \text{ (or } \frac{\pi}{2} \text{ radians)} $$
+                </div>
+                Because the dot product of their normal vectors evaluates precisely to $0$, we have proven that Plane 1 and Plane 2 are completely <strong>perpendicular</strong> to each other!
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video for a clear, step-by-step tutorial on calculating the angle between two planes using normal vectors:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/7G07dPSlWbY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on finding the angle between two planes and identifying parallel/perpendicular planes.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> The angle between two intersecting planes is mathematically identical to the angle between their:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Position vectors at the origin</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Respective normal vectors</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Parallel direction vectors</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> Extract the normal vector $\underline{a}$ from the Cartesian plane equation $4x - 3y + 2z = 10$.</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\langle -4, 3, -2 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\langle 4, 3, 2 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\langle 4, -3, 2 \rangle$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> What specific condition must be true for two planes to be considered perfectly perpendicular (orthogonal)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The dot product of their normal vectors must be zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The cross product of their normal vectors must be zero.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Their Cartesian equations must have the same constant $d$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> How can you quickly tell if two planes are strictly parallel to each other?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Their normal vectors intersect at exactly $90^\circ$.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Their normal vectors are scalar multiples of each other ($\underline{a} = k\underline{b}$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The dot product of their normal vectors equals $1$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> Calculate the dot product of the normal vectors for Plane 1: $x + y - z = 4$ and Plane 2: $2x - y + z = 1$. What does this imply?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Dot product is $2$; they are parallel.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Dot product is $-1$; they intersect at an acute angle.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Dot product is $0$; they are perpendicular.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> According to the angle formula, if $\cos \phi = 1$ (meaning the dot product equals the product of the magnitudes), what is the angle $\phi$ between the planes?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $0^\circ$ (They are parallel)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $45^\circ$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $90^\circ$ (They are perpendicular)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> What is the normal vector of the plane given simply by the equation $z = 5$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\langle 1, 1, 1 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\langle 0, 0, 5 \rangle$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\langle 0, 0, 1 \rangle$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> If the angle computed between two normal vectors is $\phi$, what is the other valid supplementary angle between the two intersecting planes?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{\pi}{2} - \phi$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\pi - \phi$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $2\pi - \phi$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "vectors-planesangle"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-planesangle");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+
+</body>
+</html>

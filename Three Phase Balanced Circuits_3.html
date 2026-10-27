@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Three Phase Balanced & Unbalanced Circuits</title>
+    <link rel="stylesheet" href="style_2.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Analysis of polyphase electrical systems, including Star (Y) and Delta topologies, per-phase analysis, power calculations, and unbalanced loads.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="page-header">
+            <div class="header-content">
+                <span class="module-tag">EE1040 - Electrical Fundamentals</span>
+                <h1>4.0 Three Phase Circuits</h1>
+                <p>Comprehensive analysis of polyphase electrical systems, including Star (Y) and Delta ($\Delta$) topologies, per-phase analysis, power calculations, and the critical behavior of unbalanced loads and neutral currents.</p>
+            </div>
+        </header>
+
+        <section class="content-block">
+            <h2>4.1 Introduction to 3-Phase Systems</h2>
+            <p>Why are 3-phase systems the universal standard for power generation and transmission? Most large loads, such as heavy industrial induction motors, require a continuous, non-pulsating 3-phase supply to produce a smooth rotating magnetic field. Even when the power is supplied to domestic residential loads (which only use a single phase), the utility company distributes the bulk 3-phase power evenly among different neighborhoods to maintain strict overall system balance at the generator.</p>
+            
+            <p>A perfectly balanced 3-phase power source (like a synchronous generator) contains three separate stator coils physically arranged $120^\circ$ apart around the rotor. This physical geometry produces three individual sinusoidal voltages that have the exact same RMS magnitude but are shifted in phase by exactly $120^\circ$ ($\frac{2\pi}{3}$ radians) from one another in the time domain.</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Balanced 3-Phase Voltage Phasors</h4>
+                <svg viewBox="0 0 500 450" style="width: 100%; height: auto; max-width: 450px; display: block; margin: 0 auto;">
+                    <defs>
+                        <!-- Safely scaled arrowheads -->
+                        <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-yellow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#facc15" />
+                        </marker>
+                        <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Center Reference -->
+                    <circle cx="250" cy="225" r="5" fill="#f1f5f9" />
+
+                    <!-- Phase R (Red) - 0 degrees -->
+                    <line x1="250" y1="225" x2="400" y2="225" stroke="#ef4444" stroke-width="4" marker-end="url(#arrow-red)" />
+                    <!-- Subscript fix via tspan -->
+                    <text x="415" y="230" fill="#ef4444" font-weight="bold" font-size="18">V<tspan baseline-shift="sub" font-size="0.75em">R</tspan> (0°)</text>
+
+                    <!-- Phase Y (Yellow) - Lags by 120 degrees (-120 or 240) -->
+                    <line x1="250" y1="225" x2="175" y2="355" stroke="#facc15" stroke-width="4" marker-end="url(#arrow-yellow)" />
+                    <text x="135" y="380" fill="#facc15" font-weight="bold" font-size="18">V<tspan baseline-shift="sub" font-size="0.75em">Y</tspan> (-120°)</text>
+
+                    <!-- Phase B (Blue) - Lags Y by 120 degrees (+120 or -240) -->
+                    <line x1="250" y1="225" x2="175" y2="95" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow-blue)" />
+                    <text x="135" y="80" fill="#3b82f6" font-weight="bold" font-size="18">V<tspan baseline-shift="sub" font-size="0.75em">B</tspan> (+120°)</text>
+
+                    <!-- 120 Degree Arcs -->
+                    <path d="M 300 225 A 50 50 0 0 1 225 268" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4" />
+                    <text x="275" y="275" fill="#f1f5f9" font-size="14">120°</text>
+
+                    <path d="M 225 268 A 50 50 0 0 1 225 182" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4" />
+                    <text x="180" y="230" fill="#f1f5f9" font-size="14">120°</text>
+
+                    <path d="M 225 182 A 50 50 0 0 1 300 225" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4" />
+                    <text x="275" y="185" fill="#f1f5f9" font-size="14">120°</text>
+                </svg>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>4.2 Star (Y) vs. Delta ($\Delta$) Connections</h2>
+            <p>Three-phase sources and loads can be wired in two primary topologies. The choice of topology defines the mathematical relationship between the <strong>Line parameters</strong> (measured between two outer phases) and the <strong>Phase parameters</strong> (measured across a single internal coil or load).</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Star (Y) vs. Delta ($\Delta$) Topologies</h4>
+                <svg viewBox="0 0 700 300" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Safely scaled arrowheads -->
+                        <marker id="arrow-white-top" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#f1f5f9" />
+                        </marker>
+                    </defs>
+
+                    <!-- STAR CONNECTION (Left) -->
+                    <text x="150" y="20" fill="#f8fafc" font-size="18" font-weight="bold" text-anchor="middle">Star (Y) Connection</text>
+                    
+                    <!-- Center Neutral -->
+                    <circle cx="150" cy="180" r="6" fill="#f1f5f9" />
+                    <text x="165" y="195" fill="#f1f5f9" font-weight="bold" font-size="16">N</text>
+
+                    <!-- Branches -->
+                    <line x1="150" y1="180" x2="150" y2="120" stroke="#facc15" stroke-width="4" />
+                    <path d="M 150 120 L 140 110 L 160 90 L 140 70 L 150 60" fill="none" stroke="#facc15" stroke-width="4" />
+                    <line x1="150" y1="60" x2="150" y2="40" stroke="#facc15" stroke-width="4" />
+                    <circle cx="150" cy="40" r="4" fill="#ef4444" />
+                    <!-- Shifted to avoid overlap with title -->
+                    <text x="130" y="45" fill="#ef4444" font-weight="bold" font-size="16">R</text>
+
+                    <line x1="150" y1="180" x2="100" y2="208" stroke="#facc15" stroke-width="4" />
+                    <path d="M 100 208 L 85 200 L 70 230 L 55 220 L 40 245" fill="none" stroke="#facc15" stroke-width="4" />
+                    <line x1="40" y1="245" x2="30" y2="250" stroke="#facc15" stroke-width="4" />
+                    <circle cx="30" cy="250" r="4" fill="#3b82f6" />
+                    <text x="10" y="260" fill="#3b82f6" font-weight="bold" font-size="16">B</text>
+
+                    <line x1="150" y1="180" x2="200" y2="208" stroke="#facc15" stroke-width="4" />
+                    <path d="M 200 208 L 215 200 L 230 230 L 245 220 L 260 245" fill="none" stroke="#facc15" stroke-width="4" />
+                    <line x1="260" y1="245" x2="270" y2="250" stroke="#facc15" stroke-width="4" />
+                    <circle cx="270" cy="250" r="4" fill="#facc15" />
+                    <text x="280" y="260" fill="#facc15" font-weight="bold" font-size="16">Y</text>
+
+                    <!-- Divider -->
+                    <line x1="350" y1="20" x2="350" y2="280" stroke="#334155" stroke-dasharray="6,4" stroke-width="2" />
+
+                    <!-- DELTA CONNECTION (Right) -->
+                    <text x="550" y="20" fill="#f8fafc" font-size="18" font-weight="bold" text-anchor="middle">Delta (Δ) Connection</text>
+
+                    <!-- Triangle -->
+                    <!-- Top Node R -->
+                    <circle cx="550" cy="70" r="4" fill="#ef4444" />
+                    <!-- Shifted slightly left to avoid center line if needed -->
+                    <text x="535" y="65" fill="#ef4444" font-weight="bold" font-size="16">R</text>
+
+                    <!-- Bottom Left Node B -->
+                    <circle cx="470" cy="220" r="4" fill="#3b82f6" />
+                    <text x="450" y="235" fill="#3b82f6" font-weight="bold" font-size="16">B</text>
+
+                    <!-- Bottom Right Node Y -->
+                    <circle cx="630" cy="220" r="4" fill="#facc15" />
+                    <text x="645" y="235" fill="#facc15" font-weight="bold" font-size="16">Y</text>
+
+                    <!-- R to B Branch -->
+                    <line x1="550" y1="70" x2="520" y2="126" stroke="#3b82f6" stroke-width="4" />
+                    <path d="M 520 126 L 505 120 L 490 150 L 475 140 L 470 170" fill="none" stroke="#3b82f6" stroke-width="4" />
+                    <line x1="470" y1="170" x2="470" y2="220" stroke="#3b82f6" stroke-width="4" />
+
+                    <!-- R to Y Branch -->
+                    <line x1="550" y1="70" x2="580" y2="126" stroke="#facc15" stroke-width="4" />
+                    <path d="M 580 126 L 595 120 L 610 150 L 625 140 L 630 170" fill="none" stroke="#facc15" stroke-width="4" />
+                    <line x1="630" y1="170" x2="630" y2="220" stroke="#facc15" stroke-width="4" />
+
+                    <!-- B to Y Branch -->
+                    <line x1="470" y1="220" x2="510" y2="220" stroke="#ef4444" stroke-width="4" />
+                    <path d="M 510 220 L 520 205 L 540 235 L 560 205 L 580 235 L 590 220" fill="none" stroke="#ef4444" stroke-width="4" />
+                    <line x1="590" y1="220" x2="630" y2="220" stroke="#ef4444" stroke-width="4" />
+                </svg>
+            </div>
+
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div class="highlight-box" style="flex: 1; min-width: 300px; margin-top: 10px;">
+                    <strong>1. Star (Y) Connection</strong>
+                    <p>Features a common neutral point. Line current equals Phase current, but Line voltage is greater than Phase voltage.</p>
+                    <p style="margin-top: 10px;">$$V_{Line} = \sqrt{3} \times V_{Phase}$$</p>
+                    <p>$$I_{Line} = I_{Phase}$$</p>
+                    <p><em>Example: Domestic distribution networks use Star to provide $400\text{V}$ line-to-line for industry, and $230\text{V}$ line-to-neutral for homes.</em></p>
+                </div>
+                
+                <div class="highlight-box" style="flex: 1; min-width: 300px; margin-top: 10px; border-color: rgba(56, 189, 248, 0.3); background-color: rgba(56, 189, 248, 0.1);">
+                    <strong style="color: var(--accent-blue);">2. Delta ($\Delta$) Connection</strong>
+                    <p>Components are connected end-to-end forming a closed loop. There is no neutral wire. Line voltage equals Phase voltage.</p>
+                    <p style="margin-top: 10px;">$$V_{Line} = V_{Phase}$$</p>
+                    <p>$$I_{Line} = \sqrt{3} \times I_{Phase}$$</p>
+                    <p><em>Example: Heavy industrial induction motors and high-voltage transmission lines typically use Delta topologies.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>4.3 Unbalanced Systems & The Floating Neutral</h2>
+            <p>A 3-phase system is <strong>Balanced</strong> only if the impedances across all three phases are mathematically identical ($Z_R = Z_Y = Z_B$ in both magnitude and phase angle). If single-phase loads (like lighting or computers in different buildings) draw unequal currents, the system becomes <strong>Unbalanced</strong>.</p>
+            
+            <h3>Neutral Current ($I_N$)</h3>
+            <p>In a Star-connected 4-wire system, applying Kirchhoff's Current Law (KCL) at the star node ($N$) reveals that the neutral wire acts as a vital return path for residual current. Using complex phasor addition:</p>
+            <div class="math-callout" style="background-color: #0f172a; border-left-color: #ef4444;">
+                <p>$$\mathbf{I}_N = \mathbf{I}_R + \mathbf{I}_Y + \mathbf{I}_B$$</p>
+            </div>
+            <p>If the system is perfectly balanced, $\mathbf{I}_N = 0\text{ A}$. However, in an unbalanced system, the vector sum does not cancel out, and a physical current flows through the neutral wire back to the source.</p>
+
+            <h3>The Danger of a Broken (Floating) Neutral</h3>
+            <p>If an unbalanced 3-phase Star system lacks a neutral wire (or if the neutral wire physically breaks), the return path for the unbalanced current is destroyed. Because KCL dictates that the currents entering the node <em>must</em> sum to zero ($I_R + I_Y + I_B = 0$), the physical voltage of the star point ($V_N$) is violently shifted away from Earth potential ($0\text{V}$) to force the currents into balance.</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Floating Neutral Phasor Shift</h4>
+                <svg viewBox="0 0 500 450" style="width: 100%; height: auto; max-width: 450px; display: block; margin: 0 auto;">
+                    <defs>
+                        <marker id="arrow-gray" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+
+                    <!-- Outer Line Voltage Triangle (Fixed by Source) -->
+                    <polygon points="250,50 400,310 100,310" fill="none" stroke="#334155" stroke-width="3" stroke-dasharray="8,4" />
+                    
+                    <text x="245" y="35" fill="#ef4444" font-weight="bold" font-size="18">R</text>
+                    <text x="415" y="325" fill="#facc15" font-weight="bold" font-size="18">Y</text>
+                    <text x="75" y="325" fill="#3b82f6" font-weight="bold" font-size="18">B</text>
+
+                    <!-- True Neutral Point N (Center) -->
+                    <circle cx="250" cy="223" r="5" fill="#22c55e" />
+                    <text x="235" y="245" fill="#22c55e" font-weight="bold" font-size="16">True N (0V)</text>
+
+                    <!-- Shifted Floating Neutral Point N' -->
+                    <circle cx="210" cy="120" r="6" fill="#ef4444" />
+                    <text x="135" y="115" fill="#ef4444" font-weight="bold" font-size="16">Shifted N'</text>
+
+                    <!-- New Phase Voltages (From N' to R, Y, B) -->
+                    <line x1="210" y1="120" x2="245" y2="58" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-gray)" />
+                    <line x1="210" y1="120" x2="395" y2="302" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-gray)" />
+                    <line x1="210" y1="120" x2="105" y2="302" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-gray)" />
+
+                    <!-- Subscript fix via tspan -->
+                    <text x="260" y="100" fill="#f1f5f9" font-size="14">V<tspan baseline-shift="sub" font-size="0.75em">RN'</tspan> (Drop)</text>
+                    <text x="320" y="210" fill="#f1f5f9" font-size="14" font-weight="bold">V<tspan baseline-shift="sub" font-size="0.75em">YN'</tspan> (Spike!)</text>
+                    <text x="120" y="210" fill="#f1f5f9" font-size="14" font-weight="bold">V<tspan baseline-shift="sub" font-size="0.75em">BN'</tspan> (Spike!)</text>
+                </svg>
+            </div>
+
+            <p><strong>The Consequence:</strong> The voltage drops drastically across the phase with the heaviest load (lowest impedance), and spikes dangerously across the phases with the lightest loads (highest impedance). A broken neutral in a residential grid can cause $230\text{V}$ outlets to surge to nearly $400\text{V}$, instantly destroying electronics and sparking fires.</p>
+        </section>
+
+        <section class="content-block">
+            <h2>4.4 3-Phase Power Calculations</h2>
+            <p>The total Active Power ($P$) securely transmitted in a balanced 3-phase system can be calculated using either the internal Phase values or the externally measurable Line values. Both formulas yield the exact same total power.</p>
+
+            <div class="math-callout">
+                <p><strong>Using Internal Phase Values:</strong></p>
+                <p>$$P_{total} = 3 \times V_{Phase} \times I_{Phase} \times \cos(\Phi)$$</p>
+                <br>
+                <p><strong>Using External Line Values (Industry Standard):</strong></p>
+                <p>$$P_{total} = \sqrt{3} \times V_{Line} \times I_{Line} \times \cos(\Phi)$$</p>
+            </div>
+            
+            <p>Where $\cos(\Phi)$ is the system Power Factor, and $\Phi$ is strictly defined as the specific phase angle difference between the phase voltage and the phase current at the load.</p>
+
+            <div class="example-box">
+                <div class="example-header">Worked Example: Neutral Current & Unbalanced Loads</div>
+                <p>A $400\text{V}$ (Line), 3-phase, 4-wire Star system has three purely resistive single-phase loads connected: Phase R ($23\ \Omega$), Phase Y ($23\ \Omega$), and Phase B ($11.5\ \Omega$). Calculate the Neutral Current.</p>
+                
+                <p style="margin-top: 15px;"><strong>1. Identify Phase Voltages (Polar Form):</strong><br>
+                $V_{Phase} = 400 / \sqrt{3} = 230\text{V}$.<br>
+                $\mathbf{V}_R = 230\angle0^\circ\text{ V}$<br>
+                $\mathbf{V}_Y = 230\angle-120^\circ\text{ V}$<br>
+                $\mathbf{V}_B = 230\angle120^\circ\text{ V}$</p>
+                
+                <p style="margin-top: 15px;"><strong>2. Calculate Phase Currents using Ohm's Law ($\mathbf{I} = \mathbf{V}/\mathbf{Z}$):</strong><br>
+                $\mathbf{I}_R = 230\angle0^\circ / 23 = \mathbf{10\angle0^\circ\text{ A}}$<br>
+                $\mathbf{I}_Y = 230\angle-120^\circ / 23 = \mathbf{10\angle-120^\circ\text{ A}}$<br>
+                $\mathbf{I}_B = 230\angle120^\circ / 11.5 = \mathbf{20\angle120^\circ\text{ A}}$</p>
+
+                <p style="margin-top: 15px;"><strong>3. Convert to Rectangular Form to Sum for Neutral Current ($\mathbf{I}_N$):</strong><br>
+                $\mathbf{I}_R = 10 + j0$<br>
+                $\mathbf{I}_Y = 10\cos(-120^\circ) + j10\sin(-120^\circ) = -5 - j8.66$<br>
+                $\mathbf{I}_B = 20\cos(120^\circ) + j20\sin(120^\circ) = -10 + j17.32$</p>
+
+                <p style="margin-top: 10px;">$\mathbf{I}_N = \mathbf{I}_R + \mathbf{I}_Y + \mathbf{I}_B = (10 - 5 - 10) + j(0 - 8.66 + 17.32)$<br>
+                $\mathbf{I}_N = \mathbf{-5 + j8.66\text{ A}}$</p>
+
+                <p style="margin-top: 10px;"><strong>Magnitude of Neutral Current:</strong><br>
+                $|\mathbf{I}_N| = \sqrt{(-5)^2 + (8.66)^2} = \sqrt{25 + 75} = \sqrt{100} = \mathbf{10\text{ Amperes}}$</p>
+                <p><em>Conclusion: The unbalanced $11.5\ \Omega$ load on Phase B forces a massive $10\text{A}$ return current through the neutral wire.</em></p>
+            </div>
+        </section>
+
+        <!-- Video strictly positioned before the quiz -->
+        <section class="video-section">
+            <h2>Video Resource: Three Phase Electricity Basics</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/qthuFLNSrlg?si=BNBMzzoanj8ZRbqe" title="Three Phase Electricity Basics" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Assessment -->
+        <section class="quiz-section">
+            <h2>End of Chapter Assessment</h2>
+            <p class="quiz-intro">Test your understanding of Three-Phase Circuits. Select an answer to see instant feedback.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. In a balanced Star (Y) connected 3-phase grid system, what is the exact mathematical relationship between Line Voltage ($V_L$) and Phase Voltage ($V_{Ph}$)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) $V_L = V_{Ph}$</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) $V_L = 3 \times V_{Ph}$</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) $V_L = \sqrt{3} \times V_{Ph}$</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) $V_L = V_{Ph} / \sqrt{3}$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What characterizes the voltages and currents in a balanced Delta ($\Delta$) connected system?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) Line voltage is $\sqrt{3}$ times the phase voltage, and line current equals phase current.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>B) Line voltage equals phase voltage, and Line current is $\sqrt{3}$ times the phase current.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) Line voltage equals phase voltage, and Line current equals phase current.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) It requires a grounded neutral wire to function.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. What happens to the neutral current ($I_N$) in a 4-wire Star system if the loads on all three phases are perfectly identical?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) The neutral current equals the sum of the magnitudes of the three phase currents ($I_N = 3 \times I_{Ph}$).</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>B) The neutral current is exactly Zero Amperes ($0\text{A}$) because the phasor sum of the three balanced currents cancels out perfectly.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) The neutral current becomes highly unstable and unpredictable.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) The neutral current equals the line current of Phase R alone.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. What severe physical consequence occurs if the neutral wire breaks (creating a "Floating Neutral") in a highly unbalanced Star-connected system?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) The system immediately balances itself automatically, dropping $I_N$ to zero.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) All three phase voltages immediately drop to $0\text{V}$ and the power cuts out safely.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>C) The central star point voltage physically shifts away from $0\text{V}$, forcing extreme over-voltages onto lightly loaded phases and under-voltages onto heavily loaded phases.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) The line-to-line voltage increases to $\sqrt{3} \times 400\text{V}$.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. Which mathematical formula correctly calculates the total Active Power ($P$) in ANY balanced 3-phase system (both Star and Delta) strictly using external Line parameters ($V_L$ and $I_L$)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) $P = 3 \times V_L \times I_L \times \cos(\Phi)$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>B) $P = V_L \times I_L \times \cos(\Phi)$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>C) $P = \sqrt{3} \times V_L \times I_L \times \cos(\Phi)$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) $P = 3 \times V_L \times I_L \times \sin(\Phi)$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_electrical.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid var(--success)";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the chapter theory and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid var(--error)";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(34, 197, 94, 0.1)";
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(34, 197, 94, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

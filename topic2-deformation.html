@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers elastic and plastic deformation, explaining Young's Modulus, Poisson's ratio, Yield Strength (0.002 offset), UTS, necking, and work hardening effects.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Deformation | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter4-timeline.html" class="back-link">&larr; Back to Chapter 04 Timeline</a>
+        <div class="topic-label">Topic 02</div>
+        <h1>Elastic & Plastic Deformation</h1>
+        <div class="content-section">
+            <h3>Elastic Deformation</h3>
+            <p>Elastic deformation is temporary. When the load is released, the material returns to its exact original shape. In most metals, this behavior is linear and governed by Hooke's Law: <code>&sigma; = E &middot; &epsilon;</code>.</p>
+            <ul>
+                <li><strong>Young's Modulus (E):</strong> The slope of the linear elastic region. It represents the material's stiffness (resistance to elastic deformation).</li>
+                <li><strong>Poisson's Ratio (&nu;):</strong> The ratio of lateral contraction to axial extension. <code>&nu; = -&epsilon;<sub>x</sub> / &epsilon;<sub>z</sub></code>.</li>
+            </ul>
+
+            <img src="curve.jpg" alt="Stress-Strain Diagram showing elastic and plastic regions" class="content-image small">
+
+            <h3>Plastic Deformation</h3>
+            <p>Beyond the elastic limit, stress is no longer proportional to strain, and the material experiences permanent, non-recoverable plastic deformation.</p>
+            <ul>
+                <li><strong>Yield Strength (&sigma;<sub>Y</sub>):</strong> The stress at which plastic deformation begins. Because the exact point is hard to pinpoint on a curve, an "offset method" is usually used by drawing a parallel line at a 0.002 strain offset. (<em>Note: Steels have distinct upper and lower yield points, so the offset method is not required.</em>)</li>
+                <li><strong>Ultimate Tensile Strength (UTS):</strong> The maximum stress sustained on the curve. After this point, deformation is confined to a small region (a phenomenon called <em>Necking</em>) until fracture.</li>
+                <li><strong>Ductility:</strong> A measure of the degree of plastic deformation a material sustains before fracture (measured via % elongation or % area reduction). Materials with virtually no plastic deformation are "brittle".</li>
+            </ul>
+
+            <h3>Work Hardening</h3>
+            <p>Also known as strain hardening, this occurs when a material undergoes plastic deformation. If the load is removed and then reapplied, the material's Yield Strength actually increases! While this increases strength and hardness, it simultaneously decreases ductility and toughness.</p>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/J5w58N3qpe0" 
+        title="Understanding Material Strength, Ductility and Toughness Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Elastic and Plastic Deformation.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What does Young's Modulus (E) represent?</div>
+                <div class="option-box" data-correct="false">A) The point where the material breaks</div>
+                <div class="option-box" data-correct="true">B) The stiffness or resistance to elastic deformation</div>
+                <div class="option-box" data-correct="false">C) The ratio of lateral strain to axial strain</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. How is Yield Strength typically determined on a stress-strain curve for metals without a distinct yield point?</div>
+                <div class="option-box" data-correct="true">A) Drawing a parallel line at a 0.002 strain offset</div>
+                <div class="option-box" data-correct="false">B) Finding the absolute maximum peak of the curve</div>
+                <div class="option-box" data-correct="false">C) Measuring the total area under the curve</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. What happens to a material during "Work Hardening" (Strain Hardening)?</div>
+                <div class="option-box" data-correct="false">A) It becomes significantly more ductile</div>
+                <div class="option-box" data-correct="false">B) Its elastic modulus (E) increases dramatically</div>
+                <div class="option-box" data-correct="true">C) Its strength and hardness increase, but ductility decreases</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What phenomenon occurs after a material reaches its Ultimate Tensile Strength (UTS)?</div>
+                <div class="option-box" data-correct="false">A) Yielding</div>
+                <div class="option-box" data-correct="true">B) Necking</div>
+                <div class="option-box" data-correct="false">C) Elastic Recovery</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. Which metal is known for having a distinct "upper and lower" yield point on its stress-strain curve?</div>
+                <div class="option-box" data-correct="false">A) Aluminum</div>
+                <div class="option-box" data-correct="true">B) Steel</div>
+                <div class="option-box" data-correct="false">C) Copper</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

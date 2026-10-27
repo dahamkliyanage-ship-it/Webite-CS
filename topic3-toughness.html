@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Explains material toughness as absorbed strain energy, physical impact testing methods, and the Ductile-Brittle Transition Temperature (DBTT) behavior in BCC versus FCC metals.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 03 - Toughness | MT1023</title>
+   <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter4-timeline.html" class="back-link">&larr; Back to Chapter 04 Timeline</a>
+        <div class="topic-label">Topic 03</div>
+        <h1>Toughness & Impact Testing</h1>
+        <div class="content-section">
+            <h3>Toughness</h3>
+            <p>The work done during the deformation of a material is stored in the form of strain energy. <strong>Toughness</strong> is defined as the total strain energy absorbed by a material up to the point of fracture (the total work done at fracture). On a stress-strain diagram, toughness is represented by the entire area under the curve. Because of this, ductile materials generally possess far greater toughness than brittle materials.</p>
+            
+            <img src="curve2.svg" alt="Graph showing toughness as the area under the stress-strain curve" class="content-image small">
+
+            <h3>Impact Testing</h3>
+            <p>Toughness is physically measured using an Impact Test on a notched specimen. An impact load is applied via a swinging hammer. The energy lost by the hammer during the swing is read on a scale as the material's toughness.</p>
+            
+            <img src="impact.jpg" alt="Diagram of a swinging hammer impact test" class="content-image small">
+
+            <h3>Ductile-Brittle Transition</h3>
+            <p>Whether a material behaves as ductile or brittle is heavily dependent on temperature. As temperature is lowered, ductile materials can begin to exhibit brittle behavior. This is known as the Ductile-Brittle Transition.</p>
+            <ul>
+                <li>In <strong>BCC metals</strong> (like steel), a sudden and sharp change in behavior is observed over a narrow temperature range. The middle value of this range is called the Ductile-Brittle Transition Temperature (DBTT).</li>
+                <li>In <strong>FCC metals</strong> (like copper), this transition is gradual, lacking a sharp sudden drop-off.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to get a better understanding of this topic:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/tpGhqQvftAo" 
+        title="Charpy Impact Test Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Toughness and Impact Testing.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. How is Toughness defined in materials science?</div>
+                <div class="option-box" data-correct="false">A) The maximum stress a material can withstand</div>
+                <div class="option-box" data-correct="true">B) The total strain energy absorbed by a material up to fracture</div>
+                <div class="option-box" data-correct="false">C) The resistance of a material to localized indentation</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. How is toughness visually represented on a Stress-Strain diagram?</div>
+                <div class="option-box" data-correct="true">A) As the total area under the curve</div>
+                <div class="option-box" data-correct="false">B) As the peak highest point on the curve</div>
+                <div class="option-box" data-correct="false">C) As the slope of the initial linear line</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. Which setup is commonly used to physically measure a material's impact toughness?</div>
+                <div class="option-box" data-correct="false">A) A diamond pyramid indenter</div>
+                <div class="option-box" data-correct="true">B) A swinging hammer striking a notched specimen</div>
+                <div class="option-box" data-correct="false">C) A slow, constant pulling machine with an extensometer</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What does DBTT stand for?</div>
+                <div class="option-box" data-correct="false">A) Deformation By Tension Test</div>
+                <div class="option-box" data-correct="true">B) Ductile-Brittle Transition Temperature</div>
+                <div class="option-box" data-correct="false">C) Dynamic Bending Toughness Threshold</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. Which lattice structure experiences a sharp, sudden ductile-to-brittle transition as temperature drops?</div>
+                <div class="option-box" data-correct="true">A) BCC (like Steel)</div>
+                <div class="option-box" data-correct="false">B) FCC (like Copper)</div>
+                <div class="option-box" data-correct="false">C) Both BCC and FCC experience it identically</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

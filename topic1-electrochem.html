@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta name="bot-context" content="Covers the fundamentals of corrosion and electrochemistry, explaining oxidation at the anode, reduction at the cathode (HER and ORR), standard electrode potentials, and cell potential.">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Topic 01 - Electrochemistry | MT1023</title>
+
+    <link rel="stylesheet" href="style-materials.css">
+
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="chapter8-timeline.html" class="back-link">&larr; Back to Chapter 08 Timeline</a>
+
+        <div class="topic-label">Topic 01</div>
+
+        <h1>Intro to Corrosion & Electrochemistry</h1>
+
+        <div class="content-section">
+
+            <p><strong>Corrosion</strong> is defined as the deterioration of metals due to a reaction with their environment. At its core, all metal corrosion is <strong>electrochemical in nature</strong>, meaning it relies on a pair of reactions where electron transfer occurs.</p>
+
+           
+
+            <h3>The Anode (Oxidation)</h3>
+
+            <p>The site where metal breaks down and releases electrons is called the anode. This is an <strong>oxidation</strong> reaction: <code>M &rarr; M<sup>n+</sup> + ne<sup>-</sup></code>. For example, Iron rusts via the reaction <code>Fe &rarr; Fe<sup>2+</sup> + 2e<sup>-</sup></code>.</p>
+
+           
+
+            <h3>The Cathode (Reduction)</h3>
+
+            <p>The site that receives these electrons is the cathode. This is a <strong>reduction</strong> reaction. The two most common reduction reactions in corrosion are:</p>
+
+            <ul>
+
+                <li><strong>Hydrogen Evolution Reaction (HER):</strong> <code>2H<sup>+</sup> + 2e<sup>-</sup> &rarr; H<sub>2</sub></code> (Common when metals corrode in acid).</li>
+
+                <li><strong>Oxygen Reduction Reaction (ORR):</strong> <code>O<sub>2</sub> + 2H<sub>2</sub>O + 4e<sup>-</sup> &rarr; 4OH<sup>-</sup></code> (Common when metals like iron rust in the atmosphere).</li>
+
+            </ul>
+
+
+
+            <img src="cell.jpg" alt="Diagram showing electron flow from anode to cathode in a basic electrochemical cell" class="content-image small">
+
+
+
+            <h3>Standard Electrode Potential (E<sup>0</sup>)</h3>
+
+            <p>Whether a metal becomes an anode (corrodes) or a cathode depends on its Standard Electrode Potential (E<sup>0</sup>). An electrode with a <strong>more negative potential</strong> will always become the anode.</p>
+
+            <p>When two electrodes are electrically connected, they form a cell. The overall cell potential indicates the rate of corrosion and is calculated as: <code>&Delta;E<sup>0</sup> = E<sup>0</sup><sub>Cathode</sub> - E<sup>0</sup><sub>Anode</sub></code>. For a corrosion reaction to occur spontaneously, <strong>&Delta;E<sup>0</sup> must be positive</strong>.</p>
+
+        </div>
+
+
+
+        <div class="quiz-container">
+
+            <div class="quiz-title">Practice Exercises</div>
+
+            <div class="quiz-desc">Test your knowledge on Electrochemistry and Corrosion basics.</div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">1. What fundamental type of reaction is responsible for all metal corrosion?</div>
+
+                <div class="option-box" data-correct="false">A) Photochemical</div>
+
+                <div class="option-box" data-correct="false">B) Thermomechanical</div>
+
+                <div class="option-box" data-correct="true">C) Electrochemical</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">2. At which site does the actual deterioration/oxidation of the metal take place?</div>
+
+                <div class="option-box" data-correct="true">A) The Anode</div>
+
+                <div class="option-box" data-correct="false">B) The Cathode</div>
+
+                <div class="option-box" data-correct="false">C) The Electrolyte bridge</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">3. Which reaction commonly occurs at the cathode when a metal corrodes in an acidic environment?</div>
+
+                <div class="option-box" data-correct="false">A) Oxygen Reduction Reaction (ORR)</div>
+
+                <div class="option-box" data-correct="false">B) Metal Oxidation</div>
+
+                <div class="option-box" data-correct="true">C) Hydrogen Evolution Reaction (HER)</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">4. When evaluating Standard Electrode Potentials (E<sup>0</sup>), which metal will become the corroding anode?</div>
+
+                <div class="option-box" data-correct="true">A) The metal with the more negative potential</div>
+
+                <div class="option-box" data-correct="false">B) The metal with the more positive potential</div>
+
+                <div class="option-box" data-correct="false">C) The metal closest to exactly 0.000V</div>
+
+            </div>
+
+
+
+            <div class="question-block" data-answered="false">
+
+                <div class="question-text">5. For a corrosion reaction to occur spontaneously, what must be true about the overall cell potential (&Delta;E<sup>0</sup>)?</div>
+
+                <div class="option-box" data-correct="false">A) It must be exactly zero</div>
+
+                <div class="option-box" data-correct="false">B) It must be negative</div>
+
+                <div class="option-box" data-correct="true">C) It must be positive</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+
+
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+
+</body>
+
+</html> 
+

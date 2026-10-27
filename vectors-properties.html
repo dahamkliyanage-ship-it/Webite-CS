@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vector Properties</title>
+    <!-- Assuming your provided CSS is saved in this file -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta name="bot-context" content="Topic: Mathematics – Vector Properties. Focus on fundamental vector properties and operations, including vector addition, subtraction, scalar multiplication, and magnitude calculations using vector components. Cover the representation of vectors in component form, the extension of vector operations to higher dimensions, and the ratio formula for determining the position vector of a point dividing a line segment in a given ratio. Include applications in structural mechanics, such as calculating resultant forces and locating midpoints, along with related practice exercises.">
+    
+
+    <link rel="stylesheet" href="chatbot_style.css">
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Properties of Vectors</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#sec1">Properties of Vectors</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="sec1-4">Properties of Vectors</h2>
+
+            <div class="blue-box">
+                <strong>Theorem 1.4.1:</strong> Suppose \(\underline{a} = a_1\underline{i} + a_2\underline{j}\) and \(\underline{b} = b_1\underline{i} + b_2\underline{j}\). Then
+                <br><br>
+                (i). \(\underline{a} + \underline{b} = (a_1 + b_1)\underline{i} + (a_2 + b_2)\underline{j}\).<br><br>
+                (ii). \(k\underline{a} = ka_1\underline{i} + ka_2\underline{j}\) where \(k\) is a scalar.<br><br>
+                (iii). \(|\underline{a}| = \sqrt{a_1^2 + a_2^2}\).<br><br>
+                (iv). \(\underline{a} - \underline{b} = (a_1 - b_1)\underline{i} + (a_2 - b_2)\underline{j}\).
+            </div>
+
+            <p>Vectors may also be represented by components. That is \(\underline{a} = a_1\underline{i} + a_2\underline{j} = \langle a_1, a_2 \rangle\).</p>
+            <p>Then we have:</p>
+            <ul>
+                <li>\(\underline{a} + \underline{b} = \langle a_1 + b_1, a_2 + b_2 \rangle\),</li>
+                <li>\(\underline{a} - \underline{b} = \langle a_1 - b_1, a_2 - b_2 \rangle\), and</li>
+                <li>\(k\underline{a} = \langle ka_1, ka_2 \rangle\).</li>
+            </ul>
+
+            <p><em>These concepts can also be extended to higher dimensions.</em></p>
+
+            <div class="yellow-box">
+                <strong>Application: Structural Mechanics</strong><br>
+                Determining the net force on a mechanical joint requires adding vector components. Suppose a structural node experiences two force vectors:
+                <br><br>
+                <ul>
+                    <li>Load A: \(\underline{F_1} = 3\underline{i} + 4\underline{j}\) kN</li>
+                    <li>Load B: \(\underline{F_2} = 5\underline{i} - 2\underline{j}\) kN</li>
+                </ul>
+                Using Theorem 1.4.1, the resultant combined force \(\underline{R}\) acting on the node is:
+                <div class="math-center">
+                    \(\underline{R} = \underline{F_1} + \underline{F_2} = (3 + 5)\underline{i} + (4 - 2)\underline{j} = 8\underline{i} + 2\underline{j}\) kN
+                </div>
+                To find the absolute magnitude of this structural load, we apply Theorem 1.4.1 (iii):
+                <div class="math-center">
+                    \(|\underline{R}| = \sqrt{8^2 + 2^2} = \sqrt{64 + 4} = \sqrt{68} \approx 8.25\) kN
+                </div>
+            </div>
+
+            <br>
+
+            <div class="blue-box">
+                <strong>Theorem 1.4.2 (Ratio Formula):</strong> Let \(A\) and \(B\) be two points with position vectors \(\underline{a}\) and \(\underline{b}\) respectively. If \(C\) is a point that divides \(AB\) in the ratio of \(m : n\) then the position vector of \(C\) is given by
+                <div class="math-center">
+                    \(\underline{c} = \frac{n\underline{a} + m\underline{b}}{m + n}\).
+                </div>
+            </div>
+
+            <p><strong>Applying the Ratio Formula:</strong> A common engineering application of this formula is finding the exact midpoint of a structural element, such as locating the center of an elastic beam resting between supports \(A\) and \(B\). For a midpoint, the ratio \(m:n\) is exactly \(1:1\). Substituting \(m=1\) and \(n=1\) into the formula simplifies directly to:</p>
+            
+            <div class="math-center">
+                \(\underline{c} = \frac{1\underline{a} + 1\underline{b}}{1 + 1} = \frac{\underline{a} + \underline{b}}{2}\)
+            </div>
+            
+            <div class="video-section">
+                <p>Watch the video below to get a better understanding of this:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/KBSCMTYaH1s?si=XX4dDnckP8493ZZC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Vector Properties based on the theorems above.</p>
+
+                <!-- Question 1: Vector Addition (Theorem 1.4.1 i) -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Suppose \(\underline{a} = \langle 3, 4 \rangle\) and \(\underline{b} = \langle -1, 2 \rangle\). Using Theorem 1.4.1, what is \(\underline{a} + \underline{b}\)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) \(\langle 4, 2 \rangle\)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) \(\langle 2, 8 \rangle\)</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) \(\langle 2, 6 \rangle\)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2: Scalar Multiplication (Theorem 1.4.1 ii) -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> If \(\underline{a} = 2\underline{i} - 5\underline{j}\) and \(k = 3\), what is the value of the scalar multiplication \(k\underline{a}\)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) \(6\underline{i} - 15\underline{j}\)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) \(5\underline{i} - 2\underline{j}\)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) \(6\underline{i} + 15\underline{j}\)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3: Magnitude (Theorem 1.4.1 iii) -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Calculate the magnitude of the vector \(\underline{a} = 3\underline{i} - 4\underline{j}\). (i.e., \(|\underline{a}|\))</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) \(7\)</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) \(5\)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) \(1\)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4: Vector Subtraction (Theorem 1.4.1 iv) -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> Let \(\underline{a} = \langle 5, 7 \rangle\) and \(\underline{b} = \langle 2, 3 \rangle\). What is \(\underline{a} - \underline{b}\)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) \(\langle 7, 10 \rangle\)</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) \(\langle 3, 4 \rangle\)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) \(\langle 3, -4 \rangle\)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5: Ratio Formula (Theorem 1.4.2) -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> According to the Ratio Formula, if point \(C\) divides \(AB\) in the ratio of \(2 : 3\) (\(m=2, n=3\)), what is the position vector \(\underline{c}\) in terms of \(\underline{a}\) and \(\underline{b}\)?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) \(\underline{c} = \frac{3\underline{a} + 2\underline{b}}{5}\)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) \(\underline{c} = \frac{2\underline{a} + 3\underline{b}}{5}\)</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) \(\underline{c} = \frac{\underline{a} + \underline{b}}{5}\)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+                
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity & Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 5;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // All questions answered correctly -> Save to Firebase Database under "vectors-properties"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "vectors-properties");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+            
+        </div>
+
+    </div>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

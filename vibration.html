@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mechanical Vibrations Summary - Engineering Mechanics</title>
+  <link rel="stylesheet" href="updated.css">
+  <link rel="stylesheet" href="chatbot_style.css">
+  <meta name="bot-context" content="Topic: Engineering Mechanics : ME 1033 Mechanical Vibrations. Focus on free undamped and damped oscillations of single degree of freedom (SDoF) systems, including mass-spring models and viscous damping. Cover the derivation of equations of motion, natural frequency, cyclic frequency, and periodic time for undamped systems. Explain the effects of damping on system response, including overdamped, critically damped, and underdamped regimes, and the calculation of damping ratio. Discuss logarithmic decrement for quantifying amplitude decay in underdamped systems. Cover equivalent spring and damper combinations in series and parallel configurations. Explain torsional vibrations, including angular SDoF systems, torsional stiffness, damping ratio, and total mass moment of inertia. Include practical examples, diagrams, and video explanations to illustrate these concepts.">
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <nav>
+    <a href="mechanics_home.html">← Back to Mechanics Hub</a>
+    <a href="#undamped-vibrations">Undamped Free Vibrations</a>
+    <a href="#damped-vibrations">Damped Free Vibrations</a>
+    <a href="#damping-regimes">Damping Regimes (&beta;)</a>
+    <a href="#log-decrement">Logarithmic Decrement</a>
+    <a href="#equivalent-systems">Equivalent Springs &amp; Dampers</a>
+    <a href="#torsional-vibrations">Torsional Vibrations</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>ME 1033: Mechanical Vibrations (SDoF Systems)</h1>
+      <p>Free Undamped &amp; Damped Oscillations, Damping Regimes, Equivalent Elements, and Torsional Dynamics</p>
+    </header>
+
+    <!-- 1. Undamped Free Vibrations -->
+    <section id="undamped-vibrations">
+      <h2>1. Undamped Free Vibrations (Mass-Spring Model)</h2>
+      <p>Occurs when motion is maintained purely by gravitational or elastic restoring forces without energy dissipation.</p>
+
+      <!-- Undamped Free Vibration Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1Cu1iqKzC1u0cvehdc77ifR4ZraRY9eMB" alt="Spring-Mass System Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Equation of Motion: m &middot; x&#776; + k &middot; x = 0 &nbsp;&rarr;&nbsp; x&#776; + &omega;²x = 0<br>
+        Natural Frequency: &omega; = &radic;(k / m) &nbsp;[rad/s]<br>
+        Cyclic Frequency: f<sub>n</sub> = &omega; / (2&pi;) &nbsp;[Hz]<br>
+        Periodic Time: T = 2&pi; / &omega; = 1 / f<sub>n</sub> &nbsp;[s]<br>
+        General Solution: x(t) = A &middot; cos(&omega;t - &phi;)
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Static Deflection &amp; Natural Frequency</strong>
+        <p>A mass causes a static deflection of &delta;<sub>st</sub> = 25 mm in a vertical spring. Taking g = 9.81 m/s², what is the natural frequency &omega; of the system?</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>At static equilibrium: mg = k &middot; &delta;<sub>st</sub> &rarr; k/m = g / &delta;<sub>st</sub>.</p>
+          <p>&omega; = &radic;(g / &delta;<sub>st</sub>) = &radic;(9.81 / 0.025) = &radic;(392.4) &approx; <strong>19.81 rad/s</strong> (f<sub>n</sub> &approx; 3.15 Hz).</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 2. Damped Free Vibrations -->
+    <section id="damped-vibrations">
+      <h2>2. Damped Free Vibrations (Viscous Dashpot)</h2>
+      <p>Mechanical resistance is modeled by a dashpot generating a damping force proportional to velocity (F<sub>d</sub> = c &middot; x&#775;).</p>
+
+      <!-- Damped System Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1oT5p6L_1gq3dk6ds6UJzEBm-_QXhLq50" alt="Damped Spring Mass Dashpot System" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Differential Equation: m &middot; x&#776; + c &middot; x&#775; + k &middot; x = 0<br>
+        Standard Form: x&#776; + 2&beta;&omega; &middot; x&#775; + &omega;²x = 0<br><br>
+        <strong>Key Parameters:</strong><br>
+        Undamped Natural Frequency: &omega; = &radic;(k / m)<br>
+        Damping Ratio: &beta; = c / (2m&omega;) = c / (2&radic;(mk))<br>
+        Critical Damping Constant: c<sub>c</sub> = 2m&omega; = 2&radic;(mk)<br>
+        Characteristic Equation: &lambda;² + 2&beta;&omega;&lambda; + &omega;² = 0 &rarr; &lambda;<sub>1,2</sub> = -&beta;&omega; &plusmn; &omega;&radic;(&beta;² - 1)
+      </div>
+    </section>
+
+    <!-- 3. Damping Regimes -->
+    <section id="damping-regimes">
+      <h2>3. Damping Regimes (&beta;)</h2>
+      <p>The value of the damping ratio &beta; dictates whether the system oscillates or returns aperiodically to rest.</p>
+
+      <!-- Damping Cases Response Curves Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/12C1BNlXEEoFb1ivd2dqlJjcl41qF8I8T" alt="Response Curves for Overdamped, Critical, and Underdamped Systems" onerror="this.style.display='none'">
+      </div>
+
+      <ul>
+        <li>
+          <strong>Overdamped (&beta; &gt; 1):</strong> Two real, negative, distinct roots. Non-oscillatory; the mass slowly crawls back to equilibrium.
+          <div class="formula-box">x(t) = A<sub>1</sub>e<sup>&lambda;<sub>1</sub>t</sup> + A<sub>2</sub>e<sup>&lambda;<sub>2</sub>t</sup></div>
+        </li>
+        <li>
+          <strong>Critically Damped (&beta; = 1):</strong> Two equal negative roots (&lambda; = -&omega;). Returns to equilibrium in the shortest possible time without oscillating.
+          <div class="formula-box">x(t) = (A<sub>1</sub> + A<sub>2</sub>t) &middot; e<sup>-&omega;t</sup> &nbsp;[c = 2&radic;(mk)]</div>
+        </li>
+        <li>
+          <strong>Underdamped (&beta; &lt; 1):</strong> Complex conjugate roots. Generates true oscillatory motion with exponentially decaying amplitude envelope.
+          <div class="formula-box">
+            Damped Angular Frequency: &omega;<sub>d</sub> = &omega;&radic;(1 - &beta;²)<br>
+            Damped Periodic Time: T<sub>d</sub> = 2&pi; / &omega;<sub>d</sub> = 2&pi; / (&omega;&radic;(1 - &beta;²))<br>
+            Response: x(t) = A &middot; e<sup>-&beta;&omega;t</sup> &middot; cos(&omega;<sub>d</sub>t - &phi;)
+          </div>
+        </li>
+      </ul>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Car Suspension Damping Shift (Lecture 6 Problem 4)</strong>
+        <p>A 1300 kg sports car deflects 0.05 m under its own weight and is designed for critical damping (&beta; = 1). If 4 passengers (65 kg each) enter the car, what is the new damping ratio &beta;?</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>1. Stiffness: k = mg / &delta;<sub>0</sub> = (1300 &times; 9.81) / 0.05 = 255.06 &times; 10³ N/m.</p>
+          <p>2. Designed c: c = 2&radic;(mk) = 2&radic;(1300 &times; 255060) &approx; 36,420 Ns/m.</p>
+          <p>3. New mass: m<sub>new</sub> = 1300 + 4(65) = 1560 kg.</p>
+          <p>4. New &beta;: &beta; = c / [2&radic;(m<sub>new</sub>k)] = 36420 / [2&radic;(1560 &times; 255060)] = <strong>0.913</strong> (&lt; 1, shifts to underdamped).</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 4. Logarithmic Decrement -->
+    <section id="log-decrement">
+      <h2>4. Logarithmic Decrement (&delta;)</h2>
+      <p>Quantifies the rate of amplitude decay over successive cycles in underdamped systems.</p>
+
+      <!-- Logarithmic Decrement Curve Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1l5eaAS-4v1buRKSrXLw7IklRtkl_AaHv" alt="Decaying Amplitude and Logarithmic Decrement Curve" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Between Consecutive Peaks: &delta; = ln(a<sub>r</sub> / a<sub>r+1</sub>) = (2&pi;&beta;) / &radic;(1 - &beta;²)<br>
+        Amplitude Ratio: a<sub>r</sub> / a<sub>r+1</sub> = e<sup>[(2&pi;&beta;) / &radic;(1 - &beta;²)]</sup><br><br>
+        <strong>Across n Cycles (From peak 1 to peak n):</strong><br>
+        ln(a<sub>1</sub> / a<sub>n</sub>) = [2(n - 1)&pi;&beta;] / &radic;(1 - &beta;²)
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Amplitude Decay Calculation</strong>
+        <p>In a vibrating machine system, the amplitude drops from 24.6 mm to 4.1 mm over 2 complete cycles (n = 3). Calculate the damping ratio &beta;.</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>Ratio a<sub>1</sub> / a<sub>3</sub> = 24.6 / 4.1 = 6.</p>
+          <p>ln(6) = 1.7918 = [2(3 - 1)&pi;&beta;] / &radic;(1 - &beta;²) = (4&pi;&beta;) / &radic;(1 - &beta;²).</p>
+          <p>Let &Lambda; = 1.7918 / (4&pi;) = 0.14258 &rarr; &beta; = &Lambda; / &radic;(1 + &Lambda;²) &approx; <strong>0.1412</strong>.</p>
+        </details>
+      </div>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/vLaFAKnaRJU" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Equivalent Springs and Dampers -->
+    <section id="equivalent-systems">
+      <h2>5. Equivalent Springs and Dampers (Series &amp; Parallel)</h2>
+      <p>Simplifies multi-element elastic and damping networks into a single effective SDoF parameter.</p>
+
+      <!-- Equivalent Series and Parallel Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1d6_x_vsmZJsH7Fae4_BDB-VMV39wxdRO" alt="Series and Parallel Combinations of Springs and Dampers" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        <strong>Series Connection (Same force, displacements add):</strong><br>
+        1 / k<sub>eq</sub> = 1 / k<sub>1</sub> + 1 / k<sub>2</sub> &nbsp;&rarr;&nbsp; k<sub>eq</sub> = (k<sub>1</sub> &middot; k<sub>2</sub>) / (k<sub>1</sub> + k<sub>2</sub>)<br>
+        1 / c<sub>eq</sub> = 1 / c<sub>1</sub> + 1 / c<sub>2</sub> &nbsp;&rarr;&nbsp; c<sub>eq</sub> = (c<sub>1</sub> &middot; c<sub>2</sub>) / (c<sub>1</sub> + c<sub>2</sub>)<br><br>
+        <strong>Parallel Connection (Same displacement, forces add):</strong><br>
+        k<sub>eq</sub> = k<sub>1</sub> + k<sub>2</sub> + ... + k<sub>n</sub><br>
+        c<sub>eq</sub> = c<sub>1</sub> + c<sub>2</sub> + ... + c<sub>n</sub>
+      </div>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/NMOt9X-Guts" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Rubber &amp; Felt Layers in Series (Lecture 6 Problem 1)</strong>
+        <p>A 150 kg machine rests on a rubber layer (k<sub>r</sub> = 15 N/mm, c<sub>r</sub> = 600 Ns/m) and a felt layer (k<sub>f</sub> = 20 N/mm). If the equivalent damping constant c<sub>eq</sub> = 320.2 Ns/m, find the damping constant of the felt layer c<sub>f</sub>.</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>Because layers are stacked, they behave in series:</p>
+          <p>1 / c<sub>eq</sub> = 1 / c<sub>r</sub> + 1 / c<sub>f</sub> &rarr; 1 / 320.2 = 1 / 600 + 1 / c<sub>f</sub>.</p>
+          <p>1 / c<sub>f</sub> = 0.003123 - 0.001667 = 0.001456 &rarr; c<sub>f</sub> &approx; <strong>686.6 Ns/m</strong>.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 6. Torsional Vibrations -->
+    <section id="torsional-vibrations">
+      <h2>6. Torsional Vibrations (Angular SDoF)</h2>
+      <p>Angular oscillation of a rotor or arm about a fixed axis under torsional stiffness and damping.</p>
+
+      <!-- Torsional System Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1wnqzHChJkZ2iauTYvd7l6MWTyacUktZU" alt="Torsional Vibration Free Body Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Dynamic Equilibrium: J<sub>O</sub> &middot; &theta;&#776; + c<sub>t</sub> &middot; &theta;&#775; + k<sub>t</sub> &middot; &theta; = 0<br>
+        Standard Form: &theta;&#776; + 2&beta;&omega; &middot; &theta;&#775; + &omega;²&theta; = 0<br><br>
+        <strong>Parameters:</strong><br>
+        Torsional Natural Frequency: &omega; = &radic;(k<sub>t</sub> / J<sub>O</sub>)<br>
+        Torsional Damping Ratio: &beta; = c<sub>t</sub> / (2&radic;(k<sub>t</sub> &middot; J<sub>O</sub>))<br>
+        Total Mass Moment: J<sub>O</sub> = I<sub>O,body</sub> + M &middot; L² &nbsp;[if carrying point mass M at length L]
+      </div>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/ER5nVy4-q6s" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Robot Arm Torsional Critical Damping (Lecture 6 Q23)</strong>
+        <p>A robot arm (I<sub>O</sub> = 1.2 kg&middot;m², length L = 0.5 m) holds a load M = 6 kg and has torsional spring k<sub>t</sub> = 1000 Nm/rad. Determine the torsional damping constant c<sub>t</sub> required for critical damping (&beta; = 1).</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>1. Total moment of inertia about O: J<sub>O</sub> = I<sub>O</sub> + M &middot; L² = 1.2 + 6(0.5)² = 1.2 + 1.5 = 2.7 kg&middot;m².</p>
+          <p>2. Critical damping condition (&beta; = 1): c<sub>t</sub> = 2&radic;(k<sub>t</sub> &middot; J<sub>O</sub>).</p>
+          <p>c<sub>t</sub> = 2&radic;(1000 &times; 2.7) = 2&radic;(2700) = 2 &times; 51.96 &approx; <strong>103.92 Ns&middot;m/rad</strong>.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <p>Engineering Mechanics | Mechanical Vibrations Summary</p>
+    </footer>
+  </div>
+  <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbot-mech.js"></script>
+
+</body>
+</html>

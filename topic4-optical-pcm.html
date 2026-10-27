@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers optical properties of materials, detailing electroluminescence in LEDs driven by semiconductor bandgaps, and Phase Change Materials (PCM) transitioning between crystalline and amorphous states for optical data storage.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 04 - Optics & PCM | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter7-timeline.html" class="back-link">&larr; Back to Chapter 07 Timeline</a>
+        <div class="topic-label">Topic 04</div>
+        <h1>Electroluminescence & Phase Change Materials</h1>
+        <div class="content-section">
+            <h3>Electroluminescence (LEDs)</h3>
+            <p>An LED bulb emits light when an electric current flows through its semiconductor p-n junction. Electrons from the n-type region and holes from the p-type region violently recombine at the junction, releasing energy as photons in a process known as <strong>electroluminescence</strong>. This is highly efficient and generates minimal heat.</p>
+            
+            <p>The resulting color of the LED depends entirely on the energy bandgap of the semiconductor material, which dictates the energy frequency of the released photons. Specific colors are achieved by modifying the bandgap via doping.</p>
+
+            <table class="data-table">
+                <tr><th>Material</th><th>Typical Light Emitted</th></tr>
+                <tr><td>Gallium Arsenide Phosphide (GaAsP)</td><td>Red, orange, or yellow</td></tr>
+                <tr><td>Gallium Phosphide (GaP)</td><td>Green or yellow</td></tr>
+                <tr><td>Indium Gallium Nitride (InGaN)</td><td>Blue, green, and ultraviolet</td></tr>
+                <tr><td>Gallium Nitride (GaN)</td><td>Blue or ultraviolet</td></tr>
+            </table>
+
+            <img src="led.jpg" alt="Glowing multi-colored LED bulbs demonstrating different bandgaps" class="content-image small">
+
+            <h3>Phase Changing Materials (PCM) for Data Storage</h3>
+            <p>Optical media like Blu-ray discs utilize Phase Changing Materials (PCM) to physically store data. A common material used is Germanium antimony telluride (Ge<sub>8</sub>Sb<sub>2</sub>Te<sub>11</sub>). This material dynamically shifts between a crystalline state and an amorphous state when hit by a laser.</p>
+            <ul>
+                <li><strong>Write Phase:</strong> A high-power laser hits the material, turning specific regions into an amorphous state (which has <em>low reflectivity</em>). These dark spots represent binary data.</li>
+                <li><strong>Erase Phase:</strong> An intermediate-power laser reheats the material, recrystallizing the regions back into a crystalline state (which has <em>high reflectivity</em>).</li>
+                <li><strong>Read Phase:</strong> A low-power laser scans the track. A photodiode reads the bouncing reflections off the crystalline and amorphous regions, interpreting the 1s and 0s.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on LEDs and Phase Change Materials.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What physical process inside an LED releases energy as a photon of light?</div>
+                <div class="option-box" data-correct="false">A) The melting of a tungsten filament</div>
+                <div class="option-box" data-correct="true">B) Electrons and holes recombining at the p-n junction</div>
+                <div class="option-box" data-correct="false">C) Magnetic induction forcing electrons to vibrate</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. What property of a semiconductor directly dictates the color of light emitted by an LED?</div>
+                <div class="option-box" data-correct="false">A) Its physical thickness</div>
+                <div class="option-box" data-correct="true">B) Its energy bandgap</div>
+                <div class="option-box" data-correct="false">C) Its thermal conductivity</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. In a Blu-ray disc, what phase transition does the writing media undergo to store data?</div>
+                <div class="option-box" data-correct="true">A) From a crystalline phase to an amorphous phase</div>
+                <div class="option-box" data-correct="false">B) From a solid phase to a liquid phase</div>
+                <div class="option-box" data-correct="false">C) From a magnetic phase to a non-magnetic phase</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. During the "Write" phase on a Blu-ray disc, a high-power laser creates amorphous regions. What is the optical property of these regions?</div>
+                <div class="option-box" data-correct="true">A) They possess low reflectivity</div>
+                <div class="option-box" data-correct="false">B) They become completely transparent</div>
+                <div class="option-box" data-correct="false">C) They possess exceptionally high reflectivity</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. What kind of laser is used to "Read" the data off a Blu-ray disc without altering the PCM layer?</div>
+                <div class="option-box" data-correct="false">A) High-power laser</div>
+                <div class="option-box" data-correct="false">B) Intermediate-power laser</div>
+                <div class="option-box" data-correct="true">C) Low-power laser</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers corrosion prevention techniques, including protective coatings like galvanizing, cathodic protection (sacrificial anodes and ICCP), and environmental modification using chemical inhibitors.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 03 - Prevention | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter8-timeline.html" class="back-link">&larr; Back to Chapter 08 Timeline</a>
+        <div class="topic-label">Topic 03</div>
+        <h1>Prevention of Corrosion</h1>
+        <div class="content-section">
+            <p>Engineers combat the natural phenomenon of corrosion through several methods:</p>
+
+            <h3>1. Material Selection & Protective Coatings</h3>
+            <p>Using noble metals (Au, Pt) or pure metals is often impossible due to cost or strength issues. Instead, engineers rely on corrosion-resistant alloys (like Stainless Steel), non-metals (ceramics/polymers), or physical barrier coatings. A common method is <strong>Galvanizing</strong>, which is the process of dipping a cleaned steel sheet into molten zinc to form a protective layer.</p>
+
+            <h3>2. Cathodic Protection</h3>
+            <p>This involves preventing corrosion by forcing the metallic structure to act strictly as the cathode.</p>
+            <ul>
+                <li><strong>Sacrificial Anodic Protection:</strong> The structure is electrically connected to a more active metal (like Zinc or Magnesium). The active metal sacrifices itself (corrodes) to protect the structure. Used in buried pipelines, ship hulls, and domestic water boilers.</li>
+                <li><strong>Impressed Current Cathodic Protection (ICCP):</strong> A DC power source (like a battery or rectifier) supplies electrons continuously into the structure alongside an inert anode (like graphite or platinum). This applied current nullifies the corrosion current.</li>
+            </ul>
+            <img src="iccp.png" alt="Diagram showing Impressed Current Cathodic Protection using a rectifier and inert anode" class="content-image small">
+
+            <h3>3. Modifying the Environment (Inhibitors)</h3>
+            <p>Because the environment plays a massive role in corrosion, it can be neutralized by adding chemical inhibitors.</p>
+            <ul>
+                <li><strong>Hydrogen Evolution Poisons:</strong> Added when the cathodic reaction is HER. Examples include Arsenic (As), Antimony (Sb), Amines, and Thiourea.</li>
+                <li><strong>Oxygen Scavengers:</strong> Added when the reaction is ORR. They eliminate oxygen from the medium entirely to halt the reaction.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to explore practical engineering solutions for preventing corrosion:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/cZg4bfEnLcU" 
+        title="Sacrificial Anode Cathodic Protection Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Corrosion Prevention techniques.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. What is the fundamental principle behind Cathodic Protection?</div>
+                <div class="option-box" data-correct="false">A) Wrapping the metal in thick plastic</div>
+                <div class="option-box" data-correct="false">B) Forcing the metallic structure to become the oxidizing anode</div>
+                <div class="option-box" data-correct="true">C) Supplying electrons to the structure to force it to act purely as the cathode</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Which two highly active metals are commonly used as "sacrificial anodes" to protect steel structures like ship hulls?</div>
+                <div class="option-box" data-correct="false">A) Gold and Platinum</div>
+                <div class="option-box" data-correct="true">B) Zinc and Magnesium</div>
+                <div class="option-box" data-correct="false">C) Copper and Tin</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. In Impressed Current Cathodic Protection (ICCP), where do the protecting electrons come from?</div>
+                <div class="option-box" data-correct="true">A) An external DC power source like a battery or rectifier</div>
+                <div class="option-box" data-correct="false">B) A highly reactive sacrificial metal</div>
+                <div class="option-box" data-correct="false">C) A chemical reaction with the soil</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. What process involves dipping a steel article into molten zinc to create a physical protective barrier?</div>
+                <div class="option-box" data-correct="false">A) Passivation</div>
+                <div class="option-box" data-correct="false">B) Anodizing</div>
+                <div class="option-box" data-correct="true">C) Galvanizing</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. What is the role of an "Oxygen Scavenger" inhibitor?</div>
+                <div class="option-box" data-correct="true">A) To eliminate oxygen from the medium to halt the Oxygen Reduction Reaction (ORR)</div>
+                <div class="option-box" data-correct="false">B) To pump extra oxygen into a crevice</div>
+                <div class="option-box" data-correct="false">C) To act as a physical paint barrier</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>

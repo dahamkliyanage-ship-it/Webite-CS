@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="bot-context" content="Covers functional nanomaterials in gas sensing, explaining how graphene and metal oxides detect molecules, and details Li-ion battery electrode materials.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 02 - Sensing & Storage | MT1023</title>
+    <link rel="stylesheet" href="style-materials.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="chapter7-timeline.html" class="back-link">&larr; Back to Chapter 07 Timeline</a>
+        <div class="topic-label">Topic 02</div>
+        <h1>Gas Sensing & Energy Storage</h1>
+        <div class="content-section">
+            <h3>Graphene for Gas Sensing</h3>
+            <p>Functional nanomaterials like graphene are incredibly effective in field-effect transistor gas sensors (used for detecting NO, CO, and NH<sub>3</sub>). Gas molecules adsorb onto the graphene surface, and their interaction with the delocalized &pi;-electrons alters the material's charge carrier concentration, causing highly detectable shifts in electrical resistance.</p>
+            <ul>
+                <li><strong>High Sensitivity:</strong> Graphene's massive surface area allows for a high density of adsorbed molecules per unit area.</li>
+                <li><strong>Quick Response:</strong> Even minute changes in surface interactions cause significant shifts in electrical properties.</li>
+            </ul>
+
+            <h3>Metal Oxide (MOS) Sensors</h3>
+            <p>Metal oxide nanoparticles (like TiO<sub>2</sub>, ZnO, and NiO) can also act as powerful ethanol sensors. Oxygen molecules adsorb onto the surface, extracting electrons to form O<sup>-</sup> ions. When ethanol gas hits the surface, it reacts with these oxygen anions, releasing the trapped electrons back into the conduction band, abruptly changing the resistance.</p>
+
+            <img src="gassense.png" alt="Diagram of a graphene-based gas sensor and resistance chart" class="content-image small">
+
+            <h3>Li-ion Battery Electrode Materials</h3>
+            <p>Functional materials are the core of modern energy storage. In a typical Li-ion battery:</p>
+            <ul>
+                <li><strong>Cathode:</strong> Often made of Lithium Cobalt Oxide (LiCoO<sub>2</sub>).</li>
+                <li><strong>Anode:</strong> Made of Graphite. To increase performance, advanced batteries utilize graphene micro/nano structures in the anode to rapidly store and transfer lithium ions.</li>
+            </ul>
+        </div>
+        <!-- Text introducing the video -->
+<p style="margin-top: 30px; font-weight: 600; color: var(--accent-green);">
+    Watch the video below to see the exact nanoscale mechanism of how metal oxide gas sensors detect molecules:
+</p>
+
+<!-- The video itself -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/SqONrFwa4PA" 
+        title="How Metal Oxide Gas Sensors Work Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div class="quiz-container">
+            <div class="quiz-title">Practice Exercises</div>
+            <div class="quiz-desc">Test your knowledge on Sensing and Storage applications.</div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">1. How does a graphene-based gas sensor physically detect gas molecules?</div>
+                <div class="option-box" data-correct="false">A) The gas physically burns holes in the graphene lattice</div>
+                <div class="option-box" data-correct="true">B) Adsorbed gas molecules interact with &pi;-electrons, altering electrical resistance</div>
+                <div class="option-box" data-correct="false">C) The gas changes the visual color of the graphene</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">2. Why do nanostructured materials provide such high sensitivity in sensors?</div>
+                <div class="option-box" data-correct="true">A) They possess a massive surface area per unit of volume</div>
+                <div class="option-box" data-correct="false">B) They have zero electrical resistance</div>
+                <div class="option-box" data-correct="false">C) They are completely unaffected by temperature</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">3. In Metal Oxide (MOS) ethanol sensors, what chemical interaction triggers the resistance change?</div>
+                <div class="option-box" data-correct="false">A) Ethanol dissolving the metal oxide nanoparticles</div>
+                <div class="option-box" data-correct="false">B) Ethanol freezing on the surface</div>
+                <div class="option-box" data-correct="true">C) Ethanol reacting with adsorbed oxygen anions, releasing electrons back into the material</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">4. In a standard Li-ion battery, what material is typically used for the Cathode?</div>
+                <div class="option-box" data-correct="true">A) Lithium Cobalt Oxide (LiCoO<sub>2</sub>)</div>
+                <div class="option-box" data-correct="false">B) Pure Graphite</div>
+                <div class="option-box" data-correct="false">C) Graphene</div>
+            </div>
+
+            <div class="question-block" data-answered="false">
+                <div class="question-text">5. To improve energy storage performance, what nanostructure is often integrated into a battery's anode?</div>
+                <div class="option-box" data-correct="false">A) Titanium Dioxide films</div>
+                <div class="option-box" data-correct="true">B) Graphene micro/nano structures</div>
+                <div class="option-box" data-correct="false">C) Zinc Oxide nanowires</div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+ <script type="module" src="interactiveQuiz.js" defer></script>
+<script src="materials_chatbot.js"></script>
+
+
+    <h2 id="success-message" style="display: none; color: #4CAF50; margin-top: 15px; text-align: center;">🎉 You got all correct! 🎉</h2>
+</body>
+</html>
