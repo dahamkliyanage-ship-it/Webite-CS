@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinite Series & Classical Convergence Tests</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #e5e7eb;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #f3f4f6;
+            padding: 20px 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            display: flex;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #9ca3af;
+            font-weight: 500;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: yellow;
+            background-color: rgba(56, 189, 248, 0.1);
+            transform: translateX(4px);
+        }
+
+        .content {
+            flex-grow: 1;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .blue-box, .yellow-box, .green-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .blue-box {
+            background-color: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid #38bdf8;
+            box-shadow: -4px 0 15px -5px rgba(56, 189, 248, 0.2);
+        }
+
+        .yellow-box {
+            background-color: rgba(250, 204, 21, 0.05);
+            border-left: 4px solid #facc15;
+            box-shadow: -4px 0 15px -5px rgba(250, 204, 21, 0.2);
+        }
+
+        .green-box {
+            background-color: rgba(74, 222, 128, 0.05);
+            border-left: 4px solid #4ade80;
+            box-shadow: -4px 0 15px -5px rgba(74, 222, 128, 0.2);
+        }
+
+        .math-center {
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 30px 0;
+            color: #f3f4f6;
+            font-weight: 500;
+            overflow-x: auto;
+        }
+
+        .video-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.5) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-left: 4px solid #facc15;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-section p {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #facc15;
+            letter-spacing: -0.2px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #e5e7eb;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .quiz-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+        }
+        .quiz-result {
+            margin-top: 15px;
+            font-weight: 600;
+            min-height: 24px;
+        }
+    </style>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+
+        function checkAnswer(btn, isCorrect, explanation) {
+            let parent = btn.parentElement;
+            let resultDiv = parent.querySelector('.quiz-result');
+            
+            if(isCorrect) {
+                // If correct, disable ALL buttons so they can't click anymore
+                let buttons = parent.querySelectorAll('.quiz-btn');
+                buttons.forEach(b => {
+                    b.style.pointerEvents = 'none';
+                    if (b !== btn) b.style.opacity = '0.6'; // Dim the wrong ones
+                });
+
+                btn.style.opacity = '1';
+                btn.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                btn.style.borderColor = '#4ade80';
+                btn.style.color = '#4ade80';
+                resultDiv.innerHTML = '✅ ' + explanation;
+                resultDiv.style.color = '#4ade80';
+            } else {
+                // If incorrect, disable ONLY the clicked button so they can try again
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.7';
+                btn.style.backgroundColor = 'rgba(248, 113, 113, 0.2)';
+                btn.style.borderColor = '#f87171';
+                btn.style.color = '#f87171';
+                resultDiv.innerHTML = '❌ ' + explanation;
+                resultDiv.style.color = '#f87171';
+            }
+        }
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Infinite Series & Classical Convergence Tests</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3 style="color: #f3f4f6; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Table of Contents</h3>
+            <ul>
+                <li><a href="#intro" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Introduction</a></li>
+                <li><a href="#comparison">Basic Comparison Tests</a></li>
+                <li><a href="#integral-ratio-root">Integral, Ratio & Root Tests</a></li>
+                <li><a href="#alternating">Alternating Series & Convergence</a></li>
+                <li><a href="#exercises">Interactive Exercises</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="intro" style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">Introduction to Infinite Series</h2>
+            <p>In finite mathematics, addition is associative and commutative: you can group or reorder numbers however you like, and the total never changes[cite: 377]. With infinite series, that intuition breaks down[cite: 377]. Adding terms indefinitely is not simple addition; it is the limit of a running total (partial sums)[cite: 377].</p>
+            <p>If you blindly add an infinite sequence without verifying convergence, you can "prove" that $1-1+1-1+\cdot\cdot\cdot=1/2$ or that $1+2+3+\cdot\cdot\cdot=-1/12$[cite: 377]. Convergence tests are safety criteria that tell you whether an infinite sum settles to a stable, finite value before you try to compute with it[cite: 377].</p>
+
+            <h2 id="comparison" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">1. Infinite Series & Basic Comparison Tests</h2>
+
+            <div class="blue-box">
+                <strong>Definitions & Key Theorems[cite: 377, 378]</strong><br><br>
+                <ul>
+                    <li><strong>Definition (Series):</strong> A series is a sequence of partial sums $S_{n}=\Sigma_{k=1}^{n}u_{k},$ where $u_{k}$ is a sequence of terms[cite: 377].</li>
+                    <li><strong>Infinite Sum:</strong> The infinite sum is defined as the limit of partial sums[cite: 377]. If $\lim_{n\rightarrow\infty}S_{n}=S\in\mathbb{R},$ the series converges to S[cite: 377]. Otherwise, it diverges[cite: 377].</li>
+                    <li><strong>Direct Comparison Test:</strong> Let $0<u_{n}<v_{n}$ for all n[cite: 377].
+                        <ul>
+                            <li>If $\Sigma_{n=1}^{\infty}v_{n}$ converges, then $\Sigma_{n=1}^{\infty}u_{n}$ converges[cite: 377].</li>
+                            <li>If $\Sigma_{n=1}^{\infty}u_{n}$ diverges, then $\Sigma_{n=1}^{\infty}v_{n}$ diverges[cite: 377].</li>
+                        </ul>
+                    </li>
+                    <li><strong>Limit Comparison Test:</strong> Let $u_n, v_{n}>0$ and $\lim_{n\rightarrow\infty}\frac{u_{n}}{v_{n}}=R$[cite: 377].
+                        <ul>
+                            <li>If $R\in(0,\infty)$, then $\sum u_{n}$ converges $\Leftrightarrow\Sigma~v_{n}$ converges[cite: 377].</li>
+                            <li>If $R=0$ and $\Sigma v_{n}$ converges, then $\sum\mathfrak{u}_{n}$ converges[cite: 377].</li>
+                            <li>If $R=\infty$ and $\Sigma v_{n}$ diverges, then $\sum u_{n}$ diverges[cite: 378].</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Exercises[cite: 377, 378]</strong><br><br>
+                <strong>Exercise 1.1: Geometric Series</strong><br>
+                Prove that the geometric series $\Sigma_{k=1}^{\infty}r^{k}$ converges $\Leftrightarrow|r|<1$, and find its sum[cite: 377].<br>
+                <em>Partial Sum Formula:</em> $S_{n}=r+r^{2}+\cdot\cdot\cdot+r^{n}=\frac{r(1-r^{n})}{1-r}(r\ne1)$[cite: 378].<br>
+                If $|r|<1$, $\lim_{n\rightarrow\infty}r^{n}=0$[cite: 378]. Thus, $\lim_{n\rightarrow\infty}S_{n}=\frac{r}{1-r}$[cite: 378].<br>
+                If $|r|\ge1$, $r^n$ does not approach 0, so the series diverges[cite: 378].<br><br>
+                
+                <strong>Exercise 1.2: Direct Comparison Test</strong><br>
+                Check convergence of $\Sigma_{k=1}^{\infty}\frac{2}{k^{2}+3}$[cite: 378].<br>
+                For all $k\ge1$, $\frac{2}{k^{2}+3}<\frac{2}{k^{2}}$[cite: 378]. We know the p-series $\Sigma_{k=1}^{\infty}\frac{1}{k^{2}}$ converges $(p=2>1)$[cite: 378]. Therefore, by the Direct Comparison Test, it converges[cite: 378].
+            </div>
+
+            <h2 id="integral-ratio-root" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">2. Integral, Ratio & Root Tests</h2>
+
+            <div class="green-box">
+                <strong>Definitions & Key Theorems[cite: 378, 379]</strong><br><br>
+                <ul>
+                    <li><strong>Integral Test:</strong> Let $u:[1,\infty)\rightarrow(0,\infty)$ be a continuous, decreasing function[cite: 378]. $\Sigma_{n=1}^{\infty} u(n)$ converges $\Leftrightarrow\int_{1}^{\infty}u(x)dx$ converges[cite: 378].</li>
+                    <li><strong>p-Series Theorem:</strong> $\zeta(p)=\Sigma_{n=1}^{\infty}\frac{1}{n^{p}}$ converges $\Leftrightarrow p>1$[cite: 379].</li>
+                    <li><strong>Ratio Test:</strong> Let $u_{n}>0$ and $\lim_{n\rightarrow\infty}\frac{u_{n+1}}{u_{n}}=R$[cite: 379].
+                        <ul>
+                            <li>If $R<1,$ $\Sigma u_{n}$ converges[cite: 379].</li>
+                            <li>If $R>1,\Sigma u_{n}$ diverges[cite: 379].</li>
+                            <li>If $R=1$, the test is inconclusive[cite: 379].</li>
+                        </ul>
+                    </li>
+                    <li><strong>Root Test:</strong> Let $u_{n}>0$ and $\lim_{n\rightarrow\infty}(u_{n})^{1/n}=R$[cite: 379]. Rules for $R$ match the Ratio Test[cite: 379].</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Exercises[cite: 379, 380]</strong><br><br>
+                <strong>Exercise 2.2: Apply the Ratio Test</strong><br>
+                Test convergence of $\Sigma_{n=1}^{\infty}\frac{(n!)^{2}}{(2n)!}$[cite: 379].<br>
+                <em>Compute the ratio:</em>
+                <div class="math-center">
+                    $$ \frac{u_{n+1}}{u_{n}} = \frac{(n+1)^{2}}{(2n+2)(2n+1)} = \frac{n+1}{2(2n+1)} $$
+                </div>
+                Take the limit as $n\rightarrow\infty$: $R = \frac{1}{4}$[cite: 380]. Since $R < 1$, the series converges[cite: 380].<br><br>
+
+                <strong>Exercise 2.3: Apply the Root Test</strong><br>
+                Test convergence of $\Sigma_{n=1}^{\infty}(\frac{n}{n+1})^{n^{2}}$[cite: 380].<br>
+                <em>Compute the root:</em>
+                <div class="math-center">
+                    $$ (u_{n})^{1/n} = \left(\frac{n}{n+1}\right)^{n} = \frac{1}{(1+\frac{1}{n})^{n}} $$
+                </div>
+                Take the limit as $n\rightarrow\infty$: $R = \frac{1}{e}$[cite: 380]. Since $1/e < 1$, the series converges[cite: 380].
+            </div>
+
+            <h2 id="alternating" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">3. Alternating Series, Absolute vs. Conditional Convergence</h2>
+
+            <div class="blue-box">
+                <strong>Definitions & Key Theorems[cite: 380, 381]</strong><br><br>
+                <ul>
+                    <li><strong>Absolute Convergence:</strong> $\Sigma u_{n}$ is absolutely convergent iff $\Sigma|u_{n}|$ converges[cite: 380]. Absolute convergence implies convergence[cite: 381].</li>
+                    <li><strong>Conditional Convergence:</strong> If $\Sigma u_{n}$ converges, but $\Sigma|u_{n}|$ diverges, the series is conditionally convergent[cite: 380].</li>
+                    <li><strong>Leibniz Alternating Series Test:</strong> Let $\Sigma_{n=1}^{\infty}(-1)^{n+1}u_{n}$ with $u_{n}>0$[cite: 381]. If $u_{n}$ is decreasing and $\lim_{n\rightarrow\infty}u_{n}=0$, then the series converges[cite: 381].</li>
+                    <li><strong>Raabe's Test:</strong> When the Ratio Test fails ($R=1$), evaluate $L=\lim_{n\rightarrow\infty}n(\frac{u_{n}}{u_{n+1}}-1)$[cite: 381]. If $L>1$, it converges; if $L<1$, it diverges[cite: 381].</li>
+                </ul>
+            </div>
+
+            
+            <h2 id="exercises" style="color: #facc15; margin-top: 50px; margin-bottom: 15px; border-bottom: 1px solid rgba(250, 204, 21, 0.3); padding-bottom: 5px;">Interactive Exercises</h2>
+
+            <!-- QUESTION 1 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 1: Geometric Series Convergence</h4>
+                <p style="margin-bottom: 15px;">Under what condition does the geometric series $\Sigma_{k=1}^{\infty}r^{k}$ converge?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. While $r < 1$ is partially true, $r$ cannot be less than or equal to $-1$, as it would oscillate and diverge.')">A) $r < 1$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The geometric series converges if and only if the absolute value of $r$ is strictly less than 1 ($|r| < 1$)[cite: 377].')">B) $|r| < 1$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. If $r = 1$, the terms do not approach 0, and the series diverges.')">C) $|r| \le 1$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 2: p-Series Theorem</h4>
+                <p style="margin-bottom: 15px;">According to the p-series theorem, the series $\Sigma_{n=1}^{\infty}\frac{1}{n^{p}}$ converges if and only if:</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The p-series converges if and only if $p > 1$[cite: 379].')">A) $p > 1$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. If $p=1$, it is the harmonic series, which diverges.')">B) $p \ge 1$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The series diverges when $p < 1$.')">C) $p < 1$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 3: Ratio Test Application</h4>
+                <p style="margin-bottom: 15px;">When applying the Ratio Test, if the limit $R = \lim_{n\rightarrow\infty}\frac{u_{n+1}}{u_{n}}$ evaluates to exactly $1$, what can be concluded?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. An $R=1$ result does not guarantee convergence.')">A) The series converges</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. An $R=1$ result does not guarantee divergence.')">B) The series diverges</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! If $R=1$, the Ratio Test is inconclusive, and another test (like Raabe\'s Test) must be used[cite: 379].')">C) The test is inconclusive</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 4: Limit Comparison Test</h4>
+                <p style="margin-bottom: 15px;">In the Limit Comparison Test, if $\lim_{n\rightarrow\infty}\frac{u_{n}}{v_{n}}=0$ and $\Sigma v_{n}$ converges, what happens to $\Sigma u_{n}$?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! If $R=0$ and the benchmark series $\\Sigma v_n$ converges, then $\\Sigma u_n$ also converges[cite: 377].')">A) $\Sigma u_{n}$ converges</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Since $v_n$ converges and bounds $u_n$ asymptotically, $u_n$ must also converge.')">B) $\Sigma u_{n}$ diverges</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The Limit Comparison Test provides a definitive answer in this scenario.')">C) The test is inconclusive</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 5: Conditional vs. Absolute Convergence</h4>
+                <p style="margin-bottom: 15px;">If an alternating series $\Sigma u_{n}$ converges, but the series of its absolute values $\Sigma|u_{n}|$ diverges, the series is said to be:</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Absolute convergence strictly requires $\\Sigma|u_n|$ to converge.')">A) Absolutely Convergent</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! If the original series converges but its absolute value counterpart diverges, it is Conditionally Convergent[cite: 380].')">B) Conditionally Convergent</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. It is not divergent because the alternating form converges.')">C) Divergent</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 6: Raabe's Test</h4>
+                <p style="margin-bottom: 15px;">When utilizing Raabe's test, you evaluate $L=\lim_{n\rightarrow\infty}n(\frac{u_{n}}{u_{n+1}}-1)$. Under what condition does the series converge?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. If $L < 1$, Raabe\'s Test states that the series diverges[cite: 381].')">A) $L < 1$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! According to Raabe\'s Test, if $L > 1$, the series converges[cite: 381].')">B) $L > 1$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Like the Ratio Test, if $L = 1$, Raabe\'s test is inconclusive[cite: 381].')">C) $L = 1$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

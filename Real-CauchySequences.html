@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cauchy Sequences, Completeness & Subsequences</title>
+    <style>
+        /* USER PROVIDED CSS - DO NOT CHANGE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #e5e7eb;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #f3f4f6;
+            padding: 20px 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            display: flex;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #9ca3af;
+            font-weight: 500;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: yellow;
+            background-color: rgba(56, 189, 248, 0.1);
+            transform: translateX(4px);
+        }
+
+        .content {
+            flex-grow: 1;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .blue-box, .yellow-box, .green-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .blue-box {
+            background-color: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid #38bdf8;
+            box-shadow: -4px 0 15px -5px rgba(56, 189, 248, 0.2);
+        }
+
+        .yellow-box {
+            background-color: rgba(250, 204, 21, 0.05);
+            border-left: 4px solid #facc15;
+            box-shadow: -4px 0 15px -5px rgba(250, 204, 21, 0.2);
+        }
+
+        .green-box {
+            background-color: rgba(74, 222, 128, 0.05);
+            border-left: 4px solid #4ade80;
+            box-shadow: -4px 0 15px -5px rgba(74, 222, 128, 0.2);
+        }
+
+        .math-center {
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 30px 0;
+            color: #f3f4f6;
+            font-weight: 500;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #e5e7eb;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .quiz-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+        }
+        .quiz-result {
+            margin-top: 15px;
+            font-weight: 600;
+            min-height: 24px;
+        }
+    </style>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+
+        function checkAnswer(btn, isCorrect, explanation) {
+            let parent = btn.parentElement;
+            let resultDiv = parent.querySelector('.quiz-result');
+            
+            if(isCorrect) {
+                // If correct, disable ALL buttons so they can't click anymore
+                let buttons = parent.querySelectorAll('.quiz-btn');
+                buttons.forEach(b => {
+                    b.style.pointerEvents = 'none';
+                    if (b !== btn) b.style.opacity = '0.6'; // Dim the wrong ones
+                });
+
+                btn.style.opacity = '1';
+                btn.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                btn.style.borderColor = '#4ade80';
+                btn.style.color = '#4ade80';
+                resultDiv.innerHTML = '✅ ' + explanation;
+                resultDiv.style.color = '#4ade80';
+            } else {
+                // If incorrect, disable ONLY the clicked button so they can try again
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.7';
+                btn.style.backgroundColor = 'rgba(248, 113, 113, 0.2)';
+                btn.style.borderColor = '#f87171';
+                btn.style.color = '#f87171';
+                resultDiv.innerHTML = '❌ ' + explanation;
+                resultDiv.style.color = '#f87171';
+            }
+        }
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Cauchy Sequences, Completeness & Subsequences</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3 style="color: #f3f4f6; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Table of Contents</h3>
+            <ul>
+                <li><a href="#intro" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Introduction</a></li>
+                <li><a href="#cauchy">Cauchy Sequences & Sets</a></li>
+                <li><a href="#completeness">Testing Completeness</a></li>
+                <li><a href="#bolzano">Subsequences & Bolzano-Weierstrass</a></li>
+                <li><a href="#exercises">Interactive Exercises</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="intro" style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">Introduction</h2>
+            <p>In standard limits, proving sequence convergence typically requires knowing the destination target $L$ beforehand in order to evaluate $|u_{n}-L|<\epsilon$[cite: 272]. However, in real-world numerical computing or iterative physical solvers, the exact true answer is almost never known ahead of time[cite: 272]. A Cauchy sequence serves as an internal sanity test: rather than measuring the distance to an unknown destination $L$, it measures the distance between the sequence's own terms ($|u_{n}-u_{m}|<\epsilon$)[cite: 272]. If the terms progressively bunch closer together, the sequence is guaranteed to settle into a definite point, provided the mathematical space is "complete" (has no missing holes)[cite: 272].</p>
+
+            <h2 id="cauchy" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">1. Cauchy Sequences & Complete Sets</h2>
+
+            <div class="blue-box">
+                <strong>Definitions & Foundational Properties[cite: 272, 273]</strong><br><br>
+                <ul>
+                    <li><strong>Definition of a Cauchy Sequence:</strong> A sequence $u_{n}$ is Cauchy if and only if for all $\epsilon>0$, there exists an index $N$ such that for any $m, n > N$, the distance $|u_{n}-u_{m}|<\epsilon$[cite: 272].</li>
+                    <li><strong>Property 1:</strong> Every converging sequence is Cauchy[cite: 272]. The triangle inequality proves that $|u_{n}-u_{m}| \le |u_{n}-L| + |u_{m}-L| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$[cite: 272].</li>
+                    <li><strong>Property 2:</strong> Every Cauchy sequence is bounded[cite: 272]. By setting $\epsilon=1$, all terms beyond an index $N$ are within a distance of 1 from each other, allowing a maximum bound $M$ to be established for the entire sequence[cite: 272].</li>
+                    <li><strong>Definition of a Complete Set:</strong> A set $A$ is Complete if every Cauchy sequence defined on $A$ converges to a point that lies inside $A$[cite: 272]. The real numbers $\mathbb{R}$ are complete, whereas the rational numbers $\mathbb{Q}$ are not[cite: 272, 273].</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Exercises: Testing Cauchy Sequences[cite: 274, 275]</strong><br><br>
+                <strong>Exercise 1.4: Disproving a False Claim</strong><br>
+                <em>Claim:</em> Does $u_{n+1}-u_{n}\rightarrow0$ as $n\rightarrow\infty$ imply that $u_{n}$ is Cauchy[cite: 274]?<br>
+                <em>Counterexample:</em> The harmonic series partial sums $u_{n}=\sum_{k=1}^{n}\frac{1}{k}$[cite: 274]. While the consecutive gap $|u_{n+1}-u_{n}|=\frac{1}{n+1}\rightarrow0$, checking indices $m=2n$ gives $|u_{2n}-u_{n}| \ge \frac{1}{2}$[cite: 274]. Thus, no matter how large $N$ is, the distance does not fall below $\epsilon = \frac{1}{4}$, proving the claim false[cite: 274].<br><br>
+                
+                <strong>Exercise 1.5: Contraction Mapping Principle</strong><br>
+                If $|u_{n+1}-u_{n}|\le\alpha|u_{n}-u_{n-1}|$ with $0<\alpha<1$, then $u_{n}$ is Cauchy[cite: 274]. By bounding the tail sum with a geometric series, the distance $|u_{n}-u_{m}| < \frac{d\cdot\alpha^{m-1}}{1-\alpha}$, which goes to 0 as $m\rightarrow\infty$[cite: 274, 275].
+            </div>
+
+            <h2 id="completeness" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">Testing Completeness of Sets</h2>
+
+            <div class="green-box">
+                <strong>Examples of Complete and Incomplete Sets[cite: 275, 276]</strong><br><br>
+                <ul>
+                    <li><strong>The Set of Integers $\mathbb{Z}$:</strong> Complete[cite: 275]. A Cauchy sequence of integers eventually forces $|u_{n}-u_{m}| < \frac{1}{2}$, which is only possible if $u_{n}=u_{m}$[cite: 275]. A constant sequence converges trivially within $\mathbb{Z}$[cite: 275].</li>
+                    <li><strong>The Set of Irrational Numbers $\mathbb{R}-\mathbb{Q}$:</strong> Not Complete[cite: 275]. The sequence $u_{n}=\frac{\sqrt{2}}{n}$ consists entirely of irrationals but converges to 0, which is rational[cite: 275]. The sequence escapes the set[cite: 275].</li>
+                    <li><strong>The Open Interval (0,1):</strong> Not Complete[cite: 275]. The sequence $u_{n}=\frac{1}{n+1}$ is inside (0,1) and converges to 0[cite: 275]. However, $0\notin(0,1)$, meaning the limit escapes the boundary[cite: 275].</li>
+                    <li><strong>The Closed Interval [0,1]:</strong> Complete[cite: 275]. Since $0\le u_{n}\le1$, taking limits preserves the inequalities ($0\le \lim u_{n}\le1$), ensuring the limit point $L$ remains within [0,1][cite: 275, 276].</li>
+                </ul>
+            </div>
+
+            <h2 id="bolzano" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">2. Subsequences & The Bolzano-Weierstrass Theorem</h2>
+
+            <div class="blue-box">
+                <strong>Definitions & The Three Equivalent Pillars[cite: 276, 277]</strong><br><br>
+                <ul>
+                    <li><strong>Subsequence Limit Theorem:</strong> If a sequence converges to $L$, then every one of its subsequences also converges to $L$[cite: 276].</li>
+                    <li><strong>Monotone Subsequence Theorem:</strong> Every sequence has at least one monotonic subsequence[cite: 276].</li>
+                    <li><strong>Bolzano-Weierstrass Theorem:</strong> Every bounded sequence has a converging subsequence[cite: 276].</li>
+                    <li><strong>Cauchy Subsequence Theorem:</strong> If a Cauchy sequence contains a subsequence that converges to $L$, then the entire sequence converges to $L$[cite: 276].</li>
+                </ul>
+                <br>
+                <strong>The Three Equivalent Pillars of Real Analysis (TFAE)[cite: 276]:</strong><br>
+                For any non-empty subset $A\subset\mathbb{R}$, the following are equivalent[cite: 276]:
+                <ol>
+                    <li>$A$ satisfies the Completeness Axiom Property (bounded subsets have a supremum/infimum in $A$)[cite: 276].</li>
+                    <li>The Bolzano-Weierstrass Theorem holds on $A$[cite: 276].</li>
+                    <li>$A$ is Cauchy Complete[cite: 276].</li>
+                </ol>
+            </div>
+
+            <h2 id="exercises" style="color: #facc15; margin-top: 50px; margin-bottom: 15px; border-bottom: 1px solid rgba(250, 204, 21, 0.3); padding-bottom: 5px;">Interactive Exercises</h2>
+
+            <!-- QUESTION 1 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 1: Cauchy Sequence Definition</h4>
+                <p style="margin-bottom: 15px;">Instead of measuring the distance to an unknown destination $L$, what does a Cauchy sequence inherently evaluate to test for convergence?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. A sequence evaluates distance from zero when checking bounds, not when checking the Cauchy property.')">A) The distance between each term and the origin</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! A Cauchy sequence measures the distance between the terms themselves ($|u_{n}-u_{m}|<\\epsilon$)[cite: 272].')">B) The distance between the sequence's own terms ($u_n$ and $u_m$)</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Measuring the distance to $L$ is standard limit evaluation, which Cauchy sequences bypass[cite: 272].')">C) The distance from the first term to the final term</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 2: Properties of Cauchy Sequences</h4>
+                <p style="margin-bottom: 15px;">Which of the following statements regarding Cauchy sequences is proven to be mathematically true?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Every Cauchy sequence is bounded[cite: 272].')">A) Every Cauchy sequence is bounded</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. While every Cauchy sequence is bounded, not every bounded sequence is Cauchy (e.g., oscillating sequences).')">B) Every bounded sequence is Cauchy</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Every converging sequence is Cauchy[cite: 272].')">C) A converging sequence may or may not be Cauchy</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 3: Completeness of Sets</h4>
+                <p style="margin-bottom: 15px;">A set is "Complete" if every Cauchy sequence defined on it converges to a point that lies inside that set. Which of the following sets is Complete?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The open interval (0,1) is not complete because sequences like $u_n = 1/(n+1)$ converge to 0, which escapes the boundary[cite: 275].')">A) The open interval (0,1)</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Irrational numbers are not complete (e.g., $\\sqrt{2}/n$ converges to 0, which is rational)[cite: 275].')">B) The set of irrational numbers $\mathbb{R}-\mathbb{Q}$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The closed interval [0,1] is complete because limits preserve inequalities ($0 \\le \\lim u_n \\le 1$), so the limit cannot escape[cite: 275, 276].')">C) The closed interval [0,1]</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 4: The Harmonic Series Counterexample</h4>
+                <p style="margin-bottom: 15px;">What false claim does the harmonic series partial sums counterexample disprove?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The harmonic series proves that $u_{n+1}-u_n \\rightarrow 0$ does not guarantee a sequence is Cauchy[cite: 274].')">A) $u_{n+1}-u_n \rightarrow 0$ as $n \rightarrow \infty$ implies that $u_n$ is Cauchy</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The Monotone Subsequence theorem states every sequence has a monotonic subsequence, which is unrelated to this counterexample[cite: 276].')">B) Every sequence has at least one monotonic subsequence</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. This statement is actually true according to the Bolzano-Weierstrass theorem[cite: 276].')">C) Every bounded sequence has a converging subsequence</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 5: Subsequence Limits</h4>
+                <p style="margin-bottom: 15px;">According to the Subsequence Limit Theorem, if a full sequence converges to a limit $L$, what must be true about its subsequences?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. A subsequence cannot diverge if the parent sequence converges to $L$.')">A) They may diverge depending on the indices chosen</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! If a sequence converges to $L$, then every one of its subsequences also converges to $L$[cite: 276].')">B) Every one of its subsequences also converges to $L$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The theorem states they converge to the exact same limit $L$, not zero[cite: 276].')">C) They must converge to 0</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 6: Bolzano-Weierstrass Theorem</h4>
+                <p style="margin-bottom: 15px;">What does the Bolzano-Weierstrass theorem explicitly guarantee for any sequence?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Only Cauchy sequences are guaranteed to converge in a complete space.')">A) Every sequence converges to a finite limit</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. While every sequence has a monotonic subsequence, this is the Monotone Subsequence Theorem, not Bolzano-Weierstrass[cite: 276].')">B) Every sequence has at least one monotonic subsequence</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The Bolzano-Weierstrass Theorem states that every bounded sequence has a converging subsequence[cite: 276].')">C) Every bounded sequence has a converging subsequence</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

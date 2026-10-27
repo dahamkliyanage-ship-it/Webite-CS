@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Limits of Real-Valued Functions & Continuity</title>
+    <style>
+        /* USER PROVIDED CSS - DO NOT CHANGE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #e5e7eb;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #f3f4f6;
+            padding: 20px 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            display: flex;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #9ca3af;
+            font-weight: 500;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: yellow;
+            background-color: rgba(56, 189, 248, 0.1);
+            transform: translateX(4px);
+        }
+
+        .content {
+            flex-grow: 1;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .blue-box, .yellow-box, .green-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .blue-box {
+            background-color: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid #38bdf8;
+            box-shadow: -4px 0 15px -5px rgba(56, 189, 248, 0.2);
+        }
+
+        .yellow-box {
+            background-color: rgba(250, 204, 21, 0.05);
+            border-left: 4px solid #facc15;
+            box-shadow: -4px 0 15px -5px rgba(250, 204, 21, 0.2);
+        }
+
+        .green-box {
+            background-color: rgba(74, 222, 128, 0.05);
+            border-left: 4px solid #4ade80;
+            box-shadow: -4px 0 15px -5px rgba(74, 222, 128, 0.2);
+        }
+
+        .math-center {
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 30px 0;
+            color: #f3f4f6;
+            font-weight: 500;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #e5e7eb;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .quiz-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+        }
+        .quiz-result {
+            margin-top: 15px;
+            font-weight: 600;
+            min-height: 24px;
+        }
+    </style>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+
+        function checkAnswer(btn, isCorrect, explanation) {
+            let parent = btn.parentElement;
+            let resultDiv = parent.querySelector('.quiz-result');
+            
+            if(isCorrect) {
+                let buttons = parent.querySelectorAll('.quiz-btn');
+                buttons.forEach(b => {
+                    b.style.pointerEvents = 'none';
+                    if (b !== btn) b.style.opacity = '0.6';
+                });
+
+                btn.style.opacity = '1';
+                btn.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                btn.style.borderColor = '#4ade80';
+                btn.style.color = '#4ade80';
+                resultDiv.innerHTML = '✅ ' + explanation;
+                resultDiv.style.color = '#4ade80';
+            } else {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.7';
+                btn.style.backgroundColor = 'rgba(248, 113, 113, 0.2)';
+                btn.style.borderColor = '#f87171';
+                btn.style.color = '#f87171';
+                resultDiv.innerHTML = '❌ ' + explanation;
+                resultDiv.style.color = '#f87171';
+            }
+        }
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Limits of Real-Valued Functions & Continuity</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3 style="color: #f3f4f6; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Table of Contents</h3>
+            <ul>
+                <li><a href="#epsilondelta" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Limits & $\epsilon-\delta$</a></li>
+                <li><a href="#benchmarks">Benchmark Limits & Squeeze</a></li>
+                <li><a href="#continuity">Continuity</a></li>
+                <li><a href="#exercises">Interactive Exercises</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="epsilondelta" style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">1. The Limit of a Function & $\epsilon-\delta$ Formulation</h2>
+
+            <div class="blue-box">
+                <strong>Core Definitions & Directional Limits[cite: 17]</strong><br><br>
+                <ul>
+                    <li><strong>Definition of Limit:</strong> $\lim_{x\rightarrow a}f(x)=L \Leftrightarrow \forall\epsilon>0, \exists\delta>0, \forall x (0<|x-a|<\delta \Rightarrow |f(x)-L|<\epsilon)$[cite: 17].</li>
+                    <li><strong>Crucial Detail:</strong> $0<|x-a|$ means $x\ne a$[cite: 17]. A limit describes how the function behaves near $a$, completely ignoring whatever happens at exactly $a$[cite: 17].</li>
+                    <li><strong>Directional Limits:</strong> Approaching from Right ($x\rightarrow a^{+}$) implies $a<x<a+\delta$, while approaching from Left ($x\rightarrow a^{-}$) implies $a-\delta<x<a$[cite: 17].</li>
+                    <li><strong>Two-Sided Limit Existence Theorem:</strong> A two-sided limit exists if and only if both one-sided limits exist and equal the exact same real value $L$[cite: 17].</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Exercises: Limit Proofs[cite: 17, 18, 19]</strong><br><br>
+                <strong>Exercise 1.1: Prove that $\lim_{x\rightarrow2}(2x+3)=7$[cite: 17]</strong><br>
+                <em>Scratchwork:</em> $|(2x+3)-7| = 2|x-2| < \epsilon \Leftrightarrow |x-2| < \frac{\epsilon}{2}$[cite: 17].<br>
+                <em>Proof:</em> Let $\epsilon>0$. Choose $\delta=\frac{\epsilon}{2}>0$[cite: 17]. For all $x$ satisfying $0<|x-2|<\delta$, we have $|f(x)-7| = 2|x-2| < 2(\frac{\epsilon}{2}) = \epsilon$[cite: 17]. Thus, the limit is 7[cite: 18].<br><br>
+
+                <strong>Exercise 1.3: Limit of Composite Functions[cite: 18]</strong><br>
+                <em>Theorem:</em> If $\lim_{x\rightarrow a}f(x)=L$, $\lim_{x\rightarrow b}g(x)=a$ and $g(x)\ne a$ on a punctured neighborhood $0<|x-b|<\delta_1$, then $\lim_{x\rightarrow b}f(g(x))=L$[cite: 18].<br>
+                <em>Proof concept:</em> By chaining the $\delta$ values. Given $\epsilon>0$, we find $\delta_2$ for $f$, and use that $\delta_2$ as the epsilon for $g$ to find $\delta_3$[cite: 18]. Choosing $\delta = \min\{\delta_1, \delta_3\}$ ensures the composition stays within bounds[cite: 19].
+            </div>
+
+            <h2 id="benchmarks" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">2. Standard Benchmark Limits & The Squeeze Theorem</h2>
+
+            <div class="green-box">
+                <strong>Key Theorems[cite: 19]</strong><br><br>
+                <ul>
+                    <li>$\lim_{x\rightarrow a}\frac{x^{n}-a^{n}}{x-a}=na^{n-1}$[cite: 19]</li>
+                    <li>$\lim_{x\rightarrow0}\frac{\sin x}{x}=1$[cite: 19]</li>
+                    <li>$\lim_{x\rightarrow\infty}(1+\frac{a}{x})^{x}=e^{a}$[cite: 19]</li>
+                    <li><strong>Squeeze Theorem:</strong> Suppose $f(x)\le g(x)\le h(x)$ for all $x$ in a punctured neighborhood $0<|x-a|<\delta$[cite: 19]. If $\lim_{x\rightarrow a}f(x) = \lim_{x\rightarrow a}h(x) = L$, then $\lim_{x\rightarrow a}g(x)=L$[cite: 19].</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Exercises[cite: 19, 20]</strong><br><br>
+                <strong>Exercise 2.1: Prove that $\lim_{\theta\rightarrow0}\frac{\sin\theta}{\theta}=1$[cite: 19]</strong><br>
+                Using geometric bounds for $0<\theta<\frac{\pi}{2}$, we have $\cos\theta < \frac{\sin\theta}{\theta} < \frac{1}{\cos\theta}$[cite: 19]. Since $\lim_{\theta\rightarrow0}\cos\theta = 1$ and $\lim_{\theta\rightarrow0}\frac{1}{\cos\theta} = 1$, the Squeeze Theorem dictates the middle term must also approach 1[cite: 19, 20]. Since sine and $\theta$ are both odd functions, their ratio is even, making the limit hold symmetrically from the left as well[cite: 20].<br><br>
+
+                <strong>Exercise 2.3: Show that $\lim_{x\rightarrow0}e^{1/x}$ does not exist[cite: 20]</strong><br>
+                Approaching from the right: As $x\rightarrow0^{+}$, $1/x\rightarrow\infty$, so $\lim_{x\rightarrow0^{+}}e^{1/x}=\infty$[cite: 20].<br>
+                Approaching from the left: As $x\rightarrow0^{-}$, $1/x\rightarrow-\infty$, so $\lim_{x\rightarrow0^{-}}e^{1/x}=0$[cite: 20].<br>
+                Because the left limit and right limit do not match, the limit does not exist[cite: 20].
+            </div>
+
+            <h2 id="continuity" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">3. Continuity & Sequential Characterization</h2>
+
+            <div class="blue-box">
+                <strong>Definitions & Key Theorems[cite: 20, 21]</strong><br><br>
+                <ul>
+                    <li><strong>Definition of Continuity:</strong> A function $f$ is continuous at $a$ iff $\lim_{x\rightarrow a}f(x)=f(a)$[cite: 20]. This requires three conditions: $f(a)$ is defined, $\lim_{x\rightarrow a}f(x)$ exists, and they are equal ($f(a^{-}) = f(a) = f(a^{+})$)[cite: 20, 21].</li>
+                    <li><strong>$\epsilon-\delta$ Criterion for Continuity:</strong> $\forall\epsilon>0, \exists\delta>0, \forall x (|x-a|<\delta \Rightarrow |f(x)-f(a)|<\epsilon)$[cite: 21]. Note the $0 < |x-a|$ condition is dropped[cite: 21].</li>
+                    <li><strong>Sequential Continuity Theorem:</strong> A function $f$ is continuous at $a \Leftrightarrow f$ is sequentially continuous at $a$[cite: 21]. This means for every sequence $x_n \rightarrow a$, the output sequence $f(x_n) \rightarrow f(a)$[cite: 21].</li>
+                </ul>
+            </div>
+            
+            <div class="yellow-box">
+                <strong>Exercise 3.1: Squeeze & Continuity Application[cite: 21, 22]</strong><br><br>
+                Show that $\lim_{x\rightarrow0}x\sin(\frac{1}{x})=0$ and define $f(0)$ so $f(x)$ is continuous[cite: 21].<br>
+                Since $-1 \le \sin(1/x) \le 1$, multiplying by $|x|$ gives $-|x| \le x\sin(1/x) \le |x|$[cite: 21, 22]. Since both $-|x|$ and $|x|$ approach 0 as $x \to 0$, the Squeeze theorem dictates the limit is 0[cite: 22]. To make $f(x)$ continuous everywhere, we define $f(0) = 0$[cite: 22].
+            </div>
+
+            <h2 id="exercises" style="color: #facc15; margin-top: 50px; margin-bottom: 15px; border-bottom: 1px solid rgba(250, 204, 21, 0.3); padding-bottom: 5px;">Interactive Exercises</h2>
+
+            <!-- QUESTION 1 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 1: The $\epsilon-\delta$ Limit Definition</h4>
+                <p style="margin-bottom: 15px;">In the formal limit definition, what does the condition $0 < |x - a|$ signify about the behavior of the limit?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The limit does evaluate $x$ values near $a$, but that is not the specific purpose of strictly being greater than 0.')">A) It guarantees the limit evaluates points exactly at $x = a$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The condition $0 < |x-a|$ means $x \\ne a$. A limit describes behavior near $a$, ignoring what happens exactly at $a$[cite: 17].')">B) It ignores whatever happens exactly at $x = a$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. This condition applies to both one-sided and two-sided limits depending on how it is written.')">C) It restricts the evaluation strictly to right-sided limits</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 2: Two-Sided Limit Existence</h4>
+                <p style="margin-bottom: 15px;">According to the Two-Sided Limit Existence Theorem, a limit $\lim_{x\rightarrow a}f(x) = L$ exists if and only if:</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Both one-sided limits must exist and equal the exact same real value $L$[cite: 17].')">A) Both one-sided limits exist and equal $L$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The function $f(a)$ does not need to equal $L$ (or even be defined) for a limit to exist.')">B) Both one-sided limits exist and $f(a) = L$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The function must approach the same value from both sides.')">C) At least one of the one-sided limits evaluates to $L$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 3: Infinite Limits</h4>
+                <p style="margin-bottom: 15px;">Why does the limit $\lim_{x\rightarrow0}e^{1/x}$ not exist?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The function does evaluate to specific limiting behaviors from either side, they just don\'t match.')">A) Because $e^{1/x}$ is undefined for all values near $x=0$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The right limit is $\\infty$, but the left limit is 0, not $-\\infty$[cite: 20].')">B) Because both one-sided limits approach infinity</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The right limit approaches $\\infty$ while the left limit approaches 0. Because they do not match, the limit does not exist[cite: 20].')">C) Because the left limit is 0 and the right limit is $\infty$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 4: The Squeeze Theorem</h4>
+                <p style="margin-bottom: 15px;">What foundational inequality is used in conjunction with the Squeeze Theorem to prove that $\lim_{\theta\rightarrow0}\frac{\sin\theta}{\theta}=1$?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The geometric bounds $\\cos\\theta < \\frac{\\sin\\theta}{\\theta} < \\frac{1}{\\cos\\theta}$ are used because both outer terms approach 1 as $\\theta \\rightarrow 0$[cite: 19, 20].')">A) $\cos\theta < \frac{\sin\theta}{\theta} < \frac{1}{\cos\theta}$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. This inequality bounds $x\\sin(1/x)$, not $\\frac{\\sin\\theta}{\\theta}$[cite: 21, 22].')">B) $-|\theta| \le \frac{\sin\theta}{\theta} \le |\theta|$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The Squeeze theorem requires bounds that evaluate to the same limit from above and below.')">C) $0 \le \frac{\sin\theta}{\theta} \le 1$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 5: Sequential Continuity</h4>
+                <p style="margin-bottom: 15px;">If a function $f$ is sequentially continuous at $a$, what must happen for every sequence $x_n$ that converges to $a$?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The sequence of outputs must converge to the function\'s value at $a$, not to $a$ itself.')">A) The sequence $f(x_n)$ converges to $a$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! For every sequence $x_n \\rightarrow a$, the sequence of outputs $f(x_n) \\rightarrow f(a)$[cite: 21].')">B) The sequence $f(x_n)$ converges to $f(a)$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Sequential continuity requires the function output to converge, not evaluate to zero.')">C) The sequence $f(x_n)$ converges to 0</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 6: Ensuring Continuity</h4>
+                <p style="margin-bottom: 15px;">To make the function $f(x) = x\sin(1/x)$ continuous everywhere on $\mathbb{R}$, how must $f(0)$ be defined?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. If $f(0) = 1$, it would not match the limit, failing the definition of continuity.')">A) $f(0) = 1$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Since the limit of $x\\sin(1/x)$ as $x \\rightarrow 0$ is 0, setting $f(0) = 0$ satisfies the continuity condition $\\lim_{x\\rightarrow0}f(x) = f(0)$[cite: 21, 22].')">B) $f(0) = 0$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Leaving it undefined means the function breaks the first rule of continuity ($f(a)$ must be defined)[cite: 20].')">C) It must remain undefined</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

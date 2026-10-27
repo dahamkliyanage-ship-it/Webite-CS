@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mean Value Theorems, L'Hôpital's Rule & Higher Derivatives</title>
+    <style>
+        /* USER PROVIDED CSS - DO NOT CHANGE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #e5e7eb;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #f3f4f6;
+            padding: 20px 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            display: flex;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #9ca3af;
+            font-weight: 500;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: yellow;
+            background-color: rgba(56, 189, 248, 0.1);
+            transform: translateX(4px);
+        }
+
+        .content {
+            flex-grow: 1;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .blue-box, .yellow-box, .green-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .blue-box {
+            background-color: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid #38bdf8;
+            box-shadow: -4px 0 15px -5px rgba(56, 189, 248, 0.2);
+        }
+
+        .yellow-box {
+            background-color: rgba(250, 204, 21, 0.05);
+            border-left: 4px solid #facc15;
+            box-shadow: -4px 0 15px -5px rgba(250, 204, 21, 0.2);
+        }
+
+        .green-box {
+            background-color: rgba(74, 222, 128, 0.05);
+            border-left: 4px solid #4ade80;
+            box-shadow: -4px 0 15px -5px rgba(74, 222, 128, 0.2);
+        }
+
+        .math-center {
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 30px 0;
+            color: #f3f4f6;
+            font-weight: 500;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #e5e7eb;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .quiz-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+        }
+        .quiz-result {
+            margin-top: 15px;
+            font-weight: 600;
+            min-height: 24px;
+        }
+    </style>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+
+        function checkAnswer(btn, isCorrect, explanation) {
+            let parent = btn.parentElement;
+            let resultDiv = parent.querySelector('.quiz-result');
+            
+            if(isCorrect) {
+                let buttons = parent.querySelectorAll('.quiz-btn');
+                buttons.forEach(b => {
+                    b.style.pointerEvents = 'none';
+                    if (b !== btn) b.style.opacity = '0.6';
+                });
+
+                btn.style.opacity = '1';
+                btn.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                btn.style.borderColor = '#4ade80';
+                btn.style.color = '#4ade80';
+                resultDiv.innerHTML = '✅ ' + explanation;
+                resultDiv.style.color = '#4ade80';
+            } else {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.7';
+                btn.style.backgroundColor = 'rgba(248, 113, 113, 0.2)';
+                btn.style.borderColor = '#f87171';
+                btn.style.color = '#f87171';
+                resultDiv.innerHTML = '❌ ' + explanation;
+                resultDiv.style.color = '#f87171';
+            }
+        }
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Mean Value Theorems, L'Hôpital's Rule & Higher Derivatives</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3 style="color: #f3f4f6; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Table of Contents</h3>
+            <ul>
+                <li><a href="#mean-value" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Mean Value Theorems</a></li>
+                <li><a href="#lhopital">L'Hôpital's Rule</a></li>
+                <li><a href="#higher-derivs">Higher Derivatives & Extrema</a></li>
+                <li><a href="#exercises-thm">Exercises: Indeterminate Forms</a></li>
+                <li><a href="#exercises-quiz">Interactive Exercises</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="mean-value" style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">1. Rolle's Theorem & The Mean Value Theorems</h2>
+
+            <div class="blue-box">
+                <strong>Foundational Theorems[cite: 37, 38]</strong><br><br>
+                <ul>
+                    <li><strong>Rolle's Theorem:</strong> Let $f$ be continuous on $[a, b]$ and differentiable on $(a, b)$ with $f(a)=f(b)$[cite: 37]. Then there exists at least one $c\in(a,b)$ such that $f^{\prime}(c)=0$[cite: 37].<br>
+                    <em>Proof Sketch:</em> By EVT, $f$ attains a max $M$ and min $m$[cite: 37]. If $M=m$, the function is constant and $f^{\prime}=0$ everywhere[cite: 37]. If $M \ne m$, since endpoints are equal, an extremum occurs at an interior point $c$[cite: 37]. By Fermat's Theorem, $f^{\prime}(c)=0$[cite: 37].</li>
+                    
+                    <li><strong>The Mean Value Theorem (Lagrange MVT):</strong> Let $f$ be continuous on $[a,b]$ and differentiable on $(a, b)$[cite: 37]. There exists $c\in(a,b)$ such that $f^{\prime}(c)=\frac{f(b)-f(a)}{b-a}$[cite: 37].<br>
+                    <em>Proof Sketch:</em> Construct a secant line error function $h(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)$[cite: 37]. Since $h(a)=h(b)=0$, apply Rolle's theorem to $h(x)$[cite: 37]. Differentiating $h$ yields the formula[cite: 37, 38].</li>
+                    
+                    <li><strong>Cauchy's Generalized Mean Value Theorem:</strong> Let $f, g$ be continuous on $[a,b]$ and differentiable on $(a, b)$ with $g^{\prime}(x)\ne0$[cite: 38]. There exists $c\in(a,b)$ such that $\frac{f^{\prime}(c)}{g^{\prime}(c)}=\frac{f(b)-f(a)}{g(b)-g(a)}$[cite: 38].</li>
+                </ul>
+            </div>
+
+            <h2 id="lhopital" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">2. Rigorous L'Hôpital's Rule</h2>
+
+            <div class="green-box">
+                <strong>The Formal Theorem & Analytical Derivation[cite: 38, 39]</strong><br><br>
+                <strong>L'Hôpital's Rule ($0/0$ Form):</strong> Suppose $f(a)=g(a)=0$, $f, g$ are continuous on $[a, a+\delta)$ and differentiable on $(a, a+\delta)$, with $g^{\prime}(x) \ne 0$[cite: 38]. If $\lim_{x\rightarrow a^{+}}\frac{f^{\prime}(x)}{g^{\prime}(x)}=L$, then $\lim_{x\rightarrow a^{+}}\frac{f(x)}{g(x)}=L$[cite: 38].<br><br>
+                
+                <em>Proof via Cauchy MVT:</em> For a given $\epsilon$, we know the ratio of derivatives is within $\epsilon$ of $L$ on some interval $(a, a+\delta_1)$[cite: 39]. For any $x$ in a valid subinterval, applying Cauchy's MVT provides a point $c$ such that $\frac{f^{\prime}(c)}{g^{\prime}(c)} = \frac{f(x)-f(a)}{g(x)-g(a)} = \frac{f(x)}{g(x)}$[cite: 39]. Since $c$ is within the $\delta_1$ bounds, the ratio of the functions is also bounded strictly within $\epsilon$ of $L$, satisfying the limit definition[cite: 39].
+            </div>
+
+            <h2 id="exercises-thm" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">Step-by-Step Indeterminate Form Evaluations</h2>
+
+            <div class="yellow-box">
+                <strong>Exercise 2.2: Evaluate $\lim_{x\rightarrow0}\frac{x^{2}\sin(1/x)}{\sin x}$[cite: 39]</strong><br>
+                Taking derivatives yields $\cos(1/x)$ terms which oscillate and fail the limit requirement[cite: 39]. Instead, split algebraically: $\lim_{x\rightarrow0}(\frac{x}{\sin x})\cdot(x\sin\frac{1}{x})$[cite: 39, 40]. The first part goes to 1, the second goes to 0 (via Squeeze Theorem)[cite: 40]. Product rule gives $1 \cdot 0 = 0$[cite: 40].<br><br>
+
+                <strong>Exercise 2.3: Evaluate $\lim_{x\rightarrow0^{+}}\frac{\ln x}{\cot(\pi x)}$[cite: 40]</strong><br>
+                Form: $\frac{-\infty}{\infty}$[cite: 40]. Apply L'Hôpital's Rule:<br>
+                $\lim_{x\rightarrow0^{+}}\frac{1/x}{-\pi\csc^2(\pi x)} = \lim_{x\rightarrow0^{+}}\frac{-\sin^2(\pi x)}{\pi x} = \lim_{x\rightarrow0^{+}}[-\frac{\sin(\pi x)}{\pi x}\cdot\sin(\pi x)]$[cite: 40]. Since $\frac{\sin(\pi x)}{\pi x} \rightarrow 1$ and $\sin(\pi x) \rightarrow 0$, the limit evaluates to 0[cite: 40].<br><br>
+
+                <strong>Exercise 2.4: Evaluate $\lim_{x\rightarrow\pi/4}(\tan x)^{\tan(2x)}$[cite: 40]</strong><br>
+                Form: $1^{\pm\infty}$[cite: 40]. Convert to exponential form $y$, so $\ln y = \frac{\ln(\tan x)}{\cot(2x)}$, yielding $[0/0]$[cite: 40].<br>
+                Deriving numerator: $\frac{1}{\sin x\cos x}$[cite: 40]. Deriving denominator: $-\frac{1}{2\sin^2x\cos^2x}$[cite: 40].<br>
+                The ratio simplifies to $-\sin(2x)$, which limits to $-1$ at $\pi/4$[cite: 40]. By continuity of the exponential, the final answer is $e^{-1} = 1/e$[cite: 40, 41].
+            </div>
+
+            <h2 id="higher-derivs" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">3. Higher Derivatives & The Second Derivative Test</h2>
+
+            <div class="blue-box">
+                <strong>Definitions & Second-Order Extrema[cite: 41, 42]</strong><br><br>
+                <ul>
+                    <li><strong>Second-Order Linear Approximation:</strong> If $f^{\prime\prime}$ exists on $(a, b)$, then $f(x)=f(c)+f^{\prime}(c)(x-c)+\frac{f^{\prime\prime}(\zeta)}{2}(x-c)^{2}$ for some intermediate point $\zeta$[cite: 41].</li>
+                    <li><strong>Second Derivative Test:</strong> Let $f^{\prime}(c)=0$ and $f^{\prime\prime}$ be continuous at $c$[cite: 41].
+                        <ul>
+                            <li>If $f^{\prime\prime}(c)>0$, $c$ is a strict local minimum[cite: 41].</li>
+                            <li>If $f^{\prime\prime}(c)<0$, $c$ is a strict local maximum[cite: 41].</li>
+                            <li>If $f^{\prime\prime}(c)=0$, the test is inconclusive[cite: 41].</li>
+                        </ul>
+                    </li>
+                    <li><strong>Proof via Remainder Expansion:</strong> Since $f^{\prime}(c)=0$, $f(x)-f(c) = \frac{f^{\prime\prime}(\zeta)}{2}(x-c)^2$[cite: 41]. If $f^{\prime\prime}(c)>0$, continuity ensures $f^{\prime\prime}(\zeta)>0$ nearby[cite: 41]. Since $(x-c)^2$ is positive, $f(x)-f(c)>0 \Rightarrow f(x)>f(c)$, making $c$ a local minimum[cite: 41, 42].</li>
+                </ul>
+            </div>
+
+            <h2 id="exercises-quiz" style="color: #facc15; margin-top: 50px; margin-bottom: 15px; border-bottom: 1px solid rgba(250, 204, 21, 0.3); padding-bottom: 5px;">Interactive Exercises</h2>
+
+            <!-- QUESTION 1 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 1: Rolle's Theorem Application</h4>
+                <p style="margin-bottom: 15px;">Under Rolle's Theorem, if $f(a) = f(b)$ and the function is not perfectly constant across $[a,b]$, what forces the derivative $f^\prime(c)$ to be 0 at an interior point?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. While it crosses the x-axis if it changes signs, this does not guarantee the slope is zero.')">A) The function must cross the x-axis</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! By EVT, it attains an extremum inside the interval. Fermat\'s theorem states the derivative at any interior extremum must be zero[cite: 37].')">B) Fermat's Interior Extremum Theorem</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. L\'Hôpital\'s Rule evaluates limits of indeterminate forms, not the slope of a function\'s extrema[cite: 38].')">C) L'Hôpital's Rule</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 2: Lagrange Mean Value Theorem</h4>
+                <p style="margin-bottom: 15px;">In the proof of the Mean Value Theorem, how is Rolle's theorem utilized?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! An error function $h(x)$ is constructed such that $h(a)=h(b)=0$, allowing Rolle\'s theorem to be applied directly[cite: 37].')">A) A secant line error function is constructed where $h(a)=h(b)=0$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Rolle\'s theorem requires endpoints to be equal, it does not mandate horizontal tangents at both ends[cite: 37].')">B) By proving that the function has horizontal tangents at both endpoints</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. A second function is required for Cauchy\'s generalized MVT, but not the standard Lagrange MVT[cite: 37, 38].')">C) By dividing the function by a second continuous function $g(x)$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 3: L'Hôpital's Analytical Proof</h4>
+                <p style="margin-bottom: 15px;">Which theorem is the core mechanical foundation used to formally prove L'Hôpital's Rule?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Lagrange MVT only uses one function, while L\'Hôpital\'s involves the ratio of two functions[cite: 37, 38].')">A) The Lagrange Mean Value Theorem</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The Squeeze Theorem evaluates limits geometrically, not via derivative ratios[cite: 40].')">B) The Squeeze Theorem</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Cauchy\'s Generalized Mean Value Theorem relates the ratio of two functions to the ratio of their derivatives, providing the step needed for L\'Hôpital\'s[cite: 38, 39].')">C) Cauchy's Generalized Mean Value Theorem</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 4: L'Hôpital's Failure Mode</h4>
+                <p style="margin-bottom: 15px;">When evaluating $\lim_{x\rightarrow0}\frac{x^2\sin(1/x)}{\sin x}$, why does applying L'Hôpital's Rule directly fail?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Taking the derivative produces a $\cos(1/x)$ term, which oscillates infinitely and fails to converge, making the limit of derivatives undefined[cite: 39].')">A) The derivative terms oscillate infinitely near 0 and fail to converge</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The original expression does evaluate to a $0/0$ indeterminate form.')">B) The expression is not an indeterminate form</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The derivative of $\sin x$ is $\cos x$, which is non-zero as $x \\rightarrow 0$.')">C) The derivative of the denominator evaluates to zero</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 5: Solving Complex Indeterminate Forms</h4>
+                <p style="margin-bottom: 15px;">When evaluating the indeterminate form $1^\infty$ (such as in $\lim_{x\rightarrow\pi/4}(\tan x)^{\tan(2x)}$), what is the necessary first step?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. You cannot apply L\'Hôpital\'s Rule to a power-based expression directly.')">A) Differentiate the base and exponent separately</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! You must set the expression equal to $y$, take the natural log ($\ln y$) to bring the exponent down, and convert it into a $0/0$ or $\infty/\infty$ form[cite: 40].')">B) Take the natural logarithm of the entire expression to convert it into a fraction</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. While substitution is useful, it does not resolve the $1^\\infty$ structural issue.')">C) Substitute $x$ with $1/t$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 6: The Second Derivative Test</h4>
+                <p style="margin-bottom: 15px;">In the proof of the Second Derivative Test, how does a positive second derivative ($f^{\prime\prime}(c)>0$) guarantee a local minimum?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Through the second-order expansion, a positive $f^{\prime\prime}$ ensures the remainder term $(x-c)^2$ is always added, proving $f(x) > f(c)$ everywhere nearby[cite: 41, 42].')">A) It guarantees the second-order remainder term is always positive, making $f(x) > f(c)$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. A positive second derivative means the slope is increasing, but this isn\'t the strict mechanism used in the proof via expansion.')">B) It proves the function is strictly increasing on the entire interval</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. An inflection point requires the second derivative to change signs across $c$, not simply be positive.')">C) It confirms the point is an inflection point</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

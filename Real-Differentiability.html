@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Differentiability, Algebraic Rules & Extremum Conditions</title>
+    <style>
+        /* USER PROVIDED CSS - DO NOT CHANGE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #e5e7eb;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #f3f4f6;
+            padding: 20px 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            display: flex;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #9ca3af;
+            font-weight: 500;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: yellow;
+            background-color: rgba(56, 189, 248, 0.1);
+            transform: translateX(4px);
+        }
+
+        .content {
+            flex-grow: 1;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .blue-box, .yellow-box, .green-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .blue-box {
+            background-color: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid #38bdf8;
+            box-shadow: -4px 0 15px -5px rgba(56, 189, 248, 0.2);
+        }
+
+        .yellow-box {
+            background-color: rgba(250, 204, 21, 0.05);
+            border-left: 4px solid #facc15;
+            box-shadow: -4px 0 15px -5px rgba(250, 204, 21, 0.2);
+        }
+
+        .green-box {
+            background-color: rgba(74, 222, 128, 0.05);
+            border-left: 4px solid #4ade80;
+            box-shadow: -4px 0 15px -5px rgba(74, 222, 128, 0.2);
+        }
+
+        .math-center {
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 30px 0;
+            color: #f3f4f6;
+            font-weight: 500;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #e5e7eb;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .quiz-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+        }
+        .quiz-result {
+            margin-top: 15px;
+            font-weight: 600;
+            min-height: 24px;
+        }
+    </style>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+
+        function checkAnswer(btn, isCorrect, explanation) {
+            let parent = btn.parentElement;
+            let resultDiv = parent.querySelector('.quiz-result');
+            
+            if(isCorrect) {
+                let buttons = parent.querySelectorAll('.quiz-btn');
+                buttons.forEach(b => {
+                    b.style.pointerEvents = 'none';
+                    if (b !== btn) b.style.opacity = '0.6';
+                });
+
+                btn.style.opacity = '1';
+                btn.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                btn.style.borderColor = '#4ade80';
+                btn.style.color = '#4ade80';
+                resultDiv.innerHTML = '✅ ' + explanation;
+                resultDiv.style.color = '#4ade80';
+            } else {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.7';
+                btn.style.backgroundColor = 'rgba(248, 113, 113, 0.2)';
+                btn.style.borderColor = '#f87171';
+                btn.style.color = '#f87171';
+                resultDiv.innerHTML = '❌ ' + explanation;
+                resultDiv.style.color = '#f87171';
+            }
+        }
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Differentiability, Algebraic Rules & Extremum Conditions</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3 style="color: #f3f4f6; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Table of Contents</h3>
+            <ul>
+                <li><a href="#intro" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Introduction</a></li>
+                <li><a href="#differentiability">Differentiability</a></li>
+                <li><a href="#extrema">Local Extrema</a></li>
+                <li><a href="#exercises-thm">Step-by-Step Proofs</a></li>
+                <li><a href="#exercises-quiz">Interactive Exercises</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="intro" style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">Introduction</h2>
+            <p>Continuity simply guarantees that a curve has no breaks or teleportations: you can draw it without lifting your pencil[cite: 31]. Differentiability requires something much stronger: smoothness[cite: 31]. If you zoom in infinitely close to a point on the curve, the graph must flatten out into a single, unambiguous straight tangent line[cite: 31]. If the curve has a sharp spike, a corner, or an infinite vertical cliff, the left and right approach speeds disagree or blow up, meaning instantaneous velocity cannot be defined[cite: 31].</p>
+
+            <h2 id="differentiability" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">1. Differentiability: Definitions & Fundamental Properties</h2>
+
+            <div class="blue-box">
+                <strong>Definitions & One-Sided Derivatives[cite: 31, 32]</strong><br><br>
+                <ul>
+                    <li><strong>Definition of Differentiability:</strong> A function $f$ is differentiable at $a$ iff the limit $f^{\prime}(a)=\lim_{x\rightarrow a}\frac{f(x)-f(a)}{x-a}$ exists as a finite real number[cite: 31].</li>
+                    <li><strong>Existence Criterion:</strong> $f$ is differentiable at $a$ if and only if both one-sided derivatives exist and are exactly equal to the same finite real value[cite: 31].</li>
+                    <li><strong>Differentiability Implies Continuity:</strong> If $f$ is differentiable at $a$, then $f$ is continuous at $a$[cite: 31, 32]. Note: The reverse is not true.</li>
+                    <li><strong>Derivative Arithmetic Rules:</strong> If $f, g$ are differentiable, they obey the Sum, Difference, Product, Quotient, and Chain rules[cite: 32]. (e.g. Chain Rule: $(f\circ g)^{\prime}=(f^{\prime}\circ g)\cdot g^{\prime}$)[cite: 32].</li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Worked Exercises: Testing Differentiability[cite: 33, 34]</strong><br><br>
+                <strong>Exercise 3.1: $f(x) = |x|$ at $x=0$[cite: 33]</strong><br>
+                Right derivative: $\lim_{x\rightarrow0^{+}}\frac{x}{x}=1$[cite: 33]. Left derivative: $\lim_{x\rightarrow0^{-}}\frac{-x}{x}=-1$[cite: 33]. Since $1 \ne -1$, $f$ is not differentiable at 0[cite: 33].<br><br>
+                
+                <strong>Exercise 3.1: $f(x) = x|x|$ at $x=0$[cite: 33, 34]</strong><br>
+                Limit of difference quotient: $\lim_{x\rightarrow0}\frac{x|x|-0}{x-0}=\lim_{x\rightarrow0}|x|=0$[cite: 34]. Both left and right limits equal 0, thus $f$ is differentiable at 0[cite: 34].<br><br>
+                
+                <strong>Exercise 3.3: Right derivative of $\sqrt{x}$ at $x=0$[cite: 34]</strong><br>
+                ${f^{\prime}}_{+}(0)=\lim_{x\rightarrow0^{+}}\frac{\sqrt{x}-\sqrt{0}}{x-0}=\lim_{x\rightarrow0^{+}}\frac{1}{\sqrt{x}}=\infty$[cite: 34]. Since the limit is not a finite real number, it is not right-differentiable at 0[cite: 34].
+            </div>
+
+            <h2 id="extrema" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">2. Local Extremum & Critical Points</h2>
+
+            <div class="green-box">
+                <strong>Definitions & Necessary Conditions[cite: 32, 33]</strong><br><br>
+                <ul>
+                    <li><strong>Local Maximum:</strong> $\exists\delta>0, \forall x (|x-a|<\delta \Rightarrow f(x) \le f(a))$[cite: 32].</li>
+                    <li><strong>Critical Point:</strong> A point $a$ is a critical point iff $f^{\prime}(a)=0$ or $f$ is not differentiable at $a$[cite: 33].</li>
+                    <li><strong>Interior Extremum Theorem (Fermat's Theorem):</strong> Let $f$ be differentiable at an interior point $a$[cite: 33]. If $a$ is a local extremum, then $f^{\prime}(a)=0$[cite: 33].<br>
+                    <em>Proof Sketch:</em> Bounding from the right gives $f^{\prime}(a)\le0$, and from the left gives $f^{\prime}(a)\ge0$[cite: 33]. By trichotomy, $f^{\prime}(a)$ must equal 0[cite: 33].</li>
+                </ul>
+            </div>
+
+            <h2 id="exercises-thm" style="color: #38bdf8; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 5px;">3. Selected Proof Walkthroughs</h2>
+
+            <div class="yellow-box">
+                <strong>Exercise 3.4: $f^{\prime}(x)$ driving $f(x)$ to infinity[cite: 34, 35]</strong><br>
+                Prove that if $\lim_{x\rightarrow\infty}f^{\prime}(x)=L>0$, then $\lim_{x\rightarrow\infty}f(x)=\infty$[cite: 34].<br>
+                If the limit of the derivative is $L>0$, we can choose a value $c$ such that $0 < c < L$[cite: 34]. There exists some $N>0$ where for all $x > N$, $f^{\prime}(x) > c$[cite: 34]. By the Mean Value Theorem, $f(x)-f(N) = f^{\prime}(\xi)(x-N)$ for some $\xi \in (N,x)$[cite: 34]. Since $f^{\prime}(\xi) > c$, we know $f(x) > f(N) + c(x-N)$[cite: 34, 35]. As $x\rightarrow\infty$, that right-hand side grows to $\infty$, forcing $f(x)$ to infinity by comparison[cite: 35].<br><br>
+
+                <strong>Exercise 3.6: Darboux's Theorem[cite: 35, 36]</strong><br>
+                <em>Statement:</em> Let $f$ be differentiable on $[a,b]$ with $f^{\prime}(a)\ne f^{\prime}(b)$. If $u$ is strictly between them, there exists $c\in(a,b)$ such that $f^{\prime}(c)=u$[cite: 35].<br>
+                <em>Proof:</em> Define auxiliary function $g(x) = ux - f(x)$[cite: 35]. By EVT, $g$ attains a maximum on $[a,b]$[cite: 35]. Evaluating the derivatives at the boundaries shows $g$ is increasing at $a$ and decreasing at $b$, meaning the maximum cannot be at either boundary[cite: 35]. The maximum must occur at an interior point $c$[cite: 35]. By Fermat's theorem, $g^{\prime}(c) = 0$[cite: 35]. Since $g^{\prime}(c) = u - f^{\prime}(c) = 0$, we have $f^{\prime}(c) = u$[cite: 36].
+            </div>
+
+            <h2 id="exercises-quiz" style="color: #facc15; margin-top: 50px; margin-bottom: 15px; border-bottom: 1px solid rgba(250, 204, 21, 0.3); padding-bottom: 5px;">Interactive Exercises</h2>
+
+            <!-- QUESTION 1 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 1: Core Definition of Differentiability</h4>
+                <p style="margin-bottom: 15px;">For a function to be considered differentiable at a point $a$, what must be true about the limit of its difference quotient?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The limit does not have to be zero; it just has to be a finite number.')">A) It must exist and evaluate to exactly 0</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The limit must exist and evaluate to a finite real number[cite: 31].')">B) It must exist as a finite real number</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. If the limit goes to infinity, the function has a vertical tangent and is not differentiable[cite: 31].')">C) It must evaluate to positive or negative infinity</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 2: Differentiability vs Continuity</h4>
+                <p style="margin-bottom: 15px;">Which of the following statements represents a true mathematical theorem?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. A function can be continuous but not differentiable (e.g., $f(x) = |x|$ has a sharp corner).')">A) If $f$ is continuous at $a$, then $f$ is differentiable at $a$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Differentiability is a stronger condition; if a function is differentiable at $a$, it is guaranteed to be continuous at $a$[cite: 31].')">B) If $f$ is differentiable at $a$, then $f$ is continuous at $a$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. These two properties are strictly linked in one direction.')">C) Differentiability and continuity are completely unrelated</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 3: Evaluating Absolute Value</h4>
+                <p style="margin-bottom: 15px;">Why is the function $f(x) = |x|$ NOT differentiable at $x = 0$?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! The right derivative is 1, and the left derivative is -1. Since they are not equal, the two-sided limit does not exist[cite: 33].')">A) The left and right derivatives evaluate to different finite values</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The limit values are finite (1 and -1), they just don\'t match[cite: 33].')">B) The left and right derivatives both evaluate to infinity</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The function is perfectly continuous at $x=0$.')">C) The function is not continuous at $x=0$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 4: Definition of a Critical Point</h4>
+                <p style="margin-bottom: 15px;">A point $a$ is classified as a critical point of $f$ if $f^\prime(a)=0$ OR if what other condition is met?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. An inflection point deals with the second derivative, not the definition of a critical point.')">A) If the point is an inflection point</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! A point is critical if the derivative is zero OR if the function is not differentiable at that point[cite: 33].')">B) If $f$ is not differentiable at $a$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Being undefined would technically make it not differentiable, but the broader condition is non-differentiability.')">C) If $f$ evaluates to zero at $a$</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 5: Fermat's Interior Extremum Theorem</h4>
+                <p style="margin-bottom: 15px;">According to Fermat's Theorem, if a differentiable function attains a local extremum at an interior point $a$, what must be true?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Bounding the difference quotient from the left and right forces the derivative to be exactly zero by trichotomy ($f^\prime(a)=0$)[cite: 33].')">A) $f^\prime(a) = 0$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The function being equal to 0 means it crosses the x-axis, not that it\'s an extremum.')">B) $f(a) = 0$</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. If it is differentiable, the limit must exist and be finite.')">C) The derivative at $a$ approaches infinity</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <div class="green-box" style="border-left-color: #38bdf8;">
+                <h4 style="margin-bottom: 10px; color: #f3f4f6;">Exercise 6: Darboux's Theorem Proof</h4>
+                <p style="margin-bottom: 15px;">In the proof of Darboux's Theorem, why is the auxiliary function $g(x) = ux - f(x)$ guaranteed to attain a maximum on $[a,b]$?</p>
+                
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. Differentiability proves continuity, but another theorem is needed for the maximum.')">A) Because it is differentiable</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false, 'Incorrect. The Mean Value Theorem relates secant and tangent slopes, it does not guarantee a maximum.')">B) Because of the Mean Value Theorem</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true, 'Correct! Because $f$ is differentiable, $g$ is continuous on a closed interval. The Extreme Value Theorem (EVT) guarantees a continuous function on a closed interval attains a maximum[cite: 35].')">C) Because of the Extreme Value Theorem</button>
+                
+                <div class="quiz-result"></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
