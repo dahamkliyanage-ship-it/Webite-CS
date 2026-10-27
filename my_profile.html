@@ -107,7 +107,6 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            cursor: pointer;
             overflow: hidden;
             border: 3px solid #38bdf8;
             flex-shrink: 0;
@@ -118,25 +117,6 @@
             height: 100%;
             object-fit: cover;
             background-color: #0f172a;
-        }
-
-        .img-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            text-align: center;
-            font-size: 0.75em;
-            padding: 8px 0;
-            opacity: 0;
-            transition: opacity 0.2s;
-            font-weight: bold;
-        }
-
-        #profile-img-container:hover .img-overlay {
-            opacity: 1;
         }
 
         .user-info-text h2 {
@@ -167,145 +147,6 @@
             margin: 0;
             color: #94a3b8;
             font-size: 1.1em;
-        }
-
-        /* Document Section */
-        .section-header {
-            font-size: 1.5em;
-            color: #38bdf8;
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 10px;
-        }
-
-        .upload-area {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .upload-area input[type="file"] {
-            flex: 1;
-            padding: 12px;
-            background: #0f172a;
-            border: 1px dashed #475569;
-            border-radius: 8px;
-            color: #cbd5e1;
-            cursor: pointer;
-        }
-        
-        .upload-area input[type="file"]::file-selector-button {
-            background-color: #334155;
-            color: #cbd5e1;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            margin-right: 15px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .upload-area input[type="file"]::file-selector-button:hover {
-            background-color: #475569;
-        }
-
-        .upload-btn {
-            background-color: #38bdf8;
-            color: #0f172a;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            height: fit-content;
-        }
-
-        .upload-btn:hover {
-            background-color: #0ea5e9;
-            transform: translateY(-2px);
-        }
-
-        .upload-btn:disabled {
-            background-color: #475569;
-            color: #94a3b8;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Document List */
-        .doc-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .doc-item {
-            background: #0f172a;
-            padding: 15px 20px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #334155;
-            transition: border-color 0.2s;
-        }
-
-        .doc-item:hover {
-            border-color: #38bdf8;
-        }
-        
-        .doc-info {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .doc-item a {
-            color: #f8fafc;
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1em;
-        }
-        
-        .doc-item a:hover {
-            color: #38bdf8;
-            text-decoration: underline;
-        }
-
-        .doc-meta {
-            color: #64748b;
-            font-size: 0.85em;
-        }
-        
-        .doc-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .delete-btn {
-            background-color: transparent;
-            color: #f43f5e;
-            border: 1px solid #f43f5e;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .delete-btn:hover {
-            background-color: #f43f5e;
-            color: #ffffff;
         }
 
         /* Custom Modal UI */
@@ -407,9 +248,6 @@
         .modal-btn-secondary:hover { background-color: #475569; }
 
         @media (max-width: 600px) {
-            .upload-area { flex-direction: column; align-items: stretch; }
-            .doc-item { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .doc-actions { width: 100%; justify-content: flex-end; }
             .user-info { flex-direction: column; text-align: center; }
         }
     </style>
@@ -424,7 +262,7 @@
         <ul>
             <li><a href="Home module page.html">Home</a></li>
             <li><a href="my_profile.html" class="active">My Profile</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="about_us.html">About Us</a></li>
             <li><a href="about university.html">About University</a></li>
             <li><a href="#" id="home-sign-out-btn">Sign Out</a></li>
         </ul>
@@ -432,12 +270,10 @@
 
     <div class="container">
         
-        <!-- User Info Card with Edit Capabilities -->
+        <!-- User Info Card with Edit Name Capabilities (NO DOCUMENT UPLOAD) -->
         <div class="card user-info">
-            <div id="profile-img-container" title="Change Profile Picture">
+            <div id="profile-img-container">
                 <img id="profile-img" src="https://placehold.co/100x100/1e293b/38bdf8?text=USER" alt="Profile Picture">
-                <div class="img-overlay">✏️ Edit</div>
-                <input type="file" id="profile-pic-input" accept="image/*" style="display: none;">
             </div>
             
             <div class="user-info-text">
@@ -445,24 +281,10 @@
                     <span id="profile-name">Loading Profile...</span>
                     <button id="edit-name-btn" class="edit-name-btn" title="Edit Name">✏️</button>
                 </h2>
-                <p id="profile-email">Please wait</p>
+                <p id="profile-email">Please wait...</p>
             </div>
         </div>
 
-        <!-- Document Storage Card -->
-        <div class="card">
-            <h3 class="section-header">My Private Documents</h3>
-            
-            <div class="upload-area">
-                <input type="file" id="file-input" accept=".pdf,.doc,.docx,.jpg,.png,.zip,.txt,.xlsx">
-                <button class="upload-btn" id="upload-btn">Upload File</button>
-            </div>
-
-            <ul class="doc-list" id="doc-list">
-                <!-- Documents will be dynamically loaded here -->
-                <li class="doc-item" style="color: #94a3b8; justify-content: center;">Fetching your documents...</li>
-            </ul>
-        </div>
     </div>
 
     <!-- Custom Modal UI -->
@@ -480,25 +302,20 @@
     <!-- Firebase SDK Setup -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        // Added updateProfile for modifying user name and photo
         import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, query, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
 
         // Your specific Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
             authDomain: "sharkvision-4ac92.firebaseapp.com",
             projectId: "sharkvision-4ac92",
-            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            storageBucket: "sharkvision-4ac92.appspot.com",
             messagingSenderId: "516357464658",
             appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app); 
 
         let currentUser = null;
 
@@ -512,7 +329,7 @@
         function showMessage(title, message) {
             modalTitle.textContent = title;
             modalMessage.textContent = message;
-            modalInput.style.display = 'none'; // Hide input
+            modalInput.style.display = 'none'; 
             modalButtons.innerHTML = `<button class="modal-btn modal-btn-primary" id="modal-ok-btn">OK</button>`;
             modal.classList.add('active');
             
@@ -524,10 +341,10 @@
         function showConfirm(title, message, onConfirm) {
             modalTitle.textContent = title;
             modalMessage.textContent = message;
-            modalInput.style.display = 'none'; // Hide input
+            modalInput.style.display = 'none'; 
             modalButtons.innerHTML = `
                 <button class="modal-btn modal-btn-secondary" id="modal-cancel-btn">Cancel</button>
-                <button class="modal-btn modal-btn-danger" id="modal-confirm-btn">Delete</button>
+                <button class="modal-btn modal-btn-danger" id="modal-confirm-btn">Sign Out</button>
             `;
             modal.classList.add('active');
             
@@ -589,12 +406,8 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                
-                // 1. Populate user info in UI
+                // Populate user info in UI
                 renderUserInfo(user);
-                
-                // 2. Fetch their personal files
-                loadUserDocuments(user.uid);
             } else {
                 // If logged out, kick them back to login page
                 try {
@@ -622,179 +435,6 @@
                 }
             });
         });
-
-        // --- EDIT PROFILE PICTURE LOGIC ---
-        const profileImgContainer = document.getElementById('profile-img-container');
-        const profilePicInput = document.getElementById('profile-pic-input');
-
-        // Clicking the image container triggers the hidden file input
-        profileImgContainer.addEventListener('click', () => {
-            profilePicInput.click();
-        });
-
-        profilePicInput.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file || !currentUser) return;
-
-            // Optional: Basic validation to ensure it's an image
-            if (!file.type.startsWith('image/')) {
-                showMessage("Invalid File", "Please select an image file (JPG, PNG, etc.)");
-                return;
-            }
-
-            showMessage("Uploading...", "Please wait while your new profile picture is being uploaded and saved.");
-
-            try {
-                // Upload to Storage: users/{uid}/profile_pic/{timestamp_filename}
-                const safeFilename = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
-                const storagePathString = `users/${currentUser.uid}/profile_pic/${safeFilename}`;
-                const storageRef = ref(storage, storagePathString);
-                
-                await uploadBytes(storageRef, file);
-                const downloadURL = await getDownloadURL(storageRef);
-
-                // Update Auth Profile
-                await updateProfile(currentUser, { photoURL: downloadURL });
-                
-                // Update UI instantly
-                renderUserInfo(currentUser);
-                showMessage("Success", "Your profile picture has been updated successfully.");
-
-            } catch (error) {
-                console.error("Error updating profile picture:", error);
-                showMessage("Upload Failed", "An error occurred while uploading your profile picture. Please try again.");
-            } finally {
-                profilePicInput.value = ""; // Clear input
-            }
-        });
-
-
-        // --- FILE UPLOAD LOGIC (DOCUMENTS) ---
-        const fileInput = document.getElementById('file-input');
-        const uploadBtn = document.getElementById('upload-btn');
-
-        uploadBtn.addEventListener('click', async () => {
-            const file = fileInput.files[0];
-            if (!file) {
-                showMessage("No File Selected", "Please choose a file to upload first.");
-                return;
-            }
-            if (!currentUser) return;
-
-            // UI Feedback
-            uploadBtn.textContent = "Uploading...";
-            uploadBtn.disabled = true;
-
-            try {
-                // Create a unique path in Firebase Storage: users/{uid}/documents/{timestamp_filename}
-                const safeFilename = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
-                const storagePathString = `users/${currentUser.uid}/documents/${safeFilename}`;
-                const storageRef = ref(storage, storagePathString);
-                
-                // Upload file to Firebase Storage
-                await uploadBytes(storageRef, file);
-                
-                // Get the public download link
-                const downloadURL = await getDownloadURL(storageRef);
-
-                // Save metadata (including the storage path for future deletion) to Firestore database
-                await addDoc(collection(db, "users", currentUser.uid, "documents"), {
-                    name: file.name,
-                    url: downloadURL,
-                    storagePath: storagePathString, 
-                    size: (file.size / 1024 / 1024).toFixed(2) + " MB",
-                    date: new Date().toLocaleDateString()
-                });
-
-                showMessage("Success", "Your file was uploaded successfully.");
-                fileInput.value = ""; // clear input
-                loadUserDocuments(currentUser.uid); // Refresh the list
-            } catch (error) {
-                console.error("Upload Error:", error);
-                showMessage("Upload Failed", "An error occurred during upload. Please ensure your files are not too large and try again.");
-            } finally {
-                uploadBtn.textContent = "Upload File";
-                uploadBtn.disabled = false;
-            }
-        });
-
-        // --- FETCH AND DISPLAY FILES LOGIC ---
-        async function loadUserDocuments(uid) {
-            const listEl = document.getElementById('doc-list');
-            listEl.innerHTML = '<li class="doc-item" style="justify-content: center;">Loading your files...</li>';
-            
-            try {
-                // Query Firestore for documents owned by this user
-                const q = query(collection(db, "users", uid, "documents"));
-                const querySnapshot = await getDocs(q);
-                
-                listEl.innerHTML = ""; // Clear loading message
-
-                if (querySnapshot.empty) {
-                    listEl.innerHTML = '<li class="doc-item" style="color: #64748b; justify-content: center;">No documents uploaded yet. Start by uploading a file above.</li>';
-                    return;
-                }
-
-                // Render each file as a clickable download link with a delete button
-                querySnapshot.forEach((docSnap) => {
-                    const data = docSnap.data();
-                    const docId = docSnap.id;
-                    
-                    const li = document.createElement('li');
-                    li.className = "doc-item";
-                    
-                    li.innerHTML = `
-                        <div class="doc-info">
-                            <a href="${data.url}" target="_blank">
-                                📄 ${data.name}
-                            </a>
-                            <span class="doc-meta">Uploaded: ${data.date || 'Unknown date'} • Size: ${data.size || 'Unknown size'}</span>
-                        </div>
-                        <div class="doc-actions">
-                            <button class="delete-btn" data-id="${docId}" data-path="${data.storagePath || ''}">Delete</button>
-                        </div>
-                    `;
-                    listEl.appendChild(li);
-                });
-
-                // Attach event listeners to all newly created delete buttons
-                document.querySelectorAll('.delete-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const docId = e.target.getAttribute('data-id');
-                        const storagePath = e.target.getAttribute('data-path');
-                        
-                        showConfirm("Delete Document", "Are you sure you want to permanently delete this file? This action cannot be undone.", () => {
-                            executeFileDeletion(docId, storagePath, uid);
-                        });
-                    });
-                });
-
-            } catch (error) {
-                console.error("Error fetching docs:", error);
-                listEl.innerHTML = '<li class="doc-item" style="color: #f43f5e; justify-content: center;">Failed to load documents. Ensure your connection is stable.</li>';
-            }
-        }
-
-        // --- FILE DELETION LOGIC ---
-        async function executeFileDeletion(docId, storagePath, uid) {
-            try {
-                // 1. Delete from Firebase Storage (if the path exists)
-                if (storagePath) {
-                    const storageRef = ref(storage, storagePath);
-                    await deleteObject(storageRef);
-                }
-
-                // 2. Delete metadata from Firestore
-                await deleteDoc(doc(db, "users", uid, "documents", docId));
-                
-                // 3. Provide feedback and refresh
-                showMessage("File Deleted", "The file was successfully removed from your profile.");
-                loadUserDocuments(uid);
-            } catch (error) {
-                console.error("Delete error:", error);
-                showMessage("Deletion Failed", "There was an error deleting the file. Please try again.");
-            }
-        }
 
         // --- SIGN OUT LOGIC ---
         const signOutBtn = document.getElementById('home-sign-out-btn');
