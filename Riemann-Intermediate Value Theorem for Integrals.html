@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intermediate Value Theorem for Integrals</title>
+    <!-- Linking to your provided CSS file -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Intermediate Value Theorem for Integrals. Focus on the statement and proof of the Intermediate Value Theorem for Riemann integrals, its applications, and implications. Include examples, step-by-step explanations, and exercises for practice. Provide a video tutorial for visual learning."> 
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Intermediate Value Theorem for Integrals</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#ivt" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">IVT for Integrals</a></li>
+                <li><a href="#general-ivt">Generalized IVT</a></li>
+                <li><a href="#interchange-limits">Limits & Integrals</a></li>
+                <li><a href="#convergence-theorems">Convergence Theorems</a></li>
+                <li><a href="#examples">Worked Examples</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="ivt" style="margin-bottom: 20px;">Intermediate Value Theorem for Integrals</h2>
+
+            <div class="blue-box">
+                <strong>Theorem(Mean Value Theorem for Definite Integrals):</strong><br><br>
+                If $f$ is a continuous function on $[a,b]$, then for at least one $x \in (a,b)$ we have:
+                <div class="math-center">
+                    $$ f(x) = \frac{1}{b - a} \int_a^b f $$
+                </div>
+                
+                <strong>Proof:</strong><br>
+                Let $M$ and $m$ be the maximum and minimum values of $f$ on $[a,b]$. If $M = m$, then $f$ is a constant function and $f(x) = \frac{1}{b-a}\int_a^b f$ for all $x \in [a,b]$.
+                <br><br>
+                Otherwise, $m < M$, then there exist distinct $x_0$ and $y_0$ in $[a,b]$ satisfying $f(x_0) = m$ and $f(y_0) = M$. Since each function $M - f$ and $f - m$ is non-negative and not identically 0, then $\int_a^b m < \int_a^b f < \int_a^b M$. Thus,
+                <div class="math-center">
+                    $$ m < \frac{1}{b - a} \int_a^b f < M $$
+                </div>
+                and by the Intermediate Value Theorem for continuous functions, we have $f(x) = \frac{1}{b-a}\int_a^b f$ for some $x$ between $x_0$ and $y_0$. Since $x \in [a,b]$, this completes the proof.
+            </div>
+
+            <h2 id="general-ivt" style="margin-top: 30px; margin-bottom: 20px;">Generalized Intermediate Value Theorem</h2>
+
+            <div class="green-box">
+                <strong>Theorem(Generalization of Intermediate Value Theorem):</strong><br><br>
+                Let $f, g : [a,b] \to \mathbb{R}$ be continuous functions and $g(t) \ge 0, \forall t \in [a,b]$. Then $\exists$ at least one $x \in [a,b]$ such that:
+                <div class="math-center">
+                    $$ \int_a^b f(t)g(t)dt = f(x) \int_a^b g(t)dt $$
+                </div>
+                That is,
+                <div class="math-center">
+                    $$ f(x) = \frac{\int_a^b f(t)g(t)dt}{\int_a^b g(t)dt} $$
+                </div>
+                <em>Note:</em> This is a generalization for I.V.T. By taking $g(t) = 1$, we may obtain the standard I.V.T for integrals.
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Proof:</strong><br>
+                Assume $M$ and $m$ are the maximum and minimum values of $f(x)$ on $[a,b]$. Since $g(x) \ge 0$:
+                <div class="math-center">
+                    $$ mg(x) \le f(x)g(x) \le Mg(x) $$
+                </div>
+                Integrating across the inequality gives:
+                <div class="math-center">
+                    $$ m \int_a^b g(t)dt \le \int_a^b f(t)g(t)dt \le M \int_a^b g(t)dt $$
+                </div>
+                Hence,
+                <div class="math-center">
+                    $$ m \le \frac{\int_a^b f(t)g(t)dt}{\int_a^b g(t)dt} \le M $$
+                </div>
+                By the I.V.T. for continuous functions, this value must be taken by the function $f$ on $[a,b]$.
+            </div>
+
+            <h2 id="interchange-limits" style="margin-top: 30px; margin-bottom: 20px;">Interchanging Limits and Integrals</h2>
+            <p style="margin-bottom: 15px;">An important question concerns when one can interchange limits and integrals. i.e., when is $\lim_{n \to \infty} \int_a^b f_n(x)dx = \int_a^b f(x)dx$ true?</p>
+
+            <div class="blue-box">
+                If the $f_n$'s are continuous and converge <em>uniformly</em> to $f = \lim_{n \to \infty} f_n$ on $[a,b]$, then $f$ is continuous and the statement holds. It turns out that if each $f_n$ is just Riemann integrable and $f_n \to f$ uniformly, then $f$ is Riemann integrable and the statement holds.
+
+                <br><br>
+                <strong>Theorem(Uniform Convergence):</strong><br>
+                Let $f_n$ be a sequence of R.I. functions on $[a,b]$ and suppose $f_n \to f$ uniformly on $[a,b]$. Then $f$ is R.I. on $[a,b]$ and:
+                <div class="math-center">
+                    $$ \lim_{n \to \infty} \int_a^b f_n(x)dx = \int_a^b f(x)dx $$
+                </div>
+                
+                <strong>Proof:</strong><br>
+                Let $\epsilon > 0$. Since $f_n \to f$ uniformly, there exists $N$ such that $|f_n(x) - f(x)| < \frac{\epsilon}{2(b-a)}$ for all $n \ge N$. Using partitions and Riemann sums $U(f - f_N, P)$ and $L(f - f_N, P)$, one can bound the difference by $\epsilon$, proving $f - f_N$ is R.I. Hence $f = (f - f_N) + f_N$ is R.I. Consequently, the integral of the difference is bounded by $\frac{\epsilon}{2} < \epsilon$, proving the limit.
+            </div>
+
+            <h2 id="convergence-theorems" style="margin-top: 30px; margin-bottom: 20px;">Pointwise Convergence</h2>
+            <p style="margin-bottom: 15px;">What happens if $f_n \to f$ <em>pointwise</em> on $[a,b]$? One problem is that $f$ need not be integrable even if it is bounded and each $f_n$ is integrable. Nevertheless, important theorems exist for sequences converging pointwise.</p>
+
+            <div class="green-box">
+                <strong>Example(Failure of Pointwise Convergence):</strong><br>
+                Let $\{q_k : k \in \mathbb{N}\}$ be an enumeration of the rationals in $[0, 1]$. Define $f_n : [0, 1] \to \mathbb{R}$ by $f_n(x) = 1$ if $x = q_k$ for $k \le n$, and $0$ otherwise.<br>
+                Each $f_n$ is Riemann integrable (it differs from 0 at finitely many points). However, $f_n \to f$ pointwise to the Dirichlet function $f$, which is <em>not</em> Riemann integrable.
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Theorem(Bounded/Dominated Convergence Theorem):</strong><br>
+                Suppose $(f_n)$ is a sequence of integrable functions on $[a,b]$ and $f_n \to f$ pointwise where $f$ is an integrable function. If there exists an $M > 0$ such that $|f_n(x)| \le M$ for all $n$ and all $x \in [a,b]$, then:
+                <div class="math-center">
+                    $$ \lim_{n \to \infty} \int_a^b f_n(x)dx = \int_a^b f(x)dx $$
+                </div>
+
+                <strong>Theorem(Monotone Convergence Theorem):</strong><br>
+                Suppose $(f_n)$ is a sequence of integrable functions on $[a,b]$ such that $f_1(x) \le f_2(x) \le \dots$ for all $x \in [a,b]$. Suppose also that $f_n \to f$ pointwise where $f$ is an integrable function on $[a,b]$. Then:
+                <div class="math-center">
+                    $$ \lim_{n \to \infty} \int_a^b f_n(x)dx = \int_a^b f(x)dx $$
+                </div>
+            </div>
+
+            <h2 id="examples" style="margin-top: 30px; margin-bottom: 20px;">Examples and Applications</h2>
+
+            <div class="yellow-box">
+                <strong>Example:</strong><br>
+                Show that $\frac{11}{24} \le \int_0^{1/2} \sqrt{1 - x^2}dx \le \frac{11\sqrt{3}}{36}$.<br>
+                <em>Hint:</em> Use the Generalized IVT framework. Let $f(x) = \frac{1}{\sqrt{1 - x^2}}$ and $g(x) = (1 - x^2)$. 
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Example:</strong><br>
+                Show that $\frac{1}{\pi} \le \int_0^1 \frac{\sin \pi x}{1 + x^2} dx \le \frac{2}{\pi}$.
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Example:</strong><br>
+                The function $f_n : [0, 1] \to \mathbb{R}$ defined by $f_n(x) = \frac{n + \cos x}{ne^x + \sin x}$ converges uniformly on $[0, 1]$ to $f(x) = e^{-x}$. 
+                By Theorem:
+                <div class="math-center">
+                    $$ \lim_{n \to \infty} \int_0^1 \frac{n + \cos x}{ne^x + \sin x} dx = \int_0^1 e^{-x} dx = 1 - \frac{1}{e} $$
+                </div>
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Example:</strong><br>
+                Find $\lim_{n \to \infty} \int_{\pi/2}^\pi \frac{\sin(nx)}{nx} dx$. (This sequence of integrals converges to 0 by applying bounding theorems).
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Added Worked Example: Applying the standard IVT for Integrals</strong><br>
+                Find the average value of the function $f(x) = x^2$ on the interval $[0, 3]$, and find the point $c$ guaranteed by Theorem.<br><br>
+                <strong>Step 1:</strong> Calculate the average value.
+                <div class="math-center">
+                    $$ f_{avg} = \frac{1}{3 - 0} \int_0^3 x^2 dx = \frac{1}{3} \left[ \frac{x^3}{3} \right]_0^3 = \frac{1}{3} \left( \frac{27}{3} \right) = 3 $$
+                </div>
+                <strong>Step 2:</strong> Find $c$ such that $f(c) = 3$.
+                <div class="math-center">
+                    $$ c^2 = 3 \implies c = \sqrt{3} $$
+                </div>
+                Since $\sqrt{3} \approx 1.732$ is in the interval $[0, 3]$, this verifies the theorem.
+            </div>
+
+            <div class="video-section">
+                <p>Watch "Mean Value Theorem For Integrals" for clear, worked examples on finding the average value of a function and locating the specific c value guaranteed by the theorem:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/bLeglo-c5Tw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Intermediate Value Theorem for Integrals and Convergence Theorems.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> For a continuous function $f(x)$ on $[a, b]$, what does the specific value $\frac{1}{b-a}\int_a^b f(x) dx$ represent physically or geometrically?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The total area under the curve.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) The average value of the function over the interval.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The exact geometric midpoint of the interval.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> In the Generalized Intermediate Value Theorem ($\int_a^b f(t)g(t)dt = f(x)\int_a^b g(t)dt$), what strict condition must the function $g(t)$ satisfy?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) It must be strictly increasing on $[a,b]$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) It must be equal to 1.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) It must be non-negative ($g(t) \ge 0$) on $[a,b]$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If a sequence of Riemann Integrable functions $f_n$ converges to $f$ on $[a,b]$, what specific type of convergence absolutely guarantees that $\lim_{n\to\infty} \int_a^b f_n(x)dx = \int_a^b f(x)dx$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Uniform convergence.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Pointwise convergence.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Absolute convergence.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> According to the provided example, why does simple <em>pointwise</em> convergence of $f_n$ to $f$ fail to guarantee that limits and integrals can be interchanged?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) Because the limit function $f$ might not even be Riemann Integrable (like the Dirichlet function).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Because the sequence might generate complex numbers.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Because pointwise integrals always evaluate to infinity.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> What additional condition, besides pointwise convergence to an integrable function $f$, does the Monotone Convergence Theorem require?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $f_1(x) \le f_2(x) \le \dots$ for all $x \in [a,b]$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $|f_n(x)| \le M$ for some constant $M$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $f_n(x)$ must be uniformly continuous.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> In the Bounded (Dominated) Convergence Theorem, the sequence of functions $f_n$ must be pointwise convergent and bounded by what?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) A strictly increasing function.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) A positive constant $M$ such that $|f_n(x)| \le M$ for all $n$ and $x$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The limit function $f(x)$ itself.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> Using the Mean Value Theorem for Integrals, what is the value $c \in (0,2)$ guaranteed for the function $f(x) = 3x^2$ on the interval $[0, 2]$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $c = 1$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $c = \frac{2}{\sqrt{3}}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $c = \sqrt{2}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> In the provided example applying uniform convergence ($\lim_{n \to \infty} \int_0^1 \frac{n + \cos x}{ne^x + \sin x} dx$), what does the sequence of functions $f_n(x)$ uniformly converge to as $n \to \infty$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $f(x) = e^{-x}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $f(x) = \frac{\cos x}{\sin x}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $f(x) = 1$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "riemann-ivt"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "riemann-ivt");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

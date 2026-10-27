@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internal Forces in Beams - Summary</title>
+  <link rel="stylesheet" href="updated.css">
+  <link rel="stylesheet" href="chatbot_style.css">
+  <meta name="bot-context" content="Topic: Engineering Mechanics : ME 1033 Internal Forces in Beams. Focus on the classification of beams, support types, and their degrees of freedom (DOFs). Cover standard sign conventions for bending moments (BM) and shear forces (SF), including hogging and sagging moments, clockwise and counter-clockwise shear forces. Explain the differential relationships between load intensity w(x), shear force S(x), and bending moment M(x), including the slope of SF and BM diagrams. Discuss the principle of superposition for linearly elastic structures, allowing combined loading effects to be evaluated by summing independent sub-cases. Include practical examples, diagrams, and video explanations to illustrate these concepts.">
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <nav>
+    <a href="mechanics_home.html">← Back to Mechanics Hub</a>
+    <a href="#beam-types">Beam Types</a>
+    <a href="#supports">Supports & DOFs</a>
+    <a href="#conventions">Sign Conventions</a>
+    <a href="#calculus-relations">SF & BM Relations</a>
+    <a href="#superposition">Superposition</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Internal Forces in Beams</h1>
+      <p>ME 1033 - Statics & Structural Mechanics Summary</p>
+    </header>
+
+    <!-- 1. Beam Classification & Geometry -->
+    <section id="beam-types">
+      <h2>1. Beam Basics & Support Configurations</h2>
+      <ul>
+        <li><strong>Beam Characteristics:</strong> Long, straight, prismatic members subjected primarily to transverse loads causing bending and shear.</li>
+        <li><strong>Prismatic Beam:</strong> Cross-sectional dimensions remain uniform throughout the length (<code>I = (1/12) &middot; b &middot; h³ = constant</code>).</li>
+        <li><strong>Degrees of Freedom (2-D Plane Member):</strong> Total of 3 DOFs &mdash; Translation along x, Translation along y, Rotation about z.</li>
+      </ul>
+
+      <!-- Common Beam Types Single Diagram Placeholder -->
+      
+
+      <ul>
+        <li><strong>Common Beam Configurations:</strong>
+          <ul>
+            <li><strong>Simply Supported:</strong> Pinned at one end, roller at the other (Statically Determinate).</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/1vGg11S4RFWVgBXoQQHvTOrMM79tetgZY" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+            <li><strong>Cantilever:</strong> Fixed at one end, completely free at the other (Statically Determinate).</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/1FSEzLPkJntiN87L4xWdYHiuATxICMus3" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+            <li><strong>Overhanging:</strong> Extends beyond supports (Statically Determinate).</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/1jM0XEd14vzXbKcfojF9CBdXqbSZXPa3G" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+            <li><strong>Propped Cantilever / Continuous / Fixed:</strong> Additional redundant supports (Statically Indeterminate).</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/1MY73oN1xGatEm3uIc8tMCVD522yWWDcJ" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 2. Support Reactions & DOFs -->
+    <section id="supports">
+      <h2>2. Support Reactions & Restraints</h2>
+      <ul>
+        <li><strong>Roller Support:</strong> Restrains 1 DOF (perpendicular translation); provides 1 vertical reaction (R<sub>y</sub>).</li>
+        <li><strong>Pinned Support:</strong> Restrains 2 DOFs (translations in x and y); provides 2 reaction components (R<sub>x</sub>, R<sub>y</sub>).</li>
+        <li><strong>Fixed Support:</strong> Restrains all 3 DOFs (x, y translations and z rotation); provides R<sub>x</sub>, R<sub>y</sub>, and a reaction moment (M).</li>
+
+      </ul>
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1GoeFNB4zpTThP70zXta97NNRLGvI1GTG" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+      </div>
+    </section>
+
+    <!-- 3. Sign Conventions -->
+    <section id="conventions">
+      <h2>3. Standard Sign Conventions</h2>
+      
+      <!-- Diagram Placeholder for SF and BM Sign Convention -->
+      <div class="img-container">
+        <img src="sign_conventions.png" alt="Bending Moment and Shear Force Sign Conventions" onerror="this.style.display='none'">
+      </div>
+
+      <ul>
+        <li><strong>Bending Moment (BM):</strong>
+          <ul>
+            <li><strong>Hogging (+):</strong> Tension at top fibres, compression at bottom fibres.</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/17czlgzOCmLh2PmKpMGzmuM4X766oxPP3" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+            <li><strong>Sagging (-):</strong> Tension at bottom fibres, compression at top fibres.</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/1usAUsAxtqGtH9pbqYNzBxs69Y5JLNHl7" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+          </ul>
+        </li>
+        <li><strong>Shear Force (SF):</strong>
+          <ul>
+            <li><strong>Clockwise (+):</strong> Tendency to rotate the beam segment clockwise (Left-Up / Right-Down).</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/1nq57WfVUaGOrYmNr5kWPEPy8CaGYllCZ" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+            <li><strong>Counter-Clockwise (-):</strong> Tendency to rotate the beam segment counter-clockwise (Left-Down / Right-Up).</li>
+            <div class="img-container">
+                <img src="https://lh3.googleusercontent.com/d/1OB7-WVACTULT0uvHSzViJdUl8sVMpH9T" alt="Beam Classifications (Simply Supported, Cantilever, Overhanging)" onerror="this.style.display='none'">
+            </div>
+          </ul>
+        </li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/C-FEVzI8oe8" 
+             title="Static video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Differential Relations -->
+    <section id="calculus-relations">
+      <h2>4. Differential Relations (Load, SF & BM)</h2>
+      <p>Mathematical link across load intensity w(x), shear force S(x), and bending moment M(x):</p>
+      
+      <div class="formula-box">
+        dS / dx = -w(x) &nbsp;&rarr;&nbsp; [Slope of SF diagram = -Load intensity]<br>
+        dM / dx = -S(x) &nbsp;&rarr;&nbsp; [Slope of BM diagram = -Shear force]<br>
+        d²M / dx² = w(x)
+      </div>
+
+      <!-- SF and BM Curve Relationship Diagram Placeholder -->
+      <div class="img-container">
+        <img src="sf_bm_relations.png" alt="Differential Relationships between Load, SFD, and BMD" onerror="this.style.display='none'">
+      </div>
+
+      <ul>
+        <li><strong>Key Curve Behaviors:</strong>
+          <ul>
+            <li>Where load <code>w = 0</code> &rarr; SF is horizontal/constant; BM is a straight inclined line.</li>
+            <li>Where UDL <code>w = constant</code> &rarr; SF varies linearly; BM varies as a quadratic parabola.</li>
+            <li>Where load is triangular (linear) &rarr; SF is parabolic; BM varies cubically.</li>
+            <li><strong>Critical Stationary BM:</strong> Maximum/minimum bending moment occurs where <code>dM/dx = 0</code>, meaning precisely where <code>S(x) = 0</code>.</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/lvobdQL6yds" 
+             title="Static video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Principle of Superposition -->
+    <section id="superposition">
+      <h2>5. Principle of Superposition</h2>
+      <p>For linearly elastic structures with small deflections, combined loading effects can be evaluated by summing independent sub-cases:</p>
+      
+      <!-- Superposition Breakdown Diagram Placeholder -->
+      <div class="img-container">
+        <img src="superposition.png" alt="Principle of Superposition Diagram for Beams" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Total SF: S(x) = S<sub>UDL</sub>(x) + S<sub>PointLoad</sub>(x)<br>
+        Total BM: M(x) = M<sub>UDL</sub>(x) + M<sub>PointLoad</sub>(x)
+      </div>
+      <ul>
+        <li>Complex loading is partitioned into standard load patterns.</li>
+        <li>Resulting internal force diagrams are formed by algebraic point-by-point summation.</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/DdZc7kLa4iI" 
+             title="Static video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <div class="quiz-box">
+        <strong>Quick Test: SFD &amp; BMD Relationships</strong>
+        <p>A simply supported beam carries a uniformly distributed load w. If the shear force diagram crosses zero (S = 0) at midspan, what happens to the bending moment at that exact point?</p>
+        <details>
+            <summary>Show Answer &amp; Working</summary>
+            <p>1. Since dM/dx = -S, when S = 0 the slope of the BM diagram is zero (dM/dx = 0).</p>
+            <p>2. Therefore, the <strong>Maximum Bending Moment</strong> occurs at this exact location.</p>
+        </details>
+    </div>
+  </div>
+  <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbot-mech.js"></script>
+
+</body>
+</html>

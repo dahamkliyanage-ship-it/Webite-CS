@@ -1,0 +1,132 @@
+:root { --bg-color: #0b1120; --text-primary: #c9d1d9; --text-secondary: #8b949e; --heading-color: #ffffff; --accent-green: #3fb950; --accent-yellow: #facc15; --accent-red: #f85149; --box-bg: #151e2e; --box-hover: #1e293b; --border-color: #334155; --sidebar-border: #30363d; }
+        body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-primary); font-family: -apple-system, sans-serif; line-height: 1.7; }
+        .container { max-width: 800px; margin: 60px auto; padding: 0 20px; }
+        .back-link { color: var(--accent-yellow); text-decoration: none; font-size: 14px; font-weight: 600; display: inline-block; margin-bottom: 30px; }
+        .topic-label { color: var(--accent-green); font-size: 13px; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; }
+        h1 { color: var(--heading-color); font-size: 36px; margin-top: 0; margin-bottom: 30px; }
+        h3 { color: var(--heading-color); font-size: 20px; margin-top: 30px; margin-bottom: 15px; }
+        p, ul { font-size: 16px; margin-bottom: 20px; } li { margin-bottom: 10px; }
+        .content-image { width: 100%; height: auto; border-radius: 8px; margin: 20px 0; border: 1px solid var(--sidebar-border); background-color: white; }
+                .image-row { display: flex; gap: 20px; margin: 20px 0; } .image-row .content-image { flex: 1; margin: 0; object-fit: contain; }
+
+        .quiz-container { border-top: 1px solid rgba(250, 204, 21, 0.4); padding-top: 30px; margin-top: 60px; margin-bottom: 60px; }
+        .quiz-title { font-size: 20px; font-weight: bold; color: var(--heading-color); }
+        .quiz-desc { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
+        .question-block { margin-bottom: 40px; }
+        .question-text { color: var(--heading-color); font-size: 16px; margin-bottom: 15px; font-weight: 600; }
+        .option-box { background-color: var(--box-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 15px 20px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; }
+        .option-box:hover:not(.answered) { background-color: var(--box-hover); border-color: #64748b; }
+        .option-box.correct { border-color: var(--accent-green); background-color: rgba(63, 185, 80, 0.1); color: var(--accent-green); }
+        .option-box.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); color: var(--accent-red); opacity: 0.7; }
+        .option-box.answered { cursor: default; }
+        .content-image.small {
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.option-box.selected {
+  background-color: #ffd700; /* Yellow highlight when clicked */
+  font-weight: bold;
+}
+#success-message {
+    text-align: center;
+    color: #4CAF50 !important; /* The green text color */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 24px;
+    
+    /* Ensure there is no background, border, or fixed positioning */
+    background: transparent;
+    position: static; 
+    box-shadow: none;
+}
+/* Sets up the main structure for your data table */
+.data-table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse; /* Merges borders cleanly */
+  margin-bottom: 20px;
+}
+
+/* Adds breathing room and a bottom border to every cell inside the data table */
+.data-table th, 
+.data-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #2a3449; /* Subtle line color for the dark theme */
+}
+
+/* Ensures the header row stands out */
+.data-table th {
+  font-weight: bold;
+  color: #ffffff; 
+}
+/* Yellow Line Block */
+.highlight-block {
+    border-left: 4px solid #FDE047;
+    padding: 16px 24px;
+    background-color: #171E2B;
+    border-radius: 0 8px 8px 0;
+    color: #FFFFFF;
+    margin: 24px 0;
+}
+
+.highlight-block h3 {
+    margin-top: 0;
+    color: #FFFFFF;
+}
+
+/* Base structural styles (if you don't already have them in your CSS) */
+body {
+    background-color: #0F1623; 
+    color: #D1D5DB;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1, h3, .quiz-title, .topic-label {
+    color: #FFFFFF;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question-block {
+    background-color: #1A2235;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.option-box {
+    background-color: #243049;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.back-link {
+    color: #60A5FA;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Problem Solving : Searching & Sorting. Focus on the fundamentals of searching and sorting algorithms, comparison-based operations and swapping, sequential search in unordered collections, binary search in sorted collections using divide and conquer, basic sorting algorithms (bubble sort, selection sort, insertion sort, and shell sort), and analyzing algorithmic performance using time complexity and Big-O notation, including logarithmic O(log n), quadratic O(n²), and linearithmic O(n log n) time complexities.">
+<title>CS1033 | Searching &amp; Sorting</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked to your global stylesheet and the updated sub-style CSS -->
+<link rel="stylesheet" href="mainstyle.css">
+<link rel="stylesheet" href="subStyle.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+<div class="titlebar">
+  
+  <div class="filetab">Search & Sort</div>
+</div>
+
+<div class="layout">
+  <!-- Master Table of Contents Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#intro" class="ln-link"><span class="ln">01</span>Core Concepts</a></li>
+      <li><a href="#searching" class="ln-link"><span class="ln">02</span>Search Algorithms</a></li>
+      <li><a href="#sorting-basic" class="ln-link"><span class="ln">03</span>Basic Sorts</a></li>
+      <li><a href="#complexities" class="ln-link"><span class="ln">04</span>Time Complexities</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    
+    <h1 class="title">Searching &amp; <span class="kw">Sorting</span></h1>
+    
+    <!-- SECTION 1: INTRO -->
+    <section id="intro" style="padding-top: 0; margin-top: 0;">
+      <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+        Searching for data and sorting data is at the absolute core of solving massive problems. Every algorithm requires a basic comparison function (like <code>></code>, <code><</code>, or <code>==</code>), but they all possess vastly different performance characteristics in speed and memory usage.
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card type-border">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">THE SEARCH</span>
+          <p>A search algorithm simply provides a Boolean answer to whether a specific data item is present in a collection. If it is an ordered collection, it can also return its exact location.</p>
+        </div>
+        <div class="pillar-card warn-border">
+          <span class="tag" style="background: rgba(224,175,104,.15); color: var(--warn);">THE SORT</span>
+          <p>A sort reorganizes a collection of items into a specific order based on their intrinsic values (like numerical order or alphabetical order).</p>
+        </div>
+        <div class="pillar-card string-border">
+          <span class="tag" style="background: rgba(158,206,106,.15); color: var(--string);">THE SWAP</span>
+          <p>Sorting algorithms rely entirely on two things: comparing items to determine relative order, and rearranging those items to change their appearance in the collection using a <code>swap()</code> operation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SEARCHING -->
+    <section id="searching">
+      <h2><span class="idx">02.</span> Search Algorithms</h2>
+      <p>There are two primary ways to hunt down data, and the choice depends entirely on whether your list is currently sorted or totally chaotic.</p>
+
+      <div class="split-grid" style="margin-top: 24px;">
+        <div class="video-frame" style="margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red);"></span>
+            <span class="dot" style="background:var(--warn);"></span>
+            <span class="dot" style="background:var(--string);"></span>
+            <span>sequential_search.py</span>
+          </div>
+          <div class="code-editor">
+            <div class="line"><span class="ln">1</span><span class="code"><span style="color: var(--text-faint);"># Simple, but highly inefficient for massive lists.</span></span></div>
+            <div class="line"><span class="ln">2</span><span class="code"><span style="color: var(--type);">def</span> <span style="color: var(--keyword);">sequential_search</span>(a_list, item):</span></div>
+            <div class="line"><span class="ln">3</span><span class="code">    pos = <span style="color: var(--warn);">0</span></span></div>
+            <div class="line"><span class="ln">4</span><span class="code">    <span style="color: var(--type);">while</span> pos &lt; <span style="color: var(--keyword);">len</span>(a_list):</span></div>
+            <div class="line"><span class="ln">5</span><span class="code">        <span style="color: var(--type);">if</span> a_list[pos] == item:</span></div>
+            <div class="line hl"><span class="ln">6</span><span class="code">            <span style="color: var(--type);">return</span> pos</span></div>
+            <div class="line"><span class="ln">7</span><span class="code">        pos += <span style="color: var(--warn);">1</span></span></div>
+            <div class="line"><span class="ln">8</span><span class="code">    <span style="color: var(--type);">return</span> -<span style="color: var(--warn);">1</span></span></div>
+          </div>
+        </div>
+        <div>
+          <h3 style="color: #fff; font-family: var(--sans); margin-top: 0;">1. Sequential Search</h3>
+          <p style="color: var(--text-muted); font-size: 14.5px;">This algorithm simply iterates through an unordered list item by item. It is easy to implement, but in the worst-case scenario, it requires <em>n</em> comparisons (checking every single item).</p>
+          
+          <h3 style="color: #fff; font-family: var(--sans); margin-top: 20px;">2. Binary Search</h3>
+          <p style="color: var(--text-muted); font-size: 14.5px;">Highly efficient, but it <strong>requires an ordered collection</strong>. It works by applying a "divide and conquer" strategy: comparing the middle item and deciding to search only the left or right half.</p>
+        </div>
+      </div>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Search Algorithms</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/ZpFqAoO4YPc?si=oeW6p6vu5G5PVwiq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: BASIC SORTS -->
+    <section id="sorting-basic">
+      <h2><span class="idx">03.</span> Basic Sorting Algorithms</h2>
+      <p>These algorithms are relatively simple to write but suffer in performance when dealing with massive collections.</p>
+
+      <div class="method-grid">
+        <div class="m-card">
+          <h3>Bubble Sort</h3>
+          <p>Makes multiple passes through a list, comparing adjacent items and swapping them if they are out of order. It places the largest item at its correct position on every pass.</p>
+        </div>
+        <div class="m-card">
+          <h3>Selection Sort</h3>
+          <p>An improvement over Bubble Sort. It keeps track of the highest value during a pass, but only performs exactly <em>one</em> swap at the very end of that pass.</p>
+        </div>
+        <div class="m-card">
+          <h3>Insertion Sort</h3>
+          <p>Maintains a sorted sublist at the bottom of the list. It takes each new item and performs faster "shift" operations (rather than full swaps) to insert it into the correct spot.</p>
+        </div>
+        <div class="m-card">
+          <h3>Shell Sort</h3>
+          <p>Improves Insertion Sort by breaking the main list into smaller sublists separated by a "gap" increment, sorting those, and finishing with a final standard insertion sort.</p>
+        </div>
+      </div>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Search Algorithms</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/GMV7ycKZ-mM?si=qYHRtIqqGMScpKFN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SECTION 5: TIME COMPLEXITY -->
+    <section id="complexities">
+      <h2><span class="idx">04.</span> Time Complexities</h2>
+      <p>How fast are they really? Here is the mathematical blueprint comparing their Average Case execution speeds.</p>
+
+      <div style="margin-top: 24px; padding-left: 10px;">
+        <div style="margin-bottom: 16px; display: flex; align-items: center;">
+          <span style="color: var(--keyword); font-family: var(--mono); font-weight: bold; width: 180px; display: inline-block; white-space: nowrap;">Binary Search</span> 
+          <div class="math-box final">Logarithmic Time <span class="math-hl">O(log n)</span></div>
+        </div>
+        <div style="margin-bottom: 16px; display: flex; align-items: center;">
+          <span style="color: var(--warn); font-family: var(--mono); font-weight: bold; width: 180px; display: inline-block; white-space: nowrap;">Bubble/Selection</span> 
+          <div class="math-box">Quadratic Time <span class="math-hl">O(n²)</span></div>
+        </div>
+        <div style="margin-bottom: 16px; display: flex; align-items: center;">
+          <span style="color: var(--string); font-family: var(--mono); font-weight: bold; width: 180px; display: inline-block; white-space: nowrap;">Merge/Quick Sort</span> 
+          <div class="math-box final">Linearithmic Time <span class="math-hl">O(n log n)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      
+      <a class="next-btn" href="probSolve.html">
+        Back to the start!
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script>
+
+
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

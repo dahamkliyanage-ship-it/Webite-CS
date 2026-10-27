@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Relative Equilibrium</title>
+    <link rel="stylesheet" href="fluid-style.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Relative equilibrium of fluids, linear acceleration, vertical acceleration, forced vortex motion, and rotating cylinders.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="fluid-container">
+        
+        <header class="fluid-header">
+            <div class="header-inner">
+                <span class="fluid-tag">CE1023 - Fluid Mechanics</span>
+                <h1>5.0 Relative Equilibrium of Fluids</h1>
+                <p>Analyzing the behavior of fluids in vessels subjected to constant linear acceleration or constant angular rotation, where fluid particles are at rest relative to the container.</p>
+            </div>
+        </header>
+
+        <section class="fluid-section">
+            <h2>5.1 Introduction to Relative Equilibrium</h2>
+            <ul class="fluid-list">
+                <li>A fluid contained in a vessel is <em>not affected</em> if the vessel moves at a <strong>constant velocity</strong> (acceleration = 0). The fluid free surface remains perfectly horizontal.</li>
+                <li>However, if the vessel moves at a <strong>constant acceleration</strong>, that acceleration is transmitted to the fluid. The fluid particles will move to new positions and then remain in those new positions in equilibrium <em>relative to the moving vessel</em>. Such an equilibrium state is known as the <strong>Relative Equilibrium</strong> of a fluid.</li>
+                <li>Similarly, if a vessel containing a fluid is rotated at a constant angular velocity, the fluid will reach a relative equilibrium position and rotate with the vessel as a rigid body. The fluid is said to be in <strong>Forced Vortex Motion</strong> under such conditions.</li>
+            </ul>
+
+            <div class="highlight-fluid">
+                <p><strong>Key Principle:</strong> As there is no <em>relative movement</em> between the fluid particles themselves once relative equilibrium is reached, <strong>no shear forces are present</strong> in the fluid. All existing forces are normal to the surfaces on which they act.</p>
+                <p>Hence, the fundamental principles of <em>'Fluid Statics'</em> can be used to study fluids in 'Relative Equilibrium'.</p>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>5.2 Relative Equilibrium under Linear Acceleration</h2>
+            <p>Consider a fluid in relative equilibrium under linear accelerations $a_x, a_y,$ and $a_z$ in the $x, y,$ and $z$ directions respectively. Let $P$ be the pressure at a point $A(x, y, z)$.</p>
+            
+            <p>Since $P = f(x, y, z)$, the total differential of pressure is:</p>
+            <div class="formula-box">
+                <p>$$dp = \frac{\partial P}{\partial x} dx + \frac{\partial P}{\partial y} dy + \frac{\partial P}{\partial z} dz \quad \text{--- (1)}$$</p>
+            </div>
+
+            <p>By applying Newton's 2nd Law ($F = m \cdot a$) to a small fluid control volume of dimensions $\Delta x, \Delta y, \Delta z$ around point A, and considering the pressure gradients:</p>
+            <ul class="fluid-list">
+                <li><strong>x-direction:</strong> $\left( P - \frac{\partial P}{\partial x}\frac{\Delta x}{2} \right)\Delta y \Delta z - \left( P + \frac{\partial P}{\partial x}\frac{\Delta x}{2} \right)\Delta y \Delta z = (\rho \Delta x \Delta y \Delta z) a_x \implies \frac{\partial P}{\partial x} = -\rho a_x$</li>
+                <li><strong>y-direction:</strong> Similarly, $\frac{\partial P}{\partial y} = -\rho a_y$</li>
+                <li><strong>z-direction:</strong> Including gravity acting downwards: $\frac{\partial P}{\partial z} = -\rho (a_z + g)$</li>
+            </ul>
+
+            <p>Substituting these partial derivatives back into equation (1):</p>
+            <div class="formula-box">
+                <p>$$dp = -\rho a_x dx - \rho a_y dy - \rho (a_z + g) dz$$</p>
+            </div>
+            
+            <p>Integrating for an incompressible fluid ($\rho = \text{constant}$):</p>
+            <div class="formula-box">
+                <p>$$P = -\rho a_x x - \rho a_y y - \rho (a_z + g) z + C'$$</p>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>5.3 Shape of the Free Surface & Isobars</h2>
+            <p>A surface of constant pressure is known as an isobar. Along the free surface, the pressure is constant and equal to atmospheric pressure ($P = P_{atm} = \text{const} = 0$ in gauge).</p>
+            
+            <p>Setting $P = 0$ in the integrated equation gives:</p>
+            <p>$$0 = -\rho a_x x - \rho a_y y - \rho (a_z + g) z + C'$$</p>
+            <p>This is in the mathematical form of $Ax + By + Cz + D = 0$, which is the <strong>Equation of a Plane Surface</strong>.</p>
+            <div class="highlight-fluid">
+                <p>Hence, the free surface of a fluid undergoing constant linear acceleration remains a flat, plane surface in 3D space, although it may be tilted.</p>
+            </div>
+
+            <h3>Inclination with the Horizontal Plane</h3>
+            <p>If $\theta_x$ and $\theta_y$ are the angles of inclination of the free surface with respect to the horizontal $x$ and $y$ axes respectively, then $\tan \theta_x = \frac{dz}{dx}$ and $\tan \theta_y = \frac{dz}{dy}$.</p>
+            <p>Differentiating the free surface equation with respect to $x$ (treating $y$ as constant):</p>
+            <p>$$-\rho a_x (1) - 0 - \rho (a_z + g) \frac{dz}{dx} = 0$$</p>
+            <div class="formula-box">
+                <p>$$\frac{dz}{dx} = \tan \theta_x = -\frac{a_x}{a_z + g}$$</p>
+                <p>Similarly: $$\frac{dz}{dy} = \tan \theta_y = -\frac{a_y}{a_z + g}$$</p>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>5.4 Relative Equilibrium under Horizontal Acceleration</h2>
+            <p>Consider a fluid accelerating strictly horizontally in the x-direction ($a_x \neq 0$, and $a_y = a_z = 0$).</p>
+            
+            <p>The equation of the free surface simplifies to: $-\rho a_x x - \rho g z = C'$.</p>
+            <p>The inclination of the free surface is:</p>
+            <div class="formula-box">
+                <p>$$\tan \theta_x = -\frac{a_x}{g}$$</p>
+            </div>
+            <p><em>Note: The negative sign indicates that for a positive acceleration ($a_x > 0$), the surface slopes downward in the direction of acceleration. (Fluid piles up at the back of the tank).</em></p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Horizontal Acceleration vs Equilibrium</h4>
+                <svg viewBox="0 0 600 250" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                        <marker id="arrow-blue-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Tank 1: Rest/Equilibrium -->
+                    <rect x="50" y="80" width="150" height="120" fill="none" stroke="#f1f5f9" stroke-width="3" />
+                    <!-- Water level straight -->
+                    <line x1="50" y1="130" x2="200" y2="130" stroke="#3b82f6" stroke-width="2" />
+                    <rect x="52" y="132" width="146" height="66" fill="rgba(59, 130, 246, 0.2)" />
+                    <!-- Isobars -->
+                    <line x1="50" y1="160" x2="200" y2="160" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" />
+                    <line x1="50" y1="180" x2="200" y2="180" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" />
+                    <text x="125" y="220" fill="#f1f5f9" text-anchor="middle" font-size="14">Static Equilibrium</text>
+                    <text x="125" y="120" fill="#3b82f6" text-anchor="middle" font-size="12">Free Surface</text>
+
+                    <!-- Tank 2: Accelerating -->
+                    <rect x="350" y="80" width="150" height="120" fill="none" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="450" y1="60" x2="520" y2="60" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <text x="500" y="50" fill="#f1f5f9" font-weight="bold" font-size="16">a_x</text>
+                    
+                    <!-- Slanted Water Level -->
+                    <polygon points="350,100 500,160 500,198 350,198" fill="rgba(59, 130, 246, 0.2)" />
+                    <line x1="350" y1="100" x2="500" y2="160" stroke="#3b82f6" stroke-width="2" />
+                    <!-- Original level reference -->
+                    <line x1="350" y1="130" x2="500" y2="130" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,4" />
+                    <!-- Slanted Isobars -->
+                    <line x1="350" y1="140" x2="495" y2="198" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" />
+                    <line x1="350" y1="170" x2="420" y2="198" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" />
+                    
+                    <!-- Angle Theta_x -->
+                    <line x1="450" y1="140" x2="530" y2="140" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <!-- Arc for angle -->
+                    <path d="M 480 140 A 30 30 0 0 1 475 150" fill="none" stroke="#f1f5f9" stroke-width="1.5" />
+                    <text x="490" y="135" fill="#f1f5f9" font-size="14">θ_x</text>
+
+                    <text x="425" y="220" fill="#f1f5f9" text-anchor="middle" font-size="14">Relative Equilibrium</text>
+                    
+                    <!-- Connecting label for Isobars -->
+                    <text x="275" y="100" fill="#3b82f6" text-anchor="middle" font-size="12">Isobars</text>
+                    <path d="M 275 105 L 275 160 L 210 160" fill="none" stroke="#3b82f6" stroke-width="1" marker-end="url(#arrow-blue-end)" />
+                    <path d="M 275 105 L 275 160 L 340 160" fill="none" stroke="#3b82f6" stroke-width="1" marker-end="url(#arrow-blue-end)" />
+                </svg>
+            </div>
+
+            <h3>Vertical Pressure Distribution</h3>
+            <p>To find the pressure difference between two vertical points 1 and 2 separated by height $h$ ($x_1 = x_2$, $z_1 - z_2 = h$):</p>
+            <p>$P_1 = -\rho a_x x_1 - \rho g z_1 + C'$</p>
+            <p>$P_2 = -\rho a_x x_2 - \rho g z_2 + C'$</p>
+            <p>$P_2 - P_1 = -\rho a_x (x_2 - x_1) - \rho g (z_2 - z_1) = 0 - \rho g (-h)$</p>
+            <div class="formula-box">
+                <p>$$P_2 = P_1 + \rho g h$$</p>
+            </div>
+            <p><strong>Crucial Concept:</strong> The vertical pressure distribution in a horizontally accelerating tank is purely hydrostatic. Pressure at any depth is simply $P = \rho g h$, where $h$ is measured vertically from the <em>tilted</em> free surface.</p>
+
+        </section>
+
+        <section class="fluid-section">
+            <h2>5.5 Relative Equilibrium under Vertical Acceleration</h2>
+            <p>Consider a fluid experiencing purely vertical acceleration ($a_z \neq 0$, $a_x = a_y = 0$). This occurs in an elevator.</p>
+            
+            <p>The equation of the free surface: $0 + 0 - \rho (a_z + g) z = C' \implies z = \text{constant}$.</p>
+            <div class="highlight-fluid">
+                <p>Since $z$ is constant, the free surface remains perfectly horizontal. There is no inclination with the horizontal plane.</p>
+            </div>
+
+            <h3>Vertical Pressure Distribution</h3>
+            <p>Applying the pressure equation between two vertical points separated by depth $h$:</p>
+            <p>$P_2 - P_1 = -\rho(a_z + g)(z_2 - z_1) = -\rho(a_z + g)(-h)$</p>
+            <div class="formula-box">
+                <p>$$P_2 = P_1 + \rho (g + a_z) h$$</p>
+                <p>$$P = \rho h (g \pm a_z)$$</p>
+            </div>
+            <p><strong>Note on Signs:</strong> Use $+a_z$ for upward acceleration (or downward deceleration). Use $-a_z$ for downward acceleration (or upward deceleration). If the fluid is in freefall ($a_z = -g$), the pressure $P = 0$ everywhere.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>5.6 Forced Vortex Motion (Rotation about a vertical axis)</h2>
+            <p>If a cylindrical vessel containing fluid is rotated at a constant angular velocity $\omega$ (rad/s) about its central vertical axis, the fluid eventually moves as a solid body. This is a forced vortex.</p>
+            
+            <p>In cylindrical coordinates $(r, \theta, z)$, the acceleration towards the center is the centripetal acceleration: $a_r = -r \omega^2$.</p>
+            <p>Applying Newton's second law radially: $\frac{\partial P}{\partial r} = \rho r \omega^2$. Vertically, we still have $\frac{\partial P}{\partial z} = -\rho g$.</p>
+            
+            <p>Integrating these gives the pressure equation for a rotating fluid:</p>
+            <div class="formula-box">
+                <p>$$P = \frac{\rho \omega^2 r^2}{2} - \rho g z + C$$</p>
+            </div>
+
+            <h3>Equation of the Free Surface</h3>
+            <p>At the free surface, $P = 0$. Let the origin $(0,0)$ be the lowest point of the free surface depression (the vertex of the paraboloid).</p>
+            <p>At $r = 0, z = 0$, we find $C = 0$. Thus, the equation of the free surface is:</p>
+            <div class="formula-box">
+                <p>$$z = \frac{\omega^2 r^2}{2g}$$</p>
+            </div>
+            <p>This is the equation of a <strong>Paraboloid</strong>. The free surface forms a parabolic curve. The height $z$ of the fluid at any radius $r$ from the center increases with the square of the angular velocity.</p>
+        </section>
+
+        <!-- Video embedded exactly before the quiz -->
+        <section class="fluid-section video-section">
+            <h2 style="text-align: center; border-bottom: none;">Video Lecture: Relative Equilibrium of Fluids</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/0NRgqj5YfK8" title="Fluid Mechanics Relative Equilibrium" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>Chapter Knowledge Check</h2>
+            <p class="quiz-intro">Test your understanding of Relative Equilibrium concepts.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. When a fluid in a tank is subjected to a constant horizontal acceleration, what happens to its free surface?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) It forms a parabolic curve.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>B) It remains a flat plane but tilts downward in the direction of the acceleration.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>C) It remains perfectly horizontal regardless of acceleration.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) It becomes chaotic and unpredictable.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What characterizes a fluid in "Relative Equilibrium"?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) The fluid particles are moving randomly inside the container.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>B) The fluid is actively spilling over the edges.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>C) There is no relative movement between fluid particles, meaning shear stresses are zero.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) The acceleration of the container is zero.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. A tank of water accelerates horizontally at $a_x = 4.905 \text{ m/s}^2$. What is the angle ($\theta_x$) of the free surface with the horizontal? (Assume $g = 9.81 \text{ m/s}^2$)</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) $45^\circ$</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>B) $30^\circ$</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>C) $\tan^{-1}(0.5) \approx 26.5^\circ$</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) $15^\circ$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. An open elevator containing a bucket of water accelerates UPWARD at a constant rate $a_z$. How does the pressure at the bottom of the bucket compare to when the elevator is stationary?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>A) The pressure is higher than when stationary.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) The pressure is exactly the same as when stationary.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) The pressure is lower than when stationary.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) The pressure becomes zero.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. A liquid tank falls completely freely under gravity ($a_z = -g$). What is the pressure at a depth $h$ below the surface?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) $\rho g h$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>B) $2 \rho g h$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>C) $0$ (Zero gauge pressure everywhere)</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) $-\rho g h$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. In a tank accelerating purely horizontally, how is the vertical pressure distribution calculated?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>A) It remains purely hydrostatic ($P = \rho g h$), where $h$ is measured vertically down from the new slanted free surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>B) It includes a horizontal component: $P = \rho a_x h$.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) The pressure is uniform everywhere in the tank.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) It relies on centrifugal force.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q7">
+                <p class="question-text"><strong>7. When a cylindrical container of fluid rotates at a constant angular velocity ($\omega$), what mathematical shape does the free surface form?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>A) A tilted flat plane.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="correct"> <span>B) A Paraboloid.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>C) A Hemisphere.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>D) An Ellipsoid.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q8">
+                <p class="question-text"><strong>8. What equation dictates the vertical height $z$ of the free surface in a Forced Vortex (rotating cylinder) at a radial distance $r$ from the central axis?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>A) $z = \frac{\omega r}{g}$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="correct"> <span>B) $z = \frac{\omega^2 r^2}{2g}$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>C) $z = \rho \omega^2 r$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>D) $z = \frac{\omega^2 r}{g}$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q9">
+                <p class="question-text"><strong>9. If a vessel moves horizontally at a constant velocity (e.g. steady $60 \text{ km/h}$), what happens to the fluid surface?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>A) It tilts backward.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>B) It forms a wave.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="correct"> <span>C) It remains perfectly flat and horizontal because acceleration is zero.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>D) It sloshes continuously.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q10">
+                <p class="question-text"><strong>10. In a fluid undergoing Forced Vortex motion (rigid body rotation), how does the pressure change radially outward from the center?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>A) It decreases due to centrifugal force.</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="correct"> <span>B) It increases radially outward due to the centripetal acceleration ($\frac{\partial P}{\partial r} = \rho r \omega^2$).</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>C) It remains constant along horizontal planes.</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>D) It alternates in a wave pattern.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid #14b8a6";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid #ef4444";
+                        }
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') correctCount++;
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

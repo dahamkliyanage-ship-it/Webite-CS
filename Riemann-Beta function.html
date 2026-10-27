@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Beta Function</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Beta Function. Focus on the definition, properties, and applications of the Beta function, including its relationship to the Gamma function, integral representations, and special values. Include worked examples, step-by-step explanations, and exercises for practice. Provide a video tutorial for visual learning.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>The Beta Function</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#definition" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Definition</a></li>
+                <li><a href="#symmetry">Symmetrical Property</a></li>
+                <li><a href="#transformations-1">Transformations (I - III)</a></li>
+                <li><a href="#transformations-2">Transformations (IV - VII)</a></li>
+                <li><a href="#examples">Worked Examples</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="definition" style="margin-bottom: 20px;">Definition:</h2>
+
+            <div class="blue-box">
+                <strong>Definition(Beta function):</strong><br><br>
+                The definite integral $\int_0^1 x^{m-1}(1 - x)^{n-1}dx$, for $m > 0, n > 0$ is known as the Beta function and is denoted by $B(m, n)$ [read as "Beta m, n"]. The Beta function is also called the <em>Eulerian integral of the first kind</em>.
+                <br><br>
+                Thus,
+                <div class="math-center">
+                    $$ B(m, n) = \int_0^1 x^{m-1}(1 - x)^{n-1}dx, \quad m > 0, n > 0. $$
+                </div>
+            </div>
+
+            <h2 id="symmetry" style="margin-top: 30px; margin-bottom: 20px;">Symmetrical Property</h2>
+
+            <div class="green-box">
+                <strong>Symmetrical property of Beta function, i.e., $B(m, n) = B(n, m)$</strong><br><br>
+                <strong>Proof:</strong> By the definition of the Beta function, we have
+                <div class="math-center">
+                    $$ B(m, n) = \int_0^1 x^{m-1}(1 - x)^{n-1}dx $$
+                </div>
+                Using the definite integral property $\int_0^a f(x)dx = \int_0^a f(a - x)dx$, substitute $x$ with $(1 - x)$:
+                <div class="math-center">
+                    $$ = \int_0^1 (1 - x)^{m-1}(1 - (1 - x))^{n-1}dx $$
+                    $$ = \int_0^1 (1 - x)^{m-1}x^{n-1}dx $$
+                    $$ = \int_0^1 x^{n-1}(1 - x)^{m-1}dx = B(n, m) $$
+                </div>
+                Now by definition of the Beta function, $B(n, m) = B(m, n)$.
+            </div>
+
+            <h2 id="transformations-1" style="margin-top: 30px; margin-bottom: 20px;">Transformation of Beta Function (Forms I - III)</h2>
+
+            <div class="yellow-box">
+                <ul>
+                    <li><strong>Form I: Show that</strong>
+                    <div class="math-center">
+                        $$ B(m, n) = \int_0^\infty \frac{x^{n-1}dx}{(1 + x)^{n+m}} = \int_0^\infty \frac{x^{m-1}dx}{(1 + x)^{n+m}}, \quad m, n > 0 $$
+                    </div>
+                    <strong>Proof:</strong> Let $x = \frac{1}{(1 + t)}$, so that $dx = -\frac{dt}{(1 + t)^2}$. As $x \to 0, t \to \infty$ and as $x \to 1, t \to 0$.<br>
+                    Substitute these into the Beta function definition:
+                    <div class="math-center">
+                        $$ B(m, n) = -\int_\infty^0 \left(\frac{1}{1 + t}\right)^{m-1} \left(1 - \frac{1}{1 + t}\right)^{n-1} \frac{dt}{(1 + t)^2} $$
+                        $$ = \int_0^\infty \frac{1}{(1 + t)^{m-1}} \left(\frac{t}{1 + t}\right)^{n-1} \frac{dt}{(1 + t)^2} = \int_0^\infty \frac{t^{n-1}}{(1 + t)^{n+m}} dt $$
+                    </div>
+                    Replacing $t$ with $x$ gives the first result. Since $m, n$ are interchangeable ($B(m,n) = B(n,m)$), it implies the second form as well.
+                    </li>
+
+                    <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                    <li><strong>Form II: Show that</strong>
+                    <div class="math-center">
+                        $$ B(m, n) = \int_0^1 \frac{x^{m-1} + x^{n-1}}{(1 + x)^{n+m}}dx $$
+                    </div>
+                    <strong>Proof 0.7.11:</strong> From Form I, split the integral at $1$:
+                    <div class="math-center">
+                        $$ B(m, n) = \int_0^\infty \frac{x^{m-1}}{(1 + x)^{n+m}}dx = \int_0^1 \frac{x^{m-1}}{(1 + x)^{n+m}}dx + \int_1^\infty \frac{x^{m-1}}{(1 + x)^{n+m}}dx $$
+                    </div>
+                    In the second integral, substitute $x = 1/t$, so $dx = -1/t^2 dt$.
+                    <div class="math-center">
+                        $$ \int_1^\infty \frac{x^{m-1}}{(1 + x)^{n+m}}dx = \int_1^0 \frac{(1/t)^{m-1}}{(1 + 1/t)^{n+m}} \left(-\frac{1}{t^2}\right)dt = \int_0^1 \frac{t^{n-1}}{(1 + t)^{n+m}}dt $$
+                    </div>
+                    Adding the two integrals back together yields the result.
+                    </li>
+
+                    <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                    <li><strong>Form III: Show that</strong>
+                    <div class="math-center">
+                        $$ \int_0^\infty \frac{x^{m-1}}{(ax + b)^{n+m}}dx = \frac{B(m, n)}{a^m b^n} $$
+                    </div>
+                    <strong>Proof:</strong> From Form I, put $x = (at)/b$ so that $dx = (a dt)/b$. Substitute this to retrieve the generalized constants.
+                    </li>
+                </ul>
+            </div>
+
+            <h2 id="transformations-2" style="margin-top: 30px; margin-bottom: 20px;">Transformations (Forms IV - VII)</h2>
+
+            <div class="blue-box">
+                <ul>
+                    <li><strong>Form IV: Show that</strong>
+                    <div class="math-center">
+                        $$ \int_0^{\pi/2} \frac{\sin^{2m-1}\theta \cos^{2n-1}\theta}{(a \sin^2\theta + b \cos^2\theta)^{m+n}} d\theta = \frac{B(m, n)}{2a^m b^n} $$
+                    </div>
+                    <strong>Proof:</strong> Put $x = \tan^2\theta$ so that $dx = 2\tan\theta\sec^2\theta d\theta$ into Form III.
+                    </li>
+
+                    <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                    <li><strong>Form V: Show that</strong>
+                    <div class="math-center">
+                        $$ \int_0^1 \frac{x^{m-1}(1 - x)^{n-1}}{(x + a)^{m+n}}dx = \frac{B(m, n)}{a^n(1 + a)^m} $$
+                    </div>
+                    <strong>Proof:</strong> Start from Form I and use the substitution $\frac{x}{1 + a} = \frac{t}{t + a}$.
+                    </li>
+
+                    <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                    <li><strong>Form VI:</strong>
+                    <div class="math-center">
+                        $$ \int_b^a (x - b)^{m-1}(a - x)^{n-1}dx = (a - b)^{m+n-1} B(m, n) $$
+                    </div>
+                    </li>
+
+                    <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                    <li><strong>Form VII: Additional rational bounds</strong>
+                    <div class="math-center">
+                        $$ \int_0^1 \frac{x^{m-1}(1 - x)^{n-1}}{(a + (b - a)x)^{m+n}} = \frac{B(m, n)}{a^n b^m} $$
+                        <br>
+                        $$ \int_0^1 \frac{x^{m-1}(1 - x)^{n-1}}{(b + cx)^{m+n}} = \frac{B(m, n)}{(b + c)^m b^n} $$
+                    </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example: Evaluating using Form VI</strong><br><br>
+                Evaluate the integral $\int_2^5 (x - 2)^2 (5 - x)^4 dx$.<br><br>
+                <strong>Solution:</strong> We use Form VI: $\int_b^a (x - b)^{m-1}(a - x)^{n-1}dx = (a - b)^{m+n-1} B(m, n)$.<br>
+                Here, $a = 5$ and $b = 2$.
+                <ul>
+                    <li>$m - 1 = 2 \implies m = 3$</li>
+                    <li>$n - 1 = 4 \implies n = 5$</li>
+                </ul>
+                Substituting these values into the formula gives:
+                <div class="math-center">
+                    $$ (5 - 2)^{3+5-1} B(3, 5) = 3^7 B(3, 5) $$
+                </div>
+                Now, calculate $B(3, 5)$:
+                <div class="math-center">
+                    $$ B(3, 5) = \frac{2! \cdot 4!}{7!} = \frac{2 \cdot 24}{5040} = \frac{48}{5040} = \frac{1}{105} $$
+                </div>
+                Finally, multiply by $3^7 = 2187$:
+                <div class="math-center">
+                    $$ \text{Result} = 2187 \cdot \frac{1}{105} = \frac{2187}{105} = \frac{729}{35} $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video to explore the connection between the Beta Function and the Gamma Function, alongside evaluating practical integral examples:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/mzUpxvXcOMs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your understanding of the Beta function, its symmetrical property, and various transformations.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What is another mathematical name commonly used for the Beta function $B(m, n)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Eulerian integral of the second kind</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Eulerian integral of the first kind</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The Gamma integral</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> The symmetrical property of the Beta function states that $B(m, n) = B(n, m)$. Which substitution is used in the standard definition $\int_0^1 x^{m-1}(1-x)^{n-1}dx$ to prove this?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $x = 1/t$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $x = t^2$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $x = 1 - t$ (or substituting $x$ with $1-x$)</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Based on Transformation Form I, which integral over the interval $[0, \infty)$ is equivalent to $B(m, n)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\int_0^\infty \frac{x^{m-1}}{(1 + x)^{n+m}} dx$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\int_0^\infty \frac{x^{m+n}}{(1 + x)^{m-1}} dx$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\int_0^\infty x^{m-1}(1 + x)^{n-1} dx$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> To derive Transformation Form II from Form I, the infinite integral $\int_0^\infty \frac{x^{m-1}}{(1 + x)^{n+m}}dx$ is split into two separate integrals at what specific value of $x$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $x = m$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $x = 1$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $x = \pi/2$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> What mathematical substitution is required to transform Form III into the trigonometric Form IV involving sine and cosine functions?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $x = \tan^2\theta$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $x = \sin\theta$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $x = \cos^2\theta$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> According to Transformation Form VI, the definite integral $\int_b^a (x - b)^{m-1}(a - x)^{n-1}dx$ mathematically evaluates to:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $(a - b)^{m+n} B(m, n)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $(a + b)^{m+n-1} B(m, n)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $(a - b)^{m+n-1} B(m, n)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> In the provided worked example evaluating $\int_2^5 (x - 2)^2 (5 - x)^4 dx$ using Form VI, what are the correctly identified values of $m$ and $n$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $m = 2, n = 4$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $m = 3, n = 5$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $m = 1, n = 3$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> Using Transformation Form III, what is the exact evaluated result of the integral $\int_0^\infty \frac{x^{m-1}}{(ax + b)^{n+m}}dx$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\frac{B(m, n)}{a^m b^n}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{B(m, n)}{(ab)^{m+n}}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{B(m, n)}{a^n b^m}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "riemann-beta"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "riemann-beta");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+/* style_2.css */
+
+:root {
+    --bg-dark: #0b1120;
+    --card-bg: #0f172a;
+    --accent-yellow: #eab308;
+    --accent-blue: #38bdf8;
+    --border-color: #1e293b;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --success: #22c55e;
+    --error: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.7;
+    padding: 50px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Header Styling */
+.page-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 25px;
+}
+
+.module-tag {
+    display: inline-block;
+    color: var(--accent-blue);
+    background-color: rgba(56, 189, 248, 0.1);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    color: #f8fafc;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* Main Content Blocks */
+.content-block {
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--accent-yellow);
+    padding: 35px;
+    margin-bottom: 35px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.content-block h2 {
+    font-size: 1.45rem;
+    color: #f8fafc;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+.content-block p {
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+}
+
+.content-block ul {
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+.content-block li {
+    margin-bottom: 8px;
+}
+
+/* SVG Diagram Boxes */
+.diagram-box {
+    background-color: #1e293b;
+    padding: 25px;
+    border-radius: 8px;
+    margin: 30px 0;
+    border: 1px solid #334155;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.diagram-box h4 {
+    text-align: center;
+    color: #f8fafc;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Video Wrapper */
+.video-section {
+    background-color: transparent;
+    padding: 0;
+    margin: 50px 0 0 0;
+    border: none;
+    box-shadow: none;
+}
+
+.video-section h2 {
+    text-align: center;
+    color: #f8fafc;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    background-color: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Math & Highlight Boxes */
+.math-callout {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 6px;
+    margin: 20px 0;
+    border-left: 4px solid var(--accent-blue);
+    text-align: center;
+    overflow-x: auto;
+}
+
+.math-callout p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.math-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight-box {
+    background-color: rgba(234, 179, 8, 0.1);
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 25px;
+}
+
+.highlight-box strong {
+    color: var(--accent-yellow);
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.15rem;
+}
+
+/* Custom Table for Examples */
+.example-box {
+    background: linear-gradient(to bottom right, #1e293b, #0f172a);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin: 25px 0;
+    overflow-x: auto; /* Ensures long equations/tables can be scrolled horizontally on small screens */
+}
+
+.example-header {
+    color: var(--accent-blue);
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Table Responsive Wrapper (Fix for Chapter 6 Shock Table) */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    background-color: #0f172a;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #0f172a;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Remove bottom margin and border if wrapped in .table-responsive */
+.table-responsive .styled-table {
+    margin-bottom: 0;
+    border: none;
+}
+
+/* Add margin bottom for standalone tables not wrapped in .table-responsive */
+.content-block > .styled-table {
+    margin-bottom: 20px;
+    border: 1px solid #334155;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #334155;
+    white-space: nowrap; /* Prevents awkward cell wrapping */
+}
+
+.styled-table th {
+    background-color: #2563eb;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Quiz Section */
+.quiz-section {
+    background-color: var(--card-bg);
+    border-top: 4px solid var(--accent-blue);
+    padding: 40px;
+    margin-top: 50px;
+    border-radius: 8px;
+}
+
+.quiz-section h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #f8fafc;
+    margin-bottom: 10px;
+}
+
+.quiz-intro {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 35px;
+}
+
+.mcq-card {
+    background-color: #1e293b;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 5px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.question-text {
+    font-size: 1.1rem;
+    color: #f1f5f9;
+    margin-bottom: 20px;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.option-label {
+    background-color: var(--card-bg);
+    padding: 14px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.option-label:hover {
+    background-color: #1e293b;
+    border-color: #3b82f6;
+}
+
+.option-label input[type="radio"] {
+    margin-right: 15px;
+    transform: scale(1.3);
+    accent-color: var(--accent-blue);
+    flex-shrink: 0;
+}
+
+.option-label span {
+    display: inline-block;
+    width: 100%;
+}
+
+.submit-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.feedback-msg {
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 24px;
+}
+
+.feedback-msg.success { color: var(--success); }
+.feedback-msg.error { color: var(--error); }
+.feedback-msg.warning { color: var(--accent-yellow); }
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .page-header h1 { font-size: 1.8rem; }
+    .content-block { padding: 25px; }
+    .diagram-box { padding: 15px; }
+}

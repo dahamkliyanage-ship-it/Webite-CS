@@ -1,0 +1,886 @@
+/* ============================================================
+   subStyle_4.css — CS1033 Component Stylesheet
+   ============================================================ */
+
+/* ---------- Cornerstone 2x2 Grid ---------- */
+.cornerstone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 30px 0 40px;
+}
+
+.c-card {
+  padding: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.c-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--string);
+}
+
+.c-card .icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.c-card .icon-wrap.type { background: rgba(187,154,247,.15); color: var(--type); }
+.c-card .icon-wrap.keyword { background: rgba(122,162,247,.15); color: var(--keyword); }
+.c-card .icon-wrap.warn { background: rgba(224,175,104,.15); color: var(--warn); }
+.c-card .icon-wrap.string { background: rgba(158,206,106,.15); color: var(--string); }
+
+.c-card .icon-wrap svg { width: 24px; height: 24px; }
+
+.c-card h3 {
+  font-family: var(--sans);
+  font-size: 18px;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.c-card p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---------- Feature Images ---------- */
+.feature-image {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+  margin-bottom: 20px;
+}
+
+
+/* ---------- Call Stack Visualizer ---------- */
+.call-stack {
+  display: flex;
+  flex-direction: column-reverse; 
+  gap: 6px;
+  margin-top: 15px;
+  font-family: var(--mono);
+}
+
+.stack-frame {
+  background: var(--bg-void);
+  border: 1px dashed var(--border);
+  padding: 12px 16px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  transition: all 0.3s ease;
+}
+
+.call-stack:hover .stack-frame {
+  border-color: var(--keyword);
+  color: var(--text-primary);
+  border-style: solid;
+}
+
+.call-stack:hover .sf-1 { transition-delay: 0.1s; background: rgba(122,162,247,.05); }
+.call-stack:hover .sf-2 { transition-delay: 0.3s; background: rgba(122,162,247,.15); }
+.call-stack:hover .sf-3 { transition-delay: 0.5s; background: rgba(122,162,247,.25); }
+.call-stack:hover .sf-4 { 
+  transition-delay: 0.7s; 
+  background: rgba(122,162,247,.4); 
+  color: #fff;
+  font-weight: bold;
+}
+
+/* ---------- Recursion Tree Visualizer ---------- */
+.visual-tree-box {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  gap: 25px;
+  font-family: var(--mono);
+  margin-top: 30px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+
+.tree-arrow {
+  border-right: 2px dashed var(--string);
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.arrow-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--string);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.tree-math {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 400px;
+}
+
+.t-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  transition: transform 0.2s ease;
+}
+
+.t-row:hover { transform: translateX(5px); }
+
+.indent-1 { margin-left: 25px; }
+.indent-2 { margin-left: 50px; }
+.indent-3 { margin-left: 75px; }
+.indent-4 { margin-left: 100px; }
+.indent-5 { margin-left: 125px; }
+
+.t-val {
+  color: var(--text-primary);
+  font-size: 16px;
+  background: var(--bg-panel);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.t-node {
+  background: var(--keyword);
+  color: var(--bg-void);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(122,162,247,0.3);
+}
+
+.t-node.start { 
+  background: var(--type); 
+  box-shadow: 0 4px 10px rgba(187,154,247,0.3);
+}
+.t-node.term { 
+  background: var(--warn); 
+  box-shadow: 0 4px 10px rgba(224,175,104,0.3);
+}
+
+.t-result {
+  background: rgba(158,206,106,.15);
+  color: var(--string);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  margin-left: auto;
+  border: 1px solid rgba(158,206,106,.3);
+}
+
+.t-result.final {
+  background: rgba(158,206,106,.3);
+  box-shadow: 0 0 15px rgba(158,206,106,.2);
+}
+
+.t-result.term-res {
+  background: rgba(224,175,104,.15);
+  color: var(--warn);
+  border-color: rgba(224,175,104,.3);
+}
+
+/* ---------- Tail Recursion Visualizer ---------- */
+.tail-visualizer {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  font-family: var(--mono);
+  margin-bottom: 50px;
+}
+.t-call {
+  color: var(--text-primary);
+  font-size: 15px;
+  padding-left: 20px;
+}
+.t-func {
+  color: var(--keyword);
+  font-weight: bold;
+}
+.t-arrow {
+  color: var(--text-faint);
+  padding-left: 40px;
+  margin: 4px 0;
+}
+.t-return-line {
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.t-val {
+  background: var(--string);
+  color: var(--bg-void);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.t-flash {
+  color: var(--warn);
+  font-size: 14px;
+}
+
+/* ============================================================
+   subStyle_2.css — CS1033 Unified Component Stylesheet
+   Covers: Quicksort, Mergesort, and Divide & Conquer Layouts
+   ============================================================ */
+
+/* ---------- 3-Pillar Strategy Layout ---------- */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 30px 0 40px;
+}
+
+.pillar-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  background: var(--bg-raised);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+.pillar-card.type-border { border-top-color: var(--type); }
+.pillar-card.warn-border { border-top-color: var(--warn); }
+.pillar-card.string-border { border-top-color: var(--string); }
+
+.pillar-card p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+
+/* ---------- Split Grid Layout ---------- */
+.split-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ---------- Code & Video Frame UI ---------- */
+.video-frame {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 24px 0 12px;
+  max-width: 100%;
+}
+
+.video-frame .bar {
+  display: flex; 
+  align-items: center; 
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-faint);
+  background: var(--bg-raised);
+}
+
+.video-frame .bar .dot { 
+  width: 9px; 
+  height: 9px;
+  border-radius: 50%;
+}
+
+/* ---------- Mergesort Execution Tree Visualizer ---------- */
+.merge-visualizer {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin: 30px 0 64px;
+  overflow-x: auto;
+}
+
+.m-row {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+}
+
+.m-arr {
+  display: flex;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.m-arr:hover {
+  transform: translateY(-2px);
+}
+
+.m-cell {
+  padding: 10px 16px;
+  border-right: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--mono);
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.m-cell:last-child {
+  border-right: none;
+}
+
+/* Division Phase Highlights */
+.m-arr.split {
+  border-color: rgba(224,175,104, 0.4);
+}
+.m-arr.split:hover {
+  box-shadow: 0 5px 15px rgba(224,175,104, 0.15);
+  border-color: var(--warn);
+}
+
+/* Assembly Phase Highlights */
+.m-arr.merge {
+  border-color: rgba(158,206,106, 0.4);
+}
+.m-arr.merge:hover {
+  box-shadow: 0 5px 15px rgba(158,206,106, 0.15);
+  border-color: var(--string);
+}
+
+/* Final Array Glow */
+.m-arr.merge.final {
+  border-color: var(--string);
+  box-shadow: 0 0 20px rgba(158,206,106, 0.2);
+}
+
+/* ---------- Mathematical Blueprint Visualizer ---------- */
+.math-box {
+  background: var(--bg-panel);
+  border: 1px dashed var(--border);
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  display: inline-block;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.math-box:hover {
+  border-color: var(--type);
+  box-shadow: 0 4px 15px rgba(187,154,247, 0.1);
+}
+
+.math-box.final {
+  border-style: solid;
+  border-color: var(--string);
+  background: rgba(158,206,106, 0.05);
+}
+
+.math-box.final:hover {
+  box-shadow: 0 4px 15px rgba(158,206,106, 0.15);
+}
+
+.math-hl {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-left: 8px;
+  padding: 4px 8px;
+  background: var(--bg-raised);
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Shared Method Grid (If needed for basic sorts) ---------- */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.m-card {
+  background: var(--bg-panel);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.m-card:hover {
+  border-style: solid;
+  border-color: var(--keyword);
+  background: var(--bg-raised);
+}
+
+.m-card h3 {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--keyword);
+  margin: 0 0 8px 0;
+}
+
+.m-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---------- Callouts ---------- */
+.callout {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--string);
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin: 26px 0 30px;
+  max-width: 70ch;
+}
+.callout .tag {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .04em;
+  color: var(--string);
+  display: block;
+  margin-bottom: 8px;
+}
+.callout.warn { border-left-color: var(--warn); }
+.callout.warn .tag { color: var(--warn); }
+.callout.type { border-left-color: var(--type); }
+.callout.type .tag { color: var(--type); }
+.callout p { margin: 0; color: var(--text-primary); }
+
+
+/* ---------- Responsive Adjustments ---------- */
+@media (max-width: 900px) {
+  .pillar-grid {
+    grid-template-columns: 1fr;
+  }
+  .split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .m-cell {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .m-row {
+    gap: 15px;
+  }
+  .method-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Append to subStyle_3.css — Roadmap Grid & Link Cards
+   ============================================================ */
+
+/* ---------- Roadmap Grid ---------- */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+  margin-bottom: 40px;
+}
+
+/* Base Card Styling (Acting as a link) */
+.road-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 26px 28px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Hover Physics */
+.road-card:hover { 
+  transform: translateY(-4px); 
+  background: var(--bg-raised);
+  border-color: var(--string);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+/* Accent Line */
+.road-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--border);
+  transition: background .2s ease;
+}
+
+.road-card:hover::before { 
+  background: var(--string); 
+}
+
+/* Typography Overrides */
+.road-card h2 { 
+  margin: 12px 0 10px; 
+  font-size: 20px; 
+  color: #fff; 
+  font-family: var(--sans); 
+  font-weight: 700; 
+  border-bottom: none;
+}
+
+.road-card p { 
+  margin: 0; 
+  font-size: 14.5px; 
+  color: var(--text-muted); 
+  line-height: 1.6; 
+}
+
+.road-card p strong {
+  color: var(--text-primary);
+}
+
+/* ---------- Roadmap Tags ---------- */
+.road-card .tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 5px;
+  margin-bottom: 4px;
+}
+
+.tag-1 { background: #00e676; color: var(--bg-void); } 
+.tag-2 { background: #00b248; color: var(--bg-void); } 
+.tag-3 { background: #007a1b; color: var(--bg-void); }
+
+/* ============================================================
+   Standalone Abstract Data Structures (ADT) Card
+   ============================================================ */
+
+.adt-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(145deg, var(--bg-panel), var(--bg-panel-alt));
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--type);
+  border-radius: 12px;
+  padding: 32px 40px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.adt-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -10px rgba(187,154,247,0.25);
+  border-color: var(--type);
+}
+
+.adt-content {
+  max-width: 80%;
+}
+
+.adt-content h2 {
+  margin: 12px 0 10px;
+  font-size: 24px;
+  color: #fff;
+  font-family: var(--sans);
+  font-weight: 700;
+  border-bottom: none;
+}
+
+.adt-content p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.adt-content strong {
+  color: var(--text-primary);
+}
+
+.adt-arrow {
+  background: rgba(187,154,247,0.1);
+  color: var(--type);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.adt-card:hover .adt-arrow {
+  background: var(--type);
+  color: var(--bg-void);
+  transform: translateX(4px);
+}
+
+.adt-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Mobile Responsiveness for ADT Card */
+@media (max-width: 768px) {
+  .adt-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 26px;
+  }
+  .adt-content {
+    max-width: 100%;
+  }
+  .adt-arrow {
+    align-self: flex-end;
+  }
+}
+
+/* ============================================================
+   IDE Code Editor Visualizer
+   ============================================================ */
+
+.code-editor {
+  background: var(--bg-void);
+  padding: 16px 0;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.code-editor .line {
+  display: flex;
+  padding: 0 16px;
+  border-left: 2px solid transparent;
+  transition: background 0.2s ease;
+}
+
+.code-editor .line:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Highlighted Line Feature */
+.code-editor .line.hl {
+  background: rgba(122, 162, 247, 0.1);
+  border-left-color: var(--keyword);
+}
+
+.code-editor .ln {
+  color: var(--text-faint);
+  padding-right: 16px;
+  user-select: none;
+  text-align: right;
+  min-width: 32px;
+}
+
+.code-editor .code {
+  color: var(--text-primary);
+  white-space: pre; /* Honors actual spaces so you don't need &nbsp; */
+}
+
+/* ---------- Algorithm Blueprint Visualizer ---------- */
+.algo-blueprint {
+  background: var(--bg-panel);
+  border: 1px dashed var(--type);
+  border-radius: 8px;
+  padding: 30px 24px 24px;
+  margin: 30px 0;
+  position: relative;
+}
+
+.algo-blueprint::before {
+  content: 'ALGORITHM BLUEPRINT';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: var(--bg-void);
+  padding: 0 10px;
+  color: var(--type);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   Pattern Recognition Visualizer
+   ============================================================ */
+.pattern-visualizer {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 30px;
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pat-track {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pat-block {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pat-a { 
+  background: rgba(187,154,247,.15); 
+  color: var(--type); 
+  border: 1px solid var(--type); 
+}
+
+.pat-b { 
+  background: rgba(122,162,247,.15); 
+  color: var(--keyword); 
+  border: 1px solid var(--keyword); 
+}
+
+/* The Highlighted "Predicted" Pattern Block */
+.pat-hl { 
+  background: rgba(158,206,106,.2); 
+  color: var(--string);
+  border: 2px dashed var(--string);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px -5px rgba(158,206,106,.4);
+}
+
+.pat-caption {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .pat-block {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+/* ============================================================
+   GCD Tail Recursion Execution Breakdown
+   ============================================================ */
+.gcd-execution {
+  background: var(--bg-void);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  font-family: var(--mono);
+  color: var(--text-primary);
+  margin-bottom: 26px;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+}
+
+.gcd-step {
+  font-size: 15.5px;
+  margin-bottom: 4px;
+}
+
+.gcd-sub {
+  color: var(--text-faint);
+  font-size: 14px;
+  margin: 2px 0 16px 40px;
+}
+
+.gcd-func {
+  color: var(--keyword);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.gcd-final {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+  color: var(--string);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.gcd-takeaway {
+  background: rgba(158,206,106,.1); 
+  border-left: 3px solid var(--string); 
+  padding: 16px 20px; 
+  margin-top: 24px; 
+  border-radius: 0 6px 6px 0;
+}

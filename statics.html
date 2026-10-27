@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statics Roadmap | ME1030</title>
+    <link rel="stylesheet" href="statics.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Engineering Mechanics : ME 1033 Statics. Focus on the analysis of bodies at rest or moving at constant velocity, emphasizing forces, moments, and equilibrium. Cover the calculation of sectional properties of plane areas, including centroids and moments of inertia. Explain the determination of internal forces in beams, including shear force and bending moment diagrams. Discuss the identification of statically determinate and indeterminate trusses, their stability, and methods for determining forces in truss members. Include practical examples, diagrams, and video explanations to illustrate these concepts.">
+</head>
+<body>
+
+    <!-- Back Navigation -->
+    <nav>
+        <a href="mechanics_home.html">← Back to Mechanics Hub</a>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1>Statics Learning Roadmap</h1>
+        <p>Follow the topics sequentially to master Engineering Statics</p>
+    </header>
+
+    <!-- Timeline Roadmap -->
+    <main class="timeline">
+        <!-- Topic 1 (Left) -->
+        <div class="container left">
+            <div class="content">
+                <span class="badge badge-green">Topic 01</span>
+                <h3>Properties of Plane Areas</h3>
+                <p>Centroids of simple & composite areas, First and Second Moment of Area (Moment of Inertia), and Parallel Axis Theorem.</p>
+                <div class="card-actions">
+                    <a href="plane area.html" class="action-btn">Study Guide</a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 2 (Right) -->
+        <div class="container right">
+            <div class="content">
+                <span class="badge badge-blue">Topic 02</span>
+                <h3>Determination of Forces in Assemblies of Rigid Bodies (Trusses)</h3>
+                <p>Structural Elements, Trusses, Stability of Trusses, Analysis of Trusses </p>
+                <div class="card-actions">
+                    <a href="trusses.html" class="action-btn">Study Guide</a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 3 (Left) -->
+        <div class="container left">
+            <div class="content">
+                <span class="badge badge-orange">Topic 03</span>
+                <h3>Internal Forces (BM & SF)- Principle of Superposition</h3>
+                <p>Bending Movements ,Shear Forces.</p>
+                <div class="card-actions">
+                    <a href="sfbm.html" class="action-btn">Study Guide</a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 4 (Right) -->
+        <div class="container right">
+            <div class="content">
+                <span class="badge badge-green">Topic 04</span>
+                <h3>Statics Mid Semester Exam</h3>
+                <p>Papers and Answers</p>
+                <div class="card-actions">
+                    <a href="tutes(Stat).html#Stat-4" class="action-btn">Links</a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 5 (Left) -->
+        <div class="container left">
+            <div class="content">
+                <span class="badge badge-blue">Topic 05</span>
+                <h3>Recommended Texts & References</h3>
+                <p>
+                     (1) “Mechanics for Engineers – Statics and Dynamics”, F.P. Beer andE.R. Johnston, McGraw-Hill Book Co.<br>
+                     (2) “Mechanics of Materials”, F.P. Beer and E.R. Johnston Jr., McGrawHill.<br>
+                     (3) “Structural Mechanics”, F. Durka (Formerly W Morgan and D.T.Williams), Longman Ltd.<br>
+                </p>
+                
+            </div>
+        </div>
+    </main>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbot-mech.js"></script>
+
+
+</body>
+</html>

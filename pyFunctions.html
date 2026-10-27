@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Python Fundamentals – Phase 3: Functions & Modularity. Focus on function definitions, parameters and arguments, return values, default parameters, keyword arguments, variable-length arguments (*args and **kwargs), local and global scope, functions calling other functions, recursion and base cases, lambda expressions, built-in functions, modules and imports, Python's Standard Library, packages, external libraries and pip, the __name__ == '__main__' convention, docstrings, function design, and organizing programs into reusable, maintainable components.">
+<title>Phase 3 — Functions & Modularity</title>
+<!-- Linked directly to your global stylesheet -->
+<link rel="stylesheet" href="pyStyle.css">
+
+
+
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+<div class="titlebar">
+  
+  <div class="filetab">Functions in Python</div>
+</div>
+
+<div class="layout">
+  <!-- Master Table of Contents Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#basics" class="ln-link"><span class="ln">01</span>Function Basics</a></li>
+      <li><a href="#arguments" class="ln-link"><span class="ln">02</span>Parameters & Scope</a></li>
+      <li><a href="#advanced" class="ln-link"><span class="ln">03</span>Advanced Functions</a></li>
+      <li><a href="#modularity" class="ln-link"><span class="ln">04</span>Modules & Packages</a></li>
+      <li><a href="#architecture" class="ln-link"><span class="ln">05</span>Architecture & Design</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="kicker">PHASE 3</div>
+    <h1 class="title">Functions &amp; <span class="kw">Modularity</span></h1>
+    
+    <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+      As programs become larger, writing everything in one continuous block of code quickly becomes difficult to manage. Functions allow us to break a program into smaller, reusable pieces, each responsible for a specific task. Modularity takes this idea further by organizing related functions and code into separate modules. Together, they make programs easier to understand, reuse, test, and maintain.
+    </p>
+
+    <!-- SECTION 1: FUNCTION BASICS -->
+    <section id="basics">
+      <h2><span class="idx">01.</span> Function Basics</h2>
+      
+      <h3>1. What Is a Function?</h3>
+      <p>A function is a reusable block of code designed to perform a specific task. Instead of writing the same instructions repeatedly, we can define them once and call the function whenever we need them.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>greet.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">greet</span>():
+    <span class="kw">print</span>(<span class="str">"Hello!"</span>)
+
+greet()
+greet()</code></pre>
+        </div>
+      </div>
+      
+      <p>The function is defined using the <code>def</code> keyword and executed by calling its name. Think of a function as a small, self-contained machine:</p>
+      <div class="ascii-diagram">Input &rarr; Function &rarr; Output</div>
+      <p>A well-designed function should generally have one clear responsibility.</p>
+
+      <h3>2. Parameters and Arguments</h3>
+      <p>Functions can receive information through parameters. Parameters allow the same function to work with different data.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>params.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">greet</span>(name):
+    <span class="kw">print</span>(<span class="str">f"Hello, {name}!"</span>)
+
+greet(<span class="str">"Alex"</span>)
+
+<span class="com"># Multiple parameters:</span>
+<span class="kw">def</span> <span class="str">add</span>(a, b):
+    <span class="kw">print</span>(a + b)
+
+add(<span class="warn">5</span>, <span class="warn">3</span>)</code></pre>
+        </div>
+      </div>
+      <p>Here, <code>name</code> is the parameter, and <code>"Alex"</code> is the argument passed to the function.</p>
+
+      <h3>3. Returning Values</h3>
+      <p>A function doesn't always need to print its result. Often, it needs to calculate something and give the result back to the rest of the program using the <code>return</code> statement.</p>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>return.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">add</span>(a, b):
+    <span class="kw">return</span> a + b
+
+result = add(<span class="warn">5</span>, <span class="warn">3</span>)
+<span class="kw">print</span>(result) <span class="com"># Output: 8</span></code></pre>
+        </div>
+      </div>
+      <p>The returned value can then be stored, modified, compared, or passed to another function. This makes functions much more flexible than simply printing results.</p>
+    </section>
+
+    <!-- SECTION 2: PARAMETERS & SCOPE -->
+    <section id="arguments">
+      <h2><span class="idx">02.</span> Parameters &amp; Scope</h2>
+      
+      <h3>1. Parameters with Default Values</h3>
+      <p>A function can provide a default value for a parameter. If no argument is provided, Python automatically uses the default value.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>defaults.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">greet</span>(name=<span class="str">"Guest"</span>):
+    <span class="kw">print</span>(<span class="str">f"Hello, {name}!"</span>)
+
+greet()       <span class="com"># Output: Hello, Guest!</span>
+greet(<span class="str">"Alex"</span>) <span class="com"># Output: Hello, Alex!</span></code></pre>
+        </div>
+      </div>
+
+      <h3>2. Keyword Arguments</h3>
+      <p>Arguments can also be passed using the parameter's name. Keyword arguments make function calls more readable and allow arguments to be supplied in a different order.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>keyword_args.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">introduce</span>(name, age):
+    <span class="kw">print</span>(<span class="str">f"{name} is {age} years old."</span>)
+
+introduce(age=<span class="warn">20</span>, name=<span class="str">"Alex"</span>)</code></pre>
+        </div>
+      </div>
+
+      <h3>3. Variable-Length Arguments</h3>
+      <p>Sometimes we don't know how many values a function will receive. Python provides <code>*args</code> for multiple positional arguments and <code>**kwargs</code> for multiple keyword arguments.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>var_args.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">add_all</span>(*numbers):
+    total = <span class="warn">0</span>
+    <span class="kw">for</span> number <span class="kw">in</span> numbers:
+        total += number
+    <span class="kw">return</span> total
+
+<span class="kw">print</span>(add_all(<span class="warn">1</span>, <span class="warn">2</span>, <span class="warn">3</span>, <span class="warn">4</span>))
+
+<span class="kw">def</span> <span class="str">show_info</span>(**details):
+    <span class="kw">print</span>(details)
+
+show_info(name=<span class="str">"Alex"</span>, age=<span class="warn">20</span>)</code></pre>
+        </div>
+      </div>
+
+      <h3>4. Variable Scope</h3>
+      <p>A variable's scope determines where it can be accessed. A variable created inside a function is generally <em>local</em> to that function, meaning it cannot be accessed outside of it. Variables defined outside functions have a wider, <em>global</em> scope.</p>
+      
+      <div class="split-grid">
+        <div class="callout warn" style="margin:0;">
+          <span class="tag">LOCAL SCOPE</span>
+<pre style="margin:0; font-family:var(--mono); color:var(--text-primary); font-size:13px;"><code><span class="kw">def</span> <span class="str">calculate</span>():
+    result = <span class="warn">10</span>
+    <span class="kw">print</span>(result)
+
+calculate()
+<span class="com"># print(result) outside fails</span></code></pre>
+        </div>
+        <div class="callout string" style="margin:0;">
+          <span class="tag">GLOBAL SCOPE</span>
+<pre style="margin:0; font-family:var(--mono); color:var(--text-primary); font-size:13px;"><code>message = <span class="str">"Hello"</span>
+
+<span class="kw">def</span> <span class="str">greet</span>():
+    <span class="kw">print</span>(message)
+
+greet()</code></pre>
+        </div>
+      </div>
+      <p style="margin-top: 15px;">Understanding scope prevents unexpected changes to data and helps keep functions independent.</p>
+    </section>
+
+    <!-- SECTION 3: ADVANCED FUNCTIONS -->
+    <section id="advanced">
+      <h2><span class="idx">03.</span> Advanced Functions</h2>
+      
+      <h3>1. Functions Calling Functions</h3>
+      <p>Functions can call other functions, allowing a larger problem to be divided into smaller tasks. This is one of the fundamental ideas behind modular programming.</p>
+      
+      <div class="ascii-diagram">
+Large Problem
+      &darr;
+ &boxdr;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxdl;
+ &darr;        &darr;        &darr;
+Task     Task     Task
+      </div>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>modular.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">square</span>(number):
+    <span class="kw">return</span> number * number
+
+<span class="kw">def</span> <span class="str">calculate</span>():
+    result = square(<span class="warn">5</span>)
+    <span class="kw">print</span>(result)
+
+calculate()</code></pre>
+        </div>
+      </div>
+
+      <h3>2. Recursion</h3>
+      <p>A function can even call itself. This is known as recursion. Every recursive function needs a base case that tells it when to stop.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>recursion.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">countdown</span>(n):
+    <span class="kw">if</span> n == <span class="warn">0</span>:
+        <span class="kw">return</span>
+    
+    <span class="kw">print</span>(n)
+    countdown(n - <span class="warn">1</span>)
+
+countdown(<span class="warn">5</span>)</code></pre>
+        </div>
+      </div>
+      <p>Recursion is particularly useful for problems that can naturally be divided into smaller versions of themselves. It will become especially important when studying algorithms and data structures.</p>
+
+      <h3>3. Lambda Functions</h3>
+      <p>Python provides a compact way to create small, simple functions using <code>lambda</code>. They are useful when a short function is needed temporarily, particularly when working with functions such as <code>map()</code>, <code>filter()</code>, and <code>sorted()</code>.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>lambda.py</span>
+        </div>
+        <div class="code-body">
+<pre><code>square = <span class="kw">lambda</span> x: x * x
+<span class="kw">print</span>(square(<span class="warn">5</span>)) <span class="com"># Output: 25</span></code></pre>
+        </div>
+      </div>
+
+      <h3>4. Built-in Functions</h3>
+      <p>Python already provides many functions that solve common tasks, such as <code>len()</code>, <code>max()</code>, <code>min()</code>, <code>sum()</code>, <code>sorted()</code>, <code>abs()</code>, and <code>round()</code>.</p>
+      
+      <div class="callout type">
+        <span class="tag">&gt;&gt; PRO TIP</span>
+        <p>Learning to use existing functions effectively is just as important as writing your own. Good programmers avoid reinventing functionality that already exists.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MODULES & PACKAGES -->
+    <section id="modularity">
+      <h2><span class="idx">04.</span> Modules &amp; Packages</h2>
+      
+      <h3>1. Modules</h3>
+      <p>As programs grow, keeping everything inside one file becomes difficult. A module is simply a Python file containing code that can be reused by other programs.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>math_tools.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">add</span>(a, b):
+    <span class="kw">return</span> a + b
+
+<span class="kw">def</span> <span class="str">multiply</span>(a, b):
+    <span class="kw">return</span> a * b</code></pre>
+        </div>
+      </div>
+      <p>Another Python file can import and use these functions using <code>import math_tools</code>, allowing related functionality to be separated into its own file.</p>
+
+      <h3>2. Importing Specific Functions</h3>
+      <p>Instead of importing the entire module, specific functions can be imported or aliased for convenience, especially with long module names.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>main.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="com"># Specific import</span>
+<span class="kw">from</span> math_tools <span class="kw">import</span> add
+<span class="kw">print</span>(add(<span class="warn">5</span>, <span class="warn">3</span>))
+
+<span class="com"># Alias import</span>
+<span class="kw">import</span> math_tools <span class="kw">as</span> mt
+<span class="kw">print</span>(mt.add(<span class="warn">5</span>, <span class="warn">3</span>))</code></pre>
+        </div>
+      </div>
+
+      <h3>3. Python's Standard Library</h3>
+      <p>Python comes with a large collection of modules known as the Standard Library. These provide ready-made functionality for mathematics, dates, files, random numbers, operating-system interaction, and much more.</p>
+      <p><code>import math</code><br><code>import random</code></p>
+
+      <h3>4. Packages</h3>
+      <p>A package is a way of organizing multiple related modules into a larger directory structure. Instead of keeping every function in one enormous file, related functionality can be grouped together as projects grow.</p>
+      
+      <div class="ascii-diagram">
+Project/
+&boxv;
+&boxt;&boxh;&boxh; main.py
+&boxv;
+&boxd;&boxh;&boxh; tools/
+    &boxt;&boxh;&boxh; math.py
+    &boxt;&boxh;&boxh; text.py
+    &boxd;&boxh;&boxh; files.py
+      </div>
+
+      <h3>5. External Libraries</h3>
+      <p>Python's ecosystem extends beyond its standard library. External packages can be installed using the terminal command <code>pip install requests</code> and then imported into a program (<code>import requests</code>). This allows programmers to build on functionality created by others instead of implementing everything from scratch.</p>
+    </section>
+
+    <!-- SECTION 5: ARCHITECTURE & DESIGN -->
+    <section id="architecture">
+      <h2><span class="idx">05.</span> Architecture &amp; Design</h2>
+
+      <h3>1. The __name__ Check</h3>
+      <p>A common Python pattern allows a file to behave differently depending on whether it is run directly or imported as a module. It is commonly used to define the starting point of a Python program.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>app.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">main</span>():
+    <span class="kw">print</span>(<span class="str">"Program started."</span>)
+
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    main()</code></pre>
+        </div>
+      </div>
+
+      <h3>2. Documentation and Docstrings</h3>
+      <p>Functions should be understandable not only to Python but also to the humans maintaining the code. Python allows functions to contain docstrings that describe what they do.</p>
+      
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span>geometry.py</span>
+        </div>
+        <div class="code-body">
+<pre><code><span class="kw">def</span> <span class="str">calculate_area</span>(length, width):
+    <span class="com">"""Return the area of a rectangle."""</span>
+    <span class="kw">return</span> length * width</code></pre>
+        </div>
+      </div>
+
+      <h3>3. Designing Good Functions</h3>
+      <p>Writing a function isn't just about making code reusable. Good functions should also be focused and predictable. A useful function generally:</p>
+      <ul>
+        <li>Has a clear purpose and meaningful name.</li>
+        <li>Accepts only the information it needs.</li>
+        <li>Produces a clear result.</li>
+        <li>Avoids unnecessary side effects.</li>
+        <li>Can be tested independently.</li>
+      </ul>
+      <p>For example, instead of writing one 100-line function doing everything, a program should be divided into <code>read_data()</code>, <code>process_data()</code>, and <code>display_result()</code> so each function has a specific responsibility.</p>
+
+      <h3>4. From Functions to Modularity</h3>
+      <p>The progression of organizing a program looks like this. This structure prevents large programs from becoming one giant block of code.</p>
+      
+      <div class="ascii-diagram" style="text-align: center;">
+Program<br>&darr;<br>Functions<br>&darr;<br>Modules<br>&darr;<br>Packages<br>&darr;<br>Larger Applications
+      </div>
+
+      <div class="callout string" style="margin-top: 50px;">
+        <span class="tag">&gt;&gt; THE BUILDING BLOCKS</span>
+        <p>Functions and modularity change the way you approach programming. Instead of asking <em>"How do I write this entire program?"</em>, you can start asking <em>"What smaller tasks make up this problem, and how can I turn each task into a reusable component?"</em></p>
+      </div>
+    </section>
+
+    <section id="watch">
+      
+      <p>Learn More — Watch the video for a deeper look at this topic.</p>
+
+      <!-- Custom Video Frame for the Embed -->
+      <div class="video-frame" style="margin: 24px 0 40px;">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Watch Python Control FLow</span>
+        </div>
+        <div class="video-wrap" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0 0 10px 10px;">
+          <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/u-OmVr_fT4s?si=8HmaXvnyguQvS8a8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         FUNCTIONS & MODULARITY QUIZ BLOCK
+         ========================================== -->
+    <section id="quiz-section">
+      <div class="quiz-container" style="margin-top: 60px; margin-bottom: 40px;">
+        <h2 style="font-family: var(--sans); font-size: 24px; margin-top: 0; color: #fff;">Knowledge Check: Functions & Modularity</h2>
+        <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 25px;">Click on a question to expand the options. Select your answers and hit submit at the bottom to evaluate your logic.</p>
+        
+        <!-- Question 1 -->
+        <div class="question-block" id="qb-1">
+          <details class="challenge-details">
+            <summary><h3>1. What will be the output?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <pre style="background: var(--bg-void); padding: 10px; border-radius: 6px; font-family: var(--mono); color: var(--text-primary); font-size: 13.5px; margin-bottom: 15px;"><code>def calculate(x, y):
+    return x + y
+
+result = calculate(5, 3)
+print(result)</code></pre>
+              <input type="radio" name="q1" id="q1-a" value="A"><label for="q1-a" class="option-label">A) 5</label>
+              <input type="radio" name="q1" id="q1-b" value="B"><label for="q1-b" class="option-label">B) 3</label>
+              <input type="radio" name="q1" id="q1-c" value="C"><label for="q1-c" class="option-label">C) 8</label>
+              <input type="radio" name="q1" id="q1-d" value="D"><label for="q1-d" class="option-label">D) 53</label>
+            </div>
+            <div class="feedback-msg" id="feedback-1"></div>
+          </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block" id="qb-2">
+          <details class="challenge-details">
+            <summary><h3>2. Which function correctly calculates and returns the square of a number?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q2" id="q2-a" value="A"><label for="q2-a" class="option-label" style="font-family: var(--mono);">A)<br>def square(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x * x)</label>
+              <input type="radio" name="q2" id="q2-b" value="B"><label for="q2-b" class="option-label" style="font-family: var(--mono);">B)<br>def square(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;return x * x</label>
+              <input type="radio" name="q2" id="q2-c" value="C"><label for="q2-c" class="option-label" style="font-family: var(--mono);">C)<br>def square(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;return x + x</label>
+              <input type="radio" name="q2" id="q2-d" value="D"><label for="q2-d" class="option-label" style="font-family: var(--mono);">D)<br>def square:<br>&nbsp;&nbsp;&nbsp;&nbsp;return x * x</label>
+            </div>
+            <div class="feedback-msg" id="feedback-2"></div>
+          </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block" id="qb-3">
+          <details class="challenge-details">
+            <summary><h3>3. What will be printed?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <pre style="background: var(--bg-void); padding: 10px; border-radius: 6px; font-family: var(--mono); color: var(--text-primary); font-size: 13.5px; margin-bottom: 15px;"><code>def modify(x):
+    x = x + 10
+    return x
+
+num = 5
+result = modify(num)
+print(num)
+print(result)</code></pre>
+              <input type="radio" name="q3" id="q3-a" value="A"><label for="q3-a" class="option-label">A)<br>15<br>15</label>
+              <input type="radio" name="q3" id="q3-b" value="B"><label for="q3-b" class="option-label">B)<br>5<br>15</label>
+              <input type="radio" name="q3" id="q3-c" value="C"><label for="q3-c" class="option-label">C)<br>15<br>5</label>
+              <input type="radio" name="q3" id="q3-d" value="D"><label for="q3-d" class="option-label">D)<br>5<br>5</label>
+            </div>
+            <div class="feedback-msg" id="feedback-3"></div>
+          </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block" id="qb-4">
+          <details class="challenge-details">
+            <summary><h3>4. Which code correctly completes the function to calculate the average of three numbers?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <pre style="background: var(--bg-void); padding: 10px; border-radius: 6px; font-family: var(--mono); color: var(--text-primary); font-size: 13.5px; margin-bottom: 15px;"><code>def average(a, b, c):
+    _____________
+
+print(average(60, 70, 80))</code></pre>
+              <input type="radio" name="q4" id="q4-a" value="A"><label for="q4-a" class="option-label">A) return a + b + c / 3</label>
+              <input type="radio" name="q4" id="q4-b" value="B"><label for="q4-b" class="option-label">B) return (a + b + c) / 3</label>
+              <input type="radio" name="q4" id="q4-c" value="C"><label for="q4-c" class="option-label">C) print((a + b + c) / 3)</label>
+              <input type="radio" name="q4" id="q4-d" value="D"><label for="q4-d" class="option-label">D) return a + b + c // 3</label>
+            </div>
+            <div class="feedback-msg" id="feedback-4"></div>
+          </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-block" id="qb-5">
+          <details class="challenge-details">
+            <summary><h3>5. What will be the output?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <pre style="background: var(--bg-void); padding: 10px; border-radius: 6px; font-family: var(--mono); color: var(--text-primary); font-size: 13.5px; margin-bottom: 15px;"><code>def greet(name):
+    return "Hello " + name
+
+message = greet("Nimal")
+print(message)</code></pre>
+              <input type="radio" name="q5" id="q5-a" value="A"><label for="q5-a" class="option-label">A) Hello</label>
+              <input type="radio" name="q5" id="q5-b" value="B"><label for="q5-b" class="option-label">B) Nimal</label>
+              <input type="radio" name="q5" id="q5-c" value="C"><label for="q5-c" class="option-label">C) Hello Nimal</label>
+              <input type="radio" name="q5" id="q5-d" value="D"><label for="q5-d" class="option-label">D) greet Nimal</label>
+            </div>
+            <div class="feedback-msg" id="feedback-5"></div>
+          </details>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-block" id="qb-6">
+          <details class="challenge-details">
+            <summary><h3>6. A program needs to check whether a number is positive, negative, or zero. Which function is the most appropriate?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q6" id="q6-a" value="A"><label for="q6-a" class="option-label" style="font-family: var(--mono);">A)<br>def check_number(num):<br>&nbsp;&nbsp;&nbsp;&nbsp;if num > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Positive"<br>&nbsp;&nbsp;&nbsp;&nbsp;elif num < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Negative"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Zero"</label>
+              <input type="radio" name="q6" id="q6-b" value="B"><label for="q6-b" class="option-label" style="font-family: var(--mono);">B)<br>def check_number:<br>&nbsp;&nbsp;&nbsp;&nbsp;if num > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Positive")</label>
+              <input type="radio" name="q6" id="q6-c" value="C"><label for="q6-c" class="option-label" style="font-family: var(--mono);">C)<br>def check_number(num):<br>&nbsp;&nbsp;&nbsp;&nbsp;if num > 0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Positive"</label>
+              <input type="radio" name="q6" id="q6-d" value="D"><label for="q6-d" class="option-label" style="font-family: var(--mono);">D)<br>def check_number(num):<br>&nbsp;&nbsp;&nbsp;&nbsp;return num > 0</label>
+            </div>
+            <div class="feedback-msg" id="feedback-6"></div>
+          </details>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-block" id="qb-7">
+          <details class="challenge-details">
+            <summary><h3>7. What will the following code print?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <pre style="background: var(--bg-void); padding: 10px; border-radius: 6px; font-family: var(--mono); color: var(--text-primary); font-size: 13.5px; margin-bottom: 15px;"><code>def multiply(a, b=2):
+    return a * b
+
+print(multiply(5))
+print(multiply(5, 3))</code></pre>
+              <input type="radio" name="q7" id="q7-a" value="A"><label for="q7-a" class="option-label">A)<br>10<br>15</label>
+              <input type="radio" name="q7" id="q7-b" value="B"><label for="q7-b" class="option-label">B)<br>5<br>15</label>
+              <input type="radio" name="q7" id="q7-c" value="C"><label for="q7-c" class="option-label">C)<br>10<br>10</label>
+              <input type="radio" name="q7" id="q7-d" value="D"><label for="q7-d" class="option-label">D)<br>15<br>10</label>
+            </div>
+            <div class="feedback-msg" id="feedback-7"></div>
+          </details>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-block" id="qb-8">
+          <details class="challenge-details">
+            <summary><h3>8. Which code best demonstrates modularity?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q8" id="q8-a" value="A"><label for="q8-a" class="option-label" style="font-family: var(--mono);">A)<br>name = input("Name: ")<br>print("Hello", name)<br>age = int(input("Age: "))<br>print("Age:", age)</label>
+              <input type="radio" name="q8" id="q8-b" value="B"><label for="q8-b" class="option-label" style="font-family: var(--mono);">B)<br>def get_name():<br>&nbsp;&nbsp;&nbsp;&nbsp;return input("Name: ")<br>def get_age():<br>&nbsp;&nbsp;&nbsp;&nbsp;return int(input("Age: "))<br>name = get_name()<br>age = get_age()</label>
+              <input type="radio" name="q8" id="q8-c" value="C"><label for="q8-c" class="option-label" style="font-family: var(--mono);">C)<br>name = input("Name: ")<br>age = int(input("Age: "))</label>
+              <input type="radio" name="q8" id="q8-d" value="D"><label for="q8-d" class="option-label" style="font-family: var(--mono);">D)<br>print(input("Name: "))<br>print(input("Age: "))</label>
+            </div>
+            <div class="feedback-msg" id="feedback-8"></div>
+          </details>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-block" id="qb-9">
+          <details class="challenge-details">
+            <summary><h3>9. What will happen when this code is executed?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <pre style="background: var(--bg-void); padding: 10px; border-radius: 6px; font-family: var(--mono); color: var(--text-primary); font-size: 13.5px; margin-bottom: 15px;"><code>def calculate(a, b):
+    result = a + b
+
+answer = calculate(4, 6)
+print(answer)</code></pre>
+              <input type="radio" name="q9" id="q9-a" value="A"><label for="q9-a" class="option-label">A) 10 will be printed</label>
+              <input type="radio" name="q9" id="q9-b" value="B"><label for="q9-b" class="option-label">B) 4 will be printed</label>
+              <input type="radio" name="q9" id="q9-c" value="C"><label for="q9-c" class="option-label">C) None will be printed</label>
+              <input type="radio" name="q9" id="q9-d" value="D"><label for="q9-d" class="option-label">D) An error will occur because result is local</label>
+            </div>
+            <div class="feedback-msg" id="feedback-9"></div>
+          </details>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-block" id="qb-10">
+          <details class="challenge-details">
+            <summary><h3>10. Which line should replace the blank to correctly return the total?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <pre style="background: var(--bg-void); padding: 10px; border-radius: 6px; font-family: var(--mono); color: var(--text-primary); font-size: 13.5px; margin-bottom: 15px;"><code>def calculate_total(price, quantity):
+    __________________________
+
+price = float(input("Enter price: "))
+quantity = int(input("Enter quantity: "))
+total = calculate_total(price, quantity)
+print("Total:", total)</code></pre>
+              <input type="radio" name="q10" id="q10-a" value="A"><label for="q10-a" class="option-label">A) print(price * quantity)</label>
+              <input type="radio" name="q10" id="q10-b" value="B"><label for="q10-b" class="option-label">B) return price + quantity</label>
+              <input type="radio" name="q10" id="q10-c" value="C"><label for="q10-c" class="option-label">C) return price * quantity</label>
+              <input type="radio" name="q10" id="q10-d" value="D"><label for="q10-d" class="option-label">D) total = price * quantity</label>
+            </div>
+            <div class="feedback-msg" id="feedback-10"></div>
+          </details>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()" style="margin-top: 20px;">Check Answers</button>
+      </div>
+    </section>
+
+    <!-- Quiz Logic JS -->
+    <script>
+    function checkAnswers() {
+      const correctAnswers = {
+        q1: 'C', q2: 'B', q3: 'B', q4: 'B', q5: 'C',
+        q6: 'A', q7: 'A', q8: 'B', q9: 'C', q10: 'C'
+      };
+
+      for (let i = 1; i <= 10; i++) {
+        const qName = 'q' + i;
+        const options = document.getElementsByName(qName);
+        const feedback = document.getElementById('feedback-' + i);
+        const detailsNode = document.getElementById('qb-' + i).querySelector('details');
+        
+        let selectedValue = null;
+        let selectedLabel = null;
+
+        options.forEach(opt => {
+          let label = document.querySelector(`label[for="${opt.id}"]`);
+          if (label) label.classList.remove('correct', 'wrong');
+        });
+
+        for (let j = 0; j < options.length; j++) {
+          if (options[j].checked) {
+            selectedValue = options[j].value;
+            selectedLabel = document.querySelector(`label[for="${options[j].id}"]`);
+            break;
+          }
+        }
+
+        if (detailsNode) detailsNode.open = true;
+
+        if (selectedValue === correctAnswers[qName]) {
+          selectedLabel.classList.add('correct');
+          feedback.style.color = 'var(--string, #9ece6a)';
+          feedback.innerText = "Correct! Spot on.";
+          feedback.style.display = 'block';
+        } else if (selectedValue !== null) {
+          selectedLabel.classList.add('wrong');
+          feedback.style.color = 'var(--red, #f7768e)';
+          feedback.innerText = "Incorrect. Review the correct answer highlighted below.";
+          feedback.style.display = 'block';
+          
+          let correctInput = document.querySelector(`input[name="${qName}"][value="${correctAnswers[qName]}"]`);
+          let correctLabel = document.querySelector(`label[for="${correctInput.id}"]`);
+          if (correctLabel) correctLabel.classList.add('correct');
+        } else {
+          feedback.style.color = 'var(--warn, #e0af68)';
+          feedback.innerText = "Please select an option to evaluate.";
+          feedback.style.display = 'block';
+        }
+      }
+    }
+    </script>
+
+
+    <!-- ROUTING BUTTON -->
+    <section class="cta">
+      
+      <a class="next-btn" href="pyDataStr.html">
+        Next: Core Data Structures
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script>
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>

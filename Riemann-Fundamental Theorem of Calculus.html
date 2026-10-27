@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fundamental Theorem of Calculus</title>
+    <!-- Linking to your provided CSS file -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Fundamental Theorem of Calculus. Focus on the statement and proof of the Fundamental Theorem of Calculus, its applications, and implications. Include examples, step-by-step explanations, and exercises for practice. Provide a video tutorial for visual learning."> 
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Fundamental Theorem of Calculus</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#ftc-1" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Fundamental Theorem I</a></li>
+                <li><a href="#integration-by-parts">Integration by Parts</a></li>
+                <li><a href="#ftc-2">Fundamental Theorem II</a></li>
+                <li><a href="#leibniz-rule">Chain Rule Application</a></li>
+                <li><a href="#change-of-variable">Change of Variable</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="ftc-1" style="margin-bottom: 20px;">Fundamental Theorem of Calculus I</h2>
+            <p style="margin-bottom: 15px;">There are two versions of the Fundamental Theorem of Calculus. Each says, roughly speaking, that differentiation and integration are inverse operations. In fact, the first version says "the integral of the derivative of a function is given by the function," and the second version says "the derivative of the integral of a continuous function is the function."</p>
+
+            <div class="blue-box">
+                <strong>Theorem(Fundamental Theorem of Calculus - I):</strong><br><br>
+                If $g$ is a continuous function on $[a,b]$ that is differentiable on $(a,b)$, and if $g'$ is integrable on $[a,b]$, then
+                <div class="math-center">
+                    $$ \int_a^b g' = g(b) - g(a) $$
+                </div>
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Proof:</strong><br>
+                For any $\epsilon > 0$, there exists a partition $P = \{a = t_0, t_1, \dots, t_n = b\}$ of $[a,b]$ such that $U(g', P) - L(g', P) < \epsilon$.
+                <br><br>
+                We apply the Mean Value Theorem to each interval $[t_{k-1}, t_k]$ to obtain $x_k \in (t_{k-1}, t_k)$ for which:
+                <div class="math-center">
+                    $$ (t_k - t_{k-1})g'(x_k) = g(t_k) - g(t_{k-1}) $$
+                </div>
+                Summing these terms yields a telescoping series:
+                <div class="math-center">
+                    $$ g(b) - g(a) = \sum_{k=1}^n (g(t_k) - g(t_{k-1})) = \sum_{k=1}^n (t_k - t_{k-1})g'(x_k) $$
+                </div>
+                It follows that $L(g', P) \le g(b) - g(a) \le U(g', P)$.
+                By definition we know, $L(g', P) \le \int_a^b g' \le U(g', P)$.
+                These above inequalities imply:
+                <div class="math-center">
+                    $$ \left| \int_a^b g' - (g(b) - g(a)) \right| \le U(g', P) - L(g', P) < \epsilon $$
+                </div>
+                Since $\epsilon$ is arbitrary, the condition holds.
+            </div>
+
+            <h2 id="integration-by-parts" style="margin-top: 30px; margin-bottom: 20px;">Integration by Parts</h2>
+
+            <div class="green-box">
+                <strong>Theorem(Integration by Parts):</strong><br><br>
+                If $u$ and $v$ are continuous functions on $[a,b]$ that are differentiable on $(a,b)$, and if $u'$ and $v'$ are integrable on $[a,b]$, then
+                <div class="math-center">
+                    $$ \int_a^b u(x)v'(x)dx + \int_a^b u'(x)v(x)dx = u(b)v(b) - u(a)v(a) $$
+                </div>
+                
+                <strong>Proof:</strong><br>
+                Let $g = uv$; then by the product rule $g' = uv' + u'v$ and $g$ is integrable (as $u, u', v, v'$ are integrable). Now by FTC-I:
+                <div class="math-center">
+                    $$ \int_a^b g' = g(b) - g(a) = u(b)v(b) - u(a)v(a) $$
+                    $$ \int_a^b (u(x)v'(x) + u'(x)v(x))dx = u(b)v(b) - u(a)v(a) $$
+                </div>
+                Splitting the integral gives the result.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Added Worked Example: Integration by Parts</strong><br><br>
+                Evaluate the definite integral $\int_0^{\pi} x \cos(x) dx$.<br><br>
+                <strong>Step 1: Assign $u$ and $v'$.</strong><br>
+                Let $u(x) = x \implies u'(x) = 1$<br>
+                Let $v'(x) = \cos(x) \implies v(x) = \sin(x)$<br><br>
+                <strong>Step 2: Apply Theorem 0.5.2 (rearranged).</strong><br>
+                <div class="math-center">
+                    $$ \int_0^\pi x \cos(x) dx = [x \sin(x)]_0^\pi - \int_0^\pi 1 \cdot \sin(x) dx $$
+                    $$ = (\pi \sin(\pi) - 0 \sin(0)) - [-\cos(x)]_0^\pi $$
+                    $$ = 0 - (-\cos(\pi) + \cos(0)) = 0 - (-(-1) + 1) = -2 $$
+                </div>
+            </div>
+
+            <h2 id="ftc-2" style="margin-top: 30px; margin-bottom: 20px;">Fundamental Theorem of Calculus II</h2>
+
+            <div class="blue-box">
+                <strong>Theorem(Fundamental Theorem of Calculus II):</strong><br><br>
+                Let $f$ be an integrable function on $[a,b]$. For $x \in [a,b]$, let
+                <div class="math-center">
+                    $$ F(x) = \int_a^x f(t)dt $$
+                </div>
+                Then $F$ is continuous on $[a,b]$. If $f$ is continuous at $x_0 \in (a,b)$, then $F$ is differentiable at $x_0$ and
+                <div class="math-center">
+                    $$ F'(x_0) = f(x_0) $$
+                </div>
+                
+                <strong>Proof(Continuity):</strong><br>
+                Select $M > 0$ so that $|f(x)| \le M$ for all $x \in [a,b]$. If $x, y \in [a,b]$ and $|x-y| < \delta = \frac{\epsilon}{M}$ where $x < y$, then:
+                <div class="math-center">
+                    $$ |F(y) - F(x)| = \left| \int_x^y f(t)dt \right| \le \int_x^y |f(t)|dt \le \int_x^y M dt = M(y-x) < \epsilon $$
+                </div>
+                This shows $F$ is uniformly continuous. Further application of limits demonstrates $F'(x_0) = f(x_0)$.
+            </div>
+
+            <h2 id="leibniz-rule" style="margin-top: 30px; margin-bottom: 20px;">Chain Rule & Function Boundaries</h2>
+
+            <div class="green-box">
+                <strong>Theorem(Leibniz Integral Rule):</strong><br><br>
+                If $f$ is continuous on an open interval $I$ containing the values of differentiable functions $y = a(x)$ and $y = b(x)$, then:
+                <div class="math-center">
+                    $$ \frac{d}{dx} \int_{a(x)}^{b(x)} f(t)dt = f(b(x))b'(x) - f(a(x))a'(x) $$
+                </div>
+                
+                <strong>Proof:</strong><br>
+                Let $F(u) = \int_{t_0}^u f(t)dt$. From FTC-II, $F'(u) = f(u)$. Consider:
+                <div class="math-center">
+                    $$ \frac{d}{dx} \int_{a(x)}^{b(x)} f(t)dt = \frac{d}{dx} \left[ \int_{a(x)}^{t_0} f(t)dt + \int_{t_0}^{b(x)} f(t)dt \right] $$
+                    $$ = \frac{d}{dx} [F(b(x)) - F(a(x))] $$
+                </div>
+                Applying the standard chain rule yields $F'(b(x))b'(x) - F'(a(x))a'(x) = f(b(x))b'(x) - f(a(x))a'(x)$.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Added Worked Example: Using Theorem</strong><br><br>
+                Find the derivative of the accumulation function with respect to $x$: $\frac{d}{dx} \int_{2x}^{x^2} e^{t^2} dt$<br><br>
+                <strong>Step 1: Identify components.</strong><br>
+                $f(t) = e^{t^2}$<br>
+                $b(x) = x^2 \implies b'(x) = 2x$<br>
+                $a(x) = 2x \implies a'(x) = 2$<br><br>
+                <strong>Step 2: Apply the formula.</strong><br>
+                <div class="math-center">
+                    $$ = f(x^2)(2x) - f(2x)(2) $$
+                    $$ = e^{(x^2)^2}(2x) - e^{(2x)^2}(2) $$
+                    $$ = 2x e^{x^4} - 2 e^{4x^2} $$
+                </div>
+            </div>
+
+            <h2 id="change-of-variable" style="margin-top: 30px; margin-bottom: 20px;">Change of Variable</h2>
+
+            <div class="blue-box">
+                <strong>Theorem(Change of Variable / Substitution Rule):</strong><br><br>
+                Let $u$ be a differentiable function on an open interval $J$ such that $u'$ is continuous, and let $I$ be an open interval such that $u(x) \in I$ for all $x \in J$. If $f$ is continuous on $I$, then $f \circ u$ is continuous on $J$ and:
+                <div class="math-center">
+                    $$ \int_a^b f(u(x)) u'(x)dx = \int_{u(a)}^{u(b)} f(u)du $$
+                </div>
+            </div>
+
+            <div class="video-section">
+                <p>Watch this video to understand the geometric intuition of the FTC and how it connects with the Chain Rule:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/hAfpl8jLFOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the Fundamental Theorem of Calculus, Integration by Parts, and the Leibniz Integral Rule.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> According to the Fundamental Theorem of Calculus I, what is the exact evaluated value of $\int_a^b g'(x) dx$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $g'(b) - g'(a)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $g(b) - g(a)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $g(x) + C$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> In the mathematical proof for FTC I, which important theorem is applied to each interval $[t_{k-1}, t_k]$ to obtain $g(t_k) - g(t_{k-1}) = (t_k - t_{k-1})g'(x_k)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The Mean Value Theorem</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The Intermediate Value Theorem</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The Squeeze Theorem</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> The Integration by Parts formula ($\int_a^b u v' dx + \int_a^b u' v dx = u(b)v(b) - u(a)v(a)$) is directly derived from which rule of differentiation?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) The Chain Rule</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The Quotient Rule</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) The Product Rule</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> In the provided worked example for Integration by Parts evaluating $\int_0^{\pi} x \cos(x) dx$, what is the final calculated result?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $0$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $-2$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\pi$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> According to the Fundamental Theorem of Calculus II, if $F(x) = \int_a^x f(t)dt$ and $f$ is continuous at $x_0$, what is the value of $F'(x_0)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $f(x_0)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $f'(x_0)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $F(x_0) - F(a)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Based on the Leibniz Integral Rule, what does the derivative $\frac{d}{dx} \int_{a(x)}^{b(x)} f(t)dt$ correctly evaluate to?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $f(b(x)) - f(a(x))$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $f(b(x))b'(x) - f(a(x))a'(x)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $f'(b(x)) - f'(a(x))$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> In the worked example finding the derivative of $\int_{2x}^{x^2} e^{t^2} dt$, what is the correct substitution for $f(b(x))$ before it is multiplied by $b'(x)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $e^{x^2}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $e^{2x}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $e^{(x^2)^2}$ or $e^{x^4}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> According to the Change of Variable (Substitution) Rule theorem, the integral $\int_a^b f(u(x)) u'(x)dx$ is mathematically equivalent to which of the following?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\int_{u(a)}^{u(b)} f(u)du$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\int_a^b f(u)du$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\int_{u(a)}^{u(b)} f(x)dx$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "riemann-ftc"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "riemann-ftc");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

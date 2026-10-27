@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Real-valued Functions and Their Properties. Focus on the definition and properties of real-valued functions, domain and range, composition of functions, inverse functions, and piecewise-defined functions. Include examples and exercises for practice.">
+    <title>Mathematical Logic & Proof Machinery</title>
+    
+    <!-- Embedded CSS for Dark Theme -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Content Boxes */
+        .content-box {
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-box h2 {
+            margin-top: 0;
+            font-size: 1.6em;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .blue-box { background-color: rgba(56, 189, 248, 0.05); border-left: 5px solid #38bdf8; }
+        .blue-box h2 { color: #38bdf8; }
+
+        .green-box { background-color: rgba(74, 222, 128, 0.05); border-left: 5px solid #4ade80; }
+        .green-box h2 { color: #4ade80; }
+
+        .yellow-box { background-color: rgba(250, 204, 21, 0.05); border-left: 5px solid #facc15; }
+        .yellow-box h2 { color: #facc15; }
+
+        .purple-box { background-color: rgba(192, 132, 252, 0.05); border-left: 5px solid #c084fc; }
+        .purple-box h2 { color: #c084fc; }
+
+        .red-box { background-color: rgba(244, 63, 94, 0.05); border-left: 5px solid #f43f5e; }
+        .red-box h2 { color: #f43f5e; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #1e293b;
+        }
+        th, td {
+            border: 1px solid #334155;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #0f172a;
+            color: #38bdf8;
+        }
+
+        /* Math Centering */
+        .math-center {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        /* Exercises Section */
+        .exercise-section {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+            border-top: 4px solid #facc15;
+        }
+
+        .question-box {
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options-list li {
+            margin-bottom: 10px;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover { background-color: #334155; }
+        .correct-ans { background-color: rgba(74, 222, 128, 0.2) !important; border-color: #4ade80 !important; }
+        .wrong-ans { background-color: rgba(244, 63, 94, 0.2) !important; border-color: #f43f5e !important; }
+        
+        .feedback-msg {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct-text { color: #4ade80; }
+        .wrong-text { color: #f43f5e; }
+
+        #completed-msg {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border: 1px solid #4ade80;
+        }
+
+        /* Database status message CSS */
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+
+    <!-- MathJax for rendering Logic Symbols -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Mathematical Logic & Proof Machinery</h1>
+    </header>
+
+    <div class="container">
+        
+        <div class="content-box blue-box">
+            <h2>1. Why Do We Need Logic & Propositions?</h2>
+            <p>In mathematics, we cannot leave room for guessing; logic is a strict set of rules that stops you from making false claims and ensures conclusions are 100% airtight.</p>
+            <p><strong>What is a Proposition?</strong><br>
+            A proposition is a clear, unambiguous statement that is either True (T) or False (F), but never both at the same time.</p>
+            <ul>
+                <li><strong>Propositions:</strong> "Colombo is in Sri Lanka." (True). $2+2=5$ (False).</li>
+                <li><strong>Non-propositions:</strong> "Is it raining?" (Question). "Clean your room!" (Command). $x+2=5$ (Unknown variable).</li>
+            </ul>
+        </div>
+
+        <div class="content-box green-box">
+            <h2>2. Combining Propositions (Connectives)</h2>
+            <p>We link simple statements using standard connectors:</p>
+            <table>
+                <tr>
+                    <th>Operation</th><th>Symbol</th><th>Meaning</th><th>Rule to Remember</th>
+                </tr>
+                <tr>
+                    <td>NOT</td><td>$\sim a$</td><td>Negation</td><td>Flips True to False, and False to True.</td>
+                </tr>
+                <tr>
+                    <td>AND</td><td>$a \wedge b$</td><td>Conjunction</td><td>True only if both a and b are True.</td>
+                </tr>
+                <tr>
+                    <td>OR</td><td>$a \vee b$</td><td>Disjunction</td><td>True if at least one of them is True.</td>
+                </tr>
+                <tr>
+                    <td>IMPLIES</td><td>$a \rightarrow b$</td><td>"If a, then b"</td><td>False only when a true premise leads to a false result.</td>
+                </tr>
+                <tr>
+                    <td>IFF</td><td>$a \leftrightarrow b$</td><td>"If and only if"</td><td>True when both have the exact same truth state.</td>
+                </tr>
+            </table>
+
+            <p><strong>Key Equivalence (Contrapositive):</strong> $a \rightarrow b \equiv \sim a \vee b \equiv \sim b \rightarrow \sim a$.</p>
+            <p><em>Arrow Notation:</em> $\rightarrow$ is an operation that can be True or False, whereas $\Rightarrow$ means the entire "if-then" statement is guaranteed to be True ($a \rightarrow b \equiv T$).</p>
+        </div>
+
+        <div class="content-box yellow-box">
+            <h2>3. Useful Logical Laws</h2>
+            <ul>
+                <li><strong>Double Negation:</strong> $\sim(\sim a) \equiv a$</li>
+                <li><strong>De Morgan's Laws:</strong> 
+                    $\sim(a \vee b) \equiv \sim a \wedge \sim b$ <br>
+                    $\sim(a \wedge b) \equiv \sim a \vee \sim b$
+                </li>
+                <li><strong>Distributive Laws:</strong>
+                    $a \vee (b \wedge c) \equiv (a \vee b) \wedge (a \vee c)$ <br>
+                    $a \wedge (b \vee c) \equiv (a \wedge b) \vee (a \wedge c)$
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-box purple-box">
+            <h2>4. Quantifiers</h2>
+            <p>Statements in math usually talk about collections of numbers (Countable Sets, where items can be arranged in a line: $x_1, x_2, x_3, \dots$).</p>
+            <ul>
+                <li><strong>Universal Quantifier ($\forall$):</strong> "For all" or "For every". The rule holds for every item without exception. To show it is False, you only need one single counterexample.<br>
+                $\forall x P(x) \equiv P(x_1) \wedge P(x_2) \wedge P(x_3) \wedge \dots$</li>
+                
+                <li><strong>Existential Quantifier ($\exists$):</strong> "There exists at least one". You only need to locate one working case to prove it True.<br>
+                $\exists x P(x) \equiv P(x_1) \vee P(x_2) \vee P(x_3) \vee \dots$</li>
+            </ul>
+            <p><strong>Negating Quantifiers:</strong> Flip and Negate the claim.<br>
+            $\sim \forall x P(x) \equiv \exists x \sim P(x)$<br>
+            $\sim \exists x P(x) \equiv \forall x \sim P(x)$</p>
+        </div>
+
+        <div class="content-box red-box">
+            <h2>5. The Three Proof Methods</h2>
+            <ul>
+                <li><strong>Direct Proof:</strong> Start by assuming statement A is true, and follow clean logical steps until you arrive at B.</li>
+                <li><strong>Proof by Contraposition:</strong> Instead of proving $A \Rightarrow B$, prove the equivalent claim: "If B is false, then A must be false" ($\sim B \Rightarrow \sim A$).</li>
+                <li><strong>Proof by Contradiction:</strong> Assume the opposite of what you want to prove. Show that this assumption forces a ridiculous or impossible outcome. Since the contradiction cannot happen, your initial claim must be true.</li>
+            </ul>
+        </div>
+
+        <!-- EXERCISES SECTION -->
+        <div class="exercise-section">
+            <h2 style="color: #facc15; margin-top: 0;">Practice Exercises</h2>
+            <p>Test your understanding of logical propositions, connectives, and proofs.</p>
+
+            <!-- Q1 -->
+            <div class="question-box" data-q="1">
+                <p><strong>1.</strong> Which of the following is a valid proposition according to logical rules?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) Read the textbook carefully.</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) Colombo is in Sri Lanka.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) $x + 5 = 10$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-box" data-q="2">
+                <p><strong>2.</strong> In a logical implication ($a \rightarrow b$), under what specific condition is the entire statement considered False?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) Only when a true premise (a) leads to a false result (b).</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) Whenever both a and b are False.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) When a is False and b is True.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-box" data-q="3">
+                <p><strong>3.</strong> What is the logically equivalent <em>contrapositive</em> of the statement $a \rightarrow b$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) $b \rightarrow a$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) $\sim a \rightarrow \sim b$</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) $\sim b \rightarrow \sim a$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-box" data-q="4">
+                <p><strong>4.</strong> According to De Morgan's Laws, how do you correctly expand the negation $\sim(a \vee b)$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) $\sim a \vee \sim b$</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) $\sim a \wedge \sim b$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) $a \wedge b$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-box" data-q="5">
+                <p><strong>5.</strong> How do you correctly negate the Universal Quantifier statement $\forall x P(x)$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) $\exists x \sim P(x)$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) $\forall x \sim P(x)$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) $\sim \exists x P(x)$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-box" data-q="6">
+                <p><strong>6.</strong> When evaluating an Existential Quantifier ($\exists x P(x)$), what is required to prove the statement is True?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) You must prove it works for every single item without exception.</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) You only need to locate at least one working case to prove it True.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) You must find exactly two counterexamples.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-box" data-q="7">
+                <p><strong>7.</strong> Which proof method involves assuming the opposite of what you want to prove, in order to force a ridiculous or impossible outcome (like $1=0$)?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) Direct Proof</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) Proof by Contraposition</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) Proof by Contradiction</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-box" data-q="8">
+                <p><strong>8.</strong> What does the double arrow notation ($\Rightarrow$) signify compared to the single arrow ($\rightarrow$)?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) It is a shorthand showing that the entire "if-then" statement is logically guaranteed to be True.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) It indicates that the statement is always False.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) It represents the "If and only if" (IFF) operation.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div id="completed-msg" style="display: none;">
+                🎉 Excellent! You have successfully mastered the basics of Mathematical Logic.
+            </div>
+
+            <!-- Database Auto-Save Message -->
+            <div id="db-status-msg"></div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Interactivity & Firebase Hook -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        // Oyage Firebase config eka methanata danna
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+            } else {
+                currentUser = null;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalQuestions = 8;
+            let correctAnswersCount = 0;
+            const answeredQuestions = new Set(); 
+            const dbStatusMsg = document.getElementById('db-status-msg');
+
+            const questionBoxes = document.querySelectorAll('.question-box');
+
+            questionBoxes.forEach(box => {
+                const buttons = box.querySelectorAll('.option-btn');
+                const feedback = box.querySelector('.feedback-msg');
+                const questionId = box.getAttribute('data-q');
+
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', async function() {
+                        if (answeredQuestions.has(questionId)) return;
+
+                        buttons.forEach(b => {
+                            b.classList.remove('correct-ans', 'wrong-ans');
+                        });
+
+                        const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                        if (isCorrect) {
+                            this.classList.add('correct-ans');
+                            feedback.textContent = "Correct!";
+                            feedback.className = "feedback-msg correct-text";
+                            feedback.style.display = "block";
+                            
+                            answeredQuestions.add(questionId);
+                            correctAnswersCount = answeredQuestions.size;
+
+                            if (correctAnswersCount === totalQuestions) {
+                                document.getElementById('completed-msg').style.display = 'block';
+
+                                // Save progress to Firestore under "real-analysis-logic"
+                                if (currentUser) {
+                                    try {
+                                        const userRef = doc(db, "users", currentUser.uid, "progress", "real-analysis-logic");
+                                        await setDoc(userRef, {
+                                            completed: true,
+                                            completedAt: new Date()
+                                        }, { merge: true });
+
+                                        dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                        dbStatusMsg.style.color = "#4ade80";
+                                    } catch (error) {
+                                        console.error("Error saving progress: ", error);
+                                        dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                        dbStatusMsg.style.color = "#f43f5e";
+                                    }
+                                } else {
+                                    dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                    dbStatusMsg.style.color = "#facc15";
+                                }
+                            }
+                        } else {
+                            this.classList.add('wrong-ans');
+                            feedback.textContent = "Incorrect. Try again!";
+                            feedback.className = "feedback-msg wrong-text";
+                            feedback.style.display = "block";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+</body>
+</html>

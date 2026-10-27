@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Definition of Riemann Integration</title>
+    <link rel="stylesheet" href="style-vectors-intro.css"> 
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Definition of Riemann Integration. Focus on the formal definition of the Riemann integral, conditions for Riemann integrability, and the geometric interpretation of the integral as the signed area under a curve. Include examples, step-by-step explanations, and exercises for practice. Provide a video tutorial for visual learning.">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Definition of Riemann Integration</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#partitions" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Partitions</a></li>
+                <li><a href="#riemann-sums">Riemann Sums</a></li>
+                <li><a href="#refinements">Refinements & Lemmas</a></li>
+                <li><a href="#integrability">Integrability Definition</a></li>
+                <li><a href="#examples">Examples & Applications</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="partitions" style="margin-bottom: 20px;">Partitions</h2>
+
+            <p style="margin-bottom: 15px;">Two intervals are said to be almost disjoint if they are disjoint or intersect only at a common endpoint. For example, the intervals $[1, 3]$ and $[3, 4]$ are almost disjoint, whereas $[0, 4]$ and $[2, 5]$ are not.</p>
+
+            <div class="blue-box">
+                <strong>Definition(Partition):</strong><br><br>
+                Let $I$ be a nonempty, compact interval (closed and bounded). A partition of $I$ is a finite collection $\{I_1, I_2, \dots, I_n\}$ of almost disjoint, nonempty, compact sub intervals whose union is $I$. 
+                <br><br>
+                A partition $P$ of $[a, b]$ with subintervals $I_k = [x_{k-1}, x_k]$ is determined by the set of endpoints of the intervals $a = x_0 < x_1 < x_2 < \dots < x_{n-1} < x_n = b$. 
+                <br><br>
+                We will denote a partition $P$ either by its intervals $P = \{I_1, I_2, \dots, I_n\}$ or by the set of endpoints of the intervals $P = \{x_0, x_1, x_2, \dots, x_n\}$. There is always one more endpoint than interval.
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example:</strong><br><br>
+                The set of intervals $\{[0, 1/6], [1/6, 1/5], [1/5, 1/4], [1/4, 1/3], [1/3, 1/2], [1/2, 1]\}$ is a partition of $[0, 1]$. The corresponding set of endpoints are $\{0, 1/6, 1/5, 1/4, 1/3, 1/2, 1\}$.
+                <br><br>
+                We denote the length of an interval $I = [a, b]$ by $|I| = b - a$.
+                For the interval $I$, the sum of the lengths $|I_k| = x_k - x_{k-1}$ of the almost disjoint sub-intervals in a partition is equal to the length of the whole interval. This is geometrically obvious; algebraically, it follows from the telescoping series:
+                <div class="math-center">
+                    $$ \sum_{k=1}^n |I_k| = \sum_{k=1}^n (x_k - x_{k-1}) $$
+                    $$ = x_n - x_{n-1} + x_{n-1} - x_{n-2} + \dots + x_2 - x_1 + x_1 - x_0 $$
+                    $$ = x_n - x_0 = |I|. $$
+                </div>
+            </div>
+
+            <h2 id="riemann-sums" style="margin-top: 30px; margin-bottom: 20px;">Upper and Lower Riemann Sums</h2>
+
+            <div class="blue-box">
+                Suppose that $f: [a, b] \to \mathbb{R}$ is a bounded function on the compact interval $I = [a, b]$ with:
+                <div class="math-center">
+                    $$ M = \sup_I f, \quad m = \inf_I f. $$
+                </div>
+                If $P = \{I_1, I_2, \dots, I_n\}$ is a partition of $I$, let
+                <div class="math-center">
+                    $$ M_k = \sup_{I_k} f = \sup \{f(x) : x \in [x_{k-1}, x_k]\}, \quad m_k = \inf_{I_k} f = \inf \{f(x) : x \in [x_{k-1}, x_k]\}. $$
+                </div>
+                
+                <strong>Upper Riemann Sum</strong><br>
+                The upper Riemann sum of $f$ with respect to the partition $P$ is defined by:
+                <div class="math-center">
+                    $$ U(f; P) = \sum_{k=1}^n M_k|I_k| = \sum_{k=1}^n M_k(x_k - x_{k-1}) $$
+                </div>
+                Geometrically, $U(f; P)$ is the sum of the areas of rectangles based on the intervals $I_k$ that lie above the graph of $f$.
+                <br><br>
+                <strong>Lower Riemann Sum</strong><br>
+                The lower Riemann sum of $f$ with respect to the partition $P$ is defined by:
+                <div class="math-center">
+                    $$ L(f; P) = \sum_{k=1}^n m_k|I_k| = \sum_{k=1}^n m_k(x_k - x_{k-1}). $$
+                </div>
+                Geometrically, $L(f; P)$ is the sum of the areas of rectangles that lie below the graph of $f$.
+                <br><br>
+                For all $k$, $m_k = \inf\{f(x)\} \le M_k = \sup\{f(x)\}$. This leads directly to our first lemma.
+            </div>
+
+            <div class="green-box" id="refinements">
+                <strong>Lemma:</strong><br>
+                Let $f$ be a bounded function on $[a,b]$ and let $P$ be any partition of $[a,b]$. Then
+                <div class="math-center">$$ L(f, P) \le U(f, P). $$</div>
+                
+                <strong>Refinements of partitions</strong><br>
+                If $P$ and $Q$ are partitions of $[a, b]$, where $P \subseteq Q$, then $Q$ is called a refinement of $P$. Note: If $P_1$ and $P_2$ are partitions of $[a,b]$, then $Q = P_1 \cup P_2$ is a refinement of both $P_1$ and $P_2$.
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+                <strong>Example:</strong><br>
+                Consider the partitions of $[0, 1]$ with endpoints $P = \{0, 1/2, 1\}$, $Q = \{0, 1/3, 2/3, 1\}$, $R = \{0, 1/4, 1/2, 3/4, 1\}$. Thus, $P, Q,$ and $R$ partition $[0, 1]$ into intervals of equal length $1/2, 1/3,$ and $1/4$, respectively. Then $Q$ is not a refinement of $P$ but $R$ is a refinement of $P$.
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Lemma:</strong><br>
+                If $Q$ is a refinement of $P$, then
+                <div class="math-center">$$ L(f, P) \le L(f, Q) \le U(f, Q) \le U(f, P) $$</div>
+                
+                <strong>Proof:</strong><br>
+                From the previous lemma, we already know that $L(f; Q) \le U(f; Q)$. We'll show that $L(f; P) \le L(f; Q)$. (The proof for Upper Sums is similar).
+                Let $P = \{x_0, x_1, \dots, x_n\} \subseteq Q$. Now $\forall k$, let $Q \cap [x_{k-1}, x_k] = \{x_{k-1} = x_{k0}, x_{k1}, \dots, x_{ki_k} = x_k\}$. Then
+                <div class="math-center">$$ m_k = \inf\{f(x) | x \in [x_{k-1}, x_k]\} \le m_{ki} = \inf\{f(x) | x \in [x_{k(i-1)}, x_{ki}]\} $$</div>
+                for $i = 1, 2, \dots, i_k$. Now let,
+                <div class="math-center">
+                    $$ L(f; P) = \sum_{k=1}^n m_k|I_k| = \sum_{k=1}^n m_k\{|I_{k1}| + |I_{k2}| + \dots + |I_{ki_k}|\} $$
+                    $$ \le \sum_{k=1}^n \{m_{k1}|I_{k1}| + m_{k2}|I_{k2}| + \dots + m_{ki_k}|I_{ki_k}|\} $$
+                    $$ = \sum_{k=1}^n \sum_{i=1}^{i_k} m_{ki}|I_{ki}| = L(Q; f). $$
+                </div>
+                Hence $L(f; P) \le L(f; Q)$.
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+                
+                <strong>Lemma:</strong><br>
+                If $P_1$ and $P_2$ are any two partitions of $[a, b]$, then
+                <div class="math-center">$$ L(f, P_1) \le U(f, P_2) $$</div>
+                <strong>Proof:</strong> Let $Q = P_1 \cup P_2$ be the common refinement of $P_1$ and $P_2$. By the previous lemmas, $L(f, P_1) \le L(f, Q) \le U(f, Q) \le U(f, P_2)$.
+            </div>
+
+            <h2 id="integrability" style="margin-top: 30px; margin-bottom: 20px;">Upper Integrals, Lower Integrals, and Integrability</h2>
+
+            <div class="blue-box">
+                Let $\mathscr{P}$ be the collection of all possible partitions of the interval $[a, b]$. 
+                <br><br>
+                <strong>Definition(Upper and Lower Integrals):</strong><br>
+                The upper integral of $f$ is $U(f) := \inf\{U(f, P) : P \in \mathscr{P}\}$.<br>
+                The lower integral of $f$ is $L(f) := \sup\{L(f, P) : P \in \mathscr{P}\}$.<br>
+                A commonly used alternative notation uses a bar over/under the integral sign: $\overline{\int_a^b} f$ and $\underline{\int_a^b} f$.
+                <br><br>
+                <strong>Lemma:</strong> For any bounded function $f$ on $[a, b]$, it is always the case that $L(f) \le U(f)$.
+                <br><br>
+                <strong>Definition:</strong><br>
+                A bounded function $f : [a, b] \to \mathbb{R}$ is Riemann integrable on $[a, b]$ if its upper integral $U(f)$ and lower integral $L(f)$ are equal. In that case, the Riemann integral of $f$ on $[a, b]$, denoted by $\int_a^b f(x)dx$, is defined. 
+                <br><br>
+                An unbounded function is not Riemann integrable. Riemann integral is defined for $f$ on a closed interval $[a, b]$.
+            </div>
+
+            <h2 id="examples" style="margin-top: 30px; margin-bottom: 20px;">Examples</h2>
+
+            <div class="yellow-box">
+                <strong>Example:</strong><br>
+                <em>A constant function is Riemann integrable on $[a, b]$.</em><br>
+                <strong>Solution:</strong> Let $f(x) = C, \forall x \in [a, b]$ where $C \in \mathbb{R}$ is a constant. Clearly $f$ is bounded and $\inf f = \sup f = C$.
+                Let $P = \{x_0, x_1, \dots, x_n\}$ be a partition. Let $m_k, M_k$ be inf and sup of $f$ on $I_k$. Since $f(x) = C$, 
+                <div class="math-center">
+                    $$ L(f, P) = \sum m_k|I_k| = C\sum |I_k| = C(b - a) $$
+                    $$ U(f, P) = \sum M_k|I_k| = C\sum |I_k| = C(b - a) $$
+                </div>
+                Therefore, $\overline{\int_a^b} f = \inf U(f, P) = \sup L(f, P) = \underline{\int_a^b} f = C(b - a)$. $f$ is Riemann integrable and $\int_a^b C dx = C(b - a)$.
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Example:</strong><br>
+                Define $f : [0, 1] \to \mathbb{R}$ by $f(x) = 1/x$ if $0 < x \le 1$, and $0$ if $x = 0$. Then $\int_0^1 \frac{1}{x} dx$ isn't defined as a Riemann integral because $f$ is unbounded. In fact, if $0 < x_1 < x_2 < \dots < x_{n-1} < 1$ is a partition, then $\sup_{[0, x_1]} f = \infty$, so the upper Riemann sums of $f$ are not well-defined.
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+                
+                <strong>Example:</strong><br>
+                An integral with an unbounded interval of integration, such as $\int_0^\infty x dx$ also isn't defined as a Riemann integral. A partition of $[1, \infty)$ into finitely many intervals contains at least one unbounded interval.
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Example:</strong><br>
+                $f(x) = 0$ if $0 < x \le 1$ and $1$ if $x = 0$ is Riemann integrable, and $\int_0^1 f dx = 0$.<br>
+                To show this, let $P = I_1, I_2, \dots, I_n$ be a partition of $[0, 1]$. Then, since $f(x) = 0$ for $x > 0$, 
+                <div class="math-center">$$ M_k = \sup_{I_k} f = 0, \quad m_k = \inf_{I_k} f = 0 \quad \text{for } k = 2, 3, \dots n $$</div>
+                The first interval is $I_1 = [0, x_1]$. Since $f(0)=1$ and $f(x)=0$ for $0 < x \le x_1$, $M_1 = 1, m_1 = 0$.
+                It follows that $U(f, P) = x_1$ and $L(f, P) = 0$. Thus, $L(f) = 0$ and $U(f) = \inf\{x_1 : 0 < x_1 \le 1\} = 0$. Since they are equal, the integral of $f$ is 0. <em>We need to show that a particular function is integrable before actually integrating it.</em>
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+                
+                <strong>Added Worked Example: Calculating a specific Riemann Sum</strong><br>
+                Consider $f(x) = x^2$ on the interval $[0, 2]$. Let's evaluate $U(f; P)$ and $L(f; P)$ using the uniform partition $P = \{0, 1, 2\}$.<br>
+                The subintervals are $I_1 = [0, 1]$ and $I_2 = [1, 2]$. The lengths are $|I_1| = 1$ and $|I_2| = 1$.<br>
+                * For $I_1$: $m_1 = \inf_{[0,1]} (x^2) = 0$ and $M_1 = \sup_{[0,1]} (x^2) = 1$.<br>
+                * For $I_2$: $m_2 = \inf_{[1,2]} (x^2) = 1$ and $M_2 = \sup_{[1,2]} (x^2) = 4$.<br>
+                Lower Sum $L(f; P) = m_1(1) + m_2(1) = 0(1) + 1(1) = 1$.<br>
+                Upper Sum $U(f; P) = M_1(1) + M_2(1) = 1(1) + 4(1) = 5$.
+            </div>
+
+            <div class="video-section">
+                <p>Watch this rigorous tutorial exploring the mathematical definitions of upper and lower integrals, partition refinements, and the exact conditions for Riemann integrability:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/rbFox57KKaQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on Partitions, Riemann Sums, and Integrability conditions.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> What constitutes a "partition" $P$ of a nonempty, compact interval $[a, b]$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) An infinite set of points existing between $a$ and $b$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) A division of the interval into exactly two equal halves.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) A finite collection of almost disjoint, nonempty, compact subintervals whose union is $[a,b]$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> How is the upper Riemann sum $U(f; P)$ defined geometrically?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) The sum of the areas of rectangles based on the intervals that lie above the graph of $f$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) The sum of the areas of rectangles based on the intervals that lie strictly below the graph of $f$.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The sum of the areas of rectangles that perfectly match the curve of $f$.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> If $P$ and $Q$ are partitions of $[a, b]$ and $P \subseteq Q$ (meaning $Q$ is a refinement of $P$), what is the mathematical relationship between their lower sums?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $L(f, P) \ge L(f, Q)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $L(f, P) \le L(f, Q)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $L(f, P) = L(f, Q)$ always</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> For a bounded function $f$ to be officially considered "Riemann integrable" on an interval $[a, b]$, what condition MUST be met?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Its upper integral must be exactly zero.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Its upper integral $U(f)$ and lower integral $L(f)$ must be strictly equal.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) The function must be unbounded.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> According to the provided examples, why is the function $f(x) = 1/x$ on the interval $[0, 1]$ NOT Riemann integrable?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Because the interval $[0, 1]$ is not closed.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) Because the function is a constant.</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) Because the function is unbounded, meaning the upper Riemann sums are not well-defined.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> How is the upper integral $U(f)$ mathematically defined across all possible partitions $\mathscr{P}$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) As the infimum of all upper Riemann sums ($\inf\{U(f, P)\}$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) As the supremum of all upper Riemann sums ($\sup\{U(f, P)\}$).</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) As the supremum of all lower Riemann sums ($\sup\{L(f, P)\}$).</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> In the worked example calculating the Riemann sums for $f(x) = x^2$ on $[0, 2]$ with the partition $P = \{0, 1, 2\}$, what were the final values of the lower sum $L(f; P)$ and upper sum $U(f; P)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $L(f; P) = 1$ and $U(f; P) = 5$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $L(f; P) = 0$ and $U(f; P) = 4$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $L(f; P) = 1$ and $U(f; P) = 4$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> If $P_1$ and $P_2$ are any two completely arbitrary partitions of $[a, b]$, which mathematical inequality is always true for a bounded function $f$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $U(f, P_1) \le L(f, P_2)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $L(f, P_1) = U(f, P_2)$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $L(f, P_1) \le U(f, P_2)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "riemann-definition"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "riemann-definition");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

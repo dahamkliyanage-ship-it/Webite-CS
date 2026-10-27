@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : The Real Number System & Axioms. Focus on the field axioms, order axioms, and completeness axiom of the real numbers. Cover the properties of real numbers, including commutativity, associativity, distributivity, additive and multiplicative identities and inverses, as well as the trichotomy and transitivity of order. Include examples, proofs, and exercises for practice.">
+
+    <script src="chatbotMaths.js"></script>
+    <title>The Real Number System & Axioms</title>
+    
+    <!-- Embedded CSS for Dark Theme -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Content Boxes */
+        .content-box {
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-box h2 {
+            margin-top: 0;
+            font-size: 1.6em;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .blue-box { background-color: rgba(56, 189, 248, 0.05); border-left: 5px solid #38bdf8; }
+        .blue-box h2 { color: #38bdf8; }
+
+        .green-box { background-color: rgba(74, 222, 128, 0.05); border-left: 5px solid #4ade80; }
+        .green-box h2 { color: #4ade80; }
+
+        .yellow-box { background-color: rgba(250, 204, 21, 0.05); border-left: 5px solid #facc15; }
+        .yellow-box h2 { color: #facc15; }
+
+        .purple-box { background-color: rgba(192, 132, 252, 0.05); border-left: 5px solid #c084fc; }
+        .purple-box h2 { color: #c084fc; }
+
+        .red-box { background-color: rgba(244, 63, 94, 0.05); border-left: 5px solid #f43f5e; }
+        .red-box h2 { color: #f43f5e; }
+
+        /* Lists and formatting */
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Math Centering */
+        .math-center {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+            overflow-x: auto;
+        }
+
+        /* Exercises Section */
+        .exercise-section {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+            border-top: 4px solid #facc15;
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            background-color: #0f172a;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+
+        .progress-bar {
+            height: 25px;
+            width: 0%;
+            background-color: #4ade80;
+            text-align: center;
+            line-height: 25px;
+            color: #0f172a;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+
+        .question-box {
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options-list li {
+            margin-bottom: 10px;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover { background-color: #334155; }
+        .correct-ans { background-color: rgba(74, 222, 128, 0.2) !important; border-color: #4ade80 !important; }
+        .wrong-ans { background-color: rgba(244, 63, 94, 0.2) !important; border-color: #f43f5e !important; }
+        
+        .feedback-msg {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct-text { color: #4ade80; }
+        .wrong-text { color: #f43f5e; }
+
+        #completed-msg {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border: 1px solid #4ade80;
+        }
+
+        /* Database status message CSS */
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+
+    <!-- MathJax for rendering Mathematical Symbols -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>The Real Number System & Axioms</h1>
+    </header>
+
+    <div class="container">
+        
+        <!-- Box 1 -->
+        <div class="content-box blue-box">
+            <h2>Why Does $\mathbb{R}$ Need Three Pillars?</h2>
+            <p>Think of building a high-precision measurement system:</p>
+            <ul>
+                <li><strong>The Field Axioms</strong> give you your arithmetic engine: you can reliably add, subtract, multiply, and scale values without formulas collapsing.</li>
+                <li><strong>The Order Axioms</strong> give you direction and comparison: you can tell which reading is larger, calibrate sensor thresholds, and define error margins using absolute values.</li>
+                <li><strong>The Completeness Axiom</strong> is the solid concrete: it glues all points together into an unbroken continuum so limits never fall into empty space.</li>
+            </ul>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="content-box green-box">
+            <h2>Part A: The Field Axioms (Algebraic Foundations)</h2>
+            <p><strong>Axiom 1 (Field Axioms):</strong> $\mathbb{R}$ is a non-empty set with addition (+) and multiplication ($\cdot$) satisfying 9 rules:</p>
+            <ul>
+                <li>Commutativity of Addition: $\forall a,b \in \mathbb{R}, a+b=b+a$.</li>
+                <li>Associativity of Addition: $\forall a,b,c \in \mathbb{R}, a+(b+c)=(a+b)+c$.</li>
+                <li>Additive Identity: $\exists 0 \in \mathbb{R}, \forall a \in \mathbb{R}, a+0=a$.</li>
+                <li>Additive Inverse: $\forall a \in \mathbb{R}, \exists -a \in \mathbb{R}, a+(-a)=0$.</li>
+                <li>Commutativity of Multiplication: $\forall a,b \in \mathbb{R}, a \cdot b=b \cdot a$.</li>
+                <li>Associativity of Multiplication: $\forall a,b,c \in \mathbb{R}, a \cdot (b \cdot c)=(a \cdot b) \cdot c$.</li>
+                <li>Multiplicative Identity: $\exists 1 \in \mathbb{R}, \forall a \in \mathbb{R}, a \cdot 1=a$.</li>
+                <li>Multiplicative Inverse: $\forall a \in \mathbb{R}-\{0\}, \exists a^{-1} \in \mathbb{R}, a \cdot a^{-1}=1$.</li>
+                <li>Distributive Law: $\forall a,b,c \in \mathbb{R}, a \cdot (b+c)=(a \cdot b)+(a \cdot c)$.</li>
+            </ul>
+
+            <p><strong>Number Hierarchy & Fields:</strong></p>
+            <ul>
+                <li>$\mathbb{R}$ and $\mathbb{Q}$ are fields because they satisfy all 9 axioms.</li>
+                <li>$\mathbb{Z}$ with + and $\cdot$ is <em>not</em> a field because it fails Axiom 8 (multiplicative inverses do not exist in $\mathbb{Z}$; e.g., $2^{-1} = \frac{1}{2} \notin \mathbb{Z}$).</li>
+            </ul>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="content-box yellow-box">
+            <h2>Part B: The Order Axioms (Linear Continuum)</h2>
+            <p><strong>Axiom 2 (Order Axioms):</strong> $\mathbb{R}$ has a strict linear order relation $<$ satisfying:</p>
+            <ul>
+                <li><strong>Trichotomy:</strong> For any $a,b \in \mathbb{R}$, exactly one holds: $a=b$, $a<b$, or $b<a$.</li>
+                <li><strong>Transitivity:</strong> $\forall a,b,c \in \mathbb{R}$, $a<b \wedge b<c \Rightarrow a<c$.</li>
+                <li><strong>Addition Invariance:</strong> $\forall a,b,c \in \mathbb{R}$, $a<b \Rightarrow a+c < b+c$.</li>
+                <li><strong>Multiplication by Positives:</strong> $\forall a,b,c \in \mathbb{R}$, $a<b \wedge 0<c \Rightarrow a \cdot c < b \cdot c$.</li>
+            </ul>
+            <p><strong>Important Absolute Value Properties:</strong></p>
+            <ul>
+                <li>$\vert{}a\vert{} \le r \Leftrightarrow -r \le a \le r$.</li>
+                <li><strong>Triangle Inequality:</strong> $\vert{}a\vert{}-\vert{}b\vert{} \le \vert{}a+b\vert{} \le \vert{}a\vert{}+\vert{}b\vert{}$.</li>
+                <li><strong>Parallelogram Identity:</strong> $\vert{}a+b\vert{}^2 + \vert{}a-b\vert{}^2 = 2a^2 + 2b^2$.</li>
+            </ul>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="content-box purple-box">
+            <h2>Part C: The Completeness Axiom & Bounds</h2>
+            <ul>
+                <li><strong>Upper Bound:</strong> $u \in \mathbb{R}$ such that $\forall a \in A, a \le u$.</li>
+                <li><strong>Lower Bound:</strong> $l \in \mathbb{R}$ such that $\forall a \in A, l \le a$.</li>
+                <li><strong>Supremum ($sup~A$):</strong> The least upper bound of A. If $u < sup~A$, then $u$ is not an upper bound of A.</li>
+                <li><strong>Infimum ($inf~A$):</strong> The greatest lower bound of A. If $l > inf~A$, then $l$ is not a lower bound of A.</li>
+            </ul>
+            <p><strong>Axiom 3 (The Completeness Axiom):</strong></p>
+            <ul>
+                <li>Every non-empty subset of $\mathbb{R}$ that is bounded above has a supremum in $\mathbb{R}$.</li>
+                <li>Every non-empty subset of $\mathbb{R}$ that is bounded below has an infimum in $\mathbb{R}$.</li>
+            </ul>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="content-box red-box">
+            <h2>Key Theorems & Proofs</h2>
+            <ul>
+                <li><strong>Archimedean Property:</strong> For every $a \in \mathbb{R}$, there exists $n \in \mathbb{Z}$ such that $n \ge a$. <em>(Proved by showing $\mathbb{Z}$ is unbounded above using the Completeness Axiom).</em></li>
+                <li><strong>Density of $\mathbb{Q}$ and $\mathbb{R}-\mathbb{Q}$:</strong> There is a rational and an irrational between any two reals.</li>
+                <li><strong>Supremum Addition:</strong> For $A+B = \{a+b \vert{} a \in A, b \in B\}$, $sup(A+B) = sup~A + sup~B$.</li>
+                <li><strong>$\epsilon$-Characterization of Supremum:</strong> Let A be bounded above by $u$. Then $\forall \epsilon>0, \exists a \in A$ such that $a+\epsilon > u \Leftrightarrow u = sup~A$.</li>
+            </ul>
+        </div>
+
+        <!-- EXERCISES SECTION -->
+        <div class="exercise-section">
+            <h2 style="color: #facc15; margin-top: 0;">Practice Exercises & Progress Tracking</h2>
+            <p>Test your understanding of the Real Number System to track your progress.</p>
+
+            <!-- PROGRESS BAR -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar">0%</div>
+            </div>
+
+            <!-- Q1 -->
+            <div class="question-box" data-q="1">
+                <p><strong>1.</strong> Which set of axioms acts as the "arithmetic engine", allowing you to reliably add, subtract, multiply, and scale values?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) The Order Axioms</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) The Field Axioms</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) The Completeness Axiom</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-box" data-q="2">
+                <p><strong>2.</strong> Why is the set of Integers ($\mathbb{Z}$) with addition and multiplication NOT considered a field?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) It lacks an additive identity (0).</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) Multiplicative inverses do not exist in $\mathbb{Z}$ (e.g., $2^{-1} = 1/2 \notin \mathbb{Z}$).</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) It does not satisfy the Commutativity of Addition.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-box" data-q="3">
+                <p><strong>3.</strong> What does the "Trichotomy" property in the Order Axioms state for any $a, b \in \mathbb{R}$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) $a < b \Rightarrow a+c < b+c$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) $a \le b$ and $b \le a \Rightarrow a=b$</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) Exactly one condition holds: $a=b$, $a<b$, or $b<a$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-box" data-q="4">
+                <p><strong>4.</strong> What is the formal definition of the "Supremum" ($sup~A$) of a set A?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) The least upper bound of A.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) The greatest lower bound of A.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) Any element $u \in \mathbb{R}$ such that $a \le u$.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-box" data-q="5">
+                <p><strong>5.</strong> According to the Completeness Axiom, every non-empty subset of $\mathbb{R}$ that is bounded above must have a...</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) Minimum in $\mathbb{R}$</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) Supremum in $\mathbb{R}$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) Rational limit</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-box" data-q="6">
+                <p><strong>6.</strong> Which property guarantees that for every real number $a \in \mathbb{R}$, there exists an integer $n \in \mathbb{Z}$ such that $n \ge a$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) The Archimedean Property</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) The Triangle Inequality</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) Density of Rationals</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-box" data-q="7">
+                <p><strong>7.</strong> The Density property of real numbers proves that between any two distinct real numbers, there always exists...</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) An integer and a whole number.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) A supremum and an infimum.</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) A rational number and an irrational number.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-box" data-q="8">
+                <p><strong>8.</strong> Which of the following represents the correct standard formula for the Triangle Inequality?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) $\vert{}a+b\vert{}^2 + \vert{}a-b\vert{}^2 = 2a^2 + 2b^2$</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) $\vert{}a\vert{}-\vert{}b\vert{} \le \vert{}a+b\vert{} \le \vert{}a\vert{}+\vert{}b\vert{}$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) $\vert{}a\vert{} \le r \Leftrightarrow -r \le a \le r$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div id="completed-msg" style="display: none;">
+                🎉 Excellent! You have successfully mastered The Real Number System & Axioms.
+            </div>
+
+            <!-- Database Auto-Save Message -->
+            <div id="db-status-msg"></div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Interactivity & Firebase Hook -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        // Oyage Firebase config eka methanata danna
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+            } else {
+                currentUser = null;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalQuestions = 8;
+            let correctAnswersCount = 0;
+            const answeredQuestions = new Set(); 
+            const progressBar = document.getElementById('progress-bar');
+            const dbStatusMsg = document.getElementById('db-status-msg');
+
+            const questionBoxes = document.querySelectorAll('.question-box');
+
+            questionBoxes.forEach(box => {
+                const buttons = box.querySelectorAll('.option-btn');
+                const feedback = box.querySelector('.feedback-msg');
+                const questionId = box.getAttribute('data-q');
+
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', async function() {
+                        if (answeredQuestions.has(questionId)) return;
+
+                        buttons.forEach(b => {
+                            b.classList.remove('correct-ans', 'wrong-ans');
+                        });
+
+                        const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                        if (isCorrect) {
+                            this.classList.add('correct-ans');
+                            feedback.textContent = "Correct!";
+                            feedback.className = "feedback-msg correct-text";
+                            feedback.style.display = "block";
+                            
+                            answeredQuestions.add(questionId);
+                            correctAnswersCount = answeredQuestions.size;
+
+                            // Calculate Progress Percentage
+                            const progressPercentage = Math.round((correctAnswersCount / totalQuestions) * 100);
+                            
+                            // Update Visual Progress Bar
+                            progressBar.style.width = progressPercentage + '%';
+                            progressBar.textContent = progressPercentage + '%';
+
+                            if (correctAnswersCount === totalQuestions) {
+                                document.getElementById('completed-msg').style.display = 'block';
+
+                                // Save progress to Firestore under "real-analysis-axioms"
+                                if (currentUser) {
+                                    try {
+                                        const userRef = doc(db, "users", currentUser.uid, "progress", "real-analysis-axioms");
+                                        await setDoc(userRef, {
+                                            completed: true,
+                                            completedAt: new Date()
+                                        }, { merge: true });
+
+                                        dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                        dbStatusMsg.style.color = "#4ade80";
+                                    } catch (error) {
+                                        console.error("Error saving progress: ", error);
+                                        dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                        dbStatusMsg.style.color = "#f43f5e";
+                                    }
+                                } else {
+                                    dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                    dbStatusMsg.style.color = "#facc15";
+                                }
+                            }
+                        } else {
+                            this.classList.add('wrong-ans');
+                            feedback.textContent = "Incorrect. Try again!";
+                            feedback.className = "feedback-msg wrong-text";
+                            feedback.style.display = "block";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+</body>
+</html>

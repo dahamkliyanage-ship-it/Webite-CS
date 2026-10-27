@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properties of Plane Areas - Summary</title>
+  <link rel="stylesheet" href="updated.css">
+  <link rel="stylesheet" href="chatbot_style.css">
+  <meta name="bot-context" content="Topic: Engineering Mechanics : ME 1033 Properties of Plane Areas. Focus on centroids and center of gravity of plane areas, including centroid coordinates using first moments of area and symmetry. Cover first and second moments of area, area moment of inertia Ixx = ∫y²dA and Iyy = ∫x²dA, polar moment Izz = Ixx + Iyy, standard section formulas for rectangles, triangles, and circles, and radius of gyration r = √(I/A). Explain the parallel axis theorem I = I_centroid + A·d² and perpendicular axis theorem. Cover engineering applications of second moment of area to bending stress σ = My/I, beam deflection, flexural rigidity EI, and the effect of beam orientation and depth on bending resistance. Explain transformation of second moments and product moment for inclined axes, including Ix1x1, Iy1y1, Ix1y1 transformation equations, the invariant sum Ixx + Iyy = Ix1x1 + Iy1y1 = Izz, and rotation angle θ. Cover principal axes, where the product moment is zero, the orientation formula tan(2θ) = −2Ixy/(Ixx − Iyy), perpendicular principal axes, maximum and minimum moments of area, and the relationship between symmetry axes and principal axes. Include composite standard sections such as hollow circular tubes, hollow boxes, and symmetric I-beams, and practice problems involving symmetry, product moment, axis rotation, and the invariant sum theorem.">
+
+</head>
+<body>
+
+  <!-- Navigation Buttons -->
+  
+  <nav>
+    <a href="mechanics_home.html">← Back to Mechanics Hub</a>
+    <a href="#centroid">Centroids</a>
+    <a href="#moments">Moments of Area</a>
+    <a href="#theorems">Theorems</a>
+    <a href="#applications">Applications</a>
+    <a href="#transformation">Transformation</a>
+    <a href="#principal-axes">Principal Axes</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Properties of Plane Areas</h1>
+      <p>ME 1033 - Properties of Plane Areas - Summary</p>
+    </header>
+
+    <!-- 1. Centroid -->
+    <section id="centroid">
+      <h2>1. Centroid & Center of Gravity</h2>
+      <ul>
+        <li><strong>Centroid (C):</strong> Geometric center of a plane area where the total area is considered to be concentrated.</li>
+        <li><strong>Coordinates:</strong></li>
+      </ul>
+      <div class="formula-box">
+       <span style="border-top: 1.5px solid currentColor; display: inline-block; line-height: 0.85;">x</span> = &int;(x &middot; dA) / A <br>
+       <span style="border-top: 1.5px solid currentColor; display: inline-block; line-height: 0.85;">y</span> = &int;(y &middot; dA) / A
+      </div>
+      <ul>
+        <li><strong>Symmetry:</strong> If an area has an axis of symmetry, the centroid lies along it. With multiple axes, it lies at their intersection.</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/GhapbLYmi18" 
+             title="Statics Video" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Moments of Area -->
+    <section id="moments">
+      <h2>2. Moments of Area</h2>
+      <ul>
+        <li><strong>First Moment:</strong> Evaluates distribution relative to an axis (used to locate centroid).</li>
+        <li><strong>Second Moment (Moment of Inertia - I):</strong> Quantifies resistance to bending and deflection.</li>
+      </ul>
+      <div class="formula-box">
+        I_xx = ∫ y² dA  |  I_yy = ∫ x² dA <br>
+        Polar Moment: I_zz = J_o = I_xx + I_yy
+      </div>
+      <!-- Rectangle Dimensions Diagram -->
+      
+      <ul>
+        <li><strong>Standard Sections:</strong>
+          <ul>
+            <li>Rectangle (Centroidal): <code>I_xx = (b · d³) / 12</code></li>
+            <li>Triangle (Base): <code>I_base = (b · h³) / 12</code></li>
+            <li>Circle: <code>I_xx = (π · R⁴) / 4</code></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1HAVKR_HNPZSHQ7bXmcABj96cdMdnwLaK" alt="Rectangle b and d Dimensions">
+      </div>
+    </section>
+
+    <!-- 3. Key Theorems -->
+    <section id="theorems">
+      <h2>3. Parallel & Perpendicular Axis Theorems</h2>
+      <ul>
+        <li><strong>Parallel Axis Theorem:</strong> Relates moment of inertia about any axis to a parallel centroidal axis.</li>
+      </ul>
+      <div class="formula-box">
+        I_xx = I_centroid + A · (ȳ)²
+      </div>
+      <!-- Parallel Axis y-bar Diagram -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1-YCuUv9HWxJ_WoqzlUUGfcFqunQUMghO" alt="Parallel Axis Theorem Axes and Distances">
+      </div>
+      <ul>
+        <li><strong>Perpendicular Axis Theorem:</strong> Valid for planar figures (<code>I_zz = I_xx + I_yy</code>).</li>
+        <li><strong>Radius of Gyration:</strong> Distance where total area yields the same moment: <code>r_x = √(I_xx / A)</code>.</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/tUVYU4WnxQw" 
+             title="Statics Video" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Applications (1 Image) -->
+    <section id="applications">
+      <h2>4. Engineering Application & Beam Geometry</h2>
+      <p>Cross-sectional shape controls structural performance under bending loads:</p>
+      <ul>
+        <li><strong>Bending Stress:</strong> <code>σ = (M · y) / I</code> (Larger <code>I</code> results in lower stress).</li>
+        <li><strong>Deflection:</strong> Inversely proportional to flexural rigidity (<code>E · I</code>).</li>
+      </ul>
+
+     <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1AUPrQI6_AcFwcm845EKyHXqkdIbCwCRr" alt="Beam Diagram">
+     </div>
+      <ul>
+        <li><strong>Orientation:</strong> Placing beams vertically maximizes depth (<code>d</code>), drastically raising <code>I</code> via <code>d³</code> to resist bending.</li>
+      </ul>
+    </section>
+    <!-- 5. The Transformation Law -->
+    <section id="transformation">
+      <h2>5. Transformation Law (Inclined Axes)</h2>
+      <p>Calculates the second moment of area when reference axes are rotated by an angle &theta;:</p>
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1B8a_haWQLzoP0b1o8iAedsom5QRqwrZt" alt="Transformation Law Diagram">
+      </div>
+      <div class="formula-box">
+        I<sub>x1x1</sub> = ( (I<sub>xx</sub> + I<sub>yy</sub>) / 2 ) + ( (I<sub>xx</sub> - I<sub>yy</sub>) / 2 ) &middot; cos 2&theta; - I<sub>xy</sub> &middot; sin 2&theta;<br>
+        I<sub>y1y1</sub> = ( (I<sub>xx</sub> + I<sub>yy</sub>) / 2 ) - ( (I<sub>xx</sub> - I<sub>yy</sub>) / 2 ) &middot; cos 2&theta; + I<sub>xy</sub> &middot; sin 2&theta;<br>
+        I<sub>x1y1</sub> = ( (I<sub>xx</sub> - I<sub>yy</sub>) / 2 ) &middot; sin 2&theta; + I<sub>xy</sub> &middot; cos 2&theta;
+      </div>
+      <ul>
+        <li><strong>Invariant Sum:</strong> Total second moment remains constant under any rotation:</li>
+      </ul>
+      <div class="formula-box">
+        I<sub>xx</sub> + I<sub>yy</sub> = I<sub>x1x1</sub> + I<sub>y1y1</sub> = I<sub>zz</sub>
+      </div>
+    </section>
+
+    <!-- 6. Principal Axes & Composite Areas -->
+    <section id="principal-axes">
+      <h2>6. Principal Axes & Properties</h2>
+      <ul>
+        <li><strong>Definition:</strong> Axes about which product moment of area vanishes (<code>I<sub>x1y1</sub> = 0</code>).</li>
+        <li><strong>Orientation Formula:</strong></li>
+      </ul>
+      <div class="formula-box">
+        tan 2&theta; = -2 &middot; I<sub>xy</sub> / (I<sub>xx</sub> - I<sub>yy</sub>)
+      </div>
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/14HUhjGa3RywVzj-g4AFSwprm9GCQBlf5" alt="tan 2 theta Graph">
+      </div>
+      <ul>
+        <li><strong>Key Characteristics:</strong>
+          <ul>
+            <li>Two principal axes are strictly perpendicular to each other (&theta; and &theta; + 90&deg;).</li>
+            <li>Yields the maximum and minimum possible second moments of area.</li>
+            <li>Any axis of symmetry is automatically a principal axis.</li>
+            <li>If a plane area has more than 2 axes of symmetry (e.g., circle, square), every axis is a principal axis with identical <code>I</code>.</li>
+          </ul>
+        </li>
+        <div class="video-card">
+          <p class="video-title">🎥 Watch video explanation:</p>
+          <div class="iframe-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/HeBYXi1cSOw" 
+                title="Statics Video" 
+                allowfullscreen>
+            </iframe>
+         </div>
+        </div>
+        
+        <li><strong>Composite Standard Sections (Centroidal I<sub>xx</sub>):</strong>
+          <div class="img-container">
+            <img src="https://lh3.googleusercontent.com/d/14tWsf2I82msDSVGZPF0CdfAjl6Url_ee" alt="Composite Sections Diagram">
+          </div>  
+          <ul>
+            <li>Hollow Circular Tube: <code>I<sub>xx</sub> = (&pi; / 64) &middot; (D<sup>4</sup> - d<sup>4</sup>)</code></li>
+            <li>Hollow Box: <code>I<sub>xx</sub> = (B &middot; D<sup>3</sup> - b &middot; d<sup>3</sup>) / 12</code></li>
+            <li>Symmetric I-Beam: <code>I<sub>xx</sub> = (B &middot; D<sup>3</sup> / 12) - 2 &middot; [b &middot; d<sup>3</sup> / 12]</code></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <div class="quiz-box">
+      <strong>Quick Test: Plane Areas</strong>
+      <p>If a symmetrical I-section has an area where I<sub>xx</sub> = 4000 cm<sup>4</sup> and I<sub>yy</sub> = 1000 cm<sup>4</sup>, what is the product moment of area I<sub>xy</sub>, and what is the value of (I<sub>x1x1</sub> + I<sub>y1y1</sub>) when axes rotate by 30&deg;?</p>
+      <details>
+        <summary>Show Answer &amp; Working</summary>
+        <p>1. Since the section has axes of symmetry, I<sub>xy</sub> = 0.</p>
+        <p>2. By Invariant Sum Theorem: I<sub>x1x1</sub> + I<sub>y1y1</sub> = I<sub>xx</sub> + I<sub>yy</sub> = 4000 + 1000 = 5000 cm<sup>4</sup>.</p>
+      </details>
+    </div>
+
+    
+  </div>
+  <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbot-mech.js"></script>
+
+</body>
+</html>

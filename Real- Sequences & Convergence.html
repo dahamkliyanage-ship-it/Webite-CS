@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Sequences & Convergence. Focus on the definition and properties of sequences, limits of sequences, convergence criteria, and the relationship between sequences and series. Include examples and exercises for practice.">
+    <title>Sequences & Convergence</title>
+    
+    <!-- Embedded CSS for Dark Theme -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Content Boxes */
+        .content-box {
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-box h2 {
+            margin-top: 0;
+            font-size: 1.6em;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .blue-box { background-color: rgba(56, 189, 248, 0.05); border-left: 5px solid #38bdf8; }
+        .blue-box h2 { color: #38bdf8; }
+
+        .green-box { background-color: rgba(74, 222, 128, 0.05); border-left: 5px solid #4ade80; }
+        .green-box h2 { color: #4ade80; }
+
+        .yellow-box { background-color: rgba(250, 204, 21, 0.05); border-left: 5px solid #facc15; }
+        .yellow-box h2 { color: #facc15; }
+
+        .purple-box { background-color: rgba(192, 132, 252, 0.05); border-left: 5px solid #c084fc; }
+        .purple-box h2 { color: #c084fc; }
+
+        .red-box { background-color: rgba(244, 63, 94, 0.05); border-left: 5px solid #f43f5e; }
+        .red-box h2 { color: #f43f5e; }
+
+        /* Lists and formatting */
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Exercises Section */
+        .exercise-section {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+            border-top: 4px solid #facc15;
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            background-color: #0f172a;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+
+        .progress-bar {
+            height: 25px;
+            width: 0%;
+            background-color: #4ade80;
+            text-align: center;
+            line-height: 25px;
+            color: #0f172a;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+
+        .question-box {
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options-list li {
+            margin-bottom: 10px;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover { background-color: #334155; }
+        .correct-ans { background-color: rgba(74, 222, 128, 0.2) !important; border-color: #4ade80 !important; }
+        .wrong-ans { background-color: rgba(244, 63, 94, 0.2) !important; border-color: #f43f5e !important; }
+        
+        .feedback-msg {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct-text { color: #4ade80; }
+        .wrong-text { color: #f43f5e; }
+
+        #completed-msg {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border: 1px solid #4ade80;
+        }
+
+        /* Database status message CSS */
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+
+    <!-- MathJax for rendering Mathematical Symbols -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Sequences & Convergence</h1>
+    </header>
+
+    <div class="container">
+        
+        <!-- Box 1 -->
+        <div class="content-box blue-box">
+            <h2>1. Sequence Definition & Formal Limits</h2>
+            <ul>
+                <li><strong>Sequence:</strong> A sequence is a function $u:\mathbb{Z}^{+}\rightarrow\mathbb{R}$. We write the image of n as $u_{n}$ instead of $u(n)$.</li>
+                <li><strong>Finite Limit of a Sequence:</strong><br>
+                $lim_{n\rightarrow\infty}u_{n}=L\in\mathbb{R}\Leftrightarrow\forall\epsilon>0, \exists N\in\mathbb{Z}^{+}, \forall n (n>N\Rightarrow\vert{}u_{n}-L\vert{}<\epsilon)$.<br>
+                <em>Plain Meaning:</em> For any precision $\epsilon>0$, there exists an index cutoff N past which every single term $u_{n}$ is within $\epsilon$ of L.</li>
+                <li><strong>Divergence to $\pm\infty$:</strong><br>
+                $lim_{n\rightarrow\infty}u_{n}=\infty\Leftrightarrow\forall M>0, \exists N\in\mathbb{Z}^{+}, \forall n (n>N\Rightarrow u_{n}>M)$.<br>
+                $lim_{n\rightarrow\infty}u_{n}=-\infty\Leftrightarrow\forall M<0, \exists N\in\mathbb{Z}^{+}, \forall n (n>N\Rightarrow u_{n}<M)$.</li>
+            </ul>
+            <p>If a sequence does not approach a finite L, $\infty$, or $-\infty$, its limit does not exist (DNE).</p>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="content-box green-box">
+            <h2>One-Sided Limits & Basic Proofs</h2>
+            <ul>
+                <li><strong>Converging from above ($L^{+}$):</strong> $\forall\epsilon>0, \exists N\in\mathbb{Z}^{+}, \forall n (n>N\Rightarrow 0\le u_{n}-L<\epsilon)$.</li>
+                <li><strong>Converging from below ($L^{-}$):</strong> $\forall\epsilon>0, \exists N\in\mathbb{Z}^{+}, \forall n (n>N\Rightarrow -\epsilon<u_{n}-L\le 0)$.</li>
+            </ul>
+            <p>If $u_{n}\rightarrow L^{+}$ or $u_{n}\rightarrow L^{-}$, then $lim_{n\rightarrow\infty}u_{n}=L$.</p>
+            
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+            
+            <p><strong>Exercise 1.1:</strong> Prove $lim_{n\rightarrow\infty}(1+\frac{1}{n})=1$.<br>
+            <em>Proof:</em> Let $\epsilon>0$. By the Archimedean Property, choose $N>\frac{1}{\epsilon}$. For all $n>N$, $\frac{1}{n}<\epsilon$.<br>
+            Thus: $\vert{}(1+\frac{1}{n})-1\vert{}=\vert{}\frac{1}{n}\vert{}=\frac{1}{n}<\epsilon$. Furthermore, since $u_{n}-1=\frac{1}{n}>0$, it converges from above: $1^{+}$.</p>
+
+            <p><strong>Exercise 1.2:</strong> Prove $lim_{n\rightarrow\infty}n^{2}=\infty$.<br>
+            <em>Proof:</em> Let $M>0$. Choose $N\ge\lceil\sqrt{M}\rceil$. For all $n>N, n>\sqrt{M}\Rightarrow n^{2}>M$. By definition, it diverges to $\infty$.</p>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="content-box yellow-box">
+            <h2>2. Limit Theorems & Arithmetic of Limits</h2>
+            <p>A sequence $u_{n}$ is convergent iff $lim_{n\rightarrow\infty}u_{n}=L\in\mathbb{R}$. Otherwise, it is divergent.</p>
+            <ul>
+                <li>If $u_{n}\rightarrow U$ and $v_{n}\rightarrow V$, then $lim(u_{n}+v_{n}) = U+V$. <em>(Proven using the Triangle Inequality: $\vert{}(u_{n}+v_{n})-(U+V)\vert{} \le \vert{}u_{n}-U\vert{} + \vert{}v_{n}-V\vert{}$).</em></li>
+                <li>If $u_{n}\rightarrow U$ and $v_{n}\rightarrow V$, then $lim(u_{n}v_{n}) = UV$. <em>(Relies on converging sequences being bounded).</em></li>
+            </ul>
+            <p><strong>Why $\infty-\infty$ is indeterminate:</strong> The limit depends on relative rates of growth. For example, if $u_{n}=n^{2}, v_{n}=n$, the limit is $\infty$. If $u_{n}=n, v_{n}=n^{2}$, the limit is $-\infty$. If $u_{n}=n+c, v_{n}=n$, the limit is $c$. Because no single consistent output can be defined, it is an indeterminate form.</p>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="content-box purple-box">
+            <h2>3. Monotonic Sequences & Bounded Convergence</h2>
+            <ul>
+                <li><strong>Increasing:</strong> $\forall m,n\in\mathbb{Z}^{+}, n>m\Rightarrow u_{n}\ge u_{m}$ (strictly increasing if $>$).</li>
+                <li><strong>Decreasing:</strong> $\forall m,n\in\mathbb{Z}^{+}, n>m\Rightarrow u_{n}\le u_{m}$ (strictly decreasing if $<$).</li>
+            </ul>
+            <p>A sequence is monotonic if it is either increasing or decreasing.</p>
+
+            <p><strong>Bounded Convergence Theorem (Monotone Convergence Theorem):</strong></p>
+            <ol>
+                <li>An increasing sequence $u_{n}$ that is bounded above converges to $sup\{u_{n}\}$ from below.</li>
+                <li>A decreasing sequence $u_{n}$ that is bounded below converges to $inf\{u_{n}\}$ from above.</li>
+            </ol>
+            <p><strong>Theorem:</strong> Every converging sequence is bounded.</p>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="content-box red-box">
+            <h2>Advanced Convergence Exercises</h2>
+            <p><strong>Exercise 3.1:</strong> Examine $u_{n}=(-1)^{n}$ and $u_{n}=sin~n$.<br>
+            $u_{n}=(-1)^{n}$ oscillates between -1 and 1. It diverges by oscillation. $u_{n}=sin~n$ never settles to any single real value on $[-1,1]$, thus it diverges.</p>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+            <p><strong>Exercise 3.2:</strong> Solve Babylonian Square Root Algorithm $u_{n+1}=\frac{1}{2}(u_{n}+\frac{a}{u_{n}})$, $a>0, u_{1}>0$.<br>
+            1. Lower Bound via AM-GM Inequality gives $u_{n} \ge \sqrt{a}$.<br>
+            2. Monotonicity check shows $u_{n+1}-u_{n} \le 0$, so it is monotonically decreasing.<br>
+            3. By the Bounded Convergence Theorem, it converges to limit L. Taking limits: $L = \frac{1}{2}(L+\frac{a}{L}) \Rightarrow L^{2}=a \Rightarrow L=\sqrt{a}$.</p>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+            <p><strong>Exercise 3.3:</strong> Solve $u_{n+2}=\frac{1}{2}(u_{n+1}+u_{n})$ with $u_{1}=a, u_{2}=b$.<br>
+            Let $d_{n}=u_{n+1}-u_{n}$. This forms a geometric sequence $d_{n}=(b-a)(-\frac{1}{2})^{n-1}$.<br>
+            Using a telescoping sum and evaluating the limit as $n\rightarrow\infty$, the sum evaluates to $\frac{2}{3}$, and the sequence converges to $\frac{a+2b}{3}$.</p>
+        </div>
+
+        <!-- EXERCISES SECTION -->
+        <div class="exercise-section">
+            <h2 style="color: #facc15; margin-top: 0;">Practice Exercises & Progress Tracking</h2>
+            <p>Test your understanding of Sequences & Convergence to track your progress.</p>
+
+            <!-- PROGRESS BAR -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar">0%</div>
+            </div>
+
+            <!-- Q1 -->
+            <div class="question-box" data-q="1">
+                <p><strong>1.</strong> A sequence is formally defined as a function mapping from which set to the Real Numbers ($\mathbb{R}$)?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) Rational Numbers ($\mathbb{Q}$)</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) All Integers ($\mathbb{Z}$)</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) Positive Integers ($\mathbb{Z}^{+}$)</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-box" data-q="2">
+                <p><strong>2.</strong> In the formal definition of a finite limit $lim_{n\rightarrow\infty}u_{n}=L$, what does the $\epsilon > 0$ represent?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) The arbitrary precision or distance bound from the limit L.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) The starting value of the sequence $u_{1}$.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) The integer cutoff index N.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-box" data-q="3">
+                <p><strong>3.</strong> If a sequence converges to L from above ($L^{+}$), which condition applies for $n > N$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) $-\epsilon < u_{n}-L \le 0$</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) $0 \le u_{n}-L < \epsilon$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) $u_{n} = L$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-box" data-q="4">
+                <p><strong>4.</strong> Why is the limit evaluation of $\infty - \infty$ considered an indeterminate form?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) Because the result depends on the relative rates of growth and cannot yield a single consistent output.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) Because subtracting infinity from infinity always equals 0.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) Because it always evaluates to exactly $-\infty$.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-box" data-q="5">
+                <p><strong>5.</strong> According to the Bounded Convergence Theorem, a decreasing sequence that is bounded below must converge to its...</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) Supremum ($sup\{u_{n}\}$)</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) Maximum element</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) Infimum ($inf\{u_{n}\}$)</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-box" data-q="6">
+                <p><strong>6.</strong> Which crucial mathematical property guarantees that every converging sequence $u_{n}$ cannot blow up to infinity?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) Every converging sequence is monotonically increasing.</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) Every converging sequence is bounded.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) Every converging sequence oscillates like $sin~n$.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-box" data-q="7">
+                <p><strong>7.</strong> For the sequence $u_{n} = (-1)^{n}$, why does the limit not exist?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) It diverges directly to $+\infty$.</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) It diverges by oscillating between -1 and 1 without settling.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) The terms approach exactly 0.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-box" data-q="8">
+                <p><strong>8.</strong> In the Babylonian Square Root Algorithm proof, what inequality is used to find the initial lower bound $\sqrt{a}$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) The AM-GM Inequality</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) The Triangle Inequality</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) The Cauchy-Schwarz Inequality</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div id="completed-msg" style="display: none;">
+                🎉 Excellent! You have successfully mastered Sequences & Convergence.
+            </div>
+
+            <!-- Database Auto-Save Message -->
+            <div id="db-status-msg"></div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Interactivity & Firebase Hook -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        // Oyage Firebase config eka methanata danna
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+            } else {
+                currentUser = null;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalQuestions = 8;
+            let correctAnswersCount = 0;
+            const answeredQuestions = new Set(); 
+            const progressBar = document.getElementById('progress-bar');
+            const dbStatusMsg = document.getElementById('db-status-msg');
+
+            const questionBoxes = document.querySelectorAll('.question-box');
+
+            questionBoxes.forEach(box => {
+                const buttons = box.querySelectorAll('.option-btn');
+                const feedback = box.querySelector('.feedback-msg');
+                const questionId = box.getAttribute('data-q');
+
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', async function() {
+                        if (answeredQuestions.has(questionId)) return;
+
+                        buttons.forEach(b => {
+                            b.classList.remove('correct-ans', 'wrong-ans');
+                        });
+
+                        const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                        if (isCorrect) {
+                            this.classList.add('correct-ans');
+                            feedback.textContent = "Correct!";
+                            feedback.className = "feedback-msg correct-text";
+                            feedback.style.display = "block";
+                            
+                            answeredQuestions.add(questionId);
+                            correctAnswersCount = answeredQuestions.size;
+
+                            // Calculate Progress Percentage
+                            const progressPercentage = Math.round((correctAnswersCount / totalQuestions) * 100);
+                            
+                            // Update Visual Progress Bar
+                            progressBar.style.width = progressPercentage + '%';
+                            progressBar.textContent = progressPercentage + '%';
+
+                            if (correctAnswersCount === totalQuestions) {
+                                document.getElementById('completed-msg').style.display = 'block';
+
+                                // Save progress to Firestore under "real-analysis-sequences"
+                                if (currentUser) {
+                                    try {
+                                        const userRef = doc(db, "users", currentUser.uid, "progress", "real-analysis-sequences");
+                                        await setDoc(userRef, {
+                                            completed: true,
+                                            completedAt: new Date()
+                                        }, { merge: true });
+
+                                        dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                        dbStatusMsg.style.color = "#4ade80";
+                                    } catch (error) {
+                                        console.error("Error saving progress: ", error);
+                                        dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                        dbStatusMsg.style.color = "#f43f5e";
+                                    }
+                                } else {
+                                    dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                    dbStatusMsg.style.color = "#facc15";
+                                }
+                            }
+                        } else {
+                            this.classList.add('wrong-ans');
+                            feedback.textContent = "Incorrect. Try again!";
+                            feedback.className = "feedback-msg wrong-text";
+                            feedback.style.display = "block";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+</body>
+</html>

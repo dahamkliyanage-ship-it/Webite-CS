@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Relation between Beta and Gamma Functions</title>
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Relation between Beta and Gamma Functions. Focus on the definition, properties, and applications of the relationship between these two special functions, including integral representations and special values. Include worked examples, step-by-step explanations, and exercises for practice. Provide a video tutorial for visual learning.">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Relation between Beta and Gamma Functions</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#theorem" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Main Theorem</a></li>
+                <li><a href="#proof">Proof by Double Integral</a></li>
+                <li><a href="#examples">Worked Examples</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="theorem" style="margin-bottom: 20px;">The Theorem</h2>
+            <p style="margin-bottom: 15px;">The most crucial property connecting these two special functions allows us to convert complex Beta integrals into simple factorial calculations via the Gamma function.</p>
+
+            <div class="blue-box">
+                <strong>Relation between Beta and Gamma Functions</strong><br><br>
+                For any real numbers $m > 0$ and $n > 0$, the relationship is strictly defined as:
+                <div class="math-center">
+                    $$ B(m, n) = \frac{\Gamma(m)\Gamma(n)}{\Gamma(m + n)} $$
+                </div>
+            </div>
+
+            <h2 id="proof" style="margin-top: 30px; margin-bottom: 20px;">Proof by Double Integral and Polar Coordinates</h2>
+
+            <div class="green-box">
+                <strong>Proof Outline</strong><br><br>
+                We use the alternative form of the Gamma function: $\Gamma(k) = 2\int_0^\infty e^{-x^2}x^{2k-1}dx$.<br><br>
+                Consider the product of two Gamma functions:
+                <div class="math-center">
+                    $$ \Gamma(m)\Gamma(n) = \left( 2\int_0^\infty e^{-x^2}x^{2m-1}dx \right) \left( 2\int_0^\infty e^{-y^2}y^{2n-1}dy \right) $$
+                </div>
+                Combine them into a double integral over the first quadrant:
+                <div class="math-center">
+                    $$ = 4 \int_0^\infty \int_0^\infty e^{-(x^2+y^2)} x^{2m-1} y^{2n-1} dx dy $$
+                </div>
+                Transform to polar coordinates: Let $x = r\cos\theta$ and $y = r\sin\theta$. The area element becomes $dx dy = r dr d\theta$, and the limits are $0 \le r < \infty$ and $0 \le \theta \le \pi/2$.
+                <div class="math-center">
+                    $$ = 4 \int_0^{\pi/2} \int_0^\infty e^{-r^2} (r\cos\theta)^{2m-1} (r\sin\theta)^{2n-1} r dr d\theta $$
+                </div>
+                Group the $r$ terms and $\theta$ terms separately:
+                <div class="math-center">
+                    $$ = \left( 2 \int_0^\infty e^{-r^2} r^{2(m+n)-1} dr \right) \left( 2 \int_0^{\pi/2} \sin^{2n-1}\theta \cos^{2m-1}\theta d\theta \right) $$
+                </div>
+                Recognize that the first integral is precisely $\Gamma(m+n)$, and the second integral is the trigonometric form of the Beta function, $B(m,n)$ (or $B(n,m)$).
+                <div class="math-center">
+                    $$ \Gamma(m)\Gamma(n) = \Gamma(m+n) B(m,n) $$
+                </div>
+                Rearranging this equation yields the fundamental theorem:
+                <div class="math-center">
+                    $$ B(m,n) = \frac{\Gamma(m)\Gamma(n)}{\Gamma(m+n)} $$
+                </div>
+            </div>
+
+            <h2 id="examples" style="margin-top: 30px; margin-bottom: 20px;">Added Worked Examples</h2>
+
+            <div class="yellow-box">
+                <strong>Example A: Evaluating a Trigonometric Integral</strong><br><br>
+                Evaluate the integral $\int_0^{\pi/2} \sin^4\theta \cos^5\theta d\theta$.<br><br>
+                <strong>Solution:</strong> We use the trigonometric form of the Beta function:
+                <div class="math-center">
+                    $$ \int_0^{\pi/2} \sin^{2m-1}\theta \cos^{2n-1}\theta d\theta = \frac{1}{2} B(m, n) $$
+                </div>
+                Matching the exponents:
+                <ul>
+                    <li>$2m - 1 = 4 \implies 2m = 5 \implies m = \frac{5}{2}$</li>
+                    <li>$2n - 1 = 5 \implies 2n = 6 \implies n = 3$</li>
+                </ul>
+                The integral becomes $\frac{1}{2} B\left(\frac{5}{2}, 3\right)$. Using the relation to Gamma functions:
+                <div class="math-center">
+                    $$ \frac{1}{2} B\left(\frac{5}{2}, 3\right) = \frac{1}{2} \frac{\Gamma(5/2)\Gamma(3)}{\Gamma(11/2)} $$
+                </div>
+                Calculate the individual Gamma values:
+                <ul>
+                    <li>$\Gamma(3) = 2! = 2$</li>
+                    <li>$\Gamma(5/2) = \frac{3}{2} \cdot \frac{1}{2} \cdot \sqrt{\pi} = \frac{3}{4}\sqrt{\pi}$</li>
+                    <li>$\Gamma(11/2) = \frac{9}{2} \cdot \frac{7}{2} \cdot \frac{5}{2} \cdot \frac{3}{2} \cdot \frac{1}{2} \cdot \sqrt{\pi} = \frac{945}{32}\sqrt{\pi}$</li>
+                </ul>
+                Substitute these back into the expression:
+                <div class="math-center">
+                    $$ \text{Result} = \frac{1}{2} \cdot \frac{(\frac{3}{4}\sqrt{\pi})(2)}{\frac{945}{32}\sqrt{\pi}} = \frac{3/4}{945/32} = \frac{3}{4} \cdot \frac{32}{945} = \frac{24}{945} = \frac{8}{315} $$
+                </div>
+            </div>
+
+            <div class="yellow-box">
+                <strong>Example B: Computing a Standard Beta Value</strong><br><br>
+                Evaluate $B(4, 5)$.<br><br>
+                <strong>Solution:</strong> Since both parameters are positive integers, we can use the factorial property $\Gamma(n) = (n-1)!$:
+                <div class="math-center">
+                    $$ B(4, 5) = \frac{\Gamma(4)\Gamma(5)}{\Gamma(4 + 5)} = \frac{\Gamma(4)\Gamma(5)}{\Gamma(9)} $$
+                    $$ = \frac{3! \cdot 4!}{8!} $$
+                    $$ = \frac{6 \cdot 24}{40320} = \frac{144}{40320} = \frac{1}{280} $$
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the vital relationship between the Beta and Gamma functions and its applications.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> Which equation correctly establishes the fundamental mathematical relationship between the Beta and Gamma functions for $m, n > 0$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $B(m, n) = \frac{\Gamma(m+n)}{\Gamma(m)\Gamma(n)}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $B(m, n) = \frac{\Gamma(m)\Gamma(n)}{\Gamma(m + n)}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $B(m, n) = \Gamma(m)\Gamma(n) - \Gamma(m+n)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> In the formal proof connecting these two functions, which specific alternative form of the Gamma function is utilized at the very beginning?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\Gamma(k) = 2\int_0^\infty e^{-x^2}x^{2k-1}dx$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\Gamma(k) = \int_0^\infty e^{-x}x^{k-1}dx$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\Gamma(k) = \int_0^1 (\ln \frac{1}{x})^{k-1} dx$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> During the proof, when converting the double integral from Cartesian ($dx dy$) to Polar coordinates, what does the differential area element $dx dy$ correctly become?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $dr d\theta$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $r^2 \sin\theta dr d\theta$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $r dr d\theta$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> What are the precise limits of integration for $r$ and $\theta$ when evaluating the polar double integral over the first quadrant?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $0 \le r < \infty$ and $0 \le \theta \le \pi$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $0 \le r < \infty$ and $0 \le \theta \le \pi/2$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $-\infty < r < \infty$ and $0 \le \theta \le 2\pi$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> In Worked Example A, attempting to evaluate $\int_0^{\pi/2} \sin^4\theta \cos^5\theta d\theta$ using the Beta function yields which corresponding values for $m$ and $n$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $m = 4, n = 5$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $m = 2, n = 5/2$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $m = 5/2, n = 3$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> Recalling the recursive properties of the Gamma function from Example A, what is the exact evaluated result of $\Gamma(5/2)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\frac{3}{4}\sqrt{\pi}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\frac{1}{2}\sqrt{\pi}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{15}{8}\sqrt{\pi}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> When solving Worked Example B to find $B(4, 5)$, which factorial expression is correctly substituted into the main theorem?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\frac{4! \cdot 5!}{9!}$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $\frac{3! \cdot 4!}{8!}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\frac{4! \cdot 5!}{8!}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> By applying the Main Theorem and the properties of the Gamma function, what is the exact value of $B(1, 2)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $2$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $1$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\frac{1}{2}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "riemann-relation"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "riemann-relation");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>

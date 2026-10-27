@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Relations and Functions. Focus on the definition and properties of relations and functions, domain and range, composition of functions, inverse functions, and piecewise-defined functions. Include examples and exercises for practice.">
+    
+    <title>Relations and Functions</title>
+    
+    <!-- Embedded CSS for Dark Theme -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Content Boxes */
+        .content-box {
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .content-box h2 {
+            margin-top: 0;
+            font-size: 1.6em;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .blue-box { background-color: rgba(56, 189, 248, 0.05); border-left: 5px solid #38bdf8; }
+        .blue-box h2 { color: #38bdf8; }
+
+        .green-box { background-color: rgba(74, 222, 128, 0.05); border-left: 5px solid #4ade80; }
+        .green-box h2 { color: #4ade80; }
+
+        .yellow-box { background-color: rgba(250, 204, 21, 0.05); border-left: 5px solid #facc15; }
+        .yellow-box h2 { color: #facc15; }
+
+        .purple-box { background-color: rgba(192, 132, 252, 0.05); border-left: 5px solid #c084fc; }
+        .purple-box h2 { color: #c084fc; }
+
+        .red-box { background-color: rgba(244, 63, 94, 0.05); border-left: 5px solid #f43f5e; }
+        .red-box h2 { color: #f43f5e; }
+
+        /* Lists and formatting */
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Math Centering */
+        .math-center {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+            overflow-x: auto;
+        }
+
+        /* Exercises Section */
+        .exercise-section {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+            border-top: 4px solid #facc15;
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            background-color: #0f172a;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+
+        .progress-bar {
+            height: 25px;
+            width: 0%;
+            background-color: #4ade80;
+            text-align: center;
+            line-height: 25px;
+            color: #0f172a;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+
+        .question-box {
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options-list li {
+            margin-bottom: 10px;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover { background-color: #334155; }
+        .correct-ans { background-color: rgba(74, 222, 128, 0.2) !important; border-color: #4ade80 !important; }
+        .wrong-ans { background-color: rgba(244, 63, 94, 0.2) !important; border-color: #f43f5e !important; }
+        
+        .feedback-msg {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct-text { color: #4ade80; }
+        .wrong-text { color: #f43f5e; }
+
+        #completed-msg {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border: 1px solid #4ade80;
+        }
+
+        /* Database status message CSS */
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+
+    <!-- MathJax for rendering Logic Symbols -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Relations and Functions</h1>
+    </header>
+
+    <div class="container">
+        
+        <!-- Box 1 -->
+        <div class="content-box blue-box">
+            <h2>1. Relations: The Core Machinery</h2>
+            <p><strong>Definition:</strong> Let A, B be non-empty sets. A relation $P:A\rightarrow B$ is a non-empty subset of the Cartesian product $A\times B$.</p>
+            <p><strong>Notation:</strong> To state that an input $x$ connects to an output $y$, we write any of the following interchangeably: $(x,y)\in P, P:x\mapsto y, x^{p}y, xPy,$ or $xP_{y}$.</p>
+            
+            <p><strong>The Four Associated Sets:</strong></p>
+            <ul>
+                <li><strong>Domain (dom P):</strong> The entire starting set A.</li>
+                <li><strong>Co-domain (codom P):</strong> The entire target set B.</li>
+                <li><strong>Pre-range (preran P):</strong> The inputs that actually have arrows leaving them: $\{x\in A|(x,y)\in P\}$.</li>
+                <li><strong>Range (ran P):</strong> The outputs that actually receive arrows: $\{y\in B|(x,y)\in P\}$.</li>
+            </ul>
+
+            <p><strong>Classification of Relations:</strong></p>
+            <ul>
+                <li><strong>One-Many:</strong> An input splits into multiple outputs: $\exists x\in A$, $\exists y_{1},y_{2}\in B$ $((x, y_{1}), (x, y_{2}) \in P \wedge y_{1} \ne y_{2})$.</li>
+                <li><strong>Many-One:</strong> Different inputs merge into the same output: $\exists x_{1},x_{2}\in A$, $\exists y\in B$ $((x_{1},y), (x_{2},y) \in P \wedge x_{1} \ne x_{2})$.</li>
+                <li><strong>Many-Many:</strong> The relation is both one-many and many-one.</li>
+                <li><strong>One-One (Injection):</strong> The relation is neither one-many nor many-one.</li>
+                <li><strong>Everywhere-defined:</strong> No input is left unused ($dom~P = preran~P$, or $\forall x\in A \exists y\in B$ such that $(x,y)\in P$).</li>
+                <li><strong>Onto (Surjection):</strong> Every target element is reached ($codom~P = ran~P$, or $\forall y\in B \exists x\in A$ such that $(x,y)\in P$).</li>
+                <li><strong>Bijection:</strong> The relation is both one-one and onto.</li>
+            </ul>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="content-box green-box">
+            <h2>Composition and Inverses</h2>
+            <ul>
+                <li><strong>Composite Relation $(Q\circ P)$:</strong> If $P:A\rightarrow B$ and $Q:B\rightarrow C$ with $ran~P = preran~Q = S$, then: 
+                    <br>$Q\circ P = \{(x,z)|(x,y)\in P \wedge (y,z)\in Q, y\in S\}$. 
+                    <br>Here, $preran(Q\circ P) = preran~P$ and $ran(Q\circ P) = ran~Q$.
+                </li>
+                <li><strong>Inverse Relation $(P^{-1})$:</strong> Reverses every pair: $P^{-1} = \{(y,x)|(x,y)\in P\}$. 
+                    <br>Notice: $ran~P = preran~P^{-1}$ and $ran~P^{-1} = preran~P$.
+                </li>
+                <li><strong>Identity Compositions:</strong> $P^{-1}\circ P = I = \{(x,x)|x\in preran~P\}$ and $P\circ P^{-1} = I = \{(y,y)|y\in ran~P\}$. Written concisely: $P\circ P^{-1} = P^{-1}\circ P = I$.</li>
+            </ul>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+            <p><strong>Exercise 1.1:</strong> Define a relation $R:A\rightarrow B$ that is many-many, not onto, and not everywhere-defined. Find its range and pre-range.<br>
+            <em>Solution:</em> Let $A=\{1,2,3\}$ and $B=\{a,b,c\}$. Choose $R=\{(1,a),(1,b),(2,a)\}$.<br>
+            It is one-many (shares input 1) and many-one (shares output a), hence many-many.<br>
+            $preran~R=\{1,2\} \ne A$ (not everywhere-defined).<br>
+            $ran~R=\{a,b\} \ne B$ (not onto).</p>
+
+            <p><strong>Exercise 1.4:</strong> Show that $(S\circ R)^{-1}=R^{-1}\circ S^{-1}$.<br>
+            <em>Proof:</em> Let $(z,x)\in(S\circ R)^{-1} \Leftrightarrow (x,z)\in S\circ R$.<br>
+            $\Leftrightarrow \exists y$ such that $(x,y)\in R \wedge (y,z)\in S$.<br>
+            $\Leftrightarrow \exists y$ such that $(y,x)\in R^{-1} \wedge (z,y)\in S^{-1}$.<br>
+            $\Leftrightarrow \exists y$ such that $(z,y)\in S^{-1} \wedge (y,x)\in R^{-1} \Leftrightarrow (z,x)\in R^{-1}\circ S^{-1}$.</p>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="content-box yellow-box">
+            <h2>2. Equivalence Relations & Partitions</h2>
+            <p><strong>Definition:</strong> A relation $R:A\rightarrow A$ is an equivalence relation iff it satisfies:</p>
+            <ul>
+                <li><strong>Reflexive:</strong> $\forall a\in A, (a,a)\in R$.</li>
+                <li><strong>Symmetric:</strong> $\forall a,b\in A, (a,b)\in R \Rightarrow (b,a)\in R$.</li>
+                <li><strong>Transitive:</strong> $\forall a,b,c\in A, (a,b)\in R \wedge (b,c)\in R \Rightarrow (a,c)\in R$.</li>
+            </ul>
+            <p><strong>Partitions:</strong> An equivalence relation breaks A into disjoint subsets called partitions (or equivalence classes). Every element belongs to exactly one partition, and elements in the same partition are related to each other.</p>
+            
+            <p><strong>Exercise 2.1:</strong> Let $A^{\prime}=\{a,b,c\}$ and $R=\{(a,a),(b,b),(c,c),(b,c),(c,b)\}$.<br>
+            It is Reflexive, Symmetric, and Transitive on $A^{\prime}$.<br>
+            Resulting Partitions: $\{a\}$ and $\{b, c\}$.</p>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="content-box purple-box">
+            <h2>3. Functions & Real-Valued Functions</h2>
+            <p><strong>Definition of a Function:</strong> A relation $f:A\rightarrow B$ is a function when it is:</p>
+            <ul>
+                <li>Everywhere-defined ($dom~f = preran~f$).</li>
+                <li>Not one-many.</li>
+            </ul>
+            <p>This allows us to write $(x,y)\in f$ simply as $f(x)=y$.</p>
+            
+            <ul>
+                <li><strong>Composition of Functions:</strong> If $f:A\rightarrow B$ is onto and $g:B\rightarrow C$ is a function, then $ran~f = B = preran~g$ so the composite $g\circ f:A\rightarrow C$ is allowed and is also a function. We write: $(g\circ f)(x)=g(f(x)) \forall x\in A$.</li>
+                <li><strong>Invertible Functions:</strong> When f is a bijection, the inverse relation $f^{-1}$ is also a function and a bijection. Identity properties hold: $(f^{-1}\circ f)(x)=x, \forall x\in A$ and $(f\circ f^{-1})(y)=y, \forall y\in B$. Concise shorthand: $f\circ f^{-1} = f^{-1}\circ f = I$.</li>
+                <li><strong>Real-Valued Function:</strong> When sets $A,B\subseteq\mathbb{R}, f$ is called a real-valued function.</li>
+                <li><strong>Binary Operations:</strong> A binary operation on a set A is formally defined as a function $*:A\times A\rightarrow A$. We write $a*b$ to mean $*((a,b))$ for $a,b\in A$.</li>
+            </ul>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="content-box red-box">
+            <h2>Function Exercises & Proofs</h2>
+            
+            <p><strong>Exercise 3.2:</strong> Prove that the composition of two one-one functions is one-one.<br>
+            <em>Proof:</em> Let $f:A\rightarrow B$ and $g:B\rightarrow C$ be one-one. Assume $(g\circ f)(x_{1}) = (g\circ f)(x_{2})$, which means $g(f(x_{1}))=g(f(x_{2}))$. Since g is one-one, its inputs must be equal: $f(x_{1})=f(x_{2})$. Since f is one-one, its inputs must be equal: $x_{1}=x_{2}$. Therefore, $g\circ f$ is one-one.</p>
+
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+            <p><strong>Exercise 3.4:</strong> Show that $f(x)=x^{2}$ is not one-one. Restrict its domain to define two inverse functions.<br>
+            <em>Solution:</em> $f(-2)=(-2)^{2}=4$ and $f(2)=2^{2}=4$. Since distinct inputs yield the same output, f is not one-one.<br>
+            Domain Restriction 1: Restrict to $x\in[0,\infty)$. The function is now one-one, giving inverse $f_{1}^{-1}(x)=\sqrt{x}$.<br>
+            Domain Restriction 2: Restrict to $x\in(-\infty,0]$. The function is one-one, giving inverse $f_{2}^{-1}(x)=-\sqrt{x}$.</p>
+            
+            <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+            <p><strong>Exercise 3.6:</strong> Let $f(x)=\frac{1-x}{1+x}$ and $g(x)=4x(1-x)$.<br>
+            Evaluating $f\circ g$:<br>
+            $(f\circ g)(x) = f(g(x)) = \frac{1-4x(1-x)}{1+4x(1-x)} = \frac{1-4x+4x^{2}}{1+4x-4x^{2}} = \frac{(2x-1)^{2}}{1+4x-4x^{2}}$.</p>
+        </div>
+
+        <!-- EXERCISES SECTION -->
+        <div class="exercise-section">
+            <h2 style="color: #facc15; margin-top: 0;">Practice Exercises & Progress Tracking</h2>
+            <p>Test your understanding of Relations and Functions to track your progress.</p>
+
+            <!-- PROGRESS BAR -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar">0%</div>
+            </div>
+
+            <!-- Q1 -->
+            <div class="question-box" data-q="1">
+                <p><strong>1.</strong> By definition, a relation $P: A \rightarrow B$ is a non-empty subset of which of the following?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) The union of A and B</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) The intersection of A and B</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) The Cartesian product $A \times B$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-box" data-q="2">
+                <p><strong>2.</strong> In a relation, what is the precise definition of the "Pre-range (preran P)"?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) The specific inputs that actually have arrows leaving them.</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) The entire starting set A (Domain).</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) The outputs that actually receive arrows.</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-box" data-q="3">
+                <p><strong>3.</strong> For a relation to be classified as a "Bijection", which two conditions must it strictly satisfy?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) Reflexive and Transitive</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) One-One (Injection) and Onto (Surjection)</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) Many-One and Everywhere-defined</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-box" data-q="4">
+                <p><strong>4.</strong> What are the required three properties for a relation to be considered an "Equivalence Relation"?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) Reflexive, Symmetric, Transitive</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) Everywhere-defined, Onto, One-One</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) One-Many, Many-One, Many-Many</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-box" data-q="5">
+                <p><strong>5.</strong> A mathematical "Function" is a relation that is strictly defined by which two properties?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) One-One and Onto</button></li>
+                    <li><button class="option-btn" data-ans="correct">B) Everywhere-defined and Not one-many</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) Reflexive and Symmetric</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-box" data-q="6">
+                <p><strong>6.</strong> According to the provided composition rules, what is the evaluated result of $P^{-1} \circ P$?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) The Identity composition $I$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) The Cartesian product $P \times P^{-1}$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) The empty set $\emptyset$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-box" data-q="7">
+                <p><strong>7.</strong> To make the function $f(x) = x^2$ one-one and invertible, the domain can be restricted to $[0, \infty)$. What is the resulting inverse function?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="wrong">A) $f^{-1}(x) = -\sqrt{x}$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) $f^{-1}(x) = x^2$</button></li>
+                    <li><button class="option-btn" data-ans="correct">C) $f^{-1}(x) = \sqrt{x}$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-box" data-q="8">
+                <p><strong>8.</strong> How is a "Binary Operation" on a set A formally defined in mathematics?</p>
+                <ul class="options-list">
+                    <li><button class="option-btn" data-ans="correct">A) As a function $*: A \times A \rightarrow A$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">B) As a relation $P: A \rightarrow B$</button></li>
+                    <li><button class="option-btn" data-ans="wrong">C) As an equivalence class $[a]$</button></li>
+                </ul>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div id="completed-msg" style="display: none;">
+                🎉 Excellent! You have successfully mastered Relations and Functions.
+            </div>
+
+            <!-- Database Auto-Save Message -->
+            <div id="db-status-msg"></div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Interactivity & Firebase Hook -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        // Oyage Firebase config eka methanata danna
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+            } else {
+                currentUser = null;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalQuestions = 8;
+            let correctAnswersCount = 0;
+            const answeredQuestions = new Set(); 
+            const progressBar = document.getElementById('progress-bar');
+            const dbStatusMsg = document.getElementById('db-status-msg');
+
+            const questionBoxes = document.querySelectorAll('.question-box');
+
+            questionBoxes.forEach(box => {
+                const buttons = box.querySelectorAll('.option-btn');
+                const feedback = box.querySelector('.feedback-msg');
+                const questionId = box.getAttribute('data-q');
+
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', async function() {
+                        if (answeredQuestions.has(questionId)) return;
+
+                        buttons.forEach(b => {
+                            b.classList.remove('correct-ans', 'wrong-ans');
+                        });
+
+                        const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                        if (isCorrect) {
+                            this.classList.add('correct-ans');
+                            feedback.textContent = "Correct!";
+                            feedback.className = "feedback-msg correct-text";
+                            feedback.style.display = "block";
+                            
+                            answeredQuestions.add(questionId);
+                            correctAnswersCount = answeredQuestions.size;
+
+                            // Calculate Progress Percentage
+                            const progressPercentage = Math.round((correctAnswersCount / totalQuestions) * 100);
+                            
+                            // Update Visual Progress Bar
+                            progressBar.style.width = progressPercentage + '%';
+                            progressBar.textContent = progressPercentage + '%';
+
+                            if (correctAnswersCount === totalQuestions) {
+                                document.getElementById('completed-msg').style.display = 'block';
+
+                                // Save progress to Firestore under "real-analysis-relations"
+                                if (currentUser) {
+                                    try {
+                                        const userRef = doc(db, "users", currentUser.uid, "progress", "real-analysis-relations");
+                                        await setDoc(userRef, {
+                                            completed: true,
+                                            completedAt: new Date()
+                                        }, { merge: true });
+
+                                        dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                        dbStatusMsg.style.color = "#4ade80";
+                                    } catch (error) {
+                                        console.error("Error saving progress: ", error);
+                                        dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                        dbStatusMsg.style.color = "#f43f5e";
+                                    }
+                                } else {
+                                    dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                    dbStatusMsg.style.color = "#facc15";
+                                }
+                            }
+                        } else {
+                            this.classList.add('wrong-ans');
+                            feedback.textContent = "Incorrect. Try again!";
+                            feedback.className = "feedback-msg wrong-text";
+                            feedback.style.display = "block";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+</body>
+</html>

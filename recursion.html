@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Problem Solving : Recursion. Focus on recursive problem-solving, recursive cases and base cases, factorial computation, recursion trees and execution stacks, the relationship between recursion and iteration, iterative implementations in Python, tail recursion and its optimization, the Towers of Hanoi problem, and applying recursion to practical challenges such as array summation, palindrome checking, and the missionaries and cannibals river-crossing puzzle using recursive search and backtracking.">
+<title>CS1033 | Recursion</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked directly to your global and updated sub-stylesheet -->
+<link rel="stylesheet" href="mainstyle.css">
+<link rel="stylesheet" href="subStyle.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="filetab">Recursion</div>
+</div>
+
+
+<div class="layout">
+
+  <!-- The Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#core-mechanics" class="ln-link"><span class="ln">00</span>Core Mechanics</a></li>
+      <li><a href="#factorial" class="ln-link"><span class="ln">01</span>Computing Factorials</a></li>
+      <li><a href="#recursion-tree" class="ln-link"><span class="ln">02</span>Recursion Tree</a></li>
+      <li><a href="#iteration-vs-recursion" class="ln-link"><span class="ln">03</span>Iteration vs. Recursion</a></li>
+      <li><a href="#iterative-implementation" class="ln-link"><span class="ln">04</span>Iterative Python</a></li>
+      <li><a href="#tail-recursion" class="ln-link"><span class="ln">05</span>Tail Recursion</a></li>
+      <li><a href="#towers-of-hanoi" class="ln-link"><span class="ln">06</span>Towers of Hanoi</a></li>
+      <li><a href="#real-world-challenge" class="ln-link"><span class="ln">07</span>Real-World Challenge</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    
+    <h1 class="title">Recursion &amp; <span class="kw">Logic</span></h1>
+    
+    <p class="lead-text" style="margin-bottom: 40px;">
+        Recursion is a problem-solving method used in computer science that has been studied over a long time and is considered to be highly useful. The method is based on the idea that a solution to a problem depends on the solution to a smaller instance of the same problem.
+    </p>
+
+    <!-- Centered Image and Source Block -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 40px; margin-bottom: 40px;">
+      <img src="recursion.jpg" alt="Recursion Visual Concept" style="max-width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);">
+      <p style="text-align: center; font-family: var(--mono); font-size: 13px; color: var(--text-faint); margin-top: 15px; max-width: 80%;">
+        Source: 
+        <a href="https://medium.com/analytics-vidhya/understanding-recursion-with-factorial-and-an-english-ruler-drawing-7d1f8244a13a" target="_blank" style="color: var(--keyword); text-decoration: underline; font-weight: 600;">
+          Understanding Recursion with Factorial and an English Ruler Drawing (Medium)
+        </a>
+      </p>
+    </div>
+
+    <!-- THE CORE MECHANICS -->
+    <section id="core-mechanics">
+      <div class="stack">
+        <div class="stack-item">
+          <span class="stack-tag" style="background: rgba(122,162,247,.15); color: var(--keyword);">THE RECURSIVE CASE</span>
+          <div>
+            <h3>The Breakdown</h3>
+            <p>The formulation of a problem in a manner that it is expressed as an instance of a smaller instance of the same problem is called the recursive case.</p>
+          </div>
+        </div>
+        
+        <div class="stack-item">
+          <span class="stack-tag" style="background: rgba(158,206,106,.15); color: var(--string);">THE BASE CASE</span>
+          <div>
+            <h3>The Direct Solution</h3>
+            <p>This successive reduction of the problem should lead to an instance of the problem that can be directly solved. This directly (or trivially) solvable instance of the problem is called the base case.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 01: THE MISSING MATH BLOCK RESTORED -->
+    <!-- SECTION 01: THE MISSING MATH BLOCK RESTORED -->
+    <section id="factorial">
+      <h2><span class="idx">01.</span> Computing the Factorial Recursively</h2>
+      <p>A common example of this method is the computation of the factorial function. The objective is to gradually reduce the originally more complex problem into a much simpler problem until it eventually reaches the base case.</p>
+      
+      <div class="callout warn" style="margin: 30px auto 40px; text-align: left;">
+          <span class="tag">&gt;&gt; THE MATHEMATICAL MODEL</span>
+          <p style="color: var(--text-primary); margin-bottom: 10px;">For example, the factorial function <em>fact</em> originally called with the parameter <em>n</em>, will call itself with the parameter <em>n - 1</em>.</p>
+          <ul class="nested-list" style="color: var(--text-primary); margin-bottom: 0; line-height: 1.8;">
+            <li><strong>The Recursive Case:</strong> For the factorial function, this can be stated as:
+                <ul style="list-style-type: circle; margin-top: 5px; margin-bottom: 10px;">
+                    <li><span style="font-family: var(--mono); color: var(--keyword); font-size: 16px;">n! = n(n - 1)! &forall;n &gt; 0</span></li>
+                </ul>
+            </li>
+            <li><strong>The Base Case:</strong> We define the base case as the factorial of 0 is equal to 1.</li>
+          </ul>
+      </div>
+    
+      <p>Let's review the actual Python code. <br> Notice how the mathematical definition translates directly into code.</p>
+
+      <div style="max-width: 800px; margin: 30px auto;">
+        <div style="background: var(--bg-panel-alt); padding: 20px 24px; border: 1px solid var(--border); border-bottom: none; border-radius: 10px 10px 0 0;">
+            <span style="font-family: var(--mono); font-size: 11.5px; font-weight: bold; letter-spacing: .04em; color: var(--type); margin-bottom: 12px; display: block;">&gt;&gt; MATHEMATICAL DEFINITION</span>
+            <div style="font-family: var(--mono); font-size: 15px; color: var(--keyword); line-height: 1.8;">
+              n! = 1 <span style="color:var(--text-faint); font-family: var(--sans);">(if n = 0)</span><br>
+              n! = n &times; (n - 1)! <span style="color:var(--text-faint); font-family: var(--sans);">(if n &gt; 0)</span>
+            </div>
+        </div>
+
+        <div class="video-frame" style="max-width: 100%; margin: 0; border-radius: 0 0 10px 10px;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+            <span>Computing the factorial</span>
+          </div>
+          <div style="background: var(--bg-void); padding: 20px 24px; font-family: var(--mono); font-size: 14.5px; color: var(--text-primary); overflow-x: auto; line-height: 1.7;">
+            <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">fact</span>(num):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Base Case</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> num == <span style="color: var(--warn);">0</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> <span style="color: var(--warn);">1</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Recursive Case</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">else</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> num * fact(num - <span style="color: var(--warn);">1</span>)
+          </div>
+        </div>
+      </div>
+
+      <div class="callout keyword" style="max-width: 800px; margin: 0 auto; text-align: left;">
+        <span class="tag">&gt;&gt; THE EXECUTION STACK</span>
+        <p style="margin-bottom: 15px;">When the hardware actually runs the instructions, it pauses the current function, saves the state, and stacks the new function on top. <strong>Hover below to watch Python resolve <em>fact(3)</em>:</strong></p>
+        
+        <div class="call-stack">
+          <div class="stack-frame sf-4">fact(0) &rarr; hits base case, returns 1</div>
+          <div class="stack-frame sf-3">fact(1) &rarr; returns 1 * fact(0)</div>
+          <div class="stack-frame sf-2">fact(2) &rarr; returns 2 * fact(1)</div>
+          <div class="stack-frame sf-1">fact(3) &rarr; returns 3 * fact(2)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECURSION TREE VISUALIZER -->
+    <section id="recursion-tree">
+      <h2><span class="idx">02.</span> The Recursion Tree</h2>
+      <p>We can create a tree structure to visualize the computation of the factorial to better understand how recursive calls are made with different parameter values.</p>
+
+      <div class="split-grid" style="margin-bottom: 24px; margin-top: 24px;">
+        <div class="callout type" style="margin: 0;">
+          <span class="tag">&gt;&gt; THE BREAKDOWN</span>
+          <p>The initial function call breaks down into smaller sub-problems (<code style="color:var(--keyword); font-family:var(--mono);">n * (n-1)!</code>) until it hits the absolute bottom—the <strong>Terminal Condition</strong>.</p>
+        </div>
+
+        <div class="callout string" style="margin: 0;">
+          <span class="tag">&gt;&gt; THE BUILD UP</span>
+          <p>Once the terminal condition is met, the math physically reverses. You <strong>build the solution from bottom to top</strong>, passing the calculated values back up the chain.</p>
+        </div>
+      </div>
+
+      <div class="visual-tree-box">
+        <div class="tree-arrow">
+          <div class="arrow-text">Build the solution from bottom to top &rarr;</div>
+        </div>
+        
+        <div class="tree-math">
+          <div class="t-row">
+            <span class="t-node start">5!</span> 
+            <span class="t-result final">120</span>
+          </div>
+          <div class="t-row indent-1">
+            <span class="t-val">5 &times;</span> <span class="t-node">4!</span> 
+            <span class="t-result">24</span>
+          </div>
+          <div class="t-row indent-2">
+            <span class="t-val">4 &times;</span> <span class="t-node">3!</span> 
+            <span class="t-result">6</span>
+          </div>
+          <div class="t-row indent-3">
+            <span class="t-val">3 &times;</span> <span class="t-node">2!</span> 
+            <span class="t-result">2</span>
+          </div>
+          <div class="t-row indent-4">
+            <span class="t-val">2 &times;</span> <span class="t-node">1!</span> 
+            <span class="t-result">1</span>
+          </div>
+          <div class="t-row indent-5">
+            <span class="t-val">1 &times;</span> <span class="t-node term">0!</span> 
+            <span class="t-result term-res">1 (Terminal Condition)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Recursion</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/m1Fjdnj_Mds?si=QywEso5cQ58M5NK6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- RECURSIVE PRACTICE CHALLENGES -->
+    <section id="practice">
+      <h3>Practice Problems</h2>
+      <p>Try these problems on your own using recursion.</p>
+
+      <div class="split-grid" style="margin-top: 24px; margin-bottom: 64px;">
+        <div class="callout type" style="margin: 0; display: flex; flex-direction: column;">
+          <span class="tag">&gt;&gt; Problem 01</span>
+          <h3 style="color: #fff; margin-top: 12px; font-family: var(--sans); font-size: 18px;">Greatest Common Divisor (GCD)</h3>
+          <p style="margin-bottom: 15px;">Write a recursive Python function to find the absolute largest positive integer that cleanly divides two target numbers without leaving a remainder (using the Euclidean algorithm).</p>
+          <div style="margin-top: auto; background: var(--bg-void); border: 1px solid var(--border); padding: 12px; border-radius: 6px;">
+            <p style="font-family: var(--mono); color: var(--text-faint); font-size: 13px; margin: 0;">
+              <strong>&gt; INTEL:</strong> If y hits 0, return x. Else, return gcd(y, x % y).
+            </p>
+          </div>
+        </div>
+
+        <div class="callout warn" style="margin: 0; display: flex; flex-direction: column;">
+          <span class="tag">&gt;&gt; Problem 02</span>
+          <h3 style="color: #fff; margin-top: 12px; font-family: var(--sans); font-size: 18px;">The nth Power Function</h3>
+          <p style="margin-bottom: 15px;">Write a recursive Python function to mathematically calculate the exact value of a base number raised to the power of <em>n</em> (for example, computing 2<sup>4</sup> = 16).</p>
+          <div style="margin-top: auto; background: var(--bg-void); border: 1px solid var(--border); padding: 12px; border-radius: 6px;">
+            <p style="font-family: var(--mono); color: var(--text-faint); font-size: 13px; margin: 0;">
+              <strong>&gt; INTEL:</strong> Base case: Exponent is 0 (return 1). Recursive case: Multiply base by power(base, exp - 1).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ITERATION VS RECURSION -->
+    <section id="iteration-vs-recursion">
+      <h2><span class="idx">03.</span> Iteration vs. Recursion</h2>
+      <p>The ultimate architectural showdown. Any problem solved using a recursive algorithm can generally be cracked using standard iteration (like a <em>for</em> or <em>while</em> loop). But which approach should you actually use in the field?</p>
+
+      <div class="callout warn" style="margin: 24px auto 32px; text-align: left;">
+          <span class="tag">&gt;&gt; THE CORE DIFFERENCE</span>
+          <p>While recursion only requires structuring the problem so it progressively becomes simpler, <strong>iteration</strong> requires the explicit formulation of a solution where an indexed computation is aggressively looped through to achieve the result.</p>
+      </div>
+
+      <div class="split-grid" style="margin-bottom: 64px;">
+        <div class="callout type" style="margin: 0; display: flex; flex-direction: column;">
+          <span class="tag">&gt;&gt; RECURSION (THE ELEGANCE)</span>
+          <ul style="color: var(--text-primary); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
+            <li>Provides significantly more <strong>elegant solutions</strong> to complex problems.</li>
+            <li>The logic is generally <strong>easier to understand</strong> and <strong>simple to code</strong>.</li>
+            <li><strong style="color: var(--red);">The Fatal Flaw:</strong> It is highly inefficient. Repeatedly calling the function inside itself generates a massive run-time call stack equal to the number of calls (plus arguments and system states), burning through memory fast.</li>
+          </ul>
+        </div>
+
+        <div class="callout string" style="margin: 0; display: flex; flex-direction: column;">
+          <span class="tag">&gt;&gt; ITERATION (THE GRIND)</span>
+          <ul style="color: var(--text-primary); margin-top: 12px; padding-left: 20px; line-height: 1.8;">
+            <li>Relies on a formulated, indexed computation mathematically looping through data.</li>
+            <li><strong style="color: var(--string);">The Major Advantage:</strong> It is significantly more efficient. It does not generate massive memory overhead or require saving continuous system states to a call stack.</li>
+            <li>Can sometimes be harder to read or require clunkier code setup for deep mathematical problems compared to recursion.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Recursion v Iteration</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/kx6DfrYfWnQ?si=kf-xelA7SF3zNP0B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+    </section>
+
+    <!-- ITERATIVE IMPLEMENTATIONS IN PYTHON -->
+    <section id="iterative-implementation">
+      <h2><span class="idx">04.</span> Iterative Implementation in Python</h2>
+      <p>To avoid the massive memory overhead of a recursive call stack, we can translate these algorithms into highly efficient iterative loops using <em>for</em> and <em>while</em> statements.</p>
+
+      <div class="split-grid" style="margin-bottom: 24px;">
+        <div class="video-frame" style="max-width: 100%; margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+            <span>Factorial using iteration</span>
+          </div>
+          <div style="background: var(--bg-void); padding: 20px; font-family: var(--mono); font-size: 15px; color: var(--text-primary); overflow-x: auto; line-height: 1.6;">
+            <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">itrfact</span>(n):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;ans = <span style="color: var(--warn);">1</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">for</span> x <span style="color: var(--type);">in</span> <span style="color: var(--keyword);">xrange</span>(<span style="color: var(--warn);">1</span>, n + <span style="color: var(--warn);">1</span>):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans *= x<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> ans
+          </div>
+        </div>
+
+        <div class="video-frame" style="max-width: 100%; margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+            <span>nth power using iteration</span>
+          </div>
+          <div style="background: var(--bg-void); padding: 20px; font-family: var(--mono); font-size: 15px; color: var(--text-primary); overflow-x: auto; line-height: 1.6;">
+            <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">itrexp</span>(x, n):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;ans = <span style="color: var(--warn);">1</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">for</span> k <span style="color: var(--type);">in</span> <span style="color: var(--keyword);">xrange</span>(<span style="color: var(--warn);">1</span>, n + <span style="color: var(--warn);">1</span>):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans *= x<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> ans
+          </div>
+        </div>
+      </div>
+
+      <div class="callout keyword" style="margin: 32px auto; text-align: left;">
+          <span class="tag">&gt;&gt; ALGORITHMIC OPTIMIZATION</span>
+          <p>Standard iteration is great, but we can push the computational efficiency even further. We can mathematically optimize the nth power calculation by halving the exponent at each step, drastically reducing the total number of loops required by the machine.</p>
+      </div>
+
+      <div class="video-frame" style="max-width: 70ch; margin: 0 auto 64px;">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>nth power (Optimized)</span>
+        </div>
+        <div style="background: var(--bg-void); padding: 20px; font-family: var(--mono); font-size: 15px; color: var(--text-primary); overflow-x: auto; line-height: 1.6;">
+          <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">itrexpfast</span>(a, n):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;ans = <span style="color: var(--warn);">1</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;num = a<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;k = n<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">while</span> k > <span style="color: var(--warn);">0</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> k % <span style="color: var(--warn);">2</span> == <span style="color: var(--warn);">1</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans = ans * num<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num = num * num<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k = k // <span style="color: var(--warn);">2</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> ans
+        </div>
+      </div>
+    </section>
+
+    <!-- TAIL RECURSION & GCD -->
+    <section id="tail-recursion">
+      <h2><span class="idx">05.</span> Tail Recursion &amp; Optimization</h2>
+      <p>Standard recursion can use a lot of memory because each recursive call is stored until it finishes. To fix this run-time inefficiency, engineers use <strong>Tail Recursion</strong>.</p>
+      
+      <div class="split-grid" style="margin-bottom: 30px;">
+        <div class="callout warn" style="margin: 0;">
+          <span class="tag">&gt;&gt; THE MECHANICS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.6;">
+            <li>In a tail-recursive function, the recursive call is the last thing the function does. There is no additional work left to do after the call returns.</li>
+            <li>Because of this, the computer doesn't need to keep creating new memory spaces for every recursive call. It can reuse the same space, making it work much like an efficient <em>while</em> loop.</li>
+          </ul>
+        </div>
+        
+        <div class="video-frame" style="max-width: 100%; margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+            <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+            <span>GCD tail recursion</span>
+          </div>
+          <div style="background: var(--bg-void); padding: 20px; font-family: var(--mono); font-size: 15px; color: var(--text-primary); overflow-x: auto; line-height: 1.6;">
+            <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">gcd</span>(x, y):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> y == <span style="color: var(--warn);">0</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> x<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">else</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> gcd(y, (x % y))
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="tail-visualizer">
+        <div class="t-call">call <span class="t-func">gcd(10, 8)</span></div>
+        <div class="t-arrow">&darr;</div>
+        <div class="t-call">call <span class="t-func">gcd(8, 2)</span></div>
+        <div class="t-arrow">&darr;</div>
+        <div class="t-call">call <span class="t-func">gcd(2, 0)</span></div>
+        <div class="t-return-line">
+           <span class="t-val">2</span>
+           <span class="t-flash">&rarr; return 2 &rarr; return 2 &rarr; <strong>Final Answer: 2</strong></span>
+        </div>
+      </div>
+      <!-- GCD Step-by-Step Breakdown -->
+      <div class="callout type" style="margin: 40px auto 0; text-align: left;">
+        <span class="tag">&gt;&gt; HOW IT WORKS</span>
+        <p style="margin-bottom: 20px;">This function finds the Greatest Common Divisor (GCD) of two numbers. For example, let's calculate <strong>gcd(48, 18)</strong>:</p>
+        
+        <div class="gcd-execution">
+          <div class="gcd-step">call <span class="gcd-func">gcd(48, 18)</span></div>
+          <div class="gcd-sub">&rarr; gcd(18, 48 % 18)</div>
+          
+          <div class="gcd-step">call <span class="gcd-func">gcd(18, 12)</span></div>
+          <div class="gcd-sub">&rarr; gcd(12, 18 % 12)</div>
+          
+          <div class="gcd-step">call <span class="gcd-func">gcd(12, 6)</span></div>
+          <div class="gcd-sub">&rarr; gcd(6, 12 % 6)</div>
+          
+          <div class="gcd-step">call <span class="gcd-func">gcd(6, 0)</span></div>
+          
+          <div class="gcd-final">
+            <span>&rarr; 6</span>
+          </div>
+        </div>
+
+        <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 15px;"><strong>Here is exactly what happens at each step:</strong></p>
+        <ul style="color: var(--text-primary); padding-left: 20px; line-height: 1.7; margin-bottom: 20px;">
+          <li>The function checks whether y is 0.</li>
+          <li>If it isn't, it calls itself again using y and the remainder of x &divide; y.</li>
+          <li>This continues with smaller numbers each time.</li>
+          <li>When y finally becomes 0, the function stops and returns x.</li>
+        </ul>
+        
+        <p style="font-size: 16px;">That final value is the GCD. So: <strong style="color: var(--type);">gcd(48, 18) = 6</strong></p>
+        
+        <div class="gcd-takeaway">
+          <p style="margin: 0; font-size: 14.5px; color: var(--text-primary); line-height: 1.6;">
+            <strong>The Takeaway:</strong> The important part is that each recursive call gets the result it needs directly, with <em>no additional calculation left afterward</em>. This makes it a flawless, simple example of tail recursion.
+          </p>
+        </div>
+      </div>
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Tail Recursion</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/_JtPhF8MshA?si=aPQASGB8NYJ0xaJb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- TOWERS OF HANOI -->
+    <section id="towers-of-hanoi">
+      <h2><span class="idx">06.</span> Towers of Hanoi</h2>
+      <p>This is the classic, definitive problem used to illustrate recursion. You have 3 pegs (A, B, C) and <em>n</em> disks stacked in decreasing size. The goal is to move the entire stack from Peg A to Peg B.</p>
+      
+      <div class="callout warn" style="margin: 24px auto 32px; text-align: left;">
+          <span class="tag">&gt;&gt; THE STRICT RULES</span>
+          <ol style="color: var(--text-primary); margin-top: 10px; padding-left: 25px; line-height: 1.6;">
+            <li>You may only move <strong>one disk</strong> at a time.</li>
+            <li>At no time may you place a larger disk on top of a smaller disk.</li>
+          </ol>
+      </div>
+
+      <!-- Hanoi Diagram Replacement -->
+      <div style="text-align: center; margin: 32px 0;">
+        <img src="Tower-Of-Hanoi.png" alt="Towers of Hanoi Initial and Goal States" style="max-width: 500px; width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);">
+      </div>
+
+      <p>For three disks, we can solve the problem by breaking it into smaller versions of the same problem:</p>
+      
+      <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 25px; line-height: 1.8;">
+        <li>Move the smaller disks (A and B) from Peg 1 to Peg 2.</li>
+        <li>Move the largest disk (C) from Peg 1 to Peg 3.</li>
+        <li>Move disks A and B from Peg 2 to Peg 3.</li>
+      </ul>
+
+      <p>The key idea is that moving two disks is itself another Towers of Hanoi problem. We can keep breaking the problem into smaller versions until there is only one disk left to move.</p>
+      
+      <p style="margin-bottom: 24px;">This is where recursion comes in. The same process is repeatedly applied to smaller stacks until the entire tower reaches the goal peg.
+        <br><br>
+      The following Python code implements the recursive solution to the Towers of Hanoi.
+      </p>
+
+      <div class="video-frame" style="max-width: 100%; margin: 30px 0 64px;">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>hanoi.py</span>
+        </div>
+        <div style="background: var(--bg-void); padding: 20px; font-family: var(--mono); font-size: 14px; color: var(--text-primary); overflow-x: auto; line-height: 1.6;">
+          <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">TowerOfHanoi</span>(n, from_peg, to_peg, spare_peg):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Base Case</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> n == <span style="color: var(--warn);">1</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--keyword);">print</span>(<span style="color: var(--string);">"Move disk 1 from peg"</span>, from_peg, <span style="color: var(--string);">"to peg"</span>, to_peg)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Recursive Case</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;TowerOfHanoi(n-<span style="color: var(--warn);">1</span>, from_peg, spare_peg, to_peg)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--keyword);">print</span>(<span style="color: var(--string);">"Move disk"</span>, n, <span style="color: var(--string);">"from peg"</span>, from_peg, <span style="color: var(--string);">"to peg"</span>, to_peg)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;TowerOfHanoi(n-<span style="color: var(--warn);">1</span>, spare_peg, to_peg, from_peg)
+        </div>
+      </div>
+    </section>
+
+    <!-- REAL-WORLD PRACTICE CHALLENGE -->
+    <!-- REAL-WORLD PRACTICE CHALLENGE -->
+    <section id="real-world-challenge">
+      <h2><span class="idx">07.</span> Exercises</h2>
+      <p>Now, apply what you've learned and design your own recursive solutions.</p>
+      
+      <!-- Feature Image Placeholder -->
+      <div style="text-align: center; margin: 30px 0;">
+          <img src="Cannibals_&_Missioneries.png" alt="Missionaries and Cannibals Logic Puzzle" class="feature-image" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+      </div>
+
+      <div class="stack" style="margin-top: 32px; margin-bottom: 64px;">
+        
+        <!-- Problem 1: Easy -->
+        <div class="stack-item challenge-card">
+          <span class="stack-tag diff-easy">EASY</span>
+          <details class="challenge-details">
+            <summary><h3>1. The Recursive Array Sum</h3></summary>
+            <div class="challenge-body">
+              <p><strong>The Scenario:</strong> You are handed a list of sequential numbers, such as <strong>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</strong>.</p>
+              <p><strong>The Task:</strong> Calculate the absolute sum of the array. <strong style="color: var(--warn);">CONSTRAINT:</strong> You must solve this recursively without using standard 'for' or 'while' loops.</p>
+              
+              <div class="test-case">
+                <strong>Test Case 1 (Fibonacci Subset):</strong>
+                <code>Input: [0, 1, 1, 2, 3, 5]</code>
+                <code>Output: 12</code>
+              </div>
+              <div class="test-case">
+                <strong>Test Case 2 (Single Element):</strong>
+                <code>Input: [8]</code>
+                <code>Output: 8</code>
+              </div>
+
+              <details class="solution-reveal">
+                <summary>⚠️ I gave up. Show me the answer.</summary>
+                <pre><code>def recursive_sum(numbers):
+    # Base Case: No numbers left to sum
+    if len(numbers) == 0:
+        return 0
+        
+    # Recursive Case: Add the first number to the sum of the rest
+    return abs(numbers[0]) + recursive_sum(numbers[1:])
+
+print(recursive_sum([0, 1, 1, 2, 3, 5, 8, 13, 21, 34]))</code></pre>
+              </details>
+            </div>
+          </details>
+        </div>
+
+        <!-- Problem 2: Medium -->
+        <div class="stack-item challenge-card">
+          <span class="stack-tag diff-med">MEDIUM</span>
+          <details class="challenge-details">
+            <summary><h3>2. The Palindrome Check</h3></summary>
+            <div class="challenge-body">
+              <p><strong>The Scenario:</strong> You need to verify if system-generated hash strings read exactly the same forwards and backwards.</p>
+              <p><strong>The Task:</strong> Determine whether a given word is a palindrome (e.g., "radar", "madam"). <strong style="color: var(--warn);">CONSTRAINT:</strong> You must solve this recursively without using string reversal shortcuts like <code>word[::-1]</code> or standard loops.</p>
+              
+              <div class="test-case">
+                <strong>Test Case 1 (Valid Palindrome):</strong>
+                <code>Input: "radar"</code>
+                <code>Output: True</code>
+              </div>
+              <div class="test-case">
+                <strong>Test Case 2 (Invalid Word):</strong>
+                <code>Input: "hello"</code>
+                <code>Output: False</code>
+              </div>
+
+              <details class="solution-reveal">
+                <summary>⚠️ I gave up. Show me the answer.</summary>
+                <pre><code>def is_palindrome(word):
+    # Base Case: 1 or 0 letters left means it is inherently a palindrome
+    if len(word) <= 1:
+        return True
+    
+    # Recursive Case: Check outer letters, then strip them and recurse inner string
+    if word[0] == word[-1]:
+        return is_palindrome(word[1:-1])
+    else:
+        return False
+
+print(is_palindrome("radar"))</code></pre>
+              </details>
+            </div>
+          </details>
+        </div>
+
+        <!-- Problem 3: Boss -->
+        <div class="stack-item challenge-card">
+          <span class="stack-tag diff-boss">BOSS</span>
+          <details class="challenge-details">
+            <summary><h3>3. The River Crossing Algorithm</h3></summary>
+            <div class="challenge-body">
+              <p><strong>The Scenario:</strong> Three missionaries and three cannibals must cross a river using a boat that holds exactly two people.</p>
+              <p><strong>The Task:</strong> Write a recursive search algorithm to find the sequence of moves. <strong style="color: var(--warn);">CONSTRAINT:</strong> If cannibals ever outnumber missionaries on either bank, the missionaries are eaten. Use recursion to map the state space and backtrack if a path fails.</p>
+              
+              <div class="test-case">
+                <strong>Goal State:</strong>
+                <code>Input: Start state (3M, 3C, Boat Left)</code>
+                <code>Output: Valid path of states reaching (0M, 0C, Boat Right)</code>
+              </div>
+
+              <details class="solution-reveal">
+                <summary>⚠️ I gave up. Show me the answer.</summary>
+                <pre><code>def river_crossing(state, path, visited):
+    m_left, c_left, boat = state
+    
+    # Base Case: Everyone safely across
+    if m_left == 0 and c_left == 0:
+        return path + [state]
+    
+    visited.add(state)
+    # Possible boat moves: (Missionaries, Cannibals)
+    moves = [(1, 0), (2, 0), (0, 1), (0, 2), (1, 1)]
+    
+    for m, c in moves:
+        if boat == 1: # Boat traveling Right
+            next_state = (m_left - m, c_left - c, 0)
+        else:         # Boat traveling Left
+            next_state = (m_left + m, c_left + c, 1)
+        
+        nm, nc, nb = next_state
+        m_right, c_right = 3 - nm, 3 - nc
+        
+        # Validation checks
+        valid_left = (nm == 0 or nm >= nc)
+        valid_right = (m_right == 0 or m_right >= c_right)
+        valid_counts = 0 <= nm <= 3 and 0 <= nc <= 3
+        
+        if valid_left and valid_right and valid_counts and next_state not in visited:
+            result = river_crossing(next_state, path + [state], visited.copy())
+            if result: 
+                return result
+            
+    return None # Dead end, backtrack
+
+solution = river_crossing((3, 3, 1), [], set())
+print("Sequence found! Path length:", len(solution))</code></pre>
+              </details>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Ready for the next step? <span class="accent">Let's move on.</span></h2>
+      <a class="next-btn" href="divideAndConquer.html">
+        Next: Divide and Conquer
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+
+</div>
+<!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script>
+</main>
+
+<script>
+  // Highlight the active TOC entry as the reader scrolls
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => {
+    const targetId = l.getAttribute('href').slice(1);
+    map.set(targetId, l);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

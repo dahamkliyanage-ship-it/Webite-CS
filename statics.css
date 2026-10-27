@@ -1,0 +1,247 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b111e; /* Leader Deep Navy/Dark Slate Background */
+    color: #f1f5f9;
+    padding: 30px 20px;
+}
+
+/* Navigation */
+nav {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+}
+
+nav a {
+    text-decoration: none;
+    color: #38bdf8; /* Soft Cyan */
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: #facc15; /* Crisp Yellow */
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header h1 {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* Timeline Base */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Center Glowing Line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, #facc15, #38bdf8, #facc15);
+    box-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Timeline Container */
+.container {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+}
+
+/* Timeline Glowing Yellow Rings */
+.container::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    right: -9px;
+    background-color: #0b111e;
+    border: 3px solid #facc15; /* Bright yellow ring */
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.6);
+    top: 32px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    left: 50%;
+}
+
+.right::after {
+    left: -9px;
+}
+
+/* Dark Topic Card */
+.content {
+    padding: 24px;
+    background: linear-gradient(145deg, #111a2e, #0e1626);
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.content:hover {
+    transform: translateY(-3px);
+    border-color: #38bdf8;
+    box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
+}
+
+/* Topic Badges (Leader Outline Pill Style) */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 14px;
+    background-color: rgba(250, 204, 21, 0.12);
+    border: 1px solid #facc15;
+    color: #facc15;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.badge-green,
+.badge-blue,
+.badge-orange {
+    background-color: rgba(250, 204, 21, 0.12);
+    border: 1px solid #facc15;
+    color: #facc15;
+}
+
+.content h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.content p {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* Action Buttons inside Cards */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 6px;
+    background-color: #1e293b;
+    color: #38bdf8;
+    border: 1px solid #334155;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: #facc15;
+    color: #0b111e;
+    border-color: #facc15;
+    font-weight: 700;
+}
+
+/* Dropdown Container */
+.tute-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Remove default summary arrow */
+.tute-dropdown summary {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tute-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Dropdown Content Box - Dark */
+.dropdown-content {
+    position: absolute;
+    top: 115%;
+    left: 0;
+    background-color: #0f172a;
+    min-width: 170px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    padding: 6px 0;
+    z-index: 10;
+    border: 1px solid #334155;
+}
+
+/* Dropdown Links */
+.dropdown-content a {
+    color: #f1f5f9;
+    padding: 8px 14px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #1e293b;
+    color: #facc15;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 650px) {
+    .timeline::after {
+        left: 20px;
+    }
+    .container {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 15px;
+    }
+    .container::after {
+        left: 11px;
+    }
+    .right {
+        left: 0%;
+    }
+}

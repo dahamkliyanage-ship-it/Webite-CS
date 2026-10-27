@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Properties of the Integral</title>
+    <!-- Assuming the provided CSS is saved in a stylesheet or embedded correctly in your framework -->
+    <link rel="stylesheet" href="style-vectors-intro.css">
+    <link rel="stylesheet" href="chatbot_style.css">
+    <meta name="bot-context" content="Topic: Mathematics : Properties of the Integral. Focus on the fundamental properties of Riemann integrals, including linearity, additivity, scalar multiplication, and boundedness. Cover proofs of key properties, operations on integrals, interval subdivisions, and sequential limits. Include worked examples, step-by-step explanations, and exercises for practice. Provide a video tutorial for visual learning."> 
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Aluthen add karapu Database status message CSS styles -->
+    <style>
+        #db-status-msg {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1>Properties of the Integral</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#basic-properties" style="color: yellow; background-color: rgba(56, 189, 248, 0.1);">Basic Properties</a></li>
+                <li><a href="#proofs-basic">Proofs of Properties</a></li>
+                <li><a href="#advanced-operations">Operations on Integrals</a></li>
+                <li><a href="#interval-limits">Intervals & Sequences</a></li>
+                <li><a href="#worked-example">Worked Example</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            
+            <h2 id="basic-properties" style="margin-bottom: 20px;">Basic Properties of Integrals</h2>
+            <p style="margin-bottom: 15px;">Notation: If $a < b$ and $f$ is integrable on $[a, b]$, then $\int_a^b f = -\int_b^a f$.</p>
+
+            <div class="blue-box">
+                <strong>Theorem(Properties of Integrals):</strong><br><br>
+                Assume $f$ and $g$ are integrable on $[a,b]$.
+                <ol style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+                    <li>$f + g$ is integrable on $[a,b]$ and $\int_a^b (f + g) = \int_a^b f + \int_a^b g$.</li>
+                    <li>For $k \in \mathbb{R}$, the function $k f$ is integrable and $\int_a^b kf = k\int_a^b f$.</li>
+                    <li>If $m \le f(x) \le M$ on $[a,b]$, then $m(b - a) \le \int_a^b f \le M(b - a)$.</li>
+                    <li>If $f(x) \le g(x)$ on $[a,b]$, then $\int_a^b f \le \int_a^b g$.</li>
+                    <li>The function $|f|$ is integrable and $\left| \int_a^b f \right| \le \int_a^b |f|$.</li>
+                </ol>
+            </div>
+
+            <h2 id="proofs-basic" style="margin-top: 30px; margin-bottom: 20px;">Proofs of Key Properties</h2>
+
+            <div class="green-box">
+                <strong>Proof(Property 1: Additivity):</strong><br>
+                Let $\epsilon > 0$. Then there exists a partition $P_1$ and $P_2$ such that $U(f, P_1) - L(f, P_1) < \frac{\epsilon}{2}$ and $U(g, P_2) - L(g, P_2) < \frac{\epsilon}{2}$. Let $P$ be a common refinement of $P_1$ and $P_2$. Then:
+                <div class="math-center">
+                    $$ U(f, P) - L(f, P) < \frac{\epsilon}{2} \quad \text{and} \quad U(g, P) - L(g, P) < \frac{\epsilon}{2} $$
+                </div>
+                Therefore, $U(f+g, P) - L(f+g, P) \le U(f, P) + U(g, P) - L(f, P) - L(g, P) < \epsilon$. Hence, $f+g$ is integrable.
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Proof(Property 2: Scalar Multiplication):</strong><br>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>Case I ($k > 0$):</strong> $U(kf, P) - L(kf, P) = k(U(f, P) - L(f, P)) < \epsilon$.</li>
+                    <li><strong>Case II ($k = -1$):</strong> $U(-f, P) - L(-f, P) = -L(f, P) + U(f, P) < \epsilon$.</li>
+                    <li><strong>Case III ($k < 0$):</strong> Let $k = -s$ where $s > 0$. Since $f$ is Riemann integrable, $sf$ is integrable by Case I, and $-sf$ is integrable by Case II.</li>
+                </ul>
+
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Proof(Properties 3 & 5):</strong><br>
+                For property 3, for any given partition $P = \{x_0, x_1, \dots, x_n\}$, we have:
+                <div class="math-center">
+                    $$ m(b - a) = \sum_{k=1}^n m_k(x_k - x_{k-1}) = L(f, P) \le L(f) \le \int_a^b f \le U(f) \le U(f, P) = \sum_{k=1}^n M_k(x_k - x_{k-1}) \le M(b - a) $$ 
+                </div>.
+                For property 5, as $-|f| \le f \le |f|$, from the previous property $-\int_a^b |f| \le \int_a^b f \le \int_a^b |f|$. Hence, $\left| \int_a^b f \right| \le \int_a^b |f|$.
+            </div>
+
+            <h2 id="advanced-operations" style="margin-top: 30px; margin-bottom: 20px;">Products, Maxima, and Minima</h2>
+
+            <div class="blue-box">
+                <strong>Theorem:</strong><br>
+                If $f$ and $g$ are Riemann integrable, then $fg$ is also Riemann integrable. 
+                <br><br>
+                <em>Proof:</em> First, we show that $f^2$ is integrable. Then, utilizing the algebraic identity $fg = \frac{(f+g)^2 - f^2 - g^2}{2}$, we prove that $fg$ is integrable because it is comprised of integrable components.
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Theorem:</strong><br>
+                If $f$ and $g$ are Riemann integrable, then $\text{Max}(f, g)$ and $\text{Min}(f, g)$ are also Riemann integrable.
+                <br><br>
+                <em>Proof:</em> By definition, $\text{Max}(f, g) := \frac{|f - g| + f + g}{2}$ and $\text{Min}(f, g) := \frac{-|f - g| + f + g}{2}$. Hence they are integrable.
+            </div>
+
+            <h2 id="interval-limits" style="margin-top: 30px; margin-bottom: 20px;">Interval Subdivisions and Sequential Limits</h2>
+
+            <div class="green-box">
+                <strong>Theorem(Interval Additivity):</strong><br>
+                Assume $f : [a,b] \to \mathbb{R}$ is bounded, and let $c \in (a,b)$. Then $f$ is integrable on $[a,b]$ if and only if it is integrable on $[a,c]$ and $[c,b]$. In this case, we have:
+                <div class="math-center">
+                    $$ \int_a^b f = \int_a^c f + \int_c^b f $$
+                </div>.
+                <em>Proof:</em> If $f$ is integrable on $[a,b]$, inserting the point $c$ into partition $P$ creates a refinement $P'$ such that $U(f, P') - L(f, P') < \epsilon$. This implies integrability on both sub-intervals.
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Theorem:(Sequential Characterization):</strong><br>
+                A bounded function $f : [a,b] \to \mathbb{R}$ is Riemann integrable if and only if there is a sequence $(P_n)$ of partitions such that:
+                <div class="math-center">
+                    $$ \lim_{n \to \infty} [U(f; P_n) - L(f; P_n)] = 0 $$
+                </div>.
+                In that case, $\int_a^b f = \lim_{n \to \infty} U(f; P_n) = \lim_{n \to \infty} L(f; P_n)$.
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 15px 0;">
+
+                <strong>Theorem(Riemann Sum Convergence):</strong><br>
+                Let $f$ be integrable over $[a,b]$ and $\epsilon > 0$. Then there exists $\delta > 0$ such that for all partitions $P = \{x_0, x_1, \dots, x_n\}$ with $|P| < \delta$:
+                <div class="math-center">
+                    $$ \left| \int_a^b f - \sum_{j=1}^n f(\zeta_j)I_j \right| < \epsilon $$
+                </div>.
+                where $\zeta_j \in [x_{j-1}, x_j]$ for $j = 1, 2, \dots, n$.
+            </div>
+
+            <h2 id="worked-example" style="margin-top: 30px; margin-bottom: 20px;">Example Application</h2>
+
+            <div class="yellow-box">
+                <strong>Worked Example: Using Linearity Properties</strong><br><br>
+                Suppose we are given that $\int_1^4 f(x) dx = 8$ and $\int_1^4 g(x) dx = 3$. Evaluate the following integral:
+                <div class="math-center">
+                    $$ \int_1^4 (2f(x) - 3g(x)) dx $$
+                </div>
+                <strong>Step 1: Apply Theorem(Property 1 - Additivity)</strong><br>
+                We can separate the integral into two parts:
+                <div class="math-center">
+                    $$ \int_1^4 2f(x) dx + \int_1^4 -3g(x) dx $$
+                </div>
+                
+                <strong>Step 2: Apply Theorem(Property 2 - Scalar Multiplication)</strong><br>
+                We can pull the constants to the outside of the integrals:
+                <div class="math-center">
+                    $$ 2\int_1^4 f(x) dx - 3\int_1^4 g(x) dx $$
+                </div>
+                
+                <strong>Step 3: Substitute known values</strong><br>
+                Substitute the given integral values into the expression:
+                <div class="math-center">
+                    $$ 2(8) - 3(3) = 16 - 9 = 7 $$
+                </div>
+                The final evaluated answer is $7$.
+            </div>
+
+
+            <div class="video-section">
+                <p>Watch this detailed theoretical breakdown covering the linearity of integrals, scalar multiplication, and bounded properties using upper and lower Darboux sums:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/vfvvoxzKuI8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- ================= EXERCISE SECTION START ================= -->
+            <div class="exercise-section">
+                <h3>Practice Exercises</h3>
+                <p>Test your knowledge on the fundamental properties of Riemann integrals and their operations.</p>
+
+                <!-- Question 1 -->
+                <div class="question-box" data-q="1">
+                    <p><strong>1.</strong> If $f$ is an integrable function on $[a, b]$, which of the following perfectly describes the mathematical relationship when the limits of integration are reversed?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\int_a^b f = -\int_b^a f$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\int_a^b f = \int_b^a f$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $\int_a^b f = \frac{1}{\int_b^a f}$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-box" data-q="2">
+                    <p><strong>2.</strong> If a function $f(x)$ is bounded such that $m \le f(x) \le M$ over the interval $[a,b]$, what bounds apply strictly to the definite integral of $f(x)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $m \le \int_a^b f \le M$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $m(b - a) \le \int_a^b f \le M(b - a)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $m(b + a) \le \int_a^b f \le M(b + a)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-box" data-q="3">
+                    <p><strong>3.</strong> Which of the following mathematical inequalities correctly relates the absolute value of an integral to the integral of its absolute value?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\int_a^b |f| \le \left| \int_a^b f \right|$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\left| \int_a^b f \right| = \int_a^b |f|$ always</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\left| \int_a^b f \right| \le \int_a^b |f|$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-box" data-q="4">
+                    <p><strong>4.</strong> To mathematically prove that the product of two Riemann integrable functions $fg$ is also integrable, which algebraic identity is directly utilized in the provided text?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $fg = \frac{(f+g)^2 - f^2 - g^2}{2}$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $fg = (f+g)(f-g)$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $fg = \text{Max}(f,g) + \text{Min}(f,g)$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-box" data-q="5">
+                    <p><strong>5.</strong> If two functions $f$ and $g$ are proven to be Riemann integrable, what can be definitively stated about the functions $\text{Max}(f, g)$ and $\text{Min}(f, g)$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) Only $\text{Max}(f,g)$ is strictly guaranteed to be integrable.</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) Both $\text{Max}(f, g)$ and $\text{Min}(f, g)$ are mathematically guaranteed to be Riemann integrable.</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) Neither function is guaranteed to be integrable unless $f$ and $g$ are completely identical.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-box" data-q="6">
+                    <p><strong>6.</strong> The Interval Additivity theorem states that for a bounded function $f$ and a point $c \in (a,b)$, the integral over $[a,b]$ can be split into two. How is this correctly written?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $\int_a^b f = \int_a^c f \times \int_c^b f$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\int_a^b f = \int_a^c f - \int_c^b f$</button></li>
+                        <li><button class="option-btn" data-ans="correct">C) $\int_a^b f = \int_a^c f + \int_c^b f$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-box" data-q="7">
+                    <p><strong>7.</strong> According to the Sequential Characterization theorem, a bounded function $f$ is defined as Riemann integrable if and only if there exists a sequence of partitions $(P_n)$ where:</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="correct">A) $\lim_{n \to \infty} [U(f; P_n) - L(f; P_n)] = 0$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">B) $\lim_{n \to \infty} U(f; P_n) = \infty$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $U(f; P_n)$ and $L(f; P_n)$ both continuously converge to exactly 1.</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-box" data-q="8">
+                    <p><strong>8.</strong> Following the linear properties from the worked example, if $\int_1^4 f(x) dx = 8$ and $\int_1^4 g(x) dx = 3$, what is the exact evaluated numerical value of $\int_1^4 (2f(x) - 3g(x)) dx$?</p>
+                    <ul class="options-list">
+                        <li><button class="option-btn" data-ans="wrong">A) $25$</button></li>
+                        <li><button class="option-btn" data-ans="correct">B) $7$</button></li>
+                        <li><button class="option-btn" data-ans="wrong">C) $16$</button></li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Completion Message -->
+                <div id="completed-msg" style="display: none;">
+                    🎉 Completed! You have answered all questions correctly.
+                </div>
+
+                <!-- Database Auto-Save Message -->
+                <div id="db-status-msg"></div>
+            </div>
+
+            <!-- JavaScript for interactivity and Firebase saving -->
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+                import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+                // Oyage Firebase config eka methanata danna
+                const firebaseConfig = {
+                    apiKey: "AIzaSy...", 
+                    authDomain: "sharkvision-4ac92.firebaseapp.com",
+                    projectId: "sharkvision-4ac92",
+                    storageBucket: "sharkvision-4ac92.firebasestorage.app",
+                    messagingSenderId: "516357464658",
+                    appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                let currentUser = null;
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                    } else {
+                        currentUser = null;
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const totalQuestions = 8;
+                    let correctAnswersCount = 0;
+                    const answeredQuestions = new Set(); 
+
+                    const questionBoxes = document.querySelectorAll('.question-box');
+                    const dbStatusMsg = document.getElementById('db-status-msg');
+
+                    questionBoxes.forEach(box => {
+                        const buttons = box.querySelectorAll('.option-btn');
+                        const feedback = box.querySelector('.feedback-msg');
+                        const questionId = box.getAttribute('data-q');
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                if (answeredQuestions.has(questionId)) return;
+
+                                buttons.forEach(b => {
+                                    b.classList.remove('correct-ans', 'wrong-ans');
+                                });
+
+                                const isCorrect = this.getAttribute('data-ans') === 'correct';
+
+                                if (isCorrect) {
+                                    this.classList.add('correct-ans');
+                                    feedback.textContent = "Correct";
+                                    feedback.className = "feedback-msg correct-text";
+                                    feedback.style.display = "block";
+                                    
+                                    answeredQuestions.add(questionId);
+                                    correctAnswersCount = answeredQuestions.size;
+
+                                    if (correctAnswersCount === totalQuestions) {
+                                        document.getElementById('completed-msg').style.display = 'block';
+
+                                        // Save progress to Firestore under "riemann-properties"
+                                        if (currentUser) {
+                                            try {
+                                                const userRef = doc(db, "users", currentUser.uid, "progress", "riemann-properties");
+                                                await setDoc(userRef, {
+                                                    completed: true,
+                                                    completedAt: new Date()
+                                                }, { merge: true });
+
+                                                dbStatusMsg.textContent = "✅ Progress saved to your account!";
+                                                dbStatusMsg.style.color = "#4ade80";
+                                            } catch (error) {
+                                                console.error("Error saving progress: ", error);
+                                                dbStatusMsg.textContent = "❌ Failed to save progress.";
+                                                dbStatusMsg.style.color = "#f43f5e";
+                                            }
+                                        } else {
+                                            dbStatusMsg.textContent = "⚠️ Please log in to save your progress!";
+                                            dbStatusMsg.style.color = "#facc15";
+                                        }
+                                    }
+                                } else {
+                                    this.classList.add('wrong-ans');
+                                    feedback.textContent = "Wrong";
+                                    feedback.className = "feedback-msg wrong-text";
+                                    feedback.style.display = "block";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
+            <!-- ================= EXERCISE SECTION END ================= -->
+
+        </div>
+    </div>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotMaths.js"></script>
+
+</body>
+</html>
