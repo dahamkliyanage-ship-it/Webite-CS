@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Buoyancy and Stability</title>
+    <link rel="stylesheet" href="fluid-style.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Buoyancy, Archimedes' Principle, submerged and floating bodies, metacenter, metacentric height, and stability.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="fluid-container">
+        
+        <header class="fluid-header">
+            <div class="header-inner">
+                <span class="fluid-tag">CE1023 - Fluid Mechanics</span>
+                <h1>4.0 Buoyancy and Stability</h1>
+                <p>Understanding Archimedes' Principle, the forces acting on submerged and floating bodies, metacentric height, and the critical conditions for the stability of vessels.</p>
+            </div>
+        </header>
+
+        <section class="fluid-section">
+            <h2>4.1 Introduction to Buoyancy</h2>
+            <p>A fluid exerts a resultant upward force on any object submerged within it. This upward force due to a fluid in equilibrium is known as the <strong>buoyancy</strong> or <strong>upthrust</strong> ($U$). Determining buoyancy is vital in the engineering design of ships, boats, buoys, and underwater structures.</p>
+            
+            <div class="highlight-fluid">
+                <p><strong>Archimedes' Principle:</strong> The buoyancy has a magnitude exactly equal to the weight of the displaced volume of fluid, and it acts vertically upwards through the centroid of the displaced volume (known as the Center of Buoyancy).</p>
+            </div>
+            
+            <p>When an object is submerged in a fluid, an equal volume of fluid is displaced. The surrounding fluid exerts the identical force on the submerged object as it would have exerted on the displaced volume of fluid to keep it in equilibrium.</p>
+            
+            <p><strong>Characteristics of Buoyancy ($U$):</strong></p>
+            <ul class="fluid-list">
+                <li><strong>Magnitude:</strong> $U = V \rho g = V \gamma$ (where $V$ is the submerged displaced volume).</li>
+                <li><strong>Direction:</strong> Acts vertically upwards.</li>
+                <li><strong>Line of Action:</strong> Passes through the <em>Center of Buoyancy ($B$)</em>, which is the exact geometric centroid of the displaced fluid volume.</li>
+            </ul>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Buoyancy on a Submerged Body</h4>
+                <svg viewBox="0 0 600 300" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-yellow-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                        </marker>
+                        <marker id="arrow-red-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                        </marker>
+                    </defs>
+
+                    <!-- Fluid Background -->
+                    <rect x="50" y="30" width="500" height="250" fill="rgba(59, 130, 246, 0.1)" />
+                    <!-- Free Surface -->
+                    <line x1="50" y1="30" x2="550" y2="30" stroke="#3b82f6" stroke-width="3" />
+                    <polygon points="300,30 290,15 310,15" fill="none" stroke="#3b82f6" stroke-width="1.5" />
+
+                    <!-- Titles shifted safely OUT of the way -->
+                    <text x="200" y="60" fill="#f1f5f9" font-size="16" text-anchor="middle">Uniform Density</text>
+                    <text x="400" y="60" fill="#f1f5f9" font-size="16" text-anchor="middle">Bottom Heavy</text>
+
+                    <!-- Uniform Body (G and B coincide) -->
+                    <circle cx="200" cy="150" r="50" fill="#1e293b" stroke="#14b8a6" stroke-width="2" />
+                    
+                    <circle cx="200" cy="150" r="5" fill="#f1f5f9" />
+                    <text x="215" y="155" fill="#f1f5f9" font-weight="bold" font-size="16">B = G</text>
+                    
+                    <!-- U Vector -->
+                    <line x1="200" y1="150" x2="200" y2="85" stroke="#facc15" stroke-width="3" marker-end="url(#arrow-yellow-end)" />
+                    <text x="175" y="95" fill="#facc15" font-weight="bold" font-size="18">U</text>
+                    
+                    <!-- W Vector -->
+                    <line x1="200" y1="150" x2="200" y2="215" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red-end)" />
+                    <text x="170" y="215" fill="#ef4444" font-weight="bold" font-size="18">W</text>
+
+                    <!-- Non-Uniform Body (G and B separated) -->
+                    <circle cx="400" cy="150" r="50" fill="#1e293b" stroke="#14b8a6" stroke-width="2" />
+                    <path d="M 350 150 A 50 50 0 0 0 450 150 Z" fill="rgba(20, 184, 166, 0.3)" />
+
+                    <!-- Center of Buoyancy B (Geometric Center) -->
+                    <circle cx="400" cy="150" r="5" fill="#facc15" />
+                    <text x="415" y="145" fill="#facc15" font-weight="bold" font-size="16">B</text>
+                    <!-- U Vector -->
+                    <line x1="400" y1="150" x2="400" y2="85" stroke="#facc15" stroke-width="3" marker-end="url(#arrow-yellow-end)" />
+                    <text x="375" y="95" fill="#facc15" font-weight="bold" font-size="18">U</text>
+
+                    <!-- Center of Gravity G (Shifted down into the heavy part) -->
+                    <circle cx="400" cy="175" r="5" fill="#ef4444" />
+                    <text x="415" y="185" fill="#ef4444" font-weight="bold" font-size="16">G</text>
+                    <!-- W Vector -->
+                    <line x1="400" y1="175" x2="400" y2="240" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red-end)" />
+                    <text x="370" y="240" fill="#ef4444" font-weight="bold" font-size="18">W</text>
+                </svg>
+            </div>
+            
+            <p><strong>Important Distinction:</strong></p>
+            <ul class="fluid-list">
+                <li>The position of $B$ (Center of Buoyancy) depends <em>only</em> on the geometric shape of the displaced fluid volume.</li>
+                <li>The position of $G$ (Center of Gravity) depends on the <em>weight distribution</em> inside the solid body.</li>
+                <li>If the body is of perfectly uniform density, $B$ and $G$ will coincide.</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section">
+            <h2>4.2 Equilibrium of Submerged Bodies</h2>
+            <p>The forces acting on a fully submerged body are its Weight ($W$) acting downwards through $G$, and the Buoyancy ($U$) acting upwards through $B$.</p>
+            
+            <ul class="fluid-list">
+                <li>If $U = W$, the body remains in perfectly neutral vertical equilibrium exactly where it is.</li>
+                <li>If $U > W$ (the body is lighter than the displaced fluid), the body will accelerate upwards until it reaches the free surface and floats. At that point, it will displace less fluid until a new equilibrium $U_{new} = W$ is reached.</li>
+                <li>If $U < W$ (the body is denser than the fluid), the body will sink to the bottom.</li>
+            </ul>
+
+            <h3>Floating Bodies</h3>
+            <p>For a floating body to be in vertical equilibrium, the buoyancy $U$ on the submerged volume must be exactly equal to the total weight $W$ of the entire body. Furthermore, $B$ and $G$ must lie on the exact same vertical line to prevent rotation or listing.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>4.3 Stability of Submerged and Floating Bodies</h2>
+            <p>Stability determines what happens when a body is given a small angular displacement (tilt) from its equilibrium position.</p>
+            <ul class="fluid-list">
+                <li><strong>Stable Equilibrium:</strong> If displaced, forces/moments act to return the body to its original position.</li>
+                <li><strong>Unstable Equilibrium:</strong> If displaced, forces/moments act to move the body further away from its original position.</li>
+                <li><strong>Neutral Equilibrium:</strong> If displaced, the body remains at rest in the new displaced position.</li>
+            </ul>
+
+            <h3>4.3.1 Stability of Fully Submerged Bodies</h3>
+            <p>For fully submerged bodies (like submarines or weather balloons), the displaced volume does not change shape when the body rotates. Therefore, the Center of Buoyancy ($B$) remains completely fixed relative to the body.</p>
+            
+            <div class="highlight-fluid">
+                <p><strong>Rule for Fully Submerged Bodies:</strong> Stability depends entirely on the relative vertical positions of $B$ and $G$.</p>
+                <ul>
+                    <li><strong>Stable:</strong> $B$ is above $G$. (A tilt creates a restoring couple).</li>
+                    <li><strong>Unstable:</strong> $B$ is below $G$. (A tilt creates an overturning couple).</li>
+                    <li><strong>Neutral:</strong> $B$ and $G$ coincide.</li>
+                </ul>
+            </div>
+
+            <h3>4.3.2 Stability of Floating Bodies</h3>
+            <p>Floating bodies are more complex. When a floating body tilts (e.g., a ship rolling), the shape of the submerged volume changes. Consequently, the Center of Buoyancy ($B$) shifts to a new position ($B'$).</p>
+            
+            <p><strong>The Metacenter ($M$):</strong> The vertical line of action of the new buoyant force acting upwards through $B'$ intersects the original vertical axis of the ship at a point called the <strong>Metacenter ($M$)</strong>.</p>
+            <p>The distance between the Center of Gravity ($G$) and the Metacenter ($M$) is the <strong>Metacentric Height ($GM$)</strong>. This is the ultimate measure of stability for ships and floating vessels.</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Stability of a Floating Body (Ship Roll)</h4>
+                <svg viewBox="0 0 600 350" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-yellow-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                        </marker>
+                        <marker id="arrow-red-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                    </defs>
+
+                    <!-- Free Surface -->
+                    <line x1="50" y1="180" x2="550" y2="180" stroke="#3b82f6" stroke-width="2" />
+                    <rect x="50" y="180" width="500" height="150" fill="rgba(59, 130, 246, 0.1)" />
+
+                    <!-- Tilted Ship Hull -->
+                    <g transform="translate(300, 180) rotate(15) translate(-300, -180)">
+                        <path d="M 200 80 L 400 80 L 380 250 L 220 250 Z" fill="#1e293b" stroke="#f1f5f9" stroke-width="2" />
+                        
+                        <!-- Original Vertical Axis of the ship -->
+                        <line x1="300" y1="50" x2="300" y2="280" stroke="#94a3b8" stroke-dasharray="5,5" stroke-width="1.5" />
+                        
+                        <!-- G (Center of Gravity) - Fixed on ship -->
+                        <circle cx="300" cy="150" r="5" fill="#ef4444" />
+                        <text x="310" y="155" fill="#ef4444" font-weight="bold" font-size="16">G</text>
+
+                        <!-- Original B (Now obsolete, just for reference) -->
+                        <circle cx="300" cy="210" r="3" fill="#94a3b8" />
+                        <text x="310" y="215" fill="#94a3b8">B</text>
+                    </g>
+
+                    <!-- New Center of Buoyancy B' (Shifted to the right) -->
+                    <circle cx="330" cy="215" r="5" fill="#facc15" />
+                    <text x="345" y="225" fill="#facc15" font-weight="bold" font-size="16">B'</text>
+
+                    <!-- Metacenter M (Accurately positioned at intersection y=68) -->
+                    <circle cx="330" cy="68" r="5" fill="#38bdf8" />
+                    <text x="345" y="73" fill="#38bdf8" font-weight="bold" font-size="18">M</text>
+
+                    <!-- Vertical line of action from B' straight up -->
+                    <!-- Extended higher to y=20 so 'U' doesn't overlap 'M' -->
+                    <line x1="330" y1="215" x2="330" y2="20" stroke="#facc15" stroke-width="3" marker-end="url(#arrow-yellow-end)" />
+                    <text x="345" y="35" fill="#facc15" font-weight="bold" font-size="18">U</text>
+
+                    <!-- Weight from G straight down (G is mathematically at x=308, y=151 after 15 deg rotation) -->
+                    <line x1="308" y1="151" x2="308" y2="290" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red-end)" />
+                    <text x="285" y="285" fill="#ef4444" font-weight="bold" font-size="18">W</text>
+
+                    <!-- Restoring Couple Indicator (Curved leftwards showing CCW torque) -->
+                    <path d="M 325 110 Q 319 90 295 105" fill="none" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <!-- Text pushed far out to the left for clean reading -->
+                    <text x="160" y="105" fill="#f1f5f9" font-size="13">Restoring Moment</text>
+                </svg>
+            </div>
+
+            <div class="highlight-fluid">
+                <p><strong>Rule for Floating Bodies:</strong> Stability depends on the relative vertical positions of $M$ and $G$.</p>
+                <ul>
+                    <li><strong>Stable:</strong> $M$ is above $G$ ($GM > 0$). The upward force at $B'$ and downward force at $G$ create a restoring moment.</li>
+                    <li><strong>Unstable:</strong> $M$ is below $G$ ($GM < 0$). The couple creates an overturning moment, causing the vessel to capsize.</li>
+                    <li><strong>Neutral:</strong> $M$ coincides with $G$ ($GM = 0$).</li>
+                </ul>
+            </div>
+            
+            <p>The Restoring Moment is given by: $M_R = W \cdot (GM) \sin\theta$. Hence, $GM$ is a direct measure of the stability of a floating body.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>4.4 Determination of Metacentric Height ($GM$)</h2>
+            
+            <h3>1. Theoretical Value</h3>
+            <p>If the exact geometry of the submerged volume is known, the metacentric height can be calculated analytically.</p>
+            <p>The distance from the original Center of Buoyancy ($B$) to the Metacenter ($M$) is called the Metacentric Radius ($BM$).</p>
+            
+            <div class="formula-box">
+                <p>$$BM = \frac{I}{V}$$</p>
+            </div>
+            <p>Where:</p>
+            <ul class="fluid-list">
+                <li>$I =$ Second moment of area of the <em>waterline plane</em> (the cross-section of the ship cut by the free surface) about its centroidal axis of rotation.</li>
+                <li>$V =$ Total submerged volume of the fluid displaced.</li>
+            </ul>
+            
+            <p>Since $M$, $G$, and $B$ lie on the same vertical axis in the equilibrium position, the Metacentric Height ($GM$) is found by geometry:</p>
+            <div class="formula-box">
+                <p>$$GM = BM - BG$$</p>
+                <p>$$GM = \frac{I}{V} - BG$$</p>
+            </div>
+            <p>Where $BG$ is the vertical distance between the Center of Gravity and the original Center of Buoyancy.</p>
+            
+            <h3>2. Time Period of Oscillation</h3>
+            <p>When a stable floating body undergoes a small angular displacement, it oscillates. The time period ($T$) of this simple harmonic motion is directly related to the metacentric height:</p>
+            <div class="formula-box">
+                <p>$$T = 2\pi \sqrt{\frac{k^2}{g \cdot GM}}$$</p>
+            </div>
+            <p>Where $k$ is the radius of gyration of the body. Note that a very large $GM$ provides great stability but results in a very short time period (a "stiff" and uncomfortable, snappy ship roll).</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>4.5 Effect of Liquid Cargo on Stability</h2>
+            <p>The stability of a floating vessel carrying liquid with a free surface (e.g., an oil tanker) is severely and adversely affected by the movement of the liquid cargo when the vessel rolls. This phenomenon is known as the <em>Free Surface Effect</em>.</p>
+            
+            <p>When the vessel tilts, the liquid cargo shifts to the lower side. This shifts the center of gravity of the ship in the same direction as the tilt, creating an overturning moment that reduces the effective metacentric height.</p>
+            
+            <div class="formula-box">
+                <p>$$Reduction\ of\ Metacentric\ Height\ = \frac{\rho_{cargo}}{\rho_{fluid}} \times \frac{i}{V}$$</p>
+                <p>$$Effective\ GM = GM - \left( \frac{\rho_c}{\rho_f} \frac{i}{V} \right)$$</p>
+            </div>
+            <p>Where $i$ is the second moment of area of the <em>free surface of the liquid cargo</em> about the axis of rotation, and $V$ is the total displaced volume of the ship.</p>
+            
+            <p><strong>Mitigation:</strong> Because the reduction is proportional to $i$ (which scales with the cube of the compartment width, $b^3/12$), stability can be massively improved by dividing large liquid compartments into several smaller longitudinal compartments. Dividing a tank into $n$ equal compartments reduces the stability loss by a factor of $1/n^2$.</p>
+        </section>
+
+        <section class="fluid-section video-section">
+            <h2 style="text-align: center; border-bottom: none;">Video Lecture: Buoyancy Principles</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/BCHrDcq92Iw" title="Fluid Mechanics Buoyancy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>Chapter Knowledge Check</h2>
+            <p class="quiz-intro">Test your understanding of Buoyancy and Stability concepts.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. According to Archimedes' Principle, the magnitude of the buoyant force is equal to:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) The total weight of the submerged object.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>B) The weight of the volume of fluid displaced by the object.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>C) The atmospheric pressure acting on the free surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) The mass of the object divided by the fluid density.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. For a fully submerged submarine to be in stable equilibrium (resistant to rolling over), what condition must be met?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) The Metacenter ($M$) must be above the Center of Gravity ($G$).</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>B) The Center of Gravity ($G$) must be above the Center of Buoyancy ($B$).</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>C) The Center of Buoyancy ($B$) must be strictly above the Center of Gravity ($G$).</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) The object must have a uniform density throughout.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. For a surface ship (floating body) to be structurally stable against capsizing, which critical point MUST be located above its Center of Gravity ($G$)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) The Center of Buoyancy ($B$).</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>B) The free surface of the water.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>C) The Metacenter ($M$).</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) The keel (bottom) of the ship.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. How is the Metacentric Radius ($BM$) mathematically defined?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>A) $BM = I / V$ (Second moment of area of the waterline plane divided by submerged volume).</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) $BM = V / I$ (Submerged volume divided by Second moment of area).</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) $BM = GM + BG$</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) $BM = \rho g V$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. A block of wood floats in water. If an extra weight is placed on top of it, the block sinks slightly deeper to find a new equilibrium. Why?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) The fluid density decreased.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>B) The center of buoyancy moved above the metacenter.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>C) The total weight $W$ increased, so it must displace a larger volume of water to generate a matching buoyant force $U$.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) The atmospheric pressure pushed it down.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. Why is a partially filled tank of liquid cargo highly dangerous to ship stability?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>A) The "free surface effect" allows liquid to slosh to the lower side during a roll, shifting the Center of Gravity and drastically reducing the effective Metacentric Height.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>B) The liquid cargo evaporates, reducing the overall weight.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) It increases the submerged volume ($V$), thereby reducing $BM$.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) The sloshing liquid lowers the Center of Gravity, making the ship too stable and rigid.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q7">
+                <p class="question-text"><strong>7. How can engineers mitigate the dangerous "Free Surface Effect" in oil tankers?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>A) By adding heavy weights to the mast of the ship.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="correct"> <span>B) By dividing the large liquid cargo tanks into several smaller longitudinal compartments.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>C) By using lower density liquids.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>D) By increasing the total draft (submerged depth) of the ship.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q8">
+                <p class="question-text"><strong>8. What determines the exact location of the Center of Buoyancy ($B$) within an object?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>A) The distribution of heavy metals inside the object.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>B) The atmospheric pressure on the free surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>C) The location of the metacenter.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="correct"> <span>D) It is strictly the geometric centroid of the displaced fluid volume.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q9">
+                <p class="question-text"><strong>9. If a floating vessel has a Metacentric Height ($GM$) of exactly zero, what state of equilibrium is it in?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>A) Stable equilibrium</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>B) Unstable equilibrium</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="correct"> <span>C) Neutral equilibrium</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>D) Negative equilibrium</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q10">
+                <p class="question-text"><strong>10. An object is completely submerged in a fluid and released. It immediately begins to sink to the bottom. What must be true?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>A) The buoyancy force is greater than its weight ($U > W$).</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="correct"> <span>B) The total weight of the object is greater than the buoyant force ($W > U$).</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>C) The Metacenter is below the Center of Gravity.</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>D) The fluid is highly compressible.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid #14b8a6";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid #ef4444";
+                        }
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') correctCount++;
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

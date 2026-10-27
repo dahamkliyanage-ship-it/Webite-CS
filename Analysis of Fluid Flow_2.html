@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Analysis of Fluid Flow</title>
+    <link rel="stylesheet" href="fluid-style.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Fundamental laws of mechanics, Conservation of Mass, Continuity Equation, Conservation of Energy, Bernoulli's Equation, Conservation of Momentum, and Control Volume analysis.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="fluid-container">
+        
+        <header class="fluid-header">
+            <div class="header-inner">
+                <span class="fluid-tag">CE1023 - Fluid Mechanics</span>
+                <h1>7.0 Analysis of Fluid Flow</h1>
+                <p>Applying the fundamental laws of mechanics—Conservation of Mass, Energy, and Momentum—using Control Volume analysis to solve practical fluid dynamics problems.</p>
+            </div>
+        </header>
+
+        <section class="fluid-section">
+            <h2>7.1 Concept of the Control Volume</h2>
+            <p>In solid mechanics, we typically track a specific mass of material (a system). In fluid mechanics, because fluids continuously deform and move, it is much easier to define a specific, fixed region in space and observe the fluid flowing through it. This region is called a <strong>Control Volume (CV)</strong>.</p>
+            
+            <ul class="fluid-list">
+                <li><strong>Control Volume (CV):</strong> A defined volume in space through which a fluid flows. It can be real or imaginary, fixed in shape or deformable, stationary or moving.</li>
+                <li><strong>Control Surface (CS):</strong> The boundary of the Control Volume. Mass, momentum, and energy cross the Control Surface.</li>
+            </ul>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Control Volume in a Converging Pipe</h4>
+                <svg viewBox="0 0 650 250" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                    </defs>
+
+                    <!-- Pipe geometry -->
+                    <path d="M 50 50 L 200 50 L 400 100 L 600 100" fill="none" stroke="#94a3b8" stroke-width="4" />
+                    <path d="M 50 200 L 200 200 L 400 150 L 600 150" fill="none" stroke="#94a3b8" stroke-width="4" />
+
+                    <!-- Control Volume Shading -->
+                    <polygon points="200,50 400,100 400,150 200,200" fill="rgba(20, 184, 166, 0.2)" />
+                    
+                    <!-- Control Surfaces (Dashed) -->
+                    <line x1="200" y1="50" x2="200" y2="200" stroke="#14b8a6" stroke-width="2" stroke-dasharray="6,4" />
+                    <line x1="400" y1="100" x2="400" y2="150" stroke="#14b8a6" stroke-width="2" stroke-dasharray="6,4" />
+                    <path d="M 200 50 L 400 100" fill="none" stroke="#14b8a6" stroke-width="2" stroke-dasharray="6,4" />
+                    <path d="M 200 200 L 400 150" fill="none" stroke="#14b8a6" stroke-width="2" stroke-dasharray="6,4" />
+
+                    <!-- Carefully Spaced Labels and Arrows to Prevent Any Overlap -->
+                    <text x="285" y="132" fill="#14b8a6" font-weight="bold" font-size="22">CV</text>
+                    
+                    <!-- Inlet Side -->
+                    <text x="150" y="130" fill="#14b8a6" font-size="16">CS1</text>
+                    <line x1="20" y1="125" x2="80" y2="125" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white-end)" />
+                    <!-- Text moved safely BELOW the arrow to avoid upper pipe wall overlap -->
+                    <text x="50" y="144" fill="#f1f5f9" font-weight="bold" font-size="14" text-anchor="middle">Inlet</text>
+
+                    <!-- Outlet Side -->
+                    <text x="420" y="130" fill="#14b8a6" font-size="16">CS2</text>
+                    <line x1="480" y1="125" x2="540" y2="125" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white-end)" />
+                    <!-- Text moved safely BELOW the arrow to completely clear the y=100 top pipe wall -->
+                    <text x="510" y="144" fill="#f1f5f9" font-weight="bold" font-size="14" text-anchor="middle">Outlet</text>
+                </svg>
+            </div>
+            <p>The core Laws of Mechanics (Conservation of Mass, Energy, and Momentum) are fundamentally applied to the flow <em>through</em> the boundaries of the Control Volume.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>7.2 Conservation of Mass (Continuity Equation)</h2>
+            <div class="highlight-fluid">
+                <p><strong>Principle:</strong> Mass cannot be created or destroyed (except in nuclear processes).</p>
+            </div>
+            <p>For a Control Volume, the general conservation of mass equation dictates that the rate of mass entering minus the rate of mass leaving equals the rate of change of mass inside the Control Volume.</p>
+            
+            <p>$$ \text{Mass inflow rate} - \text{Mass outflow rate} = \text{Rate of change of Mass in the CV} $$</p>
+            <div class="formula-box">
+                <p>$$ \frac{dm_i}{dt} - \frac{dm_o}{dt} = \frac{dm}{dt} $$</p>
+            </div>
+
+            <p>For an <strong>Incompressible Flow</strong> (density $\rho$ is essentially constant), the total mass inside a fixed CV cannot change, so $\frac{dm}{dt} = 0$. Therefore:</p>
+            <p>$$ \frac{dm_i}{dt} = \frac{dm_o}{dt} \implies \dot{m}_i = \dot{m}_o $$</p>
+            
+            <p>Since mass flow rate $\dot{m} = \rho \times Q$ (where $Q$ is the volumetric flow rate) and density $\rho$ is constant, it cancels out:</p>
+            <div class="formula-box">
+                <p>$$ Q_{in} = Q_{out} $$</p>
+                <p>$$ A_1 V_1 = A_2 V_2 = \text{constant} $$</p>
+            </div>
+            <p>This is the standard <strong>Continuity Equation</strong> for incompressible 1D flow. It mathematically proves that as the cross-sectional area ($A$) decreases, the velocity ($V$) must proportionally increase to maintain a constant volumetric flow rate ($Q$).</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>7.3 Conservation of Energy (Bernoulli's Equation)</h2>
+            <div class="highlight-fluid">
+                <p><strong>Principle:</strong> Energy cannot be created or destroyed, but it can be transformed from one form to another. In fluid flow, energy converted into certain forms (like heat due to friction) is considered a "loss" to the mechanical system.</p>
+            </div>
+            
+            <p>In fluid mechanics, we express the primary forms of mechanical energy per unit weight, yielding terms called "Heads" (measured in length units, like meters):</p>
+            <ul class="fluid-list">
+                <li><strong>Potential Head ($z$):</strong> Energy derived from elevation above a datum.</li>
+                <li><strong>Pressure Head ($\frac{P}{\rho g}$):</strong> Flow work done by the fluid's static pressure.</li>
+                <li><strong>Velocity Head ($\frac{V^2}{2g}$):</strong> Kinetic energy of the moving fluid.</li>
+            </ul>
+
+            <p><strong>Bernoulli's Theorem:</strong> In a steady, incompressible, frictionless (ideal) flow along a streamline, the Total Head remains constant.</p>
+            <div class="formula-box">
+                <p>$$ z + \frac{P}{\rho g} + \frac{V^2}{2g} = \text{Total Head} = \text{constant} $$</p>
+                <p>$$ z_1 + \frac{P_1}{\rho g} + \frac{V_1^2}{2g} = z_2 + \frac{P_2}{\rho g} + \frac{V_2^2}{2g} $$</p>
+            </div>
+            <p>The sum of the elevation and pressure terms ($z + \frac{P}{\rho g}$) is known specifically as the <strong>Piezometric Head</strong>.</p>
+
+            <h3>Modifications for Real Fluid Flow (Steady Flow Energy Equation)</h3>
+            <p>In real-world fluid flow, energy is inevitably lost due to pipe friction and turbulence. We introduce a Head Loss term ($H_L$). Furthermore, mechanical energy can be actively added to the system by pumps ($H_p$) or extracted from the system by turbines ($H_t$).</p>
+            <div class="formula-box">
+                <p>$$ z_1 + \frac{P_1}{\rho g} + \frac{V_1^2}{2g} + H_p = z_2 + \frac{P_2}{\rho g} + \frac{V_2^2}{2g} + H_t + H_L $$</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Bernoulli Applications: Siphon and Nozzle</h4>
+                <svg viewBox="0 0 700 250" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-blue-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Siphon System -->
+                    <text x="150" y="30" fill="#f1f5f9" text-anchor="middle" font-weight="bold" font-size="18">Siphon Action</text>
+                    <rect x="50" y="100" width="100" height="100" fill="none" stroke="#94a3b8" stroke-width="2" />
+                    <!-- Water in tank 1 -->
+                    <rect x="52" y="130" width="96" height="68" fill="rgba(59, 130, 246, 0.3)" />
+                    <line x1="50" y1="130" x2="150" y2="130" stroke="#3b82f6" stroke-width="2" />
+                    <!-- Shifted left to avoid the Siphon tube -->
+                    <text x="80" y="120" fill="#3b82f6" font-size="14" font-weight="bold" text-anchor="middle">Point 1</text>
+
+                    <!-- Siphon Tube -->
+                    <path d="M 120 180 L 120 70 Q 120 50 150 50 Q 180 50 180 70 L 180 200" fill="none" stroke="#f1f5f9" stroke-width="12" />
+                    <path d="M 120 180 L 120 70 Q 120 50 150 50 Q 180 50 180 70 L 180 200" fill="none" stroke="#3b82f6" stroke-width="6" marker-end="url(#arrow-blue-end)" />
+                    <text x="230" y="210" fill="#3b82f6" font-size="14" font-weight="bold">Point 2 (Jet)</text>
+                    <line x1="180" y1="200" x2="180" y2="220" stroke="#3b82f6" stroke-width="3" />
+
+                    <!-- Nozzle System -->
+                    <text x="500" y="30" fill="#f1f5f9" text-anchor="middle" font-weight="bold" font-size="18">Nozzle Flow</text>
+                    
+                    <!-- Pipe converging -->
+                    <path d="M 380 80 L 480 80 L 580 110" fill="none" stroke="#94a3b8" stroke-width="4" />
+                    <path d="M 380 160 L 480 160 L 580 130" fill="none" stroke="#94a3b8" stroke-width="4" />
+                    
+                    <!-- V1 Arrow & Text (Proper Subscript) -->
+                    <line x1="400" y1="120" x2="450" y2="120" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue-end)" />
+                    <text x="425" y="105" fill="#3b82f6" font-size="16" font-weight="bold" text-anchor="middle">V<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+
+                    <!-- V2 Arrow & Text (Proper Subscript) -->
+                    <line x1="550" y1="120" x2="600" y2="120" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue-end)" />
+                    <text x="575" y="105" fill="#3b82f6" font-size="16" font-weight="bold" text-anchor="middle">V<tspan baseline-shift="sub" font-size="0.75em">2</tspan></text>
+                    
+                    <!-- Explanation text (Proper Subscripts) -->
+                    <text x="500" y="190" fill="#f1f5f9" font-size="14" text-anchor="middle">A<tspan baseline-shift="sub" font-size="0.75em">1</tspan> &gt; A<tspan baseline-shift="sub" font-size="0.75em">2</tspan> implies V<tspan baseline-shift="sub" font-size="0.75em">2</tspan> &gt; V<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+                </svg>
+            </div>
+            
+            <p><strong>Applying Bernoulli to a Siphon:</strong> A siphon is a tube that raises a liquid over an elevation and discharges it at a lower level. Taking Point 1 at the free surface of the upper tank ($P_1 = P_{atm} = 0$, $V_1 \approx 0$) and Point 2 at the exit jet ($P_2 = P_{atm} = 0$), Bernoulli's equation simplifies entirely to $z_1 = z_2 + \frac{V_2^2}{2g}$. Therefore, the discharge velocity is purely a function of the elevation difference:</p>
+            <div class="formula-box">
+                <p>$$V_2 = \sqrt{2g(z_1 - z_2)}$$</p>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>7.4 Conservation of Momentum</h2>
+            <p>Forces exerted on solid bodies due to the dynamic flow of fluids can be determined by applying Newton's 2nd Law ($\Sigma F = \frac{dM}{dt}$) to a control volume.</p>
+            
+            <div class="highlight-fluid">
+                <p><strong>Steady Flow Momentum Equation:</strong></p>
+                <p>The net force acting on the fluid within the control volume equals the momentum outflow rate minus the momentum inflow rate.</p>
+                <p>$$ F_s = \dot{M}_{out} - \dot{M}_{in} $$</p>
+            </div>
+            <p>Where $F_s$ is the sum of all external forces acting <em>on</em> the fluid (pressure forces, body/weight forces, and reaction forces from the solid boundaries). Momentum flow rate is calculated as $\dot{M} = \dot{m}V = \rho Q V$.</p>
+            
+            <p>By Newton's 3rd Law, the force exerted <em>by</em> the fluid on the solid boundary is equal and opposite to the reaction force exerted <em>by</em> the solid boundary on the fluid.</p>
+
+            <h3>Application 1: Force Exerted by a Jet Striking a Plate</h3>
+            <p>Consider a horizontal jet of water striking a stationary flat plate. The jet is deflected radially, causing a complete destruction of its forward momentum.</p>
+            <div class="formula-box">
+                <p>Applying the Momentum Equation in the x-direction:</p>
+                <p>$$ \Sigma F_x = \dot{m}(V_{out,x} - V_{in,x}) $$</p>
+                <p>$$ -R_x = \rho Q (0 - V_1) \implies R_x = \rho Q V_1 $$</p>
+            </div>
+            <p>The force exerted <em>on the plate</em> is $F_{plate} = R_x = \rho Q V_1$. If the plate is angled at $\theta$ relative to the jet, the normal force on the plate becomes $F_n = \rho Q V_1 \sin\theta$.</p>
+
+            <h3>Application 2: Force on a Pipe Bend</h3>
+            <p>A fluid flowing through a pipe bend changes both the direction and often the magnitude of its velocity. This change in momentum vectors requires a significant reaction force to hold the bend in place (which is why large water mains require heavy concrete thrust blocks at corners).</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Control Volume for a Pipe Bend</h4>
+                <!-- Meticulously spaced SVG with Proper Subscripts -->
+                <svg viewBox="0 0 650 350" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-white-bend-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                        <marker id="arrow-red-bend-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-blue-bend-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Pipe Curve Geometry -->
+                    <path d="M 150 250 L 250 250 Q 350 250 400 200 L 450 150" fill="none" stroke="#94a3b8" stroke-width="4" />
+                    <path d="M 150 150 L 250 150 Q 300 150 320 130 L 370 80" fill="none" stroke="#94a3b8" stroke-width="4" />
+
+                    <!-- Control Volume Shading -->
+                    <path d="M 150 150 L 250 150 Q 300 150 320 130 L 370 80 L 450 150 L 400 200 Q 350 250 250 250 L 150 250 Z" fill="rgba(20, 184, 166, 0.1)" stroke="#14b8a6" stroke-dasharray="6,4" stroke-width="2" />
+                    <text x="250" y="210" fill="#14b8a6" font-size="22" font-weight="bold">CV</text>
+
+                    <!-- INLET (Left) -->
+                    <line x1="20" y1="200" x2="80" y2="200" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white-bend-end)" />
+                    <text x="20" y="180" fill="#f1f5f9" font-weight="bold" font-size="16">P<tspan baseline-shift="sub" font-size="0.75em">1</tspan> A<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+
+                    <line x1="160" y1="200" x2="210" y2="200" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue-bend-end)" />
+                    <text x="175" y="185" fill="#3b82f6" font-weight="bold" font-size="16">V<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+
+                    <!-- OUTLET (Top Right) at 45 degrees -->
+                    <!-- V_2 points OUT of CV -->
+                    <line x1="420" y1="105" x2="480" y2="45" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue-bend-end)" />
+                    <text x="420" y="70" fill="#3b82f6" font-weight="bold" font-size="16">V<tspan baseline-shift="sub" font-size="0.75em">2</tspan></text>
+
+                    <!-- P_2 A_2 Pressure points INTO CV -->
+                    <line x1="530" y1="25" x2="470" y2="85" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white-bend-end)" />
+                    <text x="540" y="45" fill="#f1f5f9" font-weight="bold" font-size="16">P<tspan baseline-shift="sub" font-size="0.75em">2</tspan> A<tspan baseline-shift="sub" font-size="0.75em">2</tspan></text>
+
+                    <!-- Angle Reference Line and Arc -->
+                    <line x1="410" y1="115" x2="520" y2="115" stroke="#94a3b8" stroke-dasharray="4,4" stroke-width="2" />
+                    <path d="M 480 115 A 70 70 0 0 0 459 66" fill="none" stroke="#f1f5f9" stroke-width="2" />
+                    <text x="490" y="95" fill="#f1f5f9" font-size="16" font-weight="bold">θ</text>
+
+                    <!-- Reaction Forces F_x and F_y -->
+                    <line x1="280" y1="320" x2="350" y2="320" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red-bend-end)" />
+                    <text x="360" y="325" fill="#ef4444" font-weight="bold" font-size="18">F<tspan baseline-shift="sub" font-size="0.75em">x</tspan></text>
+
+                    <line x1="280" y1="320" x2="280" y2="250" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red-bend-end)" />
+                    <text x="260" y="240" fill="#ef4444" font-weight="bold" font-size="18">F<tspan baseline-shift="sub" font-size="0.75em">y</tspan></text>
+                </svg>
+            </div>
+
+            <p><strong>Applying Momentum Equation for Pipe Bend:</strong></p>
+            <p>Let $F_x$ and $F_y$ be the internal reaction forces exerted by the pipe wall <em>on the fluid</em>.</p>
+            <ul class="fluid-list">
+                <li><strong>x-direction:</strong> $P_1 A_1 - P_2 A_2 \cos\theta + F_x = \rho Q (V_2 \cos\theta - V_1)$</li>
+                <li><strong>y-direction:</strong> $-P_2 A_2 \sin\theta + F_y - W = \rho Q (V_2 \sin\theta - 0)$ <br><em>(Where $W$ is the weight of fluid inside the CV, often negligible if the bend is purely in a horizontal plane)</em></li>
+            </ul>
+            <p>Solve for $F_x$ and $F_y$. The resultant force required to anchor the pipe block is equal in magnitude but opposite in direction: $R = \sqrt{F_x^2 + F_y^2}$.</p>
+        </section>
+
+        <!-- Video embedded exactly before the quiz -->
+        <section class="fluid-section video-section">
+            <h2 style="text-align: center; border-bottom: none;">Video Lecture: Viscous Flow in Pipes</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/rQcZIcEa960" title="Viscous Flow in Pipes" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Dynamic Assessment Section -->
+        <section class="quiz-section">
+            <h2>Chapter Knowledge Check</h2>
+            <p class="quiz-intro">Test your understanding of the Analysis of Fluid Flow concepts.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. The Continuity Equation for an incompressible, steady flow dictates that:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) Velocity remains constant regardless of pipe diameter.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) Pressure head is equal to velocity head.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) The volumetric flow rate $Q = A \cdot V$ must be constant throughout the pipe.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) Mass flow rate continually increases down the pipe.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What fundamental physical principle is Bernoulli's equation derived from?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) Conservation of Mass</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>B) Conservation of Energy</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) Conservation of Momentum</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) Newton's Third Law</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. Which of the following is NOT an assumption for the basic (ideal) Bernoulli equation?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) Steady flow</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>B) Incompressible flow</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) Frictionless (inviscid) flow</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>D) The fluid is actively being heated by an external source.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. In Bernoulli's equation, the term $\frac{V^2}{2g}$ is known as the:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) Pressure Head</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>B) Velocity Head (Kinetic Energy)</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) Potential Head</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) Friction Head</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. When applying the momentum equation to a control volume, the net external force $\Sigma F$ acting on the fluid equals:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) The total mass of the fluid in the CV.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>B) The sum of pressure heads entering and leaving.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>C) The rate of momentum flowing out minus the rate of momentum flowing in ($\dot{m}V_{out} - \dot{m}V_{in}$).</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) Zero, because momentum is always perfectly conserved.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. A horizontal jet of water strikes a stationary vertical plate. According to the momentum equation, what provides the force exerted on the plate?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>A) The destruction of the fluid's forward momentum as it hits the plate.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>B) The static pressure of the atmospheric air.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) The potential energy head dropping to zero.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) The friction along the smooth plate.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q7">
+                <p class="question-text"><strong>7. Why are concrete thrust blocks required at sharp bends in large pressurized water pipelines?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>A) To increase the velocity head through the bend.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>B) To prevent the water from freezing.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="correct"> <span>C) Because changing the fluid's velocity direction requires a large net force, which pushes back hard against the pipe.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>D) To increase fluid friction inside the bend.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q8">
+                <p class="question-text"><strong>8. In the Modified Steady Flow Energy Equation, if a fluid passes through a pump, how is the pump's head ($H_p$) incorporated?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q8" value="correct"> <span>A) It is added to the left-hand side ($z_1 + \dots + H_p$) because it inputs energy into the fluid system.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>B) It is subtracted from the left-hand side because it acts like a head loss.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>C) It is entirely ignored for incompressible flows.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>D) It is added to the velocity term only.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q9">
+                <p class="question-text"><strong>9. If a siphon tube discharges water into the atmosphere, what directly drives the discharge velocity ($V_2$) at the exit?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>A) The diameter of the siphon tube.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>B) The total length of the pipe friction.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="correct"> <span>C) The difference in elevation ($z_1 - z_2$) between the upper free surface and the discharge point.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>D) The viscosity of the water.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q10">
+                <p class="question-text"><strong>10. The sum of the Elevation Head ($z$) and the Pressure Head ($\frac{P}{\rho g}$) is formally defined as the:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>A) Total Dynamic Head</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="correct"> <span>B) Piezometric Head</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>C) Stagnation Head</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>D) Friction Head</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid #14b8a6";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid #ef4444";
+                        }
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Electrical Installations</title>
+    <link rel="stylesheet" href="style_2.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Study of domestic electrical distribution layouts, IEC earthing configurations (TT, TN-S), ring vs. radial circuit topologies, installation testing, and human responses to electric shock.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="page-header">
+            <div class="header-content">
+                <span class="module-tag">EE1040 - Electrical Fundamentals</span>
+                <h1>6.0 Electrical Installations & Safety Systems</h1>
+                <p>Comprehensive study of domestic electrical distribution layouts, IEC earthing configurations (TT, TN-S, TN-C-S), ring vs. radial circuit topologies, installation testing protocols, and human physiological responses to electric shock.</p>
+            </div>
+        </header>
+
+        <section class="content-block">
+            <h2>6.1 Advanced Earthing Systems (IEC 60364)</h2>
+            <p>An Earthing System connects specific conductive parts of an electrical installation with the general mass of the Earth for safety, functional reference, and fault clearance. Under international standard <strong>IEC 60364</strong>, earthing arrangements are universally categorized using a strict two-letter code ($I/T$ followed by $T/N$), supplemented optionally by an additional letter ($S/C$).</p>
+            
+            <div class="highlight-box">
+                <strong>Decoding the IEC 60364 Code Structure:</strong>
+                <ul>
+                    <li><strong>First Letter (Relationship of Power Source to Earth):</strong> 
+                        <ul>
+                            <li><strong>T (Terra):</strong> Direct, solid physical connection of the source neutral to Earth.</li>
+                            <li><strong>I (Isolated):</strong> The power source is completely isolated from Earth, or connected only through a high impedance (limiting fault currents).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Second Letter (Relationship of Consumer Installation Exposed Metalwork to Earth):</strong>
+                        <ul>
+                            <li><strong>T (Terra):</strong> Exposed conductive parts of the consumer installation are connected to an independent local Earth electrode.</li>
+                            <li><strong>N (Neutral):</strong> Exposed conductive parts are connected directly to the source neutral conductor via a protective metallic path.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Subsequent Letters (Conductor Configurations):</strong>
+                        <ul>
+                            <li><strong>S (Separate):</strong> Neutral ($N$) and Protective Earth ($PE$) run as distinct, independent conductors.</li>
+                            <li><strong>C (Combined):</strong> Neutral and Protective Earth functions are combined into a single shared conductor ($PEN$).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3>Detailed Breakdown of Common Earthing Topologies:</h3>
+            <ul class="fluid-list">
+                <li><strong>TT System:</strong> The supply transformer neutral is solidly earthed, but the consumer's installation uses an entirely independent local earth rod. Because the fault return loop travels back through the soil (which has higher resistance than copper), fault currents can be significantly lower. Consequently, <em>standard fuses or MCBs may fail to trip quickly enough</em>, making high-sensitivity <strong>RCCB/RCD protection strictly mandatory</strong>. This is the standard mandated system used across Sri Lankan domestic utility connections.</li>
+                <li><strong>TN-S System:</strong> Separate Neutral ($N$) and Protective Earth ($PE$) conductors run independently throughout the entire network from the substation to the consumer equipment. This provides a very low-impedance metallic fault loop, guaranteeing fast disconnection by protective devices. However, it incurs higher installation costs due to the dedicated 5th core/wire.</li>
+                <li><strong>TN-C System:</strong> The Neutral and Protective Earth functions are combined into a single shared $PEN$ conductor from source to load. While highly economical in copper, it is hazardous; if the $PEN$ conductor breaks or becomes loose, all exposed metal casings on consumer appliances instantly rise to full line potential ($230\text{V}$), posing a lethal shock risk. RCCBs cannot be utilized on TN-C networks.</li>
+                <li><strong>TN-C-S System (PME - Protective Multiple Earthing):</strong> The utility supplies power using a combined $PEN$ conductor up to the consumer's service entrance (cutout), where it is split into separate Neutral and Protective Earth bars. This provides an excellent economic compromise, merging utility copper savings with high consumer safety.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>6.2 Domestic Supply Layout & Consumer Unit</h2>
+            <p>Electricity is delivered from a regional distribution transformer to a residential premise via service drops. Inside the home, power passes through a structured hierarchy of safety and control devices housed in the <strong>Consumer Unit (Distribution Board)</strong>:</p>
+            
+            <ul class="fluid-list">
+                <li><strong>Service Cable & Cut-out Fuse:</strong> The incoming utility provider's main fuse, protecting the installation from massive utility-side short circuits.</li>
+                <li><strong>Energy Meter:</strong> Measures cumulative electrical energy consumption in kilowatt-hours ($\text{kWh}$).</li>
+                <li><strong>Main Isolator (Main Double-Pole Switch):</strong> A robust mechanical switch that disconnects both the Live and Neutral conductors simultaneously, allowing complete physical isolation of the entire household for safe maintenance.</li>
+                <li><strong>Residual Current Circuit Breaker (RCCB):</strong> Typically rated at $30\text{mA}$ sensitivity, monitoring phase unbalance to protect humans from accidental direct contact shock.</li>
+                <li><strong>Miniature Circuit Breaker (MCB) Array:</strong> A bank of thermal-magnetic breakers that distribute power downstream to discrete radial or ring sub-circuits (e.g., 6A lighting, 16A sockets, 20A air conditioning).</li>
+                <li><strong>Earth and Neutral Terminal Busbars:</strong> Heavy brass distribution blocks where all individual circuit protective earth ($PE$) and neutral ($N$) wires are aggregated.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>6.3 Wiring Topologies: Ring vs. Radial Circuits</h2>
+            <p>Low-voltage power sub-circuits supplying socket outlets are wired using one of two primary architectural configurations:</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Radial vs. Ring Circuit Topologies</h4>
+                <svg viewBox="0 0 800 300" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Authentic 3-Pin Socket Symbol -->
+                        <g id="socket">
+                            <rect x="-16" y="-16" width="32" height="32" rx="6" fill="#1e293b" stroke="#94a3b8" stroke-width="2" />
+                            <rect x="-4" y="-8" width="8" height="6" rx="1" fill="#f8fafc" />
+                            <rect x="-10" y="2" width="6" height="8" rx="1" fill="#f8fafc" />
+                            <rect x="4" y="2" width="6" height="8" rx="1" fill="#f8fafc" />
+                        </g>
+                    </defs>
+
+                    <!-- Divider Line -->
+                    <line x1="400" y1="20" x2="400" y2="280" stroke="#334155" stroke-dasharray="6,4" stroke-width="2" />
+
+                    <!-- ================= RADIAL CIRCUIT (Left) ================= -->
+                    <text x="200" y="40" fill="#38bdf8" font-size="18" font-weight="bold" text-anchor="middle">Radial Circuit</text>
+                    <text x="200" y="60" fill="#94a3b8" font-size="14" text-anchor="middle">Linear branch to final socket</text>
+
+                    <!-- MCB -->
+                    <rect x="50" y="140" width="70" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
+                    <text x="85" y="165" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">20A MCB</text>
+
+                    <!-- Radial Wire -->
+                    <path d="M 120 160 L 350 160" fill="none" stroke="#38bdf8" stroke-width="4" />
+                    
+                    <!-- Direction Arrows indicating single path -->
+                    <polygon points="150,160 140,154 140,166" fill="#f8fafc" />
+                    <polygon points="230,160 220,154 220,166" fill="#f8fafc" />
+                    <polygon points="310,160 300,154 300,166" fill="#f8fafc" />
+
+                    <!-- Sockets -->
+                    <use href="#socket" x="190" y="160" />
+                    <use href="#socket" x="270" y="160" />
+                    <use href="#socket" x="350" y="160" />
+                    
+                    <text x="235" y="130" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Single 2.5mm² Cable Path</text>
+
+
+                    <!-- ================= RING CIRCUIT (Right) ================= -->
+                    <text x="600" y="40" fill="#22c55e" font-size="18" font-weight="bold" text-anchor="middle">Ring Circuit</text>
+                    <text x="600" y="60" fill="#94a3b8" font-size="14" text-anchor="middle">Loops back to originating MCB</text>
+
+                    <!-- MCB -->
+                    <rect x="565" y="90" width="70" height="40" rx="4" fill="#0f172a" stroke="#22c55e" stroke-width="2" />
+                    <text x="600" y="115" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">32A MCB</text>
+
+                    <!-- Ring Wire Loop -->
+                    <path d="M 585 130 L 585 160 L 500 160 L 500 240 L 700 240 L 700 160 L 615 160 L 615 130" fill="none" stroke="#22c55e" stroke-width="4" />
+                    
+                    <!-- Direction Arrows indicating split path -->
+                    <polygon points="535,160 545,154 545,166" fill="#f8fafc" /> <!-- Flowing Left -->
+                    <polygon points="665,160 655,154 655,166" fill="#f8fafc" /> <!-- Flowing Right -->
+
+                    <!-- Sockets -->
+                    <use href="#socket" x="500" y="200" />
+                    <use href="#socket" x="600" y="240" />
+                    <use href="#socket" x="700" y="200" />
+
+                    <text x="600" y="195" fill="#22c55e" font-size="13" font-weight="bold" text-anchor="middle">Current splits across two parallel paths</text>
+                    <text x="600" y="275" fill="#22c55e" font-size="13" font-weight="bold" text-anchor="middle">Ring returns to MCB</text>
+                </svg>
+            </div>
+
+            <div class="example-box">
+                <div class="example-header">Detailed Comparison</div>
+                <p><strong>Radial Circuit:</strong></p>
+                <p>A linear circuit originating from a protective device (MCB) in the consumer unit and terminating precisely at the final socket outlet, with no return loop. Commonly utilized for dedicated high-load appliances (such as fixed air conditioners, water heaters, and water pumps) or long, linear corridors. It requires less total cable length for distant runs, and fault tracing is straightforward since the path is strictly linear.</p>
+                
+                <p style="margin-top: 20px;"><strong>Ring Circuit (Ring Final Circuit):</strong></p>
+                <p>A continuous loop where the circuit originates at the MCB, loops sequentially through multiple socket outlets around a room or zone, and the physical cable returns back to terminate at the <em>same</em> MCB terminal. Because current can travel to any socket via two parallel paths, a $2.5\text{ mm}^2$ cable in a ring can safely supply a $32\text{A}$ load (whereas a radial circuit using the same cable is restricted to a $20\text{A}$ MCB). <em>Vulnerability:</em> If a break occurs unnoticed anywhere in the ring, current doubles down the remaining single path, creating a hidden overload hazard.</p>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>6.4 Good Wiring Practices, Cable Sizing & Testing</h2>
+            
+            <p><strong>Standard Cable Sizing (Copper Conductors):</strong></p>
+            <ul class="fluid-list">
+                <li><strong>$1.5\text{ mm}^2$:</strong> Dedicated lighting sub-circuits, typically protected by a $6\text{A}$ MCB.</li>
+                <li><strong>$2.5\text{ mm}^2$:</strong> Standard socket outlet circuits (Radial up to $20\text{A}$ MCB; Ring up to $32\text{A}$ MCB).</li>
+                <li><strong>$4.0\text{ mm}^2$ to $6.0\text{ mm}^2$:</strong> Heavy fixed appliances such as instantaneous water heaters and heavy-duty air conditioning units.</li>
+            </ul>
+
+            <p><strong>Standard Phase Color Coding (IEC / BS 7671):</strong></p>
+            <ul class="fluid-list">
+                <li><span style="color:#d97706; font-weight:bold;">Brown:</span> Live / Phase conductor (Carries active voltage).</li>
+                <li><span style="color:#3b82f6; font-weight:bold;">Blue:</span> Neutral conductor (Completes the return circuit).</li>
+                <li><span style="color:#22c55e; font-weight:bold;">Green/Yellow Striped:</span> Protective Earth ($PE$) conductor (Carries fault currents safely to ground).</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Mandatory Installation Testing Protocols (IET BS 7671):</strong>
+                <p>Before any newly wired electrical installation is energized and handed over to a client, rigorous electrical tests must be executed in a specific sequence:</p>
+                <ul>
+                    <li><strong>Continuity Testing:</strong> Verifies that all protective earth conductors, ring circuit continuity, and main bonding leads are unbroken and possess extremely low electrical resistance.</li>
+                    <li><strong>Insulation Resistance Testing:</strong> Utilizes a high-voltage insulation tester (Megger, typically operating at $500\text{V}$ DC) to verify that the dielectric insulation between Live/Neutral and Earth has not been compromised by screws, nails, or moisture during construction.</li>
+                    <li><strong>Polarity Testing:</strong> Ensures that all single-pole switches, fuses, and circuit breakers are correctly installed exclusively on the Live conductor, and that Edison screw lamp holders have neutral connected to the outer shell.</li>
+                    <li><strong>Earth Fault Loop Impedance ($Z_s$) Testing:</strong> Confirms that the total impedance of the fault current loop is low enough to ensure that the MCB will trip within the mandatory safety time (typically $0.4\text{s}$ for socket circuits) during a short circuit.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>6.5 Electric Shock Physics & Human Safety Limits</h2>
+            <p>An electric shock occurs when an external electrical potential difference forces current to flow through the human body. The severity and physiological outcome of an electric shock are governed by Ohm's Law and depend heavily on four variables: <strong>Magnitude of current</strong>, <strong>Path of current through the body</strong>, <strong>Duration of exposure</strong>, and <strong>Frequency</strong> ($50/60\text{Hz}$ AC is significantly more dangerous than DC because alternating currents disrupt heart pacing and trigger tetany).</p>
+
+            <!-- Wrapped inside responsive container to prevent table layout squishing -->
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <tr>
+                        <th style="width: 22%;">Current Magnitude</th>
+                        <th style="width: 58%;">Physiological Effect on the Human Body</th>
+                        <th style="width: 20%;">Risk Category</th>
+                    </tr>
+                    <tr>
+                        <td>$1\text{ mA}$</td>
+                        <td>Threshold of perception; faint tingle felt at contact point.</td>
+                        <td>Low Risk</td>
+                    </tr>
+                    <tr>
+                        <td>$5\text{ mA}$</td>
+                        <td>Slightly disturbing shock; voluntary muscle control remains intact.</td>
+                        <td>Minor Risk</td>
+                    </tr>
+                    <tr>
+                        <td>$10 - 20\text{ mA}$</td>
+                        <td>Strong involuntary muscle contractions; the "let-go" threshold is exceeded (victim cannot let go of the live wire).</td>
+                        <td>Moderate Risk</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ef4444; font-weight:bold;">$30\text{ mA}$</td>
+                        <td style="color:#ef4444; font-weight:bold;">Severe muscle contractions, breathing difficulties, onset of ventricular fibrillation risk.</td>
+                        <td style="color:#ef4444; font-weight:bold;">High Risk (Safety Target)</td>
+                    </tr>
+                    <tr>
+                        <td>$100\text{ mA} - 1\text{ A}$</td>
+                        <td>Ventricular fibrillation of the heart occurs (uncoordinated twitching, zero blood circulation), severe internal tissue burns.</td>
+                        <td>Critical Risk</td>
+                    </tr>
+                    <tr>
+                        <td>$> 1\text{ A}$</td>
+                        <td>Sustained cardiac arrest, nerve paralysis, severe internal and external deep tissue burns.</td>
+                        <td>Lethal</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p style="margin-top:15px;">Because $30\text{mA}$ represents the critical physiological threshold where respiratory muscles paralyze and ventricular fibrillation begins, international safety codes mandate that domestic <strong>RCCBs must trip within $30\text{ms}$ to $300\text{ms}$ upon detecting a $30\text{mA}$ imbalance</strong>, mathematically ensuring human survival before cardiac arrest can take place.</p>
+        </section>
+
+        <!-- Video strictly positioned before the quiz -->
+        <section class="video-section">
+            <h2>Video Resource: Domestic Electrical Installations</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/TeeKY8nxlUc?si=EWM-1gfoXapQtE1A" title="Domestic Electrical Installations" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>End of Chapter Assessment</h2>
+            <p class="quiz-intro">Test your understanding of Electrical Installations. Select an answer to see instant feedback.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. Which specific IEC 60364 Earthing system configuration is standardly used for Sri Lankan domestic utility installations?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) TN-C System</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) IT Isolated System</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) TT System (Source earthed, consumer uses an independent earth electrode)</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) TN-S System</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the standard sensitivity trip rating for a domestic RCCB designed to protect humans against fatal electric shock?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) $10\text{ Amperes}$</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>B) $100\text{ mA}$</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) $1\text{ mA}$</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>D) $30\text{ mA}$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. What is the defining physical characteristic of a Ring Final Circuit topology for socket outlets?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) It uses a single linear wire path and terminates permanently at the final socket outlet.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>B) It is exclusively mandated for heavy Air Conditioning compressor units.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>C) The wiring loops sequentially into every socket outlet and returns back to terminate at the exact same MCB, splitting current across two parallel paths.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) It completely eliminates the need for an earth wire.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. In the IEC 60364 earthing code classification, what does the letter 'N' signify when used as the second letter?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) Network (Connected to a remote substation transformer)</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>B) Neutral (Consumer exposed metalwork is connected to the source neutral via a metallic path)</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) Non-conductive (Insulated enclosure)</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) Normal operating state</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. Why is an alternating current (AC) frequency of $50\text{Hz}$ considered significantly more dangerous to the human heart than direct current (DC) of the same magnitude?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) Because AC travels faster through skin than DC.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>B) Because $50\text{Hz}$ AC easily coordinates with and disrupts the heart's natural electrical pacing, triggering ventricular fibrillation.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>C) Because DC does not pass through skin tissue at all.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) Because AC voltage automatically triples when touching human skin.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_electrical.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid var(--success)";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the chapter theory and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid var(--error)";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(34, 197, 94, 0.1)";
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(34, 197, 94, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

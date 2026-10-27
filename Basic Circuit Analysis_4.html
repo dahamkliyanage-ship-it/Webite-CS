@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Basic Circuit Analysis</title>
+    <link rel="stylesheet" href="style_2.css">
+
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Foundational properties of electric circuits, including current, voltage, resistance, basic circuit elements, and Kirchhoff's Laws.">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="page-header">
+            <div class="header-content">
+                <span class="module-tag">EE1040 - Electrical Fundamentals</span>
+                <h1>2.0 Basic Circuit Analysis</h1>
+                <p>Understand the foundational properties of electric circuits, including current, voltage, resistance, basic circuit elements, and Kirchhoff's Laws.</p>
+            </div>
+        </header>
+
+        <section class="content-block">
+            <h2>2.1 Electric Current & Voltage</h2>
+            <p><strong>Electric Current ($i$ or $I$):</strong> Current is the rate of flow of electric charge past a point or region. By convention, current flows from a more positive potential to a more negative potential. This is known as <strong>conventional current</strong>. However, the actual physical charge carriers (electrons) flow in the exact opposite direction. Time-invariant current (Direct Current or DC) is usually denoted by $I$, while time-varying current (Alternating Current or AC) is denoted by $i$.</p>
+            
+            <div class="math-callout">
+                <p>$$i = \frac{dq}{dt}$$</p>
+                <p>$$q = \int_{t_0}^{t_1} i \cdot dt$$</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Conventional Current vs. Electron Flow</h4>
+                <svg viewBox="0 0 600 220" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Circuit Wire -->
+                    <path d="M 150 160 L 150 60 L 450 60 L 450 160" fill="none" stroke="#94a3b8" stroke-width="4" />
+                    <path d="M 150 160 L 250 160" fill="none" stroke="#94a3b8" stroke-width="4" />
+                    <path d="M 350 160 L 450 160" fill="none" stroke="#94a3b8" stroke-width="4" />
+
+                    <!-- Battery Symbol -->
+                    <line x1="250" y1="130" x2="250" y2="190" stroke="#f1f5f9" stroke-width="4" />
+                    <line x1="270" y1="145" x2="270" y2="175" stroke="#f1f5f9" stroke-width="6" />
+                    <line x1="290" y1="130" x2="290" y2="190" stroke="#f1f5f9" stroke-width="4" />
+                    <line x1="310" y1="145" x2="310" y2="175" stroke="#f1f5f9" stroke-width="6" />
+                    <line x1="330" y1="130" x2="330" y2="190" stroke="#f1f5f9" stroke-width="4" />
+                    <line x1="350" y1="145" x2="350" y2="175" stroke="#f1f5f9" stroke-width="6" />
+
+                    <text x="235" y="120" fill="#f1f5f9" font-size="20" font-weight="bold">+</text>
+                    <text x="345" y="120" fill="#f1f5f9" font-size="24" font-weight="bold">-</text>
+
+                    <!-- Resistor Symbol -->
+                    <path d="M 450 120 L 435 115 L 465 105 L 435 95 L 465 85 L 450 80" fill="none" stroke="#facc15" stroke-width="4" />
+                    <text x="480" y="105" fill="#facc15" font-size="16" font-weight="bold">Load (R)</text>
+
+                    <!-- Conventional Current (Red) -->
+                    <path d="M 180 140 L 180 85 L 280 85" fill="none" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red)" />
+                    <text x="180" y="115" fill="#ef4444" font-size="14" font-weight="bold">Conventional Current (I)</text>
+
+                    <!-- Electron Flow (Blue) -->
+                    <path d="M 420 140 L 420 85 L 320 85" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#arrow-blue)" />
+                    <text x="310" y="45" fill="#3b82f6" font-size="14" font-weight="bold">Electron Flow (e⁻)</text>
+                </svg>
+            </div>
+
+            <p><strong>Voltage ($v$ or $V$):</strong> Force is required to move a charge against an electric field. The potential difference (or voltage) is defined as the work ($W$) required to move a unit charge from one point to another. One Volt is the potential difference between two points when one Joule of energy is used to move one Coulomb of charge.</p>
+            
+            <div class="math-callout">
+                <p>$$v = \frac{dW}{dq}$$</p>
+            </div>
+
+            <p><strong>Power ($p$ or $P$):</strong> Power is the rate at which work is done (Joules per second, or Watts).</p>
+            
+            <div class="math-callout">
+                <p>$$p = \frac{dW}{dt} = \frac{dW}{dq} \cdot \frac{dq}{dt} = v \cdot i$$</p>
+                <p>$$Energy (W) = \int p \cdot dt = \int v \cdot i \cdot dt$$</p>
+            </div>
+            
+            <p><em>Sign Convention:</em> If current enters the positive terminal of an element, power is being absorbed (positive). If current leaves the positive terminal, power is being supplied (negative).</p>
+        </section>
+
+        <section class="content-block">
+            <h2>2.2 Circuit Elements and Sources</h2>
+            <p>Electrical circuits consist of active and passive elements. <strong>Active elements</strong> (like batteries, independent voltage/current sources, or dependent sources) are capable of generating electrical energy. <strong>Passive elements</strong> cannot generate electrical energy, but they can consume, dissipate, or store it.</p>
+            
+            <h3>Passive Circuit Elements:</h3>
+            <ul>
+                <li><strong>Resistor (R):</strong> Dissipates energy purely as heat. Resistance restricts current flow due to the scattering of electrons through collisions with atoms. Ohm's Law dictates the V-I relationship: $v = i \cdot R$. The unit is the Ohm ($\Omega$). Power dissipated: $p = i^2R = \frac{v^2}{R}$.</li>
+                <li><strong>Capacitor (C):</strong> Stores energy in an electric field established between two conducting plates separated by an insulating dielectric. Charge $q = Cv$, and the current-voltage relationship is $i = C \frac{dv}{dt}$. Energy stored: $W = \frac{1}{2}Cv^2$. Capacitors act as an open circuit to steady DC.</li>
+                <li><strong>Inductor (L):</strong> Stores energy in a magnetic field when current flows through a coil of wire. Voltage is induced proportional to the rate of change of current: $v = L \frac{di}{dt}$. Energy stored: $W = \frac{1}{2}Li^2$. Inductors act as a short circuit to steady DC.</li>
+            </ul>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Energy Flow in Basic Elements</h4>
+                <svg viewBox="0 0 800 160" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-flow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+
+                    <!-- Active Source Box -->
+                    <rect x="20" y="30" width="200" height="80" rx="8" fill="rgba(56, 189, 248, 0.1)" stroke="#38bdf8" stroke-width="2" />
+                    <text x="120" y="65" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Active Source</text>
+                    <text x="120" y="90" fill="#38bdf8" font-size="14" text-anchor="middle">Provides V and I</text>
+                    
+                    <line x1="230" y1="70" x2="280" y2="70" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow-flow)" />
+
+                    <!-- Resistor Box -->
+                    <rect x="300" y="30" width="200" height="80" rx="8" fill="rgba(34, 197, 94, 0.1)" stroke="#22c55e" stroke-width="2" />
+                    <text x="400" y="65" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Resistor (R)</text>
+                    <text x="400" y="90" fill="#22c55e" font-size="14" text-anchor="middle">Dissipates I²R</text>
+
+                    <line x1="510" y1="70" x2="560" y2="70" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow-flow)" />
+
+                    <!-- Inductor/Capacitor Box -->
+                    <rect x="580" y="30" width="200" height="80" rx="8" fill="rgba(250, 204, 21, 0.1)" stroke="#facc15" stroke-width="2" />
+                    <text x="680" y="65" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Capacitor / Inductor</text>
+                    <text x="680" y="90" fill="#facc15" font-size="14" text-anchor="middle">Stores Energy</text>
+                </svg>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>2.3 Equivalence Resistance, Capacitance & Inductance</h2>
+            <p>Circuit elements are frequently connected in series or parallel (shunt) configurations. Reducing these networks to a single equivalent component greatly simplifies circuit analysis.</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Series vs. Parallel Resistor Configurations</h4>
+                <svg viewBox="0 0 650 280" style="width: 100%; height: auto;">
+                    <!-- Series Section -->
+                    <text x="150" y="30" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">Series (Same Current)</text>
+                    
+                    <line x1="30" y1="140" x2="80" y2="140" stroke="#f1f5f9" stroke-width="3" />
+                    <!-- Resistor 1 -->
+                    <path d="M 80 140 L 85 125 L 95 155 L 105 125 L 115 155 L 125 125 L 130 140" fill="none" stroke="#facc15" stroke-width="3" />
+                    <text x="92" y="105" fill="#facc15" font-weight="bold" font-size="18">R<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+                    
+                    <line x1="130" y1="140" x2="170" y2="140" stroke="#f1f5f9" stroke-width="3" />
+                    <!-- Resistor 2 -->
+                    <path d="M 170 140 L 175 125 L 185 155 L 195 125 L 205 155 L 215 125 L 220 140" fill="none" stroke="#facc15" stroke-width="3" />
+                    <text x="182" y="105" fill="#facc15" font-weight="bold" font-size="18">R<tspan baseline-shift="sub" font-size="0.75em">2</tspan></text>
+                    
+                    <line x1="220" y1="140" x2="270" y2="140" stroke="#f1f5f9" stroke-width="3" />
+
+                    <!-- Divider -->
+                    <line x1="325" y1="20" x2="325" y2="260" stroke="#334155" stroke-dasharray="6,4" stroke-width="2" />
+
+                    <!-- Parallel Section -->
+                    <text x="500" y="30" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">Parallel (Same Voltage)</text>
+                    
+                    <line x1="370" y1="140" x2="420" y2="140" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="580" y1="140" x2="630" y2="140" stroke="#f1f5f9" stroke-width="3" />
+                    
+                    <!-- Top Branch -->
+                    <line x1="420" y1="140" x2="420" y2="80" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="580" y1="140" x2="580" y2="80" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="420" y1="80" x2="470" y2="80" stroke="#f1f5f9" stroke-width="3" />
+                    <path d="M 470 80 L 475 65 L 485 95 L 495 65 L 505 95 L 515 65 L 520 80" fill="none" stroke="#facc15" stroke-width="3" />
+                    <line x1="520" y1="80" x2="580" y2="80" stroke="#f1f5f9" stroke-width="3" />
+                    <text x="480" y="50" fill="#facc15" font-weight="bold" font-size="18">R<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+
+                    <!-- Bottom Branch -->
+                    <line x1="420" y1="140" x2="420" y2="200" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="580" y1="140" x2="580" y2="200" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="420" y1="200" x2="470" y2="200" stroke="#f1f5f9" stroke-width="3" />
+                    <path d="M 470 200 L 475 185 L 485 215 L 495 185 L 505 215 L 515 185 L 520 200" fill="none" stroke="#facc15" stroke-width="3" />
+                    <line x1="520" y1="200" x2="580" y2="200" stroke="#f1f5f9" stroke-width="3" />
+                    <text x="480" y="245" fill="#facc15" font-weight="bold" font-size="18">R<tspan baseline-shift="sub" font-size="0.75em">2</tspan></text>
+                    
+                    <!-- Nodes -->
+                    <circle cx="420" cy="140" r="5" fill="#f1f5f9" />
+                    <circle cx="580" cy="140" r="5" fill="#f1f5f9" />
+                </svg>
+            </div>
+            
+            <div class="highlight-box">
+                <strong>Series Connections (Current is constant)</strong>
+                <ul>
+                    <li><strong>Resistors:</strong> $R_{eq} = R_1 + R_2 + ... + R_n$</li>
+                    <li><strong>Inductors:</strong> $L_{eq} = L_1 + L_2 + ... + L_n$</li>
+                    <li><strong>Capacitors:</strong> $\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + ... + \frac{1}{C_n}$</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="border-color: rgba(56, 189, 248, 0.3); background-color: rgba(56, 189, 248, 0.1);">
+                <strong style="color: var(--accent-blue);">Parallel / Shunt Connections (Voltage is constant)</strong>
+                <ul>
+                    <li><strong>Resistors:</strong> $\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + ... + \frac{1}{R_n}$</li>
+                    <li><strong>Inductors:</strong> $\frac{1}{L_{eq}} = \frac{1}{L_1} + \frac{1}{L_2} + ... + \frac{1}{L_n}$</li>
+                    <li><strong>Capacitors:</strong> $C_{eq} = C_1 + C_2 + ... + C_n$</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>2.4 Circuit Analysis: Kirchhoff's Laws</h2>
+            <p>Gustav Kirchhoff developed two fundamental laws based on the conservation of charge and energy. These laws form the absolute basis for analyzing any lumped-parameter electrical circuit.</p>
+            
+            <h3>Kirchhoff's Current Law (KCL)</h3>
+            <p>Based on the principle of <strong>conservation of charge</strong>. It states that the algebraic sum of all currents entering and leaving a node is absolutely zero. Alternatively, the sum of currents entering a node equals the sum of currents leaving the node.</p>
+            <div class="math-callout">
+                <p>$$\sum_{n=1}^{N} i_n = 0 \quad \text{or} \quad \sum i_{in} = \sum i_{out}$$</p>
+            </div>
+            
+            <h3>Kirchhoff's Voltage Law (KVL)</h3>
+            <p>Based on the principle of <strong>conservation of energy</strong>. It states that the algebraic sum of voltages around any closed path (loop) in an electrical circuit equals zero. Energy supplied equals energy dropped.</p>
+            <div class="math-callout">
+                <p>$$\sum_{m=1}^{M} v_m = 0$$</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Visualizing KCL and KVL</h4>
+                <svg viewBox="0 0 700 280" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-blue-kcl" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#3b82f6" />
+                        </marker>
+                        <marker id="arrow-red-kcl" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-loop" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#22c55e" />
+                        </marker>
+                    </defs>
+
+                    <!-- KCL Section (Left) -->
+                    <text x="175" y="30" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">KCL (Node)</text>
+                    
+                    <!-- Center Node -->
+                    <circle cx="175" cy="140" r="6" fill="#f1f5f9" />
+                    
+                    <!-- Wires -->
+                    <line x1="50" y1="80" x2="175" y2="140" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="50" y1="200" x2="175" y2="140" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="300" y1="80" x2="175" y2="140" stroke="#f1f5f9" stroke-width="3" />
+                    <line x1="300" y1="200" x2="175" y2="140" stroke="#f1f5f9" stroke-width="3" />
+
+                    <!-- Currents pointing IN -->
+                    <line x1="80" y1="94" x2="120" y2="114" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue-kcl)" />
+                    <text x="35" y="80" fill="#3b82f6" font-weight="bold" font-size="18">i<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+
+                    <line x1="80" y1="186" x2="120" y2="166" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue-kcl)" />
+                    <text x="35" y="210" fill="#3b82f6" font-weight="bold" font-size="18">i<tspan baseline-shift="sub" font-size="0.75em">2</tspan></text>
+
+                    <!-- Currents pointing OUT -->
+                    <line x1="215" y1="121" x2="255" y2="101" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red-kcl)" />
+                    <text x="265" y="80" fill="#ef4444" font-weight="bold" font-size="18">i<tspan baseline-shift="sub" font-size="0.75em">3</tspan></text>
+
+                    <line x1="215" y1="159" x2="255" y2="179" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red-kcl)" />
+                    <text x="265" y="210" fill="#ef4444" font-weight="bold" font-size="18">i<tspan baseline-shift="sub" font-size="0.75em">4</tspan></text>
+                    
+                    <!-- Equation -->
+                    <text x="175" y="260" fill="#f1f5f9" font-size="16" text-anchor="middle">i_1 + i_2 = i_3 + i_4</text>
+
+                    <!-- Vertical Divider -->
+                    <line x1="350" y1="20" x2="350" y2="260" stroke="#334155" stroke-dasharray="6,4" stroke-width="2" />
+
+                    <!-- KVL Section (Right) -->
+                    <text x="525" y="30" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">KVL (Loop)</text>
+
+                    <!-- Circuit Border -->
+                    <rect x="420" y="80" width="200" height="120" fill="none" stroke="#f1f5f9" stroke-width="3" />
+                    
+                    <!-- Voltage Source (Left wall) -->
+                    <circle cx="420" cy="140" r="20" fill="#1e293b" stroke="#f1f5f9" stroke-width="3" />
+                    <text x="413" y="132" fill="#f1f5f9" font-size="16" font-weight="bold">+</text>
+                    <text x="415" y="158" fill="#f1f5f9" font-size="20" font-weight="bold">-</text>
+                    <!-- Label securely outside to the left -->
+                    <text x="360" y="146" fill="#38bdf8" font-weight="bold" font-size="18">V<tspan baseline-shift="sub" font-size="0.75em">s</tspan></text>
+
+                    <!-- Resistor 1 (Top wall) -->
+                    <rect x="495" y="70" width="50" height="20" fill="#1e293b" stroke="#facc15" stroke-width="3" />
+                    <text x="480" y="60" fill="#ef4444" font-size="16" font-weight="bold">+</text>
+                    <text x="550" y="60" fill="#ef4444" font-size="18" font-weight="bold">-</text>
+                    <!-- Label securely inside the loop to avoid the circuit line -->
+                    <text x="510" y="115" fill="#facc15" font-weight="bold" font-size="18">v<tspan baseline-shift="sub" font-size="0.75em">1</tspan></text>
+
+                    <!-- Resistor 2 (Right wall) -->
+                    <rect x="610" y="115" width="20" height="50" fill="#1e293b" stroke="#facc15" stroke-width="3" />
+                    <text x="635" y="125" fill="#ef4444" font-size="16" font-weight="bold">+</text>
+                    <text x="635" y="170" fill="#ef4444" font-size="18" font-weight="bold">-</text>
+                    <!-- Label securely outside the loop to the right -->
+                    <text x="645" y="146" fill="#facc15" font-weight="bold" font-size="18">v<tspan baseline-shift="sub" font-size="0.75em">2</tspan></text>
+
+                    <!-- Green Loop Indicator inside the box -->
+                    <path d="M 470 160 A 40 40 0 1 1 570 160" fill="none" stroke="#22c55e" stroke-width="3" marker-end="url(#arrow-loop)" />
+                    
+                    <!-- Equation -->
+                    <text x="525" y="260" fill="#f1f5f9" font-size="16" text-anchor="middle">V_s - v_1 - v_2 = 0</text>
+                </svg>
+            </div>
+
+            <div class="example-box">
+                <div class="example-header">Division Principles</div>
+                <p><strong>Voltage Division Principle (Series Circuits):</strong> Used to rapidly find the voltage across a specific resistor in a series circuit without finding the total current first. The voltage drops proportionately to the resistance.</p>
+                <div class="math-callout" style="background-color: #0f172a; border-left-color: #facc15; padding: 10px;">
+                    <p>$$v_x = \frac{R_x}{R_{eq}} \cdot V_{total}$$</p>
+                </div>
+                
+                <p style="margin-top: 15px;"><strong>Current Division Principle (Parallel Circuits):</strong> Used to find the current flowing through a specific branch in a parallel circuit. The current takes the path of least resistance, so it is inversely proportional to the branch resistance.</p>
+                <div class="math-callout" style="background-color: #0f172a; border-left-color: #facc15; padding: 10px;">
+                    <p>For two parallel branches: $$i_1 = \frac{R_2}{R_1 + R_2} \cdot I_{total}$$</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video strictly positioned before the quiz -->
+        <section class="video-section">
+            <h2>Video Resource: Electric Current & Circuits Explained</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/r-SCyD7f_zI?si=dJfq-7Zh63Mk8Dx0" title="Electric Current & Circuits Explained" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>End of Chapter Assessment</h2>
+            <p class="quiz-intro">Test your understanding of basic circuit analysis. Select an answer to see instant feedback.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. Which passive circuit element stores energy purely in the form of a magnetic field?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) Resistor</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) Capacitor</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) Inductor</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) Battery</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the equivalent resistance of three exactly equal $30\Omega$ resistors connected completely in parallel?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) $90\Omega$</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>B) $10\Omega$</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) $30\Omega$</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) $0.1\Omega$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. Kirchhoff's Current Law (KCL) is fundamentally derived from which physics principle?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) Conservation of Energy</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>B) Conservation of Charge</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) Newton's Second Law of Motion</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) Faraday's Law of Induction</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. How do capacitors and inductors behave when subjected to a steady, time-invariant Direct Current (DC)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>A) Capacitors act as an open circuit, Inductors act as a short circuit.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) Both act as an open circuit.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) Capacitors act as a short circuit, Inductors act as an open circuit.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) Both dissipate energy as heat.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. According to the Current Division Principle for two parallel resistors ($R_1$ and $R_2$), the current flowing specifically through $R_1$ is given by:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) $i_1 = \frac{R_1}{R_1 + R_2} \cdot I_{total}$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>B) $i_1 = \frac{R_2}{R_1 + R_2} \cdot I_{total}$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>C) $i_1 = \frac{R_1 \cdot R_2}{R_1 + R_2} \cdot I_{total}$</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) $i_1 = \frac{1}{R_1} \cdot I_{total}$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. What is the fundamental definition of Voltage ($v$)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>A) The work ($dW$) required to move a unit charge ($dq$) from one point to another.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>B) The rate of flow of electric charge over time ($dq/dt$).</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) The physical resistance an electron faces when colliding with atoms.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) The total number of valence electrons in a conductor.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_electrical.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid var(--success)";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the theory and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid var(--error)";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(34, 197, 94, 0.1)";
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(34, 197, 94, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

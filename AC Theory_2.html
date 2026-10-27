@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: AC Theory</title>
+    <link rel="stylesheet" href="style_2.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Alternating current, sinusoidal waveforms, phasor representation, impedance, admittance, and complex AC power analysis.">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="page-header">
+            <div class="header-content">
+                <span class="module-tag">EE1040 - Electrical Fundamentals</span>
+                <h1>3.0 Alternating Current (AC) Theory</h1>
+                <p>Comprehensive study of alternating current, sinusoidal waveforms, phasor representation, impedance, admittance, and complex AC power analysis.</p>
+            </div>
+        </header>
+
+        <section class="content-block">
+            <h2>3.1 Introduction to Waveforms</h2>
+            <p>A waveform is obtained by plotting the instantaneous value of a time-varying quantity (such as voltage or current) against time. Waveforms can be periodic or non-periodic.</p>
+            
+            <ul class="fluid-list">
+                <li><strong>Periodic Waveform:</strong> The same pattern repeats exactly after a specific time interval, $T$. This time $T$ is the periodic time (Period). The frequency is $f = 1/T$, measured in Hertz (Hz).</li>
+                <li><strong>Alternating Waveform:</strong> A specific type of periodic waveform where the magnitude and direction continuously change with time, alternating between positive and negative values across the zero axis.</li>
+                <li><strong>Sinusoidal Waveform:</strong> An alternating waveform that perfectly follows a mathematical sine or cosine function. It is the fundamental waveform of modern electrical grids.</li>
+            </ul>
+
+            <div class="math-callout">
+                <p><strong>General Equation of a Sinusoid:</strong></p>
+                <p>$$v(t) = V_m \sin(\omega t + \Phi)$$</p>
+                <p>Where: $V_m$ = Maximum/Peak value, $\omega$ = Angular frequency ($2\pi f$ in rad/s), and $\Phi$ = Phase angle shift.</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Fundamental Parameters of a Sinusoidal Waveform</h4>
+                <svg viewBox="0 0 650 320" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Perfect Dual-Ended Markers to prevent arrow overlapping -->
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                        
+                        <marker id="arrow-yellow-start" markerWidth="12" markerHeight="12" refX="0" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M12,0 L0,6 L12,12 z" fill="#facc15" />
+                        </marker>
+                        <marker id="arrow-yellow-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                        </marker>
+
+                        <marker id="arrow-red-start" markerWidth="12" markerHeight="12" refX="0" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M12,0 L0,6 L12,12 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-red-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                        </marker>
+
+                        <marker id="arrow-green-start" markerWidth="12" markerHeight="12" refX="0" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M12,0 L0,6 L12,12 z" fill="#22c55e" />
+                        </marker>
+                        <marker id="arrow-green-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#22c55e" />
+                        </marker>
+                    </defs>
+
+                    <!-- Axes -->
+                    <line x1="50" y1="150" x2="600" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <line x1="100" y1="270" x2="100" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <text x="610" y="155" fill="#f1f5f9" font-size="14">Time (t)</text>
+                    <text x="80" y="20" fill="#f1f5f9" font-size="14">v(t)</text>
+
+                    <!-- Grid Guides -->
+                    <line x1="100" y1="50" x2="550" y2="50" stroke="#334155" stroke-dasharray="4,4" stroke-width="1.5" />
+                    <line x1="100" y1="250" x2="550" y2="250" stroke="#334155" stroke-dasharray="4,4" stroke-width="1.5" />
+
+                    <!-- Mathematically Precise Sine Wave (Peaks exactly at 50 and 250) -->
+                    <path d="M 100 150 Q 200 -50, 300 150 T 500 150 Q 550 50, 600 50" fill="none" stroke="#38bdf8" stroke-width="3" />
+
+                    <!-- Peak Value (Vm) Indicator (Perfectly flush arrows) -->
+                    <line x1="200" y1="150" x2="200" y2="50" stroke="#facc15" stroke-width="2" marker-start="url(#arrow-yellow-start)" marker-end="url(#arrow-yellow-end)" />
+                    <text x="215" y="105" fill="#facc15" font-weight="bold" font-size="16">Peak Value (V<tspan baseline-shift="sub" font-size="0.75em">m</tspan>)</text>
+
+                    <!-- Peak-to-Peak Indicator (Moved text securely below X-axis) -->
+                    <line x1="400" y1="250" x2="400" y2="50" stroke="#ef4444" stroke-width="2" marker-start="url(#arrow-red-start)" marker-end="url(#arrow-red-end)" />
+                    <text x="415" y="175" fill="#ef4444" font-weight="bold" font-size="16">Peak-to-Peak (V<tspan baseline-shift="sub" font-size="0.75em">p-p</tspan>)</text>
+
+                    <!-- Period (T) Indicator (Perfectly flush arrows) -->
+                    <line x1="100" y1="290" x2="500" y2="290" stroke="#22c55e" stroke-width="2" marker-start="url(#arrow-green-start)" marker-end="url(#arrow-green-end)" />
+                    <line x1="100" y1="150" x2="100" y2="290" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,4" />
+                    <line x1="500" y1="150" x2="500" y2="290" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,4" />
+                    <text x="240" y="280" fill="#22c55e" font-weight="bold" font-size="16">Period (T = 1/f)</text>
+                </svg>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>3.2 Magnitude of Alternating Voltages and Currents</h2>
+            <p>Because AC waveforms continuously change magnitude, engineers use specific statistical measures to quantify them for power calculations.</p>
+            <ul>
+                <li><strong>Peak Value ($V_m$ or $I_m$):</strong> The absolute maximum instantaneous value measured from the zero reference line.</li>
+                <li><strong>Peak-to-Peak Value ($V_{p-p}$):</strong> The total voltage difference between the maximum positive peak and the maximum negative peak. For a pure sine wave, $V_{p-p} = 2V_m$.</li>
+                <li><strong>Average Value ($V_{av}$):</strong> The arithmetic average over half a cycle (a full cycle average is zero for a symmetrical AC wave). For a pure sinusoid: $V_{av} = \frac{2}{\pi} V_m \approx 0.637 V_m$.</li>
+                <li><strong>Effective or RMS Value ($V_{rms}$):</strong> The equivalent DC voltage that would dissipate the exact same amount of thermal power across a given resistor. It is the most important measure in AC analysis. For a pure sine wave: $V_{rms} = \frac{V_m}{\sqrt{2}} \approx 0.707 V_m$.</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Critical Standard:</strong> Unless explicitly stated otherwise, AC voltages and currents specified on equipment or in problem statements (e.g., "A 230V, 50Hz supply") are <strong>always</strong> RMS values.
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>3.3 Phasor Representation</h2>
+            <p>Analyzing AC circuits using trigonometric sine and cosine functions becomes incredibly tedious when adding multiple waves. Instead, we use <strong>Phasors</strong>.</p>
+            <p>A phasor is a rotating vector in the complex plane used to represent a time-varying sinusoidal quantity. The length (magnitude) of the phasor is proportional to the RMS value of the waveform, and its angle represents the phase shift ($\Phi$) relative to a standard reference (usually $0^\circ$).</p>
+            
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">The Complex Phasor Plane</h4>
+                <svg viewBox="0 0 500 400" style="width: 100%; height: auto; max-width: 400px; display: block; margin: 0 auto;">
+                    <defs>
+                        <marker id="arrow-phasor-blue" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                        </marker>
+                        <marker id="arrow-phasor-yellow" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                        </marker>
+                        <marker id="arrow-axis" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+
+                    <!-- Real and Imaginary Axes -->
+                    <line x1="50" y1="200" x2="450" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
+                    <line x1="250" y1="350" x2="250" y2="50" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
+                    <text x="460" y="205" fill="#f1f5f9" font-size="14">Real Axis (Re)</text>
+                    <text x="260" y="45" fill="#f1f5f9" font-size="14">Imaginary Axis (j)</text>
+
+                    <!-- Reference Phasor (Voltage) -->
+                    <line x1="250" y1="200" x2="380" y2="200" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow-phasor-blue)" />
+                    <text x="390" y="190" fill="#3b82f6" font-weight="bold" font-size="18">V = V∠0°</text>
+
+                    <!-- Lagging Phasor (Current) -->
+                    <line x1="250" y1="200" x2="340" y2="290" stroke="#facc15" stroke-width="4" marker-end="url(#arrow-phasor-yellow)" />
+                    <text x="350" y="310" fill="#facc15" font-weight="bold" font-size="18">I = I∠-Φ</text>
+
+                    <!-- Angle Arc -->
+                    <path d="M 310 200 A 60 60 0 0 1 292 242" fill="none" stroke="#ef4444" stroke-width="2" />
+                    <text x="320" y="235" fill="#ef4444" font-weight="bold" font-size="16">Φ (Phase Angle)</text>
+
+                    <!-- Rotation Indicator -->
+                    <path d="M 170 120 A 100 100 0 0 1 230 105" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrow-axis)" />
+                    <text x="80" y="90" fill="#22c55e" font-size="14" font-weight="bold">ω (Rotation)</text>
+                </svg>
+            </div>
+
+            <h3>Complex Number Representation (Operator $j$)</h3>
+            <p>Phasors are mathematically manipulated using complex numbers in either Polar form ($A\angle\Phi$) or Rectangular/Cartesian form ($A_x + jA_y$), where the operator $j = \sqrt{-1}$.</p>
+            <ul class="fluid-list">
+                <li>Multiplying a phasor by $j$ explicitly rotates it by exactly $+90^\circ$ (counterclockwise).</li>
+                <li>Multiplying a phasor by $-j$ rotates it by exactly $-90^\circ$ (clockwise).</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>3.4 Impedance and Admittance</h2>
+            <p>In AC circuits, resistance is generalized to a complex quantity called <strong>Impedance ($Z$)</strong>, measured in Ohms ($\Omega$). Impedance restricts current flow and causes phase shifts.</p>
+            <div class="math-callout">
+                <p>$$Z = \frac{V}{I} = R + jX$$</p>
+            </div>
+            <p>Where $R$ is the Real part (Resistance) and $X$ is the Imaginary part (Reactance).</p>
+
+            <ul class="fluid-list">
+                <li><strong>Pure Resistor:</strong> Current and voltage are perfectly in phase. $Z = R + j0 = R\angle0^\circ$.</li>
+                <li><strong>Pure Inductor:</strong> Voltage leads current by $90^\circ$. Inductive Reactance $X_L = \omega L$. Therefore, $Z = 0 + jX_L = X_L\angle90^\circ$.</li>
+                <li><strong>Pure Capacitor:</strong> Current leads voltage by $90^\circ$. Capacitive Reactance $X_C = \frac{1}{\omega C}$. Therefore, $Z = 0 - jX_C = X_C\angle-90^\circ$.</li>
+            </ul>
+
+            <p><strong>Admittance ($Y$):</strong> The mathematical inverse of impedance, measuring how easily a circuit allows current to flow. It is measured in Siemens (S). $Y = \frac{1}{Z} = G + jB$, where $G$ is Conductance and $B$ is Susceptance.</p>
+        </section>
+
+        <section class="content-block">
+            <h2>3.5 AC Power and Power Factor</h2>
+            <p>In AC circuits containing reactance (inductors or capacitors), the current and voltage waveforms are out of phase. Because $p(t) = v(t) \cdot i(t)$, this phase shift creates different components of power.</p>
+            
+            <ul class="fluid-list">
+                <li><strong>Active Power ($P$):</strong> The true, useful power permanently consumed and dissipated by resistors. Measured in Watts (W). $P = V_{rms} I_{rms} \cos(\Phi)$.</li>
+                <li><strong>Reactive Power ($Q$):</strong> The power that continuously oscillates back and forth between the source and reactive elements without doing any useful net work. Measured in Volt-Amperes Reactive (VAR). $Q = V_{rms} I_{rms} \sin(\Phi)$.</li>
+                <li><strong>Apparent Power ($S$):</strong> The total absolute power capacity the source must provide (the vector sum of Active and Reactive power). Measured in Volt-Amperes (VA). $S = V_{rms} I_{rms}$ or $S = \sqrt{P^2 + Q^2}$.</li>
+            </ul>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">The Impedance & Power Triangles (Inductive Load)</h4>
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+                    
+                    <!-- Impedance Triangle -->
+                    <svg viewBox="0 0 300 250" style="width: 45%; min-width: 250px; height: auto;">
+                        <defs>
+                            <marker id="arrow-z" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                                <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                            </marker>
+                            <marker id="arrow-x" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                                <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                            </marker>
+                            <marker id="arrow-r" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                                <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                            </marker>
+                        </defs>
+                        <text x="150" y="20" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">Impedance Triangle</text>
+                        
+                        <!-- R (Base) -->
+                        <line x1="50" y1="200" x2="200" y2="200" stroke="#ef4444" stroke-width="4" marker-end="url(#arrow-r)" />
+                        <text x="120" y="225" fill="#ef4444" font-weight="bold" font-size="18">R</text>
+
+                        <!-- X_L (Height) -->
+                        <line x1="200" y1="200" x2="200" y2="80" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow-x)" />
+                        <text x="215" y="145" fill="#3b82f6" font-weight="bold" font-size="18">jX<tspan baseline-shift="sub" font-size="0.75em">L</tspan></text>
+
+                        <!-- Z (Hypotenuse) -->
+                        <line x1="50" y1="200" x2="195" y2="84" stroke="#facc15" stroke-width="4" marker-end="url(#arrow-z)" />
+                        <text x="100" y="130" fill="#facc15" font-weight="bold" font-size="18">Z</text>
+
+                        <!-- Angle -->
+                        <path d="M 90 200 A 40 40 0 0 0 81 175" fill="none" stroke="#f1f5f9" stroke-width="2" />
+                        <text x="100" y="190" fill="#f1f5f9" font-weight="bold">Φ</text>
+                    </svg>
+
+                    <!-- Power Triangle -->
+                    <svg viewBox="0 0 300 250" style="width: 45%; min-width: 250px; height: auto;">
+                        <text x="150" y="20" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">Power Triangle</text>
+                        
+                        <!-- P (Base) -->
+                        <line x1="50" y1="200" x2="200" y2="200" stroke="#ef4444" stroke-width="4" marker-end="url(#arrow-r)" />
+                        <text x="100" y="225" fill="#ef4444" font-weight="bold" font-size="18">P (Watts)</text>
+
+                        <!-- Q (Height) -->
+                        <line x1="200" y1="200" x2="200" y2="80" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow-x)" />
+                        <text x="215" y="145" fill="#3b82f6" font-weight="bold" font-size="18">Q (VAR)</text>
+
+                        <!-- S (Hypotenuse) -->
+                        <line x1="50" y1="200" x2="195" y2="84" stroke="#facc15" stroke-width="4" marker-end="url(#arrow-z)" />
+                        <text x="80" y="125" fill="#facc15" font-weight="bold" font-size="18">S (VA)</text>
+
+                        <!-- Angle -->
+                        <path d="M 90 200 A 40 40 0 0 0 81 175" fill="none" stroke="#f1f5f9" stroke-width="2" />
+                        <text x="100" y="190" fill="#f1f5f9" font-weight="bold">Φ</text>
+                    </svg>
+
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-header">Power Factor (pf)</div>
+                <p>The Power Factor is a critical metric of electrical efficiency, defined as the ratio of true Active Power to Apparent Power.</p>
+                <div class="math-callout" style="background-color: #0f172a; border-left-color: #facc15; padding: 10px;">
+                    <p>$$pf = \frac{P}{S} = \cos(\Phi)$$</p>
+                </div>
+                <p>Where $\Phi$ is the phase angle difference between the applied voltage and the resulting current. A power factor of 1 (unity) means the circuit is purely resistive and 100% efficient. A power factor of 0 means the circuit is purely reactive, drawing heavy current but producing zero useful work.</p>
+            </div>
+        </section>
+
+        <!-- Video strictly positioned before the quiz -->
+        <section class="video-section">
+            <h2>Video Resource: AC Theory Complete Tutorial</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/Ybz9ahH4GCU?si=SaQLJztEYYw_l9q6" title="AC Theory Complete Tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Assessment -->
+        <section class="quiz-section">
+            <h2>End of Chapter Assessment</h2>
+            <p class="quiz-intro">Test your understanding of AC Theory. Select an answer to see instant feedback.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. For a standard pure sinusoidal voltage waveform, what is the exact mathematical relationship between the Peak value ($V_m$) and the RMS value ($V_{rms}$)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) $V_{rms} = V_m \times 2$</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) $V_{rms} = V_m \times 0.637$</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) $V_{rms} = \frac{V_m}{\sqrt{2}}$</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) $V_{rms} = V_m$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. In a purely capacitive AC circuit, what is the phase relationship between the current and the voltage?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) Current and voltage are exactly in phase ($0^\circ$).</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>B) Voltage leads the current by exactly $90^\circ$.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) Current lags the voltage by $180^\circ$.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>D) Current leads the voltage by exactly $90^\circ$.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. Which type of power in an AC circuit actually performs useful, permanent thermal or mechanical work, and what is its unit of measurement?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) Apparent Power ($S$), measured in Volt-Amperes (VA).</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>B) Active Power ($P$), measured in Watts (W).</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) Reactive Power ($Q$), measured in VAR.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) Complex Power ($Z$), measured in Ohms ($\Omega$).</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. If a generic AC circuit has a Power Factor of 0.0, what does this mathematically imply about the load?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) The load is completely resistive and converts 100% of the energy into heat.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) The load is drawing zero current from the source.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>C) The load is purely reactive (inductance or capacitance) and performs zero actual work.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) The frequency of the AC voltage has dropped to 0 Hz (DC).</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_electrical.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid var(--success)";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the chapter theory and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid var(--error)";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(34, 197, 94, 0.1)";
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(34, 197, 94, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

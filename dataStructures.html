@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Problem Solving: Data Structures. Focus on data categorization (primitive, composite, and abstract data types), Abstract Data Types (ADTs) and their interfaces, linear and hierarchical data structures, stacks and their LIFO principle (push, pop, top, and peek operations), queues and their FIFO principle (enqueue, dequeue, front, and rear operations), hierarchical trees (roots, parents, children, leaves, and binary trees), and tree traversal algorithms, including breadth-first search and depth-first traversal (preorder, inorder, and postorder).">
+<title>CS1033 | Core Data Structures</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked to your global stylesheet and subStyle.css -->
+<link rel="stylesheet" href="mainstyle.css">
+<link rel="stylesheet" href="subStyle.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+<div class="titlebar">
+  
+  <div class="filetab">Data Structures</div>
+</div>
+
+<div class="layout">
+  
+  <!-- The Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#categorization" class="ln-link"><span class="ln">01</span>Data Categorization</a></li>
+      <li><a href="#intro" class="ln-link"><span class="ln">02</span>Abstract Data Types</a></li>
+      <li><a href="#stacks" class="ln-link"><span class="ln">03</span>The Stack (LIFO)</a></li>
+      <li><a href="#queues" class="ln-link"><span class="ln">04</span>The Queue (FIFO)</a></li>
+      <li><a href="#trees" class="ln-link"><span class="ln">05</span>Hierarchical Trees</a></li>
+      <li><a href="#traversal" class="ln-link"><span class="ln">06</span>Tree Traversal</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    
+    <h1 class="title">Core Data <span class="kw">Structures</span></h1>
+    
+    <!-- SECTION 1: CATEGORIZATION -->
+    <section id="categorization" style="padding-top: 0; margin-top: 0;">
+      <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+        Programming becomes difficult when data is poorly organized. To write efficient algorithms, we first need to understand how data is structured into three main categories.
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card type-border">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">1: PRIMITIVE</span>
+          <p>The foundational data types directly supported by a programming language.<br>
+          <ul>
+            <li>Booleans (true/false)</li>
+            <li>Characters (text)</li>
+            <li>Integers (whole numbers)</li>
+            <li>Floating-point numbers (decimal values)</li>
+            <li>References (memory addresses)</li>
+            <li>Enumerated values (predefined choices)</li>
+          </ul></p>
+        </div>
+        <div class="pillar-card warn-border">
+          <span class="tag" style="background: rgba(224,175,104,.15); color: var(--warn);">2: COMPOSITE</span>
+          <p>Also known as data structures, these are built as structured collections of primitive types or other composite types. 
+            <ul><li>Array</li>
+            <li>Tuples</li>
+            <li>Union</li></ul>
+          </p>
+        </div>
+        <div class="pillar-card string-border">
+          <span class="tag" style="background: rgba(158,206,106,.15); color: var(--string);">3: ABSTRACT (ADT)</span>
+          <p>Mathematical models of data types defined entirely by their behavior as seen by the user. 
+            <ul>
+              <li>Lists</li>
+              <li>Stack</li>
+              <li>Queue</li>
+              <li>Tree</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ADT INTRO -->
+    <section id="intro">
+      <h2><span class="idx">02.</span> Abstract Data Types (ADTs)</h2>
+      <p style="margin-bottom: 40px;">
+        Lists, Tuples, and Dictionaries are built directly into Python. But what happens when you need to engineer a custom data engine? You build an Abstract Data Type (ADT)—a mathematical model of data defined entirely by its behavior as seen by the user.
+      </p>
+
+      <div class="cornerstone-grid">
+        <div class="c-card">
+          <div class="icon-wrap string">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+          </div>
+          <h3>Linear vs. Hierarchical</h3>
+          <p>Stacks and Queues are <strong>linear</strong> data structures (elements are explicitly behind or in front of each other). Trees are <strong>hierarchical</strong>.</p>
+        </div>
+        <div class="c-card">
+          <div class="icon-wrap keyword">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </div>
+          <h3>The Interface</h3>
+          <p>An ADT hides the internal mechanics. The user only sees the operations they are allowed to perform, like <code>push()</code> or <code>pop()</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: STACKS -->
+    <section id="stacks">
+      <h2><span class="idx">03.</span> The Stack (LIFO)</h2>
+      <p>A stack is a Last-In/First-Out (LIFO) storage structure. Insertion or removal occurs only at one specific position: the top of the stack. Think of it like a stack of plates—you can only take the top one off.</p>
+
+      <div class="hanoi-visualizer" style="margin-top: 24px; margin-bottom: 24px; justify-content: center; height: auto; padding-bottom: 0; border: none; background: transparent;">
+        <!-- Visual representation of the LIFO stack -->
+        <div style="background: var(--bg-panel-alt); border: 1px solid var(--border); border-radius: 8px; padding: 40px; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 500px;">
+          
+          <div style="background: rgba(187,154,247,.15); color: var(--type); font-family: var(--mono); font-weight: bold; font-size: 14px; padding: 6px 24px; border-radius: 20px; border: 1px solid var(--type); margin-bottom: 12px; width: 140px; text-align: center;">push()</div>
+          
+          <div style="background: var(--bg-raised); color: var(--text-primary); font-family: var(--sans); font-size: 15px; padding: 12px 24px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; width: 200px; text-align: center; position: relative;">
+            Item
+            <div style="position: absolute; right: -80px; top: 12px; font-family: var(--mono); font-size: 13px; color: var(--keyword); font-weight: bold;">&larr; top()</div>
+          </div>
+          
+          <div style="background: var(--bg-raised); color: var(--text-primary); font-family: var(--sans); font-size: 15px; padding: 12px 24px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; width: 240px; text-align: center;">Item</div>
+          
+          <div style="background: var(--bg-panel); color: var(--text-muted); font-family: var(--mono); font-weight: bold; font-size: 13px; padding: 8px 24px; width: 300px; text-align: center; margin-top: 10px; letter-spacing: 1px;">LIFO STACK</div>
+        </div>
+      </div>
+
+      <div class="callout type" style="margin-top: 0;">
+          <span class="tag" style="background: none; padding: 0; margin-bottom: 12px;">&gt;&gt; CORE STACK OPERATIONS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong>push(item)</strong>: Inserts an item to the very top.</li>
+            <li><strong>pop()</strong>: Removes and returns the top item.</li>
+            <li><strong>top() / peek()</strong>: Returns the top element without removing it, because in a stack, only the top item is visible to an outsider.</li>
+          </ul>
+      </div>
+    </section>
+    <!-- SECTION 4: QUEUES -->
+    <section id="queues">
+      <h2><span class="idx">04.</span> The Queue (FIFO)</h2>
+      <p>A queue represents a familiar real-world line of people. It is a First-In/First-Out (FIFO) storage structure where insertion happens at the tail, and removal happens at the head.</p>
+
+      <div class="callout string" style="margin-top: 24px;">
+          <span class="tag">&gt;&gt; CORE QUEUE OPERATIONS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong>insert(item) / enqueue</strong>: Inserts an item at the tail.</li>
+            <li><strong>remove() / dequeue</strong>: Removes the item at the front (head).</li>
+            <li><strong>front() &amp; rear()</strong>: Returns references to the elements at the head and tail, as those are the only items visible to an outsider.</li>
+          </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 5: TREES -->
+    <section id="trees">
+      <h2><span class="idx">05.</span> Hierarchical Trees</h2>
+      <p>Most of the data we use in the real world has a hierarchical structure (like a file system or an academic record). A Tree ADT is visualized as an upside-down tree.</p>
+
+      <div class="method-grid">
+        <div class="m-card">
+          <h3>The Root</h3>
+          <p>The topmost node of the data structure. It is the single entry point for the entire tree.</p>
+        </div>
+        <div class="m-card">
+          <h3>Children &amp; Parents</h3>
+          <p>Elements directly under a given element are its children, and the element directly above it is its parent.</p>
+        </div>
+        <div class="m-card">
+          <h3>Leaves</h3>
+          <p>The terminal nodes at the very bottom of the structure that possess absolutely no children.</p>
+        </div>
+        <div class="m-card">
+          <h3>Binary Trees</h3>
+          <p>A specific type of tree where every single element has a maximum of exactly 2 children (Left and Right).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: TREE TRAVERSAL -->
+    <section id="traversal">
+      <h2><span class="idx">06.</span> Tree Traversal</h2>
+      <p>Because trees are not linear, you cannot just iterate from index 0 to 10. You must use recursion to traverse them. The two main strategies are Breadth-First (level by level) and Depth-First (diving to the deepest leaf first).</p>
+
+      <div class="callout type" style="margin-top: 24px;">
+          <span class="tag">&gt;&gt; DEPTH-FIRST TRAVERSALS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong>Preorder:</strong> Visit Root &rarr; Traverse Left &rarr; Traverse Right. (Great for creating a direct copy of a tree).</li>
+            <li><strong>Inorder:</strong> Traverse Left &rarr; Visit Root &rarr; Traverse Right.</li>
+            <li><strong>Postorder:</strong> Traverse Left &rarr; Traverse Right &rarr; Visit Root. (Perfect for safely deleting a tree from the bottom up).</li>
+          </ul>
+      </div>
+    </section>
+
+    <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Watch &amp; Data Structures</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/O9v10jQkm5c?si=0Yy8HPz6QhZWYfYZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+    <!-- SECTION 7: CTA TO NEXT TOPIC -->
+    <section class="cta">
+      <h2><span class="accent">Let's move on.</span></h2>
+      <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">You have mastered the foundational data structures and the mathematical models. Now it is time to wrap data and behavior into Classes.</p>
+      <a class="next-btn" href="searchSort.html">
+        Next: Search & Sort
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script>
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script for the Table of Contents -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

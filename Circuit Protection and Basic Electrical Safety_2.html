@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Circuit Protection and Basic Electrical Safety</title>
+    <link rel="stylesheet" href="style_2.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Comprehensive practices for safeguarding domestic electrical installations, covering fault mechanics, fuse characteristics, MCBs, RCCBs, and advanced earthing mechanisms.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="page-header">
+            <div class="header-content">
+                <span class="module-tag">EE1040 - Electrical Fundamentals</span>
+                <h1>5.0 Circuit Protection and Basic Electrical Safety</h1>
+                <p>Comprehensive practices for safeguarding domestic electrical installations and personnel, covering fault mechanics, fuse characteristics, circuit breakers, and advanced earthing mechanisms.</p>
+            </div>
+        </header>
+
+        <section class="content-block">
+            <h2>5.1 Overview of Domestic Electrical Installations</h2>
+            <p>An electrical installation is a highly coordinated assembly of electrical equipment fulfilling a specific purpose, routing power from the utility supply to final consumption points (e.g., sockets, lighting, appliances). Typical domestic electrical installations operate at a standard $230\text{V}$ single-phase alternating supply and must strictly comply with rigorous safety frameworks, such as the IEE Wiring Regulations.</p>
+            
+            <p><strong>The Consumer Unit (Distribution Board):</strong> The heart of a domestic installation is the Consumer Unit. It acts as the central control hub where power is divided into individual sub-circuits, each protected by specific safety devices. The standard flow of power inside a modern consumer unit is rigorously sequenced to maximize safety.</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Standard Domestic Consumer Unit Flow</h4>
+                <svg viewBox="0 0 800 200" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-white" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#f1f5f9" />
+                        </marker>
+                        <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#3b82f6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Utility Supply -->
+                    <rect x="20" y="60" width="120" height="80" rx="8" fill="rgba(56, 189, 248, 0.1)" stroke="#38bdf8" stroke-width="2" />
+                    <text x="80" y="95" fill="#f8fafc" font-weight="bold" font-size="14" text-anchor="middle">Utility Meter</text>
+                    <text x="80" y="115" fill="#38bdf8" font-size="12" text-anchor="middle">Incoming 230V</text>
+                    
+                    <line x1="140" y1="100" x2="190" y2="100" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white)" />
+
+                    <!-- Main Isolator -->
+                    <rect x="200" y="60" width="140" height="80" rx="8" fill="rgba(239, 68, 68, 0.1)" stroke="#ef4444" stroke-width="2" />
+                    <text x="270" y="95" fill="#f8fafc" font-weight="bold" font-size="14" text-anchor="middle">Main Switch</text>
+                    <text x="270" y="115" fill="#ef4444" font-size="12" text-anchor="middle">Double Pole Isolator</text>
+
+                    <line x1="340" y1="100" x2="390" y2="100" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white)" />
+
+                    <!-- RCCB -->
+                    <rect x="400" y="60" width="140" height="80" rx="8" fill="rgba(34, 197, 94, 0.1)" stroke="#22c55e" stroke-width="2" />
+                    <text x="470" y="95" fill="#f8fafc" font-weight="bold" font-size="14" text-anchor="middle">RCCB</text>
+                    <text x="470" y="115" fill="#22c55e" font-size="12" text-anchor="middle">Earth Leakage Guard</text>
+
+                    <line x1="540" y1="100" x2="590" y2="100" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white)" />
+
+                    <!-- MCB Busbar Array -->
+                    <rect x="600" y="40" width="160" height="120" rx="8" fill="rgba(250, 204, 21, 0.1)" stroke="#facc15" stroke-width="2" />
+                    <text x="680" y="65" fill="#f8fafc" font-weight="bold" font-size="14" text-anchor="middle">MCB Array</text>
+                    
+                    <!-- Sub-circuits -->
+                    <line x1="620" y1="80" x2="740" y2="80" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-white)" />
+                    <text x="680" y="75" fill="#facc15" font-size="12" text-anchor="middle">Lighting (6A)</text>
+
+                    <line x1="620" y1="110" x2="740" y2="110" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-white)" />
+                    <text x="680" y="105" fill="#facc15" font-size="12" text-anchor="middle">Sockets (13A/16A)</text>
+                    
+                    <line x1="620" y1="140" x2="740" y2="140" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-white)" />
+                    <text x="680" y="135" fill="#facc15" font-size="12" text-anchor="middle">A/C Units (20A)</text>
+                </svg>
+            </div>
+            
+            <p><strong>A proper installation ensures:</strong></p>
+            <ul class="fluid-list">
+                <li>Immediate physical protection from faults like short circuits, overloads, and earth leakages.</li>
+                <li>Continuity of supply and ease of maintenance through proper sub-circuit segregation.</li>
+                <li>Fire and shock prevention through the correct scaling of MCBs and RCCBs.</li>
+                <li>Effective earthing to maintain system integrity and discharge stray voltages.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>5.2 Mechanics of Electrical Faults</h2>
+            <p>Faults occur when current flows through an unintended, low-impedance path. The primary objectives of protection devices are to instantly isolate only the faulty section, minimize service interruptions, ensure human safety, and prevent catastrophic thermal damage to cables.</p>
+            
+            <ul class="fluid-list">
+                <li><strong>Short Circuit Faults (Phase to Neutral / Phase to Phase):</strong> Caused by the unintended direct connection between conductors of different potential. According to Ohm's Law ($I = V/R$), when resistance $R$ drops to nearly zero, the current $I$ spikes toward infinity. This massive surge causes rapid thermal heating ($I^2R$) which instantly melts insulation and starts electrical fires.</li>
+                <li><strong>Earth Faults (Insulation Failure):</strong> Occurs when a live conductor breaches its insulation and touches a non-current-carrying metallic part (e.g., a refrigerator casing). High voltages immediately appear on exposed parts, posing a fatal electric shock risk to users touching the appliance.</li>
+                <li><strong>Overloads:</strong> Occurs when a healthy circuit draws higher than normal current for a sustained, prolonged period (e.g., plugging five heavy heating appliances into a single extension cord). The cumulative heat degrades insulation over time, leading to eventual failure.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>5.3 Fuses and Fusing Characteristics</h2>
+            <p>A fuse is the simplest and oldest device used for opening a circuit. It functions using a sacrificial conductor designed to melt and physically break the circuit when an excessive current flows through it. Fuses provide highly reliable short-circuit protection but must be manually replaced after operating.</p>
+            
+            <div class="math-callout" style="border-left-color: #facc15;">
+                <p><strong>The Fusing Factor:</strong></p>
+                <p>$$Fusing\ Factor = \frac{Minimum\ Fusing\ Current}{Rated\ Current}$$</p>
+                <p style="font-size: 1rem; color: #94a3b8; font-family: 'Segoe UI', sans-serif;">A safe fuse typically has a fusing factor between $1.4$ and $2.0$. A factor of $1.0$ is impossible, as the fuse would blow continuously under normal full-load conditions.</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Inverse Time-Current Characteristic</h4>
+                <svg viewBox="0 0 600 250" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-axis" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+
+                    <!-- Axes -->
+                    <line x1="80" y1="200" x2="550" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
+                    <line x1="80" y1="200" x2="80" y2="20" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
+                    
+                    <!-- Labels -->
+                    <text x="560" y="205" fill="#f1f5f9" font-size="14">Current (I)</text>
+                    <text x="75" y="15" fill="#f1f5f9" font-size="14" text-anchor="end">Tripping Time (t)</text>
+
+                    <!-- Rated Current Line -->
+                    <line x1="180" y1="200" x2="180" y2="40" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,4" />
+                    <text x="180" y="220" fill="#22c55e" font-size="12" font-weight="bold" text-anchor="middle">Rated Current</text>
+
+                    <!-- Minimum Fusing Current Line -->
+                    <line x1="240" y1="200" x2="240" y2="40" stroke="#facc15" stroke-width="2" stroke-dasharray="4,4" />
+                    <text x="240" y="235" fill="#facc15" font-size="12" font-weight="bold" text-anchor="middle">Min Fusing Current</text>
+
+                    <!-- Inverse Curve -->
+                    <path d="M 250 40 Q 260 180 520 190" fill="none" stroke="#ef4444" stroke-width="3" />
+                    <text x="400" y="175" fill="#ef4444" font-weight="bold" font-size="14">High Current = Fast Trip</text>
+                </svg>
+            </div>
+
+            <h3>Types of Fuses:</h3>
+            <ul class="fluid-list">
+                <li><strong>Rewirable (Semi-enclosed) Fuses:</strong> Consists of a porcelain base holding a tinned copper wire. They are cheap but highly dangerous because unskilled users can easily bypass them by inserting the wrong wire gauge (e.g., using a thick nail). They lack precise discrimination and the wire oxidizes over time.</li>
+                <li><strong>Cartridge Fuses:</strong> Enclosed entirely in a glass or ceramic tube with metal end caps. They offer highly accurate fusing currents, have no deteriorating elements, and cannot be easily tampered with. Commonly used inside 13A molded plugs.</li>
+                <li><strong>HRC (High Rupturing Capacity) Fuses:</strong> Designed for extreme short-circuit interruption. Contains a silver element surrounded by finely powdered quartz sand inside a ceramic body. When the element vaporizes under a massive fault, the sand immediately quenches the electrical arc. They possess massive <em>Breaking Capacity</em> (the absolute maximum fault current the fuse can safely interrupt without exploding).</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>5.4 Miniature Circuit Breakers (MCBs)</h2>
+            <p>Circuit breakers are highly calibrated, automatic electromechanical switching devices designed to protect circuits from overloads and short circuits. Unlike sacrificial fuses, MCBs do not require replacement after tripping; they can simply be reset manually once the fault is investigated and cleared.</p>
+            
+            <p>Modern MCBs utilize a dual-trip mechanism to provide comprehensive protection across all fault types:</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Dual Protection Mechanisms in MCBs</h4>
+                <svg viewBox="0 0 800 160" style="width: 100%; height: auto;">
+                    <!-- Thermal Box -->
+                    <rect x="50" y="40" width="250" height="80" rx="8" fill="rgba(250, 204, 21, 0.1)" stroke="#facc15" stroke-width="2" />
+                    <text x="175" y="75" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Thermal Mechanism</text>
+                    <text x="175" y="100" fill="#facc15" font-size="14" text-anchor="middle">Protects against Overloads</text>
+                    
+                    <text x="350" y="90" fill="#f8fafc" font-weight="bold" font-size="30" text-anchor="middle">+</text>
+
+                    <!-- Magnetic Box -->
+                    <rect x="400" y="40" width="250" height="80" rx="8" fill="rgba(56, 189, 248, 0.1)" stroke="#38bdf8" stroke-width="2" />
+                    <text x="525" y="75" fill="#f8fafc" font-weight="bold" font-size="16" text-anchor="middle">Magnetic Mechanism</text>
+                    <text x="525" y="100" fill="#38bdf8" font-size="14" text-anchor="middle">Protects against Short Circuits</text>
+                </svg>
+            </div>
+
+            <ul class="fluid-list">
+                <li><strong>Thermal Mechanism (Bimetallic Strip):</strong> Made of two metals with different expansion rates. Sustained overload current generates gradual heat, causing the strip to bend and eventually unlatch the trip mechanism. This provides a deliberate, slow response to allow temporary, harmless surges (like a motor starting).</li>
+                <li><strong>Magnetic Mechanism (Solenoid Coil):</strong> A massive current spike from a short circuit instantly creates a violently strong magnetic field inside the solenoid. This magnetically pulls a plunger that immediately strikes the trip latch, clearing the severe fault in milliseconds.</li>
+            </ul>
+            
+            <p><strong>MCB Trip Curves:</strong> MCBs are categorized into Types B, C, and D based on their magnetic trip sensitivity. Type B (trips at 3 to 5 times rated current) is standard for domestic lighting and sockets. Type C (5 to 10 times) is used for commercial fluorescent lighting or small motors. Type D (10 to 20 times) is strictly for heavy industrial equipment with massive starting currents.</p>
+        </section>
+
+        <section class="content-block">
+            <h2>5.5 Earthing, Bonding & Residual Current Devices</h2>
+            
+            <p><strong>Earthing vs. Bonding:</strong> These two terms are often confused but serve distinct safety roles. 
+            <br>• <strong>Earthing</strong> connects the non-current-carrying metallic casings of appliances directly to the mass of the earth via an Earth rod. If an insulation failure occurs, the fault current flows straight into the ground, triggering the MCB/RCCB and preventing the casing from remaining dangerously live.
+            <br>• <strong>Equipotential Bonding</strong> connects all exposed metallic services (water pipes, gas pipes, structural steel) together. This ensures that even during a severe fault, all metallic surfaces in a building remain at the exact same voltage potential, making it physically impossible to get a shock by touching two pipes simultaneously.</p>
+
+            <h3>Residual Current Circuit Breaker (RCCB)</h3>
+            <p>An RCCB (also known as an RCD) is a life-saving device strictly designed to prevent fatal electric shocks. Unlike an MCB which protects cables from fire, the RCCB protects humans. It operates on the principle of detecting an imbalance between the live (incoming) and neutral (outgoing) currents.</p>
+
+            <div class="example-box">
+                <div class="example-header">RCCB Working Principle (Core Balance Transformer)</div>
+                <p>The RCCB contains a toroidal (donut-shaped) transformer core with windings from both the Live and Neutral wires passing through it.</p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Normal Operation:</strong> The current flowing <em>in</em> through the Live wire is exactly equal to the current flowing <em>out</em> through the Neutral wire. Their opposing magnetic fluxes perfectly cancel each other out, creating zero net magnetic flux in the toroid.</li>
+                    <li><strong>Fault Condition:</strong> If a person touches a live wire (or an appliance casing becomes live), some current leaks through their body directly to the earth. Now, the returning Neutral current is strictly <em>less</em> than the incoming Live current.</li>
+                    <li><strong>The Trip:</strong> This current imbalance instantly generates a net magnetic flux in the core. This flux induces a voltage in a specialized tertiary "trip coil", which magnetically activates a relay to instantly break the circuit.</li>
+                </ol>
+                <p style="margin-top: 10px;">To protect human life from ventricular fibrillation, domestic RCCBs are highly sensitive, designed to trip instantly when the leakage reaches just $\mathbf{30\text{ mA}}$.</p>
+            </div>
+        </section>
+
+        <!-- Video strictly positioned before the quiz -->
+        <section class="video-section">
+            <h2>Video Resource: Introduction to Circuit Protection</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/YM7SdHj7Tuo?si=YcLFzDb36vrsO6ep" title="Introduction to Circuit Protection" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>End of Chapter Assessment</h2>
+            <p class="quiz-intro">Test your comprehensive understanding of Circuit Protection and Safety. Select an answer to see instant feedback.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. Inside a typical domestic Consumer Unit, which crucial component is specifically installed to protect human life from fatal electric shocks via earth leakages?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) The Main Double-Pole Isolator Switch</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>B) The Residual Current Circuit Breaker (RCCB)</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>C) The Type-B Miniature Circuit Breaker (MCB)</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) The Utility Meter</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the fundamental physical principle used by a Residual Current Circuit Breaker (RCCB) to detect a fault?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) Measuring if the voltage drops below $230\text{V}$.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>B) Detecting an electromagnetic imbalance between the incoming Live current and the outgoing Neutral current.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) Detecting when the total current drawn exceeds the MCB's thermal rating.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) Melting a precision silver element when temperatures rise rapidly.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. Which internal component inside a Miniature Circuit Breaker (MCB) is specifically responsible for detecting a sustained "overload" condition and deliberately tripping the breaker slowly?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) The solenoid magnetic coil</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>B) The bimetallic strip</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) The quartz sand filling</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) The toroidal transformer</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. Why do short circuit faults inherently cause massively dangerous current spikes leading to fires?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) Because a short circuit artificially increases the utility supply voltage.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>B) Because the unintended connection bypasses the load, dropping resistance ($R$) to near zero, forcing current ($I$) toward infinity according to Ohm's Law.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) Because short circuits induce high-frequency capacitive reactance.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) Because the earth rod suddenly draws power from the ground.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. Which of the following is considered a significant and dangerous disadvantage of older rewirable (semi-enclosed) fuses?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) They require expensive, specialized tools to replace.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>B) They possess too high of a breaking capacity.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>C) They operate much too quickly during minor, harmless motor overloads.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>D) They can be easily tampered with or bypassed by unskilled users inserting incorrect, heavy-gauge wire, completely destroying the circuit's protection.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. What is the fundamental difference between 'Earthing' and 'Equipotential Bonding' in a building?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>A) Earthing directs fault currents into the ground to trip breakers; Bonding connects metallic pipes together to ensure they remain at the exact same voltage, preventing shocks between them.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>B) Bonding connects the circuit to the ground; Earthing connects the live wire to the neutral wire.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) Earthing is used for DC systems; Bonding is used strictly for AC systems.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) There is absolutely no physical or regulatory difference; they are synonymous terms.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q7">
+                <p class="question-text"><strong>7. High Rupturing Capacity (HRC) Fuses use powdered quartz sand surrounding a silver element. What is the primary engineering purpose of this sand?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>A) To increase the overall electrical conductivity of the fuse during normal loads.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>B) To act as a bimetallic strip to bend the silver element.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="correct"> <span>C) To immediately quench and safely extinguish the massive, highly destructive electrical arc that forms when the silver element vaporizes during a severe short circuit.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>D) To absorb moisture and prevent the fuse from rusting over time.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q8">
+                <p class="question-text"><strong>8. If an electrical fuse has a "Rated Current" of 10A and a "Minimum Fusing Current" of 15A, what is its Fusing Factor?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>A) $0.66$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="correct"> <span>B) $1.5$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>C) $25$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>D) $150$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_electrical.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid var(--success)";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the chapter theory and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid var(--error)";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(34, 197, 94, 0.1)";
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(34, 197, 94, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

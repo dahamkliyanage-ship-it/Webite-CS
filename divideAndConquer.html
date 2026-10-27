@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Problem Solving: Divide and Conquer. Focus on the Divide and Conquer paradigm and its three phases (divide, conquer, and combine), recursive problem-solving, Quicksort (pivot selection, partitioning, and recursive sorting), Mergesort (recursive division, base cases, and merging sorted sub-arrays), the Karatsuba algorithm (splitting large numbers, reducing multiplication operations, recursive computation, and result assembly), and applying Divide and Conquer to computational problems such as finding the closest pair of points.">
+<title>CS1033 | Divide and Conquer Masterclass</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked to your global stylesheet and the refined subStyle_4.css -->
+<link rel="stylesheet" href="mainstyle.css">
+<link rel="stylesheet" href="subStyle.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="filetab">Divide and Conquer</div>
+</div>
+
+<div class="layout">
+  <!-- Master Table of Contents Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#intro" class="ln-link"><span class="ln">00</span>Intro</a></li>
+      <li><a href="#paradigm" class="ln-link"><span class="ln">01</span>The Core Paradigm</a></li>
+      <li><a href="#quicksort" class="ln-link"><span class="ln">02</span>Quicksort</a></li>
+      <li><a href="#mergesort-intro" class="ln-link"><span class="ln">03</span>Mergesort</a></li>
+      <li><a href="#karatsuba" class="ln-link"><span class="ln">04</span>Karatsuba Algorithm</a></li>
+      <li><a href="#gauntlet" class="ln-link"><span class="ln">05</span>Exercises</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    
+    <h1 class="title">Divide and <span class="kw">Conquer</span></h1>
+    
+    <section id="intro" style="padding-top: 0; margin-top: 0;">
+      <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+        The phrase <em>Divide and Conquer</em> (or <strong>Divide et impera</strong> in Latin) is famously attributed to the Roman emperor Julius Caesar. What started as a brilliant military tactic for dismantling massive armies has evolved into one of the most powerful problem-solving paradigms in computer science to develop highly efficient algorithms for sorting, searching, and parsing.
+      </p>
+    </section>
+
+    <!-- THE PARADIGM -->
+    <section id="paradigm">
+      <h2><span class="idx">01.</span> The Three-Phase Paradigm</h2>
+      <p>In computer science, this term is used to describe a problem-solving paradigm where a massive problem is recursively shattered into two or more sub-problems that are similar to the original. Here is the exact execution flow:</p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card type-border">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">PHASE 1: DIVIDE</span>
+          <p>Break the problem into smaller sub-problems.</p>
+        </div>
+        <div class="pillar-card warn-border">
+          <span class="tag" style="background: rgba(224,175,104,.15); color: var(--warn);">PHASE 2: CONQUER</span>
+          <p>Solve each sub-problem independently.</p>
+        </div>
+        <div class="pillar-card string-border">
+          <span class="tag" style="background: rgba(158,206,106,.15); color: var(--string);">PHASE 3: COMBINE</span>
+          <p>Bring their solutions together to solve the original problem.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICKSORT MECHANICS -->
+    <section id="quicksort">
+      <h2><span class="idx">02.</span> Quicksort Mechanics</h2>
+      <p>Quicksort takes a chaotic array of values as input and completely outputs the sorted contents by utilizing a pivot mechanism.</p>
+
+      <div class="split-grid" style="margin-top: 24px;">
+        <div class="callout type" style="margin: 0; display: flex; flex-direction: column;">
+          <span class="tag">&gt;&gt; THE PIVOT</span>
+          <p style="margin-top: 10px;">First, a specific value in the array is selected to be the <strong>pivot element</strong>. There are multiple ways to choose this target (the leftmost element, the rightmost, the median, or even a random element).</p>
+        </div>
+
+        <div class="callout warn" style="margin: 0; display: flex; flex-direction: column;">
+          <span class="tag">&gt;&gt; THE PARTITION</span>
+          <p style="margin-top: 10px;">The array is reordered. All values strictly <strong>less than</strong> the pivot are pushed before it, and all values <strong>greater than</strong> the pivot are placed after it. The pivot lands in its absolute correct final position.</p>
+        </div>
+      </div>
+
+      <div class="callout string" style="margin: 24px auto 40px; text-align: left;">
+          <span class="tag">&gt;&gt; THE RECURSIVE ASSAULT</span>
+          <p>Once the array is partitioned into two smaller sub-arrays around the pivot, steps 1 and 2 are <strong>recursively applied</strong> separately to the lower-value sub-array and the higher-value sub-array until the entire dataset is flawless.</p>
+      </div>
+    
+      <p>Here is how you translate the pivot and partition logic into raw machine execution.</p>
+
+      <div class="video-frame" style="max-width: 100%; margin: 30px 0 64px;">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>quicksort.py</span>
+        </div>
+        <div style="background: var(--bg-void); padding: 20px 24px; font-family: var(--mono); font-size: 14.5px; color: var(--text-primary); overflow-x: auto; line-height: 1.7;">
+          <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">partition</span>(arr, low, high):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;pivot = arr[high]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;i = (low - <span style="color: var(--warn);">1</span>)<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">for</span> j <span style="color: var(--type);">in</span> <span style="color: var(--keyword);">range</span>(low, high):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> arr[j] <= pivot:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = i + <span style="color: var(--warn);">1</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[i], arr[j] = arr[j], arr[i]<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;arr[i + <span style="color: var(--warn);">1</span>], arr[high] = arr[high], arr[i + <span style="color: var(--warn);">1</span>]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> (i + <span style="color: var(--warn);">1</span>)<br><br>
+          
+          <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">quickSort</span>(arr, low, high):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> low < high:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pidx = partition(arr, low, high)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quickSort(arr, low, pidx - <span style="color: var(--warn);">1</span>)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quickSort(arr, pidx + <span style="color: var(--warn);">1</span>, high)<br><br>
+          
+          arr = [<span style="color: var(--warn);">10</span>, <span style="color: var(--warn);">5</span>, <span style="color: var(--warn);">7</span>, <span style="color: var(--warn);">9</span>, <span style="color: var(--warn);">1</span>, <span style="color: var(--warn);">3</span>]<br>
+          n = <span style="color: var(--keyword);">len</span>(arr)<br>
+          quickSort(arr, <span style="color: var(--warn);">0</span>, n - <span style="color: var(--warn);">1</span>)<br>
+          <span style="color: var(--keyword);">print</span>(<span style="color: var(--string);">"Sorted array is:"</span>, arr)
+        </div>
+      </div>
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Quick Sort Explanation</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Vtckgz38QHs?si=KODoJsaQAjBxB0HS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- MERGESORT INTRO -->
+    <section id="mergesort-intro">
+      <h2><span class="idx">03.</span> Mergesort</h2>
+      <div class="callout type" style="margin: 20px 0 40px; text-align: left;">
+          <span class="tag">&gt;&gt; JOHN VON NEUMANN</span>
+          <p>Merge sort is another absolute heavyweight in the divide and conquer arena. It was engineered in 1945 by the legendary mathematician and physicist John von Neumann. Instead of using a pivot, he designed a system that systematically shatters the entire dataset into microscopic pieces before reassembling them flawlessly.</p>
+      </div>
+    
+      <p>The entire algorithm relies on three strict, recurring actions. It aggressively splits the data until it hits rock bottom, and then strategically builds it back up.</p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card type-border">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">PHASE 1: DIVIDE</span>
+          <p>Take your massive, unsorted list of <em>n</em>-items and aggressively divide it exactly in half, over and over, until you are left with <em>n</em> sub-lists that each contain only a single element.</p>
+        </div>
+        <div class="pillar-card warn-border">
+          <span class="tag" style="background: rgba(224,175,104,.15); color: var(--warn);">PHASE 2: TERMINATE</span>
+          <p>This is the base case. A list containing only one single element is mathematically impossible to be out of order. It is inherently sorted. This triggers the termination of the division phase.</p>
+        </div>
+        <div class="pillar-card string-border">
+          <span class="tag" style="background: rgba(158,206,106,.15); color: var(--string);">PHASE 3: MERGE</span>
+          <p>Now, shift into reverse. Repeatedly merge the sorted sub-lists back together, comparing elements as you go, to produce new, larger sorted lists until only one final sorted list remains.</p>
+        </div>
+      </div>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Merge Sort Explanation</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/3j0SWDX4AtU?si=Cfns9O62KHMK2A0p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>    
+      <p>Here is how you translate von Neumann's logic into machine execution. Notice how the function first calls itself to handle the splitting, and then uses <code>while</code> loops to handle the final assembly.</p>
+
+      <div class="video-frame" style="max-width: 100%; margin: 30px 0 64px;">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>mergesort.py</span>
+        </div>
+        <div style="background: var(--bg-void); padding: 20px 24px; font-family: var(--mono); font-size: 14.5px; color: var(--text-primary); overflow-x: auto; line-height: 1.7;">
+          <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">mergeSort</span>(arr):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Check if array is already sorted; a single element triggers the base case</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> <span style="color: var(--keyword);">len</span>(arr) > <span style="color: var(--warn);">1</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mid = <span style="color: var(--keyword);">len</span>(arr) // <span style="color: var(--warn);">2</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Divide the array into two halves</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left = arr[:mid]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right = arr[mid:]<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Recursively mergesort the left and right halves</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mergeSort(left)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mergeSort(right)<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = j = k = <span style="color: var(--warn);">0</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Merge temporary arrays left[] and right[]</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">while</span> i < <span style="color: var(--keyword);">len</span>(left) <span style="color: var(--type);">and</span> j < <span style="color: var(--keyword);">len</span>(right):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> left[i] < right[j]:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = left[i]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i += <span style="color: var(--warn);">1</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">else</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = right[j]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j += <span style="color: var(--warn);">1</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k += <span style="color: var(--warn);">1</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Copy any remaining data</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">while</span> i < <span style="color: var(--keyword);">len</span>(left):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = left[i]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i += <span style="color: var(--warn);">1</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k += <span style="color: var(--warn);">1</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">while</span> j < <span style="color: var(--keyword);">len</span>(right):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = right[j]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j += <span style="color: var(--warn);">1</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k += <span style="color: var(--warn);">1</span><br><br>
+          
+          arr = [<span style="color: var(--warn);">15</span>, <span style="color: var(--warn);">11</span>, <span style="color: var(--warn);">7</span>, <span style="color: var(--warn);">5</span>, <span style="color: var(--warn);">9</span>, <span style="color: var(--warn);">13</span>]<br>
+          mergeSort(arr)<br>
+          <span style="color: var(--keyword);">print</span>(<span style="color: var(--string);">"Final Sorted array: "</span>, arr)
+        </div>
+      </div>
+    
+
+    <p>Watch exactly how Mergesort shatters the array of [15, 11, 7, 5, 9, 13] and mathematically weaves it back together. The yellow highlights show the division, while the green highlights show the assembly phase.</p>
+
+      <div class="merge-visualizer">
+        <!-- Level 1: Start -->
+        <div class="m-row">
+          <div class="m-arr split">
+            <div class="m-cell">15</div><div class="m-cell">11</div><div class="m-cell">7</div><div class="m-cell">5</div><div class="m-cell">9</div><div class="m-cell">13</div>
+          </div>
+        </div>
+        
+        <!-- Level 2: Split 1 -->
+        <div class="m-row">
+          <div class="m-arr split">
+            <div class="m-cell">15</div><div class="m-cell">11</div><div class="m-cell">7</div>
+          </div>
+          <div class="m-arr split">
+            <div class="m-cell">5</div><div class="m-cell">9</div><div class="m-cell">13</div>
+          </div>
+        </div>
+
+        <!-- Level 3: Terminal Isolation -->
+        <div class="m-row" style="gap: 20px;">
+          <div class="m-arr split"><div class="m-cell">15</div></div>
+          <div class="m-arr split"><div class="m-cell">11</div></div>
+          <div class="m-arr split"><div class="m-cell">7</div></div>
+          <div class="m-arr split"><div class="m-cell">5</div></div>
+          <div class="m-arr split"><div class="m-cell">9</div></div>
+          <div class="m-arr split"><div class="m-cell">13</div></div>
+        </div>
+
+        <!-- Level 4: Initial Merge -->
+        <div class="m-row" style="gap: 60px;">
+          <div class="m-arr merge">
+            <div class="m-cell">11</div><div class="m-cell">15</div>
+          </div>
+          <div class="m-arr merge">
+            <div class="m-cell">7</div>
+          </div>
+          <div class="m-arr merge">
+            <div class="m-cell">5</div><div class="m-cell">9</div>
+          </div>
+          <div class="m-arr merge">
+            <div class="m-cell">13</div>
+          </div>
+        </div>
+
+        <!-- Level 5: Secondary Merge -->
+        <div class="m-row">
+          <div class="m-arr merge">
+            <div class="m-cell">7</div><div class="m-cell">11</div><div class="m-cell">15</div>
+          </div>
+          <div class="m-arr merge">
+            <div class="m-cell">5</div><div class="m-cell">9</div><div class="m-cell">13</div>
+          </div>
+        </div>
+
+        <!-- Level 6: Final Result -->
+        <div class="m-row">
+          <div class="m-arr merge final">
+            <div class="m-cell">5</div><div class="m-cell">7</div><div class="m-cell">9</div><div class="m-cell">11</div><div class="m-cell">13</div><div class="m-cell">15</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: THE HACK -->
+    <section id="karatsuba">
+      <h2><span class="idx">04.</span> Karatsuba Algorithm</h2>
+      
+      <div class="callout type" style="margin: 20px 0 40px; text-align: left;">
+          <span class="tag">&gt;&gt; THE 1960 BREAKTHROUGH</span>
+          <p>Discovered by Russian mathematician Anatoly Alexeyevich Karatsuba, this algorithm provides a significantly faster method for multiplying massive numbers. The key observation? <strong>A two-digit multiplication can physically be done using only 3 operations instead of the 4 classically required.</strong> This massive reduction in processing load is achieved entirely through the Divide and Conquer paradigm.</p>
+      </div>
+    
+      <p>To multiply two massive numbers, you slice them in half based on their base (<em>m</em>). Imagine multiplying two numbers structured as <code style="font-family: var(--mono); color: var(--warn);">x<sub>1</sub> &middot; m + x<sub>2</sub></code> and <code style="font-family: var(--mono); color: var(--string);">y<sub>1</sub> &middot; m + y<sub>2</sub></code>. Here is the exact execution flow:</p>
+
+      <div class="flow" style="margin-top: 30px;">
+        <div class="flow-step">
+          <div class="flow-marker"><div class="flow-num">1</div><div class="flow-line"></div></div>
+          <div class="flow-body">
+            <h3>Compute F</h3>
+            <div class="math-box">Multiply the first halves: <span class="math-hl">x<sub>1</sub> &middot; y<sub>1</sub> &rarr; F</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-marker"><div class="flow-num">2</div><div class="flow-line"></div></div>
+          <div class="flow-body">
+            <h3>Compute G</h3>
+            <div class="math-box">Multiply the second halves: <span class="math-hl">x<sub>2</sub> &middot; y<sub>2</sub> &rarr; G</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-marker"><div class="flow-num">3</div><div class="flow-line"></div></div>
+          <div class="flow-body">
+            <h3>Compute H</h3>
+            <div class="math-box">Add the halves, then multiply: <span class="math-hl">(x<sub>1</sub> + x<sub>2</sub>) &middot; (y<sub>1</sub> + y<sub>2</sub>) &rarr; H</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-marker"><div class="flow-num">4</div><div class="flow-line"></div></div>
+          <div class="flow-body">
+            <h3>Compute the K-Value</h3>
+            <div class="math-box">Subtract to find the middle term: <span class="math-hl">H - F - G &rarr; K</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-marker"><div class="flow-num">5</div></div>
+          <div class="flow-body">
+            <h3>The Final Assembly</h3>
+            <p style="margin-bottom: 10px;">Shift the values based on powers of <em>m</em> to get the final result. Because computing F, G, and H are all smaller multiplications, we trigger <strong>recursion</strong> to solve them.</p>
+            <div class="math-box final"><span class="math-hl">Result = F &middot; m<sup>2</sup> + K &middot; m + G</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Karatsuba Explained</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/yWI2K4jOjFQ?si=b0042L9m5lfxzQ7g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>   
+    
+      <p>Here is how you translate Karatsuba's mathematical optimization into flawless machine execution.</p>
+
+      <div class="video-frame" style="max-width: 100%; margin: 30px 0 64px;">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>karatsuba</span>
+        </div>
+        <div style="background: var(--bg-void); padding: 20px 24px; font-family: var(--mono); font-size: 14.5px; color: var(--text-primary); overflow-x: auto; line-height: 1.7;">
+          <span style="color: var(--type);">def</span> <span style="color: var(--keyword);">karatsuba</span>(x, y):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--keyword);">print</span>(<span style="color: var(--string);">"Calling karatsuba with"</span>, x, <span style="color: var(--string);">"and"</span>, y)<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Terminal Condition (Base Case)</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">if</span> <span style="color: var(--keyword);">len</span>(<span style="color: var(--keyword);">str</span>(x)) < <span style="color: var(--warn);">3</span> <span style="color: var(--type);">or</span> <span style="color: var(--keyword);">len</span>(<span style="color: var(--keyword);">str</span>(y)) < <span style="color: var(--warn);">3</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> x * y<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Calculate the splitting point</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;n = <span style="color: var(--keyword);">max</span>(<span style="color: var(--keyword);">len</span>(<span style="color: var(--keyword);">str</span>(x)), <span style="color: var(--keyword);">len</span>(<span style="color: var(--keyword);">str</span>(y))) // <span style="color: var(--warn);">2</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Split the digit sequences</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x1 = x // <span style="color: var(--warn);">10</span>**(n)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x2 = x % <span style="color: var(--warn);">10</span>**(n)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;y1 = y // <span style="color: var(--warn);">10</span>**(n)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;y2 = y % <span style="color: var(--warn);">10</span>**(n)<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Recursive Calls</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;F = karatsuba(x1, y1)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;G = karatsuba(x2, y2)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;H = karatsuba((x1 + x2), (y1 + y2))<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-faint);"># Final Reassembly</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">return</span> ((<span style="color: var(--warn);">10</span>**(<span style="color: var(--warn);">2</span>*n)) * F) + ((<span style="color: var(--warn);">10</span>**n) * (H - F - G)) + G<br><br>
+          
+          <span style="color: var(--text-faint);"># --- Driver Code ---</span><br>
+          <span style="color: var(--keyword);">print</span>(karatsuba(<span style="color: var(--warn);">23</span>, <span style="color: var(--warn);">45</span>))<br>
+          <span style="color: var(--keyword);">print</span>(karatsuba(<span style="color: var(--warn);">123456</span>, <span style="color: var(--warn);">987654</span>))
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 13: THE GAUNTLET -->
+    <section id="gauntlet">
+      <h2><span class="idx">05.</span> Exercises</h2>
+      <p>It is time to prove you can apply this architecture to an entirely new problem.</p>
+
+      <div class="callout string" style="margin: 24px auto 32px; text-align: left;">
+          <span class="tag">&gt;&gt; THE MISSION: CLOSEST PAIR OF POINTS</span>
+          <p><strong>The Objective:</strong> Given a vast set of coordinate points mapped onto an X-Y plane, write an algorithm that finds the two points located closest to each other.</p>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong style="color: var(--red);">The Naive Method:</strong> You could mathematically calculate the absolute distance of every single pair and manually compare them to find the minimum. This is highly inefficient.</li>
+            <li><strong style="color: var(--string);">The Challenge:</strong> Devise a flawless <strong>Divide and Conquer</strong> algorithm that solves this geometry problem with ruthless efficiency. Map out the split and the merge.</li>
+          </ul>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         DIVIDE & CONQUER QUIZ BLOCK
+         ========================================== -->
+    <section id="quiz-section">
+      <div class="quiz-container" style="margin-top: 60px;">
+        <h2 style="font-family: var(--sans); font-size: 24px; margin-top: 0;">Knowledge Check: The Gauntlet</h2>
+        <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 25px;">Click on a question to expand the options. Select your answers and hit submit at the bottom to evaluate your logic.</p>
+        
+        <!-- Question 1 -->
+        <div class="question-block" id="qb-1">
+          <details class="challenge-details">
+            <summary><h3>1. What are the three phases of the Divide and Conquer paradigm?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q1" id="q1-a" value="A"><label for="q1-a" class="option-label">A) Split, Sort, Print</label>
+              <input type="radio" name="q1" id="q1-b" value="B"><label for="q1-b" class="option-label">B) Initialize, Execute, Terminate</label>
+              <input type="radio" name="q1" id="q1-c" value="C"><label for="q1-c" class="option-label">C) Divide, Conquer, Combine</label>
+              <input type="radio" name="q1" id="q1-d" value="D"><label for="q1-d" class="option-label">D) Pivot, Partition, Repeat</label>
+            </div>
+            <div class="feedback-msg" id="feedback-1"></div>
+          </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block" id="qb-2">
+          <details class="challenge-details">
+            <summary><h3>2. In Quicksort, what is the primary purpose of the Partition phase?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q2" id="q2-a" value="A"><label for="q2-a" class="option-label">A) To divide the array exactly in half</label>
+              <input type="radio" name="q2" id="q2-b" value="B"><label for="q2-b" class="option-label">B) To push values less than the pivot before it, and greater values after it</label>
+              <input type="radio" name="q2" id="q2-c" value="C"><label for="q2-c" class="option-label">C) To merge two sorted sub-arrays</label>
+              <input type="radio" name="q2" id="q2-d" value="D"><label for="q2-d" class="option-label">D) To randomly select a pivot element</label>
+            </div>
+            <div class="feedback-msg" id="feedback-2"></div>
+          </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block" id="qb-3">
+          <details class="challenge-details">
+            <summary><h3>3. Who originally engineered the Mergesort algorithm in 1945?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q3" id="q3-a" value="A"><label for="q3-a" class="option-label">A) John von Neumann</label>
+              <input type="radio" name="q3" id="q3-b" value="B"><label for="q3-b" class="option-label">B) Anatoly Karatsuba</label>
+              <input type="radio" name="q3" id="q3-c" value="C"><label for="q3-c" class="option-label">C) Julius Caesar</label>
+              <input type="radio" name="q3" id="q3-d" value="D"><label for="q3-d" class="option-label">D) Alan Turing</label>
+            </div>
+            <div class="feedback-msg" id="feedback-3"></div>
+          </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block" id="qb-4">
+          <details class="challenge-details">
+            <summary><h3>4. What triggers the termination phase (base case) in Mergesort?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q4" id="q4-a" value="A"><label for="q4-a" class="option-label">A) When the pivot is placed in its correct position</label>
+              <input type="radio" name="q4" id="q4-b" value="B"><label for="q4-b" class="option-label">B) When the list is divided exactly in half</label>
+              <input type="radio" name="q4" id="q4-c" value="C"><label for="q4-c" class="option-label">C) When you are left with sub-lists that contain only a single element</label>
+              <input type="radio" name="q4" id="q4-d" value="D"><label for="q4-d" class="option-label">D) When the items are completely out of order</label>
+            </div>
+            <div class="feedback-msg" id="feedback-4"></div>
+          </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-block" id="qb-5">
+          <details class="challenge-details">
+            <summary><h3>5. After the partition step in Quicksort, where does the pivot element land?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q5" id="q5-a" value="A"><label for="q5-a" class="option-label">A) In its absolute correct final position</label>
+              <input type="radio" name="q5" id="q5-b" value="B"><label for="q5-b" class="option-label">B) At the very beginning of the array</label>
+              <input type="radio" name="q5" id="q5-c" value="C"><label for="q5-c" class="option-label">C) At the very end of the array</label>
+              <input type="radio" name="q5" id="q5-d" value="D"><label for="q5-d" class="option-label">D) In a temporary sub-array</label>
+            </div>
+            <div class="feedback-msg" id="feedback-5"></div>
+          </details>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-block" id="qb-6">
+          <details class="challenge-details">
+            <summary><h3>6. What computational problem does the Karatsuba algorithm optimize?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q6" id="q6-a" value="A"><label for="q6-a" class="option-label">A) Sorting coordinate points</label>
+              <input type="radio" name="q6" id="q6-b" value="B"><label for="q6-b" class="option-label">B) Multiplying massive numbers using fewer operations</label>
+              <input type="radio" name="q6" id="q6-c" value="C"><label for="q6-c" class="option-label">C) Reordering an array around a random pivot</label>
+              <input type="radio" name="q6" id="q6-d" value="D"><label for="q6-d" class="option-label">D) Finding the closest pair of points</label>
+            </div>
+            <div class="feedback-msg" id="feedback-6"></div>
+          </details>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-block" id="qb-7">
+          <details class="challenge-details">
+            <summary><h3>7. According to Mergesort mechanics, why is a sub-list containing only one element considered inherently sorted?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q7" id="q7-a" value="A"><label for="q7-a" class="option-label">A) Because it acts as the pivot element</label>
+              <input type="radio" name="q7" id="q7-b" value="B"><label for="q7-b" class="option-label">B) Because it is mathematically impossible to be out of order</label>
+              <input type="radio" name="q7" id="q7-c" value="C"><label for="q7-c" class="option-label">C) Because the machine automatically deletes empty elements</label>
+              <input type="radio" name="q7" id="q7-d" value="D"><label for="q7-d" class="option-label">D) Because it skips the divide phase completely</label>
+            </div>
+            <div class="feedback-msg" id="feedback-7"></div>
+          </details>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-block" id="qb-8">
+          <details class="challenge-details">
+            <summary><h3>8. What happens during the "Combine" phase of the core Divide and Conquer paradigm?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q8" id="q8-a" value="A"><label for="q8-a" class="option-label">A) The problem is shattered into two or more sub-problems</label>
+              <input type="radio" name="q8" id="q8-b" value="B"><label for="q8-b" class="option-label">B) The solutions to the sub-problems are brought together to solve the original problem</label>
+              <input type="radio" name="q8" id="q8-c" value="C"><label for="q8-c" class="option-label">C) Each sub-problem is solved independently in isolation</label>
+              <input type="radio" name="q8" id="q8-d" value="D"><label for="q8-d" class="option-label">D) The algorithm terminates immediately</label>
+            </div>
+            <div class="feedback-msg" id="feedback-8"></div>
+          </details>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-block" id="qb-9">
+          <details class="challenge-details">
+            <summary><h3>9. Which of the following is NOT a method mentioned for choosing a Quicksort pivot?</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q9" id="q9-a" value="A"><label for="q9-a" class="option-label">A) The leftmost element</label>
+              <input type="radio" name="q9" id="q9-b" value="B"><label for="q9-b" class="option-label">B) The median element</label>
+              <input type="radio" name="q9" id="q9-c" value="C"><label for="q9-c" class="option-label">C) The calculated average of all elements</label>
+              <input type="radio" name="q9" id="q9-d" value="D"><label for="q9-d" class="option-label">D) A completely random element</label>
+            </div>
+            <div class="feedback-msg" id="feedback-9"></div>
+          </details>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-block" id="qb-10">
+          <details class="challenge-details">
+            <summary><h3>10. The phrase "Divide and Conquer" originally stems from:</h3></summary>
+            <div class="quiz-options challenge-body">
+              <input type="radio" name="q10" id="q10-a" value="A"><label for="q10-a" class="option-label">A) A Roman military tactic used by Julius Caesar</label>
+              <input type="radio" name="q10" id="q10-b" value="B"><label for="q10-b" class="option-label">B) An algorithmic principle coined by John von Neumann</label>
+              <input type="radio" name="q10" id="q10-c" value="C"><label for="q10-c" class="option-label">C) A mathematical optimization by Anatoly Karatsuba</label>
+              <input type="radio" name="q10" id="q10-d" value="D"><label for="q10-d" class="option-label">D) A modern Python programming convention</label>
+            </div>
+            <div class="feedback-msg" id="feedback-10"></div>
+          </details>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Check Answers</button>
+      </div>
+    </section>
+
+    <!-- Quiz Logic JS -->
+    <script>
+    function checkAnswers() {
+      // Mapping answers directly from the Divide & Conquer content
+      const correctAnswers = {
+        q1: 'C', q2: 'B', q3: 'A', q4: 'C', q5: 'A',
+        q6: 'B', q7: 'B', q8: 'B', q9: 'C', q10: 'A'
+      };
+
+      for (let i = 1; i <= 10; i++) {
+        const qName = 'q' + i;
+        const options = document.getElementsByName(qName);
+        const feedback = document.getElementById('feedback-' + i);
+        const detailsNode = document.getElementById('qb-' + i).querySelector('details');
+        
+        let selectedValue = null;
+        let selectedLabel = null;
+
+        // Reset previous classes
+        options.forEach(opt => {
+          let label = document.querySelector(`label[for="${opt.id}"]`);
+          if (label) label.classList.remove('correct', 'wrong');
+        });
+
+        // Find selected answer
+        for (let j = 0; j < options.length; j++) {
+          if (options[j].checked) {
+            selectedValue = options[j].value;
+            selectedLabel = document.querySelector(`label[for="${options[j].id}"]`);
+            break;
+          }
+        }
+
+        // Force the accordion open so the user can see their results!
+        if (detailsNode) detailsNode.open = true;
+
+        if (selectedValue === correctAnswers[qName]) {
+          selectedLabel.classList.add('correct');
+          feedback.style.color = 'var(--string, #9ece6a)';
+          feedback.innerText = "Correct! Spot on.";
+          feedback.style.display = 'block';
+        } else if (selectedValue !== null) {
+          selectedLabel.classList.add('wrong');
+          feedback.style.color = 'var(--red, #f7768e)';
+          feedback.innerText = "Incorrect. Review the correct answer highlighted below.";
+          feedback.style.display = 'block';
+          
+          // Highlight the actual correct answer
+          let correctInput = document.querySelector(`input[name="${qName}"][value="${correctAnswers[qName]}"]`);
+          let correctLabel = document.querySelector(`label[for="${correctInput.id}"]`);
+          if (correctLabel) correctLabel.classList.add('correct');
+        } else {
+          feedback.style.color = 'var(--warn, #e0af68)';
+          feedback.innerText = "Please select an option to evaluate.";
+          feedback.style.display = 'block';
+        }
+      }
+    }
+    </script>
+
+    <!-- ROUTING BUTTON TO DATA STRUCTURES -->
+    <section class="cta">
+      <h2>Ready for the next step? <span class="accent">Let's move on.</span></h2>
+      <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">You can't solve massive engineering problems if your information is a mess. Learn how to store, slice, and sort through massive amounts of information efficiently.</p>
+      <a class="next-btn" href="dataStructures.html">
+        Next: Core Data Structures
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script>
+    
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Data Representation : Focus on data representation and terminology, bits and bytes, decimal and binary data units (SI and IEC prefixes), number systems (binary, octal, decimal, and hexadecimal), number system conversions, most and least significant bits (MSB and LSB), bit constraints and overflow, data categorization and memory representation, signed integers and two's complement, floating-point representation and the IEEE 754 standard, and non-numeric data representation using ASCII and Unicode.">
+<title>CS1033 | Data Representation</title>
+<meta name="description" content="How computers store and represent data — from bits and bytes to ASCII, Unicode, and floating-point numbers.">
+<link rel="stylesheet" href="mainstyle.css">
+<link rel="stylesheet" href="chatbot_style.css">
+<style>
+  /* ── Callout color variants ── */
+  .callout.red  { border-left-color: var(--red); }
+  .callout.red .tag { color: var(--red); }
+  .callout.type { border-left-color: var(--type); }
+  .callout.type .tag { color: var(--type); }
+  .callout.string { border-left-color: var(--string); }
+  .callout.string .tag { color: var(--string); }
+  .callout.keyword { border-left-color: var(--keyword); }
+  .callout.keyword .tag { color: var(--keyword); }
+
+  mark.red  { background:rgba(247,118,142,.16); color:var(--red); }
+  mark.string { background:rgba(158,206,106,.16); color:var(--string); }
+
+  .callout ul {
+    color: var(--text-primary);
+    margin-top: 12px;
+    padding-left: 20px;
+    line-height: 1.8;
+  }
+
+  /* ── Number Systems grid ── */
+  .num-sys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    margin: 28px 0 36px;
+    max-width: 70ch;
+  }
+  .num-sys-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--string);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .num-sys-card:hover { transform: translateY(-2px); background: var(--bg-raised); }
+  .num-sys-card .ns-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--string);
+    margin-bottom: 8px;
+  }
+  .num-sys-card h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: #fff;
+  }
+  .num-sys-card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: none;
+  }
+
+  /* ── Conversions grid ── */
+  .conv-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 24px 0 34px;
+    max-width: 70ch;
+  }
+  .conv-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .conv-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-faint);
+    min-width: 24px;
+  }
+  .conv-item p { margin: 0; font-size: 14.5px; color: var(--text-muted); }
+  .conv-item strong { color: var(--text-primary); }
+
+  /* ── Byte Visualizer ── */
+  .byte-visualizer {
+    background: var(--bg-panel-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px 32px;
+    margin: 26px 0;
+    max-width: 580px;
+    font-family: var(--sans);
+  }
+  .bit-title {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+  .bit-positions {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    color: var(--red);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .bit-positions span { text-align: center; font-size: 14px; }
+  .bit-boxes {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .bit-box {
+    padding: 14px 0;
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    border-right: 1px solid var(--border);
+    background: rgba(255,255,255,.02);
+    text-align: center;
+  }
+  .bit-box:last-child { border-right: none; }
+  .msb-box { background: rgba(224,175,104,.2); color: var(--warn); }
+  .lsb-box { background: rgba(158,206,106,.2); color: var(--string); }
+  .bit-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+  .label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .label .arrow { font-size: 22px; font-weight: bold; margin-bottom: 4px; }
+  .msb-label { color: var(--warn); }
+  .lsb-label { color: var(--string); }
+
+  /* ── Overflow Visualizer ── */
+  .overflow-visualizer {
+    background: var(--bg-panel-alt);
+    border: 1px dashed var(--red);
+    border-radius: 10px;
+    padding: 26px 32px;
+    margin: 26px 0;
+    max-width: 400px;
+    font-family: var(--mono);
+    color: var(--text-primary);
+  }
+  .math-row {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 22px;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+  }
+  .math-row .operator { color: var(--red); margin-right: 14px; }
+  .binary-num { color: var(--text-primary); }
+  .divider-line { height: 2px; background: var(--border); margin: 12px 0; }
+  .result-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .register-box {
+    display: flex;
+    gap: 5px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 22px;
+    color: var(--string);
+  }
+  .overflow-bit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .carry-bit {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bg-void);
+    background: var(--red);
+    padding: 10px 14px;
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(247,118,142,.4);
+    animation: pulseError 2s infinite;
+  }
+  .error-label {
+    margin-top: 10px;
+    color: var(--red);
+    font-family: var(--sans);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .error-label .arrow { font-size: 18px; font-weight: bold; margin-bottom: 4px; }
+  @keyframes pulseError {
+    0%   { transform: scale(1);    box-shadow: 0 0 10px rgba(247,118,142,.2); }
+    50%  { transform: scale(1.05); box-shadow: 0 0 20px rgba(247,118,142,.6); }
+    100% { transform: scale(1);    box-shadow: 0 0 10px rgba(247,118,142,.2); }
+  }
+
+  /* ── Data Tree Visualizer ── */
+  .tree-visualizer {
+    background: var(--bg-panel-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--sans);
+    margin-top: 16px;
+  }
+  .tree-node {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 10px 22px;
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: center;
+    min-width: 110px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.2);
+    position: relative;
+    z-index: 2;
+  }
+  .tree-node.root {
+    background: rgba(187,154,247,.15);
+    color: var(--type);
+    border-color: var(--type);
+    margin-bottom: 20px;
+  }
+  .tree-node.root::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+  .tree-branches {
+    display: flex;
+    gap: 40px;
+  }
+  .branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 20px;
+  }
+  .branch:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(50% + 20px);
+    height: 2px;
+    background: var(--border);
+  }
+  .branch:last-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    width: calc(50% + 20px);
+    height: 2px;
+    background: var(--border);
+  }
+  .branch::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+  .branch > .tree-node {
+    margin-bottom: 20px;
+  }
+  .branch > .tree-node::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+  .tree-sub-branches {
+    display: flex;
+    gap: 16px;
+  }
+  .sub-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 20px;
+  }
+  .sub-branch:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(50% + 8px);
+    height: 2px;
+    background: var(--border);
+  }
+  .sub-branch:last-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    width: calc(50% + 8px);
+    height: 2px;
+    background: var(--border);
+  }
+  .sub-branch::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+  .branch:last-child .sub-branch {
+    padding-top: 0;
+  }
+  .branch:last-child .sub-branch::before,
+  .branch:last-child .sub-branch::after {
+    content: none;
+  }
+  .tree-node.sub {
+    font-size: 12.5px;
+    min-width: 95px;
+    background: var(--bg-panel);
+  }
+
+  /* ── Floating-Point Visualizer ── */
+  .float-visualizer {
+    background: var(--bg-panel-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--mono);
+    max-width: 100%;
+    overflow-x: auto;
+    margin-top: 16px;
+  }
+  .float-labels {
+    display: flex;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .float-labels div:nth-child(1) { flex: 1; }
+  .float-labels div:nth-child(2) { flex: 8; text-align: center; }
+  .float-labels div:nth-child(3) { flex: 23; text-align: center; }
+  .float-register {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .f-bit {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    border-right: 1px solid rgba(0,0,0,.2);
+    color: var(--bg-void);
+  }
+  .f-bit:last-child { border-right: none; }
+  .sign-bit { background: var(--keyword); }
+  .exp-bit  { background: var(--string); }
+  .man-bit  { background: var(--red); }
+  .float-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 8px;
+  }
+
+  /* ── ASCII Table ── */
+  .table-visualizer {
+    background: var(--bg-panel-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    font-family: var(--mono);
+    max-width: 70ch;
+  }
+  .table-title {
+    color: var(--type);
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: .04em;
+  }
+  .table-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background: var(--bg-void);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .table-grid .th {
+    background: var(--bg-raised);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .table-grid .td {
+    color: var(--text-primary);
+    font-size: 13px;
+    padding: 9px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-soft);
+    border-right: 1px solid var(--border-soft);
+  }
+  .table-grid .td.string { color: var(--string); font-weight: bold; }
+
+  /* ── Unicode Grid ── */
+  .unicode-grid-wrapper {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+  }
+  .unicode-block {
+    flex: 1;
+    background: var(--bg-panel-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .u-title {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--keyword);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .u-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .u-cell {
+    background: var(--bg-void);
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    text-align: center;
+    padding: 10px 4px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .u-char {
+    display: block;
+    font-family: var(--sans);
+    font-size: 22px;
+    color: var(--text-primary);
+    margin-top: 4px;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--string);
+  }
+
+  .python-repl {
+    background: var(--bg-void);
+    padding: 16px 18px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .python-repl .prompt { color: var(--text-faint); }
+  .python-repl .result-false { color: var(--red); font-weight: bold; }
+  .python-repl .result-true  { color: var(--string); font-weight: bold; }
+
+  @media (max-width: 600px) {
+    .num-sys-grid { grid-template-columns: 1fr; }
+    .table-grid { grid-template-columns: repeat(3, 1fr); }
+    .unicode-grid-wrapper { flex-direction: column; }
+    .byte-visualizer { padding: 18px; }
+    .bit-box { font-size: 16px; padding: 10px 0; }
+    .overflow-visualizer { padding: 18px; }
+    .math-row { font-size: 17px; letter-spacing: 3px; }
+    .float-visualizer .f-bit { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="filetab">Data Representation</div>
+</div>
+
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#terminology"><span class="ln">01</span>Terminology</a></li>
+      <li><a href="#units"><span class="ln">02</span>Units of Data</a></li>
+      <li><a href="#number-systems"><span class="ln">03</span>Number Systems</a></li>
+      <li><a href="#conversions"><span class="ln">04</span>Conversions</a></li>
+      <li><a href="#msb-lsb"><span class="ln">05</span>MSB &amp; LSB</a></li>
+      <li><a href="#overflow"><span class="ln">06</span>Overflow</a></li>
+      <li><a href="#data-memory"><span class="ln">07</span>Data &amp; Memory</a></li>
+      <li><a href="#signed"><span class="ln">08</span>Signed Integers</a></li>
+      <li><a href="#floating"><span class="ln">09</span>Floating-Point</a></li>
+      <li><a href="#non-numeric"><span class="ln">10</span>Non-Numeric Data</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <div class="kicker">TOPIC 04: MACHINE CODE &amp; NUMBER SYSTEMS</div>
+    <h1>Data <span class="kw">Representation</span></h1>
+    <p class="lead">At its core, a computer only does one thing: it works with <mark>data</mark> and <mark>information</mark>. Think of data as the raw ingredients in a kitchen, and the computer as the master chef. The machine takes in that raw data, processes it, and serves up a finished, organized meal — the information.</p>
+
+    <!-- 01 -->
+    <section id="terminology">
+      <h2><span class="idx">01.</span> Terminology</h2>
+      <p>Underneath all those complex graphics and calculations, the machine stores and retrieves everything using the simplest system possible: microscopic 2-state hardware devices.</p>
+      <p>It all boils down to the smallest unit of data imaginable — a switch that is either completely <mark class="warn">OFF (0)</mark> or entirely <mark class="warn">ON (1)</mark>.</p>
+    </section>
+
+    <!-- 02 -->
+    <section id="units">
+      <h2><span class="idx">02.</span> Units of Data</h2>
+      <p>Before we can measure massive amounts of data, we need to look at the absolute smallest pieces of the puzzle.</p>
+
+      <div class="stack">
+        <div class="stack-item">
+          <span class="stack-tag">BIT</span>
+          <div>
+            <h3>The Bit — The Atom</h3>
+            <p>The absolute smallest unit of data representation. "Bit" is a catchy abbreviation for <em>Binary digit</em>. Either a 0 or a 1 — nothing in between.</p>
+          </div>
+        </div>
+        <div class="stack-item">
+          <span class="stack-tag">BYTE</span>
+          <div>
+            <h3>The Byte — The Building Block</h3>
+            <p>When you sequence exactly <strong>8 bits</strong> together, you create a byte. In networking standards, this is often called an <em>octet</em> to keep things completely unambiguous.</p>
+          </div>
+        </div>
+      </div>
+    
+      <p>For years, the tech world had a massive identity crisis over the word "kilobyte" (kB). Depending on who you asked, it meant two completely different things.</p>
+
+      <div class="callout warn">
+        <span class="tag">&gt;&gt; DO NOT CONFUSE</span>
+        <ul>
+          <li><strong>The Decimal Context:</strong> A kilobyte meant 1,000 (10³) bytes — the standard used for physical disk capacities and data transfer rates.</li>
+          <li><strong>The Binary Context:</strong> A kilobyte meant 1,024 (2¹⁰) bytes — used for OS-specific memory and file sizes.</li>
+        </ul>
+      </div>
+
+      <p>To fix this chaos, international standard bodies (ISO and IEC) officially split the naming conventions.</p>
+
+      <div class="stack">
+        <div class="stack-item">
+          <span class="stack-tag">SI</span>
+          <div>
+            <h3>SI Prefixes — Decimal (Powers of 10)</h3>
+            <p>10³ bytes = <strong>kilobyte (kB)</strong>, 10⁶ bytes = <strong>megabyte (MB)</strong>, 10⁹ bytes = <strong>gigabyte (GB)</strong>.</p>
+          </div>
+        </div>
+        <div class="stack-item">
+          <span class="stack-tag">IEC</span>
+          <div>
+            <h3>Binary Prefixes — Powers of 2</h3>
+            <p>2¹⁰ bytes = <strong>kibibyte (KiB)</strong>, 2²⁰ bytes = <strong>mebibyte (MiB)</strong>, 2³⁰ bytes = <strong>gibibyte (GiB)</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="number-systems">
+      <h2><span class="idx">03.</span> Number Systems</h2>
+      <p>Computers don't speak just one number language — they speak four. Click on any system below to dive deeper into how it works.</p>
+
+      <div class="num-sys-grid">
+        <a class="num-sys-card" href="https://www.geeksforgeeks.org/maths/binary-number-system/" target="_blank">
+          <span class="ns-badge">BASE-2</span>
+          <h3>Binary</h3>
+          <p>The native tongue of every processor. Uses only 0 and 1.</p>
+        </a>
+        <a class="num-sys-card" href="https://www.geeksforgeeks.org/maths/octal-number-system/" target="_blank">
+          <span class="ns-badge">BASE-8</span>
+          <h3>Octal</h3>
+          <p>A compact shorthand for binary that engineers still use today.</p>
+        </a>
+        <a class="num-sys-card" href="https://www.geeksforgeeks.org/digital-logic/decimal-number-system/" target="_blank">
+          <span class="ns-badge">BASE-10</span>
+          <h3>Decimal</h3>
+          <p>The system humans have used for centuries. No explanation needed.</p>
+        </a>
+        <a class="num-sys-card" href="https://www.geeksforgeeks.org/maths/hexadecimal-number-system/" target="_blank">
+          <span class="ns-badge">BASE-16</span>
+          <h3>Hexadecimal</h3>
+          <p>Ultra-compact binary shorthand. 0–9 and A–F. Used everywhere in CS.</p>
+        </a>
+      </div>
+
+      
+    </section>
+
+    <!-- 05 -->
+    <section id="conversions">
+      <h2><span class="idx">04.</span> Conversions</h2>
+      <p>Translation is the real skill. Here are the six conversion pathways you need to master.</p>
+
+      <div class="conv-list">
+        <div class="conv-item"><span class="conv-num">01</span><p><strong>Decimal → Binary</strong></p></div>
+        <div class="conv-item"><span class="conv-num">02</span><p><strong>Binary → Decimal</strong></p></div>
+        <div class="conv-item"><span class="conv-num">03</span><p><strong>Decimal ↔ Octal &amp; Hexadecimal</strong></p></div>
+        <div class="conv-item"><span class="conv-num">04</span><p><strong>Binary ↔ Octal</strong></p></div>
+        <div class="conv-item"><span class="conv-num">05</span><p><strong>Binary ↔ Hexadecimal</strong></p></div>
+        <div class="conv-item"><span class="conv-num">06</span><p><strong>Octal ↔ Hexadecimal</strong></p></div>
+      </div>
+
+      <!-- Custom Video Frame for the Playlist Embed -->
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>Number System Playlist</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=WkCO6S7CX5O1R8wU&amp;list=PLBlnK6fEyqRjuzyQSEGGM-hvInZ4HY0is" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- Deep Dive Resource Link -->
+      <div class="callout string" style="margin-top: 24px;">
+        <span class="tag">&gt;&gt; Extra Help</span>
+        <p>If you wanna dive deeper, watch the playlist above and check out this interactive guide: <a href="https://www.w3schools.com/programming/prog_binary_numbers.php" target="_blank" style="color: var(--keyword); text-decoration: underline; font-weight: 600;">W3Schools: Binary Numbers</a>.</p>
+      </div>
+
+      <div class="callout warn">
+        <span class="tag">&gt;&gt; PRO INTEL</span>
+        <p><strong>The Constraint:</strong> If a register is <em>n</em> bits wide, the absolute maximum number of distinct values it can represent is exactly <strong>2ⁿ</strong>. Keep this in your head at all times — it underpins everything that follows.</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="msb-lsb">
+      <h2><span class="idx">05.</span> MSB &amp; LSB</h2>
+      <p>When you look at an 8-bit sequence (a byte), not all bits are created equal. The position of the digit completely determines its absolute power and mathematical weight.</p>
+
+      <div class="callout warn">
+        <span class="tag">&gt;&gt; THE HIERARCHY</span>
+        <p>Just like standard numbers, the digit on the far left carries the most value, and the one on the far right carries the least.</p>
+        <ul>
+          <li><strong>Most Significant Bit (MSB):</strong> The leftmost bit (Position 7). It dictates the largest chunk of the value, and in signed integers, controls the positive/negative sign.</li>
+          <li><strong>Least Significant Bit (LSB):</strong> The rightmost bit (Position 0). It carries the smallest possible mathematical weight (2⁰ = 1).</li>
+        </ul>
+      </div>
+
+      <div class="byte-visualizer">
+        <div class="bit-title">Bit Position</div>
+        <div class="bit-positions">
+          <span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span><span>0</span>
+        </div>
+        <div class="bit-boxes">
+          <div class="bit-box msb-box">1</div>
+          <div class="bit-box">1</div>
+          <div class="bit-box">0</div>
+          <div class="bit-box">1</div>
+          <div class="bit-box">1</div>
+          <div class="bit-box">0</div>
+          <div class="bit-box">0</div>
+          <div class="bit-box lsb-box">1</div>
+        </div>
+        <div class="bit-labels">
+          <div class="label msb-label"><div class="arrow">↑</div><strong>Most Significant<br>Bit (MSB)</strong></div>
+          <div class="label lsb-label"><div class="arrow">↑</div><strong>Least Significant<br>Bit (LSB)</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="overflow">
+      <h2><span class="idx">06.</span> Bit Constraints &amp; Overflow</h2>
+      <p>Computers store data in hardware registers, and the number of bits a register can hold is strictly limited. Here is what happens when you push the machine past its absolute limit.</p>
+
+      <div class="callout red">
+        <span class="tag">&gt;&gt; SYSTEM OVERFLOW</span>
+        <p>If you add two numbers and the result is too big for the register to accommodate, the extra "carry bit" spills over the edge and is lost, causing a critical calculation error.</p>
+      </div>
+
+      <div class="callout">
+        <span class="tag">&gt;&gt; ANALOGY</span>
+        <p>Think of a register like a 1-litre water bottle. If you try to pour 1.5 litres into it, that extra half-litre spills over the top and is lost. In computing, that "spilled" extra bit is called the <mark class="warn">carry bit</mark>. When it falls off the edge, your computer stores the wrong number — which can crash your entire program.</p>
+      </div>
+
+      <div class="overflow-visualizer">
+        <div class="math-row"><span class="binary-num">00111110</span></div>
+        <div class="math-row"><span class="operator">+</span><span class="binary-num">11000111</span></div>
+        <div class="divider-line"></div>
+        <div class="result-row">
+          <div class="overflow-bit-container">
+            <span class="carry-bit">1</span>
+            <div class="error-label"><div class="arrow">↑</div><strong>Overflow!<br>Carry Bit Lost</strong></div>
+          </div>
+          <div class="register-box">
+            <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="data-memory">
+      <h2><span class="idx">07.</span> Data &amp; Memory</h2>
+      <p>Computers do not have infinite space. Here is a visual breakdown of how the machine categorizes data, stores it in physical memory, and what happens when you push it past its breaking point.</p>
+
+      <div class="callout type">
+        <span class="tag">&gt;&gt; DATA CATEGORIZATION</span>
+        
+        <div class="tree-visualizer">
+          <div class="tree-node root">DATA</div>
+          <div class="tree-branches">
+            <div class="branch">
+              <div class="tree-node">NUMERIC</div>
+              <div class="tree-sub-branches">
+                <div class="tree-node sub">Integers<br><span style="font-size:11px;color:var(--text-faint)">(Signed &amp; Unsigned)</span></div>
+                <div class="tree-node sub">Non-Integers<br><span style="font-size:11px;color:var(--text-faint)">(Floating-Point)</span></div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="tree-node">NON-NUMERIC</div>
+              <div class="tree-sub-branches">
+                <div class="tree-node sub">Text, Characters,<br>Media</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout string">
+        <span class="tag">&gt;&gt; STORING INTEGERS</span>
+        <p style="margin-bottom:18px;">Data is stored in physical hardware <strong>registers</strong>. If an 8-bit register only holds unsigned (positive) integers, it maxes out at 255.</p>
+        <div class="byte-visualizer" style="margin:0 auto;">
+          <div class="bit-title">8-Bit Register — Maximum Capacity</div>
+          <div class="bit-positions"><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span><span>0</span></div>
+          <div class="bit-boxes">
+            <div class="bit-box">1</div><div class="bit-box">1</div><div class="bit-box">1</div><div class="bit-box">1</div>
+            <div class="bit-box">1</div><div class="bit-box">1</div><div class="bit-box">1</div><div class="bit-box">1</div>
+          </div>
+          <div class="bit-labels">
+            <div class="label" style="width:100%;text-align:center;color:var(--string)"><strong>Maximum Unsigned Value: 255</strong></div>
+          </div>
+        </div>
+      </div>
+
+      
+    </section>
+
+    <!-- 09 -->
+    <section id="signed">
+      <h2><span class="idx">08.</span> Signed Integers &amp; Two's Complement</h2>
+      <p>How does a computer understand negative numbers if it only speaks in 1s and 0s? It uses a clever system called <mark class="type">Two's Complement</mark>, where the exact representation is defined by the hardware's word size.</p>
+
+      <div class="callout warn">
+        <span class="tag">&gt;&gt; 1. THE NEGATIVE ZONE (MSB)</span>
+        <p style="margin-bottom:18px;">In a signed integer, the MSB completely controls the sign. If it is <strong>0</strong>, the number is positive. If it is <strong>1</strong>, the number is negative. The MSB acts as a massive negative weight: <strong>−2<sup>n−1</sup></strong>.</p>
+        <div class="byte-visualizer" style="margin:0 auto;">
+          <div class="bit-title">Positional Weights (n=4)</div>
+          <div class="bit-positions">
+            <span style="color:var(--red)">-(2³)</span>
+            <span style="color:var(--warn)">2²</span>
+            <span style="color:var(--warn)">2¹</span>
+            <span style="color:var(--warn)">2⁰</span>
+          </div>
+          <div class="bit-boxes" style="grid-template-columns:repeat(4,1fr)">
+            <div class="bit-box" style="background:rgba(247,118,142,.2);color:var(--red)">1</div>
+            <div class="bit-box">0</div><div class="bit-box">0</div><div class="bit-box">0</div>
+          </div>
+          <div class="bit-labels">
+            <div class="label" style="width:100%;text-align:center;color:var(--text-primary);margin-top:10px">
+              <strong>Value = −8</strong><br>
+              <span style="font-size:12px;color:var(--text-faint)">Smallest 4-bit signed integer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout type">
+        <span class="tag">&gt;&gt; 2. THE FLIP &amp; ADD METHOD</span>
+        <p style="margin-bottom:18px;">Want to manually find the two's complement of a negative number (like <strong>−5</strong>)? Follow the standard hardware protocol.</p>
+        <div class="flow" style="margin:0 auto;">
+          <div class="flow-step">
+            <div class="flow-marker"><div class="flow-num">1</div><div class="flow-line"></div></div>
+            <div class="flow-body">
+              <h3>Get the Positive Binary</h3>
+              <p>Write +5 in an 8-bit register: <mark class="string">0000 0101</mark></p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-marker"><div class="flow-num">2</div><div class="flow-line"></div></div>
+            <div class="flow-body">
+              <h3>One's Complement — Flip the Bits</h3>
+              <p>Swap every 0 to 1, and 1 to 0: <mark class="warn">1111 1010</mark></p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-marker"><div class="flow-num">3</div></div>
+            <div class="flow-body">
+              <h3>Add 1</h3>
+              <p>Add 1 to the LSB to get your final −5: <mark class="red">1111 1011</mark></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="stack-item">
+          <span class="stack-tag">LIMITS</span>
+          <div>
+            <h3>The Boundary Formula</h3>
+            <p>For an <em>n</em>-bit register, the smallest signed integer is <strong>−2<sup>n−1</sup></strong> (MSB=1, all others=0). The largest is <strong>2<sup>n−1</sup> − 1</strong> (MSB=0, all others=1).</p>
+          </div>
+        </div>
+        <div class="stack-item">
+          <span class="stack-tag" style="background:rgba(158,206,106,.15);color:var(--string)">PYTHON</span>
+          <div>
+            <h3>Python Execution</h3>
+            <p>Python handles this automatically. Run <code>~0</code> (Bitwise NOT 0) and Python returns <code>-1</code>. Check its binary with <code>bin(-2)</code> and Python outputs <code>-0b10</code>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="floating">
+      <h2><span class="idx">09.</span> Floating-Point Numbers</h2>
+      <p>Integers are great for whole numbers, but what about real numbers with fractions? The machine uses <mark class="type">Floating-Point Numbers</mark> — a system that approximates values to support a massive numerical range.</p>
+
+      <div class="callout type">
+        <span class="tag">&gt;&gt; 1. THE ARCHITECTURE</span>
+        <p style="margin-bottom:14px;">Instead of fixing the decimal point in one place, the machine allows it to "float." It calculates the value using scientific notation:</p>
+        <p style="font-family:var(--mono);color:#fff;font-size:15px;margin:0">Number = mantissa × base<sup style="color:var(--red)">exponent</sup></p>
+        <ul style="margin-top:14px">
+          <li><strong>Mantissa (Significand):</strong> A fixed number of the most significant digits.</li>
+          <li><strong>Exponent:</strong> The scale that determines exactly where the decimal point floats.</li>
+        </ul>
+      </div>
+
+      <div class="callout string">
+        <span class="tag">&gt;&gt; 2. THE IEEE-754 STANDARD (32-BIT)</span>
+        <p style="margin-bottom:20px;">Computers slice up an allocated 32-bit register (Single-Precision) into three highly specific fields.</p>
+        <div class="float-visualizer">
+          <div class="float-labels">
+            <div style="color:var(--keyword)">Sign (1)</div>
+            <div style="color:var(--string)">Exponent (8)</div>
+            <div style="color:var(--red)">Mantissa / Fraction (23)</div>
+          </div>
+          <div class="float-register">
+            <div class="f-bit sign-bit">0</div>
+            <div class="f-bit exp-bit">0</div><div class="f-bit exp-bit">1</div><div class="f-bit exp-bit">1</div><div class="f-bit exp-bit">1</div>
+            <div class="f-bit exp-bit">1</div><div class="f-bit exp-bit">1</div><div class="f-bit exp-bit">0</div><div class="f-bit exp-bit">0</div>
+            <div class="f-bit man-bit">0</div><div class="f-bit man-bit">1</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div>
+            <div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div>
+            <div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div>
+            <div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div>
+            <div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div>
+            <div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div><div class="f-bit man-bit">0</div>
+          </div>
+          <div class="float-footer"><span>Bit 31</span><span>Bit 23</span><span>Bit 0</span></div>
+          <p style="text-align:center;margin-top:12px;font-family:var(--mono);color:var(--text-primary)">Value: <strong>0.15625</strong></p>
+        </div>
+      </div>
+
+      <div class="callout red">
+        <span class="tag">&gt;&gt; 3. THE PYTHON REALITY</span>
+        <p style="margin-bottom:14px;">Python defaults to Double-Precision (64-bit), but because the machine is forcing base-10 decimals into a base-2 binary register, most decimal floats <strong>cannot be represented exactly</strong>. They are highly accurate approximations.</p>
+        <div class="python-repl">
+          <span class="prompt">&gt;&gt;&gt;</span> 0.1 + 0.1 + 0.1 == 0.3<br>
+          <span class="result-false">False</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="non-numeric">
+      <h2><span class="idx">10.</span> Non-Numeric Data</h2>
+      <p>Computers are built to crunch numbers, but what happens when you need to store a name, a password, or a text message? Non-numeric data is primarily textual — letters (a–z, A–Z), digits (0–9), symbols (!, @, #), and control characters.</p>
+
+      <div class="callout type">
+        <span class="tag">&gt;&gt; 1. THE ASCII STANDARD</span>
+        <p style="margin-bottom:16px;">ASCII (American Standard Code for Information Interchange) is the original cheat sheet — a standardized lookup table that maps every common character to a unique 7-bit binary number.</p>
+
+        <div class="table-visualizer">
+          <div class="table-title">ASCII Quick Reference</div>
+          <div class="table-grid">
+            <div class="th">Char</div><div class="th">Dec</div><div class="th">Hex</div>
+            <div class="th">Char</div><div class="th">Dec</div><div class="th">Hex</div>
+
+            <div class="td string">A</div><div class="td">65</div><div class="td">41</div>
+            <div class="td string">a</div><div class="td">97</div><div class="td">61</div>
+
+            <div class="td string">B</div><div class="td">66</div><div class="td">42</div>
+            <div class="td string">b</div><div class="td">98</div><div class="td">62</div>
+
+            <div class="td string">Z</div><div class="td">90</div><div class="td">5A</div>
+            <div class="td string">z</div><div class="td">122</div><div class="td">7A</div>
+
+            <div class="td string">0</div><div class="td">48</div><div class="td">30</div>
+            <div class="td string">Space</div><div class="td">32</div><div class="td">20</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout keyword">
+        <span class="tag">&gt;&gt; 2. UNICODE — THE GLOBAL UPGRADE</span>
+        <p style="margin-bottom:16px;">ASCII was built for English and maxed out at 128 characters. Unicode solves this globally, supporting over 143,000 characters across 154 modern and historical scripts — from Tamil to emoji.</p>
+        <div class="unicode-grid-wrapper">
+          <div class="unicode-block">
+            <div class="u-title">Latin (Unicode)</div>
+            <div class="u-grid">
+              <div class="u-cell">U+0041<span class="u-char">A</span></div>
+              <div class="u-cell">U+0042<span class="u-char">B</span></div>
+              <div class="u-cell">U+0043<span class="u-char">C</span></div>
+              <div class="u-cell">U+0061<span class="u-char">a</span></div>
+              <div class="u-cell">U+0062<span class="u-char">b</span></div>
+              <div class="u-cell">U+0063<span class="u-char">c</span></div>
+            </div>
+          </div>
+          <div class="unicode-block">
+            <div class="u-title">Beyond ASCII</div>
+            <div class="u-grid">
+              <div class="u-cell">U+0041<span class="u-char">அ</span></div>
+              <div class="u-cell">U+4E2D<span class="u-char">中</span></div>
+              <div class="u-cell">U+1F600<span class="u-char">😀</span></div>
+              <div class="u-cell">U+0041<span class="u-char">ل</span></div>
+              <div class="u-cell">U+0041<span class="u-char">ñ</span></div>
+              <div class="u-cell">U+1F4BB<span class="u-char">💻</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="next" class="cta">
+      <h2>You've cracked the code. <span class="accent">What's next?</span></h2>
+      <a class="next-btn" href="#">
+        Next: Bare Metal — Computer Systems
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script>
+
+
+
+  </main>
+</div>
+
+<footer>CS Module Roadmap — 04 / Data Representation</footer>
+
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
