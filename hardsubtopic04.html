@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Computer Systems & Hardware : Software & Operating Systems. Focus on the definition and role of software, the differences between system software and application software, examples of each, the role of operating systems in managing hardware and software resources, process management, memory management, file management, device management, and user interfaces.">
+<title>CS1033 | Software & Operating Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hardsubtopics.css">
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+<div class="titlebar">
+  
+  <div class="filetab">Software</div>
+</div>
+
+<div class="layout">
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#what-is" class="ln-link"><span class="ln">01</span>What is Software?</a></li>
+      <li><a href="#categories" class="ln-link"><span class="ln">02</span>System vs Application</a></li>
+      <li><a href="#os" class="ln-link"><span class="ln">03</span>Operating Systems</a></li>
+      <li><a href="#summary" class="ln-link"><span class="ln">04</span>Key Idea</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="kicker">04. SOFTWARE & OS</div>
+    <h1 class="title">Software <span class="kw">& Systems</span></h1>
+    <p class="lead-text" style="margin-bottom: 40px;">
+      Software is a collection of programs and instructions that tells computer hardware what to do. Unlike hardware, software has no physical form.
+    </p>
+
+    <!-- SECTION 1: WHAT IS SOFTWARE -->
+    <section id="what-is" style="padding-top: 0; margin-top: 0;">
+      <div class="callout string">
+        <span class="tag">&gt;&gt; THE INSTRUCTION LAYER</span>
+        <p>Software bridges the gap between human intent and machine execution. It can be broadly divided into two main categories: <strong>System Software</strong> and <strong>Application Software</strong>.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SYSTEM VS APPLICATION -->
+    <section id="categories">
+      <h2><span class="idx">02.</span> System vs Application Software</h2>
+      
+      <div class="split-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px;">
+        <!-- System Software -->
+        <div class="stack-item" style="display: block;">
+          <span class="stack-tag" style="background: rgba(187,154,247,.15); color: var(--type);">SYSTEM</span>
+          <h3 style="margin: 10px 0;">Managing the Machine</h3>
+          <p style="font-size: 14.5px; margin-bottom: 12px;">System software manages and controls the computer's hardware and provides a platform for other software to run. It works mainly in the background, helping the computer operate properly.</p>
+          <ul style="color: var(--text-muted); padding-left: 20px; font-size: 14.5px;">
+            <li>Operating systems</li>
+            <li>Device drivers</li>
+            <li>Utility programs</li>
+          </ul>
+        </div>
+
+        <!-- Application Software -->
+        <div class="stack-item" style="display: block;">
+          <span class="stack-tag" style="background: rgba(224,175,104,.15); color: var(--warn);">APPLICATION</span>
+          <h3 style="margin: 10px 0;">Performing Tasks</h3>
+          <p style="font-size: 14.5px; margin-bottom: 12px;">Application software is designed to help users perform specific tasks. Unlike system software, application software is mainly focused on what the user wants to accomplish.</p>
+          <ul style="color: var(--text-muted); padding-left: 20px; font-size: 14.5px;">
+            <li>Web browsers & Word processors</li>
+            <li>Media players & Image editors</li>
+            <li>Video games</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: OPERATING SYSTEMS -->
+    <section id="os">
+      <h2><span class="idx">03.</span> Operating Systems (OS)</h2>
+      <p>An Operating System is the main system software that manages the computer's hardware and software resources. It provides a vital interface between the user, applications, and the hardware.</p>
+
+      <h3 style="color: var(--text-primary); font-family: var(--sans); margin-top: 30px; font-size: 18px;">What does an OS actually do?</h3>
+      <div class="roadmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 15px;">
+        <div class="card">
+          <span class="tag tag-1">Tasks</span>
+          <h2>Processes</h2>
+          <p>Running programs and managing concurrent tasks.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-2">Storage</span>
+          <h2>Memory</h2>
+          <p>Allocating RAM and memory space to active programs.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-3">Data</span>
+          <h2>Files</h2>
+          <p>Organizing, saving, and managing raw data.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-4">Hardware</span>
+          <h2>Devices</h2>
+          <p>Communicating directly with physical hardware and peripherals.</p>
+        </div>
+        <div class="card" style="grid-column: 1 / -1;">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">Interaction</span>
+          <h2>User Interface</h2>
+          <p>Allowing users to visually or textually interact with the computer (e.g., Windows, macOS, Linux, Android, iOS).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: SUMMARY -->
+    <section id="summary">
+      <div class="callout string">
+        <span class="tag">&gt;&gt; KEY IDEA</span>
+        <p>System software manages the computer, while application software helps users perform tasks. The operating system connects the two by managing hardware resources and providing a platform for applications to run.</p>
+      </div>
+    </section>
+
+    <!-- PAGE ROUTING NAVIGATION -->
+    <section class="cta" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center;">
+      
+      <div class="route-buttons" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-top: 30px;">
+        <a class="prev-btn" href="hardsubtopic03.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Previous: Memory & Storage
+        </a>
+
+        <a class="next-btn" href="hardsubtopic05.html">
+          Next: Embedded Systems
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </section>
+
+   <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script> 
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

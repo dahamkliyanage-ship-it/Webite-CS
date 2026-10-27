@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Engineering - First Semester</title>
+    
+    <!-- Embedded CSS directly inside HTML -->
+    <style>
+        /* Base Theme Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* Dark theme background */
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Top Bar & Heading */
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* Horizontal Navigation Menu */
+        .top-nav {
+            background-color: #1e293b;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .top-nav li {
+            display: inline;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav a:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Main Content Flexbox Layout */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        /* Centered Section Title Style */
+        .section-title {
+            text-align: center;
+            font-size: 1.8em;
+            color: #38bdf8;
+            margin: 50px 0 25px 0;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 2px;
+            background-color: rgba(56, 189, 248, 0.4);
+            margin: 10px auto 0 auto;
+        }
+
+        .module-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* Topic Cards */
+        .topic-card {
+            flex: 1 1 300px; 
+            max-width: 350px;
+            box-sizing: border-box;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+            z-index: 1;
+        }
+
+        .topic-card p {
+            margin: 0;
+            font-size: 0.95em;
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        /* Color Variations for Cards */
+        .blue-box { background-color: rgba(56, 189, 248, 0.1); border-left: 4px solid #38bdf8; color: #e2e8f0; }
+        .blue-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2); border-color: #7dd3fc; }
+        .blue-box h2 { color: #38bdf8; }
+
+        .green-box { background-color: rgba(74, 222, 128, 0.1); border-left: 4px solid #4ade80; color: #e2e8f0; }
+        .green-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2); border-color: #86efac; }
+        .green-box h2 { color: #4ade80; }
+
+        .yellow-box { background-color: rgba(250, 204, 21, 0.1); border-left: 4px solid #facc15; color: #e2e8f0; }
+        .yellow-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(250, 204, 21, 0.2); border-color: #fde047; }
+        .yellow-box h2 { color: #facc15; }
+
+        .purple-box { background-color: rgba(192, 132, 252, 0.1); border-left: 4px solid #c084fc; color: #e2e8f0; }
+        .purple-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(192, 132, 252, 0.2); border-color: #d8b4fe; }
+        .purple-box h2 { color: #c084fc; }
+
+        .red-box { background-color: rgba(244, 63, 94, 0.1); border-left: 4px solid #f43f5e; color: #e2e8f0; }
+        .red-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(244, 63, 94, 0.2); border-color: #fb7185; }
+        .red-box h2 { color: #f43f5e; }
+
+        .orange-box { background-color: rgba(251, 146, 60, 0.1); border-left: 4px solid #fb923c; color: #e2e8f0; }
+        .orange-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(251, 146, 60, 0.2); border-color: #fdba74; }
+        .orange-box h2 { color: #fb923c; }
+
+        .cyan-box { background-color: rgba(45, 212, 191, 0.1); border-left: 4px solid #2dd4bf; color: #e2e8f0; }
+        .cyan-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(45, 212, 191, 0.2); border-color: #5eead4; }
+        .cyan-box h2 { color: #2dd4bf; }
+
+        .indigo-box { background-color: rgba(129, 140, 248, 0.1); border-left: 4px solid #818cf8; color: #e2e8f0; }
+        .indigo-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(129, 140, 248, 0.2); border-color: #a5b4fc; }
+        .indigo-box h2 { color: #818cf8; }
+
+        @media (max-width: 600px) {
+            .top-nav ul { flex-direction: column; gap: 15px; }
+            .top-bar h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Faculty of Engineering - First Semester</h1>
+    </header>
+
+    <nav class="top-nav">
+        <ul>
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="module-grid">
+            
+            <!-- Module 1: Mathematics -->
+            <a href="Mathematics page.html" class="topic-card blue-box">
+                <h2>MA1014-Mathematics</h2>
+                <p>Linear algebra, calculus, ordinary differential equations, and real analysis.</p>
+                <div class="progress-status" id="status-main-mathematics" style="margin-top: 15px; width: 100%;"></div>
+            </a>
+
+            <!-- Module 2: Programming -->
+            <a href="#" class="topic-card green-box">
+                <h2>CS1033-Programming Fundamentals</h2>
+                <p>Programming logic, Python fundamentals, and algorithm development.</p>
+                <div class="progress-status" id="status-main-programming" style="margin-top: 15px; width: 100%;"></div>
+            </a>
+
+            <!-- Module 3: Materials -->
+            <a href="material.html" class="topic-card yellow-box">
+                <h2>MT1023-Properties of Materials</h2>
+                <p>Material science, structural properties, and physical principles in engineering.</p>
+                <div class="progress-status" id="status-main-materials" style="margin-top: 15px; width: 100%;"></div>
+            </a>
+
+            <!-- Module 4: Electrical -->
+            <a href="MAIN PAGE ELEC.html" class="topic-card purple-box">
+                <h2>EE1040-Electrical Fundamentals</h2>
+                <p>Circuit analysis, RLC circuits, nodal analysis, and electrical principles.</p>
+                <div class="progress-status" id="status-main-electrical" style="margin-top: 15px; width: 100%;"></div>
+            </a>
+
+            <!-- Module 5: Fluid Mechanics -->
+            <a href="MAIN PAGE.html" class="topic-card red-box">
+                <h2>CE1023-Fluid Mechanics</h2>
+                <p>Fluid statics, dynamics, pressure distribution, and flow analysis.</p>
+                <div class="progress-status" id="status-main-fluids" style="margin-top: 15px; width: 100%;"></div>
+            </a>
+
+            <!-- Module 6: Mechanics -->
+            <a href="MEchanics main.html" class="topic-card orange-box">
+                <h2>ME1033-Mechanics</h2>
+                <p>Statics, dynamics, structural mechanics, beam deflection, and moments of inertia.</p>
+                <div class="progress-status" id="status-main-mechanics" style="margin-top: 15px; width: 100%;"></div>
+            </a>
+
+        </div>
+
+        <h2 class="section-title">Academic & Performance Tools</h2>
+        
+        <div class="module-grid">
+            <a href="target cal.html" class="topic-card cyan-box">
+                <h2>Target Calculator</h2>
+                <p>Calculate required marks and grades to achieve your target academic goals.</p>
+            </a>
+            <a href="gpa cal.html" class="topic-card indigo-box">
+                <h2>GPA Calculator</h2>
+                <p>Track and calculate your semester and cumulative Grade Point Average effortlessly.</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Firebase Connection & Progress Verification Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // All subjects and their respective sub-module IDs with clear, descriptive names
+        const allSubjects = [
+            {
+                id: "mathematics",
+                elementId: "status-main-mathematics",
+                subModules: [
+                    "vectors-line",
+                    "vectors-planesangle",
+                    "vectors-angle",
+                    "vectors-crossproduct",
+                    "vectors-dotproduct",
+                    "vectors-3space",
+                    "vectors",
+                    "vectors-plane",
+                    "vectors-properties",
+                    "vectors-scalartriple",
+                    "vectors-planedistance",
+                    "vectors-skewlines",
+                    "vectors-vectortriple",
+                    "matrices-inverse",
+                    "matrices-determinant",
+                    "matrices-special",
+                    "matrices-eigenvalues",
+                    "matrices-elementary",
+                    "matrices-intro",
+                    "matrices-diagonalization",
+                    "matrices-norms",
+                    "matrices-operations",
+                    "matrices-orthogonal",
+                    "matrices-properties",
+                    "matrices-rank",
+                    "matrices-homogeneous",
+                    "matrices-nonhomogeneous",
+                    "matrices-linearequations",
+                    "ode-firstorder",
+                    "ode-basic",
+                    "ode-bernoulli",
+                    "ode-linear",
+                    "ode-reduction",
+                    "ode-secondorder",
+                    "ode-wronskian",
+                    "riemann-beta",
+                    "riemann-definition",
+                    "riemann-ftc",
+                    "riemann-gamma",
+                    "riemann-improper",
+                    "riemann-ivt",
+                    "riemann-intro",
+                    "riemann-properties",
+                    "riemann-relation",
+                    "riemann-cauchy",
+                    "real-analysis-sequences",
+                    "real-analysis-logic",
+                    "real-analysis-relations",
+                    "real-analysis-settheory",
+                    "real-analysis-axioms"
+                ]
+            },
+            {
+                id: "programming",
+                elementId: "status-main-programming",
+                subModules: ["programming-module-1"] // Add actual programming module IDs here later
+            },
+            {
+                id: "materials",
+                elementId: "status-main-materials",
+                subModules: ["materials-module-1"] // Add actual materials module IDs here later
+            },
+            {
+                id: "electrical",
+                elementId: "status-main-electrical",
+                subModules: ["electrical-module-1"] // Add actual electrical module IDs here later
+            },
+            {
+                id: "fluids",
+                elementId: "status-main-fluids",
+                subModules: ["fluids-module-1"] // Add actual fluid mechanics module IDs here later
+            },
+            {
+                id: "mechanics",
+                elementId: "status-main-mechanics",
+                subModules: ["mechanics-module-1"] // Add actual mechanics module IDs here later
+            }
+        ];
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userId = user.uid;
+                
+                for (let subject of allSubjects) {
+                    const statusEl = document.getElementById(subject.elementId);
+                    if (!statusEl) continue;
+
+                    try {
+                        let completedCount = 0;
+                        const totalModules = subject.subModules.length;
+
+                        for (let subModId of subject.subModules) {
+                            const docRef = doc(db, "users", userId, "progress", subModId);
+                            const docSnap = await getDoc(docRef);
+
+                            if (docSnap.exists() && docSnap.data().completed) {
+                                completedCount++;
+                            }
+                        }
+
+                        let percentage = 0;
+                        if (totalModules > 0) {
+                            percentage = Math.round((completedCount / totalModules) * 100);
+                        }
+
+                        statusEl.innerHTML = `
+                            <div style="width: 100%; background-color: #1e293b; border-radius: 8px; overflow: hidden; height: 10px; margin-top: 10px; border: 1px solid #334155;">
+                                <div style="width: ${percentage}%; background-color: #4ade80; height: 100%; transition: width 0.5s ease;"></div>
+                            </div>
+                            <div style="color: #4ade80; font-size: 13px; margin-top: 5px; text-align: center;">Overall Progress: ${percentage}%</div>
+                        `;
+
+                    } catch (error) {
+                        statusEl.textContent = "Status: Not Available";
+                        statusEl.style.color = "#f43f5e";
+                    }
+                }
+            } else {
+                for (let subject of allSubjects) {
+                    const statusEl = document.getElementById(subject.elementId);
+                    if (statusEl) {
+                        statusEl.innerHTML = `<div style="color: #94a3b8; font-size: 14px; margin-top: 15px;">🔒 Login to view progress</div>`;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

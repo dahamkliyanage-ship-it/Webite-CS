@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-card {
+            background: #1e293b;
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid #334155;
+        }
+
+        .login-card h2 {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #38bdf8;
+        }
+
+        .login-card p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .google-btn {
+            background-color: #ffffff;
+            color: #1e293b;
+            border: none;
+            width: 100%;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .google-btn:hover {
+            background-color: #f1f5f9;
+            transform: translateY(-1px);
+        }
+
+        .google-btn i {
+            color: #db4437;
+            font-size: 18px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #334155;
+        }
+
+        .divider::before {
+            margin-right: 10px;
+        }
+
+        .divider::after {
+            margin-left: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 14px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #f8fafc;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: #38bdf8;
+        }
+
+        .action-btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            width: 100%;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 5px;
+        }
+
+        .action-btn:hover {
+            background-color: #0ea5e9;
+            transform: translateY(-1px);
+        }
+
+        .switch-text {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .switch-text a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .switch-text a:hover {
+            text-decoration: underline;
+        }
+
+        #user-info {
+            display: none;
+            text-align: center;
+        }
+
+        #user-info img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 2px solid #38bdf8;
+        }
+
+        #user-info h3 {
+            margin-bottom: 5px;
+        }
+
+        #user-info p {
+            margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <!-- Before Login Section -->
+        <div id="login-section">
+            <h2 id="form-title">Welcome Back</h2>
+            <p id="form-subtitle">Sign in to continue your Engineering progress</p>
+
+            <!-- Google Login Button -->
+            <button id="google-login-btn" class="google-btn">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+
+            <div class="divider">OR WITH EMAIL</div>
+
+            <!-- Email & Password Form -->
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+
+            <button id="email-action-btn" class="action-btn">Sign In</button>
+
+            <!-- Switch between Sign In and Sign Up -->
+            <div class="switch-text">
+                <span id="switch-msg">Don't have an account?</span> 
+                <a id="toggle-mode-btn">Register</a>
+            </div>
+        </div>
+
+        <!-- After Login Section (Hidden by default) -->
+        <div id="user-info">
+            <img id="user-img" src="https://via.placeholder.com/80" alt="Profile Picture">
+            <h3 id="user-name"></h3>
+            <p id="user-email"></p>
+            <button id="logout-btn" class="logout-btn">Sign Out</button>
+        </div>
+    </div>
+
+    <!-- Firebase Script Connection -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

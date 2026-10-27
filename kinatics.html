@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D Kinetics Summary - Engineering Mechanics</title>
+  <link rel="stylesheet" href="updated.css">
+  <link rel="stylesheet" href="chatbot_style.css">
+  <meta name="bot-context" content="Topic: Engineering Mechanics : ME 1033 2D Kinetics (Particles & Rigid Bodies). Focus on equations of motion for particles and rigid bodies in two-dimensional motion, including Newton's second law in vector, Cartesian, and plane-polar coordinates. Cover particle kinetics, radial and transverse acceleration, centripetal and Coriolis terms, and applying force balances to practical problems. Explain D'Alembert's principle and dynamic equilibrium by introducing the inertia force -m·a and inertia moment -IG·α, allowing dynamic problems to be treated using static equilibrium equations. Cover kinetics of rigid bodies, including translational motion of the mass centre, rotational motion about the mass centre or an arbitrary point, mass moment of inertia, radius of gyration, and total kinetic energy. Explain interconnected rigid-body systems, cancellation of internal hinge or pin reactions when analyzing the complete system, resultant force and moment equations, and the use of kinematic constraints with dynamic equilibrium. Also cover the centre of percussion (COP), including its definition, distance from a pivot, q = OG + kG²/OG, the special result q = 2L/3 for a uniform thin rod pivoted at one end, and its practical applications in reducing impulsive reaction, vibration, and shock.">
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <nav>
+    <a href="mechanics_home.html">← Back to Mechanics Hub</a>
+    <a href="#particle-kinetics">Particle Kinetics</a>
+    <a href="#dalembert-principle">D'Alembert's Principle</a>
+    <a href="#rigid-body-kinetics">Rigid Body Kinetics</a>
+    <a href="#interconnected-bodies">Interconnected Systems</a>
+    <a href="#centre-of-percussion">Centre of Percussion</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>ME 1033: 2D Kinetics (Particles &amp; Rigid Bodies)</h1>
+      <p>Equations of Motion, D'Alembert's Dynamic Equilibrium, System Interconnections &amp; Centre of Percussion</p>
+    </header>
+
+    <!-- 1. Particle Kinetics (Newton's 2nd Law) -->
+    <section id="particle-kinetics">
+      <h2>1. Particle Kinetics (Newton's Second Law)</h2>
+      <p>Relates unbalanced resultant forces to linear acceleration measured from an inertial frame of reference.</p>
+
+      <!-- Particle Kinetics Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1ROTQMX4jAbwYgpkvJKUxwOxSL2cMg36U" alt="Particle Kinetics Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Vector Form: &Sigma;F = m &middot; a<br><br>
+        <strong>Cartesian Coordinates:</strong><br>
+        &Sigma;F<sub>x</sub> = m &middot; a<sub>x</sub> = m &middot; x&#776;<br>
+        &Sigma;F<sub>y</sub> = m &middot; a<sub>y</sub> = m &middot; y&#776;<br><br>
+        <strong>Plane-Polar Coordinates:</strong><br>
+        &Sigma;F<sub>r</sub> = m &middot; a<sub>r</sub> = m &middot; (r&#776; - r &middot; &theta;&#775;²) &nbsp;[Centripetal force inward]<br>
+        &Sigma;F<sub>&theta;</sub> = m &middot; a<sub>&theta;</sub> = m &middot; (r &middot; &theta;&#776; + 2 &middot; r&#775; &middot; &theta;&#775;) &nbsp;[Includes Coriolis effect]
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: IC Engine Piston Force (Lecture 5 Example 1)</strong>
+        <p>A piston (diameter 100 mm, mass 1.6 kg) accelerates upwards at 2860 m/s² with cylinder gas pressure 1.1 N/mm², normal reaction N = 2000 N, and friction &mu; = 0.17. What is the total vertical force required from the connecting rod?</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>1. Gas force (downward): P = p &middot; A = 1.1 &times; &pi;/4 &times; (100)² = 8639.4 N.</p>
+          <p>2. Friction (downward): F<sub>f</sub> = &mu; &middot; N = 0.17 &times; 2000 = 340 N.</p>
+          <p>3. Weight (downward): W = mg = 1.6 &times; 9.81 &approx; 15.7 N.</p>
+          <p>4. Dynamic equilibrium (&uarr;+): F<sub>rod,y</sub> - P - F<sub>f</sub> - W = m &middot; a.</p>
+          <p>F<sub>rod,y</sub> = 8639.4 + 340 + 15.7 + (1.6 &times; 2860) = 8995.1 + 4576 = <strong>13571 N</strong>.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 2. D'Alembert's Principle -->
+    <section id="dalembert-principle">
+      <h2>2. D'Alembert's Principle &amp; Dynamic Equilibrium</h2>
+      <p>Converts an acceleration problem into an equivalent static equilibrium system by introducing an imaginary reversed effective force (inertia force).</p>
+
+      <div class="formula-box">
+        &Sigma;F - m &middot; a = 0 &nbsp;&rarr;&nbsp; Dynamic Equilibrium Form<br>
+        Inertia Force Vector: F<sub>inertia</sub> = -m &middot; a<br>
+        Inertia Moment (Couple): M<sub>inertia</sub> = -I<sub>G</sub> &middot; &alpha;
+      </div>
+
+      <ul>
+        <li><strong>Static Analogy:</strong> By treating <code>-m&middot;a</code> as an applied external force, standard statics equations (&Sigma;F = 0, &Sigma;M = 0) can be directly applied.</li>
+        <li><strong>System of Particles:</strong> &Sigma;F<sub>ext</sub> = m<sub>total</sub> &middot; a<sub>G</sub>, where G is the center of mass of the combined cluster.</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/215kHB8Fp20" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Planar Rigid Body Kinetics -->
+    <section id="rigid-body-kinetics">
+      <h2>3. Kinetics of a Rigid Body</h2>
+      <p>Because rigid bodies possess physical dimensions, non-concurrent forces trigger simultaneous translation and rotation.</p>
+
+      <!-- Rigid Body Kinetics Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1Gwyo274ssVIznx-a1_hKWDBDuZdoTh7R" alt="Rigid Body Kinetics Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Translational Equation: &Sigma;F = m &middot; a<sub>G</sub><br>
+        Rotational Equation about Mass Centre G: &Sigma;M<sub>G</sub> = I<sub>G</sub> &middot; &alpha;<br>
+        Rotational Equation about Arbitrary Point O: &Sigma;M<sub>O</sub> = I<sub>G</sub> &middot; &alpha; + (m &middot; a<sub>G</sub>) &middot; r<sub>OG</sub><br>
+        Mass Moment of Inertia: I<sub>G</sub> = m &middot; k<sub>G</sub>² &nbsp;[k<sub>G</sub> = radius of gyration]<br>
+        Total Kinetic Energy: T = (1/2) &middot; m &middot; v<sub>G</sub>² + (1/2) &middot; I<sub>G</sub> &middot; &omega;²
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Unbalanced Wheel (Lecture 5 Example 3)</strong>
+        <p>A 30 kg wheel (radius R = 0.25 m, k<sub>G</sub> = 0.15 m) has its center of mass G located 0.1 m horizontally from its geometric center O. If released from rest with no slipping, what is its initial angular acceleration &alpha;?</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>1. Contact point I is the instantaneous centre (no slip, &omega; = 0).</p>
+          <p>2. Mass moment of inertia about I: I<sub>I</sub> = m &middot; k<sub>G</sub>² + m &middot; (GI)² = 30(0.15² + [0.1² + 0.25²]) = 30(0.0225 + 0.0725) = 2.85 kg&middot;m².</p>
+          <p>3. Torque about I: &Sigma;M<sub>I</sub> = mg &middot; (0.1) = 30 &times; 9.81 &times; 0.1 = 29.43 N&middot;m.</p>
+          <p>4. &Sigma;M<sub>I</sub> = I<sub>I</sub> &middot; &alpha; &rarr; 29.43 = 2.85 &middot; &alpha; &rarr; <strong>&alpha; = 10.3 rad/s²</strong>.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 4. Systems of Interconnected Bodies -->
+    <section id="interconnected-bodies">
+      <h2>4. Systems of Interconnected Rigid Bodies</h2>
+      <p>For assemblies connected by hinges or pins, internal reactions cancel out when analyzing the complete system Free-Body Diagram alongside its Kinetic Diagram.</p>
+
+      <!-- Interconnected System Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1CT9g4wL1AEM-ARN5M2gQyaV08ai6G_Ep" alt="Connected Bodies System FBD and Kinetic Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Resultant Force Equivalence: &Sigma;F = &Sigma;(m<sub>i</sub> &middot; a<sub>Gi</sub>)<br>
+        Moment Equivalence about Pivot P: &Sigma;M<sub>P</sub> = &Sigma;(I<sub>i</sub> &middot; &alpha;<sub>i</sub>) + &Sigma;(m<sub>i</sub> &middot; a<sub>Gi</sub> &middot; d<sub>i</sub>)
+      </div>
+
+      <ul>
+        <li>Eliminates tedious joint reaction calculations at connecting hinge pins.</li>
+        <li>Combines kinematic constraints (from velocity/acceleration polygons) directly into dynamic force equilibrium.</li>
+      </ul>
+    </section>
+
+    <!-- 5. Centre of Percussion (COP) -->
+    <section id="centre-of-percussion">
+      <h2>5. Centre of Percussion (Sweet Spot)</h2>
+      <p>The Centre of Percussion (COP) is a point on a pinned/pivoted rigid body where a transverse impact produces <strong>zero impulsive reaction force</strong> at the supporting pivot.</p>
+
+      <!-- Centre of Percussion Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/19sHb8gOQXO6pBWpJrR1C5va7y2kbVGV6" alt="Centre of Percussion Mechanism Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Distance from Pivot O to COP (q): q = OG + L<sub>G</sub><br>
+        Distance below Mass Centre (L<sub>G</sub>): L<sub>G</sub> = k<sub>G</sub>² / OG<br><br>
+        <strong>For a Uniform Thin Rod of Length L pivoted at one end:</strong><br>
+        OG = L / 2<br>
+        k<sub>G</sub>² = L² / 12<br>
+        L<sub>G</sub> = (L² / 12) / (L / 2) = L / 6<br>
+        Total Distance from Pivot: q = L/2 + L/6 = <strong>(2/3) &middot; L</strong>
+      </div>
+
+      <ul>
+        <li><strong>Dynamic Cancellation:</strong> Linear inertia force (m &middot; a<sub>G</sub>) and rotational inertia reaction (I<sub>G</sub> &middot; &alpha;) completely balance each other at the pivot point.</li>
+        <li><strong>Engineering &amp; Sports Applications:</strong> Striking faces of hammers, mallets, swords, cricket bats, baseball bats, and tennis racquets minimize vibration and wrist shock.</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/YL6tCXuoXnM" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Centre of Percussion</strong>
+        <p>A uniform wooden meter ruler (length L = 1.0 m) is suspended from a pin at its extreme upper end. At what distance from the pin should it be struck so that no reaction force is transmitted to the support pin?</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>For a uniform bar pivoted at an end: q = (2/3) &middot; L = (2/3) &times; 1.0 m = <strong>0.667 m (66.7 cm)</strong> from the pivot.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <p>Engineering Mechanics | 2D Kinetics Summary</p>
+    </footer>
+  </div>
+  <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbot-mech.js"></script>
+
+</body>
+</html>

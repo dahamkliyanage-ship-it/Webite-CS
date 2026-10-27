@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Hydrostatic Pressure</title>
+    <link rel="stylesheet" href="fluid-style.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Fluid statics, Pascal's Law, absolute vs gauge pressure, pressure head, and pressure measurement using barometers, piezometers, manometers, and Bourdon gauges.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="fluid-container">
+        
+        <header class="fluid-header">
+            <div class="header-inner">
+                <span class="fluid-tag">CE1023 - Fluid Mechanics</span>
+                <h1>2.0 Hydrostatic Pressure</h1>
+                <p>Exploration of fluid statics, understanding pressure at a point via Pascal's Law, absolute versus gauge pressure, and the principles of pressure measurement using manometers and mechanical gauges.</p>
+            </div>
+        </header>
+
+        <section class="fluid-section">
+            <h2>2.1 Static Fluid Pressure (Hydrostatic Pressure)</h2>
+            <p>Hydrostatic pressure is defined as the pressure exerted by a fluid when it is in a state of equilibrium (at rest). In this state, there are no shear stresses present within the fluid; the only forces acting on fluid surfaces are normal forces.</p>
+            
+            <div class="highlight-fluid">
+                <p><strong>Pressure ($P$) = Normal Force ($F$) / Area ($A$)</strong></p>
+                <p>$$P = \lim_{\delta A \to 0} \frac{\delta F}{\delta A}$$</p>
+            </div>
+            
+            <p><strong>Key Attributes:</strong></p>
+            <ul class="fluid-list">
+                <li><strong>Dimensions:</strong> \([P] = [\delta F] / [\delta A] = [MLT^{-2}] / [L^2] = [ML^{-1}T^{-2}]\)</li>
+                <li><strong>Units:</strong> N/m<sup>2</sup> = Pa (Pascal). Also measured in Bar (1 Bar = 10<sup>5</sup> N/m<sup>2</sup>).</li>
+                <li><strong>Nature:</strong> Pressure is a scalar quantity. The force vector \(d\vec{F}\) acting on a differential area \(d\vec{A}\) is given by \(d\vec{F} = P \cdot d\vec{A}\).</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section">
+            <h2>2.2 Characteristics of Hydrostatic Pressure</h2>
+            
+            <h3>1. Pascal's Law</h3>
+            <p><strong>Pascal's Law states:</strong> <em>The hydrostatic pressure at a point in a fluid at rest is the same in all directions.</em></p>
+            <p>$$P_x = P_y = P_z = P_\theta = P$$</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Proof of Pascal's Law (Wedge Element)</h4>
+                <svg viewBox="0 0 500 280" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                        <marker id="arrow-red-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                        </marker>
+                    </defs>
+
+                    <!-- Coordinate System -->
+                    <line x1="50" y1="200" x2="90" y2="200" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <line x1="50" y1="200" x2="50" y2="160" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <line x1="50" y1="200" x2="25" y2="225" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <text x="100" y="205" fill="#f1f5f9" font-size="14">x</text>
+                    <text x="45" y="150" fill="#f1f5f9" font-size="14">z</text>
+                    <text x="10" y="235" fill="#f1f5f9" font-size="14">y</text>
+
+                    <!-- Fluid Wedge Element -->
+                    <!-- Back face -->
+                    <polygon points="250,80 250,180 380,180" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+                    <line x1="250" y1="80" x2="380" y2="180" stroke="#475569" stroke-width="1" stroke-dasharray="4,4" />
+                    
+                    <!-- Front face -->
+                    <polygon points="200,100 200,200 330,200" fill="rgba(20, 184, 166, 0.2)" stroke="#14b8a6" stroke-width="2"/>
+                    <line x1="200" y1="100" x2="330" y2="200" stroke="#14b8a6" stroke-width="2" />
+                    
+                    <!-- Connecting lines -->
+                    <line x1="200" y1="100" x2="250" y2="80" stroke="#14b8a6" stroke-width="2" />
+                    <line x1="200" y1="200" x2="250" y2="180" stroke="#14b8a6" stroke-width="2" />
+                    <line x1="330" y1="200" x2="380" y2="180" stroke="#14b8a6" stroke-width="2" />
+                    
+                    <!-- Labels for edges -->
+                    <text x="210" y="155" fill="#3b82f6" font-size="14">Δz</text>
+                    <text x="270" y="195" fill="#3b82f6" font-size="14">Δx</text>
+                    <text x="355" y="205" fill="#3b82f6" font-size="14">Δy</text>
+                    <text x="280" y="165" fill="#3b82f6" font-size="14">Δs</text>
+
+                    <!-- Pressure Forces -->
+                    <line x1="100" y1="150" x2="180" y2="150" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red-end)" />
+                    <text x="110" y="140" fill="#ef4444" font-weight="bold" font-size="14">P<tspan baseline-shift="sub" font-size="10">x</tspan></text>
+
+                    <line x1="230" y1="260" x2="230" y2="205" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red-end)" />
+                    <text x="240" y="250" fill="#ef4444" font-weight="bold" font-size="14">P<tspan baseline-shift="sub" font-size="10">z</tspan></text>
+
+                    <line x1="360" y1="70" x2="295" y2="135" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red-end)" />
+                    <text x="365" y="65" fill="#ef4444" font-weight="bold" font-size="14">P<tspan baseline-shift="sub" font-size="10">θ</tspan></text>
+                    
+                    <!-- Angle theta -->
+                    <path d="M 290 200 A 40 40 0 0 0 310 185" fill="none" stroke="#f1f5f9" stroke-width="1.5" />
+                    <text x="285" y="193" fill="#f1f5f9" font-size="14">θ</text>
+                </svg>
+            </div>
+            
+            <p><strong>Proof Strategy:</strong> Consider a small wedge-shaped fluid element containing point A in equilibrium.</p>
+            <ul>
+                <li>Forces in x-direction: \(P_x (\Delta y \cdot \Delta z) - P_\theta (\Delta y \cdot \Delta s) \sin\theta = 0\). Since \(\sin\theta = \frac{\Delta z}{\Delta s}\), this simplifies to \(P_x = P_\theta\).</li>
+                <li>Forces in z-direction: \(P_z (\Delta x \cdot \Delta y) - P_\theta (\Delta y \cdot \Delta s) \cos\theta - \frac{1}{2}\Delta x \cdot \Delta y \cdot \Delta z \cdot \rho g = 0\). As the element shrinks to a point (\(\Delta x, \Delta y, \Delta z \to 0\)), the weight term approaches zero. Since \(\cos\theta = \frac{\Delta x}{\Delta s}\), this simplifies to \(P_z = P_\theta\).</li>
+            </ul>
+            <p>Therefore, \(P_x = P_z = P_\theta\). Since the angle \(\theta\) is arbitrary, pressure is the same from all directions.</p>
+            <p><em>Note: For moving fluids where shear stresses exist, the average normal pressure is considered: \(P = \frac{P_x + P_y + P_z}{3}\).</em></p>
+
+            <h3>2. Variation of Hydrostatic Pressure (Hydrostatic Principle)</h3>
+            <p>Let \(P\) be the pressure at a point \(A = (x, y, z)\) in the fluid. Using partial differentiation:</p>
+            <div class="formula-box">
+                <p>$$dp = \frac{\partial P}{\partial x}dx + \frac{\partial P}{\partial y}dy + \frac{\partial P}{\partial z}dz$$</p>
+            </div>
+            <p>For an incompressible fluid in equilibrium, it can be shown that:</p>
+            <ul class="fluid-list">
+                <li>\(\frac{\partial P}{\partial x} = 0\) (No pressure variation horizontally).</li>
+                <li>\(\frac{\partial P}{\partial z} = -\rho g\) (Pressure varies vertically).</li>
+            </ul>
+            <p>Integrating \(dp = -\rho g \cdot dz\) gives \(P = -\rho g z + C\).</p>
+            
+            <div class="highlight-fluid">
+                <p><strong>Piezometric Pressure:</strong> Rearranging gives \(P + \rho g z = C\). The term \(P + \rho g z\) is known as the <em>Piezometric Pressure</em> ($P^*$). In a homogeneous, incompressible fluid at rest, the Piezometric pressure is constant.</p>
+            </div>
+
+            <h3>3. Pressure Difference Between Two Points</h3>
+            <p>Considering two points in a fluid: Point 1 at depth \(z_1\) and Point 2 at depth \(z_2\).</p>
+            <p>\(P_2 - P_1 = -\rho g (z_2 - z_1)\)</p>
+            <p>If we define \(h\) as the depth measured downwards (\(h = z_1 - z_2\)), the equation becomes:</p>
+            <div class="formula-box">
+                <p>$$P_2 = P_1 + \rho g h$$</p>
+            </div>
+            <p><strong>Conclusions:</strong></p>
+            <ol class="fluid-list">
+                <li>Hydrostatic pressure varies linearly with depth.</li>
+                <li>When points are on the same horizontal plane (\(h=0\)), \(P_1 = P_2\). Surfaces of constant pressure are called <em>Isobars</em>, and they are horizontal.</li>
+            </ol>
+        </section>
+
+        <section class="fluid-section">
+            <h2>2.3 Absolute and Gauge Pressure</h2>
+            
+            <p><strong>Atmospheric Pressure ($P_{atm}$):</strong> The pressure exerted by atmospheric air. Standard atmospheric pressure at sea level is:</p>
+            <ul class="fluid-list">
+                <li>1.033 kgf/cm<sup>2</sup> (1 kgf &approx; 9.81 N)</li>
+                <li>1.013 &times; 10<sup>5</sup> N/m<sup>2</sup></li>
+                <li>1.013 Bars (1 Bar = 10<sup>5</sup> N/m<sup>2</sup>)</li>
+                <li>1 Atmosphere (atm)</li>
+                <li>14.7 psi</li>
+            </ul>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Pressure Measurement Scales</h4>
+                <svg viewBox="0 0 650 250" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-yellow-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                        </marker>
+                        <marker id="arrow-red-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-teal-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#14b8a6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Perfect Vacuum Line (Absolute Zero) -->
+                    <line x1="50" y1="220" x2="450" y2="220" stroke="#f1f5f9" stroke-width="2" stroke-dasharray="5,5" />
+                    <text x="460" y="225" fill="#f1f5f9" font-size="14">Perfect Vacuum (P=0)</text>
+
+                    <!-- Atmospheric Pressure Line -->
+                    <line x1="50" y1="120" x2="450" y2="120" stroke="#3b82f6" stroke-width="2" />
+                    <text x="460" y="125" fill="#3b82f6" font-size="14">Atmospheric Pressure (P<tspan baseline-shift="sub" font-size="10">atm</tspan>)</text>
+                    
+                    <!-- High Fluid Pressure Line -->
+                    <line x1="50" y1="40" x2="450" y2="40" stroke="#ef4444" stroke-width="2" />
+                    <text x="460" y="45" fill="#ef4444" font-size="14">Fluid Pressure P<tspan baseline-shift="sub" font-size="10">1</tspan></text>
+
+                    <!-- Low Fluid Pressure Line (Vacuum) -->
+                    <line x1="50" y1="170" x2="450" y2="170" stroke="#14b8a6" stroke-width="2" />
+                    <text x="460" y="175" fill="#14b8a6" font-size="14">Fluid Pressure P<tspan baseline-shift="sub" font-size="10">2</tspan></text>
+
+                    <!-- Absolute Pressure Arrows -->
+                    <line x1="120" y1="220" x2="120" y2="40" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-yellow-end)" />
+                    <text x="-135" y="110" fill="#facc15" font-size="13" transform="rotate(-90)">Absolute Pressure P<tspan baseline-shift="sub" font-size="9">1</tspan></text>
+
+                    <line x1="170" y1="220" x2="170" y2="170" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-yellow-end)" />
+                    <text x="-215" y="160" fill="#facc15" font-size="13" transform="rotate(-90)">Absolute P<tspan baseline-shift="sub" font-size="9">2</tspan></text>
+
+                    <!-- Gauge Pressure Arrows -->
+                    <line x1="260" y1="120" x2="260" y2="40" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red-end)" />
+                    <text x="270" y="85" fill="#ef4444" font-size="13">Gauge Pressure (+)</text>
+
+                    <line x1="330" y1="120" x2="330" y2="170" stroke="#14b8a6" stroke-width="2" marker-end="url(#arrow-teal-end)" />
+                    <text x="340" y="150" fill="#14b8a6" font-size="13">Vacuum Pressure (- Gauge)</text>
+                </svg>
+            </div>
+
+            <p><strong>Absolute Pressure:</strong> Pressure measured with respect to a perfect vacuum. Always positive.</p>
+            <p><strong>Gauge Pressure:</strong> Pressure measured with respect to atmospheric pressure. It can be positive or negative (vacuum pressures).</p>
+
+            <div class="formula-box">
+                <p>$$Absolute\ Pressure = Atmospheric\ Pressure + Gauge\ Pressure$$</p>
+                <p>$$P_{abs} = P_{atm} + P_{gauge}$$</p>
+            </div>
+
+            <h3>Pressure Head</h3>
+            <p>Pressure Head is the height of liquid volume that will produce the pressure at a point.</p>
+            <div class="formula-box">
+                <p>$$Pressure\ Head\ (h) = \frac{P}{\rho g} = \frac{P}{\gamma}$$</p>
+            </div>
+            <p><em>Example:</em> For an atmospheric pressure of 1.013 &times; 10<sup>5</sup> N/m<sup>2</sup>, the pressure head in terms of water (&rho; = 1000 kg/m<sup>3</sup>) is h = (1.013 &times; 10<sup>5</sup>) / (1000 &times; 9.81) = <strong>10.33 m of water</strong>.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>2.4 Pressure Measurements</h2>
+            <p>Various devices are used to measure fluid pressure.</p>
+            
+            <h3>1. Barometer</h3>
+            <p>Used to measure atmospheric pressure.</p>
+
+            <h3>2. Piezometer</h3>
+            <p>An open-ended vertical tube connected to a vessel/pipe containing a liquid. Height of the liquid column \(h\) gives the pressure head: \(P = \gamma h\).</p>
+            <ul class="fluid-list">
+                <li><strong>Advantages:</strong> Simple, measures small pressure differences.</li>
+                <li><strong>Disadvantages:</strong> For liquids only. Requires long tubes to measure even moderate pressures.</li>
+            </ul>
+
+            <h3>3. Manometer</h3>
+            <p>A U-shaped tube containing a heavy "manometer liquid" (e.g., mercury) connected to a vessel. The displacement $h$ of the manometer liquid column measures the pressure.</p>
+            <p><strong>Applying the Hydrostatic Principle:</strong></p>
+            <p>Equating pressures on the left and right limbs at the lowest fluid interface:</p>
+            <p>$$P_{Left} = P_{Right}$$</p>
+            <p>$$P_A + \rho_{fluid} g y = P_{atm} + \rho_{manometer} g h$$</p>
+            <p>If we want Gauge Pressure at A, we set $P_{atm} = 0$:</p>
+            <p>$$P_{A} = \rho_{manometer} g h - \rho_{fluid} g y$$</p>
+
+            <p><strong>Differential Manometers</strong> are used to measure the pressure difference between two points. Advantage: Measures pressure difference in gases and liquids easily.</p>
+
+            <h3>4. Mechanical Pressure Gauges (e.g., Bourdon Gauge)</h3>
+            <p>Consists of a metal tube of oval cross-section bent to a shape of a 'C'. One end is fixed, and the other is closed and free to move. When internal pressure increases, it straightens, moving a pointer over a calibrated scale.</p>
+            <ul class="fluid-list">
+                <li><strong>Advantages:</strong> Easy to use, wide range of pressures.</li>
+                <li><strong>Disadvantages:</strong> Less accurate, needs regular calibration.</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section video-section">
+            <h2 style="text-align: center; border-bottom: none;">Video Lecture: Hydrostatic Pressure Gradient</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/ZnoHYisObRM" title="Hydrostatic Pressure Gradient Derivation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>Chapter Knowledge Check</h2>
+            <p class="quiz-intro">Test your deep understanding of Hydrostatic Pressure concepts covered above.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. According to Pascal's Law, how does hydrostatic pressure behave at a specific point in a fluid at rest?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) It acts only in the downward vertical direction due to gravity.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) It varies depending on the shape of the container holding the fluid.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) The pressure magnitude is exactly the same from all directions.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) It is equal to the atmospheric pressure minus the gauge pressure.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the definition of "Absolute Pressure"?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) Pressure measured relative to the local atmospheric pressure.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>B) Pressure measured relative to a perfect vacuum, which is always a positive value.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>C) The pressure indicated on a standard mechanical Bourdon gauge.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) The maximum pressure a fluid can withstand before boiling.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. A piezometer is an open vertical tube used to measure pressure. Why is it NOT suitable for measuring the pressure of a gas?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) Gases have too much density, causing the glass tube to shatter.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>B) The surface tension of gases prevents them from rising in the tube.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>C) Because the top of the tube is open to the atmosphere, a gas would simply escape rather than form a measurable column.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) Gases do not exert hydrostatic pressure.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. If you have a gauge pressure reading of -20 kPa (a vacuum pressure), and the local atmospheric pressure is 101 kPa, what is the Absolute Pressure?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) -20 kPa</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) 121 kPa</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>C) 81 kPa</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) 101 kPa</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. The concept of "Piezometric Pressure" ($P^*$) in a homogeneous, incompressible fluid at rest indicates that:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) The pressure changes horizontally but remains constant vertically.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>B) The sum of the static pressure ($P$) and the elevation term ($\rho g z$) is a constant value throughout the fluid.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>C) Pressure is completely independent of the fluid's density.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) The pressure head is equal to zero at all points.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. What is the fundamental mechanism behind a Bourdon Pressure Gauge?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>A) It uses a column of liquid mercury to balance the applied fluid pressure.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>B) It consists of a curved metal tube that attempts to straighten as internal pressure increases, moving a mechanical pointer.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) It measures the electrical resistance change of a wire exposed to the fluid.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) It uses an internal vacuum chamber that collapses under high pressure.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q7">
+                <p class="question-text"><strong>7. If the pressure at a point in a water pipe is 49.05 kN/m<sup>2</sup>, what is the corresponding pressure head? (Assume &rho; = 1000 kg/m<sup>3</sup>, g = 9.81 m/s<sup>2</sup>)</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q7" value="correct"> <span>A) 5 m</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>B) 50 m</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>C) 49 m</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>D) 0.5 m</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q8">
+                <p class="question-text"><strong>8. What is the primary advantage of a Differential Manometer?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>A) It measures the absolute zero vacuum pressure.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>B) It does not require a heavy manometer fluid like mercury.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="correct"> <span>C) It directly measures the pressure difference between two distinct points in a system.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>D) It is the only gauge capable of measuring local atmospheric pressure.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q9">
+                <p class="question-text"><strong>9. In a static, homogeneous fluid, what can be said about surfaces of constant pressure (Isobars)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>A) They align vertically with gravity.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="correct"> <span>B) They are perfectly horizontal.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>C) They form concentric circles around the center of mass.</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>D) They slope downward relative to atmospheric pressure.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q10">
+                <p class="question-text"><strong>10. When establishing the manometer pressure equation for a U-tube configuration, which fundamental principle allows us to equate $P_{Left}$ and $P_{Right}$?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>A) Newton's Third Law of Motion.</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>B) The Ideal Gas Law.</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="correct"> <span>C) Hydrostatic pressure is the same in a horizontal plane within a continuous, homogeneous liquid at rest.</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>D) Atmospheric pressure pushes downward evenly on both sides.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid #14b8a6";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid #ef4444";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

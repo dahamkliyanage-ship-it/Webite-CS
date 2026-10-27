@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Mechanics - 2D Kinematics Summary</title>
+  <link rel="stylesheet" href="updated.css">
+  <link rel="stylesheet" href="chatbot_style.css">
+  <meta name="bot-context" content="Topic: Engineering Mechanics : ME 1033 2D Kinematics (Particles & Rigid Bodies). Focus on the geometric description of two-dimensional motion without considering forces. Cover particle kinematics in plane-polar coordinates, including radial and transverse velocity and acceleration components, centripetal acceleration, and the Coriolis acceleration component. Explain the main categories of rigid-body plane motion: rectilinear translation, curvilinear translation, fixed-axis rotation, and general plane motion. Cover relative velocity and relative acceleration equations for points on rigid bodies, including angular velocity, angular acceleration, radial components, and tangential components. Explain the Instantaneous Centre of Rotation (ICR), its location using perpendiculars to velocity directions, velocity relationships about the ICR, centrodes, and the application of the ICR to rolling wheels. Cover velocity vector diagrams for rigid links, including relative velocity vectors, their perpendicular direction to links, kinematic similarity, and determining velocities of intermediate points or centres of mass. Explain acceleration vector diagrams, including radial and transverse relative acceleration components, acceleration polygons, magnitude and phase angle, and proportional acceleration relationships for intermediate points. Cover mechanism mobility and Grubler's criterion, including degrees of freedom, links, lower and higher pairs, conditions for mechanisms, and mobility states. Also cover Grashof's condition for four-bar mechanisms and the basic operation and speed relationships of epicyclic gear trains, including external and internal gear meshing.">
+
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <nav>
+    <a href="index.html">← Back to Mechanics Hub</a>
+    <a href="#particle-kinematics">Particle Polar</a>
+    <a href="#rigid-body-motion">Rigid Body 2D</a>
+    <a href="#ic-rotation">Instantaneous Centre</a>
+    <a href="#relative-velocity">Velocity Diagrams</a>
+    <a href="#relative-accel">Acceleration Diagrams</a>
+    <a href="#mechanisms-grubler">Mobility &amp; Gears</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>ME 1033: 2D Kinematics (Particles &amp; Rigid Bodies)</h1>
+      <p>Instantaneous Centres, Relative Velocity &amp; Acceleration Diagrams, Mobility</p>
+    </header>
+
+    <!-- 1. Particle Kinematics in Plane-Polar Coordinates -->
+    
+    <section id="particle-kinematics">
+      <h2>1. 2D Particle Kinematics (Plane-Polar Coordinates)</h2>
+      <p>Kinematics describes purely the geometric aspects of motion without reference to forces.</p>
+
+      <!-- Diagram Placeholder: Polar Coordinate Vectors -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/12RJboR6ncPv8I9RrpgBazkXsYM9ilwXQ" alt="Plane-Polar Coordinates Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        <strong>Velocity Components:</strong><br>
+        Radial Velocity: v<sub>r</sub> = dr/dt = r&#775;<br>
+        Transverse Velocity: v<sub>&theta;</sub> = r &middot; (d&theta;/dt) = r &middot; &theta;&#775; &nbsp;[v<sub>&theta;</sub> = &theta;&#775; &times; r]<br>
+        Total Velocity: v = &radic;(v<sub>r</sub>² + v<sub>&theta;</sub>²)<br><br>
+
+        <strong>Acceleration Components:</strong><br>
+        Radial Accel: a<sub>r</sub> = r&#776; - r &middot; &theta;&#775;² &nbsp;[Centripetal: &theta;&#775; &times; (&theta;&#775; &times; r) acts towards centre, hence minus sign]<br>
+        Transverse Accel: a<sub>&theta;</sub> = r &middot; &theta;&#776; + 2 &middot; r&#775; &middot; &theta;&#775; &nbsp;[Coriolis component: 2(&theta;&#775; &times; r&#775;)]<br>
+        Total Accel: a = &radic;(a<sub>r</sub>² + a<sub>&theta;</sub>²)
+      </div>
+
+      <ul>
+        <li><strong>Radial Velocity (r&#775;):</strong> Rate at which the position vector lengthens or shortens along the radial line.</li>
+        <li><strong>Transverse Velocity (r&theta;&#775;):</strong> Tangential velocity perpendicular to the radial arm due to angular motion.</li>
+        <li><strong>Centripetal Component (-r&theta;&#775;²):</strong> Directed inwards toward the origin O.</li>
+        <li><strong>Coriolis Component (2r&#775;&theta;&#775;):</strong> Arises whenever a slider moves with speed r&#775; along an arm that is concurrently rotating with angular speed &theta;&#775;.</li>
+      </ul>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Particle Polar Kinematics</strong>
+        <p>A slider moves outward along a rotating radial arm at a constant sliding speed of 2 m/s. If the arm rotates at a constant angular velocity of 5 rad/s, what is the magnitude of the Coriolis acceleration?</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>Coriolis acceleration a<sub>coriolis</sub> = 2 &middot; &theta;&#775; &middot; r&#775; = 2 &times; 5 &times; 2 = 20 m/s².</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 2. Rigid Body Plane Motion -->
+    <section id="rigid-body-motion">
+      <h2>2. Categories of Rigid-Body Plane Motion</h2>
+      <ul>
+        <li><strong>Rectilinear Translation:</strong> All points trace straight parallel lines; orientation remains fixed (&omega; = 0).</li>
+        <li><strong>Curvilinear Translation:</strong> Points move along congruent curved trajectories without rotating (&omega; = 0).</li>
+        <li><strong>Fixed-Axis Rotation:</strong> Body rotates about an immovable axis; velocity varies linearly with radius (v = r&omega;).</li>
+        <li><strong>General Plane Motion:</strong> Simultaneous combination of translation and rotation (e.g., connecting rod in an engine).</li>
+      </ul>
+
+      <div class="formula-box">
+        Relative Velocity: v<sub>B</sub> = v<sub>A</sub> + v<sub>B/A</sub> = v<sub>A</sub> + (&omega; &times; r<sub>B/A</sub>)<br>
+        Relative Acceleration: a<sub>B</sub> = a<sub>A</sub> + (&alpha; &times; r<sub>B/A</sub>) - &omega;² &middot; r<sub>B/A</sub>
+      </div>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/MiFYsG7kRVQ" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Instantaneous Centre of Rotation (ICR) -->
+    <section id="ic-rotation">
+      <h2>3. Instantaneous Centre of Rotation (ICR)</h2>
+      <p>At any given instant, general planar motion can be modeled as pure rotation about a single point of zero instantaneous velocity (point I).</p>
+
+      <!-- Diagram Placeholder: Locating ICR -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/15-ApESzvlr4rIPHp_9JSGiJMrhiIDwbq" alt="Instantaneous Centre of Rotation Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        v<sub>A</sub> = (AI) &middot; &omega;<br>
+        v<sub>B</sub> = (BI) &middot; &omega;<br>
+        &omega; = v<sub>A</sub> / (AI) = v<sub>B</sub> / (BI)
+      </div>
+
+      <ul>
+        <li><strong>Location Method:</strong> The ICR lies at the intersection of perpendicular lines drawn to the velocity vectors at two distinct points.</li>
+        <li><strong>Centrode:</strong> The complete locus traced by instantaneous centres over time.</li>
+        <li><strong>Pure Rolling Contact:</strong> For a wheel rolling without slipping, the contact point on the track is the ICR (v<sub>contact</sub> = 0, v<sub>centre</sub> = r&omega;, v<sub>top</sub> = 2r&omega;).</li>
+      </ul>
+
+      <div class="quiz-box">
+        <strong>Quick Test: ICR Rolling Wheel</strong>
+        <p>A cylinder of radius 0.2 m rolls without slipping on a fixed horizontal ground. If the centre moves forward at 2 m/s, what is the velocity of the point at the topmost perimeter?</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>1. Ground contact is the ICR: v<sub>centre</sub> = r &middot; &omega; &rarr; &omega; = 2 / 0.2 = 10 rad/s.</p>
+          <p>2. Topmost point distance from ICR is 2r: v<sub>top</sub> = (2r) &middot; &omega; = 2 &times; 2 = 4 m/s.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 4. Velocity Diagrams (Link Mechanisms) -->
+    <section id="relative-velocity">
+      <h2>4. Velocity Vector Diagrams</h2>
+      <p>Constructed progressively across links by plotting relative velocity vectors perpendicular to rigid link segments.</p>
+
+      <!-- Diagram Placeholder: Velocity Polygon -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1ziumShQDKbh1BakdczvU_pxiKQwLEOvY" alt="Relative Velocity Vector Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <ul>
+        <li><strong>Notation:</strong> Vector <code>ab</code> represents the velocity of point B relative to point A (v<sub>B/A</sub>).</li>
+        <li><strong>Magnitude:</strong> |ab| = (AB) &middot; &omega;<sub>AB</sub>, directed strictly perpendicular to link AB.</li>
+        <li><strong>Kinematic Similarity (Rigid Body Triangle):</strong> For any points A, B, and C on the same rigid link, the velocity diagram forms a geometrically similar triangle:
+          <div class="formula-box">
+            ab / AB = bc / BC = ac / AC = &omega;
+          </div>
+        </li>
+        <li><strong>Intermediate Points / Centre of Mass (G):</strong> If point G lies along the physical link AB, it divides the velocity vector in the exact same proportion:
+          <div class="formula-box">
+            ag / ab = AG / AB &nbsp;&rarr;&nbsp; Velocity of G: v<sub>G</sub> = og
+          </div>
+        </li>
+      </ul>
+    </section>
+    <!-- 5. Acceleration Diagrams -->
+    <section id="relative-accel">
+      <h2>5. Acceleration Vector Diagrams</h2>
+      <p>Relative acceleration between two points A and B on a rigid link consists of two orthogonal components:</p>
+
+      <!-- Diagram Placeholder: Acceleration Polygon -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1lqI2p4udqekzwLZ3pLsplI_2AiqPn_zk" alt="Relative Acceleration Polygon Diagram" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Radial (Centripetal): a<sub>1</sub>x<sub>1</sub> = (AB) &middot; &omega;² &nbsp;[Parallel to AB, directed towards centre A]<br>
+        Transverse (Tangential): x<sub>1</sub>b<sub>1</sub> = (AB) &middot; &alpha; &nbsp;[Perpendicular to link AB]<br>
+        Total Relative Accel: a<sub>1</sub>b<sub>1</sub> = a<sub>1</sub>x<sub>1</sub> + x<sub>1</sub>b<sub>1</sub><br>
+        Magnitude: |a<sub>1</sub>b<sub>1</sub>| = (AB) &middot; &radic;(&alpha;² + &omega;⁴)<br>
+        Phase Angle: &phi; = tan⁻¹(&alpha; / &omega;²)
+      </div>
+
+      <ul>
+        <li><strong>Intermediate Points / Centre of Mass (G):</strong> Just like velocities, intermediate point accelerations divide the relative vector proportionally:
+          <div class="formula-box">
+            a<sub>1</sub>g<sub>1</sub> / a<sub>1</sub>b<sub>1</sub> = AG / AB &nbsp;&rarr;&nbsp; Absolute Accel of G: a<sub>G</sub> = o<sub>1</sub>g<sub>1</sub>
+          </div>
+        </li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/1aQ9EZGMdDk" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Mechanism Mobility & Epicyclic Gears -->
+    <section id="mechanisms-grubler">
+      <h2>6. Mobility (Grubler's Criterion) &amp; Epicyclic Gear Trains</h2>
+      <p>Degrees of Freedom (DOF) determines the independent inputs needed to control a mechanism.</p>
+
+      <!-- 4-Bar Mechanism Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1cm2WRKPck7DrShDJO07Bo6cZK86qRyQ0" alt="Four-Bar Link Mechanism" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        Grubler's Criterion: F = 3(N - 1) - 2L - H<br>
+        Condition for Mechanism: F = 1 &nbsp;&rarr;&nbsp; 3N - 2L - H = 4<br>
+        Grashof's Inversion Condition: s + l &le; p + q
+      </div>
+
+      <ul>
+        <li><strong>N, L, H:</strong> Total links including fixed frame (N), lower pairs (L: 1 DOF pins/sliders), higher pairs (H: 2 DOFs gear meshing/cam contact).</li>
+        <li><strong>Mobility States:</strong>
+          <ul>
+            <li><strong>F = 0:</strong> Statically determinate rigid structure (no motion possible).</li>
+            <li><strong>F = 1:</strong> Constrained kinematic mechanism with a single defined output per input.</li>
+            <li><strong>F &gt; 1:</strong> Unconstrained multi-degree system requiring multiple coordinated inputs.</li>
+          </ul>
+        </li>
+        <li><strong>Grashof Theorem:</strong> If shortest (s) + longest (l) &le; other two links (p + q), at least one link can make continuous 360&deg; revolutions.</li>
+      </ul>
+
+      <!-- Epicyclic Gear Train Diagram Placeholder -->
+      <div class="img-container">
+        <img src="https://lh3.googleusercontent.com/d/1wYFLkzKUG5fE5ynNtreawLXRki2dMTSM" alt="Epicyclic Gear Train System" onerror="this.style.display='none'">
+      </div>
+
+      <div class="formula-box">
+        External Meshing: &omega;<sub>P</sub> = (1 + r<sub>S</sub>/r<sub>P</sub>) &middot; &omega;<sub>L</sub> - (r<sub>S</sub>/r<sub>P</sub>) &middot; &omega;<sub>S</sub><br>
+        Internal Meshing (Annulus): &omega;<sub>P</sub> = (1 - r<sub>A</sub>/r<sub>P</sub>) &middot; &omega;<sub>L</sub> + (r<sub>A</sub>/r<sub>P</sub>) &middot; &omega;<sub>A</sub>
+      </div>
+
+      <ul>
+        <li><strong>S, P, L, A:</strong> Sun wheel (S), Planet wheel (P), Arm/Carrier (L), Annulus outer ring (A).</li>
+        <li>Relative speed transmission allows compact, high-torque reduction gearboxes.</li>
+      </ul>
+      <div class="video-card">
+        <p class="video-title">🎥 Watch video explanation:</p>
+        <div class="iframe-wrapper">
+          <iframe 
+             src="https://www.youtube.com/embed/zE4HGKRufU0" 
+             title="Dynamic video" 
+             allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <strong>Quick Test: Grubler's Mobility</strong>
+        <p>A planar four-bar mechanism has 4 links and 4 revolute pin joints. Using Grubler's criterion, calculate its degrees of freedom (F).</p>
+        <details>
+          <summary>Show Answer &amp; Working</summary>
+          <p>N = 4, L = 4, H = 0.</p>
+          <p>F = 3(N - 1) - 2L - H = 3(4 - 1) - 2(4) - 0 = 9 - 8 = 1. Therefore, F = 1 (single-DOF mechanism).</p>
+        </details>
+      </div>
+    </section>
+    <footer>
+      <p>Engineering Mechanics | 2D Kinematics Summary</p>
+    </footer>
+  </div>
+  <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbot-mech.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator - Faculty of Engineering</title>
+    
+    <!-- Embedded CSS matching your dark theme -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* Dark theme background */
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Top Bar & Heading */
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* Horizontal Navigation Menu */
+        .top-nav {
+            background-color: #1e293b;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .top-nav li {
+            display: inline;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav a:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Calculator Card Style */
+        .calc-card {
+            background-color: rgba(129, 140, 248, 0.05);
+            border-left: 5px solid #818cf8;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .calc-card h2 {
+            color: #818cf8;
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Note Style */
+        .calc-note {
+            text-align: center;
+            font-size: 0.9em;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            font-style: italic;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 12px;
+        }
+
+        /* Form Elements */
+        .module-entry {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e293b;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        label {
+            font-weight: 600;
+            color: #cbd5e1;
+            font-size: 0.95em;
+        }
+
+        select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background-color: #0f172a;
+            color: #ffffff;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #818cf8;
+            box-shadow: 0 0 5px rgba(129, 140, 248, 0.3);
+        }
+
+        /* Button Style */
+        .calc-btn {
+            display: block;
+            width: 100%;
+            background-color: #818cf8;
+            color: #0f172a;
+            border: none;
+            font-size: 1.1em;
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(129, 140, 248, 0.3);
+        }
+
+        .calc-btn:hover {
+            background-color: #a5b4fc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(129, 140, 248, 0.5);
+        }
+
+        /* Result Text */
+        #gpa-result {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.3em;
+            color: #38bdf8;
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 600px) {
+            .top-nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .calc-card {
+                padding: 20px;
+            }
+            .module-entry {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="top-bar">
+        <h1>Faculty of Engineering</h1>
+    </header>
+
+    <!-- Landscape Navigation Menu -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+        </ul>
+    </nav>
+
+    <!-- GPA Calculator Container -->
+    <div class="container">
+        <div class="calc-card">
+            <h2>Semester GPA Calculator</h2>
+            <p class="calc-note">Select your grades for each first-semester module to calculate your GPA.</p>
+            
+            <div id="gpa-form">
+                
+                <!-- 1. MA1014 (3 Credits) -->
+                <div class="module-entry">
+                    <label>MA1014 - Mathematics (3 Credits):</label>
+                    <select class="grade-select" data-credits="3">
+                        <option value="4.0">A+ (4.0)</option>
+                        <option value="4.0">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.5">C- (1.5)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F/I (0.0)</option>
+                    </select>
+                </div>
+
+                <!-- 2. CS1033 (3 Credits) -->
+                <div class="module-entry">
+                    <label>CS1033 - Programming Fundamentals (3 Credits):</label>
+                    <select class="grade-select" data-credits="3">
+                        <option value="4.0">A+ (4.0)</option>
+                        <option value="4.0">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.5">C- (1.5)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F/I (0.0)</option>
+                    </select>
+                </div>
+
+                <!-- 3. MT1023 (2 Credits) -->
+                <div class="module-entry">
+                    <label>MT1023 - Properties of Materials (2 Credits):</label>
+                    <select class="grade-select" data-credits="2">
+                        <option value="4.0">A+ (4.0)</option>
+                        <option value="4.0">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.5">C- (1.5)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F/I (0.0)</option>
+                    </select>
+                </div>
+
+                <!-- 4. EE1040 (2 Credits) -->
+                <div class="module-entry">
+                    <label>EE1040 - Electrical Fundamentals (2 Credits):</label>
+                    <select class="grade-select" data-credits="2">
+                        <option value="4.0">A+ (4.0)</option>
+                        <option value="4.0">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.5">C- (1.5)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F/I (0.0)</option>
+                    </select>
+                </div>
+
+                <!-- 5. CE1023 (2 Credits) -->
+                <div class="module-entry">
+                    <label>CE1023 - Fluid Mechanics (2 Credits):</label>
+                    <select class="grade-select" data-credits="2">
+                        <option value="4.0">A+ (4.0)</option>
+                        <option value="4.0">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.5">C- (1.5)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F/I (0.0)</option>
+                    </select>
+                </div>
+
+                <!-- 6. ME1033 (2 Credits) -->
+                <div class="module-entry">
+                    <label>ME1033 - Mechanics (2 Credits):</label>
+                    <select class="grade-select" data-credits="2">
+                        <option value="4.0">A+ (4.0)</option>
+                        <option value="4.0">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.5">C- (1.5)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F/I (0.0)</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button class="calc-btn" onclick="calculateGPA()">Calculate Semester GPA</button>
+
+            <h3 id="gpa-result"></h3>
+        </div>
+    </div>
+
+    <!-- JavaScript for GPA Calculation -->
+    <script>
+        function calculateGPA() {
+            const gradeSelects = document.querySelectorAll('.grade-select');
+            const resultHeading = document.getElementById('gpa-result');
+            
+            let totalGradePoints = 0;
+            let totalCredits = 0;
+
+            gradeSelects.forEach(select => {
+                const gradePoint = parseFloat(select.value);
+                const credits = parseFloat(select.getAttribute('data-credits'));
+
+                totalGradePoints += gradePoint * credits;
+                totalCredits += credits;
+            });
+
+            if (totalCredits === 0) {
+                resultHeading.innerText = "Please select valid grades.";
+                return;
+            }
+
+            const gpa = totalGradePoints / totalCredits;
+
+            resultHeading.style.color = "#38bdf8";
+            resultHeading.innerText = `Your Semester GPA: ${gpa.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Fluid Statics - ACAF</title>
+    <link rel="stylesheet" href="fluid-style.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Introduction to fluid mechanics, continuum concept, density, specific weight, specific gravity, bulk modulus, surface tension, and Newton's law of viscosity.">
+
+    <!-- MathJax script to accurately render complex LaTeX equations -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="fluid-container">
+        
+        <header class="fluid-header">
+            <div class="header-inner">
+                <span class="fluid-tag">CE1023 - Fluid Mechanics</span>
+                <h1>1.0 Introduction and Fluid Properties</h1>
+                <p>The foundational concepts of fluid mechanics, analyzing the equilibrium of fluids, matter classification, and core fluid properties such as density, viscosity, and pressure.</p>
+            </div>
+        </header>
+
+        <section class="fluid-section">
+            <h2>1.1 Fluid Mechanics Introduction</h2>
+            <p>The study of the engineering aspects of fluids can be summarized as Fluid Mechanics. The engineering aspects are mainly associated with the equilibrium and motion of fluids.</p>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Fluid Statics</h4>
+                    <p>Study of fluids in equilibrium.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Fluid Kinematics</h4>
+                    <p>Study of physical aspects of motion.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Fluid Dynamics</h4>
+                    <p>Study of physical aspects and the causes of motion.</p>
+                </div>
+            </div>
+
+            <h3>Applications of Fluid Mechanics in Engineering Practice:</h3>
+            <ul class="fluid-list">
+                <li>Water supply schemes</li>
+                <li>Irrigation schemes</li>
+                <li>Hydropower schemes</li>
+                <li>Fluid Machinery</li>
+                <li>Oil/gas pipelines</li>
+                <li>Purification of tailings</li>
+                <li>Aerodynamics</li>
+                <li>Fluid networks</li>
+                <li>Fluid loadings on structures</li>
+                <li>Lubrication</li>
+                <li>Biomedical Engineering</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section">
+            <h2>1.2 Fluids and Matter Classification</h2>
+            <p>Matter exists in 3 main states: Solid, Liquid, and Gases.</p>
+            <p><strong>Liquids and gases</strong> are commonly known as fluids. Fluids have the ability to flow. When a fluid flows, it continuously changes its shape (deforms) under the action of a shear force, no matter how small that force may be.</p>
+            
+            <div class="highlight-fluid">
+                <p><strong>Definition of a Fluid:</strong> A substance that deforms continuously under the action of a shear stress, no matter how small the shear stress may be. Even a tiny force applied parallel to the surface will cause a fluid to move continuously.</p>
+            </div>
+            
+            <p>Water, air, oils, fuels, and natural gases are among the fluids commonly encountered in engineering practice.</p>
+
+            <h3>Characteristics of Fluids vs Solids</h3>
+            <div class="table-wrapper">
+                <table class="fluid-table">
+                    <tr>
+                        <th>State</th>
+                        <th>Molecular Structure</th>
+                        <th>Physical Shape / Volume</th>
+                        <th>Behavior</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Solid</strong></td>
+                        <td>Closely packed molecules<br>Small degree of movement</td>
+                        <td>A given mass has a fixed volume and a fixed shape.</td>
+                        <td>Low compressibility<br>Permanent resistance to deformation (shear force causes a fixed deflection).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Liquid</strong></td>
+                        <td>Loosely packed molecules<br>Greater degree of movement than in a solid</td>
+                        <td>A given mass has a fixed volume but no fixed shape (takes the shape of the container).</td>
+                        <td>Low compressibility<br>No permanent resistance to deformation (i.e. flows under shear forces).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gas</strong></td>
+                        <td>Loosely packed molecules<br>High degree of movement</td>
+                        <td>A given mass has no fixed volume and no fixed shape (expands to fill the container).</td>
+                        <td>High compressibility<br>No permanent resistance to deformation (i.e. flows under shear forces).</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>1.3 The Continuum Concept</h2>
+            <p>Many of the applications of Fluid Mechanics are concerned with the bulk behavior of fluids. In such applications, a fluid is considered as a Continuum, i.e., a continuous substance filled with matter.</p>
+            <p>In a Continuum, the properties of a fluid at a point are defined for a fluid particle. A fluid particle is a small volume of fluid containing the point concerned. It is very small in macroscopic terms but very large in terms of inter-molecular distances.</p>
+            <p>Average values of properties for fluid particles are considered. <strong>The properties are assumed to vary gradually between fluid particles.</strong></p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">The Continuum Limit (Density vs Volume)</h4>
+                <svg viewBox="0 0 500 250" style="width: 100%; height: auto;">
+                    <!-- Axes -->
+                    <line x1="50" y1="200" x2="480" y2="200" stroke="#94a3b8" stroke-width="2" /> 
+                    <line x1="50" y1="200" x2="50" y2="20" stroke="#94a3b8" stroke-width="2" /> 
+                    
+                    <!-- Fixed: Unicode characters replace LaTeX for SVG compatibility -->
+                    <text x="260" y="235" fill="#f1f5f9" text-anchor="middle" font-size="14">Sample Volume (δV)</text>
+                    <text x="20" y="110" fill="#f1f5f9" transform="rotate(-90 20,110)" text-anchor="middle" font-size="14">Density (ρ)</text>
+                    
+                    <!-- Mathematically strictly bounded explicit path to prevent clipping -->
+                    <path d="M 52 120 L 56 45 L 62 215 L 68 55 L 75 195 L 83 70 L 92 170 L 102 85 L 114 150 L 128 100 L 142 130 L 155 115 L 160 120 L 450 120" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linejoin="round" />
+                    
+                    <!-- Regions -->
+                    <line x1="160" y1="200" x2="160" y2="40" stroke="#475569" stroke-width="2" stroke-dasharray="5,5" />
+                    <text x="105" y="35" fill="#ef4444" text-anchor="middle" font-size="12">Molecular Domain</text>
+                    <text x="105" y="55" fill="#ef4444" text-anchor="middle" font-size="10">(Wild Fluctuations)</text>
+                    
+                    <text x="310" y="35" fill="#3b82f6" text-anchor="middle" font-size="12">Continuum Domain</text>
+                    <text x="310" y="55" fill="#3b82f6" text-anchor="middle" font-size="10">(Stable Property Value)</text>
+
+                    <!-- Fixed limit text -->
+                    <text x="160" y="215" fill="#facc15" text-anchor="middle" font-size="12">δV* (Limit)</text>
+                </svg>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>1.4 Properties of Fluids</h2>
+            
+            <h3>1. Density (Mass Density) (\(\rho\))</h3>
+            <div class="formula-box">
+                <p>$$Density (Mass\ Density),\ \rho = \frac{Mass\ (m)}{Volume\ (V)}$$</p>
+                <p>Units: \(kg/m^3\), \(gram/cm^3\), \(slugs/ft^3\)</p>
+                <p>Dimensions: \([\rho] = [m] / [V] = [M / L^3] = [ML^{-3}]\) </p>
+            </div>
+            <p>The density of liquids varies slightly with temperature, but such variations are usually neglected in many engineering applications (and a constant value is assumed).</p>
+            <p><strong>Example: Density of water:</strong></p>
+            <ul class="fluid-list">
+                <li>\(1000\ kg/m^3\) at \(4^\circ C \leftarrow\) maximum density</li>
+                <li>\(998.2\ kg/m^3\) at \(20^\circ C\) (variation less than \(0.2\%\))</li>
+            </ul>
+            <p>Density of gases varies significantly depending on the pressure and the temperature. (e.g. Density of atmospheric air \(\approx 1.23\ kg/m^3\) at \(15^\circ C\) under atmospheric pressure).</p>
+
+            <h3>2. Specific Weight / Unit Weight (\(\gamma\))</h3>
+            <div class="formula-box">
+                <p>$$Specific\ Weight,\ \gamma = \frac{Weight\ (W)}{Volume\ (V)} \quad \text{(Weight per unit volume)}$$</p>
+                <p>Units: \(N/m^3\)</p>
+                <p>Dimensions: \([\gamma] = [W] / [V] = [MLT^{-2}] / [L^3] = [ML^{-2}T^{-2}]\) </p>
+            </div>
+            <p>Relationship to density: \(\gamma = \frac{W}{V} = \frac{m \cdot g}{V} = \rho \cdot g\) </p>
+            <p>Specific weight of water \(\approx 9.81 \times 10^3\ N/m^3\) </p>
+
+            <h3>3. Relative Density / Specific Gravity (\(S\))</h3>
+            <div class="formula-box">
+                <p>$$Relative\ Density,\ S = \frac{Density\ of\ a\ substance\ (\rho)}{Density\ of\ a\ standard\ substance\ (\rho_w)}$$</p>
+                <p>$$S = \frac{\rho}{\rho_{water}} = \frac{\gamma}{\gamma_{water}}$$</p>
+            </div>
+            <p>For liquids and solids, water is considered as the standard substance. Dimensions: Dimensionless (Ratio).</p>
+            <p>Examples: Water \(= 1.0\), Mercury \(= 13.6\), Oil \(\approx 0.8\text{ to }0.9\), Sand \(\approx 2.65\), Steel \(\approx 7.85\)</p>
+
+            <h3>4. Vapor Pressure</h3>
+            <p>Vapor pressure is due to vaporization of liquid molecules through the free surface of a liquid enclosed in a container.</p>
+            <p>Pressure due to liquid vapor above the free surface of a liquid is known as the vapor pressure. Fluid pressure must be maintained higher than the vapor pressure of a liquid to avoid boiling. (If the vapor pressure becomes equal to the ambient pressure of the liquid, boiling occurs inside the liquid mass—a phenomenon known as cavitation).</p>
+            <p>Vapor pressure of water \(= 1.7\ kN/m^2\) at \(15^\circ C\), and \(= 101.3\ kN/m^2\) (atmospheric pressure) at \(100^\circ C\) (Boiling point).</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>1.5 Bulk Modulus & Compressibility (\(K\))</h2>
+            <p>Bulk modulus is a measure of the compressibility of a substance.</p>
+            <div class="formula-box">
+                <p>$$Bulk\ Modulus\ (K) = \frac{Change\ in\ pressure\ (\Delta P)}{Change\ in\ Volume\ / Volume\ (-\Delta V/V)}$$</p>
+                <p>$$K = - \frac{dP}{dV / V}$$</p>
+            </div>
+            <p>Alternatively, since \(V = m / \rho\) and mass (\(m\)) is constant, \(dV = -\frac{m}{\rho^2} d\rho\). Substituting this gives:</p>
+            <div class="formula-box">
+                <p>$$K = \rho \frac{dP}{d\rho}$$</p>
+            </div>
+            <p><strong>Substances with high \(K\) values have low compressibility.</strong><br>
+            Bulk Modulus Examples:<br>
+            Water \(\approx 2.0 \times 10^9\ N/m^2\)<br>
+            Steel \(\approx 2.0 \times 10^{11}\ N/m^2\)<br>
+            Air \(\approx 1 \times 10^5\ N/m^2\) (Highly compressible).</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>1.6 Surface Tension (\(\sigma\))</h2>
+            <p>The free surface of a liquid behaves as a membrane under tension. Such behavior can be explained in terms of inter-molecular attraction.</p>
+            <div class="highlight-fluid">
+                <p><strong>Surface Tension (\(\sigma\)) is defined as Force/Length Along the line (surface).</strong></p>
+            </div>
+            <p>Considering the tensile force \(F\) acting along a length \(L\): Surface Tension \(\sigma = F / L\).</p>
+            <p>Dimensions: \([\sigma] = [F] / [L] = [MLT^{-2}] / [L] = [MT^{-2}]\). Units: \(N/m\).</p>
+            <p>Surface tension of water in air \(\approx 0.073\ N/m\) at \(20^\circ C\).</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Surface Tension (Capillary Rise)</h4>
+                <svg viewBox="0 0 500 250" style="width: 100%; height: auto;">
+                    <!-- Define arrowhead -->
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                          <path d="M0,0 L0,6 L9,3 z" fill="#14b8a6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Container -->
+                    <path d="M 120 50 L 120 220 L 380 220 L 380 50" fill="none" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                    
+                    <!-- Liquid in container (behind tube) -->
+                    <path d="M 122 170 L 378 170 L 378 218 L 122 218 Z" fill="rgba(56,189,248,0.2)" />
+                    <line x1="122" y1="170" x2="378" y2="170" stroke="#3b82f6" stroke-width="2" />
+
+                    <!-- Capillary tube -->
+                    <path d="M 230 20 L 230 200 M 270 20 L 270 200" fill="none" stroke="#e2e8f0" stroke-width="3" opacity="0.9"/>
+                    
+                    <!-- Liquid inside tube -->
+                    <path d="M 231 170 L 231 80 Q 250 110 269 80 L 269 170 Z" fill="rgba(56,189,248,0.6)" />
+                    
+                    <!-- Tension Arrows (at the Meniscus) -->
+                    <line x1="230" y1="80" x2="215" y2="40" stroke="#14b8a6" stroke-width="2.5" marker-end="url(#arrow)" />
+                    <line x1="270" y1="80" x2="285" y2="40" stroke="#14b8a6" stroke-width="2.5" marker-end="url(#arrow)" />
+                    
+                    <!-- Fixed: Unicode character replaces LaTeX for SVG compatibility -->
+                    <text x="250" y="30" fill="#14b8a6" text-anchor="middle" font-size="14" font-weight="bold">Surface Tension (σ)</text>
+                    <text x="250" y="140" fill="#e0f2fe" text-anchor="middle" font-size="14">Fluid Rise</text>
+                </svg>
+            </div>
+
+            <p>Effects of surface tension are usually neglected in many engineering applications (and are only considered only in very small-scale applications). Example: Small scale physical modeling, capillary effect in small tubes.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>1.7 Viscosity (\(\mu\))</h2>
+            <p>When a fluid flows, forces resisting the flow are set up within the fluid. The property of a fluid that offers internal resistance to flow is known as viscosity.</p>
+            
+            <h3>Newton's Law of Viscosity</h3>
+            <p>In straight and parallel flow of a fluid, the shear stress between adjacent layers is proportional to the velocity gradient perpendicular to the layers.</p>
+            
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Velocity Profile of a Fluid Element (Linear Gradient)</h4>
+                <svg viewBox="0 0 500 250" style="width: 100%; height: auto;">
+                    <!-- Stationary boundary (bottom) -->
+                    <rect x="50" y="200" width="400" height="10" fill="#475569" />
+                    <text x="250" y="230" fill="#94a3b8" text-anchor="middle" font-size="14">Stationary Boundary (Velocity u = 0)</text>
+                    
+                    <!-- Moving plate (top) -->
+                    <rect x="50" y="40" width="400" height="10" fill="#3b82f6" />
+                    <text x="250" y="25" fill="#3b82f6" text-anchor="middle" font-size="14">Moving Plate (Velocity u = U)</text>
+                    <path d="M 460 45 L 480 45 L 475 40 M 480 45 L 475 50" fill="none" stroke="#3b82f6" stroke-width="2" />
+                    <text x="490" y="49" fill="#3b82f6" font-size="14">F</text>
+
+                    <!-- Axes -->
+                    <line x1="80" y1="200" x2="80" y2="40" stroke="#f1f5f9" stroke-width="2" />
+                    <path d="M 80 40 L 75 50 M 80 40 L 85 50" fill="none" stroke="#f1f5f9" stroke-width="2" />
+                    <text x="60" y="120" fill="#f1f5f9" font-size="14">y</text>
+
+                    <line x1="80" y1="200" x2="380" y2="200" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="5,5"/>
+
+                    <!-- Linear Profile Diagonal Line -->
+                    <line x1="80" y1="200" x2="350" y2="50" stroke="#14b8a6" stroke-width="3" />
+
+                    <!-- Velocity Vectors (Arrows) -->
+                    <line x1="80" y1="170" x2="134" y2="170" stroke="#38bdf8" stroke-width="2" />
+                    <polygon points="134,170 129,167 129,173" fill="#38bdf8" />
+                    
+                    <line x1="80" y1="140" x2="188" y2="140" stroke="#38bdf8" stroke-width="2" />
+                    <polygon points="188,140 183,137 183,143" fill="#38bdf8" />
+
+                    <line x1="80" y1="110" x2="242" y2="110" stroke="#38bdf8" stroke-width="2" />
+                    <polygon points="242,110 237,107 237,113" fill="#38bdf8" />
+
+                    <line x1="80" y1="80" x2="296" y2="80" stroke="#38bdf8" stroke-width="2" />
+                    <polygon points="296,80 291,77 291,83" fill="#38bdf8" />
+                    
+                    <line x1="80" y1="50" x2="350" y2="50" stroke="#38bdf8" stroke-width="2" />
+                    <polygon points="350,50 345,47 345,53" fill="#38bdf8" />
+                    
+                    <text x="210" y="160" fill="#14b8a6" font-size="14">Linear Velocity Gradient</text>
+                    <text x="250" y="100" fill="#38bdf8" font-size="14">u</text>
+                </svg>
+            </div>
+
+            <p>Velocity gradient \(= \frac{du}{dy}\)</p>
+            <p>Shear stress, \(\tau \propto \frac{du}{dy}\)</p>
+            <div class="formula-box">
+                <p>$$\tau = \mu \frac{du}{dy}$$</p>
+            </div>
+            <p>The coefficient of proportionality, \(\mu\), is known as the <strong>Coefficient of Viscosity</strong> (or absolute viscosity / dynamic viscosity).</p>
+            <p>Units for \(\mu\): \(kg/ms\), \(Ns/m^2\), \(Pa \cdot s\), or \(poise\) (\(1\ kg/ms = 10\ poise\)).</p>
+            <p>Dimensions: \([\mu] = [\tau] / [du/dy] = [ML^{-1}T^{-2}] / [T^{-1}] = [ML^{-1}T^{-1}]\) </p>
+
+            <h3>Kinematic Viscosity (\(\nu\))</h3>
+            <div class="formula-box">
+                <p>$$Kinematic\ Viscosity,\ \nu = \frac{Dynamic\ Viscosity\ (\mu)}{Mass\ Density\ (\rho)}$$</p>
+            </div>
+            <p>Units of \(\nu\): \(m^2/s\) or \(Stokes\) (\(1\ m^2/s = 10^4\ Stokes\)).</p>
+
+            <h3>Effect of Temperature on Viscosity</h3>
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Temperature vs Viscosity</h4>
+                <svg viewBox="0 0 500 250" style="width: 100%; height: auto;">
+                    <!-- Axes -->
+                    <line x1="60" y1="200" x2="480" y2="200" stroke="#94a3b8" stroke-width="2" />
+                    <line x1="60" y1="200" x2="60" y2="20" stroke="#94a3b8" stroke-width="2" />
+                    
+                    <!-- Fixed: Unicode character replaces LaTeX for SVG compatibility -->
+                    <text x="270" y="235" fill="#f1f5f9" text-anchor="middle" font-size="14">Temperature (T)</text>
+                    <text x="25" y="110" fill="#f1f5f9" transform="rotate(-90 25,110)" text-anchor="middle" font-size="14">Viscosity (μ)</text>
+                    
+                    <!-- Liquid Curve (Decreasing Exponentially) -->
+                    <path d="M 80 40 Q 120 170 450 185" fill="none" stroke="#3b82f6" stroke-width="3" />
+                    <text x="380" y="175" fill="#3b82f6" font-size="14" font-weight="bold">Liquids</text>
+                    
+                    <!-- Gas Curve (Increasing Slightly) -->
+                    <path d="M 80 160 Q 250 140 450 90" fill="none" stroke="#14b8a6" stroke-width="3" />
+                    <text x="380" y="80" fill="#14b8a6" font-size="14" font-weight="bold">Gases</text>
+                </svg>
+            </div>
+
+            <ul>
+                <li>In <strong>liquids</strong>, viscosity is mainly caused by inter-molecular attraction. The viscosity of liquids decreases significantly with an increase in temperature.</li>
+                <li>In <strong>gases</strong>, viscosity is mainly due to momentum exchange between molecules. The viscosity of gases increases slightly with an increase in temperature.</li>
+            </ul>
+            <p>Fluids in which the coefficient of viscosity is constant are known as <strong>Newtonian fluids</strong>. Most fluids encountered in fluid mechanics applications (like water, air, light oils) are considered Newtonian.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>1.8 Pressure</h2>
+            <p>A fluid exerts a force on any surface which it is in contact with it.</p>
+            <div class="highlight-fluid">
+                <p><strong>Pressure (\(P\)) = Normal Force (\(F\)) / Area (\(A\))</strong></p>
+                <p>$$P = \frac{F_n}{A} = \lim_{\Delta A \to 0} \frac{\Delta F_n}{\Delta A}$$</p>
+            </div>
+            <p>Dimensions: \([P] = [F_n] / [A] = [MLT^{-2}] / [L^2] = [ML^{-1}T^{-2}]\) </p>
+            <p>Units: \(N/m^2\) or \(Pascal\) (\(Pa\)).</p>
+        </section>
+
+        <!-- Video embedded exactly before the quiz -->
+        <section class="fluid-section video-section">
+            <h2 style="text-align: center; border-bottom: none;">Video Lecture: Fundamental Concepts</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/clVwKynHpB0" title="Fluid Mechanics Fundamental Concepts" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Dynamic Assessment Section -->
+        <section class="quiz-section">
+            <h2>Chapter Knowledge Check</h2>
+            <p class="quiz-intro">Test your understanding of the foundational fluid mechanics concepts covered above.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. Which of the following defines the fundamental physical difference between a solid and a fluid?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) A fluid has a fixed shape, whereas a solid does not.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>B) A fluid has high compressibility, while solids have zero compressibility.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>C) A fluid deforms continuously under the action of a shear stress, whereas a solid shows permanent resistance to deformation.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) Fluids are only liquids; gases act like solids under pressure.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the relationship defining the Kinematic Viscosity (\(\nu\)) of a fluid?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) \(\nu = \text{Density} / \text{Dynamic Viscosity}\)</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>B) \(\nu = \text{Dynamic Viscosity} \times \text{Specific Gravity}\)</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>C) \(\nu = \text{Dynamic Viscosity} / \text{Mass Density}\) (\(\mu / \rho\))</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) \(\nu = \text{Shear Stress} / \text{Velocity Gradient}\)</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. According to Newton's Law of Viscosity, the shear stress (\(\tau\)) between adjacent fluid layers is proportional to:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) The square of the fluid velocity.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>B) The absolute temperature of the fluid.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) The pressure gradient.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>D) The velocity gradient perpendicular to the layers (\(du/dy\)).</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. How does temperature affect the dynamic viscosity of liquids and gases respectively?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) Viscosity increases for both liquids and gases with an increase in temperature.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>B) Viscosity of liquids decreases significantly, while the viscosity of gases increases slightly.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) Viscosity of liquids increases significantly, while the viscosity of gases decreases slightly.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) Temperature has no effect on the dynamic viscosity of Newtonian fluids.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+             <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. A fluid with a high Bulk Modulus (\(K\)) value indicates that the fluid is:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) Highly viscous.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>B) Having low compressibility.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>C) Highly compressible.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) A non-Newtonian fluid.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            // Attach a 'change' listener to every single radio button option
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        // Instant feedback for this specific question as soon as clicked
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid #14b8a6";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid #ef4444";
+                        }
+                        
+                        // Immediately check if all questions are completed
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            // Function to automatically calculate and show final score
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                // If every question has an answer, reveal the final score box
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

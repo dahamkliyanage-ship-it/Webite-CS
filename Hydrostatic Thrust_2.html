@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Hydrostatic Thrust</title>
+    <link rel="stylesheet" href="fluid-style.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Hydrostatic thrust, forces on submerged plane and curved surfaces, magnitude, direction, and center of pressure.">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="fluid-container">
+        
+        <header class="fluid-header">
+            <div class="header-inner">
+                <span class="fluid-tag">CE1023 - Fluid Mechanics</span>
+                <h1>3.0 Hydrostatic Thrust</h1>
+                <p>Analyzing the forces exerted by fluids in equilibrium on submerged surfaces, exploring the magnitude, direction, and line of action on both plane and curved geometries.</p>
+            </div>
+        </header>
+
+        <section class="fluid-section">
+            <h2>3.1 Introduction to Hydrostatic Thrust</h2>
+            <div class="highlight-fluid">
+                <p><strong>Hydrostatic Thrust:</strong> The total resultant force exerted on a submerged surface by a fluid in equilibrium.</p>
+            </div>
+            <p><strong>Applications:</strong> Understanding hydrostatic thrust is vital for the structural design of dams, water tanks, lock gates, sluice gates, and submarine hulls.</p>
+            
+            <p>To fully define the Hydrostatic Thrust (which is a Force Vector), we must determine three key properties:</p>
+            <ul class="fluid-list">
+                <li><strong>Direction:</strong> The orientation of the force relative to the surface.</li>
+                <li><strong>Magnitude:</strong> The total scalar size of the force.</li>
+                <li><strong>Line of Action:</strong> The specific point where the resultant force acts (Center of Pressure).</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section">
+            <h2>3.2 Hydrostatic Thrust on a Plane Surface</h2>
+            
+            <h3>1. Direction</h3>
+            <p>Since fluids in equilibrium cannot sustain shear stresses, the force $dF$ on any infinitesimal element $dA$ is always <strong>normal (perpendicular) to the surface</strong>.</p>
+            <p>Because the surface is a flat plane, all the infinitesimal normal forces are parallel to each other. Therefore, the resultant Hydrostatic Thrust ($F$) is also <strong>normal to the surface</strong>.</p>
+
+            <h3>2. Magnitude</h3>
+            <p>The magnitude of the thrust is found by integrating the pressure over the entire submerged area.</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Submerged Inclined Plane Surface Projection</h4>
+                <!-- Mathematically perfected SVG Projection -->
+                <svg viewBox="0 0 700 550" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-red-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#ef4444" />
+                        </marker>
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                    </defs>
+
+                    <!-- Free Surface Bar -->
+                    <rect x="20" y="20" width="660" height="25" fill="#dbeafe" rx="4" />
+                    <text x="520" y="38" fill="#1e3a8a" font-size="16" font-style="italic" font-weight="bold">Free surface</text>
+
+                    <!-- O point -->
+                    <text x="290" y="15" fill="#f1f5f9" font-size="20" font-weight="bold">O</text>
+
+                    <!-- Axis O-O' (Projection from O) -->
+                    <line x1="300" y1="60" x2="600" y2="180" stroke="#f1f5f9" stroke-width="2" stroke-dasharray="6,6" />
+                    <text x="615" y="190" fill="#f1f5f9" font-size="20" font-weight="bold">O'</text>
+
+                    <!-- Solid Edge Line of the Plane -->
+                    <line x1="300" y1="60" x2="100" y2="460" stroke="#f1f5f9" stroke-width="2" />
+                    
+                    <!-- Dashed Projection Lines (Parallel to O-O') -->
+                    <!-- Top of Area -->
+                    <line x1="250" y1="160" x2="550" y2="280" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <!-- Point 'a' -->
+                    <line x1="230" y1="200" x2="530" y2="320" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <!-- Centroid 'G' -->
+                    <line x1="200" y1="260" x2="500" y2="380" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <!-- Point 'c' -->
+                    <line x1="180" y1="300" x2="480" y2="420" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <!-- Bottom of Area -->
+                    <line x1="150" y1="360" x2="450" y2="480" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+
+                    <!-- Ellipse Area A (Mathematically rotated perfectly parallel to plane slope) -->
+                    <ellipse cx="500" cy="380" rx="112" ry="40" fill="rgba(20, 184, 166, 0.1)" stroke="#14b8a6" stroke-width="2" transform="rotate(116.56 500 380)" />
+                    <text x="550" y="450" fill="#14b8a6" font-size="16" font-weight="bold">Area A</text>
+
+                    <!-- Small Area dA around point 'a' -->
+                    <ellipse cx="530" cy="320" rx="25" ry="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" transform="rotate(116.56 530 320)" />
+                    <!-- Shading inside dA -->
+                    <line x1="525" y1="310" x2="535" y2="330" stroke="#3b82f6" stroke-width="1" />
+                    <line x1="520" y1="315" x2="530" y2="335" stroke="#3b82f6" stroke-width="1" />
+                    <text x="560" y="325" fill="#3b82f6" font-size="14" font-weight="bold">Area dA</text>
+
+                    <!-- Distance arrows (y, y_G, y_C) Parallel to Plane -->
+                    <!-- Arrow y -->
+                    <line x1="400" y1="100" x2="330" y2="240" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red-end)" />
+                    <text x="350" y="160" fill="#ef4444" font-size="16" font-weight="bold">y</text>
+                    
+                    <!-- Arrow y_G -->
+                    <line x1="450" y1="120" x2="350" y2="320" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red-end)" />
+                    <text x="385" y="215" fill="#ef4444" font-size="16" font-weight="bold">y_G</text>
+
+                    <!-- Arrow y_C -->
+                    <line x1="500" y1="140" x2="380" y2="380" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red-end)" />
+                    <text x="430" y="255" fill="#ef4444" font-size="16" font-weight="bold">y_C</text>
+
+                    <!-- Force Vectors dF and F (PERFECTLY Normal to Plane Line) -->
+                    <!-- dF at 'a' (230, 200) -->
+                    <line x1="150" y1="160" x2="225" y2="197" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <text x="120" y="155" fill="#f1f5f9" font-size="18" font-weight="bold">dF</text>
+                    <circle cx="230" cy="200" r="4" fill="#ef4444" />
+                    <text x="240" y="215" fill="#ef4444" font-size="16" font-weight="bold">a</text>
+
+                    <!-- Total Resultant Force F at 'c' (180, 300) -->
+                    <line x1="60" y1="240" x2="175" y2="297" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white-end)" />
+                    <text x="30" y="235" fill="#f1f5f9" font-size="22" font-weight="bold">F</text>
+                    <circle cx="180" cy="300" r="4" fill="#ef4444" />
+                    <text x="190" y="320" fill="#ef4444" font-size="16" font-weight="bold">c</text>
+
+                    <!-- Theta Angle -->
+                    <line x1="300" y1="60" x2="240" y2="60" stroke="#f1f5f9" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <path d="M 260 60 A 40 40 0 0 0 280 100" fill="none" stroke="#f1f5f9" stroke-width="1.5" />
+                    <text x="250" y="90" fill="#f1f5f9" font-size="16">θ</text>
+                </svg>
+            </div>
+
+            <p>Let $y$ be the distance measured along the inclined plane from the free surface axis O-O'.</p>
+            <p>The depth of any element $dA$ is $h = y \sin\theta$.</p>
+            <p>Pressure on element $dA$: $P = \rho g h = \rho g (y \sin\theta)$.</p>
+            <p>Force on element $dA$: $dF = P \cdot dA = \rho g y \sin\theta \cdot dA$.</p>
+            
+            <p>Total Force $F = \int dF = \int \rho g y \sin\theta dA$. Since $\rho, g$, and $\sin\theta$ are constants:</p>
+            <p>$$F = \rho g \sin\theta \int y dA$$</p>
+            
+            <p>The integral $\int y dA$ is the <em>First Moment of Area</em> about the axis O-O', which is equal to $A \cdot y_G$, where $y_G$ is the distance to the Centroid (Center of Gravity) from the free surface along the plane.</p>
+            
+            <p>Substituting this back: $F = \rho g \sin\theta (A y_G) = A [(\rho g) (y_G \sin\theta)]$.</p>
+            <p>Since $y_G \sin\theta = h_G$ (the vertical depth of the centroid), the pressure at the centroid is $P_G = \rho g h_G$.</p>
+
+            <div class="formula-box">
+                <p>$$F = P_G \times A$$</p>
+                <p>Magnitude = [Pressure at the Centroid] &times; [Total Submerged Area]</p>
+            </div>
+
+            <h3>3. Line of Action (Center of Pressure, C)</h3>
+            <p>The resultant force $F$ acts through a point on the surface known as the <strong>Center of Pressure ($C$)</strong>.</p>
+            <p>To find the distance $y_C$ from O-O' to the Center of Pressure, we take moments about the axis O-O'. The moment of the resultant force must equal the sum of the moments of the distributed forces.</p>
+            <p>$$F \cdot y_C = \int y \cdot dF$$</p>
+            <p>Substitute $F = \rho g \sin\theta \cdot A y_G$ and $dF = \rho g y \sin\theta dA$:</p>
+            <p>$$(\rho g \sin\theta \cdot A y_G) y_C = \int y (\rho g y \sin\theta dA) = \rho g \sin\theta \int y^2 dA$$</p>
+            
+            <p>The integral $\int y^2 dA$ is the <em>Second Moment of Area</em> ($I_{OO}$) of the submerged surface about the free surface axis O-O'.</p>
+            <p>$$y_C = \frac{I_{OO}}{A y_G}$$</p>
+
+            <p>Using the <strong>Parallel Axis Theorem</strong> ($I_{OO} = I_{GG} + A y_G^2$), where $I_{GG}$ is the second moment of area about the centroidal axis parallel to O-O':</p>
+            
+            <div class="formula-box">
+                <p>$$y_C = \frac{I_{GG} + A y_G^2}{A y_G} = y_G + \frac{I_{GG}}{A y_G}$$</p>
+            </div>
+
+            <p><strong>Key Deductions:</strong></p>
+            <ul class="fluid-list">
+                <li>Since $I_{GG}$ is always positive, $y_C$ is always greater than $y_G$. <strong>The Center of Pressure is always below the Centroid.</strong></li>
+                <li>As the depth of immersion ($y_G$) increases, the term $\frac{I_{GG}}{A y_G}$ approaches zero. Thus, at very deep immersions, the Center of Pressure ($y_C$) approaches the Centroid ($y_G$).</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section">
+            <h2>3.3 Second Moments of Area ($I_{GG}$) for Common Shapes</h2>
+            
+            <div class="table-wrapper">
+                <table class="fluid-table">
+                    <tr>
+                        <th>Shape</th>
+                        <th>Diagram</th>
+                        <th>Area ($A$)</th>
+                        <th>Centroid Depth ($h_G$ or $y_G$)</th>
+                        <th>Second Moment ($I_{GG}$)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Rectangle</strong></td>
+                        <td style="text-align:center;">
+                            <svg width="60" height="40">
+                                <rect x="5" y="5" width="50" height="30" fill="none" stroke="#f1f5f9" stroke-width="2"/>
+                                <line x1="0" y1="20" x2="60" y2="20" stroke="#ef4444" stroke-dasharray="2,2"/>
+                            </svg>
+                        </td>
+                        <td>$b \times h$</td>
+                        <td>$h / 2$</td>
+                        <td>$$\frac{b h^3}{12}$$</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Circle</strong></td>
+                        <td style="text-align:center;">
+                            <svg width="40" height="40">
+                                <circle cx="20" cy="20" r="15" fill="none" stroke="#f1f5f9" stroke-width="2"/>
+                                <line x1="0" y1="20" x2="40" y2="20" stroke="#ef4444" stroke-dasharray="2,2"/>
+                            </svg>
+                        </td>
+                        <td>$\frac{\pi d^2}{4}$</td>
+                        <td>$d / 2$</td>
+                        <td>$$\frac{\pi d^4}{64}$$</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Triangle</strong> (Base horizontal)</td>
+                        <td style="text-align:center;">
+                            <svg width="60" height="40">
+                                <polygon points="30,5 5,35 55,35" fill="none" stroke="#f1f5f9" stroke-width="2"/>
+                                <line x1="0" y1="25" x2="60" y2="25" stroke="#ef4444" stroke-dasharray="2,2"/>
+                            </svg>
+                        </td>
+                        <td>$\frac{b \times h}{2}$</td>
+                        <td>$h / 3$ (from base)</td>
+                        <td>$$\frac{b h^3}{36}$$</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>3.4 The Pressure Diagram (Pressure Prism)</h2>
+            <p>A Pressure Diagram is a visual representation showing the variation of hydrostatic pressure along a submerged surface. For a vertical or inclined plane surface, the pressure increases linearly with depth, forming a trapezoidal shape.</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Pressure Diagram on a Vertical Plane Surface</h4>
+                <svg viewBox="0 0 700 360" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End/Start Markers -->
+                        <marker id="arrow-blue-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                        </marker>
+                        <marker id="arrow-yellow-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                        </marker>
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#94a3b8" />
+                        </marker>
+                        <marker id="arrow-white-start" markerWidth="12" markerHeight="12" refX="0" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M12,0 L0,6 L12,12 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+
+                    <!-- Free Surface -->
+                    <line x1="80" y1="60" x2="650" y2="60" stroke="#3b82f6" stroke-width="3" />
+                    <polygon points="300,60 290,40 310,40" fill="none" stroke="#3b82f6" stroke-width="1.5" />
+                    <text x="480" y="45" fill="#3b82f6" font-size="18">Free Surface</text>
+
+                    <!-- Submerged Vertical Wall AB -->
+                    <line x1="250" y1="60" x2="250" y2="300" stroke="#f1f5f9" stroke-width="4" />
+                    <text x="220" y="80" fill="#f1f5f9" font-weight="bold" font-size="20">A</text>
+                    <text x="220" y="305" fill="#f1f5f9" font-weight="bold" font-size="20">B</text>
+
+                    <!-- Height labels (Dual-ended flush markers) -->
+                    <line x1="200" y1="60" x2="200" y2="300" stroke="#94a3b8" stroke-width="1" marker-start="url(#arrow-white-start)" marker-end="url(#arrow-white-end)" />
+                    <text x="180" y="185" fill="#94a3b8" font-size="18">h</text>
+
+                    <!-- Pressure Distribution Graph (Triangle extending to the right) -->
+                    <!-- Blue vectors show pressure magnitude pushing right -->
+                    <line x1="250" y1="120" x2="310" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue-end)" />
+                    <line x1="250" y1="180" x2="370" y2="180" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue-end)" />
+                    <line x1="250" y1="240" x2="430" y2="240" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue-end)" />
+                    <line x1="250" y1="300" x2="490" y2="300" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue-end)" />
+                    
+                    <text x="510" y="305" fill="#3b82f6" font-size="18">P_B = ρ g h</text>
+                    
+                    <!-- Enclosing line of the pressure prism -->
+                    <line x1="250" y1="60" x2="495" y2="300" stroke="#14b8a6" stroke-width="3" />
+
+                    <!-- Resultant Force F (Yellow arrow pointing LEFT into the wall) -->
+                    <!-- Force acts at h/3 from the base. h=240. h/3 = 80. y = 300 - 80 = 220 -->
+                    <!-- Line drawn from Right to Left so the standard marker points Left natively -->
+                    <line x1="430" y1="220" x2="265" y2="220" stroke="#facc15" stroke-width="4" marker-end="url(#arrow-yellow-end)" />
+                    <text x="445" y="227" fill="#facc15" font-weight="bold" font-size="22">F</text>
+                    <text x="470" y="225" fill="#facc15" font-size="16">Acts at h/3 from base</text>
+                </svg>
+            </div>
+
+            <p>For a plane surface of uniform width $b$, extending from depth $h_1$ to $h_2$, the pressure diagram is a trapezoid. The area of this pressure diagram gives the force per unit width.</p>
+            <div class="formula-box">
+                <p>$$Force / Unit\ Width = Area\ of\ the\ Pressure\ Diagram$$</p>
+                <p>$$F / b = \frac{(P_1 + P_2)}{2} \times (h_2 - h_1)$$</p>
+            </div>
+            <p>If the surface starts at the free surface ($h_1 = 0$, $P_1 = 0$), the pressure diagram is a triangle. The resultant force $F$ acts through the centroid of this triangular pressure diagram, which is located at a distance of $h/3$ from the base (or $2h/3$ from the free surface).</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>3.5 Hydrostatic Thrust on Curved Surfaces</h2>
+            <p>When calculating the hydrostatic thrust on a curved surface, it is mathematically much simpler to resolve the resultant force into horizontal and vertical components rather than integrating over the complex curved geometry.</p>
+            
+            <h3>1. Horizontal Component ($F_H$)</h3>
+            <div class="highlight-fluid">
+                <p><strong>The Horizontal Component ($F_H$) of the hydrostatic thrust on a curved surface is exactly equal to the thrust on the vertical projection of that curved surface.</strong></p>
+            </div>
+            <p>It acts horizontally through the Center of Pressure of this vertically projected plane area.</p>
+
+            <h3>2. Vertical Component ($F_V$)</h3>
+            <div class="highlight-fluid">
+                <p><strong>The Vertical Component ($F_V$) of the hydrostatic thrust on a curved surface is equal to the weight of the fluid volume located directly above the submerged surface (extending up to the free surface).</strong></p>
+            </div>
+            <p>$$F_V = Weight\ of\ Fluid = Volume \times \rho g$$</p>
+            <p>It acts downwards through the Center of Gravity of this overlying fluid volume.</p>
+            <p><em>Note: If the fluid is below the curved surface (pushing up), $F_V$ is equal to the weight of the imaginary volume of fluid that would exist above the surface up to the free surface level, acting upwards.</em></p>
+
+            <h3>Resultant Thrust on Curved Surface</h3>
+            <p>Once $F_H$ and $F_V$ are found, the magnitude and angle of the total resultant force $F$ are calculated using vector addition:</p>
+            <div class="formula-box">
+                <p>$$F = \sqrt{F_H^2 + F_V^2}$$</p>
+                <p>$$\tan\theta = \frac{F_V}{F_H}$$</p>
+            </div>
+        </section>
+
+        <section class="fluid-section video-section">
+            <h2 style="text-align: center; border-bottom: none;">Video Lecture: Hydraulic Thrust on Plane Surfaces</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/9hYGFT6v5O4" title="Hydrostatic Thrust Explanation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>Chapter Knowledge Check</h2>
+            <p class="quiz-intro">Test your understanding of Hydrostatic Thrust concepts covered above.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. How is the magnitude of the hydrostatic thrust on a submerged plane surface calculated?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) By multiplying the total area by the pressure at the deepest point of the surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>B) By multiplying the total submerged area by the pressure located at the centroid of the surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>C) By integrating the volume of fluid above the plane.</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) By dividing the Second Moment of Area by the Centroid depth.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the spatial relationship between the Center of Pressure ($C$) and the Centroid ($G$) for a submerged vertical plane?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) The Center of Pressure is always exactly at the Centroid.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>B) The Center of Pressure is always located above the Centroid.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>C) The Center of Pressure is always located below the Centroid.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) The Center of Pressure location depends entirely on the atmospheric pressure.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. As a submerged plane surface is lowered deeper into a fluid, what happens to the distance between the Center of Pressure and the Centroid?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) The distance increases linearly with depth.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>B) The distance decreases, and the Center of Pressure approaches the Centroid.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) The distance remains completely unchanged.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) The Center of Pressure moves above the Centroid.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. For a vertical rectangular wall of height $h$ starting from the free surface of water, at what depth does the resultant hydrostatic force act?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>A) $h / 2$</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>B) $2h / 3$ from the free surface (or $h/3$ from the base).</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) $h / 3$ from the free surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) It acts exactly at the bottom base $h$.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. How is the Vertical Component ($F_V$) of the hydrostatic thrust on a curved surface calculated?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) By taking the thrust on the horizontal projection of the surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>B) By integrating the Second Moment of Area of the curve.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>C) It is equal to the weight of the fluid volume directly above the curved surface extending to the free surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) By applying Newton's Law of Viscosity.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. How is the Horizontal Component ($F_H$) of the hydrostatic thrust on a curved surface determined?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>A) It is equal to the hydrostatic thrust calculated on the vertical projection of the curved surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>B) It is zero because horizontal forces cancel out.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) It is equal to the fluid weight divided by the horizontal length.</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) It requires complex 3D integration of the curved boundary equation.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q7">
+                <p class="question-text"><strong>7. What does the "Area of the Pressure Diagram" represent for a vertical plane surface?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>A) The total submerged area of the plane.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="correct"> <span>B) The total hydrostatic force per unit width of the surface.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>C) The location of the Center of Pressure.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>D) The total volume of the fluid pushing on the surface.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q8">
+                <p class="question-text"><strong>8. What is the equation for the Second Moment of Area ($I_{GG}$) of a rectangle (base $b$, height $h$) about its centroidal axis?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>A) $b h / 2$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="correct"> <span>B) $b h^3 / 12$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>C) $b h^3 / 36$</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>D) $\pi h^4 / 64$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q9">
+                <p class="question-text"><strong>9. If a fluid is in equilibrium, what type of stresses are entirely absent within the fluid mass?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>A) Normal stresses</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="correct"> <span>B) Shear stresses</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>C) Compressive stresses</span></label>
+                    <label class="option-label"><input type="radio" name="q9" value="wrong"> <span>D) Hydrostatic stresses</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q10">
+                <p class="question-text"><strong>10. The Parallel Axis Theorem relates the Second Moment of Area about the free surface ($I_{OO}$) to the centroidal axis ($I_{GG}$). Which formula represents this theorem?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>A) $I_{OO} = I_{GG} \times A y_G$</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="correct"> <span>B) $I_{OO} = I_{GG} + A y_G^2$</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>C) $I_{OO} = I_{GG} / (A y_G^2)$</span></label>
+                    <label class="option-label"><input type="radio" name="q10" value="wrong"> <span>D) $I_{OO} = I_{GG} - A y_G^2$</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid #14b8a6";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid #ef4444";
+                        }
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') correctCount++;
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

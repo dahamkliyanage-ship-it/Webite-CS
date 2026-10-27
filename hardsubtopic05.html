@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="bot-context" content="Topic: Computer Systems & Hardware : Embedded Systems. Focus on the definition and purpose of embedded systems, their differences from general-purpose computers, real-world applications in cars, washing machines, smart appliances, industrial machines, and wearable devices, and their basic components (microcontrollers or processors, memory, input devices and sensors, and output devices and actuators).">
+<title>CS1033 | Embedded Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hardsubtopics.css">
+
+
+<link rel="stylesheet" href="chatbot_style.css">
+</head>
+<body>
+
+<div class="titlebar">
+  
+  <div class="filetab">Embedded</div>
+</div>
+
+<div class="layout">
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#what-is" class="ln-link"><span class="ln">01</span>What are Embedded Systems?</a></li>
+      <li><a href="#examples" class="ln-link"><span class="ln">02</span>Everyday Examples</a></li>
+      <li><a href="#components" class="ln-link"><span class="ln">03</span>Basic Components</a></li>
+      <li><a href="#summary" class="ln-link"><span class="ln">04</span>Key Idea</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="kicker">05. EMBEDDED SYSTEMS</div>
+    <h1 class="title">Embedded <span class="kw">Systems</span></h1>
+    <p class="lead-text" style="margin-bottom: 40px;">
+      An embedded system is a computer system built into a larger device to perform a specific function or set of functions. Unlike a general-purpose computer, an embedded system is usually designed for a particular task and may have limited resources.
+    </p>
+
+    <!-- SECTION 1: WHAT IS IT -->
+    <section id="what-is" style="padding-top: 0; margin-top: 0;">
+      <div class="callout string">
+        <span class="tag">&gt;&gt; REAL-WORLD EXAMPLE</span>
+        <p>The computer inside a washing machine controls functions such as washing cycles, water levels, and timing.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: EXAMPLES -->
+    <section id="examples">
+      <h2><span class="idx">02.</span> Everyday Examples</h2>
+      <p>Embedded systems are found in many everyday devices around us:</p>
+
+      <div class="roadmap-grid">
+        <div class="card">
+          <span class="tag tag-1">Automotive</span>
+          <h2>Cars</h2>
+          <p>Engine control, airbags, and automated parking systems.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-2">Domestic</span>
+          <h2>Washing Machines</h2>
+          <p>Control washing cycles, temperatures, and water levels.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-3">Home</span>
+          <h2>Smart Appliances</h2>
+          <p>Monitor and control functions like refrigeration or climate.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-4">Commercial</span>
+          <h2>Industrial Machines</h2>
+          <p>Control and monitor manufacturing processes on assembly lines.</p>
+        </div>
+        <div class="card">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">Personal</span>
+          <h2>Smart Devices</h2>
+          <p>Handle specific device functions in wearables and handhelds.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: COMPONENTS -->
+    <section id="components">
+      <h2><span class="idx">03.</span> Basic Components</h2>
+      <p>Although embedded systems can vary greatly, a basic embedded system commonly contains a similar architecture:</p>
+
+      <div class="stack">
+        <div class="stack-item">
+          <span class="stack-tag" style="background: rgba(247,118,142,.15); color: var(--red);">PROCESS</span>
+          <div>
+            <h3>Microcontroller / Processor</h3>
+            <p>The main processing unit that executes instructions and controls the system.</p>
+          </div>
+        </div>
+        <div class="stack-item">
+          <span class="stack-tag" style="background: rgba(224,175,104,.15); color: var(--warn);">STORE</span>
+          <div>
+            <h3>Memory</h3>
+            <p>Stores the program instructions and data needed by the system.</p>
+          </div>
+        </div>
+        <div class="stack-item">
+          <span class="stack-tag" style="background: rgba(187,154,247,.15); color: var(--type);">RECEIVE</span>
+          <div>
+            <h3>Input</h3>
+            <p>Receives information from the environment through sensors or other input devices.</p>
+          </div>
+        </div>
+        <div class="stack-item">
+          <span class="stack-tag" style="background: rgba(158,206,106,.15); color: var(--string);">ACT</span>
+          <div>
+            <h3>Output</h3>
+            <p>Controls other parts of the device using actuators, displays, LEDs, motors, etc.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout warn" style="text-align: center; font-size: 18px; font-weight: bold; margin-top: 30px;">
+        <span class="tag" style="margin: 0 auto 10px auto;">&gt;&gt; A SIMPLE MODEL</span>
+        Input &rarr; Processing &rarr; Output
+      </div>
+    </section>
+
+    <!-- SECTION 4: SUMMARY -->
+    <section id="summary">
+      <div class="callout type">
+        <span class="tag">&gt;&gt; KEY IDEA</span>
+        <p>An embedded system is essentially a computer designed for a specific purpose and built into a larger device.</p>
+      </div>
+    </section>
+
+    <!-- PAGE ROUTING NAVIGATION -->
+    <section class="cta" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center;">
+      
+      
+      <div class="route-buttons" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-top: 30px;">
+        <a class="prev-btn" href="hardsubtopic04.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Previous: Software & OS
+        </a>
+
+        <a class="next-btn" href="hardsubtopic06.html">
+          Next: Current & Future Trends
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Floating Chat Icon -->
+    <div id="chatbot-icon">💬</div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="chatbotCS.js"></script>
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

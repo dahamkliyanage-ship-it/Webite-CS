@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Fluid Machinery</title>
+    <link rel="stylesheet" href="fluid-style.css">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="chatbot_style.css">
+    
+    <!-- Chatbot Context -->
+    <meta name="bot-context" content="Fluid machinery, positive displacement and rotodynamic machines, centrifugal pumps, pump performance curves, and turbines (reaction and impulse).">
+
+    <!-- MathJax Configuration to ensure $ and \(\) render inline math properly -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.firebasestorage.app",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="fluid-container">
+        
+        <header class="fluid-header">
+            <div class="header-inner">
+                <span class="fluid-tag">CE1023 - Fluid Mechanics</span>
+                <h1>8.0 Fluid Machinery</h1>
+                <p>Comprehensive overview of devices that convert fluid energy to mechanical energy or vice versa, including the principles of positive displacement and rotodynamic machines, pump performance, and turbines.</p>
+            </div>
+        </header>
+
+        <section class="fluid-section">
+            <h2>8.1 Introduction to Fluid Machinery</h2>
+            <div class="highlight-fluid">
+                <p><strong>Fluid Machine:</strong> A device which transfers energy between its operating mechanical parts (moving/rotating) and a fluid. It converts the energy stored by a fluid into mechanical energy, or vice versa.</p>
+            </div>
+            
+            <p><strong>Classification Based on the Direction of Energy Transfer:</strong></p>
+            <ul class="fluid-list">
+                <li><strong>Machine $\rightarrow$ Fluid:</strong> Energy is added to the fluid. Examples include <strong>Pumps</strong> (transfer energy to liquids), and <strong>Fans, Blowers, or Compressors</strong> (transfer energy to gases).</li>
+                <li><strong>Fluid $\rightarrow$ Machine:</strong> Energy is extracted from the fluid. Examples include <strong>Turbines</strong> and <strong>Fluid Motors</strong>.</li>
+                <li><strong>Fluid as a Medium:</strong> The fluid is used strictly to transmit force/energy without continuous flow. Example: <strong>Hydraulic Jack</strong> ($P = F/A = f/a$).</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section">
+            <h2>8.2 Classification Based on Principle of Operation</h2>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>a. Positive Displacement Machines</h4>
+                    <p>Fluid is taken into an enclosed space and forced out by repeated (cyclic) mechanical action.</p>
+                    <p><em>Examples:</em> Piston (Reciprocating) pumps, Rotary gear pumps.</p>
+                    <p>Often used for transferring highly viscous fluids (oil, fuel) or generating extremely high pressures.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>b. Rotodynamic Machines</h4>
+                    <p>Energy is continuously exchanged between a flowing fluid and a spinning rotor or impeller.</p>
+                    <p><em>Rotating Elements:</em> <strong>Impeller</strong> (in Pumps), <strong>Runner</strong> (in Turbines), <strong>Rotor</strong> (in Fans).</p>
+                    <p>Flow directions can be Axial, Radial, or Mixed.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="fluid-section">
+            <h2>8.3 Centrifugal Pumps (Rotodynamic)</h2>
+            <p>Centrifugal pumps are the most commonly used radial-flow rotodynamic machines. Their primary purpose is to raise a liquid from a lower elevation to a higher elevation over a wide range of flow rates ($Q$) and heads ($H$).</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Cross-Section of a Centrifugal Pump</h4>
+                <!-- Mathematically Precise SVG Implementation -->
+                <svg viewBox="0 0 600 380" style="width: 100%; height: auto; max-width: 550px; display: block; margin: 0 auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-blue-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                        </marker>
+                        <marker id="arrow-yellow-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#facc15" />
+                        </marker>
+                    </defs>
+
+                    <!-- Volute Casing (Precision Bezier Curve Expansion) -->
+                    <!-- Straight delivery pipe transitioning into an expanding spiral -->
+                    <path d="M 230 40 L 230 160 C 120 160, 120 350, 265 350 C 380 350, 370 200, 330 200 L 330 40" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
+
+                    <!-- Impeller Backplate Base -->
+                    <circle cx="265" cy="245" r="65" fill="#1e293b" stroke="#14b8a6" stroke-width="3" />
+                    
+                    <!-- Impeller Vanes (6 geometrically arrayed, perfectly symmetric swept-back blades) -->
+                    <g stroke="#14b8a6" stroke-width="3" fill="none" stroke-linecap="round">
+                        <path d="M 265 230 Q 300 210 325 220" transform="rotate(0 265 245)" />
+                        <path d="M 265 230 Q 300 210 325 220" transform="rotate(60 265 245)" />
+                        <path d="M 265 230 Q 300 210 325 220" transform="rotate(120 265 245)" />
+                        <path d="M 265 230 Q 300 210 325 220" transform="rotate(180 265 245)" />
+                        <path d="M 265 230 Q 300 210 325 220" transform="rotate(240 265 245)" />
+                        <path d="M 265 230 Q 300 210 325 220" transform="rotate(300 265 245)" />
+                    </g>
+
+                    <!-- Impeller Central Eye -->
+                    <circle cx="265" cy="245" r="15" fill="#0f172a" stroke="#14b8a6" stroke-width="2" />
+                    <circle cx="265" cy="245" r="6" fill="#3b82f6" />
+
+                    <!-- Rotation Indicator Arc (CW) -->
+                    <path d="M 245 270 A 30 30 0 0 0 285 270" fill="none" stroke="#facc15" stroke-width="3" marker-end="url(#arrow-yellow-end)" />
+                    <text x="280" y="290" fill="#facc15" font-size="16" font-weight="bold">ω</text>
+
+                    <!-- Dashed Flow Tracking Line (Spirals from eye out to delivery) -->
+                    <path d="M 255 260 C 170 280, 160 330, 265 330 C 350 330, 350 200, 280 180 L 280 60" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="8,5" marker-end="url(#arrow-blue-end)" />
+                    
+                    <!-- Solid Direct Delivery Flow Arrow inside pipe -->
+                    <line x1="280" y1="140" x2="280" y2="40" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow-blue-end)" />
+                    
+                    <!-- Precision Labels -->
+                    <text x="340" y="70" fill="#3b82f6" font-size="18" font-weight="bold">Q_o (Delivery)</text>
+                    
+                    <text x="160" y="250" fill="#3b82f6" font-size="16" font-weight="bold">Eye</text>
+                    <line x1="195" y1="245" x2="245" y2="245" stroke="#3b82f6" stroke-width="2" />
+                    
+                    <text x="375" y="250" fill="#14b8a6" font-size="16" font-weight="bold">Impeller</text>
+                    <line x1="365" y1="245" x2="335" y2="245" stroke="#14b8a6" stroke-width="2" />
+                    
+                    <text x="390" y="325" fill="#94a3b8" font-size="16" font-weight="bold">Volute Casing</text>
+                    <line x1="380" y1="320" x2="345" y2="335" stroke="#94a3b8" stroke-width="2" />
+                </svg>
+            </div>
+
+            <p><strong>Operation Sequence:</strong></p>
+            <ol class="fluid-list">
+                <li>The volute must first be completely filled with fluid (<strong>Primed</strong>).</li>
+                <li>The impeller is rotated by a motor. Centrifugal force pushes the fluid from the inner radius (the <strong>Eye</strong>) out to the outer radius.</li>
+                <li>Water moves out into the volute. This creates a low-pressure zone (vacuum) at the eye.</li>
+                <li>Atmospheric pressure acting on the supply reservoir forces new liquid up the suction pipe and into the eye.</li>
+            </ol>
+            <p><strong>The Volute:</strong> The volute is a casing with a gradually increasing cross-sectional area. As fluid collects in the volute, its velocity is deliberately slowed down ($Q = AV \implies V \downarrow$ as $A \uparrow$). This converts kinetic energy into static pressure energy, reducing energy losses before discharging into the delivery pipe.</p>
+        </section>
+
+        <section class="fluid-section">
+            <h2>8.4 Pump Performance & System Characteristics</h2>
+            <p>For a given pump running at a constant speed, there is a unique relationship between the Head ($H$) and the Discharge ($Q$). The manufacturer provides these Performance Curves.</p>
+
+            <ul class="fluid-list">
+                <li><strong>Head ($H$) vs $Q$:</strong> Typically a downward-sloping curve. As flow rate increases, the head the pump can provide decreases.</li>
+                <li><strong>Efficiency ($\eta$) vs $Q$:</strong> A parabolic curve that peaks at the Best Efficiency Point (BEP).</li>
+                <li><strong>Power Input ($P_i$) vs $Q$:</strong> Generally increases with flow rate.</li>
+            </ul>
+
+            <div class="formula-box">
+                <p><strong>Power of a Fluid (Power Output):</strong></p>
+                <p>$$P_o = \gamma Q H = \rho g Q H$$</p>
+                <p>$$P_i = \frac{P_o}{\eta} = \frac{\gamma Q H}{\eta}$$</p>
+            </div>
+
+            <h3>System Load Curve</h3>
+            <p>When a pump is installed in a pipeline, the system requires a specific head to maintain a flow rate $Q$. By applying Bernoulli's equation from the lower reservoir (1) to the upper reservoir (2):</p>
+            <p>$$H_1 + H_{pump} = H_2 + H_L$$</p>
+            <p>$$H_{pump} = (z_2 - z_1) + H_L = H_0 + K Q^2$$</p>
+            <p>Where $H_0$ is the total static elevation lift, and $K Q^2$ represents the dynamic head losses (pipe friction and local minor losses).</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Operating Point (Pump vs System Curve)</h4>
+                <svg viewBox="0 0 600 350" style="width: 100%; height: auto;">
+                    <defs>
+                        <marker id="arrow-white-end" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                    </defs>
+
+                    <!-- Axes -->
+                    <line x1="50" y1="300" x2="550" y2="300" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <line x1="50" y1="300" x2="50" y2="50" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-white-end)" />
+                    <text x="560" y="310" fill="#f1f5f9" font-weight="bold">Q (Discharge)</text>
+                    <text x="30" y="40" fill="#f1f5f9" font-weight="bold">H</text>
+
+                    <!-- Pump Characteristic Curve (H vs Q) -->
+                    <!-- Path mathematically forced to cross exactly at (250, 150) -->
+                    <path d="M 50 80 Q 150 90 250 150 Q 350 210 450 300" fill="none" stroke="#14b8a6" stroke-width="3" />
+                    <text x="460" y="295" fill="#14b8a6" font-weight="bold">Pump Curve (H)</text>
+
+                    <!-- System Characteristic Curve -->
+                    <!-- Path mathematically forced to cross exactly at (250, 150) -->
+                    <path d="M 50 220 Q 150 210 250 150 Q 350 90 450 50" fill="none" stroke="#facc15" stroke-width="3" />
+                    <text x="460" y="60" fill="#facc15" font-weight="bold">System Curve</text>
+                    <text x="15" y="225" fill="#facc15" font-weight="bold">H_0</text>
+
+                    <!-- Operating Point A (Exact Intersection) -->
+                    <circle cx="250" cy="150" r="6" fill="#ef4444" />
+                    <text x="265" y="145" fill="#ef4444" font-weight="bold" font-size="18">Operating Point (A)</text>
+                    
+                    <!-- Projections to axes -->
+                    <line x1="250" y1="150" x2="250" y2="300" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,5" />
+                    <text x="240" y="325" fill="#ef4444" font-weight="bold">Q_A</text>
+
+                    <line x1="250" y1="150" x2="50" y2="150" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,5" />
+                    <text x="15" y="155" fill="#ef4444" font-weight="bold">H_A</text>
+                </svg>
+            </div>
+            
+            <div class="highlight-fluid">
+                <p><strong>Operating Point:</strong> The exact discharge ($Q_A$) and head ($H_A$) at which a specific pump will operate when connected to a specific pipeline system. It is found at the geometric intersection of the Pump Curve and the System Curve.</p>
+            </div>
+            
+            <h3>Pumps in Series and Parallel</h3>
+            <ul class="fluid-list">
+                <li><strong>Parallel Pumps:</strong> Flow rates ($Q$) are added together for a given Head ($H$). Used to increase total discharge.</li>
+                <li><strong>Series Pumps:</strong> Heads ($H$) are added together for a given Flow rate ($Q$). Used to overcome high static heads ($H_0$).</li>
+            </ul>
+        </section>
+
+        <section class="fluid-section">
+            <h2>8.5 Turbines</h2>
+            <p>Turbines extract energy from a flowing fluid and convert it into rotational mechanical energy, typically to drive an electrical generator.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Reaction Turbines</h4>
+                    <p>Operate under a combination of pressure and velocity changes. Water completely fills the casing and is diverted from the outer diameter through guide vanes into the inner runner.</p>
+                    <p><em>Examples:</em> Francis Turbine (Radial/Mixed flow), Kaplan Turbine (Axial flow). Used for low to medium heads.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Impulse Turbines</h4>
+                    <p>Operate entirely on the kinetic energy of a high-velocity jet striking buckets on a wheel. The pressure remains atmospheric throughout the runner.</p>
+                    <p><em>Examples:</em> Pelton Wheel. Used for very high elevation heads.</p>
+                </div>
+            </div>
+
+            <h3>Force and Power on an Impulse Turbine (Pelton Wheel)</h3>
+            <p>A nozzle converts the pressure head of the penstock into a high-velocity jet ($v_1$). The jet strikes a moving bucket (velocity $u$) and is deflected by an angle $\beta$ (or $180 - \theta$).</p>
+
+            <div class="diagram-box">
+                <h4 style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-weight: normal;">Jet Striking a Moving Pelton Bucket</h4>
+                <svg viewBox="0 0 600 300" style="width: 100%; height: auto;">
+                    <defs>
+                        <!-- Precision End Markers -->
+                        <marker id="arrow-blue-end-small" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#3b82f6" />
+                        </marker>
+                        <marker id="arrow-white-end-small" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+                            <path d="M0,0 L12,6 L0,12 z" fill="#f1f5f9" />
+                        </marker>
+                    </defs>
+
+                    <!-- Bucket Profile (Double Cup) -->
+                    <path d="M 280 80 Q 350 150 280 220" fill="none" stroke="#f1f5f9" stroke-width="4" />
+                    <path d="M 280 80 Q 220 150 280 220" fill="none" stroke="#f1f5f9" stroke-width="4" />
+                    <path d="M 280 80 L 280 220" fill="none" stroke="#94a3b8" stroke-width="2" />
+                    <text x="320" y="240" fill="#f1f5f9" font-weight="bold">Moving Bucket</text>
+
+                    <!-- Bucket Velocity u -->
+                    <line x1="300" y1="50" x2="380" y2="50" stroke="#f1f5f9" stroke-width="3" marker-end="url(#arrow-white-end-small)" />
+                    <text x="335" y="40" fill="#f1f5f9" font-weight="bold" font-size="18">u</text>
+
+                    <!-- Entering Jet -->
+                    <line x1="50" y1="150" x2="250" y2="150" stroke="#3b82f6" stroke-width="6" marker-end="url(#arrow-blue-end-small)" />
+                    <text x="130" y="140" fill="#3b82f6" font-weight="bold" font-size="18">v_1 (Jet)</text>
+
+                    <!-- Deflected Jets (Relative Velocity) -->
+                    <path d="M 280 150 Q 320 100 240 60" fill="none" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow-blue-end-small)" />
+                    <path d="M 280 150 Q 320 200 240 240" fill="none" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow-blue-end-small)" />
+
+                    <!-- Deflection Angle -->
+                    <line x1="280" y1="150" x2="400" y2="150" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4" />
+                    <path d="M 330 150 A 50 50 0 0 0 280 100" fill="none" stroke="#facc15" stroke-width="2" />
+                    <text x="340" y="130" fill="#facc15" font-weight="bold" font-size="16">θ (Deflection)</text>
+                </svg>
+            </div>
+
+            <p>Applying the steady flow momentum equation to a continuous series of moving vanes, the force exerted on the runner in the direction of motion is:</p>
+            <div class="formula-box">
+                <p>$$F = \rho Q (v_1 - u)(1 + k \cos\beta)$$</p>
+                <p>$$Power\ (P) = F \cdot u = \rho Q u (v_1 - u)(1 + k \cos\beta)$$</p>
+            </div>
+            <p>Where $k$ is the friction loss coefficient across the bucket (if frictionless, $k = 1$), and $\beta = 180^\circ - \theta$.</p>
+            
+            <div class="highlight-fluid">
+                <p><strong>Maximum Efficiency:</strong> By differentiating Power with respect to bucket speed ($dP/du = 0$), maximum energy transfer occurs when the bucket moves at exactly half the speed of the incoming water jet: <strong>$u = 0.5 v_1$</strong>.</p>
+            </div>
+        </section>
+
+        <!-- Dynamic Assessment Section -->
+        <section class="quiz-section">
+            <h2>Chapter Knowledge Check</h2>
+            <p class="quiz-intro">Test your understanding of Fluid Machinery concepts.</p>
+            
+            <div class="mcq-card" id="q1">
+                <p class="question-text"><strong>1. Which of the following is an example of a Positive Displacement Machine?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>A) Centrifugal Pump</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="correct"> <span>B) Piston (Reciprocating) Pump</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>C) Axial Flow Fan</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="wrong"> <span>D) Francis Turbine</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q2">
+                <p class="question-text"><strong>2. What is the primary function of the Volute casing in a centrifugal pump?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>A) To impart extreme kinetic energy directly to the fluid.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>B) To filter impurities from the liquid.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="correct"> <span>C) To gradually slow down the fluid, converting kinetic energy into static pressure energy to reduce losses.</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="wrong"> <span>D) To increase the rotational speed of the impeller.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q3">
+                <p class="question-text"><strong>3. The "Operating Point" of a pump installed in a pipeline system is defined as:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>A) The point of maximum achievable head ($H$) at zero flow.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="correct"> <span>B) The geometric intersection of the Pump Performance Curve and the System Load Curve.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>C) The absolute maximum efficiency point provided by the manufacturer.</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="wrong"> <span>D) The point where the fluid cavitates in the suction pipe.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q4">
+                <p class="question-text"><strong>4. If a water supply system requires a very high delivery Head ($H$) that a single pump cannot overcome, what is the proper configuration?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q4" value="correct"> <span>A) Install multiple pumps in Series.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>B) Install multiple pumps in Parallel.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>C) Decrease the diameter of the delivery pipe to raise pressure.</span></label>
+                    <label class="option-label"><input type="radio" name="q4" value="wrong"> <span>D) Switch to a standard rotary gear pump.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q5">
+                <p class="question-text"><strong>5. A Pelton Wheel is fundamentally classified as what type of turbine?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>A) Reaction Turbine</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="correct"> <span>B) Impulse Turbine</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>C) Axial Flow Rotodynamic Compressor</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="wrong"> <span>D) Positive Displacement Fluid Motor</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <div class="mcq-card" id="q6">
+                <p class="question-text"><strong>6. For a Pelton Wheel to operate at absolutely Maximum Efficiency, the velocity of the moving bucket ($u$) should be:</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q6" value="correct"> <span>A) Exactly half the velocity of the incoming water jet ($0.5 v_1$).</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>B) Exactly equal to the velocity of the incoming water jet ($v_1$).</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>C) Exactly double the velocity of the incoming water jet ($2 v_1$).</span></label>
+                    <label class="option-label"><input type="radio" name="q6" value="wrong"> <span>D) Zero (Stationary).</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q7">
+                <p class="question-text"><strong>7. In the system equation $H = H_0 + K Q^2$, what does the term $H_0$ represent?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>A) Dynamic friction head loss.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>B) Velocity head of the fluid in the pipe.</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="correct"> <span>C) Total static elevation head (elevation difference between reservoirs).</span></label>
+                    <label class="option-label"><input type="radio" name="q7" value="wrong"> <span>D) Total power input from the motor.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+            
+            <div class="mcq-card" id="q8">
+                <p class="question-text"><strong>8. What is the fundamental mechanism of energy transfer in a Reaction Turbine (e.g., Francis)?</strong></p>
+                <div class="options-grid">
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>A) A high-velocity jet striking an open wheel at atmospheric pressure.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="correct"> <span>B) Fluid completely filling the casing and undergoing both pressure drops and velocity changes as it flows through the runner blades.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>C) Cyclic compression of a closed chamber.</span></label>
+                    <label class="option-label"><input type="radio" name="q8" value="wrong"> <span>D) Frictional drag along the outer casing.</span></label>
+                </div>
+                <div class="feedback-msg"></div>
+            </div>
+
+            <!-- Final Score Display Container -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--border-color);">
+                <h3 id="final-score-display" style="display: none;"></h3>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Chatbot Floating Icon & Container -->
+    <div id="chatbot-icon">💬</div>
+
+    <div id="chatbot-container" class="hidden">
+      <div id="chatbot-header">
+        <span>SharkVision Assistant</span>
+        <button id="close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body">
+        <div id="chatbot-messages"></div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+    <script src="chatbot_fluid.js"></script>
+
+    <!-- Auto-Evaluating Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allQuestions = document.querySelectorAll('.mcq-card');
+            const display = document.getElementById('final-score-display');
+            
+            allQuestions.forEach(card => {
+                const options = card.querySelectorAll('input[type="radio"]');
+                const feedback = card.querySelector('.feedback-msg');
+                
+                options.forEach(opt => {
+                    opt.addEventListener('change', (e) => {
+                        if(e.target.value === 'correct') {
+                            feedback.textContent = "✅ Correct! Excellent understanding.";
+                            feedback.className = "feedback-msg success";
+                            card.style.borderLeft = "5px solid #14b8a6";
+                        } else {
+                            feedback.textContent = "❌ Incorrect. Review the concepts above and try again.";
+                            feedback.className = "feedback-msg error";
+                            card.style.borderLeft = "5px solid #ef4444";
+                        }
+                        checkAllAnswered();
+                    });
+                });
+            });
+
+            function checkAllAnswered() {
+                let correctCount = 0;
+                let answeredCount = 0;
+
+                allQuestions.forEach(card => {
+                    const options = card.querySelectorAll('input[type="radio"]');
+                    let isAnswered = false;
+                    options.forEach(opt => {
+                        if (opt.checked) {
+                            isAnswered = true;
+                            if (opt.value === 'correct') {
+                                correctCount++;
+                            }
+                        }
+                    });
+                    if (isAnswered) answeredCount++;
+                });
+                
+                if (answeredCount === allQuestions.length && allQuestions.length > 0) {
+                    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+                    display.style.display = 'block';
+                    display.innerHTML = `🎉 <strong>Quiz Complete!</strong> You answered ${correctCount} out of ${allQuestions.length} questions correctly (${percentage}%).`;
+                    display.style.color = "var(--success)";
+                    display.style.padding = "20px";
+                    display.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; 
+                    display.style.borderRadius = "8px";
+                    display.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+                    display.style.marginTop = "30px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
