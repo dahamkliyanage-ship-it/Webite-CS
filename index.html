@@ -110,6 +110,7 @@
             font-size: 12px;
             color: #94a3b8;
             margin-bottom: 5px;
+            cursor: pointer; /* Makes it clear it is clickable */
         }
 
         .input-group input {
@@ -205,23 +206,25 @@
             <p id="form-subtitle">Sign in to continue your Engineering progress</p>
 
             <!-- Google Login Button -->
-            <button id="google-login-btn" class="google-btn">
+            <button id="google-login-btn" type="button" class="google-btn">
                 <i class="fab fa-google"></i> Continue with Google
             </button>
 
             <div class="divider">OR WITH EMAIL</div>
 
-            <!-- Email & Password Form -->
-            <div class="input-group">
-                <label>Email Address</label>
-                <input type="email" id="email" placeholder="Enter your email">
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="Enter your password">
-            </div>
+            <!-- FIXED: Added a <form> wrapper and 'for' attributes to labels -->
+            <form id="auth-form">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
 
-            <button id="email-action-btn" class="action-btn">Sign In</button>
+                <button id="email-action-btn" type="submit" class="action-btn">Sign In</button>
+            </form>
 
             <!-- Switch between Sign In and Sign Up -->
             <div class="switch-text">

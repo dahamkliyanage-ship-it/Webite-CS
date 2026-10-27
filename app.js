@@ -1,5 +1,5 @@
 import { auth, db } from "./backend.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { doc, setDoc, getDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // --- NEW CODE: FORCE LOGOUT CHECK ---
@@ -66,9 +66,15 @@ onAuthStateChanged(auth, (user) => {
     }
     
   } else {
-    // User is logged out: Reset UI state
-    if (loginSection) loginSection.style.display = "block";
-    if (userInfo) userInfo.style.display = "none";
+    // User is logged out: Reset UI state OR kick them out
+    if (loginSection) {
+      // If they are on the login page, show the login box
+      loginSection.style.display = "block";
+      if (userInfo) userInfo.style.display = "none";
+    } else {
+      // FIX: If they are on a protected page (like Home) and log out, kick them back to index!
+      window.location.replace("index.html");
+    }
     
     // Lock the individual complete button
     if (completeBtn && !completeBtn.hasAttribute("data-active")) {
@@ -165,6 +171,23 @@ async function displayUserProfile(userId) {
   }
 }
 
+// --- GOOGLE LOGIN LOGIC ---
+const googleLoginBtn = document.getElementById("google-login-btn");
+if (googleLoginBtn) {
+  googleLoginBtn.addEventListener("click", () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // Automatically redirects to home via the onAuthStateChanged listener above
+        window.location.replace("Home module page.html");
+      })
+      .catch((error) => {
+        console.error("Google Sign-In Error:", error);
+        alert("Google Sign-In Error: " + error.message);
+      });
+  });
+}
+
 // --- FORM TOGGLE & SUBMISSION LOGIC ---
 const toggleModeBtn = document.getElementById("toggle-mode-btn");
 const formTitle = document.getElementById("form-title");
@@ -194,7 +217,9 @@ if (toggleModeBtn) {
 }
 
 if (emailActionBtn) {
-  emailActionBtn.addEventListener("click", () => {
+  emailActionBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // <--- ADD THIS: Stops the page from instantly refreshing!
+    
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     
@@ -210,7 +235,26 @@ if (emailActionBtn) {
   });
 }
 
+// --- FIX: AGGRESSIVE SIGN OUT LOGIC ---
 const logoutBtn = document.getElementById("logout-btn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => signOut(auth));
-}
+const homeSignOutBtn = document.getElementById("home-sign-out-btn");
+
+const performSignOut = (e) => {
+  e.preventDefault(); // Prevents the page from randomly jumping to the top
+  
+  // 1. Tell Firebase to log the user out
+  signOut(auth).then(() => {
+    // 2. Clear local storage just in case
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // 3. Force redirect back to login page
+    window.location.replace("index.html?logout=true");
+  }).catch((error) => {
+    console.error("Sign out error:", error);
+    alert("Error signing out. Please check your connection.");
+  });
+};
+
+if (logoutBtn) logoutBtn.addEventListener("click", performSignOut);
+if (homeSignOutBtn) homeSignOutBtn.addEventListener("click", performSignOut);
