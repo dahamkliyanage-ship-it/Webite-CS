@@ -70,6 +70,16 @@
             color: #0f172a;
             box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
+        
+        /* Specific hover for sign out to make it distinct (optional) */
+        #home-sign-out-btn {
+            color: #f43f5e;
+        }
+        #home-sign-out-btn:hover {
+            background-color: #f43f5e;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+        }
 
         /* Main Content Flexbox Layout */
         .container {
@@ -186,6 +196,8 @@
             <li><a href="#">My Profile</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="about university.html">About University</a></li>
+            <!-- ADDED SIGN OUT BUTTON HERE -->
+            <li><a href="#" id="home-sign-out-btn">Sign Out</a></li>
         </ul>
     </nav>
 
@@ -253,7 +265,8 @@
     <!-- Firebase Connection & Progress Verification Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        /* ADDED signOut to imports */
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -275,82 +288,45 @@
                 id: "mathematics",
                 elementId: "status-main-mathematics",
                 subModules: [
-                    "vectors-line",
-                    "vectors-planesangle",
-                    "vectors-angle",
-                    "vectors-crossproduct",
-                    "vectors-dotproduct",
-                    "vectors-3space",
-                    "vectors",
-                    "vectors-plane",
-                    "vectors-properties",
-                    "vectors-scalartriple",
-                    "vectors-planedistance",
-                    "vectors-skewlines",
-                    "vectors-vectortriple",
-                    "matrices-inverse",
-                    "matrices-determinant",
-                    "matrices-special",
-                    "matrices-eigenvalues",
-                    "matrices-elementary",
-                    "matrices-intro",
-                    "matrices-diagonalization",
-                    "matrices-norms",
-                    "matrices-operations",
-                    "matrices-orthogonal",
-                    "matrices-properties",
-                    "matrices-rank",
-                    "matrices-homogeneous",
-                    "matrices-nonhomogeneous",
-                    "matrices-linearequations",
-                    "ode-firstorder",
-                    "ode-basic",
-                    "ode-bernoulli",
-                    "ode-linear",
-                    "ode-reduction",
-                    "ode-secondorder",
-                    "ode-wronskian",
-                    "riemann-beta",
-                    "riemann-definition",
-                    "riemann-ftc",
-                    "riemann-gamma",
-                    "riemann-improper",
-                    "riemann-ivt",
-                    "riemann-intro",
-                    "riemann-properties",
-                    "riemann-relation",
-                    "riemann-cauchy",
-                    "real-analysis-sequences",
-                    "real-analysis-logic",
-                    "real-analysis-relations",
-                    "real-analysis-settheory",
-                    "real-analysis-axioms"
+                    "vectors-line", "vectors-planesangle", "vectors-angle", "vectors-crossproduct",
+                    "vectors-dotproduct", "vectors-3space", "vectors", "vectors-plane",
+                    "vectors-properties", "vectors-scalartriple", "vectors-planedistance", "vectors-skewlines",
+                    "vectors-vectortriple", "matrices-inverse", "matrices-determinant", "matrices-special",
+                    "matrices-eigenvalues", "matrices-elementary", "matrices-intro", "matrices-diagonalization",
+                    "matrices-norms", "matrices-operations", "matrices-orthogonal", "matrices-properties",
+                    "matrices-rank", "matrices-homogeneous", "matrices-nonhomogeneous", "matrices-linearequations",
+                    "ode-firstorder", "ode-basic", "ode-bernoulli", "ode-linear",
+                    "ode-reduction", "ode-secondorder", "ode-wronskian", "riemann-beta",
+                    "riemann-definition", "riemann-ftc", "riemann-gamma", "riemann-improper",
+                    "riemann-ivt", "riemann-intro", "riemann-properties", "riemann-relation",
+                    "riemann-cauchy", "real-analysis-sequences", "real-analysis-logic", "real-analysis-relations",
+                    "real-analysis-settheory", "real-analysis-axioms"
                 ]
             },
             {
                 id: "programming",
                 elementId: "status-main-programming",
-                subModules: ["programming-module-1"] // Add actual programming module IDs here later
+                subModules: ["programming-module-1"]
             },
             {
                 id: "materials",
                 elementId: "status-main-materials",
-                subModules: ["materials-module-1"] // Add actual materials module IDs here later
+                subModules: ["materials-module-1"]
             },
             {
                 id: "electrical",
                 elementId: "status-main-electrical",
-                subModules: ["electrical-module-1"] // Add actual electrical module IDs here later
+                subModules: ["electrical-module-1"]
             },
             {
                 id: "fluids",
                 elementId: "status-main-fluids",
-                subModules: ["fluids-module-1"] // Add actual fluid mechanics module IDs here later
+                subModules: ["fluids-module-1"]
             },
             {
                 id: "mechanics",
                 elementId: "status-main-mechanics",
-                subModules: ["mechanics-module-1"] // Add actual mechanics module IDs here later
+                subModules: ["mechanics-module-1"]
             }
         ];
 
@@ -401,6 +377,21 @@
                 }
             }
         });
+
+        /* SIGN OUT EVENT LISTENER LOGIC ADDED HERE */
+        const signOutBtn = document.getElementById('home-sign-out-btn');
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor tag jump
+                signOut(auth).then(() => {
+                    // Sign-out successful, redirect to login
+                    window.location.replace("index.html?logout=true");
+                }).catch((error) => {
+                    console.error("Error signing out: ", error);
+                    alert("Failed to sign out. Please try again.");
+                });
+            });
+        }
     </script>
 </body>
 </html>

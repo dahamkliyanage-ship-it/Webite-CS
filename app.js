@@ -1,6 +1,18 @@
 import { auth, db } from "./backend.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { doc, setDoc, getDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+// --- NEW CODE: FORCE LOGOUT CHECK ---
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('logout') === 'true') {
+  signOut(auth).then(() => {
+    // Clean the URL so it doesn't stay there if the user refreshes
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+}
+// ------------------------------------
+
+let authStateTimer; // Added to prevent rapid misfires from Firebase cache
 
 // --- LOGIN ROUTING AND PROGRESS TRACKING ---
 onAuthStateChanged(auth, (user) => {
@@ -8,10 +20,20 @@ onAuthStateChanged(auth, (user) => {
   const userInfo = document.getElementById("user-info");
   const completeBtn = document.getElementById("mark-complete-btn");
 
+  // Clear any pending redirects if Firebase updates its state quickly
+  clearTimeout(authStateTimer);
+
   if (user) {
-    // 1. Handle Login Page Routing
+    // 1. Handle Login Page Routing (Debounced to fix redirect loop)
     if (loginSection) {
-      window.location.href = "pyDataStr.html"; 
+      loginSection.style.display = "none"; // Hide form to prevent flickering
+      
+      // Wait 800ms before redirecting to ensure Firebase doesn't correct to 'null'
+      authStateTimer = setTimeout(() => {
+        if (auth.currentUser) {
+          window.location.replace("Home module page.html"); 
+        }
+      }, 800);
     }
     
     // 2. Fetch profile data AND fill the progress bar on page load
@@ -43,9 +65,13 @@ onAuthStateChanged(auth, (user) => {
     }
     
   } else {
-    // User is logged out
-    if(loginSection) loginSection.style.display = "block";
-    if(userInfo) userInfo.style.display = "none";
+    // User is genuinely logged out
+    if(loginSection) {
+        loginSection.style.display = "block";
+    }
+    if(userInfo) {
+        userInfo.style.display = "none";
+    }
     
     if (completeBtn && !completeBtn.hasAttribute("data-active")) {
       completeBtn.setAttribute("data-active", "true");
@@ -140,10 +166,31 @@ if (emailActionBtn) {
     
     if (isSignUpMode) {
       createUserWithEmailAndPassword(auth, email, password)
+        .then(() => window.location.replace("Home module page.html"))
         .catch(error => alert("Registration Error: " + error.message));
     } else {
       signInWithEmailAndPassword(auth, email, password)
+        .then(() => window.location.replace("Home module page.html"))
         .catch(err => alert("Login Error: " + err.message));
     }
+  });
+}
+
+// --- GOOGLE SIGN-IN LOGIC ---
+const googleLoginBtn = document.getElementById("google-login-btn");
+
+if (googleLoginBtn) {
+  googleLoginBtn.addEventListener("click", () => {
+    const provider = new GoogleAuthProvider();
+    
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // Successful Google login
+        window.location.replace("Home module page.html");
+      })
+      .catch((error) => {
+        console.error("Google Sign-In Error:", error);
+        alert("Google Sign-In Error: " + error.message);
+      });
   });
 }
