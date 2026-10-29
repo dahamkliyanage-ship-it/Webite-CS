@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function getBotResponse(userMessage) {
-    const apiKey = "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"; // Replace with your active API key
+    const apiKey = "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"; // Replace with your active API key
     const apiUrl = "https://api.groq.com/openai/v1/chat/completions";
 
     // Grab the context from the current HTML page's meta tag
