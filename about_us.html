@@ -79,12 +79,20 @@
 
         /* Main Content Layout */
         .container {
-            max-width: 1000px;
+            max-width: 1200px; /* Widened slightly to fit side-by-side perfectly */
             margin: 50px auto;
             padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* Desktop Layout: Table on Left, Vision/Mission on Right */
+        @media (min-width: 992px) {
+            .container {
+                grid-template-columns: 1.8fr 1fr;
+                align-items: start;
+            }
         }
 
         .card {
@@ -104,10 +112,10 @@
             padding-bottom: 10px;
         }
 
-        /* Vision & Mission Grid */
+        /* Vision & Mission Grid (Stacked vertically) */
         .vision-mission-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 30px;
         }
 
@@ -241,10 +249,6 @@
         .modal-btn-danger:hover { background-color: #e11d48; }
         .modal-btn-secondary { background-color: #334155; color: #f8fafc; }
         .modal-btn-secondary:hover { background-color: #475569; }
-
-        @media (max-width: 768px) {
-            .vision-mission-grid { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
@@ -265,22 +269,7 @@
 
     <div class="container">
         
-        <!-- Vision & Mission Section -->
-        <div class="card">
-            <h2 class="card-title">Project Overview</h2>
-            <div class="vision-mission-grid">
-                <div class="vm-box">
-                    <h3>Our Vision</h3>
-                    <p>To revolutionize engineering education by providing an intuitive, accessible, and comprehensive digital learning platform that empowers students to achieve academic excellence seamlessly.</p>
-                </div>
-                <div class="vm-box" style="border-left-color: #4ade80;">
-                    <h3 style="color: #4ade80;">Our Mission</h3>
-                    <p>To deliver a centralized hub where engineering students can effortlessly track their progress, access vital module resources, calculate their academic standing, and stay connected with their coursework.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Team Members Section -->
+        <!-- Team Members Section (Moved to the top/left) -->
         <div class="card">
             <h2 class="card-title">Meet Our Team</h2>
             <div class="table-container">
@@ -331,6 +320,23 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Vision & Mission Section (Moved underneath/right) -->
+        <div class="card">
+            <h2 class="card-title">Project Overview</h2>
+            <div class="vision-mission-grid">
+                <!-- Vision box on top -->
+                <div class="vm-box">
+                    <h3>Our Vision</h3>
+                    <p>To revolutionize engineering education by providing an intuitive, accessible, and comprehensive digital learning platform that empowers students to achieve academic excellence seamlessly.</p>
+                </div>
+                <!-- Mission box underneath Vision -->
+                <div class="vm-box" style="border-left-color: #4ade80;">
+                    <h3 style="color: #4ade80;">Our Mission</h3>
+                    <p>To deliver a centralized hub where engineering students can effortlessly track their progress, access vital module resources, calculate their academic standing, and stay connected with their coursework.</p>
+                </div>
             </div>
         </div>
 
