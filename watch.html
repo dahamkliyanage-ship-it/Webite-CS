@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Timer - Faculty of Engineering</title>
+    
+    <style>
+        /* Base Theme Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background-color: #1e293b;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .top-nav li {
+            display: inline;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav a:hover, .top-nav a.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        #home-sign-out-btn { color: #f43f5e; }
+        #home-sign-out-btn:hover {
+            background-color: #f43f5e;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+        }
+
+        /* Main Content Layout */
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #f8fafc;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: #94a3b8;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+        }
+
+        /* Timer Grid */
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Tool Cards */
+        .tool-card {
+            background-color: #1e293b;
+            border-radius: 16px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+        }
+
+        .stopwatch-card::before { background-color: #38bdf8; }
+        .timer-card::before { background-color: #fb923c; }
+
+        .tool-title {
+            font-size: 1.8em;
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .stopwatch-card .tool-title { color: #38bdf8; }
+        .timer-card .tool-title { color: #fb923c; }
+
+        /* Time Display */
+        .time-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #f8fafc;
+            background-color: #0f172a;
+            padding: 20px 10px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
+            letter-spacing: 2px;
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.5);
+        }
+
+        /* Milliseconds for stopwatch */
+        .ms {
+            font-size: 0.5em;
+            color: #94a3b8;
+        }
+
+        /* Timer Setup Inputs */
+        .timer-setup {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .timer-setup input {
+            width: 60px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            font-size: 1.2em;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .timer-setup input:focus {
+            border-color: #fb923c;
+        }
+
+        .timer-setup span {
+            font-size: 1.5em;
+            color: #64748b;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            flex: 1;
+        }
+
+        .btn:active { transform: scale(0.95); }
+
+        .btn-start { background-color: #4ade80; color: #0f172a; }
+        .btn-start:hover { background-color: #22c55e; box-shadow: 0 0 15px rgba(74, 222, 128, 0.4); }
+
+        .btn-pause { background-color: #facc15; color: #0f172a; }
+        .btn-pause:hover { background-color: #eab308; box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+
+        .btn-reset { background-color: #ef4444; color: #ffffff; }
+        .btn-reset:hover { background-color: #dc2626; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+
+        /* Custom Modal UI */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(15, 23, 42, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-box {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        .modal-title { color: #f8fafc; font-size: 1.4em; margin-top: 0; margin-bottom: 10px; }
+        .modal-message { color: #cbd5e1; margin-bottom: 25px; }
+        .modal-buttons { display: flex; justify-content: center; gap: 15px; }
+        .modal-btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .modal-btn-primary { background-color: #38bdf8; color: #0f172a; }
+        .modal-btn-primary:hover { background-color: #0ea5e9; }
+        .modal-btn-danger { background-color: #f43f5e; color: #ffffff; }
+        .modal-btn-danger:hover { background-color: #e11d48; }
+        .modal-btn-secondary { background-color: #334155; color: #f8fafc; }
+        .modal-btn-secondary:hover { background-color: #475569; }
+        
+        .pulse-animation {
+            animation: pulse-border 1.5s infinite;
+        }
+        
+        @keyframes pulse-border {
+            0% { border-color: #ef4444; box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+            50% { border-color: transparent; box-shadow: none; }
+            100% { border-color: #ef4444; box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+        }
+
+        @media (max-width: 600px) {
+            .top-nav ul { flex-direction: column; gap: 15px; }
+            .top-bar h1 { font-size: 2em; }
+            .time-display { font-size: 2.8em; }
+        }
+    </style>
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Faculty of Engineering - First Semester</h1>
+    </header>
+
+    <nav class="top-nav">
+        <ul>
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="my_profile.html">My Profile</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+            <li><a href="#" id="home-sign-out-btn">Sign Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">Study & Exam Timers</h2>
+        <p class="section-subtitle">Use these tools to time your past paper sessions and improve your exam speed.</p>
+        
+        <div class="timer-grid">
+            
+            <!-- Stopwatch Card -->
+            <div class="tool-card stopwatch-card">
+                <h2 class="tool-title"><i class="fa-solid fa-stopwatch"></i> Stopwatch</h2>
+                <div class="time-display" id="sw-display">
+                    00:00:00<span class="ms">.00</span>
+                </div>
+                <div class="controls">
+                    <button id="sw-start" class="btn btn-start">Start</button>
+                    <button id="sw-pause" class="btn btn-pause">Pause</button>
+                    <button id="sw-reset" class="btn btn-reset">Reset</button>
+                </div>
+            </div>
+
+            <!-- Countdown Timer Card -->
+            <div class="tool-card timer-card" id="timer-container">
+                <h2 class="tool-title"><i class="fa-solid fa-hourglass-half"></i> Countdown Timer</h2>
+                
+                <!-- Input Setup -->
+                <div class="timer-setup" id="timer-setup">
+                    <input type="number" id="tm-h" min="0" max="99" placeholder="00" value="00"> <span>:</span>
+                    <input type="number" id="tm-m" min="0" max="59" placeholder="00" value="00"> <span>:</span>
+                    <input type="number" id="tm-s" min="0" max="59" placeholder="00" value="00">
+                </div>
+
+                <!-- Active Display -->
+                <div class="time-display" id="tm-display" style="display:none;">
+                    00:00:00
+                </div>
+
+                <div class="controls">
+                    <button id="tm-start" class="btn btn-start">Start</button>
+                    <button id="tm-pause" class="btn btn-pause" style="display:none;">Pause</button>
+                    <button id="tm-reset" class="btn btn-reset">Reset</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Custom Modal UI -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="modal-title" class="modal-title">Notification</h3>
+            <p id="modal-message" class="modal-message">Message goes here.</p>
+            <div id="modal-buttons" class="modal-buttons"></div>
+        </div>
+    </div>
+
+    <!-- Logic Script -->
+    <script>
+        // --- CUSTOM MODAL CONTROLLER ---
+        const modal = document.getElementById('custom-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalButtons = document.getElementById('modal-buttons');
+
+        function showMessage(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalButtons.innerHTML = `
+                <button class="modal-btn modal-btn-primary" id="modal-ok-btn">OK</button>
+            `;
+            modal.classList.add('active');
+            
+            document.getElementById('modal-ok-btn').onclick = () => {
+                modal.classList.remove('active');
+            };
+        }
+
+        function showConfirm(title, message, onConfirm) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalButtons.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button class="modal-btn modal-btn-danger" id="modal-confirm-btn">Sign Out</button>
+            `;
+            modal.classList.add('active');
+            
+            document.getElementById('modal-cancel-btn').onclick = () => {
+                modal.classList.remove('active');
+            };
+            
+            document.getElementById('modal-confirm-btn').onclick = () => {
+                modal.classList.remove('active');
+                onConfirm();
+            };
+        }
+
+        // ==========================================
+        // STOPWATCH LOGIC
+        // ==========================================
+        let swStartTime, swUpdatedTime, swDifference, swInterval;
+        let swRunning = false;
+        let swSavedTime = 0;
+
+        const swDisplay = document.getElementById('sw-display');
+        const swStartBtn = document.getElementById('sw-start');
+        const swPauseBtn = document.getElementById('sw-pause');
+        const swResetBtn = document.getElementById('sw-reset');
+
+        function updateStopwatch() {
+            swUpdatedTime = new Date().getTime();
+            swDifference = swUpdatedTime - swStartTime + swSavedTime;
+
+            let hours = Math.floor((swDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((swDifference % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((swDifference % (1000 * 60)) / 1000);
+            let milliseconds = Math.floor((swDifference % 1000) / 10);
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
+
+            swDisplay.innerHTML = `${hours}:${minutes}:${seconds}<span class="ms">.${milliseconds}</span>`;
+        }
+
+        swStartBtn.addEventListener('click', () => {
+            if (!swRunning) {
+                swStartTime = new Date().getTime();
+                swInterval = setInterval(updateStopwatch, 10);
+                swRunning = true;
+                swStartBtn.style.display = 'none';
+                swPauseBtn.style.display = 'block';
+            }
+        });
+
+        swPauseBtn.addEventListener('click', () => {
+            if (swRunning) {
+                clearInterval(swInterval);
+                swSavedTime = swDifference;
+                swRunning = false;
+                swStartBtn.style.display = 'block';
+                swStartBtn.textContent = 'Resume';
+                swPauseBtn.style.display = 'none';
+            }
+        });
+
+        swResetBtn.addEventListener('click', () => {
+            clearInterval(swInterval);
+            swSavedTime = 0;
+            swDifference = 0;
+            swRunning = false;
+            swDisplay.innerHTML = `00:00:00<span class="ms">.00</span>`;
+            swStartBtn.style.display = 'block';
+            swStartBtn.textContent = 'Start';
+            swPauseBtn.style.display = 'block';
+        });
+
+        // ==========================================
+        // COUNTDOWN TIMER LOGIC
+        // ==========================================
+        let tmInterval;
+        let tmTotalSeconds = 0;
+        let tmRunning = false;
+
+        const tmSetup = document.getElementById('timer-setup');
+        const tmDisplay = document.getElementById('tm-display');
+        const tmH = document.getElementById('tm-h');
+        const tmM = document.getElementById('tm-m');
+        const tmS = document.getElementById('tm-s');
+        const tmStartBtn = document.getElementById('tm-start');
+        const tmPauseBtn = document.getElementById('tm-pause');
+        const tmResetBtn = document.getElementById('tm-reset');
+        const timerContainer = document.getElementById('timer-container');
+
+        // Input limits formatting
+        function formatInput(input, max) {
+            let val = parseInt(input.value);
+            if (isNaN(val) || val < 0) val = 0;
+            if (val > max && max !== 99) val = max; // Prevent invalid mins/secs
+            input.value = val.toString().padStart(2, '0');
+        }
+
+        tmH.addEventListener('blur', () => formatInput(tmH, 99));
+        tmM.addEventListener('blur', () => formatInput(tmM, 59));
+        tmS.addEventListener('blur', () => formatInput(tmS, 59));
+
+        function updateTimerDisplay() {
+            let h = Math.floor(tmTotalSeconds / 3600);
+            let m = Math.floor((tmTotalSeconds % 3600) / 60);
+            let s = tmTotalSeconds % 60;
+
+            tmDisplay.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function timerEnd() {
+            clearInterval(tmInterval);
+            tmRunning = false;
+            tmStartBtn.style.display = 'block';
+            tmStartBtn.textContent = 'Start';
+            tmPauseBtn.style.display = 'none';
+            timerContainer.classList.add('pulse-animation');
+            showMessage("Time's Up!", "Your set time has elapsed. Please put your pens down!");
+        }
+
+        tmStartBtn.addEventListener('click', () => {
+            if (!tmRunning) {
+                // If starting fresh (not resuming)
+                if (tmTotalSeconds === 0) {
+                    let h = parseInt(tmH.value) || 0;
+                    let m = parseInt(tmM.value) || 0;
+                    let s = parseInt(tmS.value) || 0;
+                    tmTotalSeconds = (h * 3600) + (m * 60) + s;
+                }
+
+                if (tmTotalSeconds > 0) {
+                    tmSetup.style.display = 'none';
+                    tmDisplay.style.display = 'block';
+                    updateTimerDisplay();
+
+                    tmInterval = setInterval(() => {
+                        tmTotalSeconds--;
+                        updateTimerDisplay();
+                        if (tmTotalSeconds <= 0) {
+                            timerEnd();
+                        }
+                    }, 1000);
+
+                    tmRunning = true;
+                    tmStartBtn.style.display = 'none';
+                    tmPauseBtn.style.display = 'block';
+                    timerContainer.classList.remove('pulse-animation');
+                } else {
+                    showMessage("Invalid Time", "Please set a duration greater than zero before starting.");
+                }
+            }
+        });
+
+        tmPauseBtn.addEventListener('click', () => {
+            if (tmRunning) {
+                clearInterval(tmInterval);
+                tmRunning = false;
+                tmStartBtn.style.display = 'block';
+                tmStartBtn.textContent = 'Resume';
+                tmPauseBtn.style.display = 'none';
+            }
+        });
+
+        tmResetBtn.addEventListener('click', () => {
+            clearInterval(tmInterval);
+            tmRunning = false;
+            tmTotalSeconds = 0;
+            
+            // Switch back to setup UI
+            tmSetup.style.display = 'flex';
+            tmDisplay.style.display = 'none';
+            
+            // Reset UI buttons
+            tmStartBtn.style.display = 'block';
+            tmStartBtn.textContent = 'Start';
+            tmPauseBtn.style.display = 'none';
+            timerContainer.classList.remove('pulse-animation');
+        });
+    </script>
+
+    <!-- Firebase SDK Setup -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.appspot.com",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- AUTHENTICATION LISTENER ---
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                try {
+                    window.location.replace("index.html");
+                } catch (err) {
+                    window.location.href = "index.html";
+                }
+            }
+        });
+
+        // --- SIGN OUT LOGIC ---
+        const signOutBtn = document.getElementById('home-sign-out-btn');
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showConfirm("Sign Out", "Are you sure you want to sign out?", () => {
+                    signOut(auth).then(() => {
+                        try {
+                            localStorage.clear();
+                            sessionStorage.clear();
+                            window.location.replace("index.html?logout=true");
+                        } catch (err) {
+                            window.location.href = "index.html?logout=true";
+                        }
+                    }).catch((error) => console.error("Error signing out:", error));
+                });
+            });
+        }
+    </script>
+</body>
+</html>

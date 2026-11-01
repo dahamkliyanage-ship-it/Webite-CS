@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamil Mathematics Kuppi - Faculty of Engineering</title>
+    
+    <style>
+        /* Base Theme Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background-color: #1e293b;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .top-nav li {
+            display: inline;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav a:hover, .top-nav a.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        #home-sign-out-btn { color: #f43f5e; }
+        #home-sign-out-btn:hover {
+            background-color: #f43f5e;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #f8fafc;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: #94a3b8;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+        }
+
+        /* Custom Animated Session Cards */
+        .session-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .session-card {
+            position: relative;
+            width: 300px;
+            height: 350px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+
+        /* The glowing animated border effect */
+        .session-card::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(transparent, transparent, transparent, var(--glow-color));
+            animation: rotateGlow 4s linear infinite;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .session-card::after {
+            content: '';
+            position: absolute;
+            inset: 3px; /* Creates the inner dark box */
+            background: #0f172a;
+            border-radius: 17px;
+            z-index: -1;
+        }
+
+        .session-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 15px 35px var(--shadow-color);
+        }
+
+        .session-card:hover::before {
+            opacity: 1;
+        }
+
+        .session-card h2 {
+            font-size: 1.8em;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .session-card p {
+            color: #cbd5e1;
+            font-size: 1em;
+            padding: 0 20px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .session-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+
+        .session-card:hover .session-icon {
+            transform: scale(1.1);
+        }
+
+        /* Specific Colors for each card */
+        .batch23-card {
+            --glow-color: #f43f5e; /* Rose */
+            --shadow-color: rgba(244, 63, 94, 0.3);
+            --text-color: #f43f5e;
+            border: 1px solid rgba(244, 63, 94, 0.2);
+        }
+
+        .sasnaka-card {
+            --glow-color: #2dd4bf; /* Teal */
+            --shadow-color: rgba(45, 212, 191, 0.3);
+            --text-color: #2dd4bf;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Custom Modal UI */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(15, 23, 42, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-box {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        .modal-title { color: #f8fafc; font-size: 1.4em; margin-top: 0; margin-bottom: 10px; }
+        .modal-message { color: #cbd5e1; margin-bottom: 25px; }
+        .modal-buttons { display: flex; justify-content: center; gap: 15px; }
+        .modal-btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .modal-btn-danger { background-color: #f43f5e; color: #ffffff; }
+        .modal-btn-danger:hover { background-color: #e11d48; }
+        .modal-btn-secondary { background-color: #334155; color: #f8fafc; }
+        .modal-btn-secondary:hover { background-color: #475569; }
+
+        @media (max-width: 600px) {
+            .top-nav ul { flex-direction: column; gap: 15px; }
+            .top-bar h1 { font-size: 2em; }
+        }
+    </style>
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Faculty of Engineering - First Semester</h1>
+    </header>
+
+    <nav class="top-nav">
+        <ul>
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="my_profile.html">My Profile</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+            <li><a href="#" id="home-sign-out-btn">Sign Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">Tamil Mathematics Kuppi Sessions</h2>
+        <p class="section-subtitle">Select a session category to access recordings and resources.</p>
+        
+        <div class="session-grid">
+            
+            <!-- Batch-23 Card -->
+            <a href="https://drive.google.com/drive/folders/1olewUMpMplmVONWqmkY24i9p--g29dq4" target="_blank" class="session-card batch23-card">
+                <div class="session-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h2>Batch-23</h2>
+                <p>Access the mathematics revision sessions conducted by the 23 Batch.</p>
+            </a>
+
+            <!-- Sasnaka Sansada Card -->
+            <a href="https://drive.google.com/drive/folders/1Ywv_Os_CQ_6EIfalT7N40LWKVZIiaECn" target="_blank" class="session-card sasnaka-card">
+                <div class="session-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <h2>Sasnaka Sansada</h2>
+                <p>Access special mathematics seminars and resources provided by Sasnaka Sansada.</p>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Custom Modal UI for Sign Out -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="modal-title" class="modal-title">Notification</h3>
+            <p id="modal-message" class="modal-message">Message goes here.</p>
+            <div id="modal-buttons" class="modal-buttons"></div>
+        </div>
+    </div>
+
+    <!-- Firebase Authentication Check & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        // Centralized Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.appspot.com",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- CUSTOM MODAL CONTROLLER ---
+        const modal = document.getElementById('custom-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalButtons = document.getElementById('modal-buttons');
+
+        function showConfirm(title, message, onConfirm) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalButtons.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button class="modal-btn modal-btn-danger" id="modal-confirm-btn">Sign Out</button>
+            `;
+            modal.classList.add('active');
+            
+            document.getElementById('modal-cancel-btn').onclick = () => {
+                modal.classList.remove('active');
+            };
+            
+            document.getElementById('modal-confirm-btn').onclick = () => {
+                modal.classList.remove('active');
+                onConfirm();
+            };
+        }
+
+        // --- AUTHENTICATION LISTENER ---
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                try {
+                    window.location.replace("index.html");
+                } catch (err) {
+                    window.location.href = "index.html";
+                }
+            }
+        });
+
+        // --- SIGN OUT LOGIC ---
+        const signOutBtn = document.getElementById('home-sign-out-btn');
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showConfirm("Sign Out", "Are you sure you want to sign out?", () => {
+                    signOut(auth).then(() => {
+                        try {
+                            localStorage.clear();
+                            sessionStorage.clear();
+                            window.location.replace("index.html?logout=true");
+                        } catch (err) {
+                            window.location.href = "index.html?logout=true";
+                        }
+                    }).catch((error) => console.error("Error signing out:", error));
+                });
+            });
+        }
+    </script>
+</body>
+</html>
