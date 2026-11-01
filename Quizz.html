@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuppi Sessions - Faculty of Engineering</title>
+    <title>Mathematics Assessments - Faculty of Engineering</title>
     
-    <!-- Embedded CSS matching the global theme -->
     <style>
         /* Base Theme Styles */
         body {
@@ -80,7 +79,7 @@
 
         /* Main Content Layout */
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 50px auto;
             padding: 0 20px;
         }
@@ -104,10 +103,10 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
         }
 
-        /* Topic Cards matching the Home Page style */
+        /* Topic Cards */
         .topic-card {
             flex: 1 1 300px; 
             max-width: 350px;
@@ -117,8 +116,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
-            border-radius: 12px;
+            padding: 50px 30px;
+            border-radius: 16px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
@@ -127,41 +126,31 @@
 
         .topic-card h2 {
             margin: 0 0 15px 0;
-            font-size: 1.4em;
+            font-size: 1.8em;
             z-index: 1;
         }
 
         .topic-card p {
             margin: 0;
-            font-size: 0.95em;
+            font-size: 1em;
             opacity: 0.9;
+            z-index: 1;
+        }
+        
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
             z-index: 1;
         }
 
         /* Color Variations for Cards */
         .blue-box { background-color: rgba(56, 189, 248, 0.1); border-left: 4px solid #38bdf8; color: #e2e8f0; }
-        .blue-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2); border-color: #7dd3fc; }
-        .blue-box h2 { color: #38bdf8; }
+        .blue-box:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(56, 189, 248, 0.2); border-color: #7dd3fc; }
+        .blue-box h2, .blue-box .card-icon { color: #38bdf8; }
 
         .green-box { background-color: rgba(74, 222, 128, 0.1); border-left: 4px solid #4ade80; color: #e2e8f0; }
-        .green-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2); border-color: #86efac; }
-        .green-box h2 { color: #4ade80; }
-
-        .yellow-box { background-color: rgba(250, 204, 21, 0.1); border-left: 4px solid #facc15; color: #e2e8f0; }
-        .yellow-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(250, 204, 21, 0.2); border-color: #fde047; }
-        .yellow-box h2 { color: #facc15; }
-
-        .purple-box { background-color: rgba(192, 132, 252, 0.1); border-left: 4px solid #c084fc; color: #e2e8f0; }
-        .purple-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(192, 132, 252, 0.2); border-color: #d8b4fe; }
-        .purple-box h2 { color: #c084fc; }
-
-        .red-box { background-color: rgba(244, 63, 94, 0.1); border-left: 4px solid #f43f5e; color: #e2e8f0; }
-        .red-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(244, 63, 94, 0.2); border-color: #fb7185; }
-        .red-box h2 { color: #f43f5e; }
-
-        .orange-box { background-color: rgba(251, 146, 60, 0.1); border-left: 4px solid #fb923c; color: #e2e8f0; }
-        .orange-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(251, 146, 60, 0.2); border-color: #fdba74; }
-        .orange-box h2 { color: #fb923c; }
+        .green-box:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(74, 222, 128, 0.2); border-color: #86efac; }
+        .green-box h2, .green-box .card-icon { color: #4ade80; }
 
         /* Custom Modal UI */
         .modal-overlay {
@@ -204,6 +193,8 @@
             .top-bar h1 { font-size: 2em; }
         }
     </style>
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -222,45 +213,23 @@
     </nav>
 
     <div class="container">
-        <h2 class="section-title">Student Kuppi Sessions</h2>
-        <p class="section-subtitle">Access recorded student-led revision sessions and supplementary study materials by module.</p>
+        <h2 class="section-title">Assessments & Evaluations</h2>
+        <p class="section-subtitle">Select an evaluation type below to access practice materials and past question papers.</p>
         
         <div class="module-grid">
             
-            <!-- Module 1: Mathematics -->
-            <a href="kuppi_mathematics.html" class="topic-card blue-box">
-                <h2>MA1014-Mathematics</h2>
-                <p>Revision sessions for Linear Algebra, Calculus, ODEs, and Real Analysis.</p>
+            <!-- Quizzes Box -->
+            <a href="https://drive.google.com/drive/folders/1_VoAVuC1dQuqIITTxCfad0WbMOeZCE9q" target="_blank" class="topic-card blue-box">
+                <i class="fa-solid fa-list-check card-icon"></i>
+                <h2>Mathematics Quizzes</h2>
+                <p>Access online quizzes and short assessments for mathematical models and calculations.</p>
             </a>
 
-            <!-- Module 2: Programming -->
-            <a href="kuppi_programming.html" class="topic-card green-box">
-                <h2>CS1033-Programming Fundamentals</h2>
-                <p>Revision sessions covering Python Logic and Algorithms.</p>
-            </a>
-
-            <!-- Module 3: Materials -->
-            <a href="kuppi_materials.html" class="topic-card yellow-box">
-                <h2>MT1023-Properties of Materials</h2>
-                <p>Discussions on Material Science and Physical Principles.</p>
-            </a>
-
-            <!-- Module 4: Electrical -->
-            <a href="kuppi_electrical.html" class="topic-card purple-box">
-                <h2>EE1040-Electrical Fundamentals</h2>
-                <p>Revision sessions for Circuit Analysis and Electrical Principles.</p>
-            </a>
-
-            <!-- Module 5: Fluid Mechanics -->
-            <a href="kuppi_fluids.html" class="topic-card red-box">
-                <h2>CE1023-Fluid Mechanics</h2>
-                <p>Kuppi sessions for Fluid Statics, Dynamics, and Flow Analysis.</p>
-            </a>
-
-            <!-- Module 6: Mechanics -->
-            <a href="kuppi_mechanics.html" class="topic-card orange-box">
-                <h2>ME1033-Mechanics</h2>
-                <p>Discussions for Statics, Dynamics, and Structural Mechanics.</p>
+            <!-- Combined Labs & PP Box -->
+            <a href="#" target="_blank" class="topic-card green-box">
+                <i class="fa-solid fa-folder-open card-icon"></i>
+                <h2>Labs, PP1 & PP2</h2>
+                <p>Download laboratory manuals, submission guidelines, and previous progress papers (PP1 & PP2).</p>
             </a>
 
         </div>
@@ -319,7 +288,6 @@
         }
 
         // --- AUTHENTICATION LISTENER ---
-        // Redirect unauthorized users to login
         onAuthStateChanged(auth, (user) => {
             if (!user) {
                 try {
