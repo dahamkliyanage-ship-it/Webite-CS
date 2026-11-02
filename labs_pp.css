@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* ---------- Core Variables ---------- */
 :root {
   --bg-void: #0f1117;
@@ -16,23 +15,26 @@
 }
 
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: var(--bg-void);
   color: var(--text-primary);
   font-family: var(--sans);
 }
+
 a { text-decoration: none; }
 
 /* ---------- Top Menu Bar ---------- */
 .top-menu {
   background: var(--bg-panel);
-  border-top: 2px solid var(--keyword); /* Adds the blue line above */
-  border-bottom: 2px solid var(--keyword); /* Keeps the blue line below */
+  border-top: 2px solid var(--keyword);
+  border-bottom: 2px solid var(--keyword);
   display: flex;
   justify-content: center;
   padding: 0 20px;
 }
+
 .nav-links {
   list-style: none;
   margin: 0;
@@ -40,6 +42,7 @@ a { text-decoration: none; }
   display: flex;
   gap: 48px;
 }
+
 .nav-links a {
   font-size: 15px;
   font-weight: 500;
@@ -48,6 +51,7 @@ a { text-decoration: none; }
   display: block;
   transition: color 0.15s ease;
 }
+
 .nav-links a:hover { color: var(--keyword); }
 .nav-links a.sign-out { color: var(--red); }
 .nav-links a.sign-out:hover { opacity: 0.8; }
@@ -59,19 +63,23 @@ a { text-decoration: none; }
   padding: 40px 24px 100px;
   text-align: center;
 }
+
 .title {
   font-size: 38px;
   font-weight: 700;
   margin-bottom: 50px;
 }
+
 .header-group {
   margin-bottom: 50px;
 }
+
 .subtitle {
   font-size: 28px;
   color: var(--keyword);
   margin-bottom: 15px;
 }
+
 .lead-text {
   font-size: 16px;
   color: var(--text-muted);
@@ -85,6 +93,7 @@ a { text-decoration: none; }
   text-align: center;
   margin-top: 20px;
 }
+
 .card {
   background: var(--bg-panel);
   border: 1px solid var(--border);
@@ -96,6 +105,7 @@ a { text-decoration: none; }
   color: var(--text-primary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
@@ -113,6 +123,7 @@ a { text-decoration: none; }
   width: 50px;
   height: 50px;
 }
+
 .card-labs .card-icon { color: var(--string); }
 .card-pp1 .card-icon { color: var(--keyword); }
 .card-pp2 .card-icon { color: var(--type); }
@@ -121,6 +132,7 @@ a { text-decoration: none; }
   font-size: 20px;
   margin: 0 0 15px;
 }
+
 .card-labs h2 { color: var(--string); }
 .card-pp1 h2 { color: var(--keyword); }
 .card-pp2 h2 { color: var(--type); }
@@ -150,157 +162,4 @@ a { text-decoration: none; }
 .site-header .title {
   margin: 0; 
   font-size: 38px;
-=======
-/* ---------- Core Variables ---------- */
-:root {
-  --bg-void: #0f1117;
-  --bg-panel: #161922;
-  --bg-panel-alt: #1b1f2a;
-  --bg-raised: #1f2430;
-  --border: #262b38;
-  --text-primary: #e6e8ef;
-  --text-muted: #8890a4;
-  --keyword: #38bdf8; /* Blue */
-  --string: #4ade80; /* Green */
-  --type: #bb9af7;   /* Purple */
-  --red: #f7768e;    
-  --sans: 'Inter', system-ui, sans-serif;
-}
-
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg-void);
-  color: var(--text-primary);
-  font-family: var(--sans);
-}
-a { text-decoration: none; }
-
-/* ---------- Top Menu Bar ---------- */
-.top-menu {
-  background: var(--bg-panel);
-  border-top: 2px solid var(--keyword); /* Adds the blue line above */
-  border-bottom: 2px solid var(--keyword); /* Keeps the blue line below */
-  display: flex;
-  justify-content: center;
-  padding: 0 20px;
-}
-.nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 48px;
-}
-.nav-links a {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-primary);
-  padding: 20px 4px;
-  display: block;
-  transition: color 0.15s ease;
-}
-.nav-links a:hover { color: var(--keyword); }
-.nav-links a.sign-out { color: var(--red); }
-.nav-links a.sign-out:hover { opacity: 0.8; }
-
-/* ---------- Main Layout ---------- */
-.main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 24px 100px;
-  text-align: center;
-}
-.title {
-  font-size: 38px;
-  font-weight: 700;
-  margin-bottom: 50px;
-}
-.header-group {
-  margin-bottom: 50px;
-}
-.subtitle {
-  font-size: 28px;
-  color: var(--keyword);
-  margin-bottom: 15px;
-}
-.lead-text {
-  font-size: 16px;
-  color: var(--text-muted);
-}
-
-/* ---------- Grid & Cards ---------- */
-.roadmap-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  text-align: center;
-  margin-top: 20px;
-}
-.card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--text-primary);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-  background: var(--bg-raised);
-}
-
-/* Dynamic Accent Borders */
-.card-labs { border-left: 4px solid var(--string); }
-.card-pp1 { border-left: 4px solid var(--keyword); }
-.card-pp2 { border-left: 4px solid var(--type); }
-
-/* Icons */
-.card-icon {
-  margin-bottom: 20px;
-  width: 50px;
-  height: 50px;
-}
-.card-labs .card-icon { color: var(--string); }
-.card-pp1 .card-icon { color: var(--keyword); }
-.card-pp2 .card-icon { color: var(--type); }
-
-.card h2 {
-  font-size: 20px;
-  margin: 0 0 15px;
-}
-.card-labs h2 { color: var(--string); }
-.card-pp1 h2 { color: var(--keyword); }
-.card-pp2 h2 { color: var(--type); }
-
-.card p {
-  font-size: 14.5px;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* ---------- Mobile Responses ---------- */
-@media (max-width: 720px) {
-  .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
-  .title { font-size: 28px; }
-  .roadmap-grid { grid-template-columns: 1fr; }
-}
-
-/* ---------- Site Header ---------- */
-.site-header {
-  text-align: center;
-  padding: 40px 20px 30px;
-  background: var(--bg-void);
-}
-
-/* This overrides the old 50px bottom margin so it sits nicely above the nav */
-.site-header .title {
-  margin: 0; 
-  font-size: 38px;
->>>>>>> 6db6e9ddeaf14592b4b53262bdd2c767608d5698
 }
