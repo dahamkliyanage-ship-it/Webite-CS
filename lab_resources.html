@@ -1,128 +1,317 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lab Resources</title>
-<link rel="stylesheet" href="labs_pp.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Resources</title>
+    
+    <style>
+        /* ---------- Core Variables & Dark Theme ---------- */
+        :root {
+            --bg-void: #0f1117;
+            --bg-panel: #161922;
+            --bg-panel-alt: #1b1f2a;
+            --bg-raised: #1f2430;
+            --border: #262b38;
+            --text-primary: #e6e8ef;
+            --text-muted: #8890a4;
+            --keyword: #38bdf8; /* Blue */
+            --string: #4ade80;  /* Green */
+            --type: #bb9af7;    /* Purple */
+            --red: #f7768e;    
+            --sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg-void);
+            color: var(--text-primary);
+            font-family: var(--sans);
+        }
+
+        a { text-decoration: none; }
+
+        /* ---------- Site Header ---------- */
+        .site-header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: var(--bg-void);
+        }
+
+        .site-header .title {
+            margin: 0; 
+            font-size: 38px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* ---------- Top Menu Bar ---------- */
+        .top-menu {
+            background: var(--bg-panel);
+            border-top: 2px solid var(--keyword);
+            border-bottom: 2px solid var(--keyword);
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 48px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 20px 4px;
+            display: block;
+            transition: color 0.15s ease;
+        }
+
+        .nav-links a:hover { color: var(--keyword); }
+        .nav-links a.sign-out { color: var(--red); }
+        .nav-links a.sign-out:hover { opacity: 0.8; }
+
+        /* ---------- Main Layout ---------- */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 100px;
+            text-align: center;
+        }
+
+        .header-group { margin-bottom: 50px; }
+        .subtitle { font-size: 28px; color: var(--keyword); margin-bottom: 15px; }
+        .lead-text { font-size: 16px; color: var(--text-muted); }
+
+        /* ---------- Grid & Cards ---------- */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .roadmap-grid.dual-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 400px));
+            justify-content: center;
+        }
+
+        .card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            background: var(--bg-raised);
+        }
+
+        /* Dynamic Accent Borders */
+        .card-exercises { border-left: 4px solid var(--keyword); }
+        .card-codes { border-left: 4px solid var(--string); }
+
+        /* Icons */
+        .card-icon { margin-bottom: 20px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; }
+        .card-icon svg { width: 100%; height: 100%; }
+
+        .card-exercises .card-icon { color: var(--keyword); }
+        .card-codes .card-icon { color: var(--string); }
+
+        .card h2 { font-size: 20px; margin: 0 0 15px; }
+        .card-exercises h2 { color: var(--keyword); }
+        .card-codes h2 { color: var(--string); }
+
+        .card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+        @media (max-width: 720px) {
+            .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+            .site-header .title { font-size: 28px; }
+            .roadmap-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- Custom Modal UI Styles ---------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(15, 23, 42, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-box {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        .modal-title { color: #f8fafc; font-size: 1.4em; margin-top: 0; margin-bottom: 10px; }
+        .modal-message { color: #cbd5e1; margin-bottom: 25px; }
+        .modal-buttons { display: flex; justify-content: center; gap: 15px; }
+        .modal-btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .modal-btn-danger { background-color: #f43f5e; color: #ffffff; }
+        .modal-btn-danger:hover { background-color: #e11d48; }
+        .modal-btn-secondary { background-color: #334155; color: #f8fafc; }
+        .modal-btn-secondary:hover { background-color: #475569; }
+    </style>
 </head>
 <body>
 
-  <!-- 1. NEW: Top Header -->
-  <header class="site-header">
-  <h1 class="title">Faculty of Engineering - First Semester</h1>
-  </header>
+    <!-- 1. NEW: Top Header -->
+    <header class="site-header">
+        <h1 class="title">Faculty of Engineering - First Semester</h1>
+    </header>
 
-  <!-- Top Menu Bar -->
-  <nav class="top-menu">
-    <ul class="nav-links">
-      <li><a href="Home module page.html">Home</a></li>
-      <li><a href="my_profile.html">My Profile</a></li>
-      <li><a href="about_us.html">About Us</a></li>
-      <li><a href="about university.html">About University</a></li>
-      <li><a href="#" class="sign-out">Sign Out</a></li>
-    </ul>
-  </nav>
+    <!-- Top Menu Bar -->
+    <nav class="top-menu">
+        <ul class="nav-links">
+            <li><a href="Home module page.html">Home</a></li>
+            <li><a href="my_profile.html">My Profile</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            <li><a href="about university.html">About University</a></li>
+            <li><a href="#" class="sign-out" id="home-sign-out-btn">Sign Out</a></li>
+        </ul>
+    </nav>
 
-  <!-- Main Content -->
-  <div class="main">
-    
-    
-    <div class="header-group">
-      <h2 class="subtitle">Laboratory Resources</h2>
-      <p class="lead-text">
-        Select a category below to access practice exercises and sample codebase repositories.
-      </p>
+    <!-- Main Content -->
+    <div class="main">
+        
+        <div class="header-group">
+            <h2 class="subtitle">Laboratory Resources</h2>
+            <p class="lead-text">
+                Select a category below to access practice exercises and sample codebase repositories.
+            </p>
+        </div>
+
+        <!-- Dual Grid for exactly two cards -->
+        <div class="roadmap-grid dual-grid"> 
+            
+            <!-- LAB EXERCISES CARD -->
+            <a href="https://drive.google.com/file/d/1x9UnT9Ud16Fq166ygb3auoglBchlLGRx/view" target="_blank" class="card card-exercises">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h2>Lab Exercises</h2>
+                <p>Access weekly lab problem sets, practical assignments, and submission portals.</p>
+            </a>
+
+            <!-- SAMPLE CODES CARD -->
+            <a href="https://drive.google.com/drive/folders/1WD8I4IJlBVuyFu2ey-cXPf0ZsIJRaw-1?usp=sharing" target="_blank" class="card card-codes">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h2>Lab Sample Codes</h2>
+                <p>Download boilerplate code, solution repositories, and reference snippets.</p>
+            </a>
+
+        </div>
     </div>
 
-    <!-- Dual Grid for exactly two cards -->
-    <div class="roadmap-grid dual-grid"> 
-      
-      <!-- LAB EXERCISES CARD -->
-      <a href="https://drive.google.com/file/d/1x9UnT9Ud16Fq166ygb3auoglBchlLGRx/view" target="_blank" class="card card-exercises">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+    <!-- Custom Modal UI for Sign Out -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="modal-title" class="modal-title">Notification</h3>
+            <p id="modal-message" class="modal-message">Message goes here.</p>
+            <div id="modal-buttons" class="modal-buttons"></div>
         </div>
-        <h2>Lab Exercises</h2>
-        <p>Access weekly lab problem sets, practical assignments, and submission portals.</p>
-      </a>
-
-      <!-- SAMPLE CODES CARD -->
-      <a href="https://drive.google.com/drive/folders/1WD8I4IJlBVuyFu2ey-cXPf0ZsIJRaw-1?usp=sharing" target="_blank" class="card card-codes">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-        </div>
-        <h2>Lab Sample Codes</h2>
-        <p>Download boilerplate code, solution repositories, and reference snippets.</p>
-      </a>
-
     </div>
-  </div>
 
+    <!-- Firebase Authentication Check & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmigCL0Zv85TGPCnkjnE_33eYpAytDIIA",
+            authDomain: "sharkvision-4ac92.firebaseapp.com",
+            projectId: "sharkvision-4ac92",
+            storageBucket: "sharkvision-4ac92.appspot.com",
+            messagingSenderId: "516357464658",
+            appId: "1:516357464658:web:b86fe0797e13bd682ef58b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const modal = document.getElementById('custom-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalButtons = document.getElementById('modal-buttons');
+
+        function showConfirm(title, message, onConfirm) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalButtons.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button class="modal-btn modal-btn-danger" id="modal-confirm-btn">Sign Out</button>
+            `;
+            modal.classList.add('active');
+            
+            document.getElementById('modal-cancel-btn').onclick = () => {
+                modal.classList.remove('active');
+            };
+            
+            document.getElementById('modal-confirm-btn').onclick = () => {
+                modal.classList.remove('active');
+                onConfirm();
+            };
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                try {
+                    window.location.replace("index.html");
+                } catch (err) {
+                    window.location.href = "index.html";
+                }
+            }
+        });
+
+        const signOutBtn = document.getElementById('home-sign-out-btn');
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showConfirm("Sign Out", "Are you sure you want to sign out?", () => {
+                    signOut(auth).then(() => {
+                        try {
+                            localStorage.clear();
+                            sessionStorage.clear();
+                            window.location.replace("index.html?logout=true");
+                        } catch (err) {
+                            window.location.href = "index.html?logout=true";
+                        }
+                    }).catch((error) => console.error("Error signing out:", error));
+                });
+            });
+        }
+    </script>
 </body>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lab Resources</title>
-<link rel="stylesheet" href="labs_pp.css">
-</head>
-<body>
-
-  <!-- 1. NEW: Top Header -->
-  <header class="site-header">
-  <h1 class="title">Faculty of Engineering - First Semester</h1>
-  </header>
-
-  <!-- Top Menu Bar -->
-  <nav class="top-menu">
-    <ul class="nav-links">
-      <li><a href="Home module page.html">Home</a></li>
-      <li><a href="my_profile.html">My Profile</a></li>
-      <li><a href="about_us.html">About Us</a></li>
-      <li><a href="about university.html">About University</a></li>
-      <li><a href="#" class="sign-out">Sign Out</a></li>
-    </ul>
-  </nav>
-
-  <!-- Main Content -->
-  <div class="main">
-    
-    
-    <div class="header-group">
-      <h2 class="subtitle">Laboratory Resources</h2>
-      <p class="lead-text">
-        Select a category below to access practice exercises and sample codebase repositories.
-      </p>
-    </div>
-
-    <!-- Dual Grid for exactly two cards -->
-    <div class="roadmap-grid dual-grid"> 
-      
-      <!-- LAB EXERCISES CARD -->
-      <a href="https://drive.google.com/file/d/1x9UnT9Ud16Fq166ygb3auoglBchlLGRx/view" target="_blank" class="card card-exercises">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-        </div>
-        <h2>Lab Exercises</h2>
-        <p>Access weekly lab problem sets, practical assignments, and submission portals.</p>
-      </a>
-
-      <!-- SAMPLE CODES CARD -->
-      <a href="https://drive.google.com/drive/folders/1WD8I4IJlBVuyFu2ey-cXPf0ZsIJRaw-1?usp=sharing" target="_blank" class="card card-codes">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-        </div>
-        <h2>Lab Sample Codes</h2>
-        <p>Download boilerplate code, solution repositories, and reference snippets.</p>
-      </a>
-
-    </div>
-  </div>
-
-</body>
-
 </html>
