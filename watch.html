@@ -284,6 +284,8 @@
     </style>
     <!-- Add FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add Tone.js for sound effects without external URLs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 </head>
 <body>
 
@@ -493,6 +495,24 @@
             tmDisplay.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }
 
+        async function playAlarmSound() {
+            // Start Audio Context (required by modern browsers)
+            await Tone.start();
+            
+            // Create a simple synthesizer for an alarm sound
+            const synth = new Tone.Synth({
+                oscillator: { type: "square" },
+                envelope: { attack: 0.05, decay: 0.2, sustain: 0.4, release: 0.8 }
+            }).toDestination();
+            
+            // Play a 4-beep alarm sequence
+            const now = Tone.now();
+            synth.triggerAttackRelease("C5", "8n", now);
+            synth.triggerAttackRelease("C5", "8n", now + 0.25);
+            synth.triggerAttackRelease("C5", "8n", now + 0.5);
+            synth.triggerAttackRelease("E5", "2n", now + 0.75);
+        }
+
         function timerEnd() {
             clearInterval(tmInterval);
             tmRunning = false;
@@ -500,6 +520,10 @@
             tmStartBtn.textContent = 'Start';
             tmPauseBtn.style.display = 'none';
             timerContainer.classList.add('pulse-animation');
+            
+            // Play the alarm sound
+            playAlarmSound();
+
             showMessage("Time's Up!", "Your set time has elapsed. Please put your pens down!");
         }
 
